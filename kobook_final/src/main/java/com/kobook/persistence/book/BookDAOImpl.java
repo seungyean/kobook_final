@@ -1,5 +1,7 @@
 package com.kobook.persistence.book;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 
@@ -32,6 +34,9 @@ public class BookDAOImpl implements BookDAO {
 	public void addAttach(FileVO fileVO) throws Exception {
 		session.insert(namespace+".addAttach",fileVO);
 	}
+
+
+	
 	
 	
 	
