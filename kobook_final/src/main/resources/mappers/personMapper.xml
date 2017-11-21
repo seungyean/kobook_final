@@ -5,7 +5,7 @@
 <mapper namespace="com.kobook.mappers.personMapper">
 
 	<!-- email로 사용자 id찾기 -->
- 	<select id="findId" parameterType="String">
+ 	<select id="findId" resultType="Integer">
  		select person_id
  		from person
  		where person_email = #{person_email}
