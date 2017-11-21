@@ -20,8 +20,8 @@ public class MyPageDAOImpl implements MyPageDAO {
 	private static String namespace = "com.kobook.mappers.myPageMapper";
 
 	@Override
-	public List<BookVO> sellList(int bno) {
-		return session.selectList(namespace + ".sellList", bno);
+	public List<BookVO> sellList(int person_id) {
+		return session.selectList(namespace + ".sellList", person_id);
 	}
 
 	@Override
@@ -31,8 +31,8 @@ public class MyPageDAOImpl implements MyPageDAO {
 	}
 
 	@Override
-	public List<HashMap<String, String>> buyList(int bno) {
-		return session.selectList(namespace + ".buyList", bno);
+	public List<HashMap<String, String>> buyList(int person_id) {
+		return session.selectList(namespace + ".buyList", person_id);
 	}
 
 

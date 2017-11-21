@@ -8,7 +8,7 @@ public class BuyListVO {
 	private Timestamp order_date;
 	private String book_name;
 	private String book_m_price;
-//	private String[] files;
+	private String[] files;
 	
 	public Timestamp getOrder_date() {
 		return order_date;
@@ -28,20 +28,19 @@ public class BuyListVO {
 	public void setBook_m_price(String book_m_price) {
 		this.book_m_price = book_m_price;
 	}
-	
+	public String[] getFiles() {
+		return files;
+	}
+	public void setFiles(String[] files) {
+		this.files = files;
+	}
 	@Override
 	public String toString() {
 		return "BuyListVO [order_date=" + order_date + ", book_name=" + book_name + ", book_m_price=" + book_m_price
-				+ "]";
+				+ ", files=" + Arrays.toString(files) + "]";
 	}
 	
-//	public String[] getFiles() {
-//		return files;
-//	}
-//	public void setFiles(String[] files) {
-//		this.files = files;
-//	}
-	
+
 	
 	
 	

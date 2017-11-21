@@ -23,5 +23,13 @@ public class MyPageController {
 		model.addAttribute("sellList", service.sellList(bno));
 	}
 	
+	@RequestMapping(value="/buyList", method=RequestMethod.GET)
+	public void buyList(int bno, Model model){
+		System.out.println("구매내역 출력~~~~~~~~~~~");
+		
+		model.addAttribute("buyList", service.buyList(bno));
+	}
+	
+	
 
 }

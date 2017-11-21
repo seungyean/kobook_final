@@ -17,8 +17,8 @@ public class MyPageServiceImpl implements MyPageService {
 	private MyPageDAO dao;
 
 	@Override
-	public List<BookVO> sellList(int bno) {
-		return dao.sellList(bno);
+	public List<BookVO> sellList(int person_id) {
+		return dao.sellList(person_id);
 	}
 
 	@Override
@@ -28,8 +28,8 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	@Override
-	public List<HashMap<String, String>> buyList(int bno) {
-		return dao.buyList(bno);
+	public List<HashMap<String, String>> buyList(int person_id) {
+		return dao.buyList(person_id);
 	}
 
 }

@@ -8,8 +8,8 @@ import com.kobook.book.domain.BookVO;
 
 public interface MyPageService {
 	
-	public List<BookVO> sellList(int bno);
+	public List<BookVO> sellList(int person_id);
 	public void sellStateUpdate(BookVO vo);
-	public List<HashMap<String, String>> buyList(int bno);
+	public List<HashMap<String, String>> buyList(int person_id);
 
 }
