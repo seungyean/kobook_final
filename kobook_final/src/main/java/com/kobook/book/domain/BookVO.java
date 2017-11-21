@@ -1,4 +1,4 @@
-package com.kobook.domain.book;
+package com.kobook.book.domain;
 
 
 import java.util.Arrays;

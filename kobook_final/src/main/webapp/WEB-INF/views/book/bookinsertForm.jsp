@@ -51,8 +51,8 @@
                     <h4><span>Book Register</span></h4>
                 </div>
    
-                <form  action="/kobook/book/insertAction.do" id="subscribe"  name="subscribe" method="post" enctype="multipart/form-data">
-                	<input type="hidden" class="form-control" name="person_id" value="${person_id}">
+                <form action="insertForm" id="subscribe"  name="subscribe" method="post" enctype="multipart/form-data">
+                	<input type="hidden" class="form-control" name="person_id" value="${BookVO.person_id}">
              <b>책이름:</b>     <input type="text" name="name" id="name" class="form-control" placeholder="책이름">
            <b>  부가설명:</b>        <input type="text" name="hash" id="hash" class="form-control" placeholder="부가설명(간단검색어를 입력하세요)">
           <b>  원가: </b>        <input type="text" name="o_price" id="name" class="form-control" placeholder="원가">

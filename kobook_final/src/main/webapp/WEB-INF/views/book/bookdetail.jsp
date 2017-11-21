@@ -71,14 +71,20 @@
 				<div class="row sub_content">
 			
 			
-				<form action="/kobook/book/updateForm.do" method="post">
+				<form role="form" action="bookdetail" method="post">
+				<input type="hidden" name="book_id" value="${BookVO.book_id}">
+                	<input type="hidden" name="page" value="${cri.page}">
+                	<input type="hidden" name="perPageNum" value="${cri.perPageNum}">
+                
+                	
+                	
 					<div class="col-lg-8 col-md-8 col-sm-8">
 						<!--Project Details Page-->
 						<div class="porDetCarousel">
 							<div class="carousel-content">
 							
 				
-							<input type="hidden" name="book_id" value="${book.book_id}" />
+							
 						
 									<img alt="" class="carousel-item" src="/kobook/upload/${book.book_img}" width="10px" height="800px">
 								<!--<img class="carousel-item" src="images/portfolio/portfolio_slider1.png" alt="">
@@ -94,7 +100,7 @@
 							<div class="widget_title">
 								<h4><span>내용</span></h4>
 							</div>
-						<p>${book.book_content}</p>
+						<p>${BookVO.book_content}</p>
 						</div>
 
 					<div class="project_details">
@@ -103,23 +109,23 @@
 							</div>
 							
 					<ul class="details">
-								<li><span>책이름 :</span>${book.book_name}</li>
-								<li><span>책종류 :</span>${book.book_kind}</li>
-								<li><span>부가설명 :</span>${book.book_hash}</li>
-								<li><span> 원가:</span> ${book.book_o_price}</li>
-								<li><span> 판매가:</span> ${book.book_m_price} 할인:<b>${(book.book_o_price-book.book_m_price)/100}%</b></li>
-								<li><span> 판 :</span>${book.book_edition}</li>
-								<li><span>출판사 :</span>${book.book_publish}</li>
-								<li><span>안심여부사용 :</span>${book.book_safe_yn}</li>
+								<li><span>책이름 :</span>${BookVO.book_name}</li>
+								<li><span>책종류 :</span>${BookVO.book_kind}</li>
+								<li><span>부가설명 :</span>${BookVO.book_hash}</li>
+								<li><span> 원가:</span> ${BookVO.book_o_price}</li>
+								<li><span> 판매가:</span> ${BookVO.book_m_price} 할인:<b>${(BookVO.book_o_price-BookVO.book_m_price)/100}%</b></li>
+								<li><span> 판 :</span>${BookVO.book_edition}</li>
+								<li><span>출판사 :</span>${BookVO.book_publish}</li>
+								<li><span>안심여부사용 :</span>${BookVO.book_safe_yn}</li>
 								<li><span>책상태 :</span>
 								<c:choose>
-								<c:when test="${book.book_status=='A'}">
+								<c:when test="${BookVO.book_status=='A'}">
 								양호
 								</c:when>
-								<c:when test="${book.book_status=='B'}">
+								<c:when test="${BookVO.book_status=='B'}">
 								보통
 								</c:when>
-								<c:when test="${book.book_status=='C'}">
+								<c:when test="${BookVO.book_status=='C'}">
 								나쁨
 								</c:when>
 								</c:choose>
@@ -127,10 +133,10 @@
 		
 								<li><span>판매상태</span>
 								<c:choose>
-								<c:when test="${book.book_sell_state=='I'}">
+								<c:when test="${BookVO.book_sell_state=='I'}">
 								판매중
 								</c:when>
-								<c:when test="${book.book_sell_state=='C'}">
+								<c:when test="${BookVO.book_sell_state=='C'}">
 								판매완료
 								</c:when>
 								</c:choose>
@@ -142,19 +148,19 @@
 								<span><input type="submit" value="수정하기" id="submit" class="btn btn-default btn-lg button"></span>
 							</form>
 									
-						<form action="/kobook/book/pickAction.do" method="post">
-							<input type="hidden" name="book_id" value="${book.book_id}" />
-							<input type="hidden" name = "person_id" value="${person_id}" >
+						<%-- <form action="/kobook/book/pickAction.do" method="post">
+							<input type="hidden" name="book_id" value="${BookVO.book_id}" />
+							<input type="hidden" name = "person_id" value="${BookVO.person_id}" >
 							<span>
 							<input type="submit" value="찜하기" id="submit" class="btn btn-default btn-lg button">
 							</span>
-						</form>
+						</form> --%>
 							
 		</div>  <!--/row sub_content  -->
 		
 <%--  <img src="/kobook/upload/${b.book_img}" alt="aa" height="280" />
                                  <a href="/kobook/book/detailAction.do?book_id=${b.book_id}"></a> --%>
- 	
+ 	<%-- 
 			<div class="row sub_content">
                     <div class="col-md-12">
                         <div class="dividerHeading">
@@ -180,7 +186,7 @@
                         </div> <!--/recent-work-slider  -->
                     </div> <!--/col-md-12  -->
                 </div> <!--/row sub_content  -->
-               
+                --%>
 			</div> <!--/container  -->
 		</section>
 	</section>

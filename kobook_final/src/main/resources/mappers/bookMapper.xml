@@ -16,6 +16,83 @@
 		)		
 	</insert>
 	
+	 <select id="listCriteria" resultType="BookVO">
+    <![CDATA[
+          select 
+            *
+          from 
+            book             
+      ]]>      
+      <!-- <include refid="search"></include> -->
+         <![CDATA[     
+          order by book_date desc
+       ]]>  
+      
+    </select>
+	
+	 <!--  <sql id="search">
+      <if test="searchType != null">
+         <if test="searchType == 't'.toString()">
+            and title like '%'|| #{keyword}||'%'
+         </if>
+         <if test="searchType == 'c'.toString()">
+            and content like '%'|| #{keyword}||'%'
+         </if>
+         <if test="searchType == 'w'.toString()">
+            and writer like '%'|| #{keyword}||'%'
+         </if>
+         <if test="searchType == 'tc'.toString()">
+            and ( title like '%'|| #{keyword}||'%' OR content like
+            '%'||
+            #{keyword}||'%')
+         </if>
+         <if test="searchType == 'cw'.toString()">
+            and ( content like '%'|| #{keyword}||'%' OR writer like
+            '%'||
+            #{keyword}||'%')
+         </if>
+         <if test="searchType == 'tcw'.toString()">
+            and ( title like '%'|| #{keyword}||'%'
+            OR
+            content like
+            '%'|| #{keyword}||'%'
+            OR
+            writer like '%'|| #{keyword}||'%')
+         </if>
+      </if>
+   </sql> -->
+   
+   
+	<select id="read" resultType="BookVO">
+       select 
+           *
+       from 
+           book
+           where book_id = #{book_id}
+    </select>
+	
+	
+	<update id="update" parameterType="BookVO">
+      UPDATE book SET BOOK_NAME=#{book_name},BOOK_M_PRICE=#{book_m_price}
+		, BOOK_O_PRICE=#{book_o_price}, BOOK_SELL_STATE=#{book_sell_state}, BOOK_STATUS=#{book_status},
+		BOOK_SAFE_YN=#{book_safe_yn}, BOOK_CONTENT=#{book_content},BOOK_EDITION=#{book_edition},
+		BOOK_PUBLISH=#{book_publish}
+		WHERE BOOK_ID=#{book_id}
+    
+   </update>
+	
+	
+	<select id="countPaging" resultType="int">
+   <![CDATA[
+      select count(book_id) from book where book_id > 0         
+   ]]>      
+   
+<!--     <include refid="search"></include> -->
+   </select>
+	
+	
+	
+	
 	<insert id="addAttach" parameterType="FileVO">
 	insert into book_attach(filename, book_id)
 	values(#{fullName},#{book_id})
@@ -24,6 +101,20 @@
 	<select id="maxNum" resultType="int">
 	select MAX(book_id) from book
 	</select>
+	
+	<select id="getAttach" resultType="string">
+      select fullname from book_attach where book_id = #{book_id} order by book_date
+   </select> 
+   
+   <delete id="deleteAttach">
+   delete from book_attach where book_id=#{book_id}
+   </delete>
+   
+   <insert id="replaceAttach">
+   insert into book_attach(fullname, book_id) values(#{fullName},#{book_id})
+   </insert>
+	
+	
 	
 	
 </mapper>

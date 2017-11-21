@@ -342,7 +342,7 @@
                <!--end isotope -->
                
                
-               <div class="col-sm-12 text-center">
+           <%--     <div class="col-sm-12 text-center">
                 <ul class="pagination">
                   <!-- <ul class="pagination">
                             <li><a href="#">&laquo;</a></li>
@@ -379,13 +379,13 @@
                   </c:if>
                   <br>
 				</ul>
-               </div> <!--text container -->
+               </div> <!--text container --> --%>
                
 
    <input type="submit" value="글쓰기" class="btn-default"  />
    </form>
    
-<div class="container">
+<!-- <div class="container">
 				<div class="row">
 					<div class="row">
   						<div class="col-md-6 col-md-offset-3">
@@ -395,7 +395,7 @@
                      제목: <input type="checkbox" name="area" value="book_name" /> 
                      해시태그포함 검색유무: <input type="checkbox" name="area" value="book_hash" /> 
                      안심거래사용: <input type="checkbox" name="safe_yn" value="book_safe_yn" />
-                     <!-- 지역명검색: <input type="checkbox" name="location" value="book_location" />  -->
+                     지역명검색: <input type="checkbox" name="location" value="book_location" /> 
                      가격순 <input type="radio" name="sort" value="book_m_price"/>         
                      상태순 <input type="radio" name="sort" value="book_status"/> <br>     
                     <input type="text" class="search-query form-control" name="searchKey" id="s" placeholder="책제목 을 입력하세요" />
@@ -408,7 +408,7 @@
 					
 							
 				</div>
-			</div>  
+			</div>   -->
                
                
       </section>

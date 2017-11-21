@@ -1,4 +1,4 @@
-package com.kobook.domain.book;
+package com.kobook.book.domain;
 
 public class FileVO {
 
