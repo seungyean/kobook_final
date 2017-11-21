@@ -7,8 +7,9 @@
 
 	<typeAliases>
 		<!-- 앞으로 org.zerock.domain은 안써도 됨 -->
-		<package name="com.kobook.domain.book" />
-		<package name="com.kobook.domain.message" />
+		<package name="com.kobook.book.domain" />
+		<package name="com.kobook.message.domain" />
+		<package name="com.kobook.mypage.domain" />
 	</typeAliases>
 
 </configuration>
