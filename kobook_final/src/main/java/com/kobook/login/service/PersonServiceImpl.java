@@ -19,4 +19,9 @@ public class PersonServiceImpl implements PersonService {
 		return dao.login(dto);
 	}
 
+	@Override
+	public int findPersonId(String person_email) throws Exception {
+		return dao.findPersonId(person_email);
+	}
+	
 }
