@@ -16,9 +16,23 @@ public class MyPageTest {
 	@Inject
 	private MyPageDAO dao;
 	
-	@Test
+	/*@Test
 	public void sellListTest(){
-		System.out.println(dao.sellList(4).toString());
-	}
+		System.out.println(dao.sellList(2).toString());
+	}*/
+	
+/*	@Test
+	public void sellStateUpdate(){
+		BookVO vo = new BookVO();
+		vo.setBook_sell_state("C");
+		vo.setBook_id(1);
+		dao.sellStateUpdate(vo);
+		
+		System.out.println("책 상태 변경: " + vo);
+	}*/
 
+	@Test
+	public void buyList(){
+		System.out.println(dao.buyList(7).toString());
+	}
 }

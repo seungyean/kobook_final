@@ -2,11 +2,11 @@ package com.kobook.mypage.domain;
 
 import java.util.List;
 
-import com.kobook.domain.book.BookVO;
+import com.kobook.book.domain.BookVO;
+
 
 public class SellListVO {
 	
-	//�Ǹų���
 	private List<BookVO> sellList;
 
 	public List<BookVO> getSellList() {

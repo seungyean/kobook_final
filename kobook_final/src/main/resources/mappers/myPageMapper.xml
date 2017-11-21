@@ -8,7 +8,25 @@
 	<select id="sellList" resultType="BookVO" parameterType="int">
 		select *
 		from book
-		where person_id = 4
+		where person_id = #{person_id}
+	</select>
+
+	<!-- 판매상태 업데이트 -->
+	<update id="sellStateUpdate" parameterType="BookVO">
+		update book
+		set
+		book_sell_state = #{book_sell_state}
+		where book_id = #{book_id}
+	</update>
+
+	<!-- 구매내역 리스트 -->
+	<select id="buyList" resultType="hashMap" parameterType="int">
+		select
+		o.order_date, b.book_name, p.pay_amount
+		from book_order o, book b, pay p
+		where o.order_id = p.ORDER_ID
+		and o.book_id = b.book_id
+		and o.person_id = #{person_id}
 	</select>
 
 
