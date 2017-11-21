@@ -10,6 +10,7 @@
 		<package name="com.kobook.book.domain" />
 		<package name="com.kobook.message.domain" />
 		<package name="com.kobook.mypage.domain" />
+		<package name="com.kobook.board.domain" />
 	</typeAliases>
 
 </configuration>
