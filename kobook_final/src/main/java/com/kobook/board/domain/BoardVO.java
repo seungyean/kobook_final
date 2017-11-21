@@ -10,6 +10,8 @@ public class BoardVO {
 	private String board_content;
 	private String board_title;
 	private String board_writer;
+	
+	
 	public Integer getBoard_id() {
 		return board_id;
 	}

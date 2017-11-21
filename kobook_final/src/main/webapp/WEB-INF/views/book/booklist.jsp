@@ -120,7 +120,7 @@
                   
                   
                   <!--begin List Item -->
-                     <c:forEach var="b" items="${listModel.list}">
+                     <c:forEach var="b" items="${cri.list}">
                      <c:set var="b.book_kind" value="Law" />
                       <c:if test="${b.book_kind=='법학계열'}">
                         <li class="list_item col-lg-3 col-md-4 col-sm-6 Law">
