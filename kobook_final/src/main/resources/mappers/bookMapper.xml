@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<mapper namespace="org.zerock.mappers.bookMapper">
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kobook.mappers.bookMapper">
 
  	<insert id="create" parameterType="BookVO">
 		insert into book(
@@ -8,9 +10,9 @@
 			book_date,book_status,person_id
 			
 		)values(
-			book_id_seq.nextval, #{bookName}, #{bookOPrice}, #{bookMPrice},#{bookKind}, #{bookEdition},#{bookPublish},
-			#{bookHash}, #{bookSafeYn}, #{bookSellState}, #{bookContent}, 
-			SYSDATE,#{bookStatus},#{personId}
+			book_id_seq.nextval, #{book_name}, #{book_o_price}, #{book_m_price},#{book_kind}, #{book_edition},#{book_publish},
+			#{book_hash}, #{book_safe_yn}, #{book_sell_state}, #{book_content}, 
+			SYSDATE,#{book_status},#{person_id}
 		)		
 	</insert>
 	
