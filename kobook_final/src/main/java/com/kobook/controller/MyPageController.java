@@ -17,17 +17,17 @@ public class MyPageController {
 	private MyPageService service;
 	
 	@RequestMapping(value="/sellList", method=RequestMethod.GET)
-	public void sellList(int bno, Model model){
+	public void sellList(int person_id, Model model){
 		System.out.println("판매내역 출력~~~~~~~~~~~");
 		
-		model.addAttribute("sellList", service.sellList(bno));
+		model.addAttribute("sellList", service.sellList(person_id));
 	}
 	
 	@RequestMapping(value="/buyList", method=RequestMethod.GET)
-	public void buyList(int bno, Model model){
+	public void buyList(int person_id, Model model){
 		System.out.println("구매내역 출력~~~~~~~~~~~");
 		
-		model.addAttribute("buyList", service.buyList(bno));
+		model.addAttribute("buyList", service.buyList(person_id));
 	}
 	
 	
