@@ -13,6 +13,7 @@ public class BookServiceImpl implements BookService {
 
 	@Inject
 	private BookDAO dao;
+	
 	@Override
 	public void regist(BookVO book) throws Exception {
 		dao.create(book);

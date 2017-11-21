@@ -23,18 +23,18 @@ public class BookDAOTest {
 	public void test() throws Exception {
 		BookVO vo=new BookVO();
 		
-	vo.setBookName("aa");
-	vo.setBookOPrice(2000);
-	vo.setBookMPrice(1000);
-	vo.setBookKind("공학계열");
-	vo.setBookEdition(1);
-	vo.setBookPublish("한림");
-	vo.setBookHash("#공돌이");
-	vo.setBookSafeYn("Y");
-	vo.setBookSellState("I");
-	vo.setBookStatus("A");
-	vo.setBookContent("연락주세요");
-	vo.setPersonId(1);
+	vo.setBook_name("aa");
+	vo.setBook_o_price(2000);
+	vo.setBook_m_price(1000);
+	vo.setBook_kind("공학계열");
+	vo.setBook_edition(1);
+	vo.setBook_publish("한림");
+	vo.setBook_hash("#공돌이");
+	vo.setBook_safe_yn("Y");
+	vo.setBook_sell_state("I");
+	vo.setBook_status("A");
+	vo.setBook_content("연락주세요");
+	vo.setPerson_id(1);
 	
 	dao.create(vo);
 	System.out.println(vo);
