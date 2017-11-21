@@ -11,4 +11,8 @@
  		where person_email = #{person_email}
  	</select>
 	
+	<select id="login" resultType="PersonVO">
+		select person_email, person_pwd from person where person_email= #{person_email} and person_pwd=#{person_pwd}
+	</select>
+	
 </mapper>
