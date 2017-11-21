@@ -1,4 +1,4 @@
-package com.kobook.domain.message;
+package com.kobook.message.domain;
 
 import java.sql.Timestamp;
 

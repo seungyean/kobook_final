@@ -9,8 +9,8 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.kobook.domain.message.MessageVO;
-import com.kobook.persistence.message.MessageDAO;
+import com.kobook.message.domain.MessageVO;
+import com.kobook.message.persistence.MessageDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/spring/**/root-context.xml"})
@@ -23,10 +23,10 @@ public class MessageDAOTest {
 	public void test() throws Exception {
 		
 		MessageVO vo = new MessageVO();
-		vo.setMessage_content("test");
+		vo.setMessage_content("test2");
 		vo.setPerson_id(1);
 		vo.setReceiver_id(2);
-		dao.messageSend(vo);
+		dao.send(vo);
 		System.out.println(vo);
 	}
 
