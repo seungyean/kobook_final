@@ -77,8 +77,7 @@
                             </div>
                             <div class="navbar-collapse collapse">
                                 <ul class="nav navbar-nav">
-                                    <li ><a href="/">Home</a>
-                                    </li>
+                                    <li><a href="/">Home</a></li>
 
                                     <li><a href="/book/bookList">전체검색</a></li>
                                     <li><a href="/book/locationAction?check=1">지역검색</a></li>
