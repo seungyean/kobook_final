@@ -5,16 +5,15 @@ import java.util.Arrays;
 
 public class BuyListVO {
 	
-	private Timestamp order_date;
+	private String book_img;
 	private String book_name;
-	private String book_m_price;
-	private String[] files;
-	
-	public Timestamp getOrder_date() {
-		return order_date;
+	private String pay_amount;
+	private Timestamp order_date;
+	public String getBook_img() {
+		return book_img;
 	}
-	public void setOrder_date(Timestamp order_date) {
-		this.order_date = order_date;
+	public void setBook_img(String book_img) {
+		this.book_img = book_img;
 	}
 	public String getBook_name() {
 		return book_name;
@@ -22,23 +21,25 @@ public class BuyListVO {
 	public void setBook_name(String book_name) {
 		this.book_name = book_name;
 	}
-	public String getBook_m_price() {
-		return book_m_price;
+	public String getPay_amount() {
+		return pay_amount;
 	}
-	public void setBook_m_price(String book_m_price) {
-		this.book_m_price = book_m_price;
+	public void setPay_amount(String pay_amount) {
+		this.pay_amount = pay_amount;
 	}
-	public String[] getFiles() {
-		return files;
+	public Timestamp getOrder_date() {
+		return order_date;
 	}
-	public void setFiles(String[] files) {
-		this.files = files;
+	public void setOrder_date(Timestamp order_date) {
+		this.order_date = order_date;
 	}
 	@Override
 	public String toString() {
-		return "BuyListVO [order_date=" + order_date + ", book_name=" + book_name + ", book_m_price=" + book_m_price
-				+ ", files=" + Arrays.toString(files) + "]";
+		return "BuyListVO [book_img=" + book_img + ", book_name=" + book_name + ", pay_amount=" + pay_amount
+				+ ", order_date=" + order_date + "]";
 	}
+	
+	
 	
 
 	

@@ -35,6 +35,16 @@ public class MyPageDAOImpl implements MyPageDAO {
 		return session.selectList(namespace + ".buyList", person_id);
 	}
 
+	@Override
+	public List<HashMap<String, String>> pickList(int person_id) {
+		return session.selectList(namespace + ".pickList", person_id);
+	}
+
+	@Override
+	public int pickUpdate(int pick_id) {
+		return session.selectOne(namespace + ".pickUpdate", pick_id);
+	}
+
 
 
 }

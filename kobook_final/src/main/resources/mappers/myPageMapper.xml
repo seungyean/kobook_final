@@ -22,12 +22,34 @@
 	<!-- 구매내역 리스트 -->
 	<select id="buyList" resultType="hashMap" parameterType="int">
 		select
-		o.order_date, b.book_name, p.pay_amount
-		from book_order o, book b, pay p
-		where o.order_id = p.ORDER_ID
+		b.book_img, b.book_name, p.pay_amount,o.order_date
+		from book_order o,
+		book b, pay p
+		where o.order_id = p.order_id
 		and o.book_id = b.book_id
 		and o.person_id = #{person_id}
 	</select>
+
+	<!-- 찜리 -->
+	<select id="pickList" resultType="hashMap" parameterType="int">
+		select
+		b.book_img,b.book_name,b.book_m_price,b.book_sell_state
+		from book b,
+		pick p , person person
+		where b.book_id = p.book_id
+		and p.person_id =
+		person.person_id
+		and p.pick_state = 'Y'
+		and person.person_id = #{person_id}
+	</select>
+
+	<!-- 찜 상태 변경 -->
+	<update id="pickUpdate" parameterType="int">
+		update pick
+		set pick_state = 'N'
+		where pick_id = #{pick_id}
+	</update>
+
 
 
 </mapper>

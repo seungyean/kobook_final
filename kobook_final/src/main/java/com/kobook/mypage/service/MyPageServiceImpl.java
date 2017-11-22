@@ -32,4 +32,14 @@ public class MyPageServiceImpl implements MyPageService {
 		return dao.buyList(person_id);
 	}
 
+	@Override
+	public List<HashMap<String, String>> pickList(int person_id) {
+		return dao.pickList(person_id);
+	}
+
+	@Override
+	public int pickUpdate(int pick_id) {
+		return dao.pickUpdate(pick_id);
+	}
+
 }

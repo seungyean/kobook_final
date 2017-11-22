@@ -16,10 +16,10 @@ public class MyPageTest {
 	@Inject
 	private MyPageDAO dao;
 	
-	@Test
+/*	@Test
 	public void sellListTest(){
 		System.out.println("판매내역: " + dao.sellList(2).toString());
-	}
+	}*/
 	
 /*	@Test
 	public void sellStateUpdate(){
@@ -31,8 +31,13 @@ public class MyPageTest {
 		System.out.println("책 상태 변경: " + vo);
 	}*/
 
-	@Test
+	/*@Test
 	public void buyList(){
 		System.out.println("구매내역 : " + dao.buyList(7).toString());
+	}*/
+	
+	@Test
+	public void buyList(){
+		System.out.println("찜리스트 : " + dao.pickList(7).toString());
 	}
 }
