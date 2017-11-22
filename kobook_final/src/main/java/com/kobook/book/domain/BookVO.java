@@ -175,10 +175,4 @@ public class BookVO {
 	}
 
 
-	
-	
-	
-	
-	
-	
 }

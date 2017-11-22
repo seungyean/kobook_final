@@ -59,7 +59,7 @@
 
    
       <section class="content portfolio small-images">
-      <form action="/kobook/book/insertform.do" method="post">
+      <form action="/book/bookinsertform" method="post">
                <!--begin isotope -->
                <div class="isotope col-lg-12">
                   <!--begin portfolio filter -->

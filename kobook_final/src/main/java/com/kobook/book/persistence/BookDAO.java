@@ -24,7 +24,7 @@ public interface BookDAO {
 	
 	public void deleteAttach(Integer book_id) throws Exception;
 	
-	public void replaceAttach(String fullName, Integer book_id)throws Exception;
+	public void replaceAttach(String file_name, Integer book_id)throws Exception;
 	
 	
 	

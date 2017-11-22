@@ -2,32 +2,34 @@ package com.kobook.book.domain;
 
 public class FileVO {
 
-	private String fullName;
-	private int bno;
+	private String file_name;
+	private int book_id;
 	
 	public FileVO(){}
 
-	public FileVO(String fullName, int bno) {
+	public FileVO(String file_name, int book_id) {
 		super();
-		this.fullName = fullName;
-		this.bno = bno;
+		this.file_name = file_name;
+		this.book_id = book_id;
 	}
 
-	public String getFullName() {
-		return fullName;
+	public String getFile_name() {
+		return file_name;
 	}
 
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
+	public void setFile_name(String file_name) {
+		this.file_name = file_name;
 	}
 
-	public int getBno() {
-		return bno;
+	public int getBook_id() {
+		return book_id;
 	}
 
-	public void setBno(int bno) {
-		this.bno = bno;
+	public void setBook_id(int book_id) {
+		this.book_id = book_id;
 	}
+
+
 	
 	
 	

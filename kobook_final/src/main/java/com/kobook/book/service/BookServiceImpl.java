@@ -21,19 +21,20 @@ public class BookServiceImpl implements BookService {
 	@Transactional
 	@Override
 	public void regist(BookVO book) throws Exception {
+		book.setPerson_id(3);
 		dao.create(book);
 		String[] files=book.getFiles();
 		Integer book_id=dao.getBno();
 		
 		FileVO fileVO=new FileVO();
-		fileVO.setBno(book_id);
-		
+		fileVO.setBook_id(book_id);
+		System.out.println(book.toString());
 		if(files==null){
 			return;
 		}
 		
-		for(String fileName:files){
-			fileVO.setFullName(fileName);
+		for(String file_name:files){
+			fileVO.setFile_name(file_name);
 			dao.addAttach(fileVO);
 		}	
 	}
@@ -74,22 +75,18 @@ public class BookServiceImpl implements BookService {
 		dao.deleteAttach(book_id);
 		
 		FileVO fileVO=new FileVO();
-		fileVO.setBno(book_id);
+		fileVO.setBook_id(book_id);
 		
 		String files[]=book.getFiles();
 		if(files==null){
 			return;
 		}
 		
-		for(String fileName:files){
-			dao.replaceAttach(fileName, book_id);
+		for(String file_name:files){
+			dao.replaceAttach(file_name, book_id);
 		}	
 		
 	}
 
-	
-	
-
-	
 
 }

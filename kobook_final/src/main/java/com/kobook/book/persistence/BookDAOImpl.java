@@ -25,6 +25,7 @@ public class BookDAOImpl implements BookDAO {
 	
 	@Override
 	public void create(BookVO vo) throws Exception {
+	
 		session.insert(namespace+".create",vo);
 	}
 	
@@ -69,14 +70,12 @@ public class BookDAOImpl implements BookDAO {
 	}
 
 	@Override
-	public void replaceAttach(String fullName, Integer book_id) throws Exception {
+	public void replaceAttach(String file_name, Integer book_id) throws Exception {
 	Map<String, Object>paramMap=new HashMap<String, Object>();
 	
 	paramMap.put("book_id", book_id);
-	paramMap.put("fullName", fullName);
+	paramMap.put("file_name", file_name);
 	session.insert(namespace+".replaceAttach",paramMap);
-	
-		
 	}
 	
 	

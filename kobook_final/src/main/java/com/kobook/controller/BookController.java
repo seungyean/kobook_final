@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kobook.book.domain.BookVO;
-import com.kobook.book.domain.Criteria;
 import com.kobook.book.domain.PageMaker;
 import com.kobook.book.domain.SearchCriteria;
 import com.kobook.book.service.BookService;
@@ -28,9 +27,13 @@ public class BookController {
 	}
 	
 	@RequestMapping(value="/bookinsertForm",method=RequestMethod.POST)
-	public String bookinsertFormPOST(BookVO book, RedirectAttributes rttr)throws Exception{
+	public String bookinsertFormPOST(BookVO book) throws Exception{
+		System.out.println("aaaaaaaaaaaa");
+		System.out.println(book.toString()); 
 		service.regist(book);
+		System.out.println("bbbbbbbbbb");
 		return "redirect:/book/booklist";
+		
 	}
 
 	@RequestMapping("/booklist")
@@ -63,7 +66,5 @@ public class BookController {
 		rttr.addAttribute("searchType", cri.getSearchType());
 		rttr.addAttribute("keyword", cri.getKeyword());
 		return "redirect:/book/booklist";
-	}
-	
-	
+	}	
 }

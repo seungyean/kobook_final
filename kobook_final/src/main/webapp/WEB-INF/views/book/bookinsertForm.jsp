@@ -51,31 +51,31 @@
                     <h4><span>Book Register</span></h4>
                 </div>
    
-                <form action="insertForm" id="subscribe"  name="subscribe" method="post" enctype="multipart/form-data">
-                	<input type="hidden" class="form-control" name="person_id" value="${BookVO.person_id}">
-             <b>책이름:</b>     <input type="text" name="name" id="name" class="form-control" placeholder="책이름">
-           <b>  부가설명:</b>        <input type="text" name="hash" id="hash" class="form-control" placeholder="부가설명(간단검색어를 입력하세요)">
-          <b>  원가: </b>        <input type="text" name="o_price" id="name" class="form-control" placeholder="원가">
-            <b>  판매가: </b>           <input type="text" name="m_price" id="name" class="form-control" placeholder="판매가">
-            <b>  판: </b>            <input type="text" name="edition" id="name" class="form-control" placeholder="판(빈칸도 좋아용)">
-             <b>  출판사: </b>            <input type="text" name="publish" id="name" class="form-control" placeholder="출판사">
-             <b>  내용: </b>          <textarea rows="10" cols="70" name="content"id="name" class="form-control" placeholder="내용을 입력하세요"></textarea>
+                <form action="/book/bookinsertForm" id="subscribe"  name="subscribe" method="post" >
+                	<%-- <input type="hidden" class="form-control" name="person_id" value="${BookVO.person_id}"> --%>
+             <b>책이름:</b>     <input type="text" name="book_name" id="name" class="form-control" placeholder="책이름">
+           <b>  부가설명:</b>        <input type="text" name="book_hash" id="hash" class="form-control" placeholder="부가설명(간단검색어를 입력하세요)">
+          <b>  원가: </b>        <input type="text" name="book_o_price" id="name" class="form-control" placeholder="원가">
+            <b>  판매가: </b>           <input type="text" name="book_m_price" id="name" class="form-control" placeholder="판매가">
+            <b>  판: </b>            <input type="text" name="book_edition" id="name" class="form-control" placeholder="판(빈칸도 좋아용)">
+             <b>  출판사: </b>            <input type="text" name="book_publish" id="name" class="form-control" placeholder="출판사">
+             <b>  내용: </b>          <textarea rows="10" cols="70" name="book_content"id="name" class="form-control" placeholder="내용을 입력하세요"></textarea>
                     
-               <b>    안심여부:</b> <input type="radio" name="safe_yn" value="Y" checked="checked">Y 
-					<input type="radio" name="safe_yn" value="N">N &nbsp&nbsp
+               <b>    안심여부:</b> <input type="radio" name="book_safe_yn" value="Y" checked="checked">Y 
+					<input type="radio" name="book_safe_yn" value="N">N &nbsp&nbsp
 					
-			<b> 	책상태: </b><select name="status" id="status">
+			<b> 	책상태: </b><select name="book_status" id="status">
 					<option value="B" >보통</option>
 					<option value="A">양호</option>
 					<option value="C">미흡</option>
 			</select> &nbsp&nbsp
 			
-			<b> 	판매상태: </b><select name="sell_state" id="sell_state">
+			<b> 	판매상태: </b><select name="book_sell_state" id="sell_state">
 					<option value="I">판매중</option>
 					<option value="C">판매완료</option>
 					</select> &nbsp&nbsp
 			
-		<b> 	책종류: </b><select name="kind" id="kind">
+		<b> 	책종류: </b><select name="book_kind" id="kind">
 					<option value="사회계열">사회계열</option>
 					<option value="법학계열">법학계열</option>
 					<option value="의학계열">의학계열</option>
@@ -86,7 +86,7 @@
 					</select><br>
 			
 			
-			<b> 파일: </b><input type="file" name="img">
+			<b> 파일: </b><input type="file" name="files">
 					
                     <div class="pull-right">
                        <input type="submit" value="Subscribe" id="submit" class="btn btn-default btn-lg button">
