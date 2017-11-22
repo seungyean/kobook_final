@@ -9,9 +9,9 @@ public interface BoardService {
 	
 	public void regist(BoardVO vo)throws Exception;
 	
-	public List<BoardVO> list(SearchCriteria cri)throws Exception;
+	/*public List<BoardVO> list(SearchCriteria cri)throws Exception;
 	
-	public int countPaging(SearchCriteria cri)throws Exception;
+	public int countPaging(SearchCriteria cri)throws Exception;*/
 	
 	public BoardVO read(Integer board_id) throws Exception;
 

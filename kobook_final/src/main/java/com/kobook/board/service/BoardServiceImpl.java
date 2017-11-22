@@ -22,15 +22,15 @@ public class BoardServiceImpl implements BoardService {
 		Integer board_id=dao.getBno();
 	}
 	
-	@Override
+/*	@Override
 	public List<BoardVO> list(SearchCriteria cri) throws Exception {
 		return dao.listCriteria(cri);
-	}
+	}*/
 	
-	@Override
+/*	@Override
 	public int countPaging(SearchCriteria cri)throws Exception {
 		return dao.countPaging(cri);
-	}
+	}*/
 
 	@Override
 	public BoardVO read(Integer board_id) throws Exception {

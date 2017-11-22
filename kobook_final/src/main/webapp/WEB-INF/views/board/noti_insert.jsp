@@ -10,12 +10,12 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <!-- CSS FILES -->
-    <link rel="stylesheet" href="/kobook/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/kobook/css/style.css">
-    <link rel="stylesheet" type="/kobook/text/css" href="/kobook/css/style.css" media="screen" data-name="skins">
-    <link rel="stylesheet" href="/kobook/css/layout/wide.css" data-name="layout">
-    <link rel="stylesheet" href="/kobook/css/animate.css" type="/kobook/text/css"/>
-    <link rel="stylesheet" type="/kobook/text/css" href="/kobook//css/switcher.css" media="screen" />
+    <link rel="stylesheet" href="resources/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="resources/css/style.css">
+    <link rel="stylesheet" type="resources/text/css" href="resources/css/style.css" media="screen" data-name="skins">
+    <link rel="stylesheet" href="resources/css/layout/wide.css" data-name="layout">
+    <link rel="stylesheet" href="resources/css/animate.css" type="resources/text/css"/>
+    <link rel="stylesheet" type="resources/text/css" href="resources//css/switcher.css" media="screen" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -73,7 +73,7 @@
                                                </div>
                                                <div class="navbar-collapse collapse">
                                                      <ul class="nav navbar-nav">
-                                                            <li><a href="/kobook/admin/listUser.do">회원관리</a>
+                                                            <li><a href="resources/admin/listUser.do">회원관리</a>
                                                                    <ul class="dropdown-menu">
                                                                          <li><a href="index.html">회원수정</a></li>
                                                                          <li><a href="index_2.html">회원등급</a></li>
@@ -98,7 +98,7 @@
                                                                          <li><a href="sidebar-left.html">Left Sidebar</a></li>
                                                                          <li><a href="404-page.html">404 Page</a></li>
                                                                    </ul></li>
-                                                            <li><a href="/kobook/admin/insertBoard.do">공지사항관리</a>
+                                                            <li><a href="resources/admin/insertBoard.do">공지사항관리</a>
                                                                    <ul class="dropdown-menu">
                                                                          <li><a href="#">Portfolio Classic</a>
                                                                                 <ul class="dropdown-menu">
@@ -251,21 +251,21 @@
         </div>
     </div>
 </section>
-<script type="/kobook/text/javascript" src="/kobook/js/jquery-1.10.2.min.js"></script>
-<script src="/kobook/js/bootstrap.min.js"></script>
-<script src="/kobook/js/jquery.easing.1.3.js"></script>
-<script src="/kobook/js/retina-1.1.0.min.js"></script>
-<script type="/kobook/text/javascript" src="/kobook/js/jquery.cookie.js"></script> <!-- jQuery cookie -->
-<script type="/kobook/text/javascript" src="/kobook/js/styleswitch.js"></script> <!-- Style Colors Switcher -->
-<script type="/kobook/text/javascript" src="/kobook/js/jquery.smartmenus.min.js"></script>
-<script type="/kobook/text/javascript" src="/kobook/js/jquery.smartmenus.bootstrap.min.js"></script>
-<script type="/kobook/text/javascript" src="/kobook/js/owl.carousel.js"></script><!-- Popover-JS -->
-<script type="/kobook/text/javascript" src="/kobook/js/jflickrfeed.js"></script>
-<script type="/kobook/text/javascript" src="/kobook/js/jquery.magnific-popup.min.js"></script>
-<script type="/kobook/text/javascript" src="/kobook/js/jquery.isotope.min.js"></script>
-<script type="/kobook/text/javascript" src="/kobook/js/swipe.js"></script>
-<script type="/kobook/text/javascript" src="/kobook/js/jquery-scrolltofixed-min.js"></script>
-<script src="/kobook/js/main.js"></script>
+<script type="resources/text/javascript" src="resources/js/jquery-1.10.2.min.js"></script>
+<script src="resources/js/bootstrap.min.js"></script>
+<script src="resources/js/jquery.easing.1.3.js"></script>
+<script src="resources/js/retina-1.1.0.min.js"></script>
+<script type="resources/text/javascript" src="resources/js/jquery.cookie.js"></script> <!-- jQuery cookie -->
+<script type="resources/text/javascript" src="resources/js/styleswitch.js"></script> <!-- Style Colors Switcher -->
+<script type="resources/text/javascript" src="resources/js/jquery.smartmenus.min.js"></script>
+<script type="resources/text/javascript" src="resources/js/jquery.smartmenus.bootstrap.min.js"></script>
+<script type="resources/text/javascript" src="resources/js/owl.carousel.js"></script><!-- Popover-JS -->
+<script type="resources/text/javascript" src="resources/js/jflickrfeed.js"></script>
+<script type="resources/text/javascript" src="resources/js/jquery.magnific-popup.min.js"></script>
+<script type="resources/text/javascript" src="resources/js/jquery.isotope.min.js"></script>
+<script type="resources/text/javascript" src="resources/js/swipe.js"></script>
+<script type="resources/text/javascript" src="resources/js/jquery-scrolltofixed-min.js"></script>
+<script src="resources/js/main.js"></script>
 <!-- Start Style Switcher -->
 <div class="switcher"></div>
 <!-- End Style Switcher -->

@@ -33,7 +33,7 @@ public class BoardController {
 		return "redirect:/board/noti";
 	}
 	
-	@RequestMapping("/noti")
+/*	@RequestMapping("/noti")
 	public void list(@ModelAttribute("cri") SearchCriteria cri, Model model)throws Exception{
 		model.addAttribute("list", service.list(cri));
 		PageMaker pageMaker=new PageMaker();
@@ -41,7 +41,7 @@ public class BoardController {
 		pageMaker.setTotalCount(service.countPaging(cri));
 		model.addAttribute("pageMaker",pageMaker);
 	}
-	
+	*/
 	@RequestMapping(value="/detailNoti",method=RequestMethod.GET)
 	public void read(@RequestParam("board_id")int board_id, @ModelAttribute("cri")SearchCriteria cri, Model model)throws Exception{
 		model.addAttribute(service.read(board_id));

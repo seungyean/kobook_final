@@ -1,13 +1,14 @@
-<%-- <%@page import="kobook.admin.domain.ListModel"%> --%>
+<%--  <%@page import="kobook.admin.domain.ListModel"%>  --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%-- <%
-	ListModel listModel = (ListModel)request.getAttribute("listModel");
-/* 	int person_id = Integer.parseInt((String)request.getSession().getAttribute("person_id")); */
-%> 
 
+<%-- <%@
+	ListModel listModel = (ListModel)request.getAttribute("listModel");
+ 	int person_id = Integer.parseInt((String)request.getSession().getAttribute("person_id")); 
+%> 
+ --%>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -22,16 +23,16 @@
 <meta name="description" content="">
 
 <!-- CSS FILES -->
-<link rel="stylesheet" href="/kobook/css/bootstrap.min.css" />
-<link rel="stylesheet" href="/kobook/css/style.css">
-<link rel="stylesheet" type="/kobook/text/css"
-	href="/kobook/css/style.css" media="screen" data-name="skins">
-<link rel="stylesheet" href="/kobook/css/animate.css" type="text/css" />
-<link rel="stylesheet" href="/kobook/css/layout/wide.css"
+<link rel="stylesheet" href="resources/css/bootstrap.min.css" />
+<link rel="stylesheet" href="resources/css/style.css">
+<link rel="stylesheet" type="resources/text/css"
+	href="resources/css/style.css" media="screen" data-name="skins">
+<link rel="stylesheet" href="resources/css/animate.css" type="text/css" />
+<link rel="stylesheet" href="resources/css/layout/wide.css"
 	data-name="layout">
 
-<link rel="stylesheet" type="/kobook/text/css"
-	href="/kobook/css/switcher.css" media="screen" />
+<link rel="stylesheet" type="resources/text/css"
+	href="resources/css/switcher.css" media="screen" />
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -80,7 +81,7 @@ alert("회원용");
 					<div class="col-lg-3 col-sm-3 ">
 						<div id="logo">
 									<h1>
-										<a href="index.html"><img alt="KOBOOK" src="/kobook/images/logo.png" /></a>
+										<a href="index.html"><img alt="KOBOOK" src="resources/images/logo.png" /></a>
 									</h1>									
 
 						
@@ -103,7 +104,7 @@ alert("회원용");
 							</div>
 							<div class="navbar-collapse collapse">
 								<ul class="nav navbar-nav">
-									<li><a href="/kobook/admin/listUser.do">회원관리</a>
+									<li><a href="resources/admin/listUser.do">회원관리</a>
 										<ul class="dropdown-menu">
 											<li><a href="index.html">회원수정</a></li>
 											<li><a href="index_2.html">회원등급</a></li>
@@ -131,7 +132,7 @@ alert("회원용");
 											<li><a href="404-page.html">404 Page</a></li>
 										</ul></li>
 
-									<li><a href="/kobook/admin/insertBoard.do">공지사항관리</a>
+									<li><a href="resources/admin/insertBoard.do">공지사항관리</a>
 										<ul class="dropdown-menu">
 											<li><a href="#">Portfolio Classic</a>
 												<ul class="dropdown-menu">
@@ -160,7 +161,7 @@ alert("회원용");
 						</div>
 						<nav id="breadcrumbs">
 							<ul>
-								<li><a href="/kobook/admin/noti.jsp">Home</a>/</li>
+								<li><a href="resources/admin/noti.jsp">Home</a>/</li>
 								<li>Pages</li>
 							</ul>
 						</nav>
@@ -215,7 +216,7 @@ alert("회원용");
 
 			<!-- 이전(기준은 start page) -->
 			<c:if test="${listModel.startPage > 5 }">
-				<a href="/kobook/admin/noti.do?pageNum=${listModel.startPage - 1 }">[이전]</a>
+				<a href="resources/admin/noti.do?pageNum=${listModel.startPage - 1 }">[이전]</a>
 			</c:if>
 
 			<!-- 페이지 목록 -->
@@ -224,14 +225,14 @@ alert("회원용");
 				<c:if test="${listModel.requestPage == pageNo }">
 					<b>
 				</c:if>
-				<a href="/kobook/admin/noti.do?pageNum=${pageNo }">[${pageNo }]</a>
+				<a href="resources/admin/noti.do?pageNum=${pageNo }">[${pageNo }]</a>
 				<c:if test="${listModel.requestPage == pageNo }">
 					</b>
 				</c:if>
 			</c:forEach>
 			<!-- 이후 -->
 			<c:if test="${listModel.endPage < listModel.totalPageCount }">
-				<a href="/kobook/admin/noti.do?pageNum=${listModel.endPage + 1 }">[이후]</a>
+				<a href="resources/admin/noti.do?pageNum=${listModel.endPage + 1 }">[이후]</a>
 			</c:if> 
 
 			<!--Sidebar Widget-->
@@ -290,15 +291,15 @@ alert("회원용");
 								<div class="tab-pane fade active in" id="Popular">
 									<ul class="recent_tab_list">
 										<li><span><a href="#"><img
-													src="/kobook/images/content/recent_1.png" alt="" /></a></span> <a
+													src="resources/images/content/recent_1.png" alt="" /></a></span> <a
 											href="#">Publishing packag esanse web page editos</a> <i>October
 												09, 2015</i></li>
 										<li><span><a href="#"><img
-													src="/kobook/images/content/recent_2.png" alt="" /></a></span> <a
+													src="resources/images/content/recent_2.png" alt="" /></a></span> <a
 											href="#">Sublishing packag esanse web page editos</a> <i>October
 												08, 2015</i></li>
 										<li class="last-tab"><span><a href="#"><img
-													src="/kobook/images/content/recent_3.png" alt="" /></a></span> <a
+													src="resources/images/content/recent_3.png" alt="" /></a></span> <a
 											href="#">Mublishing packag esanse web page editos</a> <i>October
 												07, 2015</i></li>
 									</ul>
@@ -306,15 +307,15 @@ alert("회원용");
 								<div class="tab-pane fade" id="Recent">
 									<ul class="recent_tab_list">
 										<li><span><a href="#"><img
-													src="/kobook/images/content/recent_4.png" alt="" /></a></span> <a
+													src="resources/images/content/recent_4.png" alt="" /></a></span> <a
 											href="#">Various versions has evolved over the years</a> <i>October
 												18, 2015</i></li>
 										<li><span><a href="#"><img
-													src="/kobook/images/content/recent_5.png" alt="" /></a></span> <a
+													src="resources/images/content/recent_5.png" alt="" /></a></span> <a
 											href="#">Rarious versions has evolve over the years</a> <i>October
 												17, 2015</i></li>
 										<li class="last-tab"><span><a href="#"><img
-													src="/kobook/images/content/recent_6.png" alt="" /></a></span> <a
+													src="resources/images/content/recent_6.png" alt="" /></a></span> <a
 											href="#">Marious versions has evolven over the years</a> <i>October
 												16, 2015</i></li>
 									</ul>
@@ -323,7 +324,7 @@ alert("회원용");
 									<ul class="comments">
 										<li class="comments_list clearfix"><a
 											class="post-thumbnail" href="#"><img width="60"
-												height="60" src="/kobook/images/content/recent_3.png"
+												height="60" src="resources/images/content/recent_3.png"
 												alt="#"></a>
 											<p>
 												<strong><a href="#">Prambose</a> <i>says: </i> </strong>
@@ -333,7 +334,7 @@ alert("회원용");
 											</p></li>
 										<li class="comments_list clearfix"><a
 											class="post-thumbnail" href="#"><img width="60"
-												height="60" src="/kobook/images/content/recent_1.png"
+												height="60" src="resources/images/content/recent_1.png"
 												alt="#"></a>
 											<p>
 												<strong><a href="#">Makaroni</a> <i>says: </i> </strong>
@@ -343,7 +344,7 @@ alert("회원용");
 											</p></li>
 										<li class="comments_list clearfix"><a
 											class="post-thumbnail" href="#"><img width="60"
-												height="60" src="/kobook/images/content/recent_2.png"
+												height="60" src="resources/images/content/recent_2.png"
 												alt="#"></a>
 											<p>
 												<strong><a href="#">Prambanan</a> <i>says: </i> </strong>
@@ -536,26 +537,26 @@ alert("회원용");
 		</div>
 	</section>
 	
-	<script type="text/javascript" src="/kobook/js/jquery-1.10.2.min.js"></script>
-    <script src="/kobook/js/bootstrap.min.js"></script>
-    <script src="/kobook/js/jquery.easing.1.3.js"></script>
-    <script src="/kobook/js/retina-1.1.0.min.js"></script>
-    <script type="text/javascript" src="/kobook/js/jquery.cookie.js"></script> <!-- jQuery cookie -->
-    <script type="text/javascript" src="/kobook/js/styleswitch.js"></script> <!-- Style Colors Switcher -->
-    <script src="/kobook/js/jquery.fractionslider.js" type="text/javascript" charset="utf-8"></script>
-    <script type="text/javascript" src="/kobook/js/jquery.smartmenus.min.js"></script>
-    <script type="text/javascript" src="/kobook/js/jquery.smartmenus.bootstrap.min.js"></script>
-    <script type="text/javascript" src="/kobook/js/owl.carousel.min.js"></script>
-    <script type="text/javascript" src="/kobook/js/jflickrfeed.js"></script>
-    <script type="text/javascript" src="/kobook/js/jquery.magnific-popup.min.js"></script>
-    <script type="text/javascript" src="/kobook/js/jquery.isotope.min.js"></script>
-    <script type="text/javascript" src="/kobook/js/jquery.easypiechart.min.js"></script>
-    <script type="text/javascript" src="/kobook/js/swipe.js"></script>
-    <script type="text/javascript" src="/kobook/js/jquery-hoverdirection.min.js"></script>
-    <script type="text/javascript" src="/kobook/js/jquery.matchHeight-min.js"></script>
-    <script type="text/javascript" src="/kobook/js/jquery-scrolltofixed-min.js"></script>
+	<script type="text/javascript" src="resources/js/jquery-1.10.2.min.js"></script>
+    <script src="resources/js/bootstrap.min.js"></script>
+    <script src="resources/js/jquery.easing.1.3.js"></script>
+    <script src="resources/js/retina-1.1.0.min.js"></script>
+    <script type="text/javascript" src="resources/js/jquery.cookie.js"></script> <!-- jQuery cookie -->
+    <script type="text/javascript" src="resources/js/styleswitch.js"></script> <!-- Style Colors Switcher -->
+    <script src="resources/js/jquery.fractionslider.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="resources/js/jquery.smartmenus.min.js"></script>
+    <script type="text/javascript" src="resources/js/jquery.smartmenus.bootstrap.min.js"></script>
+    <script type="text/javascript" src="resources/js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="resources/js/jflickrfeed.js"></script>
+    <script type="text/javascript" src="resources/js/jquery.magnific-popup.min.js"></script>
+    <script type="text/javascript" src="resources/js/jquery.isotope.min.js"></script>
+    <script type="text/javascript" src="resources/js/jquery.easypiechart.min.js"></script>
+    <script type="text/javascript" src="resources/js/swipe.js"></script>
+    <script type="text/javascript" src="resources/js/jquery-hoverdirection.min.js"></script>
+    <script type="text/javascript" src="resources/js/jquery.matchHeight-min.js"></script>
+    <script type="text/javascript" src="resources/js/jquery-scrolltofixed-min.js"></script>
 
-    <script src="/kobook/js/main.js"></script>
+    <script src="resources/js/main.js"></script>
 
     <!-- Start Style Switcher -->
     <div class="switcher"></div>
