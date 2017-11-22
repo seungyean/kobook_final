@@ -1,5 +1,7 @@
 package com.kobook.community.persistence;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -26,4 +28,25 @@ public class BlackDAOImpl implements BlackDAO {
 		session.insert(namespace+".blackAddAttach", fileVO);
 		
 	}
+
+	@Override
+	public int blackMaxNum() throws Exception {
+		return session.selectOne(namespace+".blackMaxNum");
+	}
+
+	@Override
+	public List<String> blackGetAttach(Integer black_id) throws Exception {
+		return session.selectList(namespace+".blackGetAttach", black_id);
+	}
+
+	@Override
+	public void blackDeleteAttach(Integer black_id) throws Exception {
+		session.delete(namespace+".blackDeleteAttach", black_id);
+	}
+
+	@Override
+	public void blackReplaceAttach(BlackFileVO fileVO) {
+		session.insert(namespace+".blackReplaceAttach", fileVO);
+	}
+	
 }

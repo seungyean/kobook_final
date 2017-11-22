@@ -18,17 +18,16 @@
 
 	<insert id="blackAddAttach" parameterType="BlackFileVO">
 		insert into black_attach(black_file_name, black_id)
-		values(#{file_name}, #{black_id})
+		values(#{black_file_name}, #{black_id})
 	</insert>
 	
 	<select id="blackMaxNum" resultType="int">
 		select MAX(black_id) from black
 	</select>
 	
-<!--
 	<select id="blackGetAttach" resultType="string">
-		select file_name from black_attach where black_id = #{black_id} order by
-		black_date
+		select black_file_name from black_attach where black_id = #{black_id}
+		order by black_date
 	</select>
 
 	<delete id="blackDeleteAttach">
@@ -36,8 +35,10 @@
 	</delete>
 
 	<insert id="blackReplaceAttach">
-		insert into black_attach(file_name, black_id) values(#{file_name},#{black_id})
-	</insert>
+		insert into black_attach(black_file_name, black_id) values(#{black_file_name},#{black_id})
+	</insert>	
+<!--
+
  
 	<select id="listBlackList" resultType="Black" parameterType="CommunitySearch">
 		select * from black
