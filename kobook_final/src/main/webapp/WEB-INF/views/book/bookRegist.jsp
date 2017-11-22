@@ -64,7 +64,7 @@
                     <h4><span>Book Register</span></h4>
                 </div>
    
-                <form action="/book/bookRegist" id="subscribe"  name="subscribe" method="post" >
+                <form action="/book/bookRegist" id="subscribe"  name="subscribe" method="post" enctype="multipart/form-data">
                 	 <input type="hidden" class="form-control" name="person_id" value="${person_id}"> 
              <b>책이름:</b>     <input type="text" name="book_name" id="name" class="form-control" placeholder="책이름">
            <b>  부가설명:</b>        <input type="text" name="book_hash" id="hash" class="form-control" placeholder="부가설명(간단검색어를 입력하세요)">

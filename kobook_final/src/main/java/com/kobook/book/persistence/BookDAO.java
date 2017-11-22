@@ -3,7 +3,7 @@ package com.kobook.book.persistence;
 import java.util.List;
 
 import com.kobook.book.domain.BookVO;
-import com.kobook.book.domain.FileVO;
+import com.kobook.book.domain.BookFileVO;
 import com.kobook.book.domain.SearchCriteria;
 
 public interface BookDAO {
@@ -20,11 +20,11 @@ public interface BookDAO {
 	
 	public void update(BookVO vo)throws Exception;
 	
-	public void addAttach(FileVO fileVO)throws Exception;
+	public void addAttach(BookFileVO fileVO)throws Exception;
 	
 	public void deleteAttach(Integer book_id) throws Exception;
 	
-	public void replaceAttach(String file_name, Integer book_id)throws Exception;
+	public void replaceAttach(String book_file_name, Integer book_id)throws Exception;
 	
 	
 	

@@ -93,9 +93,9 @@
 	
 	
 	
-	<insert id="addAttach" parameterType="FileVO">
+	<insert id="addAttach" parameterType="BookFileVO">
 	insert into book_attach(book_file_name, book_id)
-	values(#{file_name},#{book_id})
+	values(#{book_file_name},#{book_id})
 	</insert>
 	
 	<select id="maxNum" resultType="int">
@@ -111,7 +111,7 @@
    </delete>
    
    <insert id="replaceAttach">
-   insert into book_attach(book_file_name, book_id) values(#{file_name},#{book_id})
+   insert into book_attach(book_file_name, book_id) values(#{book_file_name},#{book_id})
    </insert>
 	
 	

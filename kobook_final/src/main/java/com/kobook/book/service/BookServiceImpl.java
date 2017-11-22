@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kobook.book.domain.BookVO;
-import com.kobook.book.domain.FileVO;
+import com.kobook.book.domain.BookFileVO;
 import com.kobook.book.domain.SearchCriteria;
 import com.kobook.book.persistence.BookDAO;
 
@@ -26,15 +26,15 @@ public class BookServiceImpl implements BookService {
 		String[] files=book.getFiles();
 		Integer book_id=dao.getBno();
 		
-		FileVO fileVO=new FileVO();
+		BookFileVO fileVO=new BookFileVO();
 		fileVO.setBook_id(book_id);
 		System.out.println(book.toString());
 		if(files==null){
 			return;
 		}
 		
-		for(String file_name:files){
-			fileVO.setFile_name(file_name);
+		for(String book_file_name:files){
+			fileVO.setBook_file_name(book_file_name);
 			dao.addAttach(fileVO);
 		}	
 	}
@@ -74,7 +74,7 @@ public class BookServiceImpl implements BookService {
 		Integer book_id=dao.getBno();
 		dao.deleteAttach(book_id);
 		
-		FileVO fileVO=new FileVO();
+		BookFileVO fileVO=new BookFileVO();
 		fileVO.setBook_id(book_id);
 		
 		String files[]=book.getFiles();
@@ -82,8 +82,8 @@ public class BookServiceImpl implements BookService {
 			return;
 		}
 		
-		for(String file_name:files){
-			dao.replaceAttach(file_name, book_id);
+		for(String book_file_name:files){
+			dao.replaceAttach(book_file_name, book_id);
 		}	
 		
 	}
