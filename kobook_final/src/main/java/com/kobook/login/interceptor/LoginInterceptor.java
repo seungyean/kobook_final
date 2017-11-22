@@ -19,6 +19,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
+		System.out.println("===================post시작");
 		
 		HttpSession session = request.getSession();
 
@@ -26,7 +27,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		String person_pwd = request.getParameter("person_pwd");
 		
 
-		int person_id = service.findPersonId(person_email);
+		String person_id = service.findPersonId(person_email)+"";
 		
 		session.setAttribute("person_email", person_email);
 		session.setAttribute("person_pwd", person_pwd);
@@ -46,6 +47,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+		System.out.println("==================pre시작");
 		HttpSession session = request.getSession();
 		
 		if(session.getAttribute("login") != null){

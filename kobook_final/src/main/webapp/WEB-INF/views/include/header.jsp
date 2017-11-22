@@ -1,4 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<% 
+	String cur_id = "0";
+	
+	if(session.getAttribute("person_id") != null){
+		cur_id = (String)session.getAttribute("person_id")+"";
+	}
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,7 +15,9 @@
 <script type="text/javascript">
 
 	function popup(){
-		var child = window.open("/message/messageSend","", "width=630, height=300, menubar=yes, statebar=yes, scrollbar=yes");	
+		
+		window.name = "mainPage";
+		window.open("/message/messageSend","messagePage", "width=630, height=300, menubar=yes, statebar=yes, scrollbar=yes");
 	}
 	
 </script>
@@ -20,6 +30,7 @@
                     <div class="col-sm-8 top-info hidden-xs">
                         <span><i class="fa fa-phone"></i>Phone: (123) 456-7890</span>
                         <span><i class="fa fa-envelope"></i>Email: kobook@kobook.com</span>
+                        <span><%= cur_id %></span>
                     </div>
                     <div class="col-sm-4 top-info">
                         <ul>

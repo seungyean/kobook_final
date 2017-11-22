@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	session.setAttribute("person_id", "2");
+	/* session.setAttribute("person_id", "2"); */
 	int cur_id = Integer.parseInt((String)session.getAttribute("person_id"));
 	System.out.println("cur_id: " + cur_id);
 %>
