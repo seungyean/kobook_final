@@ -61,7 +61,7 @@
                                     <li ><a href="/">Home</a>
                                     </li>
 
-                                    <li><a href="/bookList">전체검색</a></li>
+                                    <li><a href="/book/bookList">전체검색</a></li>
                                     <li><a href="/book/locationAction?check=1">지역검색</a></li>
 
                                     <li><a href="/community/blackList" >커뮤니티</a>

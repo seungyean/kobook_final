@@ -71,7 +71,7 @@
 				<div class="row sub_content">
 			
 			
-				<form role="form" action="bookdetail" method="post">
+				<form role="form" action="/book/bookRead" method="post">
 				<input type="hidden" name="book_id" value="${BookVO.book_id}">
                 	<input type="hidden" name="page" value="${cri.page}">
                 	<input type="hidden" name="perPageNum" value="${cri.perPageNum}">
