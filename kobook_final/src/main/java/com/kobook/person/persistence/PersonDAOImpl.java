@@ -18,7 +18,11 @@ public class PersonDAOImpl implements PersonDAO {
 	
 	@Override
 	public int findPersonId(String person_email) throws Exception {
-		return session.selectOne(namespace+".findId", person_email);
+		if(session.selectOne(namespace+".findId", person_email) == null){
+			return -1;
+		} else {
+			return session.selectOne(namespace+".findId", person_email);
+		}
 	}
 	
 	@Override

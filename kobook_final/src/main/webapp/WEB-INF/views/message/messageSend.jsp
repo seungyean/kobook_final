@@ -15,7 +15,7 @@
 <body>
 
 	쪽지보내기<br><br>
-	<form action="/message/send" method="post" name="messageForm">
+	<form action="/message/messageSend" method="post" name="messageForm">
 		<input type="hidden" name="person_id" value="<%=cur_id %>">
 		
 		<table border="1" cellpadding="0" cellspacing="0">
