@@ -61,5 +61,10 @@ public class BlackDAOImpl implements BlackDAO {
 	public int blackCount(SearchCriteria cri) throws Exception {
 		return session.selectOne(namespace+".blackCount", cri);
 	}
+
+	@Override
+	public BlackVO blackRead(Integer black_id) throws Exception {
+		return session.selectOne(namespace+".blackRead", black_id);
+	}
 	
 }

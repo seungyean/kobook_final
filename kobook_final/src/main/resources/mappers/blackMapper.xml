@@ -37,7 +37,6 @@
 	
 	<select id="blackGetAttach" resultType="string">
 		select black_file_name from black_attach where black_id = #{black_id}
-		order by black_date
 	</select>
 
 	<delete id="blackDeleteAttach">

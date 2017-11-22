@@ -52,6 +52,11 @@ public class BlackServiceImpl implements BlackService {
 	public int blackCount(SearchCriteria cri) throws Exception {
 		return dao.blackCount(cri);
 	}
+
+	@Override
+	public BlackVO blackRead(Integer black_id) throws Exception {
+		return dao.blackRead(black_id);
+	}
 	
 	
 
