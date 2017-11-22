@@ -99,7 +99,7 @@
 					</select><br>
 			
 			
-			<b> 파일: </b><input type="file" name="file_name">
+			<b> 파일: </b><input type="file" name="file">
 					
                     <div class="pull-right">
                        <input type="submit" value="Subscribe" id="submit" class="btn btn-default btn-lg button">

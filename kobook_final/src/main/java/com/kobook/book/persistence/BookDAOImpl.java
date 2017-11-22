@@ -11,7 +11,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kobook.book.domain.BookVO;
-import com.kobook.book.domain.BookFileVO;
 import com.kobook.book.domain.SearchCriteria;
 
 @Repository

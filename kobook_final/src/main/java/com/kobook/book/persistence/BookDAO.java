@@ -3,7 +3,6 @@ package com.kobook.book.persistence;
 import java.util.List;
 
 import com.kobook.book.domain.BookVO;
-import com.kobook.book.domain.BookFileVO;
 import com.kobook.book.domain.SearchCriteria;
 
 public interface BookDAO {

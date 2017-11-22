@@ -89,7 +89,7 @@
                            <div class="recent-item box">
                               <figure class="touching ">
                               
-                             <%--  <img src="/kobook/upload/${b.book_img}" alt="aa" height="280" /> --%>
+                             <%--  <img src="/F://upload/${b.book_img}" alt="aa" height="280" /> --%>
                                  <a href="/book/bookRead?book_id=${b.book_id}"></a>
                                  <div class="option inner">
                                     <div>
