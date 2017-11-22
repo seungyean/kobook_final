@@ -2,6 +2,7 @@ package com.kobook.community.persistence;
 
 import java.util.List;
 
+import com.kobook.book.domain.SearchCriteria;
 import com.kobook.community.domain.BlackFileVO;
 import com.kobook.community.domain.BlackVO;
 
@@ -18,6 +19,9 @@ public interface BlackDAO {
 	public void blackDeleteAttach(Integer black_id) throws Exception;
 	//blackReplaceAttach
 	public void blackReplaceAttach(BlackFileVO fileVO);
-	
+	//blackList
+	public List<BlackVO> blackList(SearchCriteria cri) throws Exception;
+	//blackCount
+	public int blackCount(SearchCriteria cri) throws Exception;
 	
 }

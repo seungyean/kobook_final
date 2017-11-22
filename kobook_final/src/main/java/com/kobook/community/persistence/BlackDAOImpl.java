@@ -4,9 +4,11 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kobook.book.domain.SearchCriteria;
 import com.kobook.community.domain.BlackFileVO;
 import com.kobook.community.domain.BlackVO;
 
@@ -47,6 +49,17 @@ public class BlackDAOImpl implements BlackDAO {
 	@Override
 	public void blackReplaceAttach(BlackFileVO fileVO) {
 		session.insert(namespace+".blackReplaceAttach", fileVO);
+	}
+
+	@Override
+	public List<BlackVO> blackList(SearchCriteria cri) throws Exception {
+		return session.selectList(namespace+".blackList", cri,
+				new RowBounds(cri.getPageStart(), cri.getPerPageNum()));
+	}
+
+	@Override
+	public int blackCount(SearchCriteria cri) throws Exception {
+		return session.selectOne(namespace+".blackCount", cri);
 	}
 	
 }

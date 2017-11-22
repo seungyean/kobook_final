@@ -14,12 +14,15 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kobook.book.domain.PageMaker;
+import com.kobook.book.domain.SearchCriteria;
 import com.kobook.community.domain.BlackVO;
 import com.kobook.community.service.BlackService;
 import com.kobook.util.MediaUtils;
@@ -31,6 +34,7 @@ public class CommunityController {
 
 	@Inject
 	private BlackService service;
+	
 	@Resource(name = "uploadPath")
 	private String uploadPath;
 
@@ -40,8 +44,19 @@ public class CommunityController {
 	}
 
 	@RequestMapping(value = "blackRegist", method = RequestMethod.POST)
-	public void blackRegistPost(BlackVO vo, Model model) throws Exception {
+	public String blackRegistPost(BlackVO vo, Model model) throws Exception {
 		service.blackRegist(vo);
+		return "redirect:/community/blackList";
+	}
+	
+	@RequestMapping(value = "blackList", method = RequestMethod.GET)
+	public void blackList(@ModelAttribute SearchCriteria cri, Model model)throws Exception{
+		model.addAttribute("list", service.blackList(cri));
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(service.blackCount(cri));
+		
+		model.addAttribute("pageMaker", pageMaker);
 	}
 
 	@RequestMapping(value = "/uploadAjax", method = RequestMethod.GET)

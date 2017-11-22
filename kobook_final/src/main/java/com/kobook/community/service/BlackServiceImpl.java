@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kobook.book.domain.SearchCriteria;
 import com.kobook.community.domain.BlackFileVO;
 import com.kobook.community.domain.BlackVO;
 import com.kobook.community.persistence.BlackDAO;
@@ -40,6 +41,16 @@ public class BlackServiceImpl implements BlackService {
 	@Override
 	public List<String> blackGetAttach(Integer black_id) throws Exception {
 		return dao.blackGetAttach(black_id);
+	}
+
+	@Override
+	public List<BlackVO> blackList(SearchCriteria cri) throws Exception {
+		return dao.blackList(cri);
+	}
+
+	@Override
+	public int blackCount(SearchCriteria cri) throws Exception {
+		return dao.blackCount(cri);
 	}
 	
 	

@@ -24,6 +24,16 @@
 	<select id="blackMaxNum" resultType="int">
 		select MAX(black_id) from black
 	</select>
+ 
+	<select id="blackList" resultType="BlackVO" parameterType="SearchCriteria">
+		<![CDATA[
+			 select * from black where black_id > 0
+		]]>
+			 <include refid="search"/>
+		<![CDATA[	  
+			 order by black_id DESC
+ 		]]>
+	</select>
 	
 	<select id="blackGetAttach" resultType="string">
 		select black_file_name from black_attach where black_id = #{black_id}
@@ -36,38 +46,52 @@
 
 	<insert id="blackReplaceAttach">
 		insert into black_attach(black_file_name, black_id) values(#{black_file_name},#{black_id})
-	</insert>	
-<!--
-
- 
-	<select id="listBlackList" resultType="Black" parameterType="CommunitySearch">
-		select * from black
-		<if test="area != null">
-			<where>
-				<foreach collection="area" item="item" separator="OR" open="("
-					close=")">
-					${item} LIKE #{searchKey}
-				</foreach>
-			</where>
+	</insert>
+			
+ 	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				and black_title like '%'|| #{keyword}||'%'
+			</if>
+			<if test="searchType == 'c'.toString()">
+				and black_content like '%'|| #{keyword}||'%'
+			</if>
+			<if test="searchType == 'w'.toString()">
+				and black_email like '%'|| #{keyword}||'%'
+			</if>
+			<if test="searchType == 'tc'.toString()">
+				and ( black_title like '%'|| #{keyword}||'%' OR black_content like
+				'%'||
+				#{keyword}||'%')
+			</if>
+			<if test="searchType == 'cw'.toString()">
+				and ( black_content like '%'|| #{keyword}||'%' OR black_email like
+				'%'||
+				#{keyword}||'%')
+			</if>
+			<if test="searchType == 'tcw'.toString()">
+				and ( black_title like '%'|| #{keyword}||'%'
+				OR
+				black_content like
+				'%'|| #{keyword}||'%'
+				OR
+				black_email like '%'|| #{keyword}||'%')
+			</if>
 		</if>
-		order by black_id DESC
+	</sql>
+
+	<select id="blackCount" resultType="int" parameterType="SearchCriteria">
+		<![CDATA[
+			select count(*) from black	 where black_id >= 0
+		]]>
+		 <include refid="search"/>
 	</select>
 
-	<select id="countBlack" resultType="int" parameterType="CommunitySearch">
-		select count(*) from black
-		<if test="area != null">
-			<where>
-				<foreach collection="area" item="item" separator="OR" open="("
-					close=")">
-					${item} LIKE #{searchKey}
-				</foreach>
-			</where>
-		</if>
-	</select>
-
-	<select id="selectBlackDetail" parameterType="int" resultType="Black">
+	<select id="blackRead" parameterType="int" resultType="BlackVO">
 		select * from black where black_id = #{black_id}
 	</select>
+
+<!--
 
 	<update id="updateBlackList" parameterType="Black">
 		update black set black_title=#{black_title},

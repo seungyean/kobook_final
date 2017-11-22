@@ -4,12 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<%
-/* 	if(session.getAttribute("person_id") != null) {
-		int person_id = Integer.parseInt((String)(session.getAttribute("person_id")));
-	} */
-	session.setAttribute("person_id", "2");
-%>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -77,7 +71,6 @@
 								<span>신고합니다 글 작성</span>
 							</h4>
 						</div>
-						<!-- 나중에 로그인되면 아래 person_id의 value는 sessionid로 변경 -->
 						<form id='registerForm' role="form" 
 							method="post" name="registerform">
 							<div class="form-group">
@@ -92,12 +85,6 @@
 								<input type="text" class="form-control" name="black_email"
 									placeholder="신고email">
 							</div>
-							<!-- 
-							<div class="form-group">
-								<input type="file" class="form-control" name="black_img"
-									placeholder="ImageFile">
-							</div>
-							 -->
 							<div class="form-group">
 								<textarea rows="10" cols="73" class="form-control"
 									name="black_content" placeholder="신고 내용 작성"></textarea>
