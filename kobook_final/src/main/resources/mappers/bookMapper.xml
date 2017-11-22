@@ -7,12 +7,12 @@
  	<insert id="create" parameterType="BookVO">
 		insert into book(
 			book_id,book_name,book_o_price,book_m_price,book_kind,book_edition,book_publish,book_hash,book_safe_yn,book_content,
-			book_date,book_status,book_sell_state,person_id
+			book_date,book_status,book_sell_state,book_img,person_id
 			
 		)values(
 			book_id_seq.nextval, #{book_name}, #{book_o_price}, #{book_m_price},#{book_kind}, #{book_edition},#{book_publish},
 			#{book_hash}, #{book_safe_yn}, #{book_content}, 
-			SYSDATE,#{book_status},#{book_sell_state},#{person_id}
+			SYSDATE,#{book_status},#{book_sell_state},#{book_img},#{person_id}
 		)		
 	</insert>
 	
@@ -76,7 +76,7 @@
       UPDATE book SET BOOK_NAME=#{book_name},BOOK_M_PRICE=#{book_m_price}
 		, BOOK_O_PRICE=#{book_o_price}, BOOK_SELL_STATE=#{book_sell_state}, BOOK_STATUS=#{book_status},
 		BOOK_SAFE_YN=#{book_safe_yn}, BOOK_CONTENT=#{book_content},BOOK_EDITION=#{book_edition},
-		BOOK_PUBLISH=#{book_publish}
+		BOOK_PUBLISH=#{book_publish},BOOK_IMG=#{book_img}
 		WHERE BOOK_ID=#{book_id}
     
    </update>
@@ -93,7 +93,7 @@
 	
 	
 	
-	<insert id="addAttach" parameterType="BookFileVO">
+<!-- 	<insert id="addAttach" parameterType="BookFileVO">
 	insert into book_attach(book_file_name, book_id)
 	values(#{book_file_name},#{book_id})
 	</insert>
@@ -112,7 +112,7 @@
    
    <insert id="replaceAttach">
    insert into book_attach(book_file_name, book_id) values(#{book_file_name},#{book_id})
-   </insert>
+   </insert> -->
 	
 	
 	

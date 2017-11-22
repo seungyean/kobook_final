@@ -9,8 +9,6 @@ import com.kobook.book.domain.SearchCriteria;
 public interface BookDAO {
 
 	public void create(BookVO vo)throws Exception;
-	
-	public int getBno() throws Exception;
 
 	public List<BookVO> listCriteria(SearchCriteria cri)throws Exception;
 	
@@ -19,12 +17,6 @@ public interface BookDAO {
 	public BookVO read(Integer book_id) throws Exception;
 	
 	public void update(BookVO vo)throws Exception;
-	
-	public void addAttach(BookFileVO fileVO)throws Exception;
-	
-	public void deleteAttach(Integer book_id) throws Exception;
-	
-	public void replaceAttach(String book_file_name, Integer book_id)throws Exception;
 	
 	
 	

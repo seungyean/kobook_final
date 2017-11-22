@@ -18,25 +18,13 @@ public class BookServiceImpl implements BookService {
 	@Inject
 	private BookDAO dao;
 	
-	@Transactional
+
 	@Override
 	public void regist(BookVO book) throws Exception {
 		//book.setPerson_id(3);
 		dao.create(book);
-		String[] files=book.getFiles();
-		Integer book_id=dao.getBno();
-		
-		BookFileVO fileVO=new BookFileVO();
-		fileVO.setBook_id(book_id);
 		System.out.println(book.toString());
-		if(files==null){
-			return;
-		}
 		
-		for(String book_file_name:files){
-			fileVO.setBook_file_name(book_file_name);
-			dao.addAttach(fileVO);
-		}	
 	}
 
 	
@@ -67,24 +55,10 @@ public class BookServiceImpl implements BookService {
 
 
 
-	@Transactional
+
 	@Override
 	public void modify(BookVO book) throws Exception {
 		dao.update(book);
-		Integer book_id=dao.getBno();
-		dao.deleteAttach(book_id);
-		
-		BookFileVO fileVO=new BookFileVO();
-		fileVO.setBook_id(book_id);
-		
-		String files[]=book.getFiles();
-		if(files==null){
-			return;
-		}
-		
-		for(String book_file_name:files){
-			dao.replaceAttach(book_file_name, book_id);
-		}	
 		
 	}
 

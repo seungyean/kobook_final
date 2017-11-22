@@ -29,10 +29,6 @@ public class BookDAOImpl implements BookDAO {
 		session.insert(namespace+".create",vo);
 	}
 	
-	@Override
-	public int getBno() throws Exception {
-		return session.selectOne(namespace+".maxNum");
-	}
 
 	
 	
@@ -58,25 +54,6 @@ public class BookDAOImpl implements BookDAO {
 		
 	}
 	
-	@Override
-	public void addAttach(BookFileVO fileVO) throws Exception {
-		session.insert(namespace+".addAttach",fileVO);
-	}
-
-	@Override
-	public void deleteAttach(Integer book_id) throws Exception {
-		session.delete(namespace+".deleteAttach",book_id);
-		
-	}
-
-	@Override
-	public void replaceAttach(String book_file_name, Integer book_id) throws Exception {
-	Map<String, Object>paramMap=new HashMap<String, Object>();
-	
-	paramMap.put("book_id", book_id);
-	paramMap.put("book_file_name", book_file_name);
-	session.insert(namespace+".replaceAttach",paramMap);
-	}
 	
 	
 
