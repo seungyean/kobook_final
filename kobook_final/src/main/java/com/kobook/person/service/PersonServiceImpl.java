@@ -1,4 +1,4 @@
-package com.kobook.login.service;
+package com.kobook.person.service;
 
 import javax.inject.Inject;
 

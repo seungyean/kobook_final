@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kobook.login.service.PersonService;
+import com.kobook.person.service.PersonService;
 import com.kobook.message.DTO.MessageDTO;
 import com.kobook.message.domain.MessageVO;
 import com.kobook.message.service.MessageService;

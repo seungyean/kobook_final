@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kobook.login.DTO.LoginDTO;
-import com.kobook.login.service.PersonService;
+import com.kobook.person.service.PersonService;
 import com.kobook.person.domain.PersonVO;
 
 @Controller
