@@ -15,12 +15,12 @@
 		, #{black_email}, #{person_id}
 		)
 	</insert>
-
+<!-- 
 	<insert id="blackAddAttach" parameterType="FileVO">
 		insert into black_attach(black_file_name, black_id)
 		values(#{file_name},#{black_id})
 	</insert>
-
+ -->
 	<select id="blackMaxNum" resultType="int">
 		select MAX(black_id) from black
 	</select>
