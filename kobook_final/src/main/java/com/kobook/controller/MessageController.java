@@ -24,10 +24,14 @@ public class MessageController {
 	@Inject
 	private PersonService pService;
 	
-	@RequestMapping(value="/sendForm", method=RequestMethod.GET)
+	@RequestMapping(value="/messageSend", method=RequestMethod.GET)
 	public void sendGET(HttpSession session) throws Exception{
 		
 	}
 	
+	public String sendPOST() throws Exception {
+		
+		return "";
+	}
 	
 }

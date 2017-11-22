@@ -7,7 +7,7 @@
 <script type="text/javascript">
 
 	function popup(){
-		var child = window.open("/message/sendForm","", "width=630, height=300, menubar=yes, statebar=yes, scrollbar=yes");	
+		var child = window.open("/message/messageSend","", "width=630, height=300, menubar=yes, statebar=yes, scrollbar=yes");	
 	}
 	
 </script>
