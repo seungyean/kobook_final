@@ -20,7 +20,7 @@
 </head>
 <body>
 	<!-- 헤더 -->
- 		<%--  <jsp:include page="/include/header.jsp" /> --%>
+ 		 <jsp:include page="/WEB-INF/views/include/header.jsp" />
   	<!-- /헤더 -->
 	
 	<!--start wrapper-->
@@ -161,7 +161,7 @@
 	<!--end wrapper-->
 
 	<!-- 푸터 -->
- 		 <%-- <jsp:include page="/include/footer.jsp" /> --%>
+ 		  <jsp:include page="/WEB-INF/views/include/footer.jsp" />
   	<!-- /푸터 -->
 	
     <script type="text/javascript" src="/kobook/js/jquery-1.10.2.min.js"></script>
