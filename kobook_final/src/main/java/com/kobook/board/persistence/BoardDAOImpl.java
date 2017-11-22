@@ -9,7 +9,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kobook.board.domain.BoardVO;
-import com.kobook.board.domain.ListModelVO;
 import com.kobook.board.domain.SearchVO;
 import com.kobook.book.domain.SearchCriteria;
 
