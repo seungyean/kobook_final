@@ -21,8 +21,8 @@ public class PersonController {
 	private PersonService service;
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public void loginGET(@ModelAttribute("dto") LoginDTO dto) {
-		
+	public void loginGET(@ModelAttribute("dto") LoginDTO dto) throws Exception {
+
 	}
 	
 	@RequestMapping(value = "/loginPost", method = RequestMethod.POST)
