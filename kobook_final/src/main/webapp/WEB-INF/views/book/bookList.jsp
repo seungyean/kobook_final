@@ -78,6 +78,8 @@
 
                   </ul>
                   
+                 <!--  <img src="/resources/test.jpg" alt="aa" height="280" /> -->
+                  
                   <!--begin portfolio_list -->   
             <ul id="list" class="portfolio_list clearfix ">      
                    
@@ -90,11 +92,13 @@
                               <figure class="touching ">
                               
                              <%--  <img src="/F://upload/${b.book_img}" alt="aa" height="280" /> --%>
-                                 <a href="/book/bookRead?book_id=${b.book_id}"></a>
+                                 <img src="displayFile?fileName=${b.book_img}" alt="aa" height="280"></img>
+                                  <a href="/book/bookRead?book_id=${b.book_id}" class="fa fa-link"></a> 
+                                  
                                  <div class="option inner">
                                     <div>
                                        <h5>${b.book_name}</h5>
-                                       <%-- <a href="/kobook/upload/${b.book_img}" class="fa fa-search mfp-image"></a>  --%>
+                                        <a href="displayFile?fileName=${b.book_img}" class="fa fa-search mfp-image"></a>
                                        <a href="/book/bookRead?book_id=${b.book_id}" class="fa fa-link"></a> 
                                        <span>${b.book_m_price}원</span>
                                        
@@ -119,6 +123,7 @@
                         </c:if>
                         </c:forEach>
                   <!--end List Item --> 
+
                   
                   
                   <!--begin List Item -->
@@ -129,13 +134,14 @@
                            <div class="recent-item box">
                               <figure class="touching ">
                               
-                             <%--  <img src="/kobook/upload/${b.book_img }" alt="aa" height="280"/> --%>
-                                 <a href="/book/bookRead?book_id=${b.book_id}"></a>
+                             <img src="displayFile?fileName=${b.book_img}" alt="aa" height="280"></img>
+                                  <a href="/book/bookRead?book_id=${b.book_id}" class="fa fa-link"></a> 
                                  <div class="option inner">
                                     <div>
                                        <h5>${b.book_name}</h5>
-                                       <%-- <a href="/kobook/upload/${b.book_img }" class="fa fa-search mfp-image"></a>  --%>
+                                        <a href="displayFile?fileName=${b.book_img}" class="fa fa-search mfp-image"></a>
                                        <a href="/book/bookRead?book_id=${b.book_id}" class="fa fa-link"></a> 
+                                      
                                        <span>${b.book_m_price}원</span>
                                        
                                         <c:choose>
@@ -239,6 +245,7 @@
                            <div class="recent-item box">
                               <figure class="touching ">
                               
+                              <img alt="aa" src="displa">
                               <%-- <img src="/kobook/upload/${b.book_img }" height="280" alt="aa"/> --%>
                                  <a href="/book/bookRead?book_id=${b.book_id}"></a>
                                  <div class="option inner">
@@ -443,6 +450,43 @@
     <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
 
   <script src="/resources/js/main.js"></script>
+  
+<!--   <script type="text/javascript">
+  function checkImageType(fileName){
+		
+		var pattern = /jpg|gif|png|jpeg/i;
+		
+		return fileName.match(pattern);
+
+	}
+
+	function getFileInfo(fullName){
+			
+		var fileName,imgsrc, getLink;
+		
+		var fileLink;
+		
+		if(checkImageType(fullName)){
+			imgsrc = "/book/displayFile?fileName="+fullName;
+			fileLink = fullName.substr(14);
+			
+			var front = fullName.substr(0,12); // /2015/07/01/ 
+			var end = fullName.substr(14);
+			
+			getLink = "/book/displayFile?fileName="+front + end;
+			
+		}else{
+			imgsrc ="/resources/dist/img/file.png";
+			fileLink = fullName.substr(12);
+			getLink = "/book/displayFile?fileName="+fullName;
+		}
+		fileName = fileLink.substr(fileLink.indexOf("_")+1);
+		
+		return  {fileName:fileName, imgsrc:imgsrc, getLink:getLink, fullName:fullName};
+		
+	}
+  
+  </script> -->
    <!-- Start Style Switcher -->
    <div class="switcher"></div>
    <!-- End Style Switcher -->
