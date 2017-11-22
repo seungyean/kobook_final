@@ -28,11 +28,13 @@ public class MessageController {
 	@Inject
 	private PersonService pService;
 	
-	@RequestMapping(value="/messageSend", method=RequestMethod.POST)
-	public void messageSendPOST(@RequestParam("person_id") String person_id,HttpSession session) throws Exception{
-		session.setAttribute("person_id", person_id);
+	// 쪽지 form으로 이동
+	@RequestMapping(value="/messageSend")
+	public void messageSendPOST(HttpSession session) throws Exception{
+		
 	}
 	
+	// 쪽지 보내기
 	@RequestMapping(value="/send", method=RequestMethod.POST)
 	public String sendPOST(MessageDTO dto, HttpSession session) throws Exception {
 		
@@ -40,7 +42,8 @@ public class MessageController {
 		System.out.println("보낼 사람 id:" + pService.findPersonId(dto.getReceiver_email()));
 		
 		int receiver_id = pService.findPersonId(dto.getReceiver_email());
-		
+	
+		// 해당 email을 가진 사용자가 존재하지 않으면 -1 반환
 		if(receiver_id == -1){
 			
 			return "/message/sendFail";

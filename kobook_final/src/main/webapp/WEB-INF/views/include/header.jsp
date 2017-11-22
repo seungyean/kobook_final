@@ -18,28 +18,20 @@
 	function popup(){
 		
 		window.name = "mainPage";
-		window.open("","messagePage", "width=630, height=300, menubar=yes, statebar=yes, scrollbar=yes");
-		
-		var frm = document.createElement("form");
-		frm.setAttribute("action", "/message/messageSend");
-		frm.setAttribute("target", "messagePage");
-		frm.setAttribute("method", "post");
-		document.body.appendChild(frm);
-		var input_id = document.createElement("input");
-		frm.setAttribute("type", "hidden");
-		frm.setAttribute("name", "person_id");
-		frm.setAttribute("value", <%=cur_id%>);
-		frm.appendChild(input_id);
-		frm.submit();
-		
+		window.open("/message/messageSend","messagePage", "width=630, height=300, menubar=yes, statebar=yes, scrollbar=yes");
+ 		
+		document.messageForm.target = "messagePage";
+		document.messageForm.submit; 
 	}
 	
 </script>
 </head>
 <body>
 <header id="header">
-		<form action="/message/messageSend" method="post" name="messageForm">
 		
+		<!-- 팝업창으로 session값을 post로 보내는 과정 -->
+		<form action="/message/messageSend" method="post" name="messageForm">
+			<input type="hidden" name="person_id" value="<%=cur_id %>">
 		</form>
         <div id="top-bar">
             <div class="container">
@@ -47,7 +39,6 @@
                     <div class="col-sm-8 top-info hidden-xs">
                         <span><i class="fa fa-phone"></i>Phone: (123) 456-7890</span>
                         <span><i class="fa fa-envelope"></i>Email: kobook@kobook.com</span>
-                        <span><%= cur_id %></span>
                     </div>
                     <div class="col-sm-4 top-info">
                         <ul>
