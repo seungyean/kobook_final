@@ -7,7 +7,7 @@
 <script type="text/javascript">
 
 	function popup(){
-		var child = window.open('/kobook/message/sendMessageForm.jsp','', 'width=630, height=300, menubar=yes, statebar=yes, scrollbar=yes');	
+		var child = window.open("/message/sendForm","", "width=630, height=300, menubar=yes, statebar=yes, scrollbar=yes");	
 	}
 	
 </script>
@@ -61,7 +61,7 @@
                                     <li ><a href="/kobook/index.do">Home</a>
                                     </li>
 
-                                    <li><a href="/kobook/book/listAction.do">전체검색</a></li>
+                                    <li><a href="/book/booklist">전체검색</a></li>
                                     <li><a href="/kobook/book/locationAction.do?check=1">지역검색</a></li>
 
                                     <li><a href="/kobook/community/blackList.do" >커뮤니티</a>

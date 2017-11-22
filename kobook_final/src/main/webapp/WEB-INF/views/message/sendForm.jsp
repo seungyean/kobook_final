@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%
+	session.setAttribute("person_id", "2");
 	int cur_id = Integer.parseInt((String)session.getAttribute("person_id"));
 	System.out.println("cur_id: " + cur_id);
 %>
@@ -13,27 +14,27 @@
 </head>
 <body>
 
-	ÂÊÁöº¸³»±â<br><br>
-	<form action="/message/" method="post" name="messageForm">
+	ìª½ì§€ë³´ë‚´ê¸°<br><br>
+	<form action="/message/send" method="post" name="messageForm">
 		<input type="hidden" name="person_id" value="<%=cur_id %>">
 		
 		<table border="1" cellpadding="0" cellspacing="0">
 		<tr height="30">
-			<td width="80">º¸³¾ »ç¶÷</td>
+			<td width="80">ë³´ë‚¼ ì‚¬ëžŒ</td>
 			<td align="left" colspan="3">
 				<input type="text" name="receiver_email" size="50">
 			</td>	
 		</tr>		
 		<tr height="30">
-			<td width="80">³»¿ë</td>			
+			<td width="80">ë‚´ìš©</td>			
 			<td align="left" colspan="3">
 				<textarea rows="10" cols="70" name="message_content"></textarea>
 			</td>			
 		</tr>
 		<tr height="30">			
 			<td colspan="4" align="center">
-				<input type="submit" value="Àü¼Û">&nbsp;&nbsp;
-				<input type="button" value="Ãë¼Ò" onclick="javascript:window.close();">
+				<input type="submit" value="ì „ì†¡">&nbsp;&nbsp;
+				<input type="button" value="ì·¨ì†Œ" onclick="javascript:window.close();">
 			</td>			
 		</tr>
 	</table>
