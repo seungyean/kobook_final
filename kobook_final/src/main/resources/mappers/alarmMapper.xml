@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kobook.mappers.alarmMapper">
+
+	<select id="alarmList" resultType="AlarmVO" parameterType="int">
+		SELECT *
+		FROM ALARM
+		WHERE PERSON_ID=#{person_id}
+		ORDER BY ALARM_ID DESC
+	</select>
+
+	<update id="alarmUpdate" parameterType="AlarmVO">
+		UPDATE ALARM SET HIT_YN='Y' WHERE PERSON_ID=#{person_id}
+	</update>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
