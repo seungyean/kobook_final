@@ -31,7 +31,7 @@
 			window.open("/person/login","","width=400,height=300,left=550,top=200");
 		}
 	   function fn_logout(){
-			location.href="/kobook/logout.jsp";
+			//location.href="/kobook/logout.jsp";
 		}
 	</script>
 </head>
@@ -92,25 +92,26 @@
 
 		<br>
 							
-							<c:if test="${person_id == null }">
+							<c:if test="${person_email == null }">
 								<a href="#" onclick="fn_login()">로그인</a>
 							</c:if>
 							
 							
-							<c:if test="${person_id != null }">
-								<a href="#" onclick="fn_logout()">로그아웃</a>
+							<c:if test="${person_email != null }">
+								<h4>${person_email }님  환영합니다앙~^0^</h4> 
+								<%-- <a href="#" onclick="fn_logout()">로그아웃</a>
 								
 								<c:choose>
-									<c:when test="${person_id == 0}">
+									<c:when test="${person_email == 0}">
 										<h4>관리자 로그인</h4>
 										<form action="/kobook/admin/listUser.do">
-            					  		<%-- 	<input type="hidden" name="person_id" value="${person_id }"> --%>
+            					  			<input type="hidden" name="person_id" value="${person_id }">
 											<input type="submit" value="회원관리이동">
 										</form>
 									</c:when>
 									<c:otherwise>
-										<h4>${person_id }님  환영합니다앙~^0^</h4> 
-											    <c:forEach var="z" items="${alarmList }">
+										<h4>${person_email }님  환영합니다앙~^0^</h4> 
+											     <c:forEach var="z" items="${alarmList }">
 	    											<c:if test="${z.hit_yn == 'N' }">
 	             											<% alarm_new += 1;%>
 	        										</c:if> 
@@ -119,9 +120,9 @@
             					  		<form action="/kobook/recom/alarmListAction.do">
             					  			<input type="hidden" name="person_id" value="${person_id }">
 											<input type="submit" value="알림">
-										</form>
+										</form> 
 									</c:otherwise>
-								</c:choose>
+								</c:choose> --%>
         					</c:if>
         
 <%--         <h2>알림 리스트</h2>
@@ -187,11 +188,11 @@
 		<section class="super_sub_content">
             <div class="dividerHeading text-center">
             	<c:choose>
-            		<c:when test="${person_id == 0}">
+            		<c:when test="${person_email == 'admin@kobook.com'}">
             			<h4><span>신규 등록 도서</span></h4>
             		</c:when>
             		<c:when test="${list != null}">
-            			<h4>${person_id }님을 위한 추천도서</h4>
+            			<h4>${person_email }님을 위한 추천도서</h4>
             		</c:when>
             		<c:otherwise>
             			<h4>신규 등록도서</h4>
