@@ -99,6 +99,16 @@
 							
 							<c:if test="${person_email != null }">
 								<h4>${person_email }님  환영합니다앙~^0^</h4> 
+								<c:forEach var="z" items="${alarmList }">
+	    							<c:if test="${z.hit_yn == 'N' }">
+	             						<% alarm_new += 1;%>
+	        						</c:if> 
+	    						</c:forEach>
+        								<h4>새로운 알람의 갯수 : [ <%=alarm_new %> ]</h4>
+            					  		<form action="/kobook/recom/alarmListAction.do">
+            					  			<input type="hidden" name="person_id" value="${person_id }">
+											<input type="submit" value="알림">
+										</form> 
 								<%-- <a href="#" onclick="fn_logout()">로그아웃</a>
 								
 								<c:choose>

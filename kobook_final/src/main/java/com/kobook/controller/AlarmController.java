@@ -29,6 +29,7 @@ public class AlarmController {
 		int person_id = (int)session.getAttribute("person_id");
 		
 		List<AlarmVO> alarmList = service.alarmListService(person_id);
+		request.setAttribute("alarmList", alarmList);
 	}
 	
 	@RequestMapping(value="/alarmUpdate", method=RequestMethod.POST)

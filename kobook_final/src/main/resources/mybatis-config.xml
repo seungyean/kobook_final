@@ -13,6 +13,7 @@
 		<package name="com.kobook.board.domain" />
 		<package name="com.kobook.person.domain" />
 		<package name="com.kobook.community.domain" />
+		<package name="com.kobook.alarm.domain"/>
 	</typeAliases>
 
 </configuration>
