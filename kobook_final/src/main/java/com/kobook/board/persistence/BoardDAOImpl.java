@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kobook.board.domain.BoardVO;
+import com.kobook.book.domain.BookVO;
 import com.kobook.book.domain.SearchCriteria;
 
 
@@ -26,6 +27,14 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 	
 	
+	
+	@Override
+	public void update(BookVO vo) throws Exception {
+		session.update(namespace+".update",vo);
+	}
+
+
+
 	@Override
 	public List<BoardVO> BoardListCri(SearchCriteria cri)throws Exception {
 		return session.selectList(namespace+".listCriteria", cri, new RowBounds(cri.getPageStart(),cri.getPerPageNum()));

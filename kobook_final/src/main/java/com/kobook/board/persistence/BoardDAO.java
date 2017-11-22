@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import com.kobook.board.domain.BoardVO;
+import com.kobook.book.domain.BookVO;
 import com.kobook.book.domain.Criteria;
 import com.kobook.book.domain.SearchCriteria;
 
@@ -19,6 +20,9 @@ public interface BoardDAO {
 	public int getBno() throws Exception;
 	
 	public int BoardcountPaging(SearchCriteria cri)throws Exception;
+	
+	
+	public void update(BookVO vo)throws Exception;
 	
 	
 }
