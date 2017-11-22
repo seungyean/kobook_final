@@ -6,7 +6,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <% 
-	int person_id = Integer.parseInt((String)(session.getAttribute("person_id")));
+	/* int person_id = Integer.parseInt((String)(session.getAttribute("person_id"))); */
+	//session.setAttribute("person_id", 5);
 %>
 <%-- <%
 	Book book = (Book)request.getAttribute("book");
@@ -27,12 +28,12 @@
 
 
      <!-- CSS FILES -->
-    <link rel="stylesheet" href="/kobook/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/kobook/css/style.css">
-    <link rel="stylesheet" type="text/css" href="/kobook/css/style.css" media="screen" data-name="skins">
-    <link rel="stylesheet" href="/kobook/css/layout/wide.css" data-name="layout">
+    <link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/resources/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/style.css" media="screen" data-name="skins">
+    <link rel="stylesheet" href="/resources/css/layout/wide.css" data-name="layout">
 
-    <link rel="stylesheet" type="text/css" href="/kobook/css/switcher.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/resources/css/switcher.css" media="screen" />
 </head>
 
 
@@ -71,8 +72,8 @@
 				<div class="row sub_content">
 			
 			
-				<form role="form" action="/book/bookRead" method="post">
-				<input type="hidden" name="book_id" value="${BookVO.book_id}">
+				<form role="form" action="/book/bookModify/${bookVO.book_id}" method="post">
+				<%-- <input type="hidden" name="book_id" value="${bookVO.book_id}"> --%>
                 	<input type="hidden" name="page" value="${cri.page}">
                 	<input type="hidden" name="perPageNum" value="${cri.perPageNum}">
                 
@@ -86,7 +87,7 @@
 				
 							
 						
-									<img alt="" class="carousel-item" src="/kobook/upload/${book.book_img}" width="10px" height="800px">
+									<%-- <img alt="" class="carousel-item" src="/kobook/upload/${bookVO.book_img}" width="10px" height="800px"> --%>
 								<!--<img class="carousel-item" src="images/portfolio/portfolio_slider1.png" alt="">
 								<img class="carousel-item" src="images/portfolio/portfolio_slider2.png" alt="">
 								<img class="carousel-item" src="images/portfolio/portfolio_slider3.png" alt=""> -->
@@ -100,7 +101,7 @@
 							<div class="widget_title">
 								<h4><span>내용</span></h4>
 							</div>
-						<p>${BookVO.book_content}</p>
+						<p>${bookVO.book_content}</p>
 						</div>
 
 					<div class="project_details">
@@ -109,23 +110,23 @@
 							</div>
 							
 					<ul class="details">
-								<li><span>책이름 :</span>${BookVO.book_name}</li>
-								<li><span>책종류 :</span>${BookVO.book_kind}</li>
-								<li><span>부가설명 :</span>${BookVO.book_hash}</li>
-								<li><span> 원가:</span> ${BookVO.book_o_price}</li>
-								<li><span> 판매가:</span> ${BookVO.book_m_price} 할인:<b>${(BookVO.book_o_price-BookVO.book_m_price)/100}%</b></li>
-								<li><span> 판 :</span>${BookVO.book_edition}</li>
-								<li><span>출판사 :</span>${BookVO.book_publish}</li>
-								<li><span>안심여부사용 :</span>${BookVO.book_safe_yn}</li>
+								<li><span>책이름 :</span>${bookVO.book_name}</li>
+								<li><span>책종류 :</span>${bookVO.book_kind}</li>
+								<li><span>부가설명 :</span>${bookVO.book_hash}</li>
+								<li><span> 원가:</span> ${bookVO.book_o_price}</li>
+								<li><span> 판매가:</span> ${bookVO.book_m_price} 할인:<b>${(bookVO.book_o_price-bookVO.book_m_price)/100}%</b></li>
+								<li><span> 판 :</span>${bookVO.book_edition}</li>
+								<li><span>출판사 :</span>${bookVO.book_publish}</li>
+								<li><span>안심여부사용 :</span>${bookVO.book_safe_yn}</li>
 								<li><span>책상태 :</span>
 								<c:choose>
-								<c:when test="${BookVO.book_status=='A'}">
+								<c:when test="${bookVO.book_status=='A'}">
 								양호
 								</c:when>
-								<c:when test="${BookVO.book_status=='B'}">
+								<c:when test="${bookVO.book_status=='B'}">
 								보통
 								</c:when>
-								<c:when test="${BookVO.book_status=='C'}">
+								<c:when test="${bookVO.book_status=='C'}">
 								나쁨
 								</c:when>
 								</c:choose>
@@ -133,10 +134,10 @@
 		
 								<li><span>판매상태</span>
 								<c:choose>
-								<c:when test="${BookVO.book_sell_state=='I'}">
+								<c:when test="${bookVO.book_sell_state=='I'}">
 								판매중
 								</c:when>
-								<c:when test="${BookVO.book_sell_state=='C'}">
+								<c:when test="${bookVO.book_sell_state=='C'}">
 								판매완료
 								</c:when>
 								</c:choose>
@@ -196,25 +197,26 @@
  		<%--  <jsp:include page="/include/footer.jsp" /> --%>
   	<!-- /푸터 -->
 
-	<script type="text/javascript" src="/kobook/js/jquery-1.10.2.min.js"></script>
-	<script src="/kobook/js/bootstrap.min.js"></script>
-	<script src="/kobook/js/jquery.easing.1.3.js"></script>
-	<script src="/kobook/js/retina-1.1.0.min.js"></script>
-	<script type="text/javascript" src="/kobook/js/jquery.cookie.js"></script>
-	<!-- jQuery cookie -->
-	<script type="text/javascript" src="/kobook/js/styleswitch.js"></script>
-	<!-- Style Colors Switcher -->
-	<script type="text/javascript" src="/kobook/js/jquery.smartmenus.min.js"></script>
-	<script type="text/javascript"
-		src="/kobook/js/jquery.smartmenus.bootstrap.min.js"></script>
-	<script type="text/javascript" src="/kobook/js/owl.carousel.min.js"></script>
-	<script type="text/javascript" src="/kobook/js/jflickrfeed.js"></script>
-	<script type="text/javascript" src="/kobook/js/jquery.magnific-popup.min.js"></script>
-	<script type="text/javascript" src="/kobook/js/jquery.isotope.min.js"></script>
-	<script type="text/javascript" src="/kobook/js/swipe.js"></script>
-	<script type="text/javascript" src="/kobook/js/jquery-scrolltofixed-min.js"></script>
-	<script type="text/javascript" src="/kobook/js/jquery-hoverdirection.min.js"></script>
+	  <script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
+    <script src="/resources/js/bootstrap.min.js"></script>
+    <script src="/resources/js/jquery.easing.1.3.js"></script>
+    <script src="/resources/js/retina-1.1.0.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.cookie.js"></script> <!-- jQuery cookie -->
+    <script type="text/javascript" src="/resources/js/styleswitch.js"></script> <!-- Style Colors Switcher -->
+    <script src="/resources/js/jquery.fractionslider.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.smartmenus.bootstrap.min.js"></script>
+    <script type="text/javascript" src="/resources/js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jflickrfeed.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.magnific-popup.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.isotope.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.easypiechart.min.js"></script>
+    <script type="text/javascript" src="/resources/js/swipe.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery-hoverdirection.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.matchHeight-min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
 
+ 
 
 	<script type="text/javascript">
 		$(document)
@@ -404,8 +406,7 @@
 							});
 						});
 	</script>
-	<script src="js/main.js"></script>
-
+	 <script src="/resources/js/main.js"></script>
 	<!-- Start Style Switcher -->
 	<div class="switcher"></div>
 	<!-- End Style Switcher -->

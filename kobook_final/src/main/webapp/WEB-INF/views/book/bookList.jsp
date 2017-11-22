@@ -7,7 +7,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
+<%
+//session.setAttribute("person_id", 5);
+%>
 
 
 
@@ -25,16 +27,16 @@
 <meta name="description" content="">
 
  <!-- CSS FILES -->
-    <link rel="stylesheet" href="resources/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="resources/css/style.css">
-    <link rel="stylesheet" type="text/css" href="resources/css/style.css" media="screen" data-name="skins">
-    <link rel="stylesheet" href="resources/css/layout/wide.css" data-name="layout">
+    <link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/resources/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/style.css" media="screen" data-name="skins">
+    <link rel="stylesheet" href="/resources/css/layout/wide.css" data-name="layout">
 
-    <link rel="stylesheet" type="text/css" href="resources/css/switcher.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/resources/css/switcher.css" media="screen" />
 </head>
 <body>
    <!-- 헤더 -->
-        <%-- <jsp:include page="/include/header.jsp" /> --%>
+        <jsp:include page="/WEB-INF/views/include/header.jsp" />
      <!-- /헤더 -->
 
    <!--start wrapper-->
@@ -421,26 +423,26 @@
  		  <jsp:include page="/WEB-INF/views/include/footer.jsp" />
   	<!-- /푸터 -->
 	
-     <script type="text/javascript" src="resources/js/jquery-1.10.2.min.js"></script>
-    <script src="resources/js/bootstrap.min.js"></script>
-    <script src="resources/js/jquery.easing.1.3.js"></script>
-    <script src="resources/js/retina-1.1.0.min.js"></script>
-    <script type="text/javascript" src="resources/js/jquery.cookie.js"></script> <!-- jQuery cookie -->
-    <script type="text/javascript" src="resources/js/styleswitch.js"></script> <!-- Style Colors Switcher -->
-    <script src="resources/js/jquery.fractionslider.js" type="text/javascript" charset="utf-8"></script>
-    <script type="text/javascript" src="resources/js/jquery.smartmenus.min.js"></script>
-    <script type="text/javascript" src="resources/js/jquery.smartmenus.bootstrap.min.js"></script>
-    <script type="text/javascript" src="resources/js/owl.carousel.min.js"></script>
-    <script type="text/javascript" src="resources/js/jflickrfeed.js"></script>
-    <script type="text/javascript" src="resources/js/jquery.magnific-popup.min.js"></script>
-    <script type="text/javascript" src="resources/js/jquery.isotope.min.js"></script>
-    <script type="text/javascript" src="resources/js/jquery.easypiechart.min.js"></script>
-    <script type="text/javascript" src="resources/js/swipe.js"></script>
-    <script type="text/javascript" src="resources/js/jquery-hoverdirection.min.js"></script>
-    <script type="text/javascript" src="resources/js/jquery.matchHeight-min.js"></script>
-    <script type="text/javascript" src="resources/js/jquery-scrolltofixed-min.js"></script>
+     <script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
+    <script src="/resources/js/bootstrap.min.js"></script>
+    <script src="/resources/js/jquery.easing.1.3.js"></script>
+    <script src="/resources/js/retina-1.1.0.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.cookie.js"></script> <!-- jQuery cookie -->
+    <script type="text/javascript" src="/resources/js/styleswitch.js"></script> <!-- Style Colors Switcher -->
+    <script src="/resources/js/jquery.fractionslider.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.smartmenus.bootstrap.min.js"></script>
+    <script type="text/javascript" src="/resources/js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jflickrfeed.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.magnific-popup.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.isotope.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.easypiechart.min.js"></script>
+    <script type="text/javascript" src="/resources/js/swipe.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery-hoverdirection.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.matchHeight-min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
 
-  <script src="resources/js/main.js"></script>
+  <script src="/resources/js/main.js"></script>
    <!-- Start Style Switcher -->
    <div class="switcher"></div>
    <!-- End Style Switcher -->

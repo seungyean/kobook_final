@@ -21,7 +21,7 @@ public class BookServiceImpl implements BookService {
 	@Transactional
 	@Override
 	public void regist(BookVO book) throws Exception {
-		book.setPerson_id(3);
+		//book.setPerson_id(3);
 		dao.create(book);
 		String[] files=book.getFiles();
 		Integer book_id=dao.getBno();
