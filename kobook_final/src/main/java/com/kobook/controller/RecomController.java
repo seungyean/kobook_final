@@ -22,7 +22,7 @@ public class RecomController {
 	@Inject
 	private AlarmService service;
 	
-	@RequestMapping(value="/", method=RequestMethod.GET)
+	@RequestMapping(value="/")
 	public String alarmList(Model model, HttpServletRequest request) throws Exception {
 		System.out.println("controller - ");
 		
