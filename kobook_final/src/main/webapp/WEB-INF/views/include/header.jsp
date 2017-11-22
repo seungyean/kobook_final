@@ -58,30 +58,30 @@
                             </div>
                             <div class="navbar-collapse collapse">
                                 <ul class="nav navbar-nav">
-                                    <li ><a href="/kobook/index.do">Home</a>
+                                    <li ><a href="/">Home</a>
                                     </li>
 
-                                    <li><a href="/book/booklist">전체검색</a></li>
-                                    <li><a href="/kobook/book/locationAction.do?check=1">지역검색</a></li>
+                                    <li><a href="/bookList">전체검색</a></li>
+                                    <li><a href="/book/locationAction?check=1">지역검색</a></li>
 
-                                    <li><a href="/kobook/community/blackList.do" >커뮤니티</a>
+                                    <li><a href="/community/blackList" >커뮤니티</a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="/kobook/community/blackList.do">신고합니다</a></li>
-                                            <li><a href="/kobook/community/donateList.do">무료나눔</a></li>
-                                            <li><a href="/kobook/community/photoReviewList.do">포토리뷰</a></li>
-                                            <li><a href="/kobook/admin/noti.do">공지사항</a></li>
-                                            <li><a href="/kobook/community/qna.do">자주묻는질문</a></li>
+                                            <li><a href="/community/blackList">신고합니다</a></li>
+                                            <li><a href="/community/donateList">무료나눔</a></li>
+                                            <li><a href="/community/photoReviewList">포토리뷰</a></li>
+                                            <li><a href="/admin/noti">공지사항</a></li>
+                                            <li><a href="/community/qna">자주묻는질문</a></li>
                                         </ul>
                                     </li>
                                     
-                                    <li><a href="/kobook/mypage/userUpdate.do" >마이페이지</a>
+                                    <li><a href="/mypage/userUpdate" >마이페이지</a>
                                         <ul class="dropdown-menu">
-                                            		<li><a href="/kobook/mypage/userUpdate.do">회원정보수정</a></li>
-                                                    <li><a href="/kobook/mypage/mileage.do">마일리지</a></li>
-                                                    <li><a href="/kobook/mypage/pickList.do">찜 리스트</a></li>
-                                                    <li><a href="/kobook/mypage/buyList.do">구매내역</a></li>
-                                                    <li><a href="/kobook/mypage/sellList.do">판매내역</a></li>
-                                                    <li><a href="/kobook/mypage/reviewList.do">판매후기</a></li>
+                                            		<li><a href="/mypage/userUpdate">회원정보수정</a></li>
+                                                    <li><a href="/mypage/mileage">마일리지</a></li>
+                                                    <li><a href="/mypage/pickList">찜 리스트</a></li>
+                                                    <li><a href="/mypage/buyList">구매내역</a></li>
+                                                    <li><a href="/mypage/sellList">판매내역</a></li>
+                                                    <li><a href="/mypage/reviewList">판매후기</a></li>
                                         </ul>
                                     </li>
                                 </ul>
