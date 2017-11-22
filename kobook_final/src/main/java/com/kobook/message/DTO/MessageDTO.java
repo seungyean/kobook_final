@@ -25,5 +25,11 @@ public class MessageDTO {
 	public void setMessage_content(String message_content) {
 		this.message_content = message_content;
 	}
+	
+	@Override
+	public String toString() {
+		return "MessageDTO [person_id=" + person_id + ", receiver_email=" + receiver_email + ", message_content="
+				+ message_content + "]";
+	}
 
 }

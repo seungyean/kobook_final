@@ -33,15 +33,15 @@ public class MessageController {
 	}
 	
 	@RequestMapping(value="/messageSend", method=RequestMethod.POST)
-	public String sendPOST(MessageDTO dto, HttpSession session, Model model) throws Exception {
+	public String sendPOST(MessageDTO dto, HttpSession session) throws Exception {
 		
-		System.out.println("현재 id:" + pService.findPersonId(dto.getReceiver_email()));
+		System.out.println(dto.toString());
+		System.out.println("보낼 사람 id:" + pService.findPersonId(dto.getReceiver_email()));
 		
 		int receiver_id = pService.findPersonId(dto.getReceiver_email());
 		
 		if(receiver_id == -1){
 			
-			/*model.addAttribute("dto", dto);*/
 			return "/message/sendFail";
 			
 		} else {
@@ -54,7 +54,7 @@ public class MessageController {
 			
 			mService.messageSend(message);
 			
-			return "redirect:/message/sendOk";
+			return "/message/sendOk";
 		}
 
 	}
