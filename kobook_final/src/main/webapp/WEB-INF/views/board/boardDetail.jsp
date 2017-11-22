@@ -1,14 +1,12 @@
-<%--  <%@page import="kobook.admin.domain.ListModel"%>  --%>
+<%-- <%@page import="resources.admin.domain.ListMode --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-<%-- <%@
+<%-- <%
 	ListModel listModel = (ListModel)request.getAttribute("listModel");
- 	int person_id = Integer.parseInt((String)request.getSession().getAttribute("person_id")); 
-%> 
- --%>
+%> --%>
+
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -23,17 +21,15 @@
 <meta name="description" content="">
 
 <!-- CSS FILES -->
-<link rel="stylesheet" href="resources/css/bootstrap.min.css" />
-<link rel="stylesheet" href="resources/css/style.css">
-<link rel="stylesheet" type="resources/text/css"
-	href="resources/css/style.css" media="screen" data-name="skins">
-<link rel="stylesheet" href="resources/css/animate.css" type="text/css" />
-<link rel="stylesheet" href="resources/css/layout/wide.css"
+<link rel="stylesheet" href="/resources/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/resources/css/style.css">
+<link rel="stylesheet" type="/resources/text/css"
+	href="/resources/css/style.css" media="screen" data-name="skins">
+<link rel="stylesheet" href="/resources/css/layout/wide.css"
 	data-name="layout">
 
-<link rel="stylesheet" type="resources/text/css"
-	href="resources/css/switcher.css" media="screen" />
-
+<link rel="stylesheet" type="/resources/text/css"
+	href="/resources/css/switcher.css" media="screen" />
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -41,16 +37,20 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<!-- <script type="text/javascript">
-alert("회원용");
-</script> -->
 <body>
-
-<%--     <!-- 헤더 -->
- 		 <jsp:include page="/include/header.jsp" />
-  	<!-- /헤더 --> --%>
-
-<!--   	<header id="header">
+	<script type="text/javascript">
+		function update() {
+			location.href = "/resources/admin/updateNoti.do?board_id=${board.board_id}";
+		}
+		function list_fn() {
+			location.href = "/resources/admin/noti.do?board_id=${board.board_id}";
+		}
+		function remove_fn() {
+			location.href = "/resources/admin/deleteNoti.do?board_id=${board.board_id}";
+		}
+	</script>
+	<!--Start Header-->
+	<header id="header">
 		<div id="top-bar">
 			<div class="container">
 				<div class="row">
@@ -77,34 +77,31 @@ alert("회원용");
 		<div id="logo-bar">
 			<div class="container">
 				<div class="row">
-					Logo / Mobile Menu
+					<!-- Logo / Mobile Menu -->
 					<div class="col-lg-3 col-sm-3 ">
 						<div id="logo">
-									<h1>
-										<a href="index.html"><img alt="KOBOOK" src="resources/images/logo.png" /></a>
-									</h1>									
-
-						
-							
+							<h1>
+								<a href="/resources/index.html">관리자</a>
+							</h1>
 						</div>
 					</div>
-					Navigation
-    ==================================================
+					<!-- Navigation
+    ================================================== -->
 					<div class="col-lg-9 col-sm-9">
 						<div class="navbar navbar-default navbar-static-top"
 							role="navigation">
-							 <div class="container">
+							<!--  <div class="container">-->
 							<div class="navbar-header">
 								<button type="button" class="navbar-toggle"
 									data-toggle="collapse" data-target=".navbar-collapse">
 									<span class="sr-only">Toggle navigation</span> <span
 										class="icon-bar"></span> <span class="icon-bar"></span> <span
-										class="icon-bar"></span>ㄻ
+										class="icon-bar"></span>
 								</button>
 							</div>
 							<div class="navbar-collapse collapse">
 								<ul class="nav navbar-nav">
-									<li><a href="resources/admin/listUser.do">회원관리</a>
+									<li><a href="/resources/admin/listUser.do">회원관리</a>
 										<ul class="dropdown-menu">
 											<li><a href="index.html">회원수정</a></li>
 											<li><a href="index_2.html">회원등급</a></li>
@@ -126,13 +123,13 @@ alert("회원용");
 													<li><a href="about-2.html">About Us 2</a></li>
 												</ul></li>
 											<li><a href="services.html">Services</a></li>
-											<li class="active"><a href="faq.html">공지사항</a></li>
+											<li class="active"><a href="faq.html">FAQ</a></li>
 											<li><a href="sidebar-right.html">Right Sidebar</a></li>
 											<li><a href="sidebar-left.html">Left Sidebar</a></li>
 											<li><a href="404-page.html">404 Page</a></li>
 										</ul></li>
 
-									<li><a href="resources/admin/insertBoard.do">공지사항관리</a>
+									<li><a href="/resources/admin/notiAdmin.do">공지사항관리</a>
 										<ul class="dropdown-menu">
 											<li><a href="#">Portfolio Classic</a>
 												<ul class="dropdown-menu">
@@ -148,7 +145,8 @@ alert("회원용");
 				</div>
 			</div>
 		</div>
-	</header> -->
+	</header>
+	<!--End Header-->
 
 	<!--start wrapper-->
 	<section class="wrapper">
@@ -161,7 +159,7 @@ alert("회원용");
 						</div>
 						<nav id="breadcrumbs">
 							<ul>
-								<li><a href="resources/admin/noti.jsp">Home</a>/</li>
+								<li><a href="noti.jsp">Home</a>/</li>
 								<li>Pages</li>
 							</ul>
 						</nav>
@@ -175,65 +173,40 @@ alert("회원용");
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8">
+					<div class="panel-group accordion" id="accordion">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title"></h4>
+							</div>
+
+						</div>
+					</div>
 				</div>
 			</div>
 
-			<h3>글목록보기</h3>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                 <c:forEach var="board" items="${listModel.list}">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" 
-                                       		 href="/board/detailNoti/board_id=${board.board_id }">${board.board_title }
-                                       </a>
-                                    </h4>
-                                 </c:forEach>
-                                </div>
-                            </div>
-                               
-<!--  			<table border="1" cellpadding="0" cellspacing="0">
-				<tr height="30">
-					<td width="50" align="center">글번호</td>
-					<td width="100" align="center">글쓴이</td>
-					<td width="350" align="center">글제목</td>
-					<td width="150" align="center">작성일</td>
-					<td width="100" align="center">조회수</td>
-				</tr> -->
-			
-<%-- 				<c:forEach var="board" items="${listModel.list}">
- 					<tr height="30">
-						<td align="center">${board.board_id }</td>
-						<td align="center">${board.board_writer }</td>
-						<td align="center"><a href="boardDetail.do?board_id=${board.board_id }">${board.board_title }</a></td>
-						<td align="center"><fmt:formatDate value="${board.board_date }"	pattern="yyyy-MM-dd" /></td>
-						<td align="center">${board.board_hit }</td>
-					</tr>
-				</c:forEach> 
- 			</table>  --%>				
+			<!-- 관리자용 -->
+			<h4>공지사항 세부</h4>
 
+			<table border="1" cellpadding="0" cellspacing="0">
+				<tr height="50">
+					<td align="left" width="700">글제목 : ${board.board_title }</td>
+					<td width="200" align="right">날짜 : <fmt:formatDate
+							value="${board.board_date}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+				</tr>
+				<tr height="50">
+					<td align="left" width="700">작성자 : ${board.board_writer }</td>
+					<td align="right" width="200">조회수 : ${board.board_hit }</td>
+				</tr>
+				<tr height="300">
+					<td colspan="2" align="left">${board.board_content }</td>
+				</tr>
+			</table>
 
-			<!-- 페이징 처리 영역 -->
-
-			<!-- 이전(기준은 start page) -->
-			<c:if test="${listModel.startPage > 5 }">
-				<a href="resources/admin/noti.do?pageNum=${listModel.startPage - 1 }">[이전]</a>
-			</c:if>
-
-			<!-- 페이지 목록 -->
-			<c:forEach var="pageNo" begin="${listModel.startPage }"
-				end="${listModel.endPage }">
-				<c:if test="${listModel.requestPage == pageNo }">
-					<b>
-				</c:if>
-				<a href="resources/admin/noti.do?pageNum=${pageNo }">[${pageNo }]</a>
-				<c:if test="${listModel.requestPage == pageNo }">
-					</b>
-				</c:if>
-			</c:forEach>
-			<!-- 이후 -->
-			<c:if test="${listModel.endPage < listModel.totalPageCount }">
-				<a href="resources/admin/noti.do?pageNum=${listModel.endPage + 1 }">[이후]</a>
-			</c:if> 
+			<br>
+			<%--공지사항 수정 / 목록 --%>
+			<input type="button" value="수정" onclick="update_fn()"> <input
+				type="button" value="목록" onclick="list_fn()"> <input
+				type="button" value="삭제" onclick="remove_fn()">
 
 			<!--Sidebar Widget-->
 			<div class="col-lg-4">
@@ -291,15 +264,15 @@ alert("회원용");
 								<div class="tab-pane fade active in" id="Popular">
 									<ul class="recent_tab_list">
 										<li><span><a href="#"><img
-													src="resources/images/content/recent_1.png" alt="" /></a></span> <a
+													src="/resources/images/content/recent_1.png" alt="" /></a></span> <a
 											href="#">Publishing packag esanse web page editos</a> <i>October
 												09, 2015</i></li>
 										<li><span><a href="#"><img
-													src="resources/images/content/recent_2.png" alt="" /></a></span> <a
+													src="/resources/images/content/recent_2.png" alt="" /></a></span> <a
 											href="#">Sublishing packag esanse web page editos</a> <i>October
 												08, 2015</i></li>
 										<li class="last-tab"><span><a href="#"><img
-													src="resources/images/content/recent_3.png" alt="" /></a></span> <a
+													src="/resources/images/content/recent_3.png" alt="" /></a></span> <a
 											href="#">Mublishing packag esanse web page editos</a> <i>October
 												07, 2015</i></li>
 									</ul>
@@ -307,15 +280,15 @@ alert("회원용");
 								<div class="tab-pane fade" id="Recent">
 									<ul class="recent_tab_list">
 										<li><span><a href="#"><img
-													src="resources/images/content/recent_4.png" alt="" /></a></span> <a
+													src="/resources/images/content/recent_4.png" alt="" /></a></span> <a
 											href="#">Various versions has evolved over the years</a> <i>October
 												18, 2015</i></li>
 										<li><span><a href="#"><img
-													src="resources/images/content/recent_5.png" alt="" /></a></span> <a
+													src="/resources/images/content/recent_5.png" alt="" /></a></span> <a
 											href="#">Rarious versions has evolve over the years</a> <i>October
 												17, 2015</i></li>
 										<li class="last-tab"><span><a href="#"><img
-													src="resources/images/content/recent_6.png" alt="" /></a></span> <a
+													src="/resources/images/content/recent_6.png" alt="" /></a></span> <a
 											href="#">Marious versions has evolven over the years</a> <i>October
 												16, 2015</i></li>
 									</ul>
@@ -324,7 +297,7 @@ alert("회원용");
 									<ul class="comments">
 										<li class="comments_list clearfix"><a
 											class="post-thumbnail" href="#"><img width="60"
-												height="60" src="resources/images/content/recent_3.png"
+												height="60" src="/resources/images/content/recent_3.png"
 												alt="#"></a>
 											<p>
 												<strong><a href="#">Prambose</a> <i>says: </i> </strong>
@@ -334,7 +307,7 @@ alert("회원용");
 											</p></li>
 										<li class="comments_list clearfix"><a
 											class="post-thumbnail" href="#"><img width="60"
-												height="60" src="resources/images/content/recent_1.png"
+												height="60" src="/resources/images/content/recent_1.png"
 												alt="#"></a>
 											<p>
 												<strong><a href="#">Makaroni</a> <i>says: </i> </strong>
@@ -344,7 +317,7 @@ alert("회원용");
 											</p></li>
 										<li class="comments_list clearfix"><a
 											class="post-thumbnail" href="#"><img width="60"
-												height="60" src="resources/images/content/recent_2.png"
+												height="60" src="/resources/images/content/recent_2.png"
 												alt="#"></a>
 											<p>
 												<strong><a href="#">Prambanan</a> <i>says: </i> </strong>
@@ -400,10 +373,8 @@ alert("회원용");
 				</div>
 			</div>
 		</div>
-		</div>
 	</section>
 
-	</section>
 	<!--end wrapper-->
 
 	<!--start footer-->
@@ -536,31 +507,36 @@ alert("회원용");
 			</div>
 		</div>
 	</section>
-	
-	<script type="text/javascript" src="resources/js/jquery-1.10.2.min.js"></script>
-    <script src="resources/js/bootstrap.min.js"></script>
-    <script src="resources/js/jquery.easing.1.3.js"></script>
-    <script src="resources/js/retina-1.1.0.min.js"></script>
-    <script type="text/javascript" src="resources/js/jquery.cookie.js"></script> <!-- jQuery cookie -->
-    <script type="text/javascript" src="resources/js/styleswitch.js"></script> <!-- Style Colors Switcher -->
-    <script src="resources/js/jquery.fractionslider.js" type="text/javascript" charset="utf-8"></script>
-    <script type="text/javascript" src="resources/js/jquery.smartmenus.min.js"></script>
-    <script type="text/javascript" src="resources/js/jquery.smartmenus.bootstrap.min.js"></script>
-    <script type="text/javascript" src="resources/js/owl.carousel.min.js"></script>
-    <script type="text/javascript" src="resources/js/jflickrfeed.js"></script>
-    <script type="text/javascript" src="resources/js/jquery.magnific-popup.min.js"></script>
-    <script type="text/javascript" src="resources/js/jquery.isotope.min.js"></script>
-    <script type="text/javascript" src="resources/js/jquery.easypiechart.min.js"></script>
-    <script type="text/javascript" src="resources/js/swipe.js"></script>
-    <script type="text/javascript" src="resources/js/jquery-hoverdirection.min.js"></script>
-    <script type="text/javascript" src="resources/js/jquery.matchHeight-min.js"></script>
-    <script type="text/javascript" src="resources/js/jquery-scrolltofixed-min.js"></script>
 
-    <script src="resources/js/main.js"></script>
+	<script type="/resources/text/javascript"
+		src="/resources/js/jquery-1.10.2.min.js"></script>
+	<script src="/resources/js/bootstrap.min.js"></script>
+	<script src="/resources/js/jquery.easing.1.3.js"></script>
+	<script src="/resources/js/retina-1.1.0.min.js"></script>
+	<script type="/resources/text/javascript"
+		src="/resources/js/jquery.cookie.js"></script>
+	<!-- jQuery cookie -->
+	<script type="/resources/text/javascript"
+		src="/resources/js/styleswitch.js"></script>
+	<!-- Style Colors Switcher -->
+	<script type="/resources/text/javascript"
+		src="/resources/js/jquery.smartmenus.min.js"></script>
+	<script type="/resources/text/javascript"
+		src="/resources/js/jquery.smartmenus.bootstrap.min.js"></script>
+	<script type="/resources/text/javascript"
+		src="/resources/js/jflickrfeed.js"></script>
+	<script type="/resources/text/javascript"
+		src="/resources/js/jquery.magnific-popup.min.js"></script>
+	<script type="/resources/text/javascript"
+		src="/resources/js/jquery.isotope.min.js"></script>
+	<script type="/resources/text/javascript" src="/resources/js/swipe.js"></script>
+	<script type="/resources/text/javascript"
+		src="/resources/js/jquery-scrolltofixed-min.js"></script>
 
-    <!-- Start Style Switcher -->
-    <div class="switcher"></div>
-    <!-- End Style Switcher -->
+	<script src="/resources/js/main.js"></script>
 
+	<!-- Start Style Switcher -->
+	<div class="switcher"></div>
+	<!-- End Style Switcher -->
 </body>
 </html>
