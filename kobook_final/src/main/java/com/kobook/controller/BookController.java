@@ -76,7 +76,7 @@ public class BookController {
 	}
 	
 	@RequestMapping(value="/bookModify",method=RequestMethod.POST)
-	public String modifyPOST(@RequestParam("book_id")int book_id,RedirectAttributes rttr, BookVO book, Model model,@RequestParam("file")MultipartFile file)throws Exception{
+	public String modifyPOST(@RequestParam("book_id")int book_id,RedirectAttributes rttr, BookVO book, @ModelAttribute("cri") SearchCriteria cri, Model model,@RequestParam("file")MultipartFile file)throws Exception{
 		
 		 String savedName=uploadFile(file.getOriginalFilename(), file.getBytes());
 		 System.out.println("수정전:"+book.toString());
@@ -85,8 +85,8 @@ public class BookController {
 		 
 		service.modify(book);
 		 System.out.println("수정후:"+book.toString()); 
-		//rttr.addAttribute("page",cri.getPage());
-		//rttr.addAttribute("perPageNum",cri.getPerPageNum());
+		rttr.addAttribute("page",cri.getPage());
+		rttr.addAttribute("perPageNum",cri.getPerPageNum());
 		//rttr.addAttribute("searchType", cri.getSearchType());
 		//rttr.addAttribute("keyword", cri.getKeyword());
 		return "redirect:/book/bookList";
