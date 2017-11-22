@@ -11,7 +11,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kobook.book.domain.BookVO;
-import com.kobook.book.domain.FileVO;
+import com.kobook.book.domain.BookFileVO;
 import com.kobook.book.domain.SearchCriteria;
 
 @Repository
@@ -29,10 +29,6 @@ public class BookDAOImpl implements BookDAO {
 		session.insert(namespace+".create",vo);
 	}
 	
-	@Override
-	public int getBno() throws Exception {
-		return session.selectOne(namespace+".maxNum");
-	}
 
 	
 	
@@ -58,25 +54,6 @@ public class BookDAOImpl implements BookDAO {
 		
 	}
 	
-	@Override
-	public void addAttach(FileVO fileVO) throws Exception {
-		session.insert(namespace+".addAttach",fileVO);
-	}
-
-	@Override
-	public void deleteAttach(Integer book_id) throws Exception {
-		session.delete(namespace+".deleteAttach",book_id);
-		
-	}
-
-	@Override
-	public void replaceAttach(String file_name, Integer book_id) throws Exception {
-	Map<String, Object>paramMap=new HashMap<String, Object>();
-	
-	paramMap.put("book_id", book_id);
-	paramMap.put("file_name", file_name);
-	session.insert(namespace+".replaceAttach",paramMap);
-	}
 	
 	
 

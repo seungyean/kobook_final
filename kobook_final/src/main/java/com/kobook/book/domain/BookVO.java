@@ -18,14 +18,14 @@ public class BookVO {
 	private String book_content;
 	private Date book_date;
 	private String book_status;
-	private String[] files;
+	private String book_img;
 	private int person_id;
 
 	public BookVO(){}
 
 	public BookVO(Integer book_id, String book_name, int book_o_price, int book_m_price, String book_kind,
 			int book_edition, String book_publish, String book_hash, String book_safe_yn, String book_sell_state,
-			String book_content, Date book_date, String book_status, String[] files, int person_id) {
+			String book_content, Date book_date, String book_status, String book_img, int person_id) {
 		super();
 		this.book_id = book_id;
 		this.book_name = book_name;
@@ -40,7 +40,7 @@ public class BookVO {
 		this.book_content = book_content;
 		this.book_date = book_date;
 		this.book_status = book_status;
-		this.files = files;
+		this.book_img = book_img;
 		this.person_id = person_id;
 	}
 
@@ -148,12 +148,12 @@ public class BookVO {
 		this.book_status = book_status;
 	}
 
-	public String[] getFiles() {
-		return files;
+	public String getBook_img() {
+		return book_img;
 	}
 
-	public void setFiles(String[] files) {
-		this.files = files;
+	public void setBook_img(String book_img) {
+		this.book_img = book_img;
 	}
 
 	public int getPerson_id() {
@@ -170,9 +170,9 @@ public class BookVO {
 				+ ", book_m_price=" + book_m_price + ", book_kind=" + book_kind + ", book_edition=" + book_edition
 				+ ", book_publish=" + book_publish + ", book_hash=" + book_hash + ", book_safe_yn=" + book_safe_yn
 				+ ", book_sell_state=" + book_sell_state + ", book_content=" + book_content + ", book_date=" + book_date
-				+ ", book_status=" + book_status + ", files=" + Arrays.toString(files) + ", person_id=" + person_id
-				+ "]";
+				+ ", book_status=" + book_status + ", book_img=" + book_img + ", person_id=" + person_id + "]";
 	}
 
+	
 
 }

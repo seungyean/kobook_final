@@ -1,13 +1,16 @@
 package com.kobook.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kobook.book.domain.BookVO;
@@ -27,7 +30,8 @@ public class BookController {
 	}
 	
 	@RequestMapping(value="/bookRegist",method=RequestMethod.POST)
-	public String bookRegistPOST(BookVO book) throws Exception{
+	public String bookRegistPOST(BookVO book,Model model,@RequestParam("file")MultipartFile file, HttpServletRequest request) throws Exception{
+		
 		System.out.println("aaaaaaaaaaaa");
 		System.out.println(book.toString()); 
 		service.regist(book);

@@ -2,6 +2,7 @@ package com.kobook.community.domain;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Arrays;
 
 public class BlackVO implements Serializable {
 	private int black_id;
@@ -11,10 +12,12 @@ public class BlackVO implements Serializable {
 	private String black_email;
 	private int person_id;
 	
-	public BlackVO() {	}
+	private String[] files;
 
-	public BlackVO(int black_id, String black_title, Timestamp black_date, String black_content,
-			String black_email, int person_id) {
+	public BlackVO() {}
+
+	public BlackVO(int black_id, String black_title, Timestamp black_date, String black_content, String black_email,
+			int person_id, String[] files) {
 		super();
 		this.black_id = black_id;
 		this.black_title = black_title;
@@ -22,6 +25,7 @@ public class BlackVO implements Serializable {
 		this.black_content = black_content;
 		this.black_email = black_email;
 		this.person_id = person_id;
+		this.files = files;
 	}
 
 	public int getBlack_id() {
@@ -71,5 +75,22 @@ public class BlackVO implements Serializable {
 	public void setPerson_id(int person_id) {
 		this.person_id = person_id;
 	}
+
+	public String[] getFiles() {
+		return files;
+	}
+
+	public void setFiles(String[] files) {
+		this.files = files;
+	}
+
+	@Override
+	public String toString() {
+		return "BlackVO [black_id=" + black_id + ", black_title=" + black_title + ", black_date=" + black_date
+				+ ", black_content=" + black_content + ", black_email=" + black_email + ", person_id=" + person_id
+				+ ", files=" + Arrays.toString(files) + "]";
+	}
+	
+	
 	
 }

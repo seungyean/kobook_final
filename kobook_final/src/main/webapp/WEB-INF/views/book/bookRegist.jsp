@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+/* if(session.getAttribute("person_id")!=null){
+	int person_id=Integer.parseInt((String)(session.getAttribute("person_id")));
+} */
 
+%>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
@@ -11,19 +16,21 @@
     <meta name="description" content="">
 
     <!-- CSS FILES -->
-    <link rel="stylesheet" href="resources/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="resources/css/style.css">
-    <link rel="stylesheet" type="text/css" href="resources/css/style.css" media="screen" data-name="skins">
-    <link rel="stylesheet" href="resources/css/layout/wide.css" data-name="layout">
+    <link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/resources/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/style.css" media="screen" data-name="skins">
+    <link rel="stylesheet" href="/resources/css/layout/wide.css" data-name="layout">
 
 <!--     <link rel="stylesheet" href="resources/css/fractionslider.css"/>
     <link rel="stylesheet" href="resources/css/style-fraction.css"/>
     <link rel="stylesheet" href="resources/css/animate.css"/> -->
 
-    <link rel="stylesheet" type="text/css" href="resources/css/switcher.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/resources/css/switcher.css" media="screen" />
 
 
 </head>
+
+
 <body>
 	<!-- 헤더 -->
  		 <jsp:include page="/WEB-INF/views/include/header.jsp" />
@@ -57,8 +64,8 @@
                     <h4><span>Book Register</span></h4>
                 </div>
    
-                <form action="/book/bookRegist" id="subscribe"  name="subscribe" method="post" >
-                	<%-- <input type="hidden" class="form-control" name="person_id" value="${BookVO.person_id}"> --%>
+                <form action="/book/bookRegist" id="subscribe"  name="subscribe" method="post" enctype="multipart/form-data">
+                	 <input type="hidden" class="form-control" name="person_id" value="${person_id}"> 
              <b>책이름:</b>     <input type="text" name="book_name" id="name" class="form-control" placeholder="책이름">
            <b>  부가설명:</b>        <input type="text" name="book_hash" id="hash" class="form-control" placeholder="부가설명(간단검색어를 입력하세요)">
           <b>  원가: </b>        <input type="text" name="book_o_price" id="name" class="form-control" placeholder="원가">
@@ -170,26 +177,26 @@
  		  <jsp:include page="/WEB-INF/views/include/footer.jsp" />
   	<!-- /푸터 -->
 	
-     <script type="text/javascript" src="resources/js/jquery-1.10.2.min.js"></script>
-    <script src="resources/js/bootstrap.min.js"></script>
-    <script src="resources/js/jquery.easing.1.3.js"></script>
-    <script src="resources/js/retina-1.1.0.min.js"></script>
-    <script type="text/javascript" src="resources/js/jquery.cookie.js"></script> <!-- jQuery cookie -->
-    <script type="text/javascript" src="resources/js/styleswitch.js"></script> <!-- Style Colors Switcher -->
-    <script src="resources/js/jquery.fractionslider.js" type="text/javascript" charset="utf-8"></script>
-    <script type="text/javascript" src="resources/js/jquery.smartmenus.min.js"></script>
-    <script type="text/javascript" src="resources/js/jquery.smartmenus.bootstrap.min.js"></script>
-    <script type="text/javascript" src="resources/js/owl.carousel.min.js"></script>
-    <script type="text/javascript" src="resources/js/jflickrfeed.js"></script>
-    <script type="text/javascript" src="resources/js/jquery.magnific-popup.min.js"></script>
-    <script type="text/javascript" src="resources/js/jquery.isotope.min.js"></script>
-    <script type="text/javascript" src="resources/js/jquery.easypiechart.min.js"></script>
-    <script type="text/javascript" src="resources/js/swipe.js"></script>
-    <script type="text/javascript" src="resources/js/jquery-hoverdirection.min.js"></script>
-    <script type="text/javascript" src="resources/js/jquery.matchHeight-min.js"></script>
-    <script type="text/javascript" src="resources/js/jquery-scrolltofixed-min.js"></script>
+       <script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
+    <script src="/resources/js/bootstrap.min.js"></script>
+    <script src="/resources/js/jquery.easing.1.3.js"></script>
+    <script src="/resources/js/retina-1.1.0.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.cookie.js"></script> <!-- jQuery cookie -->
+    <script type="text/javascript" src="/resources/js/styleswitch.js"></script> <!-- Style Colors Switcher -->
+    <script src="/resources/js/jquery.fractionslider.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.smartmenus.bootstrap.min.js"></script>
+    <script type="text/javascript" src="/resources/js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jflickrfeed.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.magnific-popup.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.isotope.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.easypiechart.min.js"></script>
+    <script type="text/javascript" src="/resources/js/swipe.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery-hoverdirection.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.matchHeight-min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
 
-  <script src="resources/js/main.js"></script>
+  <script src="/resources/js/main.js"></script>
 
     <!-- Start Style Switcher -->
     <div class="switcher"></div>
