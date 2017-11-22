@@ -38,6 +38,9 @@
 </head>
 <body>
 <header id="header">
+		<form action="/message/messageSend" method="post" name="messageForm">
+		
+		</form>
         <div id="top-bar">
             <div class="container">
                 <div class="row">

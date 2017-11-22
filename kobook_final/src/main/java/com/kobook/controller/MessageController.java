@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kobook.login.service.PersonService;
@@ -27,9 +28,9 @@ public class MessageController {
 	@Inject
 	private PersonService pService;
 	
-	@RequestMapping(value="/messageSend", method=RequestMethod.GET)
-	public void messageSendPOST(@ModelAttribute("dto") MessageDTO dto, HttpSession session) throws Exception{
-		
+	@RequestMapping(value="/messageSend", method=RequestMethod.POST)
+	public void messageSendPOST(@RequestParam("person_id") String person_id,HttpSession session) throws Exception{
+		session.setAttribute("person_id", person_id);
 	}
 	
 	@RequestMapping(value="/send", method=RequestMethod.POST)
