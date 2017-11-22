@@ -1,8 +1,12 @@
 package com.kobook.controller;
 
 
+import java.util.List;
+
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,31 +24,66 @@ import com.kobook.book.domain.SearchCriteria;
 @RequestMapping("/board/*")
 public class BoardController {
 
+	private static final Logger logger =
+			LoggerFactory.getLogger(BoardController.class);
+	
 	@Inject
 	private BoardService service;
 	
-	@RequestMapping(value="/noti_insert", method=RequestMethod.GET)
+	@RequestMapping(value="/boardInsert", method=RequestMethod.GET)
 	public void notiGET(BoardVO vo, Model model)throws Exception{
 	}
 	
-	@RequestMapping(value="/noti_insert", method=RequestMethod.POST)
+	@RequestMapping(value="/boardInsert", method=RequestMethod.POST)
 	public String notiPOST(BoardVO vo, RedirectAttributes rttr)throws Exception {
-		service.regist(vo);
-		return "redirect:/board/noti";
+		
+/*		//BoardVO 내용확인
+		logger.info("insert post.....");
+		logger.info(vo.toString());*/
+		
+		service.BoardRegist(vo);
+	
+	/*	rttr.addFlashAttribute("list", "success");*/
+		
+		return "redirect:/board/boardList";
 	}
 	
-/*	@RequestMapping("/noti")
-	public void list(@ModelAttribute("cri") SearchCriteria cri, Model model)throws Exception{
-		model.addAttribute("list", service.list(cri));
+	@RequestMapping("/boardList")
+	public void BoardList(@ModelAttribute("cri") SearchCriteria cri, Model model)throws Exception{
+		model.addAttribute("list", service.BoardListCri(cri));
 		PageMaker pageMaker=new PageMaker();
 		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(service.countPaging(cri));
+		pageMaker.setTotalCount(service.BoardcountPaging(cri));
 		model.addAttribute("pageMaker",pageMaker);
 	}
-	*/
-	@RequestMapping(value="/detailNoti",method=RequestMethod.GET)
-	public void read(@RequestParam("board_id")int board_id, @ModelAttribute("cri")SearchCriteria cri, Model model)throws Exception{
-		model.addAttribute(service.read(board_id));
+	
+	
+	@RequestMapping("/adminMain")
+	public String admin()throws Exception {
+		
+		logger.info("adminPage....loggging");
+		return "/board/adminMain";
 	}
+	
+	
+	@RequestMapping(value="/boardDetail", method=RequestMethod.GET)
+	public void readGET(@RequestParam("board_id") int board_id, Model model)throws Exception {
+		
+		model.addAttribute(service.BoardRead(board_id));
+	}
+	
+	@RequestMapping(value="/boardDetail", method=RequestMethod.POST)
+	public String readPOST(@RequestParam("board_id") int board_id, RedirectAttributes rttr)throws Exception {
+		
+		service.BoardRead(board_id);
+		
+		return "redirect:/board/boardDetail";
+	}
+	
+	
+/*	@RequestMapping(value="/detailNoti",method=RequestMethod.GET)
+	public void read(@RequestParam("board_id")int board_id, @ModelAttribute("cri")SearchCriteria cri, Model model)throws Exception{
+		model.addAttribute(service.BoardRead(board_id));
+	}*/
 	
 }

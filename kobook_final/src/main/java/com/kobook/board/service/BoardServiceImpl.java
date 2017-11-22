@@ -4,10 +4,12 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 
 import com.kobook.board.domain.BoardVO;
 import com.kobook.board.persistence.BoardDAO;
+import com.kobook.book.domain.BookVO;
 import com.kobook.book.domain.SearchCriteria;
 
 @Service
@@ -17,24 +19,24 @@ public class BoardServiceImpl implements BoardService {
 	private BoardDAO dao;
 	
 	@Override
-	public void regist(BoardVO vo) throws Exception {
-		dao.insertBoard(vo);
+	public void BoardRegist(BoardVO vo) throws Exception {
+		dao.BoardInsert(vo);
 		Integer board_id=dao.getBno();
 	}
 	
-/*	@Override
-	public List<BoardVO> list(SearchCriteria cri) throws Exception {
-		return dao.listCriteria(cri);
-	}*/
-	
-/*	@Override
-	public int countPaging(SearchCriteria cri)throws Exception {
-		return dao.countPaging(cri);
-	}*/
-
 	@Override
-	public BoardVO read(Integer board_id) throws Exception {
-		return dao.read(board_id);
+	public List<BoardVO> BoardListCri(SearchCriteria cri) throws Exception {
+		return dao.BoardListCri(cri);
+	}
+	
+	@Override
+	public int BoardcountPaging(SearchCriteria cri) throws Exception {
+		return dao.BoardcountPaging(cri);
+	}
+	
+	@Override
+	public BoardVO BoardRead(Integer board_id) throws Exception {
+		return dao.BoardRead(board_id);
 	}
 	
 	@Override

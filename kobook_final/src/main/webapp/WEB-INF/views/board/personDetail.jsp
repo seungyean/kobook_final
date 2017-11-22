@@ -1,5 +1,5 @@
-<%-- <%@page import="kobook.admin.domain.Person"%>
-<%@page import="kobook.admin.dao.PersonDA --%>O"%>
+<%-- <%@page import="resources.admin.domain.Person"%>
+<%@page import="resources.admin.dao.PersonDA --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -21,15 +21,15 @@
 <meta name="description" content="">
 
 <!-- CSS FILES -->
-<link rel="stylesheet" href="/kobook/css/bootstrap.min.css" />
-<link rel="stylesheet" href="/kobook/css/style.css">
-<link rel="stylesheet" type="/kobook/text/css"
-	href="/kobook/css/style.css" media="screen" data-name="skins">
-<link rel="stylesheet" href="/kobook/css/layout/wide.css"
+<link rel="stylesheet" href="/resources/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/resources/css/style.css">
+<link rel="stylesheet" type="/resources/text/css"
+	href="/resources/css/style.css" media="screen" data-name="skins">
+<link rel="stylesheet" href="/resources/css/layout/wide.css"
 	data-name="layout">
 
-<link rel="stylesheet" type="/kobook/text/css"
-	href="/kobook/css/switcher.css" media="screen" />
+<link rel="stylesheet" type="/resources/text/css"
+	href="/resources/css/switcher.css" media="screen" />
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -40,7 +40,7 @@
 <script type="text/javascript">
 function delete_fn(){
 	alert("삭제가 완료되었습니다.");
-	location.href = "/kobook/admin/delete.do?person_id=${person.person_id}";
+	location.href = "/resources/admin/delete.do?person_id=${person.person_id}";
 }
 </script>
 </head>
@@ -76,10 +76,10 @@ function delete_fn(){
 				<div class="row">
 					<!-- Logo / Mobile Menu -->
 					<div class="col-lg-3 col-sm-3 ">
-						<div id="kobook">
+						<div id="resources">
 							<h1>
-								<a href="/kobook/index.html"><img alt="KOBOOK - 관리자"
-									src="/kobook/images/logo.png" /></a>
+								<a href="/resources/index.html"><img alt="관리자"
+									src="/resources/images/logo.png" /></a>
 							</h1>
 						</div>
 					</div>
@@ -99,7 +99,7 @@ function delete_fn(){
 							</div>
 							<div class="navbar-collapse collapse">
 								<ul class="nav navbar-nav">
-									<li><a href="/kobook/admin/listUser.do">회원관리</a>
+									<li><a href="/resources/admin/listUser.do">회원관리</a>
 										<ul class="dropdown-menu">
 											<li><a href="index.html">회원수정</a></li>
 											<li><a href="index_2.html">회원등급</a></li>
@@ -127,7 +127,7 @@ function delete_fn(){
 											<li><a href="404-page.html">404 Page</a></li>
 										</ul></li>
 
-									<li><a href="/kobook/admin/noti.do">공지사항관리</a>
+									<li><a href="/resources/admin/noti.do">공지사항관리</a>
 										<ul class="dropdown-menu">
 											<li><a href="#">Portfolio Classic</a>
 												<ul class="dropdown-menu">
@@ -157,7 +157,7 @@ function delete_fn(){
 						</div>
 						<nav id="breadcrumbs">
 							<ul>
-								<li><a href="/kobook/admin/blackUser.do">블랙회원</a>/</li>
+								<li><a href="/resources/admin/blackUser.do">블랙회원</a>/</li>
 							</ul>
 						</nav>
 					</div>
@@ -180,7 +180,7 @@ function delete_fn(){
 				</div>
 			</div>
 
-		<form action="/kobook/admin/gradeUser.do" method="post">
+		<form action="/board/boardDetail" method="post">
 
 		<table border="1" cellpadding ="0" cellspacing ="0" >
 			<tr height="50">

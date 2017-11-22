@@ -53,4 +53,7 @@ public class BoardDAOTest {
 			logger.info(boardVO.getBoard_content() + ":" + boardVO.getBoard_title());
 		}
 	}*/
+	
+	
+	
 }
