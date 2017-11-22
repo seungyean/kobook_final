@@ -28,11 +28,11 @@ public class MessageController {
 	private PersonService pService;
 	
 	@RequestMapping(value="/messageSend", method=RequestMethod.GET)
-	public void sendGET(@ModelAttribute("dto") MessageDTO dto, HttpSession session) throws Exception{
+	public void messageSendPOST(@ModelAttribute("dto") MessageDTO dto, HttpSession session) throws Exception{
 		
 	}
 	
-	@RequestMapping(value="/messageSend", method=RequestMethod.POST)
+	@RequestMapping(value="/send", method=RequestMethod.POST)
 	public String sendPOST(MessageDTO dto, HttpSession session) throws Exception {
 		
 		System.out.println(dto.toString());

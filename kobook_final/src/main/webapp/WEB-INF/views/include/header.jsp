@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <% 
-	String cur_id = "0";
+	String cur_id = "-1";
 	
 	if(session.getAttribute("person_id") != null){
 		cur_id = (String)session.getAttribute("person_id")+"";
@@ -18,7 +18,20 @@
 	function popup(){
 		
 		window.name = "mainPage";
-		window.open("/message/messageSend","messagePage", "width=630, height=300, menubar=yes, statebar=yes, scrollbar=yes");
+		window.open("","messagePage", "width=630, height=300, menubar=yes, statebar=yes, scrollbar=yes");
+		
+		var frm = document.createElement("form");
+		frm.setAttribute("action", "/message/messageSend");
+		frm.setAttribute("target", "messagePage");
+		frm.setAttribute("method", "post");
+		document.body.appendChild(frm);
+		var input_id = document.createElement("input");
+		frm.setAttribute("type", "hidden");
+		frm.setAttribute("name", "person_id");
+		frm.setAttribute("value", <%=cur_id%>);
+		frm.appendChild(input_id);
+		frm.submit();
+		
 	}
 	
 </script>
@@ -91,8 +104,8 @@
                                             		<li><a href="/mypage/userUpdate">회원정보수정</a></li>
                                                     <li><a href="/mypage/mileage">마일리지</a></li>
                                                     <li><a href="/mypage/pickList">찜 리스트</a></li>
-                                                    <li><a href="/mypage/buyList?person_id="${person_id}>구매내역</a></li>
-                                                    <li><a href="/mypage/sellList?person_id="${person_id}>판매내역</a></li>
+                                                    <li><a href="/mypage/buyList">구매내역</a></li>
+                                                    <li><a href="/mypage/sellList">판매내역</a></li>
                                                     <li><a href="/mypage/reviewList">판매후기</a></li>
                                         </ul>
                                     </li>

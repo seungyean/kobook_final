@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	/* session.setAttribute("person_id", "2"); */
 	int cur_id = Integer.parseInt((String)session.getAttribute("person_id"));
-	System.out.println("cur_id: " + cur_id);
+	System.out.println("팝업창에서의 cur_id: " + cur_id);
 %>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -15,7 +14,7 @@
 <body>
 
 	쪽지보내기<br><br>
-	<form action="/message/messageSend" method="post">
+	<form action="/message/send" method="post">
 		<input type="hidden" name="person_id" value="<%=cur_id %>">
 		
 		<table border="1" cellpadding="0" cellspacing="0">
