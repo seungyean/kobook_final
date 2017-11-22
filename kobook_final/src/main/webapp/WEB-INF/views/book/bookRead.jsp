@@ -72,10 +72,11 @@
 				<div class="row sub_content">
 			
 			
-				<form role="form" action="/book/bookModify/${bookVO.book_id}" method="post">
-				<%-- <input type="hidden" name="book_id" value="${bookVO.book_id}"> --%>
-                	<input type="hidden" name="page" value="${cri.page}">
-                	<input type="hidden" name="perPageNum" value="${cri.perPageNum}">
+				<form role="form" action="/book/bookModify" method="GET">
+				 <input type="hidden" name="person_id" value="${person_id}"> 
+				  <input type="hidden" name="book_id" value="${bookVO.book_id}"> 
+             <%--    	<input type="hidden" name="page" value="${cri.page}">
+                	<input type="hidden" name="perPageNum" value="${cri.perPageNum}"> --%>
                 
                 	
                 	
@@ -87,7 +88,7 @@
 				
 							
 						
-									<%-- <img alt="" class="carousel-item" src="/kobook/upload/${bookVO.book_img}" width="10px" height="800px"> --%>
+									 <img alt="" class="carousel-item" src="displayFile?fileName=${bookVO.book_img}" width="10px" height="800px">
 								<!--<img class="carousel-item" src="images/portfolio/portfolio_slider1.png" alt="">
 								<img class="carousel-item" src="images/portfolio/portfolio_slider2.png" alt="">
 								<img class="carousel-item" src="images/portfolio/portfolio_slider3.png" alt=""> -->

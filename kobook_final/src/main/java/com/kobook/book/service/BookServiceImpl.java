@@ -57,7 +57,6 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public void modify(BookVO book) throws Exception {
 		dao.update(book);
-		
 	}
 
 

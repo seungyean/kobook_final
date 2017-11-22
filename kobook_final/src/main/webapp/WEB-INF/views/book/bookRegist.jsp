@@ -72,6 +72,7 @@
             <b>  판매가: </b>           <input type="text" name="book_m_price" id="name" class="form-control" placeholder="판매가">
             <b>  판: </b>            <input type="text" name="book_edition" id="name" class="form-control" placeholder="판(빈칸도 좋아용)">
              <b>  출판사: </b>            <input type="text" name="book_publish" id="name" class="form-control" placeholder="출판사">
+              <b> 해시태그: </b>            <input type="text" name="book_hash" id="name" class="form-control" placeholder="해시태그">
              <b>  내용: </b>          <textarea rows="10" cols="70" name="book_content"id="name" class="form-control" placeholder="내용을 입력하세요"></textarea>
                     
                <b>    안심여부:</b> <input type="radio" name="book_safe_yn" value="Y" checked="checked">Y 

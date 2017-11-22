@@ -8,7 +8,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <% 
 	
-	BookVO book = (BookVO)request.getAttribute("book");
+	/* BookVO book = (BookVO)request.getAttribute("book");
 	String book_safe_yn = book.getBook_safe_yn();
 	String book_status = book.getBook_status();
 	String book_sell_state = book.getBook_sell_state();
@@ -16,7 +16,7 @@
 	System.out.println(book_safe_yn);
 	System.out.println(book_status);
 	System.out.println(book_sell_state);
-	System.out.println(book_kind);
+	System.out.println(book_kind); */
  
 %>
 
@@ -78,43 +78,47 @@
 
 
 
-                <form action="/book/bookModify" id="subscribe"  name="subscribe" method="post" >
-                	 <input type="hidden" class="form-control" name="person_id" value="${person_id}"> 
+                <form action="/book/bookModify" id="subscribe"  name="subscribe" method="post" enctype="multipart/form-data">
+              <%--   	 <input type="hidden" class="form-control" name="person_id" value="${person_id}">  --%>
+                	 <input type="hidden" class="form-control" name="book_id" value="${bookVO.book_id}"> 
+                  	<%-- <input type="hidden" name="page" value="${cri.page}">
+                	<input type="hidden" name="perPageNum" value="${cri.perPageNum}"> --%>
                 	
                   <b>책이름:</b>  <input type="text" name="book_name"  value="${bookVO.book_name}" class="form-control" placeholder="책이름">
                <b>원가:</b>     <input type="text" name="book_o_price"   value="${bookVO.book_o_price}" class="form-control" placeholder="원가">
                 <b>판매가:</b>    <input type="text" name="book_m_price"  value="${bookVO.book_m_price}" class="form-control" placeholder="판매가">
                  <b>판:</b>    <input type="text" name="book_edition"  value="${bookVO.book_edition}" class="form-control" placeholder="판(빈칸도 좋아용)">
                 <b>출판사:</b>      <input type="text" name="book_publish"  value="${bookVO.book_publish}" class="form-control" placeholder="출판사">
+                 <b>해시태그:</b> <input type="text" name="book_hash" value="${bookVO.book_hash}" class="form-control" placeholder="해시태그">
                  <b>내용:</b>   <textarea rows="10" cols="70" name="book_content" class="form-control" placeholder="내용을 입력하세요">${bookVO.book_content} </textarea>
                     
-                                 <b> 안심여부:</b> <input type="radio" name="book_safe_yn" value="Y" <c:if test="${book_safe_yn eq 'Y'}">checked="checked"</c:if>>Y 
-					<input type="radio" name="book_safe_yn" value="N" <c:if test="${book_safe_yn eq 'N'}">checked="checked"</c:if>>N &nbsp;&nbsp;
+                                 <b> 안심여부:</b> <input type="radio" name="book_safe_yn" value="Y" <c:if test="${bookVO.book_safe_yn eq 'Y'}">checked="checked"</c:if>>Y 
+					<input type="radio" name="book_safe_yn" value="N" <c:if test="${bookVO.book_safe_yn eq 'N'}">checked="checked"</c:if>>N &nbsp;&nbsp;
 					
 				<b>책상태:</b> <select name="book_status">
-						<option value="B" <c:if test="${book_status eq 'B'}"> selected</c:if>>보통</option>
-						<option value="A" <c:if test="${book_status eq 'A'}"> selected</c:if>>양호</option>
-						<option value="C" <c:if test="${book_status eq 'C'}"> selected</c:if>>미흡</option>
+						<option value="B" <c:if test="${bookVO.book_status eq 'B'}"> selected</c:if>>보통</option>
+						<option value="A" <c:if test="${bookVO.book_status eq 'A'}"> selected</c:if>>양호</option>
+						<option value="C" <c:if test="${bookVO.book_status eq 'C'}"> selected</c:if>>미흡</option>
 					</select> &nbsp;&nbsp;
 			
 				<b>판매상태: </b><select name="book_sell_state">
-							<option value="I" <c:if test="${book_sell_state eq 'I'}"> selected</c:if>>판매중</option>
-							<option value="C" <c:if test="${book_sell_state eq 'C'}"> selected</c:if>>판매완료</option>
+							<option value="I" <c:if test="${bookVO.book_sell_state eq 'I'}"> selected</c:if>>판매중</option>
+							<option value="C" <c:if test="${bookVO.book_sell_state eq 'C'}"> selected</c:if>>판매완료</option>
 					</select> &nbsp;&nbsp;
 					
 			<b>책종류:</b> <select name="book_kind">
-					<option value="사회계열" <c:if test="${book_kind == '사회계열'}"> selected</c:if>>사회계열</option>
-					<option value="법학계열"<c:if test="${book_kind == '법학계열'}"> selected</c:if>>법학계열</option>
-					<option value="의학계열"<c:if test="${book_kind == '의학계열'}"> selected</c:if>>의학계열</option>
-					<option value="공학계열"<c:if test="${book_kind == '공학계열'}"> selected</c:if>>공학계열</option>
-					<option value="자연계열"<c:if test="${book_kind == '자연계열'}"> selected</c:if>>자연계열</option>
-					<option value="예체능계열"<c:if test="${book_kind == '예체능계열'}"> selected</c:if>>예체능계열</option>
-					<option value="어문학계열"<c:if test="${book_kind == '어문학계열'}"> selected</c:if>>어문학계열</option>
+					<option value="사회계열" <c:if test="${bookVO.book_kind == '사회계열'}"> selected</c:if>>사회계열</option>
+					<option value="법학계열"<c:if test="${bookVO.book_kind == '법학계열'}"> selected</c:if>>법학계열</option>
+					<option value="의학계열"<c:if test="${bookVO.book_kind == '의학계열'}"> selected</c:if>>의학계열</option>
+					<option value="공학계열"<c:if test="${bookVO.book_kind == '공학계열'}"> selected</c:if>>공학계열</option>
+					<option value="자연계열"<c:if test="${bookVO.book_kind == '자연계열'}"> selected</c:if>>자연계열</option>
+					<option value="예체능계열"<c:if test="${bookVO.book_kind == '예체능계열'}"> selected</c:if>>예체능계열</option>
+					<option value="어문학계열"<c:if test="${bookVO.book_kind == '어문학계열'}"> selected</c:if>>어문학계열</option>
 					</select><br>
 			
            
-			<b>파일:</b> <%-- <input type="hidden" name="img" value="${bookVO.book_img}"> --%>
-					<input type="file" name="file">
+			<b>파일:</b>  <input type="hidden" name="file" value="${bookVO.book_img}">
+					 <input type="file" name="file">
 					 
 					 
                     <div class="pull-right">

@@ -173,12 +173,12 @@
                            <div class="recent-item box">
                               <figure class="touching ">
                               
-                              <%-- <img src="/kobook/upload/${b.book_img }" height="280" alt="aa"/> --%>
-                                 <a href="/book/bookRead?book_id=${b.book_id}"></a>
+                               <img src="displayFile?fileName=${b.book_img}" alt="aa" height="280"></img>
+                                  <a href="/book/bookRead?book_id=${b.book_id}" class="fa fa-link"></a> 
                                  <div class="option inner">
                                     <div>
                                        <h5>${b.book_name}</h5>
-                                       <%-- <a href="/kobook/upload/${b.book_img }" class="fa fa-search mfp-image"></a>  --%>
+                                        <a href="displayFile?fileName=${b.book_img}" class="fa fa-search mfp-image"></a>
                                        <a href="/book/bookRead?book_id=${b.book_id}" class="fa fa-link"></a> 
                                        <span>${b.book_m_price}원</span>
                                         <c:choose>
@@ -209,12 +209,12 @@
                            <div class="recent-item box">
                               <figure class="touching ">
                               
-                              <%-- <img src="/kobook/upload/${b.book_img }" height="280" alt="aa"/> --%>
-                                 <a href="/book/bookRead?book_id=${b.book_id}"></a>
+                               <img src="displayFile?fileName=${b.book_img}" alt="aa" height="280"></img>
+                                  <a href="/book/bookRead?book_id=${b.book_id}" class="fa fa-link"></a> 
                                  <div class="option inner">
                                     <div>
                                        <h5>${b.book_name}</h5>
-                                       <%-- <a href="/kobook/upload/${b.book_img }" class="fa fa-search mfp-image"></a> --%> 
+                                        <a href="displayFile?fileName=${b.book_img}" class="fa fa-search mfp-image"></a>
                                        <a href="/book/bookRead?book_id=${b.book_id}" class="fa fa-link"></a> 
                                     <span>${b.book_m_price}원</span>
                                      <c:choose>
@@ -246,12 +246,12 @@
                               <figure class="touching ">
                               
                               <img alt="aa" src="displa">
-                              <%-- <img src="/kobook/upload/${b.book_img }" height="280" alt="aa"/> --%>
-                                 <a href="/book/bookRead?book_id=${b.book_id}"></a>
+                                <img src="displayFile?fileName=${b.book_img}" alt="aa" height="280"></img>
+                                  <a href="/book/bookRead?book_id=${b.book_id}" class="fa fa-link"></a> 
                                  <div class="option inner">
                                     <div>
                                        <h5>${b.book_name}</h5>
-                                      <%--  <a href="/kobook/upload/${b.book_img }" class="fa fa-search mfp-image"></a>  --%>
+                                      <a href="displayFile?fileName=${b.book_img}" class="fa fa-search mfp-image"></a>
                                        <a href="/book/bookRead?book_id=${b.book_id}" class="fa fa-link"></a> 
                                        <span>${b.book_m_price}원</span>
                                         <c:choose>
@@ -282,12 +282,12 @@
                            <div class="recent-item box">
                               <figure class="touching ">
                               
-                              <%-- <img src="/kobook/upload/${b.book_img }" height="280" alt="aa"/> --%>
-                                 <a href="/book/bookRead?book_id=${b.book_id}"></a>
+                               <img src="displayFile?fileName=${b.book_img}" alt="aa" height="280"></img>
+                                  <a href="/book/bookRead?book_id=${b.book_id}" class="fa fa-link"></a> 
                                  <div class="option inner">
                                     <div>
                                        <h5>${b.book_name}</h5>
-                                      <%--  <a href="/kobook/upload/${b.book_img }" class="fa fa-search mfp-image"></a>  --%>
+                                      <a href="displayFile?fileName=${b.book_img}" class="fa fa-search mfp-image"></a>
                                        <a href="/book/bookRead?book_id=${b.book_id}" class="fa fa-link"></a> 
                                        <span>${b.book_m_price}원</span>
                                         <c:choose>
@@ -318,12 +318,12 @@
                            <div class="recent-item box">
                               <figure class="touching ">
                               
-                              <%-- <img src="/kobook/upload/${b.book_img }" height="280"  alt="aa"/> --%>
-                                 <a href="/book/bookRead?book_id=${b.book_id}"></a>
+                              <img src="displayFile?fileName=${b.book_img}" alt="aa" height="280"></img>
+                                  <a href="/book/bookRead?book_id=${b.book_id}" class="fa fa-link"></a> 
                                  <div class="option inner">
                                     <div>
                                        <h5>${b.book_name}</h5>
-                                       <%-- <a href="/kobook/upload/${b.book_img }" class="fa fa-search mfp-image"></a>  --%>
+                                      <a href="displayFile?fileName=${b.book_img}" class="fa fa-search mfp-image"></a>
                                        <a href="/book/bookRead?book_id=${b.book_id}" class="fa fa-link"></a> 
                                     <span>${b.book_m_price}원</span>
                                      <c:choose>

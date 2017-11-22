@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -59,14 +60,37 @@ public class BookController {
         String savedName=uploadFile(file.getOriginalFilename(), file.getBytes());
 
        // UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes());
-        
+       
         System.out.println(book.toString()); 
         book.setBook_img(savedName);
 		service.regist(book);
-		System.out.println("bbbbbbbbbb");
 		return "redirect:/book/bookList";
 		
 	}
+	
+	@RequestMapping(value="/bookModify",method=RequestMethod.GET)
+	public void modifyGET(@RequestParam("book_id")int book_id, BookVO book, Model model)throws Exception
+	{
+		model.addAttribute(service.read(book_id));
+
+	}
+	
+	@RequestMapping(value="/bookModify",method=RequestMethod.POST)
+	public String modifyPOST(@RequestParam("book_id")int book_id,RedirectAttributes rttr, BookVO book, Model model,@RequestParam("file")MultipartFile file)throws Exception{
+		
+		 String savedName=uploadFile(file.getOriginalFilename(), file.getBytes());
+		 System.out.println("수정전:"+book.toString());
+	       book.setBook_img(savedName);
+		
+		 
+		service.modify(book);
+		 System.out.println("수정후:"+book.toString()); 
+		//rttr.addAttribute("page",cri.getPage());
+		//rttr.addAttribute("perPageNum",cri.getPerPageNum());
+		//rttr.addAttribute("searchType", cri.getSearchType());
+		//rttr.addAttribute("keyword", cri.getKeyword());
+		return "redirect:/book/bookList";
+	}	
 	
 	@ResponseBody
     @RequestMapping(value="/displayFile",method=RequestMethod.GET)
@@ -123,21 +147,7 @@ public class BookController {
 	}
 	
 	
-	@RequestMapping(value="/bookModify",method=RequestMethod.GET)
-	public void modifyGET(@RequestParam("book_id")int book_id, BookVO book, Model model)throws Exception
-	{
-		model.addAttribute(service.read(book_id));
-	}
 	
-	@RequestMapping(value="/bookModify",method=RequestMethod.POST)
-	public String modifyPOST(RedirectAttributes rttr, BookVO book, Model model, @ModelAttribute("cri")SearchCriteria cri)throws Exception{
-		service.modify(book);
-		rttr.addAttribute("page",cri.getPage());
-		rttr.addAttribute("perPageNum",cri.getPerPageNum());
-		rttr.addAttribute("searchType", cri.getSearchType());
-		rttr.addAttribute("keyword", cri.getKeyword());
-		return "redirect:/book/bookList";
-	}	
 	
 	private String uploadFile(String originalName, byte[] fileData) throws Exception{
         //원본파일이름, 파일데이터를 byte[]로 변환한 정보를통해 실제파일 업로드

@@ -73,11 +73,11 @@
 	
 	
 	<update id="update" parameterType="BookVO">
-      UPDATE book SET BOOK_NAME=#{book_name},BOOK_M_PRICE=#{book_m_price}
-		, BOOK_O_PRICE=#{book_o_price}, BOOK_SELL_STATE=#{book_sell_state}, BOOK_STATUS=#{book_status},
-		BOOK_SAFE_YN=#{book_safe_yn}, BOOK_CONTENT=#{book_content},BOOK_EDITION=#{book_edition},
-		BOOK_PUBLISH=#{book_publish},BOOK_IMG=#{book_img}
-		WHERE BOOK_ID=#{book_id}
+      UPDATE book SET book_name=#{book_name},book_m_price=#{book_m_price}, book_o_price=#{book_o_price}, 
+        book_sell_state=#{book_sell_state}, book_status=#{book_status},book_hash=#{book_hash},
+		book_safe_yn=#{book_safe_yn}, book_content=#{book_content},book_edition=#{book_edition},
+		book_publish=#{book_publish},book_img=#{book_img}
+		WHERE book_id=#{book_id}
     
    </update>
 	
