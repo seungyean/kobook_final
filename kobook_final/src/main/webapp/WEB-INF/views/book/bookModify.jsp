@@ -1,13 +1,14 @@
 <%-- <%@page import="kobook.book.domain.BookSearch"%>
 <%@page import="kobook.book.domain.Book"%> --%>
+<%@page import="com.kobook.book.domain.BookVO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <% 
-/* 	
-	Book book = (Book)request.getAttribute("book");
+	
+	BookVO book = (BookVO)request.getAttribute("book");
 	String book_safe_yn = book.getBook_safe_yn();
 	String book_status = book.getBook_status();
 	String book_sell_state = book.getBook_sell_state();
@@ -16,7 +17,7 @@
 	System.out.println(book_status);
 	System.out.println(book_sell_state);
 	System.out.println(book_kind);
- */
+ 
 %>
 
 <%
@@ -113,7 +114,7 @@
 			
            
 			<b>파일:</b> <%-- <input type="hidden" name="img" value="${bookVO.book_img}"> --%>
-					<!--  <input type="file" name="u_img">  -->
+					<input type="file" name="file">
 					 
 					 
                     <div class="pull-right">
