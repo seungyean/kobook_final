@@ -2,12 +2,10 @@
 <%@ page import="com.kobook.mypage.persistence.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<% 
-
-	session.setAttribute("person_id", "7");
-	
-
+<%
+	session.getAttribute("person_id");
 %>
+
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
@@ -19,16 +17,19 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
     <!-- CSS FILES -->
-    <link rel="stylesheet" href="/kobook/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/kobook/css/style.css">
-    <link rel="stylesheet" type="text/css" href="/kobook/css/style.css" media="screen" data-name="skins">
-    <link rel="stylesheet" href="/kobook/css/layout/wide.css" data-name="layout">
+    <link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/resources/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/style.css" media="screen" data-name="skins">
+    <link rel="stylesheet" href="/resources/css/layout/wide.css" data-name="layout">
 
-    <link rel="stylesheet" type="text/css" href="/kobook/css/switcher.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/resources/css/switcher.css" media="screen" />
+    <script type="text/javascript">
+    console.log(person_id);
+    </script>
 </head>
 <body>
 	<!-- 헤더 -->
-<%--  		 <jsp:include page="/include/header.jsp" /> --%>
+ 		 <jsp:include page="/WEB-INF/views/include/header.jsp" />
   	<!-- /헤더 -->
 	
 	<!--start wrapper-->
@@ -70,7 +71,7 @@
 									</div>
 									</c:when>
 									<c:otherwise>
-										<form action="sellUpdate.do" method="post">
+										<form action="sellStateUpdate" method="post">
 										<input type="submit" value="변경" class="btn-default" style="margin-left: 1050px">
 										<br>
 										<br>
@@ -91,7 +92,7 @@
 												<td align="center">${bookSellList.book_id }</td>
 												<td>${bookSellList.book_name  }</td>
 												<td align="center">${bookSellList.book_date  }</td>
-												<td align="center">${bookSellList.book_id }</td>
+												<td align="center">${bookSellList.book_m_price }</td>
 												<td align="center">
 													<c:set var="name" value="${bookSellList.book_sell_state}" />
 														<c:choose>
@@ -159,26 +160,31 @@
 	</section><!--end wrapper-->
 
 	<!-- 푸터 -->
-<%--  		 <jsp:include page="/include/footer.jsp" /> --%>
+ 		 <jsp:include page="/WEB-INF/views/include/footer.jsp" />
   	<!-- /푸터 -->
 	
 	
 
-    <script type="text/javascript" src="/kobook/js/jquery-1.10.2.min.js"></script>
-    <script src="/kobook/js/bootstrap.min.js"></script>
-    <script src="/kobook/js/jquery.easing.1.3.js"></script>
-    <script src="/kobook/js/retina-1.1.0.min.js"></script>
-    <script type="text/javascript" src="/kobook/js/jquery.cookie.js"></script> <!-- jQuery cookie -->
-    <script type="text/javascript" src="/kobook/js/styleswitch.js"></script> <!-- Style Colors Switcher -->
-    <script type="text/javascript" src="/kobook/js/jquery.smartmenus.min.js"></script>
-    <script type="text/javascript" src="/kobook/js/jquery.smartmenus.bootstrap.min.js"></script>
-        <script type="text/javascript" src="/kobook/js/jflickrfeed.js"></script>
-    <script type="text/javascript" src="/kobook/js/jquery.magnific-popup.min.js"></script>
-    <script type="text/javascript" src="/kobook/js/jquery.isotope.min.js"></script>
-    <script type="text/javascript" src="/kobook/js/swipe.js"></script>
-    <script type="text/javascript" src="/kobook/js/jquery-scrolltofixed-min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
+    <script src="/resources/js/bootstrap.min.js"></script>
+    <script src="/resources/js/jquery.easing.1.3.js"></script>
+    <script src="/resources/js/retina-1.1.0.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.cookie.js"></script> <!-- jQuery cookie -->
+    <script type="text/javascript" src="/resources/js/styleswitch.js"></script> <!-- Style Colors Switcher -->
+    <script src="resources/js/jquery.fractionslider.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.smartmenus.bootstrap.min.js"></script>
+    <script type="text/javascript" src="/resources/js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jflickrfeed.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.magnific-popup.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.isotope.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.easypiechart.min.js"></script>
+    <script type="text/javascript" src="/resources/js/swipe.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery-hoverdirection.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.matchHeight-min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
 
-    <script src="/kobook/js/main.js"></script>
+    <script src="resources/js/main.js"></script>
 
     <!-- Start Style Switcher -->
     <div class="switcher"></div>

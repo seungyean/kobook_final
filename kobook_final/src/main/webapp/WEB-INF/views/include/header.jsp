@@ -79,8 +79,8 @@
                                             		<li><a href="/mypage/userUpdate">회원정보수정</a></li>
                                                     <li><a href="/mypage/mileage">마일리지</a></li>
                                                     <li><a href="/mypage/pickList">찜 리스트</a></li>
-                                                    <li><a href="/mypage/buyList">구매내역</a></li>
-                                                    <li><a href="/mypage/sellList">판매내역</a></li>
+                                                    <li><a href="/mypage/buyList?person_id="${person_id}>구매내역</a></li>
+                                                    <li><a href="/mypage/sellList?person_id="${person_id}>판매내역</a></li>
                                                     <li><a href="/mypage/reviewList">판매후기</a></li>
                                         </ul>
                                     </li>
