@@ -105,10 +105,10 @@
 	        						</c:if> 
 	    						</c:forEach>
         								<h4>새로운 알람의 갯수 : [ <%=alarm_new %> ]</h4>
-            					  		<form action="/kobook/recom/alarmListAction.do">
-            					  			<input type="hidden" name="person_id" value="${person_id }">
+             					  		<form action="/alarmUpdate" method="post">
+            					  			
 											<input type="submit" value="알림">
-										</form> 
+										</form>  
 								<%-- <a href="#" onclick="fn_logout()">로그아웃</a>
 								
 								<c:choose>

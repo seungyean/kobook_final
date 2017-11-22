@@ -19,12 +19,13 @@ public class AlarmDAOImpl implements AlarmDAO {
 	
 	@Override
 	public List<AlarmVO> alarmListDAO(int person_id) {
-		return session.selectList(namespace + ".alarmList");
+		System.out.println("dao - list");
+		return session.selectList(namespace + ".alarmList", person_id);
 	}
 
 	@Override
-	public void alarmUpdate(AlarmVO alarmVO) {
-		session.update(namespace + ".alarmUpdate", alarmVO);
+	public void alarmUpdate(int person_id) {
+		session.update(namespace + ".alarmUpdate", person_id);
 		System.out.println("dao - update");
 	}
 

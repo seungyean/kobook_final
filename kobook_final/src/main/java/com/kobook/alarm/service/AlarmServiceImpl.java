@@ -18,16 +18,16 @@ public class AlarmServiceImpl implements AlarmService{
 	
 	@Override
 	public List<AlarmVO> alarmListService(int person_id) throws Exception {
-		List<AlarmVO> alarmList = dao.alarmListDAO(person_id);
 		System.out.println("service - list");
+		List<AlarmVO> alarmList = dao.alarmListDAO(person_id);
 		return alarmList;
 	}
 
 	@Transactional
 	@Override
-	public void alarmUpdateService(AlarmVO alarmVO) throws Exception {
+	public void alarmUpdateService(int person_id) throws Exception {
 		System.out.println("service - update");
-		dao.alarmUpdate(alarmVO);
+		dao.alarmUpdate(person_id);
 	}
 	
 }

@@ -6,5 +6,5 @@ import com.kobook.alarm.domain.AlarmVO;
 
 public interface AlarmService {
 	public List<AlarmVO> alarmListService(int person_id) throws Exception;
-	public void alarmUpdateService(AlarmVO alarmVO) throws Exception;
+	public void alarmUpdateService(int person_id) throws Exception;
 }

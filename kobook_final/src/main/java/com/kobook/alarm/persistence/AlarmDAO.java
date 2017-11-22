@@ -6,5 +6,5 @@ import com.kobook.alarm.domain.AlarmVO;
 
 public interface AlarmDAO {
 	public List<AlarmVO> alarmListDAO(int person_id);
-	public void alarmUpdate(AlarmVO alarmVO);
+	public void alarmUpdate(int person_id);
 }

@@ -1,7 +1,7 @@
 package com.kobook.controller;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,13 +26,16 @@ public class PersonController {
 	}
 	
 	@RequestMapping(value = "/loginPost", method = RequestMethod.POST)
-	public void loginPOST(LoginDTO dto, HttpSession session, Model model) throws Exception {
+	public void loginPOST(LoginDTO dto, HttpServletRequest request, Model model) throws Exception {
 		PersonVO vo = service.login(dto);
-		
+
 		if(vo == null){
 			return ;
 		}
 		
 		model.addAttribute("PersonVO", vo);
+
 	}
+	
+
 }

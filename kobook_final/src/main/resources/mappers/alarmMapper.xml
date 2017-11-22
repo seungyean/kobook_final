@@ -12,7 +12,7 @@
 		ORDER BY ALARM_ID DESC
 	</select>
 
-	<update id="alarmUpdate" parameterType="AlarmVO">
+	<update id="alarmUpdate" parameterType="int">
 		UPDATE ALARM SET HIT_YN='Y' WHERE PERSON_ID=#{person_id}
 	</update>
 
