@@ -33,6 +33,10 @@
 		document.alarmUpdate.submit();
 	}
 	
+	   function fn_login(){
+			window.open("/person/login","","width=400,height=300,left=550,top=200");
+		}
+	
 	function fn_logout(){
 			location.href="/person/logout";
 		}
@@ -154,7 +158,7 @@
                                     <li><a href="/">Home</a></li>
 
                                     <li><a href="/book/bookList">전체검색</a></li>
-                                    <li><a href="/book/locationAction?check=1">지역검색</a></li>
+                                    <li><a href="book/booklocationList">지역검색</a></li>
 
                                     <li><a href="/community/blackList" >커뮤니티</a>
                                         <ul class="dropdown-menu">

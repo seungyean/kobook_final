@@ -26,14 +26,6 @@
     <link rel="stylesheet" href="resources/css/animate.css"/>
 
     <link rel="stylesheet" type="text/css" href="resources/css/switcher.css" media="screen" />
-
-
-	<script type="text/javascript">
-	   function fn_login(){
-			window.open("/person/login","","width=400,height=300,left=550,top=200");
-		}
-
-	</script>
 </head>
 
 <body class="home">	

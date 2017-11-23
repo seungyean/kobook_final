@@ -1,7 +1,5 @@
 package com.kobook.login.interceptor;
 
-import java.awt.image.RescaleOp;
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +14,26 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
 	@Inject
 	private PersonService service;
+	
+	public void saveDest(HttpServletRequest request) {
+		System.out.println("saveDest");
+		String uri = request.getHeader("referer");
+		String query = request.getQueryString();
+		
+		if(query == null || query.equals("null")){
+			query = "";
+		}else {
+			query = "?" + query;
+		}
+		
+		
+		request.getSession().setAttribute("dest", uri+query);
+		
+		if(request.getMethod().equals("GET")){
+			
+		}
+		
+	}
 	
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
@@ -39,27 +57,22 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			session.setAttribute("person_pwd", person_pwd);
 			session.setAttribute("person_id", person_id);
 			
+			
+			
 			if(person_email.equals("admin@kobook.com") && person_pwd.equals("0000")){
 				session.setAttribute("person_id", person_id);
 			}
 			
 			else if(person_email.equals(person_emailCheck) && person_pwd.equals(person_pwdCheck)){
 				session.setAttribute("person_id", person_id);
+				Object dest = session.getAttribute("dest");
+				System.out.println((String)dest);
+				//response.sendRedirect(dest != null ? (String)dest:"/");
 
 			}else{
 				response.sendRedirect("/person/loginFail");
 			}
 		}
-
-		
-		
-/*		ModelMap modelMap = modelAndView.getModelMap();
-		Object personVO = modelMap.get("personVO");*/
-		
-/*		if(personVO != null) {
-			session.setAttribute("login", personVO);
-			response.sendRedirect("/");
-		}*/
 		
 	}
 
