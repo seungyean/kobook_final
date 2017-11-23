@@ -11,6 +11,9 @@
 		cur_id = (String)session.getAttribute("person_id")+"";
 		
 	}
+	
+	int person_id = Integer.parseInt(cur_id);
+			
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -21,12 +24,12 @@
 
 	function popupMessage(){
 		
-		if(<%=cur_id%> >  0){
+		if(<%=person_id%> >  0){
 		
 			window.name = "mainPage";
 			window.open("/message/messageSend","messagePage", "width=630, height=300, menubar=yes, statebar=yes, scrollbar=yes");
 	 		
-			document.session_id.action = "/message/messageSend"
+			document.session_id.action = "/message/messageSend";
 			document.session_id.target = "messagePage";
 			document.session_id.submit;
 		
@@ -37,11 +40,13 @@
 	function popupChat(){
 		
 		window.name = "mainPage";
-		window.open("/chatbot/chatbot","chatbotPage", "width=400, height=650, menubar=yes, statebar=yes, scrollbar=yes");
+		window.open("/chatbot/chatbot","chatbotPage", "width=400, height=650, menubar=yes, statebar=yes, scrollbar=yes, left=800");
  		
-		document.session_id.action = "/chatbot/chatbot"
-		document.session_id.target = "chatbotPage";
-		document.session_id.submit;
+		if(<%=person_id%> > 0){
+			document.session_id.action = "/chatbot/chatbot";
+			document.session_id.target = "chatbotPage";
+			document.session_id.submit;	
+		}
 		
 	}
 	
@@ -67,7 +72,7 @@
 		
 		<!-- 팝업창으로 session값을 post로 보내는 과정 -->
 		<form method="post" name="session_id">
-			<input type="hidden" name="person_id" value="<%=cur_id %>">
+			<input type="hidden" name="person_id" value="<%=person_id %>">
 		</form>
         <div id="top-bar">
             <div class="container">
