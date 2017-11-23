@@ -17,6 +17,47 @@
 	content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>Electrify Responsive Multipurpose Template</title>
 <meta name="description" content="">
+<style type="text/css">
+body{
+			margin-top: 100px;
+			font-family: 'Trebuchet MS', serif;
+			line-height: 1.6
+		}
+		.container1{
+			width: 800px;
+			margin: 0 auto;
+		}
+
+
+
+		ul.tabs{
+			margin: 0px;
+			padding: 0px;
+			list-style: none;
+		}
+		ul.tabs li{
+			background: none;
+			color: #222;
+			display: inline-block;
+			padding: 10px 15px;
+			cursor: pointer;
+		}
+
+		ul.tabs li.current{
+			 background: #ededed; 
+			 color: #222; 
+		}
+
+		.tab-content{
+			display: none;
+			background: #ededed;
+			padding: 15px;
+		}
+
+		.tab-content.current{
+			display: inherit; 
+		}
+</style>
 
 <!-- CSS FILES -->
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css" />
@@ -29,6 +70,7 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/switcher.css"
 	media="screen" />
 </head>
+
 <body>
 	<!-- 헤더 -->
 	 <jsp:include page="/WEB-INF/views/include/header.jsp" />
@@ -54,41 +96,40 @@
 			</div>
 		</section>
 
+
+ <section class="content typography">
+	<div class="container">
 		<div class="row sub_content">
 			<div class="col-lg-12 col-md-12 col-sm-12">
 				<div class="dividerHeading">
 					<h4>
-						<span>Tables</span>
+						<span>지역검색 리스트</span>
 					</h4>
-				</div>
-			</div>
-			<div class="col-lg-12 col-md-12 col-sm-12">
-				<div class="table-responsive">
-
-
+					<br> <br>
 	
-		<form action="/book/booklocationList" method="get">
-			<!-- <input type="hidden" name="temp" value="temp">
-					<input type="hidden" name="check" value="-1"> -->
-			<input type="text" name="keyword" id="keywordInput" value='${cri.keyword}' placeholder="지역을 입력하세요." size="25">
-			<input type="hidden" class="form-control" name="person_id" value="${person_id}"> 
-			<button id='searchBtn' class="btn-default"><i class="fa fa-search"></i></button>
-		</form>
-
-							<table class="table table-striped table-hover">
-								<thead>
+		
+	
+	
+			<div class="container1">
+							<ul class="tabs">
+								<li class="tab-link current" data-tab="tab-1">직거래</li>
+								<li class="tab-link" data-tab="tab-2">안심거래</li>
+							</ul>
+	       
+						    
+					<div id="tab-1" class="tab-content current">
+						  <table class="table table-striped table-hover">
+						  <thead>
 									<tr>
-										<th>글번호</th>
+										<th align="center">글번호</th>
 										<th>책제목</th>
-										<th>책상태</th>
-										<th>판매상태</th>
-										<th>책가격</th>
-										<th>안심유무</th>
-										<th>날짜</th>
+										<th align="center">책상태</th>
+										<th align="center">판매상태</th>
+										<th align="center">책가격</th>
+										<th align="center">안심유무</th>
+										<th align="center">날짜</th>
 									</tr>
-								</thead>
-								
-								
+						  </thead>
 								<c:forEach var="b" items="${list}">
 									<tr>
 										<td>${b.book_id}</td>
@@ -110,18 +151,103 @@
 										</td>
 										<td>${b.book_m_price}</td>
 										<td>${b.book_safe_yn}</td>
-										<td><fmt:formatDate value="${b.book_date}"pattern='yyyy-MM-dd' /></td>
+										 <td><fmt:formatDate value="${b.book_date}" pattern='yyyy-MM-dd' /></td>
 									</tr>
 								</c:forEach>
-							</table>
-				</div>
-				<!--/table-responsive -->
-			</div>
-				<!--/col-lg-12 col-md-12 col-sm-12  -->
-		</div>
-		<!--/row sub_content  -->
+							 </table>
+							 
+	 
+							 
+						</div> <!--/tab-1  -->
+					
+								
+					
+					
+					<div id="tab-2" class="tab-content">
+					 <table class="table table-striped table-hover">
+						  <thead>
+									<tr>
+										<th align="center">글번호</th>
+										<th>책제목</th>
+										<th align="center">책상태</th>
+										<th align="center">판매상태</th>
+										<th align="center">책가격</th>
+										<th align="center">안심유무</th>
+										<th align="center">날짜</th>
+									</tr>
+						  </thead>	
+								<c:forEach var="b2" items="${list2}">
+									<tr>
+										<td>${b2.book_id}</td>
+										<td><a href="/book/bookRead?book_id=${b2.book_id}">${b2.book_name}</a></td>
+										<td><c:if test="${b2.book_status !=null}">
+												<c:choose>
+													<c:when test="${b2.book_status=='A'}">양호</c:when>
+													<c:when test="${b2.book_status=='C'}">나쁨</c:when>
+													<c:otherwise>보통</c:otherwise>
+												</c:choose>
+											</c:if>
+										</td>
+										<td><c:if test="${b2.book_sell_state !=null}">
+												<c:choose>
+													<c:when test="${b2.book_sell_state=='I'}">판매중</c:when>
+													<c:when test="${b2.book_sell_state=='C'}">판매완료</c:when>
+												</c:choose>
+											</c:if>
+										</td>
+										<td>${b2.book_m_price}</td>
+										<td>${b2.book_safe_yn}</td>
+									<td><fmt:formatDate value="${b2.book_date}" pattern='yyyy-MM-dd' /></td>
+									</tr>
+								</c:forEach>	
+								</table>			
+			             </div> <!--/tab-2  -->
+					
+					 </div><!--/container1  -->	
+					 
+		<form action="/book/booklocationList" method="post">
+			<input type="text" name="keyword" id="keywordInput" value='${cri.keyword}' placeholder="지역을 입력하세요." size="25">
+			<input type="hidden" class="form-control" name="person_id" value="${person_id}"> 
+			<button id='searchBtn' class="btn-default"><i class="fa fa-search"></i></button>
+     	</form>
+		
+								
+			        <%--     <div id="tab-2" class="tab-content">	
+								<c:forEach var="b2" items="${list2}">
+									<tr>
+										<td>${b2.book_id}</td>
+										<td><a href="/book/bookRead?book_id=${b2.book_id}">${b2.book_name}</a></td>
+										<td><c:if test="${b2.book_status !=null}">
+												<c:choose>
+													<c:when test="${b2.book_status=='A'}">양호</c:when>
+													<c:when test="${b2.book_status=='C'}">나쁨</c:when>
+													<c:otherwise>보통</c:otherwise>
+												</c:choose>
+											</c:if>
+										</td>
+										<td><c:if test="${b2.book_sell_state !=null}">
+												<c:choose>
+													<c:when test="${b2.book_sell_state=='I'}">판매중</c:when>
+													<c:when test="${b2.book_sell_state=='C'}">판매완료</c:when>
+												</c:choose>
+											</c:if>
+										</td>
+										<td>${b2.book_m_price}</td>
+										<td>${b2.book_safe_yn}</td>
+										<td><fmt:formatDate value="${b.book_date}"pattern='yyyy-MM-dd' /></td>
+									</tr>
+								</c:forEach>				
+			             </div> <!--/tab-2  -->	 --%>
+					 
+					  	
+		
+	
+				
+					
+						
 
-		<div class="text-center">
+
+		<div class="col-sm-12 text-center">
 			<ul class="pagination">
 
 				<c:if test="${pageMaker.prev}">
@@ -143,10 +269,18 @@
 				</c:if>
 
 			</ul>
-		</div>
-
-
-
+		</div><!--/col-sm-12 text-center  -->
+				
+				
+				
+				
+				
+				
+		            </div> <!--/col-lg-12 col-md-12 col-sm-12  -->		
+		         </div><!--/row sub_content  -->
+		       </div>
+		  </div> <!--/container  -->
+		</section> <!--/content typography  -->
 	</section>
 	<!--end wrapper-->
 
@@ -186,17 +320,29 @@
 							"click",
 							function(event) {
 
-								self.location = "bookList"
+								self.location = "booklocationList"
 										+ '${pageMaker.makeQuery(1)}'
-										+ "&searchType="
-										+ $("select option:selected").val()
 										+ "&keyword="
 										+ $('#keywordInput').val();
 
 							});
 
+					
+					  $('ul.tabs li').click(function(){
+						    var tab_id = $(this).attr('data-tab');
+						    $('ul.tabs li').removeClass('current');
+						    $('.tab-content').removeClass('current');
+						 
+						    $(this).addClass('current');
+						    $("#"+tab_id).addClass('current');
+						  });
+						 
 				});
+
 		</script>
+		
+		
+		
 	
 	<!-- Start Style Switcher -->
 	<div class="switcher"></div>

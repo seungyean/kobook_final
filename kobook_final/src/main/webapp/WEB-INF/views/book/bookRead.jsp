@@ -119,6 +119,7 @@
 								<li><span> 판 :</span>${bookVO.book_edition}</li>
 								<li><span>출판사 :</span>${bookVO.book_publish}</li>
 								<li><span>안심여부사용 :</span>${bookVO.book_safe_yn}</li>
+								<li><span>날짜: </span><fmt:formatDate value="${b.book_date}" pattern='yyyy-MM-dd' /></li>
 								<li><span>책상태 :</span>
 								<c:choose>
 								<c:when test="${bookVO.book_status=='A'}">

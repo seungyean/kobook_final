@@ -143,7 +143,8 @@ public class BookController {
 	
 	@RequestMapping("/booklocationList")
 	public void locationlist(@ModelAttribute("cri") SearchCriteria cri, Model model)throws Exception{
-		model.addAttribute("list", service.locationCriteria(cri));
+		model.addAttribute("list", service.directListCriteria(cri));
+		model.addAttribute("list2", service.safeListCriteria(cri));
 		PageMaker pageMaker=new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(service.countPaging(cri));

@@ -1,6 +1,7 @@
 package com.kobook.book.domain;
 
 
+import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -16,7 +17,7 @@ public class BookVO {
 	private String book_safe_yn;
 	private String book_sell_state;
 	private String book_content;
-	private Date book_date;
+	private Timestamp book_date;
 	private String book_status;
 	private String book_img;
 	private int person_id;
@@ -25,7 +26,7 @@ public class BookVO {
 
 	public BookVO(Integer book_id, String book_name, int book_o_price, int book_m_price, String book_kind,
 			int book_edition, String book_publish, String book_hash, String book_safe_yn, String book_sell_state,
-			String book_content, Date book_date, String book_status, String book_img, int person_id) {
+			String book_content, Timestamp book_date, String book_status, String book_img, int person_id) {
 		super();
 		this.book_id = book_id;
 		this.book_name = book_name;
@@ -132,11 +133,11 @@ public class BookVO {
 		this.book_content = book_content;
 	}
 
-	public Date getBook_date() {
+	public Timestamp getBook_date() {
 		return book_date;
 	}
 
-	public void setBook_date(Date book_date) {
+	public void setBook_date(Timestamp book_date) {
 		this.book_date = book_date;
 	}
 

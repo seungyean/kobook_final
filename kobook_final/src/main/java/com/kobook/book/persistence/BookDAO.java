@@ -12,7 +12,9 @@ public interface BookDAO {
 
 	public List<BookVO> listCriteria(SearchCriteria cri)throws Exception;
 	
-	public List<BookVO> locationCriteria(SearchCriteria cri)throws Exception;
+	public List<BookVO> directListCriteria(SearchCriteria cri)throws Exception;
+	
+	public List<BookVO> safeListCriteria(SearchCriteria cri)throws Exception;
 	
 	public int countPaging(SearchCriteria cri)throws Exception;
 	

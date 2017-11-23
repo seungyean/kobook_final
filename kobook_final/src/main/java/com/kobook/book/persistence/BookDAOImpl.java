@@ -40,8 +40,16 @@ public class BookDAOImpl implements BookDAO {
 	
 	
 	@Override
-	public List<BookVO> locationCriteria(SearchCriteria cri) throws Exception {
-		return session.selectList(namespace+".locationCriteria",cri,new RowBounds(cri.getPageStart(),cri.getPerPageNum()));
+	public List<BookVO> directListCriteria(SearchCriteria cri) throws Exception {
+		return session.selectList(namespace+".directListCriteria",cri,new RowBounds(cri.getPageStart(),cri.getPerPageNum()));
+	}
+
+
+
+
+	@Override
+	public List<BookVO> safeListCriteria(SearchCriteria cri) throws Exception {
+		return session.selectList(namespace+".safeListCriteria",cri,new RowBounds(cri.getPageStart(),cri.getPerPageNum()));
 	}
 
 

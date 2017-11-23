@@ -45,11 +45,15 @@ public class BookServiceImpl implements BookService {
 
 	
 
+	@Override
+	public List<BookVO> directListCriteria(SearchCriteria cri) throws Exception {
+		return dao.directListCriteria(cri);
+	}
 
 
 	@Override
-	public List<BookVO> locationCriteria(SearchCriteria cri) throws Exception {
-		return dao.locationCriteria(cri);
+	public List<BookVO> safeListCriteria(SearchCriteria cri) throws Exception {
+		return dao.safeListCriteria(cri);
 	}
 
 

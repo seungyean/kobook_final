@@ -27,23 +27,40 @@
             where book_id > 0
       ]]>
 		<include refid="search"></include>
-		<!-- <![CDATA[ order by book_date desc ]]> -->
 		<include refid="sort"></include>
 
 	</select>
 
-	<select id="locationCriteria" resultType="BookVO" parameterType="SearchCriteria">
+	<select id="directListCriteria" resultType="BookVO" parameterType="SearchCriteria">
 	<![CDATA[
-          select 
-            *
-          from 
-            book             
-            where book_safe_yn='N'
+     select b.book_id, b.book_name, b.book_o_price,b.book_m_price,b.book_kind,b.book_edition, b.book_publish, 
+            b.book_hash, b.book_safe_yn, b.book_content,b.book_date, b.book_status,b.book_sell_state, b.book_img,
+            p.person_id
+      from book b, person p
+      where b.person_id=p.person_id
+      and b.book_safe_yn='N'
       ]]>
+       <include refid="locationsearch"></include>
+	</select>
 	
+		<select id="safeListCriteria" resultType="BookVO" parameterType="SearchCriteria">
+	<![CDATA[
+     select b.book_id, b.book_name, b.book_o_price,b.book_m_price,b.book_kind,b.book_edition, b.book_publish, 
+            b.book_hash, b.book_safe_yn, b.book_content,b.book_date, b.book_status,b.book_sell_state, b.book_img,
+            p.person_id
+      from book b, person p
+      where b.person_id=p.person_id
+      and b.book_safe_yn='Y'
+      ]]>
+            <include refid="locationsearch"></include>
 	</select>
 
 
+<sql id="locationsearch">
+<if test="keyword !=null">
+and p.person_address like '%'|| #{keyword}||'%'
+</if>
+</sql>
 
 	<sql id="search">
 		<if test="searchType != null">
@@ -78,7 +95,6 @@
 				book_hash like '%'|| #{keyword}||'%')
 			</if>
 		</if>
-
 	</sql>
 
 
@@ -97,7 +113,8 @@
 			</if>
 		</if>
 	</sql>
-
+	
+	
 
 
 	<select id="read" resultType="BookVO">

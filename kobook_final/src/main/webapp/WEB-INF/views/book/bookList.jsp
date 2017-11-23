@@ -87,7 +87,8 @@
 				<option value="tcw"
 					<c:out value="${cri.searchType eq 'tcw'?'selected':''}"/>>
 					제목 + 내용 + 해시태그</option>
-			</select> <input type="text" name="keyword" id="keywordInput"
+			</select> 
+			<input type="text" name="keyword" id="keywordInput"
 				value='${cri.keyword }' placeholder="Enter Search keywords..."
 				size="25">
 			<button id='searchBtn' class="btn-default">
