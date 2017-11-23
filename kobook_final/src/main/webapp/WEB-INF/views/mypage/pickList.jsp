@@ -66,6 +66,12 @@
             location.href="/mypage/pickStateUpdate?pick_id=" + pick_id;
          });
     	
+    	// 주문 버튼 
+    	 $("#order").click(function(){
+    		var pick_id = $(this).parent().parent().find('td:first').text().trim();
+            location.href="/mypage/order?pick_id=" + pick_id;
+         });
+    	
     	$("#use_mileage").keyup(function() {
     		var use_mileage = $('#use_mileage').val();
     		$('#total_price').val(book_m_price - use_mileage);
@@ -156,6 +162,7 @@
 													<td>
 													<input type="button" value="삭제" class="btn-danger" id="del" >
 													<input type="button" value="결제" class="btn-default" id="popPay">
+													<input type="button" value="주문" class="btn-default" id="order">
 													</td>
 												</tr>
 											</c:forEach>

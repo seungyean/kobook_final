@@ -4,6 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kobook.mappers.myPageMapper">
 
+<!-- 주문자 정보 -->
+	<select id="orderPerson" resultType="PersonVO" parameterType="int">
+		SELECT *
+		FROM person
+		WHERE person_id = #{person_id}
+	</select>
+
 	<!-- 판매내역 리스트 -->
 	<select id="sellList" resultType="BookVO" parameterType="int">
 		SELECT *
@@ -14,7 +21,8 @@
 	<!-- 판매상태 업데이트 -->
 	<update id="sellStateUpdate" parameterType="BookVO">
 		UPDATE book
-		SET book_sell_state = # {book_sell_state}
+		SET
+		book_sell_state = # {book_sell_state}
 		WHERE book_id = #{book_id}
 	</update>
 
@@ -30,7 +38,8 @@
 		pay p
 		WHERE o.order_id = p.order_id
 		AND o.book_id = b.book_id
-		AND o.person_id = #{person_id}
+		AND
+		o.person_id = #{person_id}
 	</select>
 
 	<!-- 찜리 -->
@@ -41,19 +50,23 @@
 		b.book_m_price,
 		b.book_sell_state,
 		p.pick_id
-		FROM book b,
+		FROM
+		book b,
 		pick p,
 		person person
 		WHERE b.book_id = p.book_id
-		AND p.person_id = person.person_id
+		AND p.person_id
+		= person.person_id
 		AND p.pick_state = 'Y'
-		AND person.person_id = #{person_id}
+		AND person.person_id =
+		#{person_id}
 	</select>
 
 	<!-- 찜 상태 변경 -->
 	<update id="pickUpdate" parameterType="int">
 		UPDATE pick
-		SET pick_state = 'N'
+		SET pick_state
+		= 'N'
 		WHERE pick_id = #{pick_id}
 	</update>
 
@@ -65,11 +78,29 @@
 		FROM mileage m,
 		pay p,
 		book_order o
-		WHERE m.pay_id = p.pay_id
+		WHERE
+		m.pay_id = p.pay_id
 		AND p.order_id = o.order_id
+		AND o.person_id =
+		#{person_id}
+	</select>
+
+
+	<!-- 마일리지 리스트 -->
+	<select id="orderList" resultType="hashMap">
+		SELECT b.book_img,
+		b.book_name,
+		b.book_m_price,
+		b.book_publish
+		FROM book b,
+		person p,
+		book_order o
+		WHERE b.book_id = o.book_id
+		AND o.person_id = p.person_id
 		AND o.person_id = #{person_id}
 	</select>
 
+	
 
 
 </mapper>

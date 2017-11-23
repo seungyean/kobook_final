@@ -6,7 +6,22 @@ public class PersonVO {
 	private String person_email;
 	private String person_pwd;
 	private String person_name;
+	private String person_postcode;
+	public String getPerson_postcode() {
+		return person_postcode;
+	}
+	public void setPerson_postcode(String person_postcode) {
+		this.person_postcode = person_postcode;
+	}
+	public String getPerson_address2() {
+		return person_address2;
+	}
+	public void setPerson_address2(String person_address2) {
+		this.person_address2 = person_address2;
+	}
+
 	private String person_address;
+	private String person_address2;
 	private String person_phone;
 	private int person_mileage;
 	private String person_school;
@@ -86,14 +101,16 @@ public class PersonVO {
 	public void setPerson_avg(double person_avg) {
 		this.person_avg = person_avg;
 	}
-	
 	@Override
 	public String toString() {
 		return "PersonVO [person_id=" + person_id + ", person_email=" + person_email + ", person_pwd=" + person_pwd
-				+ ", person_name=" + person_name + ", person_address=" + person_address + ", person_phone="
-				+ person_phone + ", person_mileage=" + person_mileage + ", person_school=" + person_school
-				+ ", person_sell_grade=" + person_sell_grade + ", person_kind=" + person_kind + ", person_account="
-				+ person_account + ", person_avg=" + person_avg + "]";
+				+ ", person_name=" + person_name + ", person_postcode=" + person_postcode + ", person_address="
+				+ person_address + ", person_address2=" + person_address2 + ", person_phone=" + person_phone
+				+ ", person_mileage=" + person_mileage + ", person_school=" + person_school + ", person_sell_grade="
+				+ person_sell_grade + ", person_kind=" + person_kind + ", person_account=" + person_account
+				+ ", person_avg=" + person_avg + "]";
 	}
+	
+
 	
 }

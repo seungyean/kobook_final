@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kobook.book.domain.BookVO;
+import com.kobook.person.domain.PersonVO;
 
 
 @Repository
@@ -48,6 +49,16 @@ public class MyPageDAOImpl implements MyPageDAO {
 	@Override
 	public List<HashMap<String, String>> mileageList(int person_id) {
 		return session.selectList(namespace + ".mileageList", person_id);
+	}
+
+	@Override
+	public List<HashMap<String, String>> orderList(int person_id) {
+		return session.selectList(namespace + ".orderList", person_id);
+	}
+
+	@Override
+	public PersonVO orderPerson(int person_id) {
+		return session.selectOne(namespace + ".orderPerson", person_id);
 	}
 
 

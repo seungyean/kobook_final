@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kobook.book.domain.BookVO;
 import com.kobook.mypage.service.MyPageService;
+import com.kobook.person.domain.PersonVO;
 
 @Controller
 @RequestMapping("/mypage/*")
@@ -110,5 +111,22 @@ public class MyPageController {
 		
 		model.addAttribute("mileageList", service.mileageList(person_id));
 	}
+	
+	/* 주문 */
+	@RequestMapping(value = "/order", method = RequestMethod.GET)
+	public void orderList(HttpServletRequest request, Model model) {
+		System.out.println("----------------Controller : 주문 출력-----------------");
+		
+		HttpSession session = request.getSession();
+		int person_id = Integer.parseInt((String)session.getAttribute("person_id"));
+		
+		model.addAttribute("orderList", service.orderList(person_id));
+		model.addAttribute( service.orderPerson(person_id));
+		System.out.println( service.orderPerson(person_id));
+	}
+	
+	
+	
+
 
 }
