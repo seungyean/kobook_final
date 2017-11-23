@@ -69,11 +69,11 @@
 						<div class="blog_single">
 							<article class="post">
 								<form role="form" action="blackModify" method="post">
+									<input type='hidden' name='page' value="${cri.page}"> 
+							<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
+							<input type='hidden' name='searchType' value="${cri.searchType}">
+							<input type='hidden' name='keyword' value="${cri.keyword}">
 									<input type="hidden" name="black_id" value="${blackVO.black_id}">
-									<figure class="post_img">
-										<img src="/resources/upload/${blackVO.black_img }"
-											alt="NO IMAGE" height="300" width="400">
-									</figure>
 									<div class="post_date">
 										<span class="day">${blackVO.black_id }</span>
 									</div>
@@ -106,10 +106,10 @@
 											<ul class="mailbox-attachments clearfix uploadedList">
 											</ul>
 
+									<button type="submit" class="btn btn-primary">SAVE</button>
+									<button type="submit" class="btn btn-warning">CANCEL</button>
 										</div>
 									</div>
-									<span> <input class="btn btn-lg btn-default"
-										type="submit" value="수정완료"></span>
 								</form>
 							</article>
 						</div>
@@ -152,7 +152,155 @@
 		src="/resources/js/jquery-scrolltofixed-min.js"></script>
 
 	<script src="/resources/js/main.js"></script>
+	
+	<script type="text/javascript" src="/resources/js/upload.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+	
+<script id="template" type="text/x-handlebars-template">
+<li>
+	<div class="mailbox-attachment-info">
+<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}
+  <span class="mailbox-attachment-icon has-img"><br><img src="{{imgsrc}}" alt="Attachment">
+	</a>
+	<a href="{{fullName}}" 
+     class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a>
+	</span>
+  </div>
+</li>                
+</script>
 
+<script>
+$(document).ready(function(){
+		
+	var formObj = $("form[role='form']");
+	
+	formObj.submit(function(event){
+		event.preventDefault();
+		
+		var that = $(this);
+		
+		var str ="";
+		$(".uploadedList .delbtn").each(function(index){
+			 str += "<input type='hidden' name='files["+index+"]' value='"+$(this).attr("href") +"'> ";
+		});
+		
+		that.append(str);
+
+		console.log(str);
+		
+		that.get(0).submit();
+	});
+	
+	
+	$(".btn-warning").on("click", function(){
+	  self.location = "/community/blackList?page=${cri.page}&perPageNum=${cri.perPageNum}"+
+			  "&searchType=${cri.searchType}&keyword=${cri.keyword}";
+	});
+	
+});
+
+
+
+
+var template = Handlebars.compile($("#template").html());
+
+
+$(".fileDrop").on("dragenter dragover", function(event){
+	event.preventDefault();
+});
+
+
+$(".fileDrop").on("drop", function(event){
+	event.preventDefault();
+	
+	var files = event.originalEvent.dataTransfer.files;
+	
+	var file = files[0];
+	
+	var formData = new FormData();
+	
+	formData.append("file", file);	
+	
+	$.ajax({
+		  url: '/community/uploadAjax',
+		  data: formData,
+		  dataType:'text',
+		  processData: false,
+		  contentType: false,
+		  type: 'POST',
+		  success: function(data){
+			  
+			  var fileInfo = getFileInfo(data);
+			  
+			  var html = template(fileInfo);
+			  
+			  $(".uploadedList").append(html);
+		  }
+		});	
+});
+
+
+$(".uploadedList").on("click", ".delbtn", function(event){
+	
+	event.preventDefault();
+	
+	var that = $(this);
+	 
+	$.ajax({
+	   url:"/community/deleteFile",
+	   type:"post",
+	   data: {fileName:$(this).attr("href")},
+	   dataType:"text",
+	   success:function(result){
+		   if(result == 'deleted'){
+			   that.closest("li").remove();
+		   }
+	   }
+   });
+});
+
+
+var black_id = ${blackVO.black_id};
+var template = Handlebars.compile($("#template").html());
+
+$.getJSON("/community/blackGetAttach/"+black_id,function(list){
+	$(list).each(function(){
+		
+		var fileInfo = getFileInfo(this);
+		
+		var html = template(fileInfo);
+		
+		 $(".uploadedList").append(html);
+		
+	});
+});
+
+$(".uploadedList").on("click", ".mailbox-attachment-info a", function(event){
+	
+	var fileLink = $(this).attr("href");
+	
+	if(checkImageType(fileLink)){
+		
+		event.preventDefault();
+				
+		var imgTag = $("#popup_img");
+		imgTag.attr("src", fileLink);
+		
+		console.log(imgTag.attr("src"));
+				
+		$(".popup").show('slow');
+		imgTag.addClass("show");		
+	}	
+});
+
+$("#popup_img").on("click", function(){
+	
+	$(".popup").hide('slow');
+	
+});	
+
+
+</script>
 	<!-- Start Style Switcher -->
 	<div class="switcher"></div>
 	<!-- End Style Switcher -->

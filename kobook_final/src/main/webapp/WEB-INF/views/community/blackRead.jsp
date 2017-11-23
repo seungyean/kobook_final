@@ -38,13 +38,13 @@
      } 
   	
     </style>
-
+<!-- 
 <script type="text/javascript">
 	function fn_update() {
 		location.href = "blackModify?black_id=${black.black_id}";
 	}
 </script>
-
+ -->
 </head>
 <body class="home">
 	<!-- 헤더 -->
@@ -81,16 +81,15 @@
     <div id="popup_front" class='popup front' style="display:none;">
      <img id="popup_img">
     </div>
-    <ul class="mailbox-attachments clearfix uploadedList">
-    								</ul>
+    			<form role="form" action="blackModify" method="post">
+					<input type='hidden' name='black_id' value="${blackVO.black_id}">
+					<input type='hidden' name='page' value="${cri.page}">
+					<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
+					<input type='hidden' name='searchType' value="${cri.searchType}">
+					<input type='hidden' name='keyword' value="${cri.keyword}">
+				</form>
+   
 							<article class="post">
-								<form role="form" action="blackRemove" method="post">
-									<input type="hidden" name="black_id" value="${blackVO.black_id}">
-									
-									<%-- 	<img src="/resources/upload/${black.black_img }" alt="NO IMAGE"
-											height="350" width="400"> --%>
-									
-									
 									<div class="post_date">
 										<span class="day">${blackVO.black_id }</span>
 									</div>
@@ -101,12 +100,13 @@
 												<span><i class="fa fa-calendar"></i> <fmt:formatDate
 														value="${blackVO.black_date }" pattern="MMM dd, yyyy" /> </span> <span><i
 													class="fa fa-user"></i> By ${blackVO.person_id} </span>
-										<c:if test="${blackVO.person_id == person_id }">			
-										<span>
-											<input type="button" id="modifyBtn" class="btn btn-lg btn-default" value="수정">
-											<input class="btn btn-lg btn-default" type="button" value="삭제">
-										</span>
+										<c:if test="${blackVO.person_id == person_id }">
+											<!-- <input type="button" class="btn btn-lg btn-default" value="수정">
+											<input class="btn btn-lg btn-default" type="button" value="삭제"> -->
+											<button type="submit" class="btn btn-warning" id="modifyBtn">수정</button>
+											<button type="submit" class="btn btn-danger" id="removeBtn">삭제</button>
 										</c:if>
+										<button type="submit" class="btn btn-primary" id="goListBtn">목록으로</button>
 											</div>
 										</div>
 										<span>신고email : <b>${blackVO.black_email }</b></span>
@@ -114,8 +114,9 @@
 											${blackVO.black_content }</blockquote>
 
 									</div>
-								</form>
 							</article>
+							 <ul class="mailbox-attachments clearfix uploadedList">
+							 </ul>
 						</div>
 					</div>
 				</div>
@@ -154,21 +155,20 @@
     
 <script id="templateAttach" type="text/x-handlebars-template">
 <li data-src='{{fullName}}'>
-  <span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
-  <div class="mailbox-attachment-info">
-	<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
-	</span>
+<div class="mailbox-attachment-info">
+<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}
+  <span class="mailbox-attachment-icon has-img"><br><img src="{{imgsrc}}" alt="Attachment"></span>
+</a>
   </div>
 </li>
 </script>  
 
 <script>
 $(function(){
-	/*
 	var formObj = $("form[role='form']");
 	 	
 	$("#modifyBtn").on("click", function(){
-		formObj.attr("action", "/community/modifyPage");
+		formObj.attr("action", "/community/blackModify");
 		formObj.attr("method", "get");		
 		formObj.submit();
 	});
@@ -181,7 +181,7 @@ $(function(){
 		});
 		
 		if(arr.length > 0){
-			$.post("/deleteAllFiles",{files:arr}, function(){
+			$.post("/community/deleteAllFiles",{files:arr}, function(){
 				
 			});
 		}
@@ -192,10 +192,10 @@ $(function(){
 	
 	$("#goListBtn ").on("click", function(){
 		formObj.attr("method", "get");
-		formObj.attr("action", "/sboard/blackList");
+		formObj.attr("action", "/community/blackList");
 		formObj.submit();
 	});
-	 */
+
 	var black_id = ${blackVO.black_id};
 	var template = Handlebars.compile($("#templateAttach").html());
 	

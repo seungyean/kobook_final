@@ -142,9 +142,10 @@
 
 <script id="template" type="text/x-handlebars-template">
 <li>
-  <span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
   <div class="mailbox-attachment-info">
-	<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
+	<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}
+  <span class="mailbox-attachment-icon has-img"><br><img src="{{imgsrc}}" alt="Attachment">
+</a>
 	<a href="{{fullName}}" 
      class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a>
 	</span>
@@ -190,6 +191,24 @@ $(".fileDrop").on("drop", function(event){
 		});	
 });
 
+$(".uploadedList").on("click", ".delbtn", function(event){
+	
+	event.preventDefault();
+	
+	var that = $(this);
+	 
+	$.ajax({
+	   url:"/community/deleteFile",
+	   type:"post",
+	   data: {fileName:$(this).attr("href")},
+	   dataType:"text",
+	   success:function(result){
+		   if(result == 'deleted'){
+			   that.closest("li").remove();
+		   }
+	   }
+   });
+});
 
 $("#registerForm").submit(function(event){
 	event.preventDefault();

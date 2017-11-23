@@ -55,6 +55,7 @@ public class CommunityController {
 	@RequestMapping(value = "blackList", method = RequestMethod.GET)
 	public void blackList(@ModelAttribute SearchCriteria cri, Model model)throws Exception{
 		model.addAttribute("list", service.blackList(cri));
+		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(service.blackCount(cri));
