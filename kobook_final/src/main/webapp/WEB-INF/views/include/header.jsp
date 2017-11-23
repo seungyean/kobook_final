@@ -19,27 +19,46 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 
-	function popup(){
+	function popupMessage(){
+		
+		if(<%=cur_id%> >  0){
+		
+			window.name = "mainPage";
+			window.open("/message/messageSend","messagePage", "width=630, height=300, menubar=yes, statebar=yes, scrollbar=yes");
+	 		
+			document.session_id.action = "/message/messageSend"
+			document.session_id.target = "messagePage";
+			document.session_id.submit;
+		
+		} else alert("로그인이 필요합니다");
+		
+	}
+	
+	function popupChat(){
 		
 		window.name = "mainPage";
-		window.open("/message/messageSend","messagePage", "width=630, height=300, menubar=yes, statebar=yes, scrollbar=yes");
+		window.open("/chatbot/chatbot","chatbotPage", "width=400, height=650, menubar=yes, statebar=yes, scrollbar=yes");
  		
-		document.messageForm.target = "messagePage";
-		document.messageForm.submit; 
+		document.session_id.action = "/chatbot/chatbot"
+		document.session_id.target = "chatbotPage";
+		document.session_id.submit;
+		
 	}
 	
 	function fn_newAlarm() {
+		
 		document.alarmUpdate.action = "/alarmUpdate";
 		document.alarmUpdate.submit();
+		
 	}
 	
-	   function fn_login(){
-			window.open("/person/login","","width=400,height=300,left=550,top=200");
-		}
+	function fn_login(){
+		window.open("/person/login","","width=400,height=300,left=550,top=200");
+	}
 	
 	function fn_logout(){
-			location.href="/person/logout";
-		}
+		location.href="/person/logout";
+	}
 	
 </script>
 </head>
@@ -47,7 +66,7 @@
 <header id="header">
 		
 		<!-- 팝업창으로 session값을 post로 보내는 과정 -->
-		<form action="/message/messageSend" method="post" name="messageForm">
+		<form method="post" name="session_id">
 			<input type="hidden" name="person_id" value="<%=cur_id %>">
 		</form>
         <div id="top-bar">
@@ -59,8 +78,8 @@
                     </div>
                     <div class="col-sm-4 top-info">
                         <ul>
-                            <li><a href="" class="my-envelope"><i class="fa fa-envelope" onclick="popup()"></i></a></li>
-                            <li><a href="" class="my-facebook"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="" class="my-envelope"><i class="fa fa-envelope" onclick="popupMessage()"></i></a></li>
+                            <li><a href="" class="my-comment"><i class="fa fa-comment" onclick="popupChat()"></i></a></li>
                             <li><a href="" class="my-skype"><i class="fa fa-skype"></i></a></li>
                             <li><a href="" class="my-pint"><i class="fa fa-pinterest"></i></a></li>
                             <li><a href="" class="my-rss"><i class="fa fa-rss"></i></a></li>
