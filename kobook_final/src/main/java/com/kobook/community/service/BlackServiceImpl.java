@@ -32,8 +32,8 @@ public class BlackServiceImpl implements BlackService {
 			return;
 		}
 		
-		for(String fileName : files) {
-			fileVO.setBlack_file_name(fileName);
+		for(String black_file_name : files) {
+			fileVO.setBlack_file_name(black_file_name);
 			dao.blackAddAttach(fileVO);
 		}
 	}
@@ -55,7 +55,38 @@ public class BlackServiceImpl implements BlackService {
 
 	@Override
 	public BlackVO blackRead(Integer black_id) throws Exception {
-		return dao.blackRead(black_id);
+		return dao.blackSelect(black_id);
+	}
+
+	@Transactional
+	@Override
+	public void blackModify(BlackVO vo) throws Exception {
+		dao.blackUpdate(vo);
+		
+		Integer black_id = vo.getBlack_id();
+		dao.blackDeleteAttach(black_id);
+		
+		BlackFileVO fileVO = new BlackFileVO();
+		fileVO.setBlack_id(black_id);
+		
+		String[] files = vo.getFiles();
+		
+		if(files == null) {
+			return;
+		}
+		
+		for(String black_file_name : files) {
+			fileVO.setBlack_file_name(black_file_name);
+			dao.blackReplaceAttach(fileVO);
+		}
+		
+	}
+
+	@Transactional
+	@Override
+	public void blackRemove(Integer black_id) throws Exception {
+		dao.blackDeleteAttach(black_id);
+		dao.blackDelete(black_id);
 	}
 	
 	

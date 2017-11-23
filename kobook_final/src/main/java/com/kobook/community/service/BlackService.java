@@ -11,4 +11,6 @@ public interface BlackService {
 	public int blackCount(SearchCriteria cri) throws Exception;
 	public List<String> blackGetAttach(Integer black_id) throws Exception;
 	public BlackVO blackRead(Integer black_id) throws Exception;
+	public void blackModify(BlackVO vo) throws Exception;
+	public void blackRemove(Integer black_id) throws Exception;
 }

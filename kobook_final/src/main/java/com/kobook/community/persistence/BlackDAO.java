@@ -23,6 +23,11 @@ public interface BlackDAO {
 	public List<BlackVO> blackList(SearchCriteria cri) throws Exception;
 	//blackCount
 	public int blackCount(SearchCriteria cri) throws Exception;
-	//blackRead
-	public BlackVO blackRead(Integer black_id) throws Exception;
+	//blackSelect
+	public BlackVO blackSelect(Integer black_id) throws Exception;
+	//blackUpdate
+	public void blackUpdate(BlackVO vo) throws Exception;
+	//blackDelete
+	public void blackDelete(Integer black_id) throws Exception;
+	
 }

@@ -41,7 +41,7 @@
 
 <script type="text/javascript">
 	function fn_update() {
-		location.href = "blackUpdateForm.do?black_id=${black.black_id}";
+		location.href = "blackModify?black_id=${black.black_id}";
 	}
 </script>
 
@@ -84,7 +84,7 @@
     <ul class="mailbox-attachments clearfix uploadedList">
     								</ul>
 							<article class="post">
-								<form action="blackDelete.do" method="post">
+								<form role="form" action="blackRemove" method="post">
 									<input type="hidden" name="black_id" value="${blackVO.black_id}">
 									
 									<%-- 	<img src="/resources/upload/${black.black_img }" alt="NO IMAGE"
@@ -103,8 +103,8 @@
 													class="fa fa-user"></i> By ${blackVO.person_id} </span>
 										<c:if test="${blackVO.person_id == person_id }">			
 										<span>
-											<input type="button" class="btn btn-lg btn-default" value="수정" onclick="fn_update()">
-											<input class="btn btn-lg btn-default" type="submit" value="삭제">
+											<input type="button" id="modifyBtn" class="btn btn-lg btn-default" value="수정">
+											<input class="btn btn-lg btn-default" type="button" value="삭제">
 										</span>
 										</c:if>
 											</div>
@@ -168,7 +168,7 @@ $(function(){
 	var formObj = $("form[role='form']");
 	 	
 	$("#modifyBtn").on("click", function(){
-		formObj.attr("action", "/sboard/modifyPage");
+		formObj.attr("action", "/community/modifyPage");
 		formObj.attr("method", "get");		
 		formObj.submit();
 	});

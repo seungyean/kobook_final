@@ -86,23 +86,24 @@
 		 <include refid="search"/>
 	</select>
 
-	<select id="blackRead" parameterType="int" resultType="BlackVO">
+	<select id="blackSelect" parameterType="int" resultType="BlackVO">
 		select * from black where black_id = #{black_id}
 	</select>
 
-<!--
-
-	<update id="updateBlackList" parameterType="Black">
+	<update id="blackUpdate" parameterType="BlackVO">
 		update black set black_title=#{black_title},
 		black_content=#{black_content}, black_email=#{black_email}
-		<if test="black_img != null">, black_img = #{black_img}</if>
 		where black_id = #{black_id}
 	</update>
 
-	<delete id="deleteBlackList" parameterType="int">
+	<delete id="blackDelete" parameterType="int">
 		DELETE FROM black
 		WHERE black_id=#{black_id}
 	</delete>
+
+<!--
+
+
 
 	<update id="updateBlack_id" parameterType="int">
 		update black set

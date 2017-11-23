@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kobook.book.domain.PageMaker;
 import com.kobook.book.domain.SearchCriteria;
@@ -65,6 +66,37 @@ public class CommunityController {
 	public void blackRead(@RequestParam("black_id") int black_id, Model model,
 			@ModelAttribute("cri") SearchCriteria cri) throws Exception{
 		model.addAttribute(service.blackRead(black_id));
+	}
+	
+	@RequestMapping(value = "blackModify", method = RequestMethod.GET)
+	public void blackModifyGet(@RequestParam("black_id") int black_id, Model model,
+			@ModelAttribute("cri") SearchCriteria cri) throws Exception {
+		model.addAttribute(service.blackRead(black_id));
+	}
+	
+	@RequestMapping(value = "blackModify", method = RequestMethod.POST)
+	public String blackModifyPost(RedirectAttributes rtts, BlackVO vo, SearchCriteria cri) throws Exception {
+		service.blackModify(vo);
+		
+		rtts.addAttribute("page", cri.getPage());
+		rtts.addAttribute("perPageNum", cri.getPerPageNum());
+		rtts.addAttribute("searchType", cri.getSearchType());
+		rtts.addAttribute("keyword", cri.getKeyword());
+		
+		return "redirect:/community/blackList";
+	}
+	
+	@RequestMapping("blackRemove")
+	public String blackRemove(RedirectAttributes rtts, SearchCriteria cri
+			, @RequestParam("black_id") Integer black_id) throws Exception {
+		service.blackRemove(black_id);
+		
+		rtts.addAttribute("page", cri.getPage());
+		rtts.addAttribute("perPageNum", cri.getPerPageNum());
+		rtts.addAttribute("searchType", cri.getSearchType());
+		rtts.addAttribute("keyword", cri.getKeyword());
+		
+		return "redirect:/community/blackList";
 	}
 
 	@RequestMapping(value = "/uploadAjax", method = RequestMethod.GET)

@@ -63,8 +63,18 @@ public class BlackDAOImpl implements BlackDAO {
 	}
 
 	@Override
-	public BlackVO blackRead(Integer black_id) throws Exception {
-		return session.selectOne(namespace+".blackRead", black_id);
+	public BlackVO blackSelect(Integer black_id) throws Exception {
+		return session.selectOne(namespace+".blackSelect", black_id);
+	}
+
+	@Override
+	public void blackUpdate(BlackVO vo) throws Exception {
+		session.update(namespace+".blackUpdate", vo);
+	}
+
+	@Override
+	public void blackDelete(Integer black_id) throws Exception {
+		session.delete(namespace+".blackDelete", black_id);
 	}
 	
 }
