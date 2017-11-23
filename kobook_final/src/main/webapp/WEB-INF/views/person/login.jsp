@@ -9,9 +9,8 @@
 	function closeWin(){
 		window.opener.name = "main.jsp";
 		document.loginForm.target = "main.jsp";
-		//document.loginForm.action = "/kobook/recom/loginAction.do";
 		document.loginForm.submit();
-		
+		document.getElementById("parentURI").value = window.opener.location.href;
 		window.self.close();
 	}
 </script>
@@ -21,6 +20,7 @@
 	<br>
 	
 	<form action="/person/loginPost" method="post" name="loginForm">
+		<input type="hidden" id="parentURI" name="parentURI" value="">
 		<input type="text" name="person_email" placeholder="아이디를 입력하세요." style="height: 30px; width: 250px; margin-left: 60px;"><br><br>
 		<input type="password" name="person_pwd" placeholder="비밀번호를 입력하세요." style="height: 30px; width: 250px; margin-left: 60px;"><br><br>
 		<input type="submit" value="로그인" style="margin-left: 150px; width: 60px; height: 30px" onclick="closeWin()">

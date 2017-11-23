@@ -37,19 +37,12 @@
 	
 	
 	<beans:bean id="loginInterceptor" class="com.kobook.login.interceptor.LoginInterceptor"></beans:bean>
-	<beans:bean id="authInterceptor" class="com.kobook.login.interceptor.AuthInterceptor"></beans:bean>
 	
 	<interceptors>
 		<interceptor>
 			<mapping path="/person/loginPost"/>
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
-		
-		<interceptor>
-			<mapping path="/person/loginPost"/>
-			<beans:ref bean="authInterceptor"/>
-		</interceptor>
-		
 	</interceptors>
 	
 </beans:beans>
