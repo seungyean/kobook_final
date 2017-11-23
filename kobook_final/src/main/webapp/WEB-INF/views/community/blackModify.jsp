@@ -166,7 +166,7 @@
      class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a>
 	</span>
   </div>
-</li>                
+</li>
 </script>
 
 <script>
