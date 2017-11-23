@@ -33,6 +33,10 @@
 		document.alarmUpdate.submit();
 	}
 	
+	function fn_logout(){
+			location.href="/person/logout";
+		}
+	
 </script>
 </head>
 <body>

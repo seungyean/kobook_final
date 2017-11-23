@@ -32,11 +32,7 @@
 	   function fn_login(){
 			window.open("/person/login","","width=400,height=300,left=550,top=200");
 		}
-	   function fn_logout(){
-			//location.href="/kobook/logout.jsp";
-			alert("logout");
-			console.log("logout");
-		}
+
 	</script>
 </head>
 
@@ -95,8 +91,6 @@
         </div>
 
 		<br>
-							
-							
         
 <%--         <h2>알림 리스트</h2>
         
@@ -224,7 +218,10 @@
 		                </c:if>
 	                	
 	                </c:forEach>  
-                
+               </div>
+               </div>
+               
+               </section>
 
 
 

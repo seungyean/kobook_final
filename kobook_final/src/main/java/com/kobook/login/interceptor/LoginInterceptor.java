@@ -1,5 +1,7 @@
 package com.kobook.login.interceptor;
 
+import java.awt.image.RescaleOp;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,14 +26,32 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
 		String person_email = request.getParameter("person_email");
 		String person_pwd = request.getParameter("person_pwd");
-		
 
-		String person_id = service.findPersonId(person_email)+"";
+		String person_emailCheck = service.loginCheck(person_email).getPerson_email();
+		String person_pwdCheck = service.loginCheck(person_email).getPerson_pwd();
 		
-		session.setAttribute("person_email", person_email);
-		session.setAttribute("person_pwd", person_pwd);
-		session.setAttribute("person_id", person_id);
+		
+		if(service.loginCheck(person_email) != null) {
+			System.out.println("login Check");
+			String person_id = service.findPersonId(person_email)+"";
+			
+			session.setAttribute("person_email", person_email);
+			session.setAttribute("person_pwd", person_pwd);
+			session.setAttribute("person_id", person_id);
+			
+			if(person_email.equals("admin@kobook.com") && person_pwd.equals("0000")){
+				session.setAttribute("person_id", person_id);
+			}
+			
+			else if(person_email.equals(person_emailCheck) && person_pwd.equals(person_pwdCheck)){
+				session.setAttribute("person_id", person_id);
 
+			}else{
+				response.sendRedirect("/person/loginFail");
+			}
+		}
+
+		
 		
 /*		ModelMap modelMap = modelAndView.getModelMap();
 		Object personVO = modelMap.get("personVO");*/

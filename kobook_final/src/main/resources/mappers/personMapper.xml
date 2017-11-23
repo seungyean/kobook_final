@@ -15,4 +15,10 @@
 		select person_email, person_pwd from person where person_email= #{person_email} and person_pwd=#{person_pwd}
 	</select>
 	
+	<select id="loginCheck" parameterType="String" resultType="PersonVO">
+		SELECT *
+		FROM PERSON
+		WHERE PERSON_EMAIL=#{person_email}
+	</select>
+	
 </mapper>

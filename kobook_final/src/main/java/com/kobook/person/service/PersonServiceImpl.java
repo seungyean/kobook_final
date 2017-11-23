@@ -23,5 +23,10 @@ public class PersonServiceImpl implements PersonService {
 	public int findPersonId(String person_email) throws Exception {
 		return dao.findPersonId(person_email);
 	}
+
+	@Override
+	public PersonVO loginCheck(String person_email) {
+		return dao.loginCheck(person_email);
+	}
 	
 }

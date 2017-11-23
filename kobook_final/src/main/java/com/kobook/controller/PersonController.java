@@ -2,6 +2,7 @@ package com.kobook.controller;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +15,7 @@ import com.kobook.person.service.PersonService;
 import com.kobook.person.domain.PersonVO;
 
 @Controller
-@RequestMapping("/person")
+@RequestMapping("/person/*")
 public class PersonController {
 
 	@Inject
@@ -34,7 +35,24 @@ public class PersonController {
 		}
 		
 		model.addAttribute("PersonVO", vo);
-
+	}
+	
+	@RequestMapping(value = "/loginFail", method = RequestMethod.GET)
+	public String loginFail() throws Exception {
+		return "/person/loginFail";
+	}
+	
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logOut(HttpServletRequest request, HttpSession session) throws Exception {
+		System.out.println("logout");
+		
+		session.removeAttribute("person_id");
+		session.removeAttribute("person_email");
+		session.removeAttribute("person_pwd");
+		
+		session.invalidate();
+		
+		return "redirect:/";
 	}
 	
 

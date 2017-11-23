@@ -8,5 +8,6 @@ public interface PersonDAO {
 	public int findPersonId(String person_email) throws Exception;
 	
 	public PersonVO login(LoginDTO dto) throws Exception;
+	public PersonVO loginCheck(String person_email);
 
 }

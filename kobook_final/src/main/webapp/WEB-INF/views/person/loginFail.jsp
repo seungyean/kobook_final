@@ -6,15 +6,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-	function backPage(){
-		history.go(-1);
-	}
+
+function loginFail(){
+	history.go(-1);
+	window.open("/person/login","","width=400,height=300,left=550,top=200");
+}
+
+	
+	alert("로그인을 다시하세요!");
 </script>
 </head>
-<body>
-
-	해당 회원의 아이디가 존재하지 않거나 비밀번호가 일치하지 않습니다.<br>
-	<button onclick="backPage()">돌아가기</button>
-
+<body onload="loginFail()">
 </body>
 </html>

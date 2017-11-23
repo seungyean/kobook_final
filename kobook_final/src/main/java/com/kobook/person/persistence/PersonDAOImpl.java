@@ -31,4 +31,9 @@ public class PersonDAOImpl implements PersonDAO {
 		return session.selectOne(namespace + ".login", dto);
 	}
 
+	@Override
+	public PersonVO loginCheck(String person_email) {
+		return session.selectOne(namespace + ".loginCheck", person_email);
+	}
+
 }
