@@ -9,7 +9,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kobook.board.domain.BoardVO;
-import com.kobook.book.domain.BookVO;
 import com.kobook.book.domain.SearchCriteria;
 
 
@@ -22,36 +21,37 @@ public class BoardDAOImpl implements BoardDAO {
 	private static String namespace="com.kobook.mappers.boardMapper";
 
 	@Override
-	public int BoardInsert(BoardVO vo) throws Exception {
+	public int boardInsert(BoardVO vo) throws Exception {
 		return session.insert(namespace + ".insertBoard", vo);
 	}
-	
-	
-	
-	@Override
-	public void update(BookVO vo) throws Exception {
-		session.update(namespace+".update",vo);
-	}
-
-
 
 	@Override
-	public List<BoardVO> BoardListCri(SearchCriteria cri)throws Exception {
+	public List<BoardVO> boardListCri(SearchCriteria cri)throws Exception {
 		return session.selectList(namespace+".listCriteria", cri, new RowBounds(cri.getPageStart(),cri.getPerPageNum()));
 	}
 
 	@Override
-	public int BoardcountPaging(SearchCriteria cri) throws Exception {
+	public int boardcountPaging(SearchCriteria cri) throws Exception {
 		return session.selectOne(namespace+".countPaging",cri);
 	}
 	
 	@Override
-	public BoardVO BoardRead(Integer board_id) throws Exception {
+	public BoardVO boardRead(Integer board_id) throws Exception {
 		return session.selectOne(namespace +".read", board_id);
 	}
 	
 	@Override
 	public int getBno() throws Exception {
 		return session.selectOne(namespace+".maxNum");
+	}
+	
+	@Override
+	public void boardUpdateView(Integer board_id)throws Exception {
+		session.update(namespace +".boardUpdateView", board_id);
+	}
+	
+	@Override
+	public void boardRemove(Integer board_id)throws Exception {
+		session.delete(namespace +".boardRemove", board_id);
 	}
 }

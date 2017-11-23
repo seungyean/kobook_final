@@ -8,14 +8,15 @@ import com.kobook.book.domain.SearchCriteria;
 
 public interface BoardService {
 	
-	public void BoardRegist(BoardVO vo)throws Exception;
+	public void boardRegist(BoardVO vo)throws Exception;
 	
-	public List<BoardVO> BoardListCri(SearchCriteria cri)throws Exception;
+	public List<BoardVO> boardListCri(SearchCriteria cri)throws Exception;
 	
-	public BoardVO BoardRead(Integer board_id) throws Exception;
+	public BoardVO boardRead(Integer board_id) throws Exception;
 
 	public int getBno() throws Exception;
 	
-	public int BoardcountPaging(SearchCriteria cri) throws Exception;
+	public int boardcountPaging(SearchCriteria cri) throws Exception;
 	
+	public void boardRemove(Integer board_id)throws Exception;
 }

@@ -19,9 +19,9 @@
           select 
             *
           from 
-            board             
+            board where board_id > 0           
       ]]>
-		<!-- <include refid="search"></include> -->
+		 <include refid="search"></include>
          <![CDATA[     
           order by board_date desc
        ]]>
@@ -36,18 +36,44 @@
 		where board_id = #{board_id}
 	</select>
 
+
 	<select id="maxNum" resultType="int">
 		select MAX(board_id) from board
 	</select>
+
 
 	<select id="countPaging" resultType="int">
    <![CDATA[
       select count(board_id) from board where board_id > 0         
    ]]>      
    
-<!--     <include refid="search"></include> -->
+     <include refid="search"></include>
    </select>
 
+
+    <sql id="search">
+      <if test="searchType != null">
+         <if test="searchType == 't'.toString()">
+            and board_title like '%'|| #{keyword}||'%'
+         </if>
+         <if test="searchType == 'c'.toString()">
+            and board_content like '%'|| #{keyword}||'%'
+         </if>
+         <if test="searchType == 'tc'.toString()">
+            and ( board_title like '%'|| #{keyword}||'%' OR board_content like
+            '%'||
+            #{keyword}||'%')
+         </if>
+      </if>
+   </sql>
+
+	<update id="boardUpdateView">
+		update board set board_hit = board_hit +1 where board_id = #{board_id}
+	</update>
+	
+	<delete id="boardRemove" parameterType="Integer">
+		delete from board where board_id = #{board_id}
+	</delete>
 
 </mapper>
 

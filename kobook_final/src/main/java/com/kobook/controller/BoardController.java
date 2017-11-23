@@ -37,53 +37,49 @@ public class BoardController {
 	@RequestMapping(value="/boardInsert", method=RequestMethod.POST)
 	public String notiPOST(BoardVO vo, RedirectAttributes rttr)throws Exception {
 		
-/*		//BoardVO 내용확인
-		logger.info("insert post.....");
-		logger.info(vo.toString());*/
-		
-		service.BoardRegist(vo);
+		service.boardRegist(vo);
 	
-	/*	rttr.addFlashAttribute("list", "success");*/
+		rttr.addFlashAttribute("result", "SUCCESS");
 		
 		return "redirect:/board/boardList";
 	}
 	
-	@RequestMapping("/boardList")
+	@RequestMapping(value="/boardList", method = RequestMethod.GET)
 	public void BoardList(@ModelAttribute("cri") SearchCriteria cri, Model model)throws Exception{
-		model.addAttribute("list", service.BoardListCri(cri));
+		model.addAttribute("list", service.boardListCri(cri));
 		PageMaker pageMaker=new PageMaker();
 		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(service.BoardcountPaging(cri));
+		pageMaker.setTotalCount(service.boardcountPaging(cri));
 		model.addAttribute("pageMaker",pageMaker);
 	}
 	
 	
 	@RequestMapping("/adminMain")
 	public String admin()throws Exception {
-		
 		logger.info("adminPage....loggging");
 		return "/board/adminMain";
 	}
 	
 	
-	@RequestMapping(value="/boardDetail", method=RequestMethod.GET)
-	public void readGET(@RequestParam("board_id") int board_id, Model model)throws Exception {
-		
-		model.addAttribute(service.BoardRead(board_id));
+	@RequestMapping("boardDetail")
+	public void blackRead(@RequestParam("board_id") int board_id, Model model,
+			@ModelAttribute("cri") SearchCriteria cri) throws Exception{
+		model.addAttribute(service.boardRead(board_id));
 	}
 	
-	@RequestMapping(value="/boardDetail", method=RequestMethod.POST)
-	public String readPOST(@RequestParam("board_id") int board_id, RedirectAttributes rttr)throws Exception {
+
+	@RequestMapping("boardRemove")
+	public String boardRemove(@RequestParam("board_id")Integer board_id, SearchCriteria cri, RedirectAttributes rttr)throws Exception {
 		
-		service.BoardRead(board_id);
+		service.boardRemove(board_id);
 		
-		return "redirect:/board/boardDetail";
+		rttr.addAttribute("page", cri.getPage());
+		rttr.addAttribute("perPageNum", cri.getPerPageNum());
+		rttr.addAttribute("searchType", cri.getSearchType());
+		rttr.addAttribute("keyword", cri.getKeyword());
+		
+		rttr.addFlashAttribute("msg", "SUCCESS");
+		
+		return "redirect:/board/boardList";
 	}
-	
-	
-/*	@RequestMapping(value="/detailNoti",method=RequestMethod.GET)
-	public void read(@RequestParam("board_id")int board_id, @ModelAttribute("cri")SearchCriteria cri, Model model)throws Exception{
-		model.addAttribute(service.BoardRead(board_id));
-	}*/
-	
 }

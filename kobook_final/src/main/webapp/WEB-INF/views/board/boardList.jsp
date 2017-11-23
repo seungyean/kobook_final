@@ -1,14 +1,14 @@
-<%--  <%@page import="kobook.admin.domain.ListModel"%>  --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<%-- <%@
-	ListModel listModel = (ListModel)request.getAttribute("listModel");
- 	int person_id = Integer.parseInt((String)request.getSession().getAttribute("person_id")); 
-%> 
- --%>
+<%
+/* 	int cur_id = Integer.parseInt((String) session.getAttribute("person_id")); */
+	session.setAttribute("person_id", "1");
+%>
+
+
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -44,111 +44,12 @@
 <!-- <script type="text/javascript">
 alert("회원용");
 </script> -->
-<body>
 
-<%--     <!-- 헤더 -->
- 		 <jsp:include page="/include/header.jsp" />
-  	<!-- /헤더 --> --%>
+<body class="home">
+	<!-- 헤더 -->
+	<jsp:include page="/WEB-INF/views/include/header.jsp" />
+	<!-- /헤더 -->
 
-<!--   	<header id="header">
-		<div id="top-bar">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-8 top-info hidden-xs">
-						<span><i class="fa fa-phone"></i>Phone: (123) 456-7890</span> <span><i
-							class="fa fa-envelope"></i>Email: mail@example.com</span>
-					</div>
-					<div class="col-sm-4 top-info">
-						<ul>
-							<li><a href="" class="my-tweet"><i class="fa fa-twitter"></i></a></li>
-							<li><a href="" class="my-facebook"><i
-									class="fa fa-facebook"></i></a></li>
-							<li><a href="" class="my-skype"><i class="fa fa-skype"></i></a></li>
-							<li><a href="" class="my-pint"><i
-									class="fa fa-pinterest"></i></a></li>
-							<li><a href="" class="my-rss"><i class="fa fa-rss"></i></a></li>
-							<li><a href="" class="my-google"><i
-									class="fa fa-google-plus"></i></a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div id="logo-bar">
-			<div class="container">
-				<div class="row">
-					Logo / Mobile Menu
-					<div class="col-lg-3 col-sm-3 ">
-						<div id="logo">
-									<h1>
-										<a href="index.html"><img alt="KOBOOK" src="resources/images/logo.png" /></a>
-									</h1>									
-
-						
-							
-						</div>
-					</div>
-					Navigation
-    ==================================================
-					<div class="col-lg-9 col-sm-9">
-						<div class="navbar navbar-default navbar-static-top"
-							role="navigation">
-							 <div class="container">
-							<div class="navbar-header">
-								<button type="button" class="navbar-toggle"
-									data-toggle="collapse" data-target=".navbar-collapse">
-									<span class="sr-only">Toggle navigation</span> <span
-										class="icon-bar"></span> <span class="icon-bar"></span> <span
-										class="icon-bar"></span>ㄻ
-								</button>
-							</div>
-							<div class="navbar-collapse collapse">
-								<ul class="nav navbar-nav">
-									<li><a href="resources/admin/listUser.do">회원관리</a>
-										<ul class="dropdown-menu">
-											<li><a href="index.html">회원수정</a></li>
-											<li><a href="index_2.html">회원등급</a></li>
-											<li><a href="index_3.html">회원분류</a></li>
-										</ul></li>
-
-									<li><a href="#">게시판관리(미구현)</a>
-										<ul class="dropdown-menu">
-											<li><a href="elements.html">게시판 1</a></li>
-											<li><a href="form-elements.html">게시판 2</a></li>
-											<li><a href="columns.html">게시판 3</a></li>
-										</ul></li>
-
-									<li class="active"><a href="#">안전거래관리(미구현)</a>
-										<ul class="dropdown-menu">
-											<li><a href="about.html">About</a>
-												<ul class="dropdown-menu">
-													<li><a href="about.html">About Us 1</a></li>
-													<li><a href="about-2.html">About Us 2</a></li>
-												</ul></li>
-											<li><a href="services.html">Services</a></li>
-											<li class="active"><a href="faq.html">공지사항</a></li>
-											<li><a href="sidebar-right.html">Right Sidebar</a></li>
-											<li><a href="sidebar-left.html">Left Sidebar</a></li>
-											<li><a href="404-page.html">404 Page</a></li>
-										</ul></li>
-
-									<li><a href="resources/admin/insertBoard.do">공지사항관리</a>
-										<ul class="dropdown-menu">
-											<li><a href="#">Portfolio Classic</a>
-												<ul class="dropdown-menu">
-													<li><a href="portfolio_2.html">Portfolio 2</a></li>
-													<li><a href="portfolio_3.html">Portfolio 3</a></li>
-													<li><a href="portfolio_4.html">Portfolio 4</a></li>
-												</ul></li>
-										</ul></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header> -->
 
 	<!--start wrapper-->
 	<section class="wrapper">
@@ -174,96 +75,89 @@ alert("회원용");
 	<section class="content faq">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-8">
-				</div>
+				<div class="col-lg-8"></div>
 			</div>
 
+
 			<h3>글목록보기</h3>
-                            <%-- <div class="panel panel-default">
-                                <div class="panel-heading">
-                                 <c:forEach var="board" items="${listModel.list}">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" 
-                                       		 href="/board/detailNoti/board_id=${board.board_id }">${board.board_title }
-                                       </a>
-                                    </h4>
-                                 </c:forEach>
-                                </div>
-                            </div> --%>
-                               
-<!--  			<table border="1" cellpadding="0" cellspacing="0">
-				<tr height="30">
-					<td width="50" align="center">글번호</td>
-					<td width="100" align="center">글쓴이</td>
-					<td width="350" align="center">글제목</td>
-					<td width="150" align="center">작성일</td>
-					<td width="100" align="center">조회수</td>
-				</tr> -->
+
+			<select name="searchType">
+				<option value="n"
+					<c:out value="${cri.searchType == null?'selected':''}"/>>
+					---</option>
+				<option value="t"
+					<c:out value="${cri.searchType eq 't'?'selected':''}"/>>
+					Title</option>
+				<option value="c"
+					<c:out value="${cri.searchType eq 'c'?'selected':''}"/>>
+					Content</option>
+				<option value="tc"
+					<c:out value="${cri.searchType eq 'tc'?'selected':''}"/>>
+					Title OR Content</option>
+			</select>
 			
-<%-- 				<c:forEach var="board" items="${listModel.list}">
- 					<tr height="30">
-						<td align="center">${board.board_id }</td>
-						<td align="center">${board.board_writer }</td>
-						<td align="center"><a href="boardDetail.do?board_id=${board.board_id }">${board.board_title }</a></td>
-						<td align="center"><fmt:formatDate value="${board.board_date }"	pattern="yyyy-MM-dd" /></td>
-						<td align="center">${board.board_hit }</td>
-					</tr>
-				</c:forEach> 
- 			</table>  --%>				
+			<input type="text" name='keyword' id="keywordInput"	value='${cri.keyword }'>
+			<button id='searchBtn'>Search</button>
+			<button id='newBtn'>New Board</button>
+			<br>
+			<br>
+	
 
-
-<%-- 			<!-- 페이징 처리 영역 -->
-
-			<!-- 이전(기준은 start page) -->
-			<c:if test="${listModel.startPage > 5 }">
-				<a href="resources/admin/noti.do?pageNum=${listModel.startPage - 1 }">[이전]</a>
-			</c:if>
-
-			<!-- 페이지 목록 -->
-			<c:forEach var="pageNo" begin="${listModel.startPage }"
-				end="${listModel.endPage }">
-				<c:if test="${listModel.requestPage == pageNo }">
-					<b>
-				</c:if>
-				<a href="resources/admin/noti.do?pageNum=${pageNo }">[${pageNo }]</a>
-				<c:if test="${listModel.requestPage == pageNo }">
-					</b>
-				</c:if>
-			</c:forEach>
-			<!-- 이후 -->
-			<c:if test="${listModel.endPage < listModel.totalPageCount }">
-				<a href="resources/admin/noti.do?pageNum=${listModel.endPage + 1 }">[이후]</a>
-			</c:if>  --%>
-			
 			<form role="form" method="POST">
 				<input type='hidden' name='board_id' value="{boardVO.board_id">
 			</form>
-			
-			<table class="table table-bordered">
-			
+
+			<table class="table table-bordered" style="text-align: center;">
 				<tr>
 					<th style="width: 5px">BNO</th>
 					<th style="width: 10px">WRITER</th>
-				    <th style="width: 250px">TITLE</th>
+					<th style="width: 250px" align="left">TITLE</th>
 					<th style="width: 20px">REGDATE</th>
 					<th style="width: 10px">VIEWCNT</th>
 				</tr>
-				
+
 				<c:forEach items="${list}" var="list">
-				
-				<tr>
-					<td>${list.board_id }</td>
-					<td>${list.board_writer }</td>
-					<td><a href="/board/boardDetail?board_id=${list.board_id }">${list.board_title }</a></td>
-					<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" 
-							value="${list.board_date }" /></td>
-					<td><span class="badge">${list.board_hit }</span></td>		
-				</tr>	
-				
+					<tr>
+						<td>${list.board_id }</td>
+						<td>${list.board_writer }</td>
+						<td align="left"><a href="/board/boardDetail?board_id=${list.board_id }">${list.board_title }</a></td>
+						<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
+								value="${list.board_date }" /></td>
+						<td><span>${list.board_hit }</span></td>
+					</tr>
 				</c:forEach>
-				
 			</table>
-			
+
+
+<div class="box-footer">
+
+					<div class="text-center">
+						<ul class="pagination">
+
+							<c:if test="${pageMaker.prev}">
+								<li><a
+									href="boardList${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
+							</c:if>
+
+							<c:forEach begin="${pageMaker.startPage }"
+								end="${pageMaker.endPage }" var="idx">
+								<li
+									<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+									<a href="boardList${pageMaker.makeSearch(idx)}">${idx}</a>
+								</li>
+							</c:forEach>
+
+							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+								<li><a
+									href="boardList${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
+							</c:if>
+
+						</ul>
+					</div>
+
+				</div>
+
+
 
 			<!--Sidebar Widget-->
 			<div class="col-lg-4">
@@ -280,9 +174,9 @@ alert("회원용");
 						<!-- end site search -->
 					</div>
 
-					
-		</div>
-		</div>
+
+				</div>
+			</div>
 		</div>
 	</section>
 
@@ -384,65 +278,66 @@ alert("회원용");
 			</div>
 		</div>
 	</footer>
-	<!--end footer-->
+	<!--end wrapper-->
 
-	<section class="footer_bottom">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-6">
-					<p class="copyright">
-						&copy; Copyright 2015 Electrify | Powered by <a
-							href="http://www.jqueryrain.com/">jQuery Rain</a>
-					</p>
-				</div>
+	<!-- 푸터 -->
+ 		 <jsp:include page="/WEB-INF/views/include/footer.jsp" />
+  	<!-- /푸터 -->
 
-				<div class="col-sm-6 ">
-					<div class="footer_social">
-						<ul class="footbot_social">
-							<li><a class="fb" href="#." data-placement="top"
-								data-toggle="tooltip" title="Facebook"><i
-									class="fa fa-facebook"></i></a></li>
-							<li><a class="twtr" href="#." data-placement="top"
-								data-toggle="tooltip" title="Twitter"><i
-									class="fa fa-twitter"></i></a></li>
-							<li><a class="dribbble" href="#." data-placement="top"
-								data-toggle="tooltip" title="Dribbble"><i
-									class="fa fa-dribbble"></i></a></li>
-							<li><a class="skype" href="#." data-placement="top"
-								data-toggle="tooltip" title="Skype"><i class="fa fa-skype"></i></a></li>
-							<li><a class="rss" href="#." data-placement="top"
-								data-toggle="tooltip" title="RSS"><i class="fa fa-rss"></i></a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
 	
-	<script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
+
+	 <script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
     <script src="/resources/js/bootstrap.min.js"></script>
     <script src="/resources/js/jquery.easing.1.3.js"></script>
     <script src="/resources/js/retina-1.1.0.min.js"></script>
     <script type="text/javascript" src="/resources/js/jquery.cookie.js"></script> <!-- jQuery cookie -->
     <script type="text/javascript" src="/resources/js/styleswitch.js"></script> <!-- Style Colors Switcher -->
-    <script src="/resources/js/jquery.fractionslider.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script>
     <script type="text/javascript" src="/resources/js/jquery.smartmenus.bootstrap.min.js"></script>
-    <script type="text/javascript" src="/resources/js/owl.carousel.min.js"></script>
-    <script type="text/javascript" src="/resources/js/jflickrfeed.js"></script>
+        <script type="text/javascript" src="/resources/js/jflickrfeed.js"></script>
     <script type="text/javascript" src="/resources/js/jquery.magnific-popup.min.js"></script>
     <script type="text/javascript" src="/resources/js/jquery.isotope.min.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.easypiechart.min.js"></script>
     <script type="text/javascript" src="/resources/js/swipe.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery-hoverdirection.min.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.matchHeight-min.js"></script>
     <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
 
     <script src="/resources/js/main.js"></script>
 
-    <!-- Start Style Switcher -->
-    <div class="switcher"></div>
-    <!-- End Style Switcher -->
+<script>
+	var result = '${msg}';
+
+	if (result == 'SUCCESS') {
+		alert("처리가 완료되었습니다.");
+		location.replace(self.location);
+	}
+</script>
+
+<script>
+	$(document).ready(
+			function() {
+
+				$('#searchBtn').on(
+						"click",
+						function(event) {
+
+							self.location = "boardList"
+									+ '${pageMaker.makeQuery(1)}'
+									+ "&searchType="
+									+ $("select option:selected").val()
+									+ "&keyword=" + $('#keywordInput').val();
+						});
+
+				$('#newBtn').on("click", function(evt) {
+
+					self.location = "boardList";
+
+				});
+
+			});
+</script>
+
+	<!-- Start Style Switcher -->
+	<div class="switcher"></div>
+	<!-- End Style Switcher -->
 
 </body>
 </html>

@@ -1,11 +1,13 @@
-<%-- <%@page import="resources.admin.domain.ListMode --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%-- <%
-	ListModel listModel = (ListModel)request.getAttribute("listModel");
-%> --%>
+
+<%
+	int cur_id = Integer.parseInt((String) session.getAttribute("person_id"));
+	System.out.println("실제 로그인 cur_id: " + cur_id);
+%>
+
 
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
@@ -25,11 +27,13 @@
 <link rel="stylesheet" href="/resources/css/style.css">
 <link rel="stylesheet" type="/resources/text/css"
 	href="/resources/css/style.css" media="screen" data-name="skins">
+<link rel="stylesheet" href="/resources/css/animate.css" type="text/css" />
 <link rel="stylesheet" href="/resources/css/layout/wide.css"
 	data-name="layout">
 
 <link rel="stylesheet" type="/resources/text/css"
 	href="/resources/css/switcher.css" media="screen" />
+
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -37,116 +41,11 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
-	<script type="text/javascript">
-		function update() {
-			location.href = "/resources/admin/updateNoti.do?board_id=${board.board_id}";
-		}
-		function list_fn() {
-			location.href = "/resources/admin/noti.do?board_id=${board.board_id}";
-		}
-		function remove_fn() {
-			location.href = "/resources/admin/deleteNoti.do?board_id=${board.board_id}";
-		}
-	</script>
+<body class="home">
 	<!--Start Header-->
-	<header id="header">
-		<div id="top-bar">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-8 top-info hidden-xs">
-						<span><i class="fa fa-phone"></i>Phone: (123) 456-7890</span> <span><i
-							class="fa fa-envelope"></i>Email: mail@example.com</span>
-					</div>
-					<div class="col-sm-4 top-info">
-						<ul>
-							<li><a href="" class="my-tweet"><i class="fa fa-twitter"></i></a></li>
-							<li><a href="" class="my-facebook"><i
-									class="fa fa-facebook"></i></a></li>
-							<li><a href="" class="my-skype"><i class="fa fa-skype"></i></a></li>
-							<li><a href="" class="my-pint"><i
-									class="fa fa-pinterest"></i></a></li>
-							<li><a href="" class="my-rss"><i class="fa fa-rss"></i></a></li>
-							<li><a href="" class="my-google"><i
-									class="fa fa-google-plus"></i></a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div id="logo-bar">
-			<div class="container">
-				<div class="row">
-					<!-- Logo / Mobile Menu -->
-					<div class="col-lg-3 col-sm-3 ">
-						<div id="logo">
-							<h1>
-								<a href="/resources/index.html">관리자</a>
-							</h1>
-						</div>
-					</div>
-					<!-- Navigation
-    ================================================== -->
-					<div class="col-lg-9 col-sm-9">
-						<div class="navbar navbar-default navbar-static-top"
-							role="navigation">
-							<!--  <div class="container">-->
-							<div class="navbar-header">
-								<button type="button" class="navbar-toggle"
-									data-toggle="collapse" data-target=".navbar-collapse">
-									<span class="sr-only">Toggle navigation</span> <span
-										class="icon-bar"></span> <span class="icon-bar"></span> <span
-										class="icon-bar"></span>
-								</button>
-							</div>
-							<div class="navbar-collapse collapse">
-								<ul class="nav navbar-nav">
-									<li><a href="/resources/admin/listUser.do">회원관리</a>
-										<ul class="dropdown-menu">
-											<li><a href="index.html">회원수정</a></li>
-											<li><a href="index_2.html">회원등급</a></li>
-											<li><a href="index_3.html">회원분류</a></li>
-										</ul></li>
-
-									<li><a href="#">게시판관리(미구현)</a>
-										<ul class="dropdown-menu">
-											<li><a href="elements.html">게시판 1</a></li>
-											<li><a href="form-elements.html">게시판 2</a></li>
-											<li><a href="columns.html">게시판 3</a></li>
-										</ul></li>
-
-									<li class="active"><a href="#">안전거래관리(미구현)</a>
-										<ul class="dropdown-menu">
-											<li><a href="about.html">About</a>
-												<ul class="dropdown-menu">
-													<li><a href="about.html">About Us 1</a></li>
-													<li><a href="about-2.html">About Us 2</a></li>
-												</ul></li>
-											<li><a href="services.html">Services</a></li>
-											<li class="active"><a href="faq.html">FAQ</a></li>
-											<li><a href="sidebar-right.html">Right Sidebar</a></li>
-											<li><a href="sidebar-left.html">Left Sidebar</a></li>
-											<li><a href="404-page.html">404 Page</a></li>
-										</ul></li>
-
-									<li><a href="/resources/admin/notiAdmin.do">공지사항관리</a>
-										<ul class="dropdown-menu">
-											<li><a href="#">Portfolio Classic</a>
-												<ul class="dropdown-menu">
-													<li><a href="portfolio_2.html">Portfolio 2</a></li>
-													<li><a href="portfolio_3.html">Portfolio 3</a></li>
-													<li><a href="portfolio_4.html">Portfolio 4</a></li>
-												</ul></li>
-										</ul></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
-	<!--End Header-->
+	<!-- 헤더 -->
+	<jsp:include page="/WEB-INF/views/include/header.jsp" />
+	<!-- /헤더 -->
 
 	<!--start wrapper-->
 	<section class="wrapper">
@@ -159,7 +58,7 @@
 						</div>
 						<nav id="breadcrumbs">
 							<ul>
-								<li><a href="noti.jsp">Home</a>/</li>
+								<li><a href="/resources/admin/noti.jsp">Home</a>/</li>
 								<li>Pages</li>
 							</ul>
 						</nav>
@@ -172,41 +71,58 @@
 	<section class="content faq">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-8">
-					<div class="panel-group accordion" id="accordion">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h4 class="panel-title"></h4>
-							</div>
-
-						</div>
-					</div>
-				</div>
+				<div class="col-lg-8"></div>
 			</div>
 
-			<!-- 관리자용 -->
+
 			<h4>공지사항 세부</h4>
 
-			<table border="1" cellpadding="0" cellspacing="0">
+			<table class="table table-bordered" style="text-align: center;">
 				<tr height="50">
-					<td align="left" width="700">글제목 : ${board.board_title }</td>
+					<td align="left" width="700">글제목 : ${boardVO.board_title }</td>
 					<td width="200" align="right">날짜 : <fmt:formatDate
-							value="${board.board_date}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+							value="${boardVO.board_date}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
 				</tr>
 				<tr height="50">
-					<td align="left" width="700">작성자 : ${board.board_writer }</td>
-					<td align="right" width="200">조회수 : ${board.board_hit }</td>
+					<td align="left" width="700">작성자 : ${boardVO.board_writer }</td>
+					<td align="right" width="200">조회수 : ${boardVO.board_hit }</td>
 				</tr>
 				<tr height="300">
-					<td colspan="2" align="left">${board.board_content }</td>
+					<td colspan="2" align="left">${boardVO.board_content }</td>
 				</tr>
 			</table>
 
-			<br>
-			<%--공지사항 수정 / 목록 --%>
-			<input type="button" value="수정" onclick="update_fn()"> <input
-				type="button" value="목록" onclick="list_fn()"> <input
-				type="button" value="삭제" onclick="remove_fn()">
+
+			<%-- 			<c:if test="${status.cur_id == 1}">
+				<div align="left">
+					<input type="button" value="수정" onclick="update_fn()">
+					<input type="button" value="삭제" onclick="remove_fn()">
+				</div>
+			</c:if> --%>
+
+			<!-- 			<div align="center">
+				<input type="button" value="수정" onclick="update_fn()"> <input
+					type="button" value="삭제" onclick="remove_fn()"> <input
+					type="button" value="목록" onclick='history.back(-1); return false;'>
+			</div> -->
+				<form role="form" action="boardModify" method="post">
+					<input type='hidden' name='board_id' value="${boardVO.board_id}">
+					<input type='hidden' name='page' value="${cri.page}">
+					<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
+					<input type='hidden' name='searchType' value="${cri.searchType}">
+					<input type='hidden' name='keyword' value="${cri.keyword}">
+				</form> 
+			
+			
+
+			<form role="form" action="boardRemove" method="post">
+			<div class="box-footer" align="center">
+			<input type='hidden' name='board_id' value="${boardVO.board_id}">
+			<button type="submit" value="수정" id="modifyBtn">수정</button>
+			<button type="submit" value="삭제" id="removeBtn">삭제</button>
+			<button type="submit" value="목록" onclick='history.back(-1); return false;'>목록</button>
+			</div>
+			</form>
 
 			<!--Sidebar Widget-->
 			<div class="col-lg-4">
@@ -222,154 +138,6 @@
 						</div>
 						<!-- end site search -->
 					</div>
-
-					<div class="widget widget_categories">
-						<div class="widget_title">
-							<h4>
-								<span>Categories</span>
-							</h4>
-						</div>
-						<ul class="arrows_list list_style">
-							<li><a href="#"> Grapic Design (10)</a></li>
-							<li><a href="#"> Web Design & Development (25)</a></li>
-							<li><a href="#"> Photography (29)</a></li>
-							<li><a href="#"> Custom Illustrations (19)</a></li>
-							<li><a href="#"> Wordpress Themes(38)</a></li>
-							<li><a href="#"> Videography (33)</a></li>
-						</ul>
-					</div>
-
-					<div class="widget widget_about">
-						<div class="widget_title">
-							<h4>
-								<span>Basic Text Widget</span>
-							</h4>
-						</div>
-						<p>Lorem ipsum dolor sit amet, consectetur adip, sed do
-							eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-							enim ad minim veniam, quis nostrud exercitation ullamco laboris
-							nisi ut aliquip ex ea commodo consequat.</p>
-					</div>
-
-					<div class="widget widget_tab">
-						<div class="velocity-tab sidebar-tab">
-							<ul class="nav nav-tabs">
-								<li class="active"><a href="#Popular" data-toggle="tab">Popular</a></li>
-								<li class=""><a href="#Recent" data-toggle="tab">Recent</a></li>
-								<li class="last-tab"><a href="#Comment" data-toggle="tab"><i
-										class="fa fa-comments-o"></i></a></li>
-							</ul>
-
-							<div class="tab-content clearfix">
-								<div class="tab-pane fade active in" id="Popular">
-									<ul class="recent_tab_list">
-										<li><span><a href="#"><img
-													src="/resources/images/content/recent_1.png" alt="" /></a></span> <a
-											href="#">Publishing packag esanse web page editos</a> <i>October
-												09, 2015</i></li>
-										<li><span><a href="#"><img
-													src="/resources/images/content/recent_2.png" alt="" /></a></span> <a
-											href="#">Sublishing packag esanse web page editos</a> <i>October
-												08, 2015</i></li>
-										<li class="last-tab"><span><a href="#"><img
-													src="/resources/images/content/recent_3.png" alt="" /></a></span> <a
-											href="#">Mublishing packag esanse web page editos</a> <i>October
-												07, 2015</i></li>
-									</ul>
-								</div>
-								<div class="tab-pane fade" id="Recent">
-									<ul class="recent_tab_list">
-										<li><span><a href="#"><img
-													src="/resources/images/content/recent_4.png" alt="" /></a></span> <a
-											href="#">Various versions has evolved over the years</a> <i>October
-												18, 2015</i></li>
-										<li><span><a href="#"><img
-													src="/resources/images/content/recent_5.png" alt="" /></a></span> <a
-											href="#">Rarious versions has evolve over the years</a> <i>October
-												17, 2015</i></li>
-										<li class="last-tab"><span><a href="#"><img
-													src="/resources/images/content/recent_6.png" alt="" /></a></span> <a
-											href="#">Marious versions has evolven over the years</a> <i>October
-												16, 2015</i></li>
-									</ul>
-								</div>
-								<div class="tab-pane fade" id="Comment">
-									<ul class="comments">
-										<li class="comments_list clearfix"><a
-											class="post-thumbnail" href="#"><img width="60"
-												height="60" src="/resources/images/content/recent_3.png"
-												alt="#"></a>
-											<p>
-												<strong><a href="#">Prambose</a> <i>says: </i> </strong>
-												Morbi augue velit, tempus mattis dignissim nec, porta sed
-												risus. Donec eget magna eu lorem tristique pellentesque eget
-												eu dui. Fusce lacinia tempor malesuada.
-											</p></li>
-										<li class="comments_list clearfix"><a
-											class="post-thumbnail" href="#"><img width="60"
-												height="60" src="/resources/images/content/recent_1.png"
-												alt="#"></a>
-											<p>
-												<strong><a href="#">Makaroni</a> <i>says: </i> </strong>
-												Tempus mattis dignissim nec, porta sed risus. Donec eget
-												magna eu lorem tristique pellentesque eget eu dui. Fusce
-												lacinia tempor malesuada.
-											</p></li>
-										<li class="comments_list clearfix"><a
-											class="post-thumbnail" href="#"><img width="60"
-												height="60" src="/resources/images/content/recent_2.png"
-												alt="#"></a>
-											<p>
-												<strong><a href="#">Prambanan</a> <i>says: </i> </strong>
-												Donec convallis, metus nec tempus aliquet, nunc metus
-												adipiscing leo, a lobortis nisi dui ut odio. Nullam
-												ultrices, eros accumsan vulputate faucibus, turpis tortor.
-											</p></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="widget widget_tag">
-						<div class="widget_title">
-							<h4>
-								<span>Tags Widget</span>
-							</h4>
-						</div>
-						<ul class="tags">
-							<li><a href="#"><b>business</b></a></li>
-							<li><a href="#">corporate</a></li>
-							<li><a href="#">css3</a></li>
-							<li><a href="#"><b>html5</b></a></li>
-							<li><a href="#">javascript</a></li>
-							<li><a href="#"><b>jquery</b></a></li>
-							<li><a href="#">multipurpose</a></li>
-							<li><a href="#"><b>mysql</b></a></li>
-							<li><a href="#">portfolio</a></li>
-							<li><a href="#">premium</a></li>
-							<li><a href="#">responsive</a></li>
-							<li><a href="#"><b>theme</b></a></li>
-							<li><a href="#"><b>jQuery Rain</b></a></li>
-						</ul>
-					</div>
-
-					<div class="widget widget_archives">
-						<div class="widget_title">
-							<h4>
-								<span>Archives</span>
-							</h4>
-						</div>
-						<ul class="archives_list list_style">
-							<li><a href="#"> November 2015</a></li>
-							<li><a href="#"> October 2015</a></li>
-							<li><a href="#"> September 2015</a></li>
-							<li><a href="#"> August 2015</a></li>
-							<li><a href="#"> July 2015</a></li>
-							<li><a href="#"> June 2015</a></li>
-							<li><a href="#"> May 2015</a></li>
-						</ul>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -377,136 +145,6 @@
 
 	<!--end wrapper-->
 
-	<!--start footer-->
-	<footer class="footer">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-6 col-md-3 col-lg-3">
-					<div class="widget_title">
-						<h4>
-							<span>About Us</span>
-						</h4>
-					</div>
-					<div class="widget_content">
-						<p>Donec earum rerum hic tenetur ans sapiente delectus, ut aut
-							reiciendise voluptat maiores alias consequaturs aut perferendis
-							doloribus asperiores.</p>
-						<ul class="contact-details-alt">
-							<li><i class="fa fa-map-marker"></i>
-								<p>
-									<strong>Address</strong>: #2021 Lorem Ipsum
-								</p></li>
-							<li><i class="fa fa-user"></i>
-								<p>
-									<strong>Phone</strong>:(+91) 9000-12345
-								</p></li>
-							<li><i class="fa fa-envelope"></i>
-								<p>
-									<strong>Email</strong>: <a href="#">mail@example.com</a>
-								</p></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-sm-6 col-md-3 col-lg-3">
-					<div class="widget_title">
-						<h4>
-							<span>Recent Posts</span>
-						</h4>
-					</div>
-					<div class="widget_content">
-						<ul class="links">
-							<li><a href="#">Aenean commodo ligula eget dolor<span>November
-										07, 2015</span></a></li>
-							<li><a href="#">Temporibus autem quibusdam <span>November
-										05, 2015</span></a></li>
-							<li><a href="#">Debitis aut rerum saepe <span>November
-										03, 2015</span></a></li>
-							<li><a href="#">Et voluptates repudiandae <span>November
-										02, 2015</span></a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-sm-6 col-md-3 col-lg-3">
-					<div class="widget_title">
-						<h4>
-							<span>Twitter</span>
-						</h4>
-					</div>
-					<div class="widget_content">
-						<ul class="tweet_list">
-							<li class="tweet_content item">
-								<p class="tweet_link">
-									<a href="#">@jquery_rain </a> Lorem ipsum dolor et, consectetur
-									adipiscing eli
-								</p> <span class="time">29 September 2015</span>
-							</li>
-							<li class="tweet_content item">
-								<p class="tweet_link">
-									<a href="#">@jquery_rain </a> Lorem ipsum dolor et, consectetur
-									adipiscing eli
-								</p> <span class="time">29 September 2015</span>
-							</li>
-							<li class="tweet_content item">
-								<p class="tweet_link">
-									<a href="#">@jquery_rain </a> Lorem ipsum dolor et, consectetur
-									adipiscing eli
-								</p> <span class="time">29 September 2015</span>
-							</li>
-						</ul>
-					</div>
-					<div class="widget_content">
-						<div class="tweet_go"></div>
-					</div>
-				</div>
-				<div class="col-sm-6 col-md-3 col-lg-3">
-					<div class="widget_title">
-						<h4>
-							<span>Flickr Gallery</span>
-						</h4>
-					</div>
-					<div class="widget_content">
-						<div class="flickr">
-							<ul id="flickrFeed" class="flickr-feed"></ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</footer>
-	<!--end footer-->
-
-	<section class="footer_bottom">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-6">
-					<p class="copyright">
-						&copy; Copyright 2015 Electrify | Powered by <a
-							href="http://www.jqueryrain.com/">jQuery Rain</a>
-					</p>
-				</div>
-
-				<div class="col-sm-6 ">
-					<div class="footer_social">
-						<ul class="footbot_social">
-							<li><a class="fb" href="#." data-placement="top"
-								data-toggle="tooltip" title="Facebook"><i
-									class="fa fa-facebook"></i></a></li>
-							<li><a class="twtr" href="#." data-placement="top"
-								data-toggle="tooltip" title="Twitter"><i
-									class="fa fa-twitter"></i></a></li>
-							<li><a class="dribbble" href="#." data-placement="top"
-								data-toggle="tooltip" title="Dribbble"><i
-									class="fa fa-dribbble"></i></a></li>
-							<li><a class="skype" href="#." data-placement="top"
-								data-toggle="tooltip" title="Skype"><i class="fa fa-skype"></i></a></li>
-							<li><a class="rss" href="#." data-placement="top"
-								data-toggle="tooltip" title="RSS"><i class="fa fa-rss"></i></a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
 
 	<script type="/resources/text/javascript"
 		src="/resources/js/jquery-1.10.2.min.js"></script>
@@ -534,6 +172,45 @@
 		src="/resources/js/jquery-scrolltofixed-min.js"></script>
 
 	<script src="/resources/js/main.js"></script>
+
+<script type="text/javascript">
+
+
+var result = '${msg}';
+
+if (result == 'SUCCESS') {
+	alert("삭제가 완료되었습니다.");
+	location.replace(self.location);
+}
+
+
+$(document).ready(function(){
+	var formObj = $("form[role='form']");
+	console.log(formObj);
+/*  	$(".btn-warning").on("click", function(){
+		formObj.attr("action", "/board/modifyPage");
+		formObj.attr("method", "get");		
+		formObj.submit();
+	});
+	
+	$(".btn-danger").on("click", function(){
+		formObj.attr("action", "/board/removePage");
+		formObj.submit();
+	});
+	  */
+	$(".removeBtn").on("click", function(){
+		formObj.attr("action", "/board/removePage");
+		formObj.submit();
+	});
+	
+	$(".modifyBtn").on("click", function(){
+		formObj.attr("method", "get");
+		formObj.attr("action", "/board/modifyPage");
+		formObj.submit();
+	});
+	
+});
+</script>
 
 	<!-- Start Style Switcher -->
 	<div class="switcher"></div>
