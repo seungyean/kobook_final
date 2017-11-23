@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kobook.alarm.domain.AlarmVO;
 import com.kobook.alarm.service.AlarmService;
@@ -23,18 +24,17 @@ public class AlarmController {
 	private AlarmService service;
 	
 	@RequestMapping(value="/alarmList", method=RequestMethod.GET)
-	public String alarmList(Model model, HttpServletRequest request) throws Exception {
+	public String alarmList(HttpServletRequest request, RedirectAttributes rttr) throws Exception {
 		System.out.println("controller - list");
 		
 		HttpSession session = request.getSession();
 		int person_id = Integer.parseInt((String)session.getAttribute("person_id"));
 		
 		List<AlarmVO> alarmList = service.alarmListService(person_id);
-		System.out.println(person_id);
 		
-		request.setAttribute("alarmList", alarmList);
+		rttr.addFlashAttribute("alarmList", alarmList);
 		
-		return "/main";
+		return "redirect:/recom";
 	}
 	
 	@RequestMapping(value="/alarmUpdate", method=RequestMethod.POST)

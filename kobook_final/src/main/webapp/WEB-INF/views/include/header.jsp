@@ -1,4 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	int alarm_new=0;
+%>
 
 <% 
 	String cur_id = "-1";
@@ -22,6 +26,11 @@
  		
 		document.messageForm.target = "messagePage";
 		document.messageForm.submit; 
+	}
+	
+	function fn_newAlarm() {
+		document.alarmUpdate.action = "/alarmUpdate";
+		document.alarmUpdate.submit();
 	}
 	
 </script>
@@ -53,6 +62,9 @@
                 </div>
             </div>
         </div>
+        
+	
+        
         <div id="logo-bar">
             <div class="container">
                 <div class="row">
@@ -64,9 +76,67 @@
                     </div>
                     <!-- Navigation
     ================================================== -->
+    
+            
                     <div class="col-lg-9 col-sm-9">
-                        <div class="navbar navbar-default navbar-static-top" role="navigation">
+                    	<div class="navbar navbar-default navbar-static-top" role="navigation">
                             <!--  <div class="container">-->
+                            
+                            <div style="margin-left: 400px; font-size: small;">
+        						
+        						<c:if test="${person_email == null }">
+									<a href="#" onclick="fn_login()">로그인</a>
+								</c:if>	
+							</div>
+							
+							<div style="margin-left: 80px;">
+								<c:if test="${person_email != null }">
+									
+									<span>
+									${person_email }님 로그인중 
+										<c:forEach var="z" items="${alarmList }">
+	    									<c:if test="${z.hit_yn == 'N' }">
+	             								<% alarm_new += 1;%>
+	        								</c:if> 
+	    								</c:forEach>
+										<a href="#" onclick="fn_newAlarm()">새로온 알림  [ <%=alarm_new %> ]</a> 
+										<a href="#" onclick="fn_logout()"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 로그아웃</a>
+  											<form action="/alarmUpdate" method="post" name="alarmUpdate"></form>
+									</span> 
+								</c:if>
+							</div>
+        					
+        						
+
+								<%-- <a href="#" onclick="fn_logout()">로그아웃</a>
+								
+								<c:choose>
+									<c:when test="${person_email == 0}">
+										<h4>관리자 로그인</h4>
+										<form action="/kobook/admin/listUser.do">
+            					  			<input type="hidden" name="person_id" value="${person_id }">
+											<input type="submit" value="회원관리이동">
+										</form>
+									</c:when>
+									<c:otherwise>
+										<h4>${person_email }님  환영합니다앙~^0^</h4> 
+											     <c:forEach var="z" items="${alarmList }">
+	    											<c:if test="${z.hit_yn == 'N' }">
+	             											<% alarm_new += 1;%>
+	        										</c:if> 
+	    										</c:forEach>
+        								<h4>새로운 알람의 갯수 : [ <%=alarm_new %> ]</h4>
+            					  		<form action="/kobook/recom/alarmListAction.do">
+            					  			<input type="hidden" name="person_id" value="${person_id }">
+											<input type="submit" value="알림">
+										</form> 
+									</c:otherwise>
+								</c:choose>
+								</c:if> --%>
+        					
+        					
+        					
+                            
                             <div class="navbar-header">
                                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                                     <span class="sr-only">Toggle navigation</span>
@@ -95,7 +165,7 @@
                                     <li><a href="/mypage/userUpdate" >마이페이지</a>
                                         <ul class="dropdown-menu">
                                             		<li><a href="/mypage/userUpdate">회원정보수정</a></li>
-                                                    <li><a href="/mypage/mileage">마일리지</a></li>
+                                                    <li><a href="/mypage/mileageList">마일리지</a></li>
                                                     <li><a href="/mypage/pickList">찜 리스트</a></li>
                                                     <li><a href="/mypage/buyList">구매내역</a></li>
                                                     <li><a href="/mypage/sellList">판매내역</a></li>

@@ -1,3 +1,5 @@
+<%@page import="com.kobook.alarm.domain.AlarmVO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
@@ -32,6 +34,8 @@
 		}
 	   function fn_logout(){
 			//location.href="/kobook/logout.jsp";
+			alert("logout");
+			console.log("logout");
 		}
 	</script>
 </head>
@@ -92,48 +96,7 @@
 
 		<br>
 							
-							<c:if test="${person_email == null }">
-								<a href="#" onclick="fn_login()">로그인</a>
-							</c:if>
 							
-							
-							<c:if test="${person_email != null }">
-								<h4>${person_email }님  환영합니다앙~^0^</h4> 
-								<c:forEach var="z" items="${alarmList }">
-	    							<c:if test="${z.hit_yn == 'N' }">
-	             						<% alarm_new += 1;%>
-	        						</c:if> 
-	    						</c:forEach>
-        								<h4>새로운 알람의 갯수 : [ <%=alarm_new %> ]</h4>
-             					  		<form action="/alarmUpdate" method="post">
-            					  			
-											<input type="submit" value="알림">
-										</form>  
-								<%-- <a href="#" onclick="fn_logout()">로그아웃</a>
-								
-								<c:choose>
-									<c:when test="${person_email == 0}">
-										<h4>관리자 로그인</h4>
-										<form action="/kobook/admin/listUser.do">
-            					  			<input type="hidden" name="person_id" value="${person_id }">
-											<input type="submit" value="회원관리이동">
-										</form>
-									</c:when>
-									<c:otherwise>
-										<h4>${person_email }님  환영합니다앙~^0^</h4> 
-											     <c:forEach var="z" items="${alarmList }">
-	    											<c:if test="${z.hit_yn == 'N' }">
-	             											<% alarm_new += 1;%>
-	        										</c:if> 
-	    										</c:forEach>
-        								<h4>새로운 알람의 갯수 : [ <%=alarm_new %> ]</h4>
-            					  		<form action="/kobook/recom/alarmListAction.do">
-            					  			<input type="hidden" name="person_id" value="${person_id }">
-											<input type="submit" value="알림">
-										</form> 
-									</c:otherwise>
-								</c:choose> --%>
-        					</c:if>
         
 <%--         <h2>알림 리스트</h2>
         

@@ -14,6 +14,7 @@
 		<package name="com.kobook.person.domain" />
 		<package name="com.kobook.community.domain" />
 		<package name="com.kobook.alarm.domain"/>
+		<package name="com.kobook.recom.domain"/>
 	</typeAliases>
 
 </configuration>
