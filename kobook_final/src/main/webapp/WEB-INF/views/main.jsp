@@ -195,13 +195,13 @@
 						
 		                	<div class="portfolio-item graphic-design">
 		                        <div class="box">
-		                            <img src="/kobook/img/bookImg/${f.book_id }.PNG" alt="">
+		                            <img src="resources/img/7.png" alt="">
 		                            <div class="option inner">
 		                                <div>
 		                                    <h5>기타 상세보기</h5>
 		                                    <a href="/kobook/img/bookImg/${f.book_id }.PNG" class="fa fa-search mfp-image"></a>
 		                                    <a href="/kobook/search/book_detail.jsp" class="fa fa-link"></a>
-		                                    <a href="/kobook/recom/recomDeleteAction.do?book_id=${f.book_id }&favorite_id=${f.favorite_id}&favorite_major=${f.favorite_major}&favorite_name=${f.favorite_name}" class="fa fa-times"></a>
+		                                    <a href="/deleteRecom?book_id=${f.book_id }&favorite_id=${f.favorite_id}&favorite_major=${f.favorite_major}&favorite_name=${f.favorite_name}" class="fa fa-times"></a>
 		                                </div>
 		                            </div>
 		                        </div>

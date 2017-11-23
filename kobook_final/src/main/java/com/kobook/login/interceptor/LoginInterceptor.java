@@ -48,7 +48,12 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			
 			else if(person_email.equals(person_emailCheck) && person_pwd.equals(person_pwdCheck)){
 				session.setAttribute("person_id", person_id);
-				response.sendRedirect(parentURI != null ? parentURI:"/");
+				
+				if(!parentURI.equals("http://localhost:8081/#")){
+					response.sendRedirect(parentURI != null ? parentURI:"/");
+				}
+				
+				
 
 			}else{
 				response.sendRedirect("/person/loginFail");

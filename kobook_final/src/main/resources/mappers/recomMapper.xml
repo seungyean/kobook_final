@@ -12,6 +12,12 @@
 		AND BOOK.BOOK_ID = FAVORITE.BOOK_ID
 	</select>
 
+	<delete id="deleteFavorite" parameterType="FavoriteVO">
+		DELETE FROM FAVORITE
+		WHERE PERSON_ID=#{person_id}
+		AND BOOK_ID=#{book_id}
+	</delete>
+
 </mapper>
 
 
