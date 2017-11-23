@@ -12,6 +12,6 @@ public interface MyPageDAO {
 	public void sellStateUpdate(BookVO vo);
 	public List<HashMap<String, String>> buyList(int person_id);
 	public List<HashMap<String, String>> pickList(int person_id);
-	public int pickUpdate(int pick_id);
+	public void pickUpdate(int pick_id);
 
 }

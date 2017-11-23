@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="/resources/css/layout/wide.css" data-name="layout">
 
     <link rel="stylesheet" type="text/css" href="/resources/css/switcher.css" media="screen" /></head>
-
+	<script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
     
     
     <script type="text/javascript">
@@ -29,7 +29,7 @@
 
     $(function(){
     	
-    	var sum_mileage = ${sumMileage};
+//     	var sum_mileage = ${sumMileage};
     	var pick_id = "";
     	var book_name = "";
     	var book_m_price = "";
@@ -63,7 +63,7 @@
     	// 찜 삭제 버튼 
     	 $(".btn-danger").click(function(){
     		var pick_id = $(this).parent().parent().find('td:first').text().trim();
-            location.href="/kobook/mypage/pickUpdate.do?pick_id=" + pick_id;
+            location.href="/mypage/pickStateUpdate?pick_id=" + pick_id;
          });
     	
     	$("#use_mileage").keyup(function() {
@@ -137,6 +137,7 @@
 										<tbody>
 											<c:forEach var="element" items="${pickList }" varStatus="s">
 												<tr>
+													<td align="center" hidden="">${element.PICK_ID }</td>
 													<td align="center"><input type="checkbox"></td>
 													<td align="center">	${element.BOOK_IMG }</td>
 													<td>${element.BOOK_NAME }</td>
@@ -262,7 +263,7 @@
     <script src="/resources/js/retina-1.1.0.min.js"></script>
     <script type="text/javascript" src="/resources/js/jquery.cookie.js"></script> <!-- jQuery cookie -->
     <script type="text/javascript" src="/resources/js/styleswitch.js"></script> <!-- Style Colors Switcher -->
-    <script src="resources/js/jquery.fractionslider.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/resources/js/jquery.fractionslider.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script>
     <script type="text/javascript" src="/resources/js/jquery.smartmenus.bootstrap.min.js"></script>
     <script type="text/javascript" src="/resources/js/owl.carousel.min.js"></script>
@@ -275,7 +276,7 @@
     <script type="text/javascript" src="/resources/js/jquery.matchHeight-min.js"></script>
     <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
 
-    <script src="resources/js/main.js"></script>
+    <script src="/resources/js/main.js"></script>
 
     <!-- Start Style Switcher -->
     <div class="switcher"></div>

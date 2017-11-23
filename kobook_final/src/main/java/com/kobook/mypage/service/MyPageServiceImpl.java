@@ -38,8 +38,8 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	@Override
-	public int pickUpdate(int pick_id) {
-		return dao.pickUpdate(pick_id);
+	public void pickUpdate(int pick_id) {
+		 dao.pickUpdate(pick_id);
 	}
 
 }

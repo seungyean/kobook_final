@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kobook.book.domain.BookVO;
@@ -88,13 +89,10 @@ public class MyPageController {
 	}
 	
 	/* 찜리스트 상태 변경 */
-	@RequestMapping(value = "/pickStateUpdate", method = RequestMethod.POST)
-	public String pickStateUpdate(HttpServletRequest request, RedirectAttributes rttr) {
+	@RequestMapping(value = "/pickStateUpdate", method = RequestMethod.GET)
+	public String pickStateUpdate(@RequestParam("pick_id") int pick_id, RedirectAttributes rttr) {
 		System.out.println("----------------Controller :찜리스트 상태 변경-----------------");
-		
-		HttpSession session = request.getSession();
-		int pick_id = Integer.parseInt((String)session.getAttribute("pick_id"));
-		
+		System.out.println(pick_id);
 		service.pickUpdate(pick_id);
 		
 		return "redirect:/mypage/pickList";

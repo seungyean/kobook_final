@@ -41,8 +41,8 @@ public class MyPageDAOImpl implements MyPageDAO {
 	}
 
 	@Override
-	public int pickUpdate(int pick_id) {
-		return session.selectOne(namespace + ".pickUpdate", pick_id);
+	public void pickUpdate(int pick_id) {
+		 session.selectOne(namespace + ".pickUpdate", pick_id);
 	}
 
 

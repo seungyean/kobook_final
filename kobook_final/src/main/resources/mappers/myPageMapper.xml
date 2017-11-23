@@ -33,7 +33,7 @@
 	<!-- 찜리 -->
 	<select id="pickList" resultType="hashMap" parameterType="int">
 		select
-		b.book_img,b.book_name,b.book_m_price,b.book_sell_state
+		b.book_img,b.book_name,b.book_m_price,b.book_sell_state,p.pick_id
 		from book b,
 		pick p , person person
 		where b.book_id = p.book_id
