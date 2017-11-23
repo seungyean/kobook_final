@@ -4,117 +4,160 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kobook.mappers.bookMapper">
 
- 	<insert id="create" parameterType="BookVO">
+	<insert id="create" parameterType="BookVO">
 		insert into book(
-			book_id,book_name,book_o_price,book_m_price,book_kind,book_edition,book_publish,book_hash,book_safe_yn,book_content,
-			book_date,book_status,book_sell_state,book_img,person_id
-			
+		book_id,book_name,book_o_price,book_m_price,book_kind,book_edition,book_publish,book_hash,book_safe_yn,book_content,
+		book_date,book_status,book_sell_state,book_img,person_id
+
 		)values(
-			book_id_seq.nextval, #{book_name}, #{book_o_price}, #{book_m_price},#{book_kind}, #{book_edition},#{book_publish},
-			#{book_hash}, #{book_safe_yn}, #{book_content}, 
-			SYSDATE,#{book_status},#{book_sell_state},#{book_img},#{person_id}
-		)		
+		book_id_seq.nextval, #{book_name}, #{book_o_price},
+		#{book_m_price},#{book_kind},
+		#{book_edition},#{book_publish},
+		#{book_hash}, #{book_safe_yn}, #{book_content},
+		SYSDATE,#{book_status},#{book_sell_state},#{book_img},#{person_id}
+		)
 	</insert>
-	
-	 <select id="listCriteria" resultType="BookVO">
+
+	<select id="listCriteria" resultType="BookVO" parameterType="SearchCriteria">
     <![CDATA[
           select 
             *
           from 
             book             
-      ]]>      
-      <!-- <include refid="search"></include> -->
-         <![CDATA[     
-          order by book_date desc
-       ]]>  
-      
-    </select>
+            where book_id > 0
+      ]]>
+		<include refid="search"></include>
+		<!-- <![CDATA[ order by book_date desc ]]> -->
+		<include refid="sort"></include>
+
+	</select>
+
+	<select id="locationCriteria" resultType="BookVO" parameterType="SearchCriteria">
+	<![CDATA[
+          select 
+            *
+          from 
+            book             
+            where book_safe_yn='N'
+      ]]>
 	
-	 <!--  <sql id="search">
-      <if test="searchType != null">
-         <if test="searchType == 't'.toString()">
-            and title like '%'|| #{keyword}||'%'
-         </if>
-         <if test="searchType == 'c'.toString()">
-            and content like '%'|| #{keyword}||'%'
-         </if>
-         <if test="searchType == 'w'.toString()">
-            and writer like '%'|| #{keyword}||'%'
-         </if>
-         <if test="searchType == 'tc'.toString()">
-            and ( title like '%'|| #{keyword}||'%' OR content like
-            '%'||
-            #{keyword}||'%')
-         </if>
-         <if test="searchType == 'cw'.toString()">
-            and ( content like '%'|| #{keyword}||'%' OR writer like
-            '%'||
-            #{keyword}||'%')
-         </if>
-         <if test="searchType == 'tcw'.toString()">
-            and ( title like '%'|| #{keyword}||'%'
-            OR
-            content like
-            '%'|| #{keyword}||'%'
-            OR
-            writer like '%'|| #{keyword}||'%')
-         </if>
-      </if>
-   </sql> -->
-   
-   
+	</select>
+
+
+
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				and book_name like '%'|| #{keyword}||'%'
+			</if>
+			<if test="searchType == 'c'.toString()">
+				and book_content like '%'|| #{keyword}||'%'
+			</if>
+			<if test="searchType == 'w'.toString()">
+				and book_hash like '%'|| #{keyword}||'%'
+			</if>
+			<if test="searchType == 'tc'.toString()">
+				and ( book_name like '%'|| #{keyword}||'%' OR
+				book_content like
+				'%'||
+				#{keyword}||'%')
+			</if>
+			<if test="searchType == 'cw'.toString()">
+				and ( book_name like '%'|| #{keyword}||'%' OR book_hash
+				like
+				'%'||
+				#{keyword}||'%')
+			</if>
+			<if test="searchType == 'tcw'.toString()">
+				and ( book_name like '%'|| #{keyword}||'%'
+				OR
+				book_content
+				like
+				'%'|| #{keyword}||'%'
+				OR
+				book_hash like '%'|| #{keyword}||'%')
+			</if>
+		</if>
+
+	</sql>
+
+
+	<sql id="sort">
+		<if test="sortType != null">
+			<if test="sortType == 'd'.toString()">
+			   order by book_date desc 
+			 </if>
+			<if test="sortType == 's'.toString()">
+				order by book_safe_yn desc
+			</if>
+			<if test="sortType == 'p'.toString()"> order
+				by book_m_price
+			</if>
+			<if test="sortType == 'b'.toString()"> order by book_status
+			</if>
+		</if>
+	</sql>
+
+
+
 	<select id="read" resultType="BookVO">
-       select 
-           *
-       from 
-           book
-           where book_id = #{book_id}
-    </select>
-	
-	
+		select
+		*
+		from
+		book
+		where book_id =
+		#{book_id}
+	</select>
+
+
 	<update id="update" parameterType="BookVO">
-      UPDATE book SET book_name=#{book_name},book_m_price=#{book_m_price}, book_o_price=#{book_o_price}, 
-        book_sell_state=#{book_sell_state}, book_status=#{book_status},book_hash=#{book_hash},
-		book_safe_yn=#{book_safe_yn}, book_content=#{book_content},book_edition=#{book_edition},
+		UPDATE book SET
+		book_name=#{book_name},book_m_price=#{book_m_price},
+		book_o_price=#{book_o_price},
+		book_sell_state=#{book_sell_state},
+		book_status=#{book_status},book_hash=#{book_hash},
+		book_safe_yn=#{book_safe_yn},
+		book_content=#{book_content},book_edition=#{book_edition},
 		book_publish=#{book_publish},book_img=#{book_img}
-		WHERE book_id=#{book_id}
-    
-   </update>
-	
-	
+		WHERE
+		book_id=#{book_id}
+
+	</update>
+
+
 	<select id="countPaging" resultType="int">
    <![CDATA[
-      select count(book_id) from book          
-   ]]>      
-   
-<!--     <include refid="search"></include> -->
-   </select>
-	
-	
-	
-	
-<!-- 	<insert id="addAttach" parameterType="BookFileVO">
-	insert into book_attach(book_file_name, book_id)
-	values(#{book_file_name},#{book_id})
-	</insert>
-	
-	<select id="maxNum" resultType="int">
-	select MAX(book_id) from book
+      select count(book_id) from book where book_id>0    
+   ]]>
+
+		<include refid="search"></include>
+		 <include refid="sort"></include>
 	</select>
-	
-	<select id="getAttach" resultType="string">
-      select book_file_name from book_attach where book_id = #{book_id} order by book_date
-   </select> 
-   
-   <delete id="deleteAttach">
-   delete from book_attach where book_id=#{book_id}
-   </delete>
-   
-   <insert id="replaceAttach">
-   insert into book_attach(book_file_name, book_id) values(#{book_file_name},#{book_id})
-   </insert> -->
-	
-	
-	
-	
+
+
+	<insert id="pickcreate" parameterType="PickVO">
+		insert into pick(
+		pick_id, person_id, book_id, pick_state
+
+		)values(
+		pick_id_seq.nextval, #{person_id}, #{book_id},'Y'
+		)
+	</insert>
+
+
+	<!-- <insert id="addAttach" parameterType="BookFileVO"> insert into book_attach(book_file_name, 
+		book_id) values(#{book_file_name},#{book_id}) </insert> <select id="maxNum" 
+		resultType="int"> select MAX(book_id) from book </select> <select id="getAttach" 
+		resultType="string"> select book_file_name from book_attach where book_id 
+		= #{book_id} order by book_date </select> <delete id="deleteAttach"> delete 
+		from book_attach where book_id=#{book_id} </delete> <insert id="replaceAttach"> 
+		insert into book_attach(book_file_name, book_id) values(#{book_file_name},#{book_id}) 
+		</insert> -->
+		
+		
+
+
+
+
+
 </mapper>

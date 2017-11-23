@@ -10,6 +10,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kobook.book.domain.PickVO;
 import com.kobook.book.domain.BookVO;
 import com.kobook.book.domain.SearchCriteria;
 
@@ -37,6 +38,15 @@ public class BookDAOImpl implements BookDAO {
 	}
 
 	
+	
+	@Override
+	public List<BookVO> locationCriteria(SearchCriteria cri) throws Exception {
+		return session.selectList(namespace+".locationCriteria",cri,new RowBounds(cri.getPageStart(),cri.getPerPageNum()));
+	}
+
+
+
+
 	@Override
 	public int countPaging(SearchCriteria cri) throws Exception {
 		return session.selectOne(namespace+".countPaging",cri);
@@ -51,6 +61,11 @@ public class BookDAOImpl implements BookDAO {
 	public void update(BookVO vo) throws Exception {
 		session.update(namespace+".update",vo);
 		
+	}
+
+	@Override
+	public void pick(PickVO pick) throws Exception {
+		session.insert(namespace+".pickcreate",pick);
 	}
 	
 	

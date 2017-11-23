@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.kobook.book.domain.PickVO;
 import com.kobook.book.domain.BookVO;
 import com.kobook.book.domain.SearchCriteria;
 import com.kobook.book.persistence.BookDAO;
@@ -42,6 +43,15 @@ public class BookServiceImpl implements BookService {
 		return dao.listCriteria(cri);
 	}
 
+	
+
+
+
+	@Override
+	public List<BookVO> locationCriteria(SearchCriteria cri) throws Exception {
+		return dao.locationCriteria(cri);
+	}
+
 
 
 
@@ -59,5 +69,15 @@ public class BookServiceImpl implements BookService {
 		dao.update(book);
 	}
 
+
+
+
+	@Override
+	public void pick(PickVO pick) throws Exception {
+		dao.pick(pick);
+		
+	}
+
+	
 
 }

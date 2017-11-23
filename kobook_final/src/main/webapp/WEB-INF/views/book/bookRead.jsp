@@ -113,7 +113,7 @@
 					<ul class="details">
 								<li><span>책이름 :</span>${bookVO.book_name}</li>
 								<li><span>책종류 :</span>${bookVO.book_kind}</li>
-								<li><span>부가설명 :</span>${bookVO.book_hash}</li>
+								<li><span>해시태그 :</span>${bookVO.book_hash}</li>
 								<li><span> 원가:</span> ${bookVO.book_o_price}</li>
 								<li><span> 판매가:</span> ${bookVO.book_m_price} 할인:<b>${(bookVO.book_o_price-bookVO.book_m_price)/100}%</b></li>
 								<li><span> 판 :</span>${bookVO.book_edition}</li>
@@ -147,16 +147,16 @@
 				</div>  <!--/project_details  -->
 		</div>  <!--/col-lg-4 col-md-4 col-sm-4  -->
   
-								<span><input type="submit" value="수정하기" id="submit" class="btn btn-default btn-lg button"></span>
+								<span><input type="submit" value="수정하기" id="submit" class="btn btn-default btn-lg button">
+								</span>
 							</form>
+				
+				<form action="/book/pick" method="post" name="pick">	
+                     <input type="hidden" name="book_id" value="${bookVO.book_id}">
+                     <input type="hidden" name = "person_id" value="${person_id}">
+                     <input type="submit" value="찜하기" class="btn btn-default btn-lg button">
+                 </form>
 									
-						<%-- <form action="/kobook/book/pickAction.do" method="post">
-							<input type="hidden" name="book_id" value="${BookVO.book_id}" />
-							<input type="hidden" name = "person_id" value="${BookVO.person_id}" >
-							<span>
-							<input type="submit" value="찜하기" id="submit" class="btn btn-default btn-lg button">
-							</span>
-						</form> --%>
 							
 		</div>  <!--/row sub_content  -->
 		
@@ -217,9 +217,9 @@
     <script type="text/javascript" src="/resources/js/jquery.matchHeight-min.js"></script>
     <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
 
- 
-
 	<script type="text/javascript">
+
+	
 		$(document)
 				.ready(
 						function() {
@@ -405,8 +405,13 @@
 									autoChange : true
 								});
 							});
-						});
+
+				);
+		
+		
 	</script>
+	
+	
 	 <script src="/resources/js/main.js"></script>
 	<!-- Start Style Switcher -->
 	<div class="switcher"></div>

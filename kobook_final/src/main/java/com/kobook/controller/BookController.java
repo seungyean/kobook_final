@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kobook.book.domain.PickVO;
 import com.kobook.book.domain.BookVO;
 import com.kobook.book.domain.PageMaker;
 import com.kobook.book.domain.SearchCriteria;
@@ -140,6 +141,15 @@ public class BookController {
 		model.addAttribute("pageMaker",pageMaker);
 	}
 	
+	@RequestMapping("/booklocationList")
+	public void locationlist(@ModelAttribute("cri") SearchCriteria cri, Model model)throws Exception{
+		model.addAttribute("list", service.locationCriteria(cri));
+		PageMaker pageMaker=new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(service.countPaging(cri));
+		model.addAttribute("pageMaker",pageMaker);
+	}
+	
 	
 	@RequestMapping(value="/bookRead",method=RequestMethod.GET)
 	public void read(@RequestParam("book_id")int book_id, @ModelAttribute("cri")SearchCriteria cri, Model model)throws Exception{
@@ -158,6 +168,14 @@ public class BookController {
        FileCopyUtils.copy(fileData, target);  //실제파일처리- spring에서 제공하는 FileCopyUtils이용
         return savedName;
 }
+	@RequestMapping(value="/pick")
+	public String pick(PickVO pick, Model model)throws Exception{
+		System.out.println("PICK컨트롤러진입");
+		service.pick(pick);
+		System.out.println("찜성공");
+		return "redirect:/book/bookList";
+	}
+	
 	
 	
 }

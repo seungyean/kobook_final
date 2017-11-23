@@ -20,11 +20,6 @@
     <link rel="stylesheet" href="/resources/css/style.css">
     <link rel="stylesheet" type="text/css" href="/resources/css/style.css" media="screen" data-name="skins">
     <link rel="stylesheet" href="/resources/css/layout/wide.css" data-name="layout">
-
-<!--     <link rel="stylesheet" href="resources/css/fractionslider.css"/>
-    <link rel="stylesheet" href="resources/css/style-fraction.css"/>
-    <link rel="stylesheet" href="resources/css/animate.css"/> -->
-
     <link rel="stylesheet" type="text/css" href="/resources/css/switcher.css" media="screen" />
 
 
@@ -67,12 +62,11 @@
                 <form action="/book/bookRegist" id="subscribe"  name="subscribe" method="post" enctype="multipart/form-data">
                 	 <input type="hidden" class="form-control" name="person_id" value="${person_id}"> 
              <b>책이름:</b>     <input type="text" name="book_name" id="name" class="form-control" placeholder="책이름">
-           <b>  부가설명:</b>        <input type="text" name="book_hash" id="hash" class="form-control" placeholder="부가설명(간단검색어를 입력하세요)">
+           <b>  해시태그:</b>        <input type="text" name="book_hash" id="hash" class="form-control" placeholder="부가설명(간단검색어를 입력하세요)">
           <b>  원가: </b>        <input type="text" name="book_o_price" id="name" class="form-control" placeholder="원가">
             <b>  판매가: </b>           <input type="text" name="book_m_price" id="name" class="form-control" placeholder="판매가">
             <b>  판: </b>            <input type="text" name="book_edition" id="name" class="form-control" placeholder="판(빈칸도 좋아용)">
              <b>  출판사: </b>            <input type="text" name="book_publish" id="name" class="form-control" placeholder="출판사">
-              <b> 해시태그: </b>            <input type="text" name="book_hash" id="name" class="form-control" placeholder="해시태그">
              <b>  내용: </b>          <textarea rows="10" cols="70" name="book_content"id="name" class="form-control" placeholder="내용을 입력하세요"></textarea>
                     
                <b>    안심여부:</b> <input type="radio" name="book_safe_yn" value="Y" checked="checked">Y 
