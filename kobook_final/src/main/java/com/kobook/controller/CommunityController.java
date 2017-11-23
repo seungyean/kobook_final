@@ -99,11 +99,11 @@ public class CommunityController {
 		
 		return "redirect:/community/blackList";
 	}
-
+/*
 	@RequestMapping(value = "/uploadAjax", method = RequestMethod.GET)
 	public void uploadAjax() {
 	}
-
+*/
 	@ResponseBody
 	@RequestMapping(value = "/uploadAjax", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
 	public ResponseEntity<String> uploadAjax(MultipartFile file) throws Exception {

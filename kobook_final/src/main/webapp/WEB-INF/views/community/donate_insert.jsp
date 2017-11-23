@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -16,7 +17,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1" />
 
- <!-- CSS FILES -->
+<!-- CSS FILES -->
     <link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/resources/css/style.css">
     <link rel="stylesheet" type="text/css" href="/resources/css/style.css" media="screen" data-name="skins">
@@ -36,7 +37,7 @@
 				<div class="row">
 					<div class="col-lg-12 col-md-12 col-sm-12">
 						<div class="page_title">
-							<h2>무료 나눔 상세보기</h2>
+							<h2>무료 나눔 게시판</h2>
 						</div>
 						<nav id="breadcrumbs">
 							<ul>
@@ -49,68 +50,53 @@
 				</div>
 			</div>
 		</section>
-
-		<section class="content blog">
+		<section class="content typography">
 			<div class="container">
-				<div class="row">
-					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
-						<div class="blog_single">
-							<article class="post">
-								<form action="donateUpdateAction.do" method="post"
-									enctype="multipart/form-data">
-									<input type="hidden" name="donate_id"
-										value="${donate.donate_id}">
-									<figure class="post_img">
-										<img src="../upload/${donate.donate_img }" alt="NO IMAGE"
-											height="300" width="400">
-									</figure>
-									<div class="post_date">
-										<span class="day">${donate.donate_id }</span>
-									</div>
-									<div class="post_content">
-										<div class="post_meta">
-											<input type="text" name="donate_title"
-												value="${donate.donate_title }">
-											<div class="metaInfo">
-												<span><i class="fa fa-calendar"></i> <fmt:formatDate
-														value="${donate.donate_date }" pattern="MMM dd, yyyy" />
-												</span> <span><i class="fa fa-user"></i> By
-													${donate.person_id} </span> <span><i class="fa fa-eye"></i>
-													${donate.donate_hit} </span>
-												<!-- <span><i class="fa fa-comments"></i> <a href="#">12 Comments</a></span> -->
-											</div>
-										</div>
-										<blockquote class="default">
-											<textarea cols="30" rows="3" name="donate_content"
-												placeholder="${donate.donate_content }">${donate.donate_content }</textarea>
-										</blockquote>
-										<input type="hidden" name="donate_img"
-											value="${donate.donate_img }"> <input type="file"
-											name="donateUimg">
-									</div>
-									<span> <input class="btn btn-lg btn-default"
-										type="submit" value="수정완료"></span>
-								</form>
-							</article>
+				<div class="row sub_content">
+					<div class="col-lg-6 col-sm-6">
+						<div class="dividerHeading">
+							<h4>
+								<span>무료 나눔 글 작성</span>
+							</h4>
 						</div>
+						<!-- 나중에 로그인되면 아래 person_id의 value는 sessionid로 변경 -->
+						<form action="donateInsertAction.do" id="registerform"
+							method="post" name="registerform" enctype="multipart/form-data">
+							<div class="form-group">
+								<input type="hidden" class="form-control" name="person_id"
+									value="${person_id }">
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control" name="donate_title"
+									placeholder="글 제목">
+							</div>
+							<div class="form-group">
+								<input type="file" class="form-control" name="donate_img"
+									placeholder="ImageFile">
+							</div>
+							<div class="form-group">
+								<textarea rows="10" cols="73" class="form-control"
+									name="donate_content">글 내용</textarea>
+							</div>
+							<div class="form-group">
+								<input type="submit" class="btn btn-default btn-lg button"
+									value="작성 완료">
+							</div>
+						</form>
 					</div>
 				</div>
-				<!--/.row-->
 			</div>
-			<!--/.container-->
 		</section>
-
 	</section>
 	<!--end wrapper-->
 
 	<!-- 푸터 -->
  		 <jsp:include page="/WEB-INF/views/include/footer.jsp" />
   	<!-- /푸터 -->
-	
 
 	
 
-	<script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
+	 <script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
     <script src="/resources/js/bootstrap.min.js"></script>
     <script src="/resources/js/jquery.easing.1.3.js"></script>
     <script src="/resources/js/retina-1.1.0.min.js"></script>
