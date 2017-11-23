@@ -42,4 +42,9 @@ public class MyPageServiceImpl implements MyPageService {
 		 dao.pickUpdate(pick_id);
 	}
 
+	@Override
+	public List<HashMap<String, String>> mileageList(int person_id) {
+		return dao.mileageList(person_id);
+	}
+
 }

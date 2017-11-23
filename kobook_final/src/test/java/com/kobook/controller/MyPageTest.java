@@ -36,8 +36,13 @@ public class MyPageTest {
 		System.out.println("구매내역 : " + dao.buyList(7).toString());
 	}*/
 	
-	@Test
+	/*@Test
 	public void buyList(){
 		System.out.println("찜리스트 : " + dao.pickList(7).toString());
+	}*/
+	
+	@Test
+	public void mileageList(){
+		System.out.println("마일리지 내역 : " + dao.mileageList(7).toString());
 	}
 }

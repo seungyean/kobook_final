@@ -13,4 +13,5 @@ public interface MyPageService {
 	public List<HashMap<String, String>> buyList(int person_id);
 	public List<HashMap<String, String>> pickList(int person_id);
 	public void pickUpdate(int pick_id);
+	public  List<HashMap<String, String>> mileageList(int person_id);
 }

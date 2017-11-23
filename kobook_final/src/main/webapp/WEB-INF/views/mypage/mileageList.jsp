@@ -66,7 +66,6 @@
 							<table class="table">
 										<thead>
 											<tr>
-												<td align="center">No</td>
 												<td align="center">적립날짜</td>
 												<td align="center">적립내용</td>
 												<td align="center">마일리지</td>
@@ -75,8 +74,7 @@
 										<tbody>
 										<c:forEach var="element" items="${mileageList }" >
 											<tr>
-												<td align="center">${element.MILEAGE_ID }</td>
-												<td align="center">${element.MILEAGE_DATE  }</td>
+												<td align="center">${element.ORDER_DATE  }</td>
 												<c:set var="name" value="${element.MILEAGE_KIND  }" />
 														<c:choose>
    															<c:when test="${name eq 'P' }">

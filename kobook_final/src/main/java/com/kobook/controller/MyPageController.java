@@ -99,5 +99,16 @@ public class MyPageController {
 
 	}
 	
+	/* 마일리지 내역 */
+	@RequestMapping(value = "/mileageList", method = RequestMethod.GET)
+	public void mileageList(HttpServletRequest request, Model model) {
+		System.out.println("----------------Controller : 마일리지 내역 출력-----------------");
+		
+		HttpSession session = request.getSession();
+		int person_id = Integer.parseInt((String)session.getAttribute("person_id"));
+		
+		
+		model.addAttribute("mileageList", service.mileageList(person_id));
+	}
 
 }

@@ -6,49 +6,69 @@
 
 	<!-- 판매내역 리스트 -->
 	<select id="sellList" resultType="BookVO" parameterType="int">
-		select *
-		from book
-		where person_id = #{person_id}
+		SELECT *
+		FROM book
+		WHERE person_id = #{person_id}
 	</select>
 
 	<!-- 판매상태 업데이트 -->
 	<update id="sellStateUpdate" parameterType="BookVO">
-		update book
-		set
-		book_sell_state = #{book_sell_state}
-		where book_id = #{book_id}
+		UPDATE book
+		SET book_sell_state = # {book_sell_state}
+		WHERE book_id = #{book_id}
 	</update>
 
 	<!-- 구매내역 리스트 -->
 	<select id="buyList" resultType="hashMap" parameterType="int">
-		select
-		b.book_img, b.book_name, p.pay_amount,o.order_date
-		from book_order o,
-		book b, pay p
-		where o.order_id = p.order_id
-		and o.book_id = b.book_id
-		and o.person_id = #{person_id}
+		SELECT
+		b.book_img,
+		b.book_name,
+		p.pay_amount,
+		o.order_date
+		FROM book_order o,
+		book b,
+		pay p
+		WHERE o.order_id = p.order_id
+		AND o.book_id = b.book_id
+		AND o.person_id = #{person_id}
 	</select>
 
 	<!-- 찜리 -->
 	<select id="pickList" resultType="hashMap" parameterType="int">
-		select
-		b.book_img,b.book_name,b.book_m_price,b.book_sell_state,p.pick_id
-		from book b,
-		pick p , person person
-		where b.book_id = p.book_id
-		and p.person_id =
-		person.person_id
-		and p.pick_state = 'Y'
-		and person.person_id = #{person_id}
+		SELECT
+		b.book_img,
+		b.book_name,
+		b.book_m_price,
+		b.book_sell_state,
+		p.pick_id
+		FROM book b,
+		pick p,
+		person person
+		WHERE b.book_id = p.book_id
+		AND p.person_id = person.person_id
+		AND p.pick_state = 'Y'
+		AND person.person_id = #{person_id}
 	</select>
 
 	<!-- 찜 상태 변경 -->
 	<update id="pickUpdate" parameterType="int">
-		update pick
-		set pick_state = 'N'
-		where pick_id = #{pick_id}
+		UPDATE pick
+		SET pick_state = 'N'
+		WHERE pick_id = #{pick_id}
 	</update>
+
+	<!-- 마일리지 리스트 -->
+	<select id="mileageList" resultType="hashMap">
+		SELECT o.order_date,
+		m.mileage_point,
+		m.mileage_kind
+		FROM mileage m,
+		pay p,
+		book_order o
+		WHERE m.pay_id = p.pay_id
+		AND p.order_id = o.order_id
+		AND o.person_id = #{person_id}
+	</select>
 
 
 
