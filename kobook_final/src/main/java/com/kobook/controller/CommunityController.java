@@ -219,8 +219,24 @@ public class CommunityController {
 	public void donateRegistPost(DonateVO vo, Model model) throws Exception {
 		System.out.println(vo.toString());
 		donateService.donateRegist(vo);
-		//return "redirect:/community/blackList";
+		//return "redirect:/community/donateList";
 	}
 	
+	@RequestMapping("donateList")
+	public void donateList(@ModelAttribute SearchCriteria cri, Model model) throws Exception {
+		model.addAttribute("list", donateService.donateList(cri));
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(donateService.donateCount(cri));
+		
+		model.addAttribute("pageMaker", pageMaker);
+	}
+	
+	@RequestMapping(value="/donateGetAttach/{donate_id}")
+	@ResponseBody
+	public List<String> donateGetAttach(@PathVariable("donate_id")Integer donate_id) throws Exception {		
+		return donateService.donateGetAttach(donate_id);
+	}
 
 }

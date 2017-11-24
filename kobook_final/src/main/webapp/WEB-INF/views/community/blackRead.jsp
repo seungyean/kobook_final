@@ -38,13 +38,6 @@
      } 
   	
     </style>
-<!-- 
-<script type="text/javascript">
-	function fn_update() {
-		location.href = "blackModify?black_id=${black.black_id}";
-	}
-</script>
- -->
 </head>
 <body class="home">
 	<!-- 헤더 -->
@@ -149,6 +142,7 @@
 
 <script type="text/javascript" src="/resources/js/upload.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+    
     <script src="/resources/js/main.js"></script>
     
 <script id="templateAttach" type="text/x-handlebars-template">

@@ -22,35 +22,55 @@
 	<select id="donateMaxNum" resultType="int">
 		select MAX(donate_id) from donate
 	</select>
-			
-	<!-- 
-	<select id="selectDonate_id" resultType="Integer">
-		select max(donate_id) from donate
+
+	<select id="donateList" resultType="DonateVO" parameterType="SearchCriteria">
+		<![CDATA[
+			 select * from donate where donate_id > 0
+		]]>
+			 <include refid="search"/>
+		<![CDATA[	  
+			 order by donate_id DESC
+ 		]]>
+	</select>
+	
+	<select id="donateCount" resultType="int" parameterType="SearchCriteria">
+		<![CDATA[
+			select count(*) from donate where donate_id > 0
+		]]>
+		 <include refid="search"/>
+	</select>
+	
+ 	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				and donate_title like '%'|| #{keyword}||'%'
+			</if>
+			<if test="searchType == 'c'.toString()">
+				and donate_content like '%'|| #{keyword}||'%'
+			</if>
+			<if test="searchType == 'tc'.toString()">
+				and ( donate_title like '%'|| #{keyword}||'%' OR donate_content like
+				'%'||
+				#{keyword}||'%')
+			</if>
+		</if>
+	</sql>
+	
+	<select id="donateGetAttach" resultType="string">
+		select donate_file_name from donate_attach where donate_id = #{donate_id}
 	</select>
 
-	
-	<select id="listDonate" resultType="Donate" parameterType="CommunitySearch">
-		select * from donate 
-		<if test="area != null">
-			<where>
-				<foreach collection="area" item="item" separator="OR" open="(" close=")">
-					${item} LIKE #{searchKey}
-				</foreach>
-			</where>
-		</if>
-		order by donate_id DESC
-	</select>
-	
-	<select id="countDonate" resultType="int" parameterType="CommunitySearch">
-		select count(*) from donate
-		<if test="area != null">
-			<where>
-				<foreach collection="area" item="item" separator="OR" open="(" close=")">
-					${item} LIKE #{searchKey}
-				</foreach>
-			</where>
-		</if>
-	</select>
+	<delete id="donateDeleteAttach">
+		delete from donate_attach where donate_id=#{donate_id}
+	</delete>
+
+	<insert id="donateReplaceAttach">
+		insert into donate_attach(donate_file_name, donate_id) values(#{donate_file_name},#{donate_id})
+	</insert>
+
+
+	<!-- 
+			
 	
 	<select id="selectPersonName" resultType="Person" parameterType="int">
 		select P.PERSON_NAME from donate D join person P on D.person_id = P.person_id

@@ -1,10 +1,13 @@
 package com.kobook.community.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kobook.book.domain.SearchCriteria;
 import com.kobook.community.domain.DonateFileVO;
 import com.kobook.community.domain.DonateVO;
 import com.kobook.community.persistence.DonateDAO;
@@ -30,6 +33,21 @@ public class DonateServiceImpl implements DonateService {
 			fileVO.setDonate_file_name(donate_file_name);
 			dao.donateAddAttach(fileVO);
 		}
+	}
+
+	@Override
+	public List<DonateVO> donateList(SearchCriteria cri) throws Exception {
+		return dao.donateList(cri);
+	}
+
+	@Override
+	public int donateCount(SearchCriteria cri) throws Exception {
+		return dao.donateCount(cri);
+	}
+
+	@Override
+	public List<String> donateGetAttach(Integer donate_id) throws Exception {
+		return dao.donateGetAttach(donate_id);
 	}
 
 }
