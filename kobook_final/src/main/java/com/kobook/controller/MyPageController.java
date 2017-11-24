@@ -108,12 +108,6 @@ public class MyPageController {
 		HttpSession session = request.getSession();
 		int person_id = Integer.parseInt((String)session.getAttribute("person_id"));
 		
-//		BookVO book = service.bookMileage(book_id);
-//		int  strBook = book.getBook_m_price();
-//		int bookMileage = (int) (strBook * 0.01);
-//		
-//		model.addAttribute("bookMileage",bookMileage);
-		
 		model.addAttribute("mileageList", service.mileageList(person_id));
 	}
 	
@@ -125,10 +119,17 @@ public class MyPageController {
 		HttpSession session = request.getSession();
 		int person_id = Integer.parseInt((String)session.getAttribute("person_id"));
 		
+		List<HashMap<String, String>> list = service.orderList(person_id);
 		model.addAttribute("orderList", service.orderList(person_id));
 		model.addAttribute( service.orderPerson(person_id));
 		
 		PersonVO person = service.orderPerson(person_id);
+		
+		list.get(0).get("book_id");
+		
+		
+		
+		
 		
 		// 휴대폰 - 
 		String strPhone[] = person.getPerson_phone().split("-");

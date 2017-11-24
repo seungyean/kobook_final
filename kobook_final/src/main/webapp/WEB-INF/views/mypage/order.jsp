@@ -21,37 +21,45 @@
     <link rel="stylesheet" href="/resources/css/layout/wide.css" data-name="layout">
 
     <link rel="stylesheet" type="text/css" href="/resources/css/switcher.css" media="screen" /></head>
+    <script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
    <script type="text/javascript">
    
    $(function(){
 	   
-	   
-	   /* var name = '';
-	    
-	   $("#del").prop(function(){
+	 //배송지 정보 : 새로운배송지 라디오 버튼 클릭시
+   $("#newDel").on("click",function(){
 		   
-		   $("#delivery").val($("#order").val())
-		   var name = $('#oname').val();
-		   $('').val(name);
+		   $('#dname').attr("placeholder", " ");
+		   $('#dpostcode').attr("placeholder", " ");
+		   $('#daddr1').attr("placeholder", " ");
+		   $('#daddr2').attr("placeholder", " ");
+		   $('#dphone1_1').attr("placeholder", " ");
+		   $('#dphone1_2').attr("placeholder", " ");
+		   $('#dphone1_3').attr("placeholder", " ");
+		   $('#demail1').attr("placeholder", " ");
+		   $('#demail2').attr("placeholder", " ");
+		   $('#demail3').attr("placeholder", " ");
 		   
-	   }); */
+	   }); 
+   
+ 	//배송지 정보 : 주문자 동일 라디오 버튼 클릭시
+   $("#orderDel").on("click",function(){
+	   
+	   $('#dname').attr("placeholder", $('#oname').attr("placeholder"));
+	   $('#dpostcode').attr("placeholder", $('#opostcode').attr("placeholder"));
+	   $('#daddr1').attr("placeholder", $('#oaddr1').attr("placeholder"));
+	   $('#daddr2').attr("placeholder", $('#oaddr2').attr("placeholder"));
+	   $('#dphone1_1').attr("placeholder", $('#ophone1_1').attr("placeholder"));
+	   $('#dphone1_2').attr("placeholder", $('#ophone1_2').attr("placeholder"));
+	   $('#dphone1_3').attr("placeholder", $('#ophone1_3').attr("placeholder"));
+	   $('#demail1').attr("placeholder", $('#oemail1').attr("placeholder"));
+	   $('#demail2').attr("placeholder", $('#oemail2').attr("placeholder"));
+	   $('#demail3').attr("placeholder", $('#oemail3').attr("placeholder"));
+	   
+   }); 
 	   
 	   
-	   $("input:radio[name='del']").change(function(e) {
 
-	       var rVal = $(this).val();
-	       console.log(rVal);
-
-	       if(rVal != "Y"){
-	          $("#oname").val($("#dname").val())
-	          $("#opostcode").val($("#dpostcode").val())
-	       }else{
-	        /*  $('#상위div아이디 input[type="text"]').val("");
-	         $('#상위div아이디 input[type="number"]').val(""); */
-	      }
-
-	    });
-	      
 	   
 	   
 	   
@@ -128,7 +136,7 @@
 								                        </td>
 								                        <td class="col-sm-1 col-md-1 text-center" id="m_price" ><strong>${element.BOOK_M_PRICE }</strong></td>
 								                        <td class="col-sm-1 col-md-1 text-center"><strong>1</strong></td>
-								                        <td class="col-sm-1 col-md-1 text-center"><strong>${bookMileage}P</strong></td>
+								                        <td class="col-sm-1 col-md-1 text-center"><strong>${element.BOOK_M_PRICE }P</strong></td>
 								                        <td class="col-sm-1 col-md-1 text-center"><strong>2000원</strong></td>
 								                    </tr>
 												</c:forEach>
@@ -243,44 +251,67 @@
 													<tbody class="address_form ">
 														<tr>
 															<th scope="row">배송지 선택</th>	
-															<td><input type="radio" value="Y" name="del">&nbsp;주문자 정보와 동일 &nbsp;<input type="radio" value="N" name="del">&nbsp;새로운 배송지</td>
+															<td>
+																<input type="radio" value="Y" name="sameAddr" id="orderDel">&nbsp;주문자 정보와 동일 &nbsp;
+																<input type="radio" value="N" name="sameAddr" id="newDel">&nbsp;새로운 배송지
+															</td>
 														</tr>
       														    <tr>
 															<th scope="row">받으시는 분 <img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif"alt="필수"></th>
-															<td><input id="dname" name="dname" class="inputTypeText" size="15" value=""type="text"placeholder="" ></td>
+															<td><input id="dname" name="dname" class="inputTypeText" size="15" value=""type="text"placeholder="${personVO.person_name}" ></td>
 														</tr>
 														
 														<tr>
 															<th scope="row">주소 <img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수"></th>
-															<td><input id="dpostcode" name="dpostcode" class="inputTypeText" size="6" maxlength="6"  value="" type="text">
-																<input id="ozipcode2" name="ozipcode2" class="inputTypeText" size="6" maxlength="6"  value="" type="text" style="display: none;"> 
+															<td><input id="dpostcode" name="dpostcode" class="inputTypeText" placeholder="${personVO.person_postcode}" size="6" maxlength="6" readonly="readonly" value="" type="text">
+																<input id="dzipcode2" name="dzipcode2" class="inputTypeText" placeholder="" size="6" maxlength="6" readonly="readonly" value="" type="text" style="display: none;"> 
 																<a href="#none" id="btn_search_ozipcode"><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/btn_zipcode.gif" alt="우편번호"></a>
 																<br> 
-																<input id="daddr1" name="daddr1" class="inputTypeText" size="40"  value="" type="text"> 
+																<input id="daddr1" name="daddr1" class="inputTypeText" placeholder="${personVO.person_address}" size="40" readonly="readonly" value="" type="text"> 
 																<spanclass="grid">기본주소</span><br> 
-																<input id="daddr2" name="daddr2" class="inputTypeText" " size="40" value="" type="text"><span class="grid">나머지주소</span>
+																<input id="daddr2" name="daddr2" class="inputTypeText" placeholder="${personVO.person_address2}" size="40" value="" type="text" readonly="readonly"> <span class="grid">나머지주소</span>
 															</td>
 														</tr>
 														
 														<tr>
 															<th scope="row">휴대전화 <img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수"></th>
 															<td>
-																<select id="dphone1_1" name="ophone2_[]">
-																		<option value="010">010</option>
-																		<option value="011">011</option>
-																		<option value="016">016</option>
-																		<option value="017">017</option>
-																		<option value="018">018</option>
-																		<option value="019">019</option>
+															
+																<select id="dphone1_1" name="dphone1_[]" >
+																	<c:choose>
+					   													<c:when test="${phone0 eq '010' }">
+					      												  <option value="010" selected="selected">010</option>
+					      												  <option value="010" >011</option>
+					      												  <option value="010" >016</option>
+					      												  <option value="010" >017</option>
+					      												  <option value="010" >018</option>
+					      												  <option value="010" >019</option>
+					   													</c:when>
+					   													<c:when test="${phone0 eq '011' }">
+					      												  <option value="010" selected="selected">011</option>
+					   													</c:when>
+					   													<c:when test="${phone0 eq '016' }">
+					      												  <option value="010" selected="selected">016</option>
+					   													</c:when>
+					   													<c:when test="${phone0 eq '017' }">
+					      												  <option value="010" selected="selected">017</option>
+					   													</c:when>
+					   													<c:when test="${phone0 eq '018' }">
+					      												  <option value="010" selected="selected">018</option>
+					   													</c:when>
+					   													<c:when test="${phone0 eq '019' }">
+					      												  <option value="010" selected="selected">019</option>
+					   													</c:when>
+					  												</c:choose>
 																</select>
-															- <input id="dphone1_2" name="ophone2_[]" maxlength="4" size="4" value="" type="text">
-															- <input id="dphone1_3" name="ophone2_[]" maxlength="4" size="4" value="" type="text"></td>
+															- <input id="dphone1_2" name="dphone2_[]" maxlength="4" size="4" value="" type="text" placeholder="${phone1 }" >
+															- <input id="dphone1_3" name="dphone2_[]" maxlength="4" size="4" value="" type="text"  placeholder="${phone2 }" ></td>
 														</tr>
 														<tr>
 															<th scope="row">이메일 <img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수"></th>
 															<td>
-																<input id="demail1" name="oemail1" value="" type="text">@
-																<input id="demail2" name="oemail2" readonly="readonly" value="" type="text">
+																<input id="demail1" name="demail1" value="" type="text" readonly="readonly" placeholder="${email0 }">@
+																<input id="demail2" name="demail2" readonly="readonly" value="" type="text" placeholder="${email1 }">
 																	<select id="demail3">
 																		<option value="" selected="selected">- 이메일 선택 -</option>
 																		<option value="naver.com">naver.com</option>
@@ -391,7 +422,7 @@
   	<!-- /푸터 -->
 	
 	
-  	<script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
+  	
     <script src="/resources/js/bootstrap.min.js"></script>
     <script src="/resources/js/jquery.easing.1.3.js"></script>
     <script src="/resources/js/retina-1.1.0.min.js"></script>
