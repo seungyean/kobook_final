@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.kobook.book.domain.BookVO;
+import com.kobook.mypage.domain.OrderVO;
 import com.kobook.person.domain.PersonVO;
 
 
@@ -17,5 +18,5 @@ public interface MyPageService {
 	public  List<HashMap<String, String>> mileageList(int person_id);
 	public  List<HashMap<String, String>> orderList(int person_id);
 	public PersonVO orderPerson(int person_id);
-//	public BookVO bookMileage(int book_id);
+	public void orderInsert(OrderVO vo);
 }

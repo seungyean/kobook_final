@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kobook.alarm.domain.AlarmVO;
 import com.kobook.alarm.service.AlarmService;
 import com.kobook.book.domain.BookVO;
+import com.kobook.mypage.domain.OrderVO;
 import com.kobook.mypage.service.MyPageService;
 import com.kobook.person.domain.PersonVO;
 
@@ -143,13 +144,8 @@ public class MyPageController {
 		
 		list.get(0).get("book_id");
 		
-		
-		
-		
-		
 		// 휴대폰 - 
 		String strPhone[] = person.getPerson_phone().split("-");
-		
 		model.addAttribute("phone0", strPhone[0]);
 		model.addAttribute("phone1", strPhone[1]);
 		model.addAttribute("phone2", strPhone[2]);
@@ -161,6 +157,30 @@ public class MyPageController {
 		
 	}
 	
+	/* 주문 등록 */
+	@RequestMapping(value="/orderSuccess", method=RequestMethod.GET)
+	public void orderSuccessGET(OrderVO order, Model model)throws Exception{
+		System.out.println("주문등록 get~~~~~~~~~~~~~~~~~");
+	}
+	
+	@RequestMapping(value="/orderSuccess", method=RequestMethod.POST)
+	public String orderSuccessPOST(OrderVO order,RedirectAttributes rttr, HttpServletRequest request)throws Exception{
+		System.out.println("주문등록 post~~~~~~~~~~~~~~~~~");
+		System.out.println(order.toString());
+		
+		HttpSession session = request.getSession();
+		int person_id = Integer.parseInt((String)session.getAttribute("person_id"));
+		List<HashMap<String, String>> list = service.orderList(person_id);
+		int book_id = Integer.parseInt(list.get(0).get("book_id"));
+		
+		order.setPerson_id(person_id);
+		order.setBook_id(book_id);
+		
+		
+		service.orderInsert(order);
+		
+		return "redirect:/mypage/order";
+	}
 	
 	
 

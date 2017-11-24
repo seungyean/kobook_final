@@ -1,5 +1,7 @@
 package com.kobook.controller;
 
+import java.text.SimpleDateFormat;
+
 import javax.inject.Inject;
 
 import org.junit.Test;
@@ -7,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.kobook.mypage.domain.OrderVO;
 import com.kobook.mypage.persistence.MyPageDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -51,8 +54,19 @@ public class MyPageTest {
 		System.out.println("주문내역 : " + dao.orderList(7).toString());
 	}
 	*/
-	@Test
+	/*@Test
 	public void Test(){
 		System.out.println("주문자 정보: " + dao.orderPerson(7));
+	}
+	*/
+	@Test
+	public void Test(){
+		OrderVO vo = new OrderVO();
+		SimpleDateFormat dformat = new SimpleDateFormat("dd-MM-yyyy");
+		dformat.format("2017-11-24");
+		vo.setPerson_id(7);
+		vo.setBook_id(2);
+//		vo.setOrder_id(3);
+		 dao.orderInsert(vo);
 	}
 }

@@ -28,7 +28,28 @@
    
    $(function(){
 	   
+	   var del_price = 2000;
 	   
+	   $('#total_price').html(parseInt($('#book_price').text()) + del_price);
+	   
+	   // 마일리지 사용
+	   $("#input_mile").keyup(function() {
+		   
+		var book_price = parseInt($('#book_price').text());
+   		var input_mile = parseInt($('#input_mile').val());
+   		
+   		
+   		$('#total_price').html($('#book_price').text() - input_mile + del_price );
+   		$('#sale_price').html($('#input_mile').val());
+   		
+		});
+	   
+	   //결제버튼 클릭 
+	   $("#orderSuccess").click(function() {
+           location.href="/mypage/orderSuccess";
+		});
+	   
+	   // 우편번호 api
    $("#btn_post").on("click",function(){
 		   
 	   new daum.Postcode({
@@ -73,7 +94,7 @@
 	   
 	 //배송지 정보 : 새로운배송지 라디오 버튼 클릭시
    $("#newDel").on("click",function(){
-		   
+	  
 		   $('#dname').attr("placeholder", " ");
 		   $('#dpostcode').attr("placeholder", " ");
 		   $('#daddr1').attr("placeholder", " ");
@@ -99,17 +120,7 @@
    }); 
    
    
-   //이메일 셀렉트
-   function emailSelect(){
-	   
-	   var value = $("#demail3 option:selected").val();
-	    var text = $("#demail3 option:selected").text();
-	    console.log(value + " :: " + text);
-	   
-	}
-
-   emailSelect();
-	   
+  
 	   
 	   
 	   
@@ -447,30 +458,27 @@
 															<tr>
 																<td class="price">
 																	<div style="text-align: center;">
-																		<strong id="total_order_price_view">247,000</strong>
-																		<strong class="tail">원</strong>
-																		<span id="total_order_price_ref_view" class="tail displaynone"></span>
+																	<c:forEach var="element" items="${orderList }" varStatus="s">
+																		<strong id="book_price">${element.BOOK_M_PRICE }</strong>
+																		<strong>원</strong>
+																	</c:forEach>
 																	</div>
 																</td>
 																<td class="option ">
 																	<div style="text-align: center;">
-																		<strong>-&nbsp;</strong><strong id="total_sale_price_view">0</strong>
-																		<strong class="tail">원</strong>
-																		<span id="total_sale_price_ref_view" class="tail displaynone"></span>
+																		<strong>-&nbsp;</strong><strong id="sale_price">0</strong>
+																		<strong>원</strong>
 																	</div>
 																</td>
 																<td class="option ">
 																	<div style="text-align: center;" >
-																		<strong>+&nbsp;</strong><strong id="total_sale_price_view">0</strong>
-																		<strong class="tail">원</strong>
-																		<span id="total_sale_price_ref_view" class="tail displaynone"></span>
+																		<strong>+&nbsp;</strong><strong id="del_price">2000원</strong>
 																	</div>
 																</td>
 																<td class="total">
 																	<div style="text-align: center;">
-																		<strong>=&nbsp;</strong><strong id="total_order_sale_price_view">247,000</strong>
-																		<strong class="tail">원</strong>
-																		<span id="total_order_sale_price_ref_view" class="tail displaynone"></span>
+																		<strong>=&nbsp;</strong><strong id="total_price">0</strong>
+																		<strong>원</strong>
 																	</div>
 																</td>
 															</tr>
@@ -483,7 +491,7 @@
 																<td >
 																	<p>
 																		<input id="input_mile" name="input_mile" class="inputTypeText" placeholder="" size="10" value="" type="text" /> 
-																		원 (총 사용가능 적립금 : <strong class="point">0</strong>원)
+																		원 (총 사용가능 적립금 : <strong class="point" id="totalMileage">${personVO.person_mileage }</strong>원)
 																	</p>
 																	<ul class="info">
 																		<li id="mileage_max_unlimit" class="">최대 사용금액은 제한이 없습니다.</li>
@@ -537,7 +545,7 @@
 
 							<div class="col-lg-2 col-md-2 col-xs-12" style="float: right;">
 								<!-- Standard button -->
-								<button class="btn btn-default btn-lg btn-block" type="button">
+								<button class="btn btn-default btn-lg btn-block" type="button" id="orderSuccess">
 									결제하기
 								</button>
 							</div>
