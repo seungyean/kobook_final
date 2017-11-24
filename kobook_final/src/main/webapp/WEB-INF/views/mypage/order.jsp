@@ -22,9 +22,54 @@
 
     <link rel="stylesheet" type="text/css" href="/resources/css/switcher.css" media="screen" /></head>
     <script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
-   <script type="text/javascript">
+    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+	   
+   <script>
    
    $(function(){
+	   
+	   
+   $("#btn_post").on("click",function(){
+		   
+	   new daum.Postcode({
+		   oncomplete: function(data) {
+
+               // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+               // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+               var fullAddr = ''; // 최종 주소 변수
+               var extraAddr = ''; // 조합형 주소 변수
+
+               // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+               if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                   fullAddr = data.roadAddress;
+
+               } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                   fullAddr = data.jibunAddress;
+               }
+
+               // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+               if(data.userSelectedType === 'R'){
+                   //법정동명이 있을 경우 추가한다.
+                   if(data.bname !== ''){
+                       extraAddr += data.bname;
+                   }
+                   // 건물명이 있을 경우 추가한다.
+                   if(data.buildingName !== ''){
+                       extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                   }
+                   // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                   fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+               }
+
+               // 우편번호와 주소 정보를 해당 필드에 넣는다.
+               document.getElementById('dpostcode').value = data.zonecode; //5자리 새우편번호 사용
+               document.getElementById('daddr1').value = fullAddr;
+
+               // 커서를 상세주소 필드로 이동한다.
+               document.getElementById('daddr2').focus();
+           }
+	    }).open();
+	   }); 
 	   
 	 //배송지 정보 : 새로운배송지 라디오 버튼 클릭시
    $("#newDel").on("click",function(){
@@ -33,12 +78,10 @@
 		   $('#dpostcode').attr("placeholder", " ");
 		   $('#daddr1').attr("placeholder", " ");
 		   $('#daddr2').attr("placeholder", " ");
+// 		   $('#dphone1_1').val().$("#sel_test1 option:selected").val();
 		   $('#dphone1_1').attr("placeholder", " ");
 		   $('#dphone1_2').attr("placeholder", " ");
 		   $('#dphone1_3').attr("placeholder", " ");
-		   $('#demail1').attr("placeholder", " ");
-		   $('#demail2').attr("placeholder", " ");
-		   $('#demail3').attr("placeholder", " ");
 		   
 	   }); 
    
@@ -52,14 +95,20 @@
 	   $('#dphone1_1').attr("placeholder", $('#ophone1_1').attr("placeholder"));
 	   $('#dphone1_2').attr("placeholder", $('#ophone1_2').attr("placeholder"));
 	   $('#dphone1_3').attr("placeholder", $('#ophone1_3').attr("placeholder"));
-	   $('#demail1').attr("placeholder", $('#oemail1').attr("placeholder"));
-	   $('#demail2').attr("placeholder", $('#oemail2').attr("placeholder"));
-	   $('#demail3').attr("placeholder", $('#oemail3').attr("placeholder"));
 	   
    }); 
+   
+   
+   //이메일 셀렉트
+   function emailSelect(){
 	   
+	   var value = $("#demail3 option:selected").val();
+	    var text = $("#demail3 option:selected").text();
+	    console.log(value + " :: " + text);
 	   
+	}
 
+   emailSelect();
 	   
 	   
 	   
@@ -136,7 +185,15 @@
 								                        </td>
 								                        <td class="col-sm-1 col-md-1 text-center" id="m_price" ><strong>${element.BOOK_M_PRICE }</strong></td>
 								                        <td class="col-sm-1 col-md-1 text-center"><strong>1</strong></td>
-								                        <td class="col-sm-1 col-md-1 text-center"><strong>${element.BOOK_M_PRICE }P</strong></td>
+								                        <td class="col-sm-1 col-md-1 text-center">
+								                        <c:set var="avg" value="${element.BOOK_M_PRICE }"/>
+								                        	<strong>
+								                        	${avg/100}P
+								                        	
+								                        	</strong>
+								                        	
+								                        	</td>
+								                        
 								                        <td class="col-sm-1 col-md-1 text-center"><strong>2000원</strong></td>
 								                    </tr>
 												</c:forEach>
@@ -265,11 +322,11 @@
 															<th scope="row">주소 <img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수"></th>
 															<td><input id="dpostcode" name="dpostcode" class="inputTypeText" placeholder="${personVO.person_postcode}" size="6" maxlength="6" readonly="readonly" value="" type="text">
 																<input id="dzipcode2" name="dzipcode2" class="inputTypeText" placeholder="" size="6" maxlength="6" readonly="readonly" value="" type="text" style="display: none;"> 
-																<a href="#none" id="btn_search_ozipcode"><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/btn_zipcode.gif" alt="우편번호"></a>
+																<a href="#none" id="btn_post"><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/btn_zipcode.gif" alt="우편번호"></a>
 																<br> 
 																<input id="daddr1" name="daddr1" class="inputTypeText" placeholder="${personVO.person_address}" size="40" readonly="readonly" value="" type="text"> 
 																<spanclass="grid">기본주소</span><br> 
-																<input id="daddr2" name="daddr2" class="inputTypeText" placeholder="${personVO.person_address2}" size="40" value="" type="text" readonly="readonly"> <span class="grid">나머지주소</span>
+																<input id="daddr2" name="daddr2" class="inputTypeText" placeholder="${personVO.person_address2}" size="40" value="" type="text" > <span class="grid">나머지주소</span>
 															</td>
 														</tr>
 														
@@ -279,6 +336,14 @@
 															
 																<select id="dphone1_1" name="dphone1_[]" >
 																	<c:choose>
+																		<c:when test="${phone0 eq ' ' }">
+					      												  <option value="010" selected="selected">010</option>
+					      												  <option value="010" >011</option>
+					      												  <option value="010" >016</option>
+					      												  <option value="010" >017</option>
+					      												  <option value="010" >018</option>
+					      												  <option value="010" >019</option>
+					   													</c:when>
 					   													<c:when test="${phone0 eq '010' }">
 					      												  <option value="010" selected="selected">010</option>
 					      												  <option value="010" >011</option>
@@ -288,19 +353,44 @@
 					      												  <option value="010" >019</option>
 					   													</c:when>
 					   													<c:when test="${phone0 eq '011' }">
+					      												  <option value="010" >010</option>
 					      												  <option value="010" selected="selected">011</option>
+					      												  <option value="010" >016</option>
+					      												  <option value="010" >017</option>
+					      												  <option value="010" >018</option>
+					      												  <option value="010" >019</option>
 					   													</c:when>
 					   													<c:when test="${phone0 eq '016' }">
+					      												  <option value="010" >010</option>
+					      												  <option value="010" >011</option>
 					      												  <option value="010" selected="selected">016</option>
+					      												  <option value="010" >017</option>
+					      												  <option value="010" >018</option>
+					      												  <option value="010" >019</option>
 					   													</c:when>
 					   													<c:when test="${phone0 eq '017' }">
+					      												  <option value="010" >010</option>
+					      												  <option value="010" >011</option>
+					      												  <option value="010" >016</option>
 					      												  <option value="010" selected="selected">017</option>
+					      												  <option value="010" >018</option>
+					      												  <option value="010" >019</option>
 					   													</c:when>
 					   													<c:when test="${phone0 eq '018' }">
+					      												  <option value="010" >010</option>
+					      												  <option value="010" >011</option>
+					      												  <option value="010" >016</option>
+					      												  <option value="010" >017</option>
 					      												  <option value="010" selected="selected">018</option>
+					      												  <option value="010" >019</option>
 					   													</c:when>
 					   													<c:when test="${phone0 eq '019' }">
-					      												  <option value="010" selected="selected">019</option>
+					      												  <option value="010" >010</option>
+					      												  <option value="010" >011</option>
+					      												  <option value="010" >016</option>
+					      												  <option value="010" >017</option>
+					      												  <option value="010" >018</option>
+					      												  <option value="010" selected="selected" >019</option>
 					   													</c:when>
 					  												</c:choose>
 																</select>
@@ -308,27 +398,16 @@
 															- <input id="dphone1_3" name="dphone2_[]" maxlength="4" size="4" value="" type="text"  placeholder="${phone2 }" ></td>
 														</tr>
 														<tr>
-															<th scope="row">이메일 <img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수"></th>
-															<td>
-																<input id="demail1" name="demail1" value="" type="text" readonly="readonly" placeholder="${email0 }">@
-																<input id="demail2" name="demail2" readonly="readonly" value="" type="text" placeholder="${email1 }">
-																	<select id="demail3">
-																		<option value="" selected="selected">- 이메일 선택 -</option>
-																		<option value="naver.com">naver.com</option>
-																		<option value="daum.net">daum.net</option>
-																		<option value="nate.com">nate.com</option>
-																		<option value="hotmail.com">hotmail.com</option>
-																		<option value="yahoo.com">yahoo.com</option>
-																		<option value="empas.com">empas.com</option>
-																		<option value="korea.com">korea.com</option>
-																		<option value="dreamwiz.com">dreamwiz.com</option>
-																		<option value="gmail.com">gmail.com</option>
-																		<option value="etc">직접입력</option>
-																	</select>
-																<p class="grid">
-																	이메일을 통해 주문처리과정을 보내드립니다.<br>이메일 주소란에는 반드시 수신가능한
-																	이메일주소를 입력해 주세요.
-																</p></td>
+														<th scope="row">배송메시지</th>
+														   <td>
+														      <textarea id="omessage" name="omessage"  maxlength="255" cols="70" ></textarea>                        
+														      <div class="message displaynone">
+															      <ul>
+																	<li>배송메시지란에는 배송시 참고할 사항이 있으면 적어주십시오.</li>
+																	<li>50자 내외로 입력해주십시오.</li>
+															      </ul>						
+															  </div>
+														    </td>
 														</tr>
 													</tbody>
 												</table>
@@ -339,53 +418,145 @@
 							</div>
 							<!-- /배송자 정보 -->
 							
+							<!-- 결제예정, 마일리지 -->
+							<div class="container">
+							    <div class="row">
+							        <div class="col-sm-12 col-md-10 col-md-offset-1">
+							            <h3>결제 예정 금액</h3>
+							            <p class="required">
+							            <div class="totalArea">
+											<div class="boardWrite">
+												<table  summary="" class="table table-hover" >
+													<thead>
+														<tr>
+															<th scope="col" style="width: 400px; text-align: center;" >
+																<span>총 주문 금액</span>
+															</th>
+															<th scope="col" style="width: 400px; text-align: center;">
+																<span>총 </span>
+																<span id="total_addsale_text" class="">할인</span>
+															</th>
+															<th scope="col" style="width: 400px; text-align: center;">
+																<span>총 </span>
+																<span id="total_addsale_text" class="">배송비</span>
+															</th>
+															<th scope="col" style="width: 400px; text-align: center;" >총 결제예정 금액</th>
+														</tr>
+													</thead>
+													<tbody class="address_form ">
+															<tr>
+																<td class="price">
+																	<div style="text-align: center;">
+																		<strong id="total_order_price_view">247,000</strong>
+																		<strong class="tail">원</strong>
+																		<span id="total_order_price_ref_view" class="tail displaynone"></span>
+																	</div>
+																</td>
+																<td class="option ">
+																	<div style="text-align: center;">
+																		<strong>-&nbsp;</strong><strong id="total_sale_price_view">0</strong>
+																		<strong class="tail">원</strong>
+																		<span id="total_sale_price_ref_view" class="tail displaynone"></span>
+																	</div>
+																</td>
+																<td class="option ">
+																	<div style="text-align: center;" >
+																		<strong>+&nbsp;</strong><strong id="total_sale_price_view">0</strong>
+																		<strong class="tail">원</strong>
+																		<span id="total_sale_price_ref_view" class="tail displaynone"></span>
+																	</div>
+																</td>
+																<td class="total">
+																	<div style="text-align: center;">
+																		<strong>=&nbsp;</strong><strong id="total_order_sale_price_view">247,000</strong>
+																		<strong class="tail">원</strong>
+																		<span id="total_order_sale_price_ref_view" class="tail displaynone"></span>
+																	</div>
+																</td>
+															</tr>
+													</tbody>
+												</table>
+												<table  summary="" class="table table-hover" >
+													<tbody class="address_form ">
+														<tr>
+																<th scope="row" style="text-align: center;">적립금</th>
+																<td >
+																	<p>
+																		<input id="input_mile" name="input_mile" class="inputTypeText" placeholder="" size="10" value="" type="text" /> 
+																		원 (총 사용가능 적립금 : <strong class="point">0</strong>원)
+																	</p>
+																	<ul class="info">
+																		<li id="mileage_max_unlimit" class="">최대 사용금액은 제한이 없습니다.</li>
+																		<li id="mileage_max_limit" class="displaynone">1회 구매시 적립금 최대 사용금액은 입니다.</li>
+																		<li>적립금으로만 결제할 경우, 결제금액이 0으로 보여지는 것은 정상이며 [결제하기] 버튼을 누르면 주문이 완료됩니다.</li>
+																		<li id="mileage_shipfee" class="displaynone">적립금 사용시 배송비는 적립금으로 사용 할 수 없습니다.</li>
+																	</ul>
+																</td>
+															</tr>
+      														    
+													</tbody>
+												</table>
+											</div>
+										</div>
+							        </div>
+							    </div>
+							</div>
+							
 							<!-- 결제 -->
 							<div class="container">
 							    <div class="row">
 							        <div class="col-sm-12 col-md-10 col-md-offset-1">
-							            <h3>결제</h3>
-							            <table class="table table-hover">
-							                <thead>
-							                    <tr>
-							                        <th>이미지</th>
-							                        <th class="text-center">판매가</th>
-							                        <th class="text-center">수량</th>
-							                        <th class="text-center">적립금</th>
-							                        <th class="text-center">배송비</th>
-							                    </tr>
-							                </thead>
-							                <tbody>
-							                    <c:forEach var="element" items="${orderList }" varStatus="s">
-												<tr>
-							                        <td class="col-sm-8 col-md-6">
-								                        <div class="media">
-								                            <a class="thumbnail pull-left" href="#"> <img class="media-object" src="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/72/product-icon.png" style="width: 72px; height: 72px;"> </a>
-								                            <div class="media-body">
-								                                <h4 class="media-heading"><a href="#">&nbsp;&nbsp;${element.BOOK_NAME }</a></h4>
-								                                <h5 class="media-heading"><a href="#">&nbsp;&nbsp;&nbsp;${element.BOOK_PUBLISH }</a></h5>
-								                            </div>
-								                        </div>
-							                        </td>
-							                        <td class="col-sm-1 col-md-1 text-center" id="m_price" ><strong>${element.BOOK_M_PRICE }</strong></td>
-							                        <td class="col-sm-1 col-md-1 text-center"><strong>1</strong></td>
-							                        
-							                        <td class="col-sm-1 col-md-1 text-center"><strong>${element.BOOK_M_PRICE }P</strong></td>
-							                        <td class="col-sm-1 col-md-1 text-center"><strong>2000원</strong></td>
-							                    </tr>
-											</c:forEach>
-							                </tbody>
-							            </table>
+							            <h3>결제 수단</h3>
+							            <p class="required">
+							            <div class="totalArea">
+											<div class="boardWrite">
+												<table  summary="" class="table table-hover" >
+													<caption>무통장입금</caption>
+													<tbody>
+													<tr>
+														<th scope="row">입금자명</th>
+													    <td><input id="pname" name="pname" class="inputTypeText" placeholder="" size="15" maxlength="20" value="" type="text"  /></td>
+													</tr>
+													<tr>
+														<th scope="row">입금은행</th>
+														<td>
+													       <select id="bankaccount" name="bankaccount">
+															<option value="-1">::: 입금은행 선택 :::</option>
+															<option value="bank_01">기업은행:06806792001027 코북</option>
+															<option value="bank_02">국민은행:42173704015601 코북</option>
+														   </select>                            
+													     </td>
+													</tr>
+													</tbody>
+													</table>
+											</div>
+										</div>
 							        </div>
 							    </div>
 							</div>
-							<!-- /결제 -->
+
+							<div class="col-lg-2 col-md-2 col-xs-12" style="float: right;">
+								<!-- Standard button -->
+								<button class="btn btn-default btn-lg btn-block" type="button">
+									결제하기
+								</button>
+							</div>
+
+
+
+
+
+
+
+
+
+
+
+						</div>
+							</div>
 							
-							
-							
-				</div>
-			</div>
-				</div>
-			</div>
+							</div>
+						</div>
 		</section>
 		
 	
