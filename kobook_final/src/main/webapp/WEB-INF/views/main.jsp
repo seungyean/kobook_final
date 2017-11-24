@@ -147,73 +147,87 @@
 		<section class="super_sub_content">
             <div class="dividerHeading text-center">
             	<c:choose>
-            		<c:when test="${person_email == 'admin@kobook.com'}">
-            			<h4><span>신규 등록 도서</span></h4>
-            		</c:when>
-            		<c:when test="${list != null}">
-            			<h4>${person_email }님을 위한 추천도서</h4>
+            		<c:when test="${(person_id == 1) || (person_id == null)}">
+            			<h4><span>새로 등록된 도서</span></h4>
+            			
+			            <div class="portfolio-centered">
+				            <div class="recentitems portfolio">
+									<c:forEach var="i" begin="0" end="9">
+										<div class="portfolio-item mockups">
+										  <div class="box">
+										    	<img src="resources/img/7.png" alt="">
+										              <div class="option inner">
+										                  <div>
+										                     <h5>전공 상세보기</h5>
+										                     <a href="/kobook/img/bookImg/${f.book_id }.PNG" class="fa fa-search mfp-image"></a>
+										                     <a href="/kobook/book/detailAction.do?book_id=${f.book_id}" class="fa fa-link"></a>
+															 <a href="/deleteRecom?book_id=${f.book_id }&favorite_id=${f.favorite_id}&favorite_major=${f.favorite_major}&favorite_name=${f.favorite_name}" class="fa fa-times"></a>			                  </div>
+										               </div>
+								     	  </div>
+										</div>
+									</c:forEach>
+							</div>
+				        </div>  
             		</c:when>
             		<c:otherwise>
-            			<h4>신규 등록도서</h4>
+            			<h4>${person_email }님을 위한 추천도서</h4>
+            			
+            			 <nav class="clearfix">
+                			<ul id="filter">
+                    			<li data-filter="*" class="selected"><a href="#">전체보기</a></li>
+                    			<li data-filter=".mockups"><a href="#">전공</a></li>
+                    			<li data-filter=".graphic-design"><a href="#">기타</a></li>
+                			</ul>
+            			</nav>
+            			
+			            <div class="portfolio-centered">
+			                <div class="recentitems portfolio">
+				                <c:forEach var="f" items="${list }">
+				
+					                <c:if test="${f.favorite_major == 'M' }">
+						                	<div class="portfolio-item mockups">
+						                        <div class="box">
+						                            <img src="/kobook/img/bookImg/${f.book_id }.PNG" alt="">
+						                            <div class="option inner">
+						                                <div>
+						                                    <h5>전공 상세보기</h5>
+						                                    <a href="/kobook/img/bookImg/${f.book_id }.PNG" class="fa fa-search mfp-image"></a>
+						                                    <a href="/kobook/book/detailAction.do?book_id=${f.book_id}" class="fa fa-link"></a>
+						                                    <a href="/kobook/recom/recomDeleteAction.do?book_id=${f.book_id }&favorite_id=${f.favorite_id}&favorite_major=${f.favorite_major}&favorite_name=${f.favorite_name}" class="fa fa-times"></a>
+						                                </div>
+						                            </div>
+						                        </div>
+						                    </div>
+			
+					                </c:if>
+					                
+					                
+					                <c:if test="${f.favorite_major == 'O' }">
+									
+									<input type="hidden" id="book_id" value="${f.book_id }">
+									
+					                	<div class="portfolio-item graphic-design">
+					                        <div class="box">
+					                            <img src="resources/img/7.png" alt="">
+					                            <div class="option inner">
+					                                <div>
+					                                    <h5>기타 상세보기</h5>
+					                                    <a href="/kobook/img/bookImg/${f.book_id }.PNG" class="fa fa-search mfp-image"></a>
+					                                    <a href="/kobook/search/book_detail.jsp" class="fa fa-link"></a>
+					                                    <a href="/deleteRecom?book_id=${f.book_id }&favorite_id=${f.favorite_id}&favorite_major=${f.favorite_major}&favorite_name=${f.favorite_name}" class="fa fa-times"></a>
+					                                </div>
+					                            </div>
+					                        </div>
+					                    </div>
+					                </c:if>
+				                	
+				                </c:forEach>  
+			               </div>
+			            </div>
             		</c:otherwise>
             	</c:choose>
             </div>
-
-            <nav class="clearfix">
-                <ul id="filter">
-                    <li data-filter="*" class="selected"><a href="#">전체보기</a></li>
-                    <li data-filter=".mockups"><a href="#">전공</a></li>
-                    <li data-filter=".graphic-design"><a href="#">기타</a></li>
-                </ul>
-            </nav>
-
-            <div class="portfolio-centered">
-                <div class="recentitems portfolio">
-	                <c:forEach var="f" items="${list }">
-	
-		                <c:if test="${f.favorite_major == 'M' }">
-			                	<div class="portfolio-item mockups">
-			                        <div class="box">
-			                            <img src="/kobook/img/bookImg/${f.book_id }.PNG" alt="">
-			                            <div class="option inner">
-			                                <div>
-			                                    <h5>전공 상세보기</h5>
-			                                    <a href="/kobook/img/bookImg/${f.book_id }.PNG" class="fa fa-search mfp-image"></a>
-			                                    <a href="/kobook/book/detailAction.do?book_id=${f.book_id}" class="fa fa-link"></a>
-			                                    <a href="/kobook/recom/recomDeleteAction.do?book_id=${f.book_id }&favorite_id=${f.favorite_id}&favorite_major=${f.favorite_major}&favorite_name=${f.favorite_name}" class="fa fa-times"></a>
-			                                </div>
-			                            </div>
-			                        </div>
-			                    </div>
-
-		                </c:if>
-		                
-		                
-		                <c:if test="${f.favorite_major == 'O' }">
-						
-						<input type="hidden" id="book_id" value="${f.book_id }">
-						
-		                	<div class="portfolio-item graphic-design">
-		                        <div class="box">
-		                            <img src="resources/img/7.png" alt="">
-		                            <div class="option inner">
-		                                <div>
-		                                    <h5>기타 상세보기</h5>
-		                                    <a href="/kobook/img/bookImg/${f.book_id }.PNG" class="fa fa-search mfp-image"></a>
-		                                    <a href="/kobook/search/book_detail.jsp" class="fa fa-link"></a>
-		                                    <a href="/deleteRecom?book_id=${f.book_id }&favorite_id=${f.favorite_id}&favorite_major=${f.favorite_major}&favorite_name=${f.favorite_name}" class="fa fa-times"></a>
-		                                </div>
-		                            </div>
-		                        </div>
-		                    </div>
-
-		                </c:if>
-	                	
-	                </c:forEach>  
-               </div>
-               </div>
-               
-               </section>
+		</section>
 
 
 

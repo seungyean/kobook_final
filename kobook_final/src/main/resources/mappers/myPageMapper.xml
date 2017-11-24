@@ -22,7 +22,7 @@
 	<update id="sellStateUpdate" parameterType="BookVO">
 		UPDATE book
 		SET
-		book_sell_state = # {book_sell_state}
+		book_sell_state = #{book_sell_state}
 		WHERE book_id = #{book_id}
 	</update>
 

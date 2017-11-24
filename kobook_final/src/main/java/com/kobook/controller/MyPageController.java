@@ -62,7 +62,7 @@ public class MyPageController {
 				temp.setBook_sell_state(book_sell_state);
 				service.sellStateUpdate(temp);
 				
-				/*//"판매가 완료되었습니다." 알림 주는 부분 (아름)
+				//"판매가 완료되었습니다." 알림 주는 부분 (아름)
 				if(temp.getBook_sell_state().equals("C")) {
 					AlarmVO alarmVO = new AlarmVO();
 					
@@ -71,7 +71,7 @@ public class MyPageController {
 					alarmVO.setPerson_id(person_id);
 					
 					alarmService.alarmMessage(alarmVO);
-				}*/
+				}
 			}
 		}
 		

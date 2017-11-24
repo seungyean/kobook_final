@@ -8,9 +8,9 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	function closeWinAlarm(){
-		window.opener.name = "main.jsp";
-		document.alarmForm.target = "main.jsp";
-		document.alarmForm.submit();
+		//window.opener.name = "main.jsp";
+		//document.alarmForm.target = "main.jsp";
+		//document.alarmForm.submit();
 		window.self.close();
 	}
 </script>
@@ -18,12 +18,8 @@
 <body>
 	<h1 style="text-align: center;">AlARM LIST</h1>
 	<br>
-	
-	<form action="/alarmUpdate" method="get" name="alarmForm">
-<!-- 		<input type="hidden" id="parentURI" name="parentURI" value=""> -->
-		<!-- <input type="text" name="person_email" placeholder="아이디를 입력하세요." style="height: 30px; width: 250px; margin-left: 60px;"><br><br>
-		<input type="password" name="person_pwd" placeholder="비밀번호를 입력하세요." style="height: 30px; width: 250px; margin-left: 60px;"><br><br> -->
-		
+<!-- 	
+	<form action="/alarmUpdate" method="get" name="alarmForm">	 -->	
 		<table border="1" align="center">
 			<tr>
 				<td>번호</td>
@@ -40,8 +36,11 @@
 			</c:forEach>
 		</table>
 		
-		<br><br>
+		<br>
+		<input type="button" value="확인" style="margin-left: 200px; width: 60px; height: 30px" onclick="closeWinAlarm()">
+<!-- 		
+		
 		<input type="submit" value="확인" style="margin-left: 300px; width: 60px; height: 30px" onclick="closeWinAlarm()">
-	</form>
+	</form> -->
 </body>
 </html>
