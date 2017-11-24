@@ -57,6 +57,15 @@ public class BookServiceImpl implements BookService {
 	}
 
 
+	
+
+
+	@Override
+	public List<BookVO> sellPersonList(int person_id) throws Exception {
+		return dao.sellPersonList(person_id);
+	}
+
+
 
 
 	@Override
@@ -80,6 +89,14 @@ public class BookServiceImpl implements BookService {
 	public void pick(PickVO pick) throws Exception {
 		dao.pick(pick);
 		
+	}
+
+
+
+
+	@Override
+	public int getPersonIdByBookId(int book_id) throws Exception {
+		return dao.getPersonIdByBookId(book_id);
 	}
 
 	

@@ -53,7 +53,13 @@ public class BookDAOImpl implements BookDAO {
 	}
 
 
+	
 
+
+	@Override
+	public List<BookVO> sellPersonList(int person_id) throws Exception {
+		return session.selectList(namespace+".sellPersonList", person_id);
+	}
 
 	@Override
 	public int countPaging(SearchCriteria cri) throws Exception {
@@ -75,15 +81,14 @@ public class BookDAOImpl implements BookDAO {
 	public void pick(PickVO pick) throws Exception {
 		session.insert(namespace+".pickcreate",pick);
 	}
-	
-	
-	
-
-	
-	
 
 
-	
+
+
+	@Override
+	public int getPersonIdByBookId(int book_id) throws Exception {
+		return session.selectOne(namespace +".getPersonIdByBookId", book_id);
+	}
 	
 	
 	

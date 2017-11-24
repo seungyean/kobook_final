@@ -17,11 +17,15 @@ public interface BookService {
 	public List<BookVO> directListCriteria(SearchCriteria cri)throws Exception;
 	
 	public List<BookVO> safeListCriteria(SearchCriteria cri)throws Exception;
+	
+	public List<BookVO> sellPersonList(int person_id) throws Exception;
 
 	public int countPaging(SearchCriteria cri)throws Exception;
 	
 	public void modify(BookVO book)throws Exception;
 	
 	public void pick(PickVO pick)throws Exception;
+	
+	public int getPersonIdByBookId(int book_id) throws Exception;
 	
 }

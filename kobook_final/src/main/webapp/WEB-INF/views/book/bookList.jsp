@@ -152,19 +152,16 @@
 									<div class="recent-item box">
 										<figure class="touching ">
 
-											<%--  <img src="/F://upload/${b.book_img}" alt="aa" height="280" /> --%>
-											<img src="displayFile?fileName=${b.book_img}" alt="aa"
-												height="280"></img>
-											<a href="/book/bookRead?book_id=${b.book_id}"
-												class="fa fa-link"></a>
+								
+											<img src="displayFile?fileName=${b.book_img}" alt="aa" height="280"></img>
+											<a href="/book/bookRead?book_id=${b.book_id}"></a>
 
 											<div class="option inner">
 												<div>
 													<h5>${b.book_name}</h5>
-													<a href="displayFile?fileName=${b.book_img}"
-														class="fa fa-search mfp-image"></a> <a
-														href="/book/bookRead?book_id=${b.book_id}"
-														class="fa fa-link"></a> <span>${b.book_m_price}원</span>
+													<a href="displayFile?fileName=${b.book_img}" class="fa fa-search mfp-image"></a> 
+														<a href="/book/bookRead?book_id=${b.book_id}" class="fa fa-link"></a> 
+													<span>${b.book_m_price}원</span>
 
 													<c:choose>
 														<c:when test="${b.book_sell_state=='I'}">
@@ -200,8 +197,7 @@
 
 											<img src="displayFile?fileName=${b.book_img}" alt="aa"
 												height="280"></img>
-											<a href="/book/bookRead?book_id=${b.book_id}"
-												class="fa fa-link"></a>
+											<a href="/book/bookRead?book_id=${b.book_id}"></a>
 											<div class="option inner">
 												<div>
 													<h5>${b.book_name}</h5>
@@ -241,8 +237,7 @@
 
 											<img src="displayFile?fileName=${b.book_img}" alt="aa"
 												height="280"></img>
-											<a href="/book/bookRead?book_id=${b.book_id}"
-												class="fa fa-link"></a>
+											<a href="/book/bookRead?book_id=${b.book_id}"></a>
 											<div class="option inner">
 												<div>
 													<h5>${b.book_name}</h5>
@@ -280,8 +275,7 @@
 
 											<img src="displayFile?fileName=${b.book_img}" alt="aa"
 												height="280"></img>
-											<a href="/book/bookRead?book_id=${b.book_id}"
-												class="fa fa-link"></a>
+											<a href="/book/bookRead?book_id=${b.book_id}"></a>
 											<div class="option inner">
 												<div>
 													<h5>${b.book_name}</h5>
@@ -317,11 +311,9 @@
 									<div class="recent-item box">
 										<figure class="touching ">
 
-											<img alt="aa" src="displa">
 											<img src="displayFile?fileName=${b.book_img}" alt="aa"
 												height="280"></img>
-											<a href="/book/bookRead?book_id=${b.book_id}"
-												class="fa fa-link"></a>
+											<a href="/book/bookRead?book_id=${b.book_id}"></a>
 											<div class="option inner">
 												<div>
 													<h5>${b.book_name}</h5>
@@ -359,8 +351,7 @@
 
 											<img src="displayFile?fileName=${b.book_img}" alt="aa"
 												height="280"></img>
-											<a href="/book/bookRead?book_id=${b.book_id}"
-												class="fa fa-link"></a>
+											<a href="/book/bookRead?book_id=${b.book_id}"></a>
 											<div class="option inner">
 												<div>
 													<h5>${b.book_name}</h5>
@@ -398,8 +389,7 @@
 
 											<img src="displayFile?fileName=${b.book_img}" alt="aa"
 												height="280"></img>
-											<a href="/book/bookRead?book_id=${b.book_id}"
-												class="fa fa-link"></a>
+											<a href="/book/bookRead?book_id=${b.book_id}"></a>
 											<div class="option inner">
 												<div>
 													<h5>${b.book_name}</h5>

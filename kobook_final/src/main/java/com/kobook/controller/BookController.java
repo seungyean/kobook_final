@@ -141,6 +141,8 @@ public class BookController {
 		model.addAttribute("pageMaker",pageMaker);
 	}
 	
+	
+	
 	@RequestMapping("/booklocationList")
 	public void locationlist(@ModelAttribute("cri") SearchCriteria cri, Model model)throws Exception{
 		model.addAttribute("list", service.directListCriteria(cri));
@@ -153,9 +155,18 @@ public class BookController {
 	
 	
 	@RequestMapping(value="/bookRead",method=RequestMethod.GET)
-	public void read(@RequestParam("book_id")int book_id, @ModelAttribute("cri")SearchCriteria cri, Model model)throws Exception{
+	public void read(@RequestParam("book_id")int book_id, Model model)throws Exception{
+		System.out.println("readCon: book_id: " + book_id);
 		model.addAttribute(service.read(book_id));
+		model.addAttribute("slist",service.sellPersonList(service.getPersonIdByBookId(book_id)));
 	}
+	
+/*	
+	@RequestMapping(value="/bookRead",method=RequestMethod.POST)
+	public void sellPersonListread(@RequestParam("book_id")int book_id, Model model)throws Exception{
+		
+		
+	}*/
 	
 	
 	

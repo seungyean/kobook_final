@@ -6,7 +6,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <% 
-	/* int person_id = Integer.parseInt((String)(session.getAttribute("person_id"))); */
+	int person_id = Integer.parseInt((String)(session.getAttribute("person_id")));
 	//session.setAttribute("person_id", 5);
 %>
 <%-- <%
@@ -77,7 +77,7 @@
 				  <input type="hidden" name="book_id" value="${bookVO.book_id}"> 
              <%--    	<input type="hidden" name="page" value="${cri.page}">
                 	<input type="hidden" name="perPageNum" value="${cri.perPageNum}"> --%>
-                
+                </form>
                 	
                 	
 					<div class="col-lg-8 col-md-8 col-sm-8">
@@ -86,9 +86,7 @@
 							<div class="carousel-content">
 							
 				
-							
-						
-									 <img alt="" class="carousel-item" src="displayFile?fileName=${bookVO.book_img}" width="10px" height="800px">
+									 <img alt="aa" class="carousel-item" src="displayFile?fileName=${bookVO.book_img}" width="10px" height="800px">
 								<!--<img class="carousel-item" src="images/portfolio/portfolio_slider1.png" alt="">
 								<img class="carousel-item" src="images/portfolio/portfolio_slider2.png" alt="">
 								<img class="carousel-item" src="images/portfolio/portfolio_slider3.png" alt=""> -->
@@ -119,7 +117,7 @@
 								<li><span> 판 :</span>${bookVO.book_edition}</li>
 								<li><span>출판사 :</span>${bookVO.book_publish}</li>
 								<li><span>안심여부사용 :</span>${bookVO.book_safe_yn}</li>
-								<li><span>날짜: </span><fmt:formatDate value="${b.book_date}" pattern='yyyy-MM-dd' /></li>
+								<li><span>날짜: </span><fmt:formatDate value="${bookVO.book_date}" pattern='yyyy-MM-dd' /></li>
 								<li><span>책상태 :</span>
 								<c:choose>
 								<c:when test="${bookVO.book_status=='A'}">
@@ -146,50 +144,55 @@
 								</li>
 						</ul> 
 				</div>  <!--/project_details  -->
-		</div>  <!--/col-lg-4 col-md-4 col-sm-4  -->
-  
-								<span><input type="submit" value="수정하기" id="submit" class="btn btn-default btn-lg button">
+									<span>
+								<input type="submit" value="수정하기" id="submit" class="btn btn-default btn-lg button">
 								</span>
-							</form>
+							
 				
 				<form action="/book/pick" method="post" name="pick">	
                      <input type="hidden" name="book_id" value="${bookVO.book_id}">
                      <input type="hidden" name = "person_id" value="${person_id}">
                      <input type="submit" value="찜하기" class="btn btn-default btn-lg button">
                  </form>
-									
-							
+		</div>  <!--/col-lg-4 col-md-4 col-sm-4  -->		
 		</div>  <!--/row sub_content  -->
 		
-<%--  <img src="/kobook/upload/${b.book_img}" alt="aa" height="280" />
-                                 <a href="/kobook/book/detailAction.do?book_id=${b.book_id}"></a> --%>
- 	<%-- 
-			<div class="row sub_content">
+		     
+		     
+		     
+		     
+		     
+		     <div class="row sub_content">
                     <div class="col-md-12">
                         <div class="dividerHeading">
-                            <h4><span>Recent Work</span></h4>
+                            <h4><span>판매자의 다른도서 상품</span></h4>
                         </div>
+                         
                         <div id="recent-work-slider" class="owl-carousel">
-                            <div class="recent-item box">
-                                <figure class="touching ">
-                                	<c:forEach var="b" items="${listModel.list}">
-                                    <img src="/kobook/upload/${b.book_img}" alt=""/>
+                            <c:forEach var="b" items="${slist}">
+                               <figure class="touching ">
+                                  <div class="recent-item box">
+                              
+                                   <img src="displayFile?fileName=${b.book_img}" alt="aa" height="150" width="210"></img>
+									<a href="/book/bookRead?book_id=${b.book_id}"></a>
                                     <div class="option inner">
                                         <div>
                                             <h5>${b.book_name}</h5>
-                                            <a href="/kobook/upload/${b.book_img}" class="fa fa-search mfp-image"></a> 
-                                      		<a href="/kobook/book/detailAction.do?book_id=${b.book_id}" class="fa fa-link"></a> 
-                                            <span>${b.book_m_price}원</span>
+                                          <a href="displayFile?fileName=${b.book_img}" class="fa fa-search mfp-image"></a> 
+                                          <a href="/book/bookRead?book_id=${b.book_id}" class="fa fa-link"></a>
+										  <span>${b.book_m_price}원</span>
                                         </div>
                                     </div>
-                                     </c:forEach>
-                                </figure>
-                            </div> <!--/recent-item box  -->
-                            
-                        </div> <!--/recent-work-slider  -->
-                    </div> <!--/col-md-12  -->
-                </div> <!--/row sub_content  -->
-                --%>
+                               
+                                 </div><!--/판매자다른 상품 recent-item box  -->
+                                 </figure>
+                             </c:forEach>
+                         </div><!--/판매자다른 상품 recent-work-slider  -->
+                         
+                    </div> <!--/판매자다른 상품 col-md-12  -->
+              </div> <!--/판매자다른 상품 row sub_content  -->
+		
+
 			</div> <!--/container  -->
 		</section>
 	</section>
@@ -219,195 +222,117 @@
     <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
 
 	<script type="text/javascript">
+    $(document).ready(function() {
+       $.fn.carousel = function(op) {
+          var op, ui = {};
+          op = $.extend({
+             speed: 500,
+             autoChange: false,
+             interval: 5000
+          }, op);
+          ui.carousel = this;
+          ui.items    = ui.carousel.find('.carousel-item');
+          ui.itemsLen = ui.items.length;
 
-	
-		$(document)
-				.ready(
-						function() {
-							$.fn.carousel = function(op) {
-								var op, ui = {};
-								op = $.extend({
-									speed : 500,
-									autoChange : false,
-									interval : 5000
-								}, op);
-								ui.carousel = this;
-								ui.items = ui.carousel.find('.carousel-item');
-								ui.itemsLen = ui.items.length;
+          // CREATE CONTROLS
+          ui.ctrl    = $('<div />', {'class': 'carousel-control'});
+          ui.prev    = $('<div />', {'class': 'carousel-prev'});
+          ui.next    = $('<div />', {'class': 'carousel-next'});
+          ui.pagList  = $('<ul />', {'class': 'carousel-pagination'});
+          ui.pagItem  = $('<li></li>');
+          for (var i = 0; i < ui.itemsLen; i++) {
+             ui.pagItem.clone().appendTo(ui.pagList);
+          }
+          ui.prev.appendTo(ui.ctrl);
+          ui.next.appendTo(ui.ctrl);
+          ui.pagList.appendTo(ui.ctrl);
+          ui.ctrl.appendTo(ui.carousel);
+          ui.carousel.find('.carousel-pagination li').eq(0).addClass('active');
+          ui.carousel.find('.carousel-item').each(function() {
+             $(this).hide();
+          });
+          ui.carousel.find('.carousel-item').eq(0).show().addClass('active');
+          
+          
+          // CHANGE ITEM
+          var changeImage = function(direction, context) {
+             var current = ui.carousel.find('.carousel-item.active');
 
-								// CREATE CONTROLS
-								ui.ctrl = $('<div />', {
-									'class' : 'carousel-control'
-								});
-								ui.prev = $('<div />', {
-									'class' : 'carousel-prev'
-								});
-								ui.next = $('<div />', {
-									'class' : 'carousel-next'
-								});
-								ui.pagList = $('<ul />', {
-									'class' : 'carousel-pagination'
-								});
-								ui.pagItem = $('<li></li>');
-								for (var i = 0; i < ui.itemsLen; i++) {
-									ui.pagItem.clone().appendTo(ui.pagList);
-								}
-								ui.prev.appendTo(ui.ctrl);
-								ui.next.appendTo(ui.ctrl);
-								ui.pagList.appendTo(ui.ctrl);
-								ui.ctrl.appendTo(ui.carousel);
-								ui.carousel.find('.carousel-pagination li').eq(
-										0).addClass('active');
-								ui.carousel.find('.carousel-item').each(
-										function() {
-											$(this).hide();
-										});
-								ui.carousel.find('.carousel-item').eq(0).show()
-										.addClass('active');
+             if (direction == 'index') {
+                if(current.index() === context.index())
+                   return false;
 
-								// CHANGE ITEM
-								var changeImage = function(direction, context) {
-									var current = ui.carousel
-											.find('.carousel-item.active');
+                context.addClass('active').siblings().removeClass('active');
 
-									if (direction == 'index') {
-										if (current.index() === context.index())
-											return false;
+                ui.items.eq(context.index()).addClass('current').fadeIn(op.speed, function() {
+                   current.removeClass('active').hide();
+                   $(this).addClass('active').removeClass('current');
+                });
+             } 
 
-										context.addClass('active').siblings()
-												.removeClass('active');
+             if (direction == 'prev') {
+                if (current.index() == 0) {
+                   ui.carousel.find('.carousel-item:last').addClass('current').fadeIn(op.speed, function() {
+                      current.removeClass('active').hide();
+                      $(this).addClass('active').removeClass('current');
+                   });
+                }
+                else {
+                   current.prev().addClass('current').fadeIn(op.speed, function() {
+                      current.removeClass('active').hide();
+                      $(this).addClass('active').removeClass('current');
+                   });
+                }
+             }
 
-										ui.items.eq(context.index()).addClass(
-												'current').fadeIn(
-												op.speed,
-												function() {
-													current.removeClass(
-															'active').hide();
-													$(this).addClass('active')
-															.removeClass(
-																	'current');
-												});
-									}
+             if (direction == undefined) {
+                if (current.index() == ui.itemsLen - 1) {
+                   ui.carousel.find('.carousel-item:first').addClass('current').fadeIn(300, function() {
+                      current.removeClass('active').hide();
+                      $(this).addClass('active').removeClass('current');
+                   });
+                }
+                else {
+                   current.next().addClass('current').fadeIn(300, function() {
+                      current.removeClass('active').hide();
+                      $(this).addClass('active').removeClass('current');
+                   });
+                }
+             }
+             ui.carousel.find('.carousel-pagination li').eq( ui.carousel.find('.carousel-item.current').index() ).addClass('active').siblings().removeClass('active');
+          };
 
-									if (direction == 'prev') {
-										if (current.index() == 0) {
-											ui.carousel
-													.find('.carousel-item:last')
-													.addClass('current')
-													.fadeIn(
-															op.speed,
-															function() {
-																current
-																		.removeClass(
-																				'active')
-																		.hide();
-																$(this)
-																		.addClass(
-																				'active')
-																		.removeClass(
-																				'current');
-															});
-										} else {
-											current
-													.prev()
-													.addClass('current')
-													.fadeIn(
-															op.speed,
-															function() {
-																current
-																		.removeClass(
-																				'active')
-																		.hide();
-																$(this)
-																		.addClass(
-																				'active')
-																		.removeClass(
-																				'current');
-															});
-										}
-									}
-
-									if (direction == undefined) {
-										if (current.index() == ui.itemsLen - 1) {
-											ui.carousel
-													.find(
-															'.carousel-item:first')
-													.addClass('current')
-													.fadeIn(
-															300,
-															function() {
-																current
-																		.removeClass(
-																				'active')
-																		.hide();
-																$(this)
-																		.addClass(
-																				'active')
-																		.removeClass(
-																				'current');
-															});
-										} else {
-											current
-													.next()
-													.addClass('current')
-													.fadeIn(
-															300,
-															function() {
-																current
-																		.removeClass(
-																				'active')
-																		.hide();
-																$(this)
-																		.addClass(
-																				'active')
-																		.removeClass(
-																				'current');
-															});
-										}
-									}
-									ui.carousel
-											.find('.carousel-pagination li')
-											.eq(
-													ui.carousel
-															.find(
-																	'.carousel-item.current')
-															.index()).addClass(
-													'active').siblings()
-											.removeClass('active');
-								};
-
-								ui.carousel.on('click', 'li', function() {
-									changeImage('index', $(this));
-								}).on('click', '.carousel-prev', function() {
-									changeImage('prev');
-								}).on('click', '.carousel-next', function() {
-									changeImage();
-								});
-
-								// AUTO CHANGE
-								if (op.autoChange) {
-									var changeInterval = setInterval(
-											changeImage, op.interval);
-									ui.carousel.on('mouseenter', function() {
-										clearInterval(changeInterval);
-									}).on(
-											'mouseleave',
-											function() {
-												changeInterval = setInterval(
-														changeImage,
-														op.interval);
-											});
-								}
-								return this;
-							};
-
-							$('.porDetCarousel').each(function() {
-								$(this).carousel({
-									autoChange : true
-								});
-							});
-
-				);
+          ui.carousel
+             .on('click', 'li', function() {
+                changeImage('index', $(this));
+             })
+             .on('click', '.carousel-prev', function() {
+                changeImage('prev');
+             })
+             .on('click', '.carousel-next', function() {
+                changeImage();
+             });
+          
+          // AUTO CHANGE
+          if (op.autoChange) {
+             var changeInterval = setInterval(changeImage, op.interval);
+             ui.carousel
+                .on('mouseenter', function() {
+                   clearInterval(changeInterval);
+                })
+                .on('mouseleave', function() {
+                   changeInterval = setInterval(changeImage, op.interval);
+                });
+          }
+          return this;
+       };
+       
+       $('.porDetCarousel').each(function() {
+          $(this).carousel({
+             autoChange: true
+          });
+       });
+    });
 		
 		
 	</script>

@@ -56,6 +56,21 @@
 	</select>
 
 
+	<select id="sellPersonList" resultType="BookVO">
+		<![CDATA[
+		select * 
+		from book
+		where person_id=#{person_id}
+		]]>
+		<!--  -->
+	</select>
+
+	<select id="getPersonIdByBookId" resultType="Integer">
+		select person_id
+		from book
+		where book_id = #{book_id}
+	</select>
+
 <sql id="locationsearch">
 <if test="keyword !=null">
 and p.person_address like '%'|| #{keyword}||'%'
