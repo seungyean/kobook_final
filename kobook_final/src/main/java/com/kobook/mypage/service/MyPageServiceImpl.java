@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kobook.book.domain.BookVO;
+import com.kobook.mypage.domain.OrderVO;
 import com.kobook.mypage.persistence.MyPageDAO;
 import com.kobook.person.domain.PersonVO;
 
@@ -59,9 +60,11 @@ public class MyPageServiceImpl implements MyPageService {
 		return dao.orderPerson(person_id);
 	}
 
-//	@Override
-//	public BookVO bookMileage(int book_id) {
-//		return dao.bookMileage(book_id);
-//	}
+	@Override
+	public void orderInsert(OrderVO vo) {
+		dao.orderInsert(vo);
+	}
+
+
 
 }

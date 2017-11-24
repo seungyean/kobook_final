@@ -38,8 +38,7 @@
 		pay p
 		WHERE o.order_id = p.order_id
 		AND o.book_id = b.book_id
-		AND
-		o.person_id = #{person_id}
+		AND o.person_id = #{person_id}
 	</select>
 
 	<!-- 찜리 -->
@@ -55,18 +54,15 @@
 		pick p,
 		person person
 		WHERE b.book_id = p.book_id
-		AND p.person_id
-		= person.person_id
+		AND p.person_id = person.person_id
 		AND p.pick_state = 'Y'
-		AND person.person_id =
-		#{person_id}
+		AND person.person_id = #{person_id}
 	</select>
 
 	<!-- 찜 상태 변경 -->
 	<update id="pickUpdate" parameterType="int">
 		UPDATE pick
-		SET pick_state
-		= 'N'
+		SET pick_state = 'N'
 		WHERE pick_id = #{pick_id}
 	</update>
 
@@ -81,12 +77,11 @@
 		WHERE
 		m.pay_id = p.pay_id
 		AND p.order_id = o.order_id
-		AND o.person_id =
-		#{person_id}
+		AND o.person_id = #{person_id}
 	</select>
 
 
-	<!-- 마일리지 리스트 -->
+	<!-- 주문내역 -->
 	<select id="orderList" resultType="hashMap">
 		SELECT b.book_img,
 		b.book_name,
@@ -100,6 +95,14 @@
 		AND o.person_id = #{person_id}
 	</select>
 
+	<!-- 주문내역 -->
+	<insert id="orderInsert" parameterType="OrderVO">
+		INSERT INTO book_order 
+		VALUES (order_id_seq.NEXTVAL, 
+             	To_char(To_date(sysdate), 'YYYY-MM-DD'), 
+            	#{book_id}, 
+             	#{person_id})
+	</insert>
 	
 
 
