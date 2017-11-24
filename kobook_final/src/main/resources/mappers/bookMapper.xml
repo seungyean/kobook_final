@@ -70,6 +70,22 @@
 		from book
 		where book_id = #{book_id}
 	</select>
+	
+	<!--판매자정보  -->
+	<select id="readSellPerson" resultType="PersonDTO">
+    select person_id, person_email,person_sell_grade, person_avg from person where person_id=#{person_id}
+	</select>
+	
+<!-- 	<insert id="reviewCreate" parameterType="ReviewVO">
+	insert into review(
+	review_id, review_content, review_date, review_star, pay_id
+	)
+	values(
+		review_id_seq.nextval, #{review_content}, SYSDATE,
+		#{review_star},#{pay_id},
+		)
+	</insert> -->
+	
 
 <sql id="locationsearch">
 <if test="keyword !=null">
@@ -187,6 +203,11 @@ and p.person_address like '%'|| #{keyword}||'%'
 		</insert> -->
 		
 		
+	<!-- <select id="payPerson" resultType="PersonVO" parameterType="int">
+		SELECT *
+		FROM person
+		WHERE person_id = #{person_id}
+	</select> -->
 
 
 

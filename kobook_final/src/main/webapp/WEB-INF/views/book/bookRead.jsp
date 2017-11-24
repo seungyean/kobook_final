@@ -158,6 +158,33 @@
 		</div>  <!--/row sub_content  -->
 		
 		     
+		 <!--     <img alt="" src="resources/img/vip.jpg"> -->
+		       <div class="row sub_content">
+                    <div class="col-md-12">
+                        <div class="dividerHeading">
+                            <h4><span>판매자정보</span></h4>
+                        </div>
+  
+                      		 <h2> 이메일 : ${s.person_email} &nbsp;&nbsp;
+                       		 등급 :
+                       		 	<c:choose>
+								<c:when test="${s.person_sell_grade=='U'}">
+								<img alt="" src="/resources/img/vip.jpg">
+								</c:when>
+								<c:when test="${s.person_sell_grade=='M'}">
+								<img alt="" src="/resources/img/gold.jpg">
+								</c:when>
+								<c:when test="${s.person_sell_grade=='D'}">
+								<img alt="" src="/resources/img/green.jpg">
+								</c:when>
+								</c:choose>
+                       		 &nbsp;&nbsp;
+                       		 평점 :${s.person_avg}
+							</h2>
+                    </div>
+               </div>
+               
+               
 		     
 		     
 		     

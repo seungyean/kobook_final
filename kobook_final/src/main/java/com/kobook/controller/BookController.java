@@ -27,8 +27,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kobook.book.domain.PickVO;
+import com.kobook.book.domain.ReviewVO;
 import com.kobook.book.domain.BookVO;
 import com.kobook.book.domain.PageMaker;
+import com.kobook.book.domain.PersonDTO;
 import com.kobook.book.domain.SearchCriteria;
 import com.kobook.book.service.BookService;
 import com.kobook.util.MediaUtils;
@@ -155,9 +157,10 @@ public class BookController {
 	
 	
 	@RequestMapping(value="/bookRead",method=RequestMethod.GET)
-	public void read(@RequestParam("book_id")int book_id, Model model)throws Exception{
+	public void read(@RequestParam("book_id")int book_id, PersonDTO person, Model model)throws Exception{
 		System.out.println("readCon: book_id: " + book_id);
 		model.addAttribute(service.read(book_id));
+		model.addAttribute("s",service.readSellPerson(service.getPersonIdByBookId(book_id)));
 		model.addAttribute("slist",service.sellPersonList(service.getPersonIdByBookId(book_id)));
 	}
 	
@@ -168,7 +171,19 @@ public class BookController {
 		
 	}*/
 	
+	/*@RequestMapping(value="/reviewRegist",method=RequestMethod.POST)
+	public void reviewRegist(ReviewVO review, Model model)throws Exception{
+		System.out.println("ÈÄ±â±ÛÆû");
+	}*/
 	
+	/*@RequestMapping(value="/reviewRegist",method=RequestMethod.POST)
+	public String reviewRegistPOST(ReviewVO review, Model model)throws Exception{
+		
+		 System.out.println(review.toString()); 
+	     service.reviewregist(review);
+		 return "redirect:/book/bookRead";
+		
+	}*/
 	
 	
 	private String uploadFile(String originalName, byte[] fileData) throws Exception{

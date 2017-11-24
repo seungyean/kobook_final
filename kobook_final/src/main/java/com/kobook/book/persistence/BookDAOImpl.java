@@ -11,7 +11,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kobook.book.domain.PickVO;
+import com.kobook.book.domain.ReviewVO;
 import com.kobook.book.domain.BookVO;
+import com.kobook.book.domain.PersonDTO;
 import com.kobook.book.domain.SearchCriteria;
 
 @Repository
@@ -52,8 +54,14 @@ public class BookDAOImpl implements BookDAO {
 		return session.selectList(namespace+".safeListCriteria",cri,new RowBounds(cri.getPageStart(),cri.getPerPageNum()));
 	}
 
-
 	
+
+	@Override
+	public PersonDTO readSellPerson(int person_id) throws Exception {
+		return session.selectOne(namespace+".readSellPerson",person_id);
+	}
+
+
 
 
 	@Override
@@ -89,6 +97,21 @@ public class BookDAOImpl implements BookDAO {
 	public int getPersonIdByBookId(int book_id) throws Exception {
 		return session.selectOne(namespace +".getPersonIdByBookId", book_id);
 	}
+
+
+
+
+	@Override
+	public void reviewCreate(ReviewVO review) throws Exception {
+		session.insert(namespace+".reviewCreate");
+		
+	}
+
+
+
+
+
+	
 	
 	
 	

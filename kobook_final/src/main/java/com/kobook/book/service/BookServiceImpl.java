@@ -7,7 +7,9 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.kobook.book.domain.PickVO;
+import com.kobook.book.domain.ReviewVO;
 import com.kobook.book.domain.BookVO;
+import com.kobook.book.domain.PersonDTO;
 import com.kobook.book.domain.SearchCriteria;
 import com.kobook.book.persistence.BookDAO;
 
@@ -56,8 +58,15 @@ public class BookServiceImpl implements BookService {
 		return dao.safeListCriteria(cri);
 	}
 
-
 	
+
+
+	@Override
+	public PersonDTO readSellPerson(int person_id) throws Exception {
+		return dao.readSellPerson(person_id);
+	}
+
+
 
 
 	@Override
@@ -73,6 +82,16 @@ public class BookServiceImpl implements BookService {
 		return dao.countPaging(cri);
 	}
 
+
+	
+
+
+
+	@Override
+	public void reviewregist(ReviewVO review) throws Exception {
+		dao.reviewCreate(review);
+		
+	}
 
 
 
