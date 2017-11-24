@@ -17,6 +17,13 @@
 	</update>
 	
 	
+	<select id="alarmCount" resultType="int" parameterType="int">
+		SELECT COUNT(*)
+		FROM ALARM
+		where PERSON_ID=#{person_id}
+		and HIT_YN='N'
+	</select>
+	
 	
 	<!-- 알람 리스트 관련 매퍼 -->
 	

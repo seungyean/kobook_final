@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	int alarm_new=0;
+	//int alarm_new=0;
 %>
 
 <% 
@@ -20,7 +20,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script
+  src="https://code.jquery.com/jquery-2.2.4.js"
+  integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+  crossorigin="anonymous"></script>
+  
 <script type="text/javascript">
+
+	$(function(){
+		$.getJSON('/alarmCount',function(data){
+			$("#alarm_new").html(data);
+		})
+	});
 
 	function popupMessage(){
 		
@@ -124,12 +135,14 @@
 									
 									<span>
 									${person_email }님 로그인중 
-										<c:forEach var="z" items="${alarmList }">
+<%-- 										<c:forEach var="z" items="${alarmList }">
 	    									<c:if test="${z.hit_yn == 'N' }">
 	             								<% alarm_new += 1;%>
 	        								</c:if> 
-	    								</c:forEach>
-										<a href="#" onclick="fn_newAlarm()">새로온 알림  [ <%=alarm_new %> ]</a> 
+	    								</c:forEach> --%>
+										<a href="#" onclick="fn_newAlarm()">새로온 알림  [ </a> 
+										<a href="#" id="alarm_new"></a> 
+										<a href="#"> ]</a> 
 										<a href="#" onclick="fn_logout()"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 로그아웃</a>
   											<form action="/alarmUpdate" method="post" name="alarmUpdate"></form>
 									</span> 

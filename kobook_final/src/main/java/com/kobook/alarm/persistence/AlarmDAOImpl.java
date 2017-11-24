@@ -35,4 +35,13 @@ public class AlarmDAOImpl implements AlarmDAO {
 		session.insert(namespace + ".alarmMessage", alarmVO);
 	}
 
+	@Override
+	public int alarmCount(int person_id) {
+		System.out.println("dao - alarmCount");
+		int a = session.selectOne(namespace + ".alarmCount", person_id);
+		System.out.println("dao a : "+a);
+		System.out.println(person_id);
+		return a;
+	}
+
 }

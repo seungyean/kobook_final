@@ -35,4 +35,12 @@ public class AlarmServiceImpl implements AlarmService{
 		System.out.println("service - alarmMsg");
 		dao.alarmMessage(alarmVO);
 	}
+
+	@Override
+	public int alarmCount(int person_id) {
+		System.out.println("service - alarmCount");
+		int b = dao.alarmCount(person_id);
+		return b;
+	}
+	
 }
