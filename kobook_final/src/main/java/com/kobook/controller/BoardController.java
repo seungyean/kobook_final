@@ -4,6 +4,8 @@ package com.kobook.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +21,7 @@ import com.kobook.board.domain.BoardVO;
 import com.kobook.board.service.BoardService;
 import com.kobook.book.domain.PageMaker;
 import com.kobook.book.domain.SearchCriteria;
+
 
 @Controller
 @RequestMapping("/board/*")
@@ -45,14 +48,15 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/boardList", method = RequestMethod.GET)
-	public void BoardList(@ModelAttribute("cri") SearchCriteria cri, Model model)throws Exception{
+	public void BoardList(@ModelAttribute("cri") SearchCriteria cri, Model model, HttpServletRequest request)throws Exception{
+		HttpSession session = request.getSession();
 		model.addAttribute("list", service.boardListCri(cri));
 		PageMaker pageMaker=new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(service.boardcountPaging(cri));
 		model.addAttribute("pageMaker",pageMaker);
+		model.addAttribute("cur_id", session.getAttribute("cur_id"));
 	}
-	
 	
 	@RequestMapping("/adminMain")
 	public String admin()throws Exception {
@@ -61,24 +65,42 @@ public class BoardController {
 	}
 	
 	
-	@RequestMapping("boardDetail")
+	@RequestMapping("/boardDetail")
 	public void blackRead(@RequestParam("board_id") int board_id, Model model,
 			@ModelAttribute("cri") SearchCriteria cri) throws Exception{
 		model.addAttribute(service.boardRead(board_id));
 	}
-	
 
-	@RequestMapping("boardRemove")
+	@RequestMapping("/boardRemove")
 	public String boardRemove(@RequestParam("board_id")Integer board_id, SearchCriteria cri, RedirectAttributes rttr)throws Exception {
-		
+
 		service.boardRemove(board_id);
 		
 		rttr.addAttribute("page", cri.getPage());
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());
 		rttr.addAttribute("searchType", cri.getSearchType());
 		rttr.addAttribute("keyword", cri.getKeyword());
-		
 		rttr.addFlashAttribute("msg", "SUCCESS");
+		
+		return "redirect:/board/boardList";
+	}
+	
+	@RequestMapping(value = "/boardModify", method = RequestMethod.GET)
+	public void boardModifyGet(@RequestParam("board_id") int board_id, Model model,
+			@ModelAttribute("cri") SearchCriteria cri) throws Exception {
+			System.out.println("modifyGET");
+		model.addAttribute(service.boardRead(board_id));
+	}
+	
+	@RequestMapping(value = "/boardModify", method = RequestMethod.POST)
+	public String boardModifyPost(RedirectAttributes rtts, BoardVO vo, SearchCriteria cri) throws Exception {
+		service.boardModify(vo);
+		
+		rtts.addAttribute("page", cri.getPage());
+		rtts.addAttribute("perPageNum", cri.getPerPageNum());
+		rtts.addAttribute("searchType", cri.getSearchType());
+		rtts.addAttribute("keyword", cri.getKeyword());
+
 		
 		return "redirect:/board/boardList";
 	}

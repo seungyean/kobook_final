@@ -151,7 +151,7 @@
                 </div>
                 <form action="/board/boardInsert" method="post">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="작성자" name ="board_writer">
+                        <input type="text" class="form-control" placeholder="관리자" name ="board_writer">
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="제목" name ="board_title">

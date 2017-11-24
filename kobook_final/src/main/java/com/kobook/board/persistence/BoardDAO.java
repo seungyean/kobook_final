@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.kobook.board.domain.BoardVO;
 import com.kobook.book.domain.SearchCriteria;
+import com.kobook.community.domain.BlackVO;
 
 
 public interface BoardDAO {
@@ -29,4 +30,7 @@ public interface BoardDAO {
 	
 	//공지사항 삭제
 	public void boardRemove(Integer board_id)throws Exception;
+	
+	//공시사항 수정
+	public void boardUpdate(BoardVO vo) throws Exception;
 }

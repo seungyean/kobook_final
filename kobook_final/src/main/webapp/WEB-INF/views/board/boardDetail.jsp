@@ -8,7 +8,6 @@
 	System.out.println("실제 로그인 cur_id: " + cur_id);
 %>
 
-
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -23,13 +22,11 @@
 <meta name="description" content="">
 
 <!-- CSS FILES -->
-<link rel="stylesheet" href="/resources/css/bootstrap.min.css" />
-<link rel="stylesheet" href="/resources/css/style.css">
-<link rel="stylesheet" type="/resources/text/css"
-	href="/resources/css/style.css" media="screen" data-name="skins">
-<link rel="stylesheet" href="/resources/css/animate.css" type="text/css" />
-<link rel="stylesheet" href="/resources/css/layout/wide.css"
-	data-name="layout">
+ <!-- CSS FILES -->
+    <link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/resources/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/style.css" media="screen" data-name="skins">
+    <link rel="stylesheet" href="/resources/css/layout/wide.css" data-name="layout">
 
 <link rel="stylesheet" type="/resources/text/css"
 	href="/resources/css/switcher.css" media="screen" />
@@ -41,6 +38,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+
 <body class="home">
 	<!--Start Header-->
 	<!-- 헤더 -->
@@ -75,7 +73,7 @@
 			</div>
 
 
-			<h4>공지사항 세부</h4>
+			<h4>공지사항 세부  </h4>
 
 			<table class="table table-bordered" style="text-align: center;">
 				<tr height="50">
@@ -105,25 +103,38 @@
 					type="button" value="삭제" onclick="remove_fn()"> <input
 					type="button" value="목록" onclick='history.back(-1); return false;'>
 			</div> -->
-				<form role="form" action="boardModify" method="post">
+<%-- 				<form role="form" action="boardModify" method="post">
 					<input type='hidden' name='board_id' value="${boardVO.board_id}">
 					<input type='hidden' name='page' value="${cri.page}">
 					<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
 					<input type='hidden' name='searchType' value="${cri.searchType}">
 					<input type='hidden' name='keyword' value="${cri.keyword}">
-				</form> 
+				</form>  --%>
 			
-			
-
-			<form role="form" action="boardRemove" method="post">
-			<div class="box-footer" align="center">
-			<input type='hidden' name='board_id' value="${boardVO.board_id}">
-			<button type="submit" value="수정" id="modifyBtn">수정</button>
-			<button type="submit" value="삭제" id="removeBtn">삭제</button>
-			<button type="submit" value="목록" onclick='history.back(-1); return false;'>목록</button>
-			</div>
+			<div class="box-footer">
+<%-- 			<form role="form" action="boardModify" method="post" >			
+				<input type='hidden' name='board_id' value="${boardVO.board_id}">
+					<input type='hidden' name='page' value="${cri.page}">
+					<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
+					<input type='hidden' name='searchType' value="${cri.searchType}">
+					<input type='hidden' name='keyword' value="${cri.keyword}">				
+			</form> --%>
+			<form role="form" action="modify" method="post">
+ 					<input type='hidden' name='board_id' value="${boardVO.board_id }">
+					<input type='hidden' name='page' value="${cri.page}">
+					<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
+					<input type='hidden' name='searchType' value="${cri.searchType}">
+					<input type='hidden' name='keyword' value="${cri.keyword}">
+					<button type="submit" value="삭제" class="btn btn-danger" id="removeBtn">삭제</button>	
+					<button type="submit" value="수정" class="btn btn-warning" id="modifyBtn">수정</button>			
 			</form>
-
+			
+			<div align="center">
+				<button type="submit" value="목록" onclick='history.back(-1); return false;'>목록</button> 
+			</div>
+			
+			</div>
+			
 			<!--Sidebar Widget-->
 			<div class="col-lg-4">
 				<div class="sidebar">
@@ -146,74 +157,61 @@
 	<!--end wrapper-->
 
 
-	<script type="/resources/text/javascript"
-		src="/resources/js/jquery-1.10.2.min.js"></script>
-	<script src="/resources/js/bootstrap.min.js"></script>
-	<script src="/resources/js/jquery.easing.1.3.js"></script>
-	<script src="/resources/js/retina-1.1.0.min.js"></script>
-	<script type="/resources/text/javascript"
-		src="/resources/js/jquery.cookie.js"></script>
-	<!-- jQuery cookie -->
-	<script type="/resources/text/javascript"
-		src="/resources/js/styleswitch.js"></script>
-	<!-- Style Colors Switcher -->
-	<script type="/resources/text/javascript"
-		src="/resources/js/jquery.smartmenus.min.js"></script>
-	<script type="/resources/text/javascript"
-		src="/resources/js/jquery.smartmenus.bootstrap.min.js"></script>
-	<script type="/resources/text/javascript"
-		src="/resources/js/jflickrfeed.js"></script>
-	<script type="/resources/text/javascript"
-		src="/resources/js/jquery.magnific-popup.min.js"></script>
-	<script type="/resources/text/javascript"
-		src="/resources/js/jquery.isotope.min.js"></script>
-	<script type="/resources/text/javascript" src="/resources/js/swipe.js"></script>
-	<script type="/resources/text/javascript"
-		src="/resources/js/jquery-scrolltofixed-min.js"></script>
+	<script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
+    <script src="/resources/js/bootstrap.min.js"></script>
+    <script src="/resources/js/jquery.easing.1.3.js"></script>
+    <script src="/resources/js/retina-1.1.0.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.cookie.js"></script> <!-- jQuery cookie -->
+    <script type="text/javascript" src="/resources/js/styleswitch.js"></script> <!-- Style Colors Switcher -->
+    <script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.smartmenus.bootstrap.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jflickrfeed.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.magnific-popup.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.isotope.min.js"></script>
+    <script type="text/javascript" src="/resources/js/swipe.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
 
-	<script src="/resources/js/main.js"></script>
+	<script type="text/javascript" src="/resources/js/upload.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+    <script src="/resources/js/main.js"></script>
 
-<script type="text/javascript">
-
-
-var result = '${msg}';
+</body>
+<script>
+ 
+	var result = '${msg}';
 
 if (result == 'SUCCESS') {
-	alert("삭제가 완료되었습니다.");
+	alert("처리가  완료되었습니다.");
 	location.replace(self.location);
 }
-
 
 $(document).ready(function(){
 	var formObj = $("form[role='form']");
 	console.log(formObj);
-/*  	$(".btn-warning").on("click", function(){
-		formObj.attr("action", "/board/modifyPage");
+    	$(".btn-warning").on("click", function(){
+		formObj.attr("action", "/board/boardModify"); */
 		formObj.attr("method", "get");		
 		formObj.submit();
-	});
+	}); 
+  	
+ 	$("#modifyBtn").on("click", function(){
+		formObj.attr("method", "get");
+   		formObj.attr("action", "/board/boardModify"); 
+		formObj.submit();
+	}); 
 	
 	$(".btn-danger").on("click", function(){
-		formObj.attr("action", "/board/removePage");
+		formObj.attr("action", "/board/boardRemove");
 		formObj.submit();
 	});
-	  */
-	$(".removeBtn").on("click", function(){
-		formObj.attr("action", "/board/removePage");
+	  
+	$("#removeBtn").on("click", function(){
+		formObj.attr("method", "post");
+		formObj.attr("action", "/board/boardRemove");
 		formObj.submit();
 	});
-	
-	$(".modifyBtn").on("click", function(){
-		formObj.attr("method", "get");
-		formObj.attr("action", "/board/modifyPage");
-		formObj.submit();
-	});
-	
 });
+
 </script>
 
-	<!-- Start Style Switcher -->
-	<div class="switcher"></div>
-	<!-- End Style Switcher -->
-</body>
 </html>

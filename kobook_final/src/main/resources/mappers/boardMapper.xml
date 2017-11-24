@@ -74,6 +74,17 @@
 	<delete id="boardRemove" parameterType="Integer">
 		delete from board where board_id = #{board_id}
 	</delete>
+	
+	 <update id="boardUpdate">
+		update board set board_title = #{board_title}, board_content = #{board_content} 
+		where board_id = #{board_id}
+	</update> 
+
+<!--  <select id="selectPersonName" resultType="Person" parameterType="int">
+      select P.PERSON_NAME from photo D join person P on D.person_id = P.person_id
+         where D.PERSON_ID =#{person_id} and D.photo_id = #{photo_id}
+   </select> -->
+
 
 </mapper>
 

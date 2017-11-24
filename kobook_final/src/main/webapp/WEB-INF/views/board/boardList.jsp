@@ -4,8 +4,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%
-/* 	int cur_id = Integer.parseInt((String) session.getAttribute("person_id")); */
-	session.setAttribute("person_id", "1");
+/* 	session.setAttribute("person_id", "1");
+	int cur_id = Integer.parseInt((String) session.getAttribute("person_id"));
+	System.out.println("리스트 cur_id: " + cur_id); */
 %>
 
 
@@ -94,14 +95,12 @@ alert("회원용");
 				<option value="tc"
 					<c:out value="${cri.searchType eq 'tc'?'selected':''}"/>>
 					Title OR Content</option>
-			</select>
-			
-			<input type="text" name='keyword' id="keywordInput"	value='${cri.keyword }'>
+			</select> <input type="text" name='keyword' id="keywordInput"
+				value='${cri.keyword }'>
 			<button id='searchBtn'>Search</button>
 			<button id='newBtn'>New Board</button>
-			<br>
-			<br>
-	
+			<br> <br>
+
 
 			<form role="form" method="POST">
 				<input type='hidden' name='board_id' value="{boardVO.board_id">
@@ -120,7 +119,8 @@ alert("회원용");
 					<tr>
 						<td>${list.board_id }</td>
 						<td>${list.board_writer }</td>
-						<td align="left"><a href="/board/boardDetail?board_id=${list.board_id }">${list.board_title }</a></td>
+						<td align="left"><a
+							href="/board/boardDetail?board_id=${list.board_id }">${list.board_title }</a></td>
 						<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
 								value="${list.board_date }" /></td>
 						<td><span>${list.board_hit }</span></td>
@@ -128,34 +128,38 @@ alert("회원용");
 				</c:forEach>
 			</table>
 
+			
+			<div class="box-footer">
 
-<div class="box-footer">
+			<c:if test="${cur_id==1}">
+				<input type="submit" value="등록" id="insertBtn">	
+			</c:if>
 
-					<div class="text-center">
-						<ul class="pagination">
+				<div class="text-center">
+					<ul class="pagination">
 
-							<c:if test="${pageMaker.prev}">
-								<li><a
-									href="boardList${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
-							</c:if>
+						<c:if test="${pageMaker.prev}">
+							<li><a
+								href="boardList${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
+						</c:if>
 
-							<c:forEach begin="${pageMaker.startPage }"
-								end="${pageMaker.endPage }" var="idx">
-								<li
-									<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-									<a href="boardList${pageMaker.makeSearch(idx)}">${idx}</a>
-								</li>
-							</c:forEach>
+						<c:forEach begin="${pageMaker.startPage }"
+							end="${pageMaker.endPage }" var="idx">
+							<li
+								<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+								<a href="boardList${pageMaker.makeSearch(idx)}">${idx}</a>
+							</li>
+						</c:forEach>
 
-							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-								<li><a
-									href="boardList${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
-							</c:if>
+						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+							<li><a
+								href="boardList${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
+						</c:if>
 
-						</ul>
-					</div>
-
+					</ul>
 				</div>
+
+			</div>
 
 
 
@@ -281,63 +285,69 @@ alert("회원용");
 	<!--end wrapper-->
 
 	<!-- 푸터 -->
- 		 <jsp:include page="/WEB-INF/views/include/footer.jsp" />
-  	<!-- /푸터 -->
+	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+	<!-- /푸터 -->
 
-	
 
-	 <script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
-    <script src="/resources/js/bootstrap.min.js"></script>
-    <script src="/resources/js/jquery.easing.1.3.js"></script>
-    <script src="/resources/js/retina-1.1.0.min.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.cookie.js"></script> <!-- jQuery cookie -->
-    <script type="text/javascript" src="/resources/js/styleswitch.js"></script> <!-- Style Colors Switcher -->
-    <script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.smartmenus.bootstrap.min.js"></script>
-        <script type="text/javascript" src="/resources/js/jflickrfeed.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.magnific-popup.min.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.isotope.min.js"></script>
-    <script type="text/javascript" src="/resources/js/swipe.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
 
-    <script src="/resources/js/main.js"></script>
+	<script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
+	<script src="/resources/js/bootstrap.min.js"></script>
+	<script src="/resources/js/jquery.easing.1.3.js"></script>
+	<script src="/resources/js/retina-1.1.0.min.js"></script>
+	<script type="text/javascript" src="/resources/js/jquery.cookie.js"></script>
+	<!-- jQuery cookie -->
+	<script type="text/javascript" src="/resources/js/styleswitch.js"></script>
+	<!-- Style Colors Switcher -->
+	<script type="text/javascript"
+		src="/resources/js/jquery.smartmenus.min.js"></script>
+	<script type="text/javascript"
+		src="/resources/js/jquery.smartmenus.bootstrap.min.js"></script>
+	<script type="text/javascript" src="/resources/js/jflickrfeed.js"></script>
+	<script type="text/javascript"
+		src="/resources/js/jquery.magnific-popup.min.js"></script>
+	<script type="text/javascript"
+		src="/resources/js/jquery.isotope.min.js"></script>
+	<script type="text/javascript" src="/resources/js/swipe.js"></script>
+	<script type="text/javascript"
+		src="/resources/js/jquery-scrolltofixed-min.js"></script>
 
-<script>
-	var result = '${msg}';
+	<script src="/resources/js/main.js"></script>
 
-	if (result == 'SUCCESS') {
-		alert("처리가 완료되었습니다.");
-		location.replace(self.location);
-	}
-</script>
+	<script>
+		var result = '${msg}';
 
-<script>
-	$(document).ready(
-			function() {
+		if (result == 'SUCCESS') {
+			alert("처리가 완료되었습니다.");
+			location.replace(self.location);
+		}
+	</script>
 
-				$('#searchBtn').on(
-						"click",
-						function(event) {
+	<script>
+		$(document).ready(
+				function() {
 
-							self.location = "boardList"
-									+ '${pageMaker.makeQuery(1)}'
-									+ "&searchType="
-									+ $("select option:selected").val()
-									+ "&keyword=" + $('#keywordInput').val();
-						});
+					$('#searchBtn').on(
+							"click",
+							function(event) {
 
-				$('#newBtn').on("click", function(evt) {
+								self.location = "boardList"
+										+ '${pageMaker.makeQuery(1)}'
+										+ "&searchType="
+										+ $("select option:selected").val()
+										+ "&keyword="
+										+ $('#keywordInput').val();
+							});
 
-					self.location = "boardList";
+					$('#newBtn').on("click", function(evt) {
+
+						self.location = "boardList";
+
+					});
 
 				});
+	</script>
 
-			});
-</script>
 
-	<!-- Start Style Switcher -->
-	<div class="switcher"></div>
-	<!-- End Style Switcher -->
 
 </body>
 </html>

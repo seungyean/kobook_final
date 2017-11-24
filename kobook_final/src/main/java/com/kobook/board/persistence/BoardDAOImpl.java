@@ -54,4 +54,9 @@ public class BoardDAOImpl implements BoardDAO {
 	public void boardRemove(Integer board_id)throws Exception {
 		session.delete(namespace +".boardRemove", board_id);
 	}
+	
+	@Override
+	public void boardUpdate(BoardVO vo) throws Exception {
+		session.update(namespace+".boardUpdate", vo);
+	}
 }
