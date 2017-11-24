@@ -29,4 +29,10 @@ public class AlarmDAOImpl implements AlarmDAO {
 		System.out.println("dao - update");
 	}
 
+	@Override
+	public void alarmMessage(AlarmVO alarmVO) {
+		System.out.println("dao - alarmMsg");
+		session.insert(namespace + ".alarmMessage", alarmVO);
+	}
+
 }

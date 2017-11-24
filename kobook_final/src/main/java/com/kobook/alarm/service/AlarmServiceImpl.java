@@ -29,5 +29,10 @@ public class AlarmServiceImpl implements AlarmService{
 		System.out.println("service - update");
 		dao.alarmUpdate(person_id);
 	}
-	
+
+	@Override
+	public void alarmMessage(AlarmVO alarmVO) throws Exception {
+		System.out.println("service - alarmMsg");
+		dao.alarmMessage(alarmVO);
+	}
 }

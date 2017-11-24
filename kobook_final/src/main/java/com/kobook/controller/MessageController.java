@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kobook.person.service.PersonService;
+import com.kobook.alarm.domain.AlarmVO;
+import com.kobook.alarm.service.AlarmService;
 import com.kobook.message.DTO.MessageDTO;
 import com.kobook.message.domain.MessageVO;
 import com.kobook.message.service.MessageService;
@@ -27,6 +29,9 @@ public class MessageController {
 
 	@Inject
 	private PersonService pService;
+	
+	@Inject
+	private AlarmService alarmService;
 	
 	// 쪽지 form으로 이동
 	@RequestMapping(value="/messageSend")
@@ -42,7 +47,18 @@ public class MessageController {
 		System.out.println("보낼 사람 id:" + pService.findPersonId(dto.getReceiver_email()));
 		
 		int receiver_id = pService.findPersonId(dto.getReceiver_email());
-	
+		
+		
+		//메세지를 보내면 알람 보내는 서비스 (아름)
+		AlarmVO alarmVO = new AlarmVO();
+		
+		alarmVO.setAlarm_kind("Message");
+		alarmVO.setAlarm_content("새 쪽지가 도착하였습니다.");
+		alarmVO.setPerson_id(receiver_id);
+		
+		alarmService.alarmMessage(alarmVO);
+		
+		
 		// 해당 email을 가진 사용자가 존재하지 않으면 -1 반환
 		if(receiver_id == -1){
 			
