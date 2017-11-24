@@ -59,4 +59,9 @@ public class MyPageServiceImpl implements MyPageService {
 		return dao.orderPerson(person_id);
 	}
 
+//	@Override
+//	public BookVO bookMileage(int book_id) {
+//		return dao.bookMileage(book_id);
+//	}
+
 }

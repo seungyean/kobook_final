@@ -61,6 +61,11 @@ public class MyPageDAOImpl implements MyPageDAO {
 		return session.selectOne(namespace + ".orderPerson", person_id);
 	}
 
+//	@Override
+//	public BookVO bookMileage(int book_id) {
+//		return session.selectOne(namespace + ".bookMileage", book_id);
+//	}
+
 
 
 }

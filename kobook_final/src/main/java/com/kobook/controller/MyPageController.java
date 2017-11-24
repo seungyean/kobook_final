@@ -108,6 +108,11 @@ public class MyPageController {
 		HttpSession session = request.getSession();
 		int person_id = Integer.parseInt((String)session.getAttribute("person_id"));
 		
+//		BookVO book = service.bookMileage(book_id);
+//		int  strBook = book.getBook_m_price();
+//		int bookMileage = (int) (strBook * 0.01);
+//		
+//		model.addAttribute("bookMileage",bookMileage);
 		
 		model.addAttribute("mileageList", service.mileageList(person_id));
 	}
@@ -122,7 +127,21 @@ public class MyPageController {
 		
 		model.addAttribute("orderList", service.orderList(person_id));
 		model.addAttribute( service.orderPerson(person_id));
-		System.out.println( service.orderPerson(person_id));
+		
+		PersonVO person = service.orderPerson(person_id);
+		
+		// 휴대폰 - 
+		String strPhone[] = person.getPerson_phone().split("-");
+		
+		model.addAttribute("phone0", strPhone[0]);
+		model.addAttribute("phone1", strPhone[1]);
+		model.addAttribute("phone2", strPhone[2]);
+		
+		// 이메일 @
+		String strEmail[] = person.getPerson_email().split("@");
+		model.addAttribute("email0", strEmail[0]);
+		model.addAttribute("email1", strEmail[1]);
+		
 	}
 	
 	

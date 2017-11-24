@@ -17,4 +17,5 @@ public interface MyPageService {
 	public  List<HashMap<String, String>> mileageList(int person_id);
 	public  List<HashMap<String, String>> orderList(int person_id);
 	public PersonVO orderPerson(int person_id);
+//	public BookVO bookMileage(int book_id);
 }
