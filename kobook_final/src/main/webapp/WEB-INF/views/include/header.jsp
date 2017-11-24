@@ -50,11 +50,9 @@
 		
 	}
 	
-	function fn_newAlarm() {
-		
-		document.alarmUpdate.action = "/alarmUpdate";
-		document.alarmUpdate.submit();
-		
+	function fn_newAlarm() {		
+		window.open("/alarmList","","width=500,height=300,left=550,top=200");
+
 	}
 	
 	function fn_login(){

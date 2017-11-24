@@ -24,29 +24,31 @@ public class AlarmController {
 	private AlarmService service;
 	
 	@RequestMapping(value="/alarmList", method=RequestMethod.GET)
-	public String alarmList(HttpServletRequest request, RedirectAttributes rttr) throws Exception {
-		System.out.println("controller - list");
+	public String alarmView(HttpServletRequest request) throws Exception {
+		System.out.println("controller - view");
 		
 		HttpSession session = request.getSession();
 		int person_id = Integer.parseInt((String)session.getAttribute("person_id"));
 		
 		List<AlarmVO> alarmList = service.alarmListService(person_id);
+		request.setAttribute("alarmList", alarmList);
 		
-		rttr.addFlashAttribute("alarmList", alarmList);
-		
-		return "redirect:/recom";
+		return "/person/alarm";
 	}
 	
-	@RequestMapping(value="/alarmUpdate", method=RequestMethod.POST)
-	public String alarmUpdate(HttpServletRequest request) throws Exception {
+	@RequestMapping(value="/alarmUpdate", method=RequestMethod.GET)
+	public String alarmUpdate(HttpServletRequest request, RedirectAttributes rttr) throws Exception {
 		System.out.println("controller - update");
 		
 		HttpSession session = request.getSession();
 		int person_id = Integer.parseInt((String)session.getAttribute("person_id"));
 		
+		List<AlarmVO> alarmList = service.alarmListService(person_id);
+		rttr.addFlashAttribute("alarmList", alarmList);
+		
 		service.alarmUpdateService(person_id);
 		
-		return "redirect:/alarmList";
+		return "redirect:/recom";
 	}
 
 }
