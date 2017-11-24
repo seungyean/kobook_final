@@ -25,47 +25,18 @@
 </head>
 <body>
 
+	<!--Start Header-->
+	<!-- 헤더 -->
+	<jsp:include page="/WEB-INF/views/include/header.jsp" />
+	<!-- /헤더 -->
 
 
-<!--Start Header-->
-<header id="header">
-    <div id="top-bar">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-8 top-info hidden-xs">
-                    <span><i class="fa fa-phone"></i>Phone: (123) 456-7890</span>
-                    <span><i class="fa fa-envelope"></i>Email: mail@example.com</span>
-                </div>
-                <div class="col-sm-4 top-info">
-                    <ul>
-                        <li><a href="" class="my-tweet"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="" class="my-facebook"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="" class="my-skype"><i class="fa fa-skype"></i></a></li>
-                        <li><a href="" class="my-pint"><i class="fa fa-pinterest"></i></a></li>
-                        <li><a href="" class="my-rss"><i class="fa fa-rss"></i></a></li>
-                        <li><a href="" class="my-google"><i class="fa fa-google-plus"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="logo-bar">
-        <div class="container">
-            <div class="row">
-                <!-- Logo / Mobile Menu -->
-                <div  class="col-lg-3 col-sm-3 ">
-                    <div id="KOBOOK">
-                        <h1><a href="index.html"><img alt="KOBOOK - 관리자"
-                         src="images/logo.png"/></a></h1>
-                    </div>
-                </div>
-                
-                 <!-- Navigation
-    ================================================== -->
+<!--                  Navigation
+    ==================================================
                                  <div class="col-lg-9 col-sm-9">
                                         <div class="navbar navbar-default navbar-static-top"
                                                role="navigation">
-                                               <!--  <div class="container">-->
+                                                <div class="container">
                                                <div class="navbar-header">
                                                      <button type="button" class="navbar-toggle"
                                                             data-toggle="collapse" data-target=".navbar-collapse">
@@ -118,7 +89,7 @@
                     </div>
              </div>
        </header>
-       <!--End Header-->
+       End Header -->
                 
                 
                 
@@ -151,17 +122,19 @@
                 </div>
                 <form action="/board/boardInsert" method="post">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="관리자" name ="board_writer">
+                     <input type="text" class="form-control" placeholder="관리자" name ="board_writer">
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="제목" name ="board_title">
                     </div>
                     <div class="form-group">
                         <textarea rows="6" class="form-control" cols="70" placeholder="내용" name="board_content"></textarea>
-                        <input type="submit" value="등록">
+                        <button type="submit" value="등록">등록</button>
+                        <button type="submit" value="목록" onclick='history.back(-1); return false;'>목록</button>     
+                    </div>    
                  </form>       
                  <br>
-
+			</div>
         </div>
     </div>
 </section>

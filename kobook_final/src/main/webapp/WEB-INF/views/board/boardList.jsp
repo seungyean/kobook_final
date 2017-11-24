@@ -4,11 +4,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%
-/* 	session.setAttribute("person_id", "1");
 	int cur_id = Integer.parseInt((String) session.getAttribute("person_id"));
-	System.out.println("리스트 cur_id: " + cur_id); */
+	System.out.println("리스트 cur_id: " + cur_id); 
 %>
-
 
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
@@ -24,13 +22,11 @@
 <meta name="description" content="">
 
 <!-- CSS FILES -->
-<link rel="stylesheet" href="/resources/css/bootstrap.min.css" />
-<link rel="stylesheet" href="/resources/css/style.css">
-<link rel="stylesheet" type="/resources/text/css"
-	href="/resources/css/style.css" media="screen" data-name="skins">
-<link rel="stylesheet" href="/resources/css/animate.css" type="text/css" />
-<link rel="stylesheet" href="/resources/css/layout/wide.css"
-	data-name="layout">
+ <!-- CSS FILES -->
+    <link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/resources/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/style.css" media="screen" data-name="skins">
+    <link rel="stylesheet" href="/resources/css/layout/wide.css" data-name="layout">
 
 <link rel="stylesheet" type="/resources/text/css"
 	href="/resources/css/switcher.css" media="screen" />
@@ -41,6 +37,7 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+</head>
 </head>
 <!-- <script type="text/javascript">
 alert("회원용");
@@ -100,8 +97,7 @@ alert("회원용");
 			<button id='searchBtn'>Search</button>
 			<button id='newBtn'>New Board</button>
 			<br> <br>
-
-
+			
 			<form role="form" method="POST">
 				<input type='hidden' name='board_id' value="{boardVO.board_id">
 			</form>
@@ -128,13 +124,20 @@ alert("회원용");
 				</c:forEach>
 			</table>
 
-			
-			<div class="box-footer">
-
-			<c:if test="${cur_id==1}">
-				<input type="submit" value="등록" id="insertBtn">	
-			</c:if>
-
+<%
+	if(cur_id==1){
+%>		
+			<div class="box-footer" align="center">
+			<form role="form" action="insert" method="get">
+			 	<input type='hidden' name='board_id' value="${boardVo.board_id }">
+			 	<input type="submit" value="등록" id="insertBtn">					
+			</form>
+<%
+	}else{
+%>
+<%
+	}
+%>
 				<div class="text-center">
 					<ul class="pagination">
 
@@ -184,134 +187,44 @@ alert("회원용");
 		</div>
 	</section>
 
-	<!--end wrapper-->
-
-	<!--start footer-->
-	<footer class="footer">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-6 col-md-3 col-lg-3">
-					<div class="widget_title">
-						<h4>
-							<span>About Us</span>
-						</h4>
-					</div>
-					<div class="widget_content">
-						<p>Donec earum rerum hic tenetur ans sapiente delectus, ut aut
-							reiciendise voluptat maiores alias consequaturs aut perferendis
-							doloribus asperiores.</p>
-						<ul class="contact-details-alt">
-							<li><i class="fa fa-map-marker"></i>
-								<p>
-									<strong>Address</strong>: #2021 Lorem Ipsum
-								</p></li>
-							<li><i class="fa fa-user"></i>
-								<p>
-									<strong>Phone</strong>:(+91) 9000-12345
-								</p></li>
-							<li><i class="fa fa-envelope"></i>
-								<p>
-									<strong>Email</strong>: <a href="#">mail@example.com</a>
-								</p></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-sm-6 col-md-3 col-lg-3">
-					<div class="widget_title">
-						<h4>
-							<span>Recent Posts</span>
-						</h4>
-					</div>
-					<div class="widget_content">
-						<ul class="links">
-							<li><a href="#">Aenean commodo ligula eget dolor<span>November
-										07, 2015</span></a></li>
-							<li><a href="#">Temporibus autem quibusdam <span>November
-										05, 2015</span></a></li>
-							<li><a href="#">Debitis aut rerum saepe <span>November
-										03, 2015</span></a></li>
-							<li><a href="#">Et voluptates repudiandae <span>November
-										02, 2015</span></a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-sm-6 col-md-3 col-lg-3">
-					<div class="widget_title">
-						<h4>
-							<span>Twitter</span>
-						</h4>
-					</div>
-					<div class="widget_content">
-						<ul class="tweet_list">
-							<li class="tweet_content item">
-								<p class="tweet_link">
-									<a href="#">@jquery_rain </a> Lorem ipsum dolor et, consectetur
-									adipiscing eli
-								</p> <span class="time">29 September 2015</span>
-							</li>
-							<li class="tweet_content item">
-								<p class="tweet_link">
-									<a href="#">@jquery_rain </a> Lorem ipsum dolor et, consectetur
-									adipiscing eli
-								</p> <span class="time">29 September 2015</span>
-							</li>
-							<li class="tweet_content item">
-								<p class="tweet_link">
-									<a href="#">@jquery_rain </a> Lorem ipsum dolor et, consectetur
-									adipiscing eli
-								</p> <span class="time">29 September 2015</span>
-							</li>
-						</ul>
-					</div>
-					<div class="widget_content">
-						<div class="tweet_go"></div>
-					</div>
-				</div>
-				<div class="col-sm-6 col-md-3 col-lg-3">
-					<div class="widget_title">
-						<h4>
-							<span>Flickr Gallery</span>
-						</h4>
-					</div>
-					<div class="widget_content">
-						<div class="flickr">
-							<ul id="flickrFeed" class="flickr-feed"></ul>
+<!--Sidebar Widget-->
+			<div class="col-lg-4">
+				<div class="sidebar">
+					<div class="widget widget_search">
+						<div class="site-search-area">
+							<!-- <form method="get" id="site-searchform" action="#">
+										<div>
+											<input class="input-text" name="s" id="s" placeholder="Enter Search keywords..." type="text" />
+											<input id="searchsubmit" value="Search" type="submit" />
+										</div>
+									</form> -->
 						</div>
+						<!-- end site search -->
 					</div>
 				</div>
 			</div>
-		</div>
-	</footer>
+
+
 	<!--end wrapper-->
-
-	<!-- 푸터 -->
-	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
-	<!-- /푸터 -->
-
 
 
 	<script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
-	<script src="/resources/js/bootstrap.min.js"></script>
-	<script src="/resources/js/jquery.easing.1.3.js"></script>
-	<script src="/resources/js/retina-1.1.0.min.js"></script>
-	<script type="text/javascript" src="/resources/js/jquery.cookie.js"></script>
-	<!-- jQuery cookie -->
-	<script type="text/javascript" src="/resources/js/styleswitch.js"></script>
-	<!-- Style Colors Switcher -->
-	<script type="text/javascript"
-		src="/resources/js/jquery.smartmenus.min.js"></script>
-	<script type="text/javascript"
-		src="/resources/js/jquery.smartmenus.bootstrap.min.js"></script>
-	<script type="text/javascript" src="/resources/js/jflickrfeed.js"></script>
-	<script type="text/javascript"
-		src="/resources/js/jquery.magnific-popup.min.js"></script>
-	<script type="text/javascript"
-		src="/resources/js/jquery.isotope.min.js"></script>
-	<script type="text/javascript" src="/resources/js/swipe.js"></script>
-	<script type="text/javascript"
-		src="/resources/js/jquery-scrolltofixed-min.js"></script>
+    <script src="/resources/js/bootstrap.min.js"></script>
+    <script src="/resources/js/jquery.easing.1.3.js"></script>
+    <script src="/resources/js/retina-1.1.0.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.cookie.js"></script> <!-- jQuery cookie -->
+    <script type="text/javascript" src="/resources/js/styleswitch.js"></script> <!-- Style Colors Switcher -->
+    <script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.smartmenus.bootstrap.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jflickrfeed.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.magnific-popup.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.isotope.min.js"></script>
+    <script type="text/javascript" src="/resources/js/swipe.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
 
-	<script src="/resources/js/main.js"></script>
+	<script type="text/javascript" src="/resources/js/upload.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+    <script src="/resources/js/main.js"></script>
 
 	<script>
 		var result = '${msg}';
@@ -320,6 +233,7 @@ alert("회원용");
 			alert("처리가 완료되었습니다.");
 			location.replace(self.location);
 		}
+		
 	</script>
 
 	<script>
@@ -343,8 +257,19 @@ alert("회원용");
 						self.location = "boardList";
 
 					});
-
 				});
+		
+		
+		$(document).ready(function(){
+			var formObj = $("form[role='form']");
+			console.log(formObj);
+		    	$("#insertBtn").on("click", function(){
+				formObj.attr("action", "/board/boardInsert");
+				formObj.attr("method", "get");		
+				formObj.submit();
+			}); 
+		});
+		
 	</script>
 
 

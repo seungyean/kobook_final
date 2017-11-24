@@ -2,12 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 <%
-	int cur_id = Integer.parseInt((String) session.getAttribute("person_id"));
-	System.out.println("실제 로그인 cur_id: " + cur_id);
+int cur_id = Integer.parseInt((String) session.getAttribute("person_id"));
+System.out.println("리스트 cur_id: " + cur_id); 
 %>
-
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -91,48 +89,29 @@
 			</table>
 
 
-			<%-- 			<c:if test="${status.cur_id == 1}">
-				<div align="left">
-					<input type="button" value="수정" onclick="update_fn()">
-					<input type="button" value="삭제" onclick="remove_fn()">
-				</div>
-			</c:if> --%>
-
-			<!-- 			<div align="center">
-				<input type="button" value="수정" onclick="update_fn()"> <input
-					type="button" value="삭제" onclick="remove_fn()"> <input
-					type="button" value="목록" onclick='history.back(-1); return false;'>
-			</div> -->
-<%-- 				<form role="form" action="boardModify" method="post">
-					<input type='hidden' name='board_id' value="${boardVO.board_id}">
-					<input type='hidden' name='page' value="${cri.page}">
-					<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
-					<input type='hidden' name='searchType' value="${cri.searchType}">
-					<input type='hidden' name='keyword' value="${cri.keyword}">
-				</form>  --%>
-			
-			<div class="box-footer">
-<%-- 			<form role="form" action="boardModify" method="post" >			
-				<input type='hidden' name='board_id' value="${boardVO.board_id}">
-					<input type='hidden' name='page' value="${cri.page}">
-					<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
-					<input type='hidden' name='searchType' value="${cri.searchType}">
-					<input type='hidden' name='keyword' value="${cri.keyword}">				
-			</form> --%>
+<%
+	if(cur_id==1){
+%>	
+			<div class="box-footer">			
 			<form role="form" action="modify" method="post">
  					<input type='hidden' name='board_id' value="${boardVO.board_id }">
 					<input type='hidden' name='page' value="${cri.page}">
 					<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
 					<input type='hidden' name='searchType' value="${cri.searchType}">
 					<input type='hidden' name='keyword' value="${cri.keyword}">
-					<button type="submit" value="삭제" class="btn btn-danger" id="removeBtn">삭제</button>	
-					<button type="submit" value="수정" class="btn btn-warning" id="modifyBtn">수정</button>			
+					<button type="submit" value="삭제" id="removeBtn">삭제</button>	
+					<button type="submit" value="수정" id="modifyBtn">수정</button>			
 			</form>
+<%
+	}else{
+%>
+<%
+	}
+%>			
 			
 			<div align="center">
 				<button type="submit" value="목록" onclick='history.back(-1); return false;'>목록</button> 
 			</div>
-			
 			</div>
 			
 			<!--Sidebar Widget-->
@@ -188,22 +167,12 @@ if (result == 'SUCCESS') {
 $(document).ready(function(){
 	var formObj = $("form[role='form']");
 	console.log(formObj);
-    	$(".btn-warning").on("click", function(){
-		formObj.attr("action", "/board/boardModify"); */
-		formObj.attr("method", "get");		
-		formObj.submit();
-	}); 
   	
  	$("#modifyBtn").on("click", function(){
-		formObj.attr("method", "get");
-   		formObj.attr("action", "/board/boardModify"); 
+ 		formObj.attr("method", "get"); 
+    	formObj.attr("action", "/board/boardModify"); 
 		formObj.submit();
 	}); 
-	
-	$(".btn-danger").on("click", function(){
-		formObj.attr("action", "/board/boardRemove");
-		formObj.submit();
-	});
 	  
 	$("#removeBtn").on("click", function(){
 		formObj.attr("method", "post");

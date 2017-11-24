@@ -57,7 +57,7 @@
                     <!-- Logo / Mobile Menu -->
                     <div  class="col-lg-3 col-sm-3 ">
                         <div id="logo">
-                           <h1><a href="index.html">관리자</a></h1>
+                           <h1><a href="index.html">관리자WORLD</a></h1>
                         </div>
                     </div>
                     <!-- Navigation
@@ -75,28 +75,11 @@
                             </div>
                             <div class="navbar-collapse collapse">
                                 <ul class="nav navbar-nav">
-                                    <li><a href="/board/personDetail">회원 관리</a>
-<!--                                     <ul class="dropdown-menu">
-                                            <li><a href="index.html">Home 1</a></li>
-                                            <li><a href="index_2.html">Home 2</a></li>
-                                            <li><a href="index_3.html">Home 3</a></li>
-                                            <li><a href="index_4.html">Home 4</a></li>
-                                            <li><a href="index_5.html">Home 5</a></li>
-                                            <li><a href="index_6.html">Home 6</a></li>
-                                            <li><a href="index_7.html">Home 7</a></li>
-                                        </ul> -->
-                                </li>
+                                    <li><a href="/board/personList">회원관리</a>
+                                    </li>
 
                                     <li><a href="#">주문배송 관리</a>
-<!--                                         <ul class="dropdown-menu">
-                                            <li><a href="elements.html">Elements</a></li>
-                                            <li><a href="form-elements.html">Form Elements</a></li>
-                                            <li><a href="columns.html">Columns</a></li>
-                                            <li><a href="typography.html">Typography</a></li>
-                                            <li><a href="pricing-tables.html">Pricing Tables</a></li>
-                                            <li><a href="animation.html">Animation</a></li>
-                                            <li><a href="icons.html">Icons</a></li>
-                                        </ul> -->
+
                                     </li>
 
                                     <li><a href="#">게시판 관리</a>
@@ -144,19 +127,14 @@
 		<section class="content service">
 			<div class="container">
 				<div class="row sub_content">
-					<div class="col-md-12 col-lg-12 col-sm-12 ">
-						<div class="dividerHeading">
-							<h4><span>Services Style 1</span></h4>
-						</div>
-					</div>
                     <div class="col-sm-4">
                         <div class="serviceBox_1">
                             <div class="service-icon">
                                 <i class="fa fa-folder-open-o"></i>
                             </div>
                             <div class="service-content">
-                                <h3>Clean &amp; Minimal</h3>
-                                <p>Aenean commodo ligula eget dolor. Aenean massa. Lorem ipsum dolor sit amet, consec tetuer adipis elit, aliquam eget nibh etlibura.</p>
+                                <h3>오늘 총 매출</h3>
+                                <p>1,000,000,000 ${payVO.pay_price }</p>
                             </div>
                         </div>
                     </div>
@@ -166,8 +144,8 @@
                                 <i class="fa fa-folder-o"></i>
                             </div>
                             <div class="service-content">
-                                <h3>Branding Theme</h3>
-                                <p>Aenean commodo ligula eget dolor. Aenean massa. Lorem ipsum dolor sit amet, consec tetuer adipis elit, aliquam eget nibh etlibura.</p>
+                                <h3>오늘 가입자</h3>
+                                <p>2명쯤 될라나?? 미구현${personVO.person_id }</p>
                             </div>
                         </div>
                     </div>
@@ -177,327 +155,38 @@
                                 <i class="fa fa-heart-o"></i>
                             </div>
                             <div class="service-content">
-                                <h3>Modern Design</h3>
-                                <p>Aenean commodo ligula eget dolor. Aenean massa. Lorem ipsum dolor sit amet, consec tetuer adipis elit, aliquam eget nibh etlibura.</p>
+                                <h3>오늘 총 접속자</h3>
+                                <p>10명 ${personVO.person_total }</p>
                             </div>
                         </div>
                     </div>
 				</div>
 				<div class="row sub_content">
-					<div class="col-md-12 col-lg-12">
-						<div class="dividerHeading">
-							<h4><span>Services Style 2</span></h4>
-						</div>
-					</div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="serviceBox_2 green">
-                            <div class="service-icon">
-                                <i class="fa fa-globe"></i>
-                            </div>
-                            <div class="service-content">
-                                <h3>Web Development</h3>
-                                <p> sit amet, consec tetuer adipis elit, aliquam eget nibh etlibura.</p>
-                                <div class="read">
-                                    <a href="">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="serviceBox_2 purple">
-                            <div class="service-icon">
-                                <i class="fa fa-rocket"></i>
-                            </div>
-                            <div class="service-content">
-                                <h3>Brand Building</h3>
-                                <p> sit amet, consec tetuer adipis elit, aliquam eget nibh etlibura.</p>
-                                <div class="read">
-                                    <a href="">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="serviceBox_2 red">
-                            <div class="service-icon">
-                                <i class="fa fa-user-md"></i>
-                            </div>
-                            <div class="service-content">
-                                <h3>Responsive Design</h3>
-                                <p> sit amet, consec tetuer adipis elit, aliquam eget nibh etlibura.</p>
-                                <div class="read">
-                                    <a href="">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="serviceBox_2 blue">
-                            <div class="service-icon">
-                                <i class="fa fa-twitter"></i>
-                            </div>
-                            <div class="service-content">
-                                <h3>Clean & Clear Design</h3>
-                                <p> sit amet, consec tetuer adipis elit, aliquam eget nibh etlibura.</p>
-                                <div class="read">
-                                    <a href="">Read more</a>
-                                </div>
-                            </div>
+                               <div id="chart_a"></div>
                         </div>
                     </div>
 				</div>
-			
-				<div class="row sub_content">
-					<div class="col-md-12 col-lg-12">
-						<div class="dividerHeading">
-							<h4><span>Services Style 3</span></h4>
-						</div>
-					</div>
-                    <div class="col-sm-4">
-                        <div class="serviceBox_3">
-                            <div class="service-image">
-                                <img src="images/services/1.png"/>
-                            </div>
-                            <div class="service-content">
-                                <h3>cusantium dolor</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="serviceBox_3">
-                            <div class="service-content bg1">
-                                <h3>TECHNOLOGIES & PARTNERING</h3>
-                            </div>
-                            <div class="service-image">
-                                <img src="images/services/2.png"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="serviceBox_3">
-                            <div class="service-image">
-                                <img src="images/services/3.png"/>
-                            </div>
-                            <div class="service-content bg2">
-                                <h3>Oscillating Multi-Tools</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                    <div class="row sub_content">
-                        <div class="col-md-12 col-lg-12">
-                            <div class="dividerHeading">
-                                <h4><span>Services Style 4</span></h4>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="serviceBox_4">
-                                <div class="service-icon">
-                                    <i class="fa fa-signal"></i>
-                                </div>
-                                <div class="service-content">
-                                    <h3>Strategy</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisc elit. Proin ultricies vestibulum velit, bibendum et condimen dolore ipsum.</p>
-                                </div>
-                                <div class="read">
-                                    <a href="" class="btn btn-default">Read info<i class="fa fa-angle-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="serviceBox_4">
-                                <div class="service-icon">
-                                    <i class="fa fa-cogs"></i>
-                                </div>
-                                <div class="service-content">
-                                    <h3>OUR Solutions</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisc elit. Proin ultricies vestibulum velit, bibendum et condimen dolore ipsum.</p>
-                                </div>
-                                <div class="read">
-                                    <a href="" class="btn btn-default">Read info<i class="fa fa-angle-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="serviceBox_4">
-                                <div class="service-icon">
-                                    <i class="fa fa-users"></i>
-                                </div>
-                                <div class="service-content">
-                                    <h3>Customer care</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisc elit. Proin ultricies vestibulum velit, bibendum et condimen dolore ipsum.</p>
-                                </div>
-                                <div class="read">
-                                    <a href="" class="btn btn-default">Read info<i class="fa fa-angle-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="grey_bg">
                     <div class="container">
-                        <div class="row sub_content">
+                       <!--  <div class="row sub_content"> -->
                             <div class="col-md-12 col-lg-12">
-                                <div class="dividerHeading">
-                                    <h4><span>Services Style 5</span></h4>
+                            <div class="col-sm-4">
+                                <div class="serviceBox_5">
+                                    <div id="chart_div"></div>
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="serviceBox_5">
-                                    <span class="service-icon">01</span>
-                                    <h3>Web <br>Agency</h3>
-                                    <p>Lorem ipsum dolor sit amet, consec tetur adipisc elit. Proin ultricies ves tibulum velit, bibendum et condi.</p>
-                                    <div class="read">
-                                        <a href="" class="btn btn-default">Read Info</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="serviceBox_5">
-                                    <span class="service-icon">02</span>
-                                    <h3>Clean & Clear<br> Design</h3>
-                                    <p>Lorem ipsum dolor sit amet, consec tetur adipisc elit. Proin ultricies ves tibulum velit, bibendum et condi.</p>
-                                    <div class="read">
-                                        <a href="" class="btn btn-default">Read Info</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="serviceBox_5">
-                                    <span class="service-icon">03</span>
-                                    <h3>Responsive<br> Designs</h3>
-                                    <p>Lorem ipsum dolor sit amet, consec tetur adipisc elit. Proin ultricies ves tibulum velit, bibendum et condi.</p>
-                                    <div class="read">
-                                        <a href="" class="btn btn-default">Read Info</a>
+                                       <div id="chart_divv"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="container">
-                    <div class="row sub_content">
-                        <div class="col-md-12 col-lg-12">
-                            <div class="dividerHeading">
-                                <h4><span>Services Style 6</span></h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="serviceBox_6 same-height">
-                                <div class="service-content">
-                                    <h3>Clean& powerful code</h3>
-                                    <span class="line"></span>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas luctus condimentum felis, sit amet placerat felis. Mauris porta lorem.</p>
-                                    <a class="btn btn-default" href="">Read more <i class="fa fa-thumbs-up"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="serviceBox_6 same-height purple">
-                                <div class="service-content">
-                                    <h3>Incredibly Flexible</h3>
-                                    <span class="line"></span>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas luctus condimentum felis, sit amet placerat felis. Mauris porta lorem.</p>
-                                    <a class="btn btn-default" href="">Read more <i class="fa fa-thumbs-up"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="serviceBox_6 same-height black">
-                                <div class="service-content">
-                                    <h3>Quick Support</h3>
-                                    <span class="line"></span>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas luctus condimentum felis, sit amet placerat felis. Mauris porta lorem.</p>
-                                    <a class="btn btn-default" href="">Read more <i class="fa fa-thumbs-up"></i></a>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="container">
-                    <div class="row sub_content">
-                        <div class="col-md-12 col-lg-12">
-                            <div class="dividerHeading">
-                                <h4><span>Services Style 7</span></h4>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6">
-                            <div class="serviceBox_7 right">
-                                <div class="service-icon">
-                                    <i class="fa fa-headphones"></i>
-                                </div>
-                                <h3>SEO Ready</h3>
-                                <p>
-                                    Drag more traffic to your website with our SEO Friendly theme: simply bank...
-                                </p>
-                            </div>
-
-                            <div class="serviceBox_7 right">
-                                <div class="service-icon">
-                                    <i class="fa fa-tasks"></i>
-                                </div>
-                                <h3>Retina Ready</h3>
-                                <p>
-                                    All our themes come with extensive HTML Documentation that teaches you how...
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6">
-                            <div class="serviceBox_7">
-                                <div class="service-icon">
-                                    <i class="fa fa-pencil"></i>
-                                </div>
-                                <h3>easy customizable</h3>
-                                <p>
-                                    All our themes include advanced options which makes them super flexible for...
-                                </p>
-                            </div>
-                            <div class="serviceBox_7">
-                                <div class="service-icon">
-                                    <i class="fa fa-gears"></i>
-                                </div>
-                                <h3>global features</h3>
-                                <p>
-                                    <!--Lorem ipsum dolor sit amet, elit.. consectetur adipisicing elit. Alias & molestiae nihil-->
-                                    We made sure images on your website would look stunning on any device. Our...
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 		</section>
-		<section class="promo_box">
-			<div class="container">
-                <div class="row">
-                    <div class="col-sm-9 col-md-9 col-lg-9">
-                        <div class="promo_content">
-                            <h3>Electrify is awesome responsive template, with clean design.</h3>
-                            <p>Lorem ipsum dolor sit amet, cons adipiscing elit. Aenean commodo ligula eget dolor. </p>
-                        </div>
-                    </div>
-                    <div class="col-sm-3 col-md-3 col-lg-3">
-                        <div class="pb_action">
-                            <a class="btn btn-lg btn-default" href="#fakelink">
-                                <i class="fa fa-shopping-cart"></i>
-                                Download Now
-                            </a>
-                        </div>
-                    </div>
-                </div>
-			</div>
-		</section>
+		
 	</section><!--end wrapper-->
 
 	<!--start footer-->
@@ -609,8 +298,110 @@
 
     <script src="/resources/js/main.js"></script>
 
-    <!-- Start Style Switcher -->
-    <div class="switcher"></div>
-    <!-- End Style Switcher -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   
+    <script type="text/javascript">
+    google.charts.load('current', {packages: ['corechart', 'line']});
+    google.charts.setOnLoadCallback(drawBasic);
+
+    function drawBasic() {
+
+          var data = new google.visualization.DataTable();
+          data.addColumn('number', 'X');
+          data.addColumn('number', 'Dogs');
+
+          data.addRows([
+            [0, 0],   [1, 10],  [2, 23],  [3, 17],  [4, 18],  [5, 9],
+            [6, 11],  [7, 27],  [8, 33],  [9, 40],  [10, 32], [11, 35],
+            [12, 30], [13, 40], [14, 42], [15, 47], [16, 44], [17, 48],
+            [18, 52], [19, 54], [20, 42], [21, 55], [22, 56], [23, 57],
+            [24, 60], [25, 50], [26, 52], [27, 51], [28, 49], [29, 53],
+            [30, 55], [31, 60], [32, 61], [33, 59], [34, 62], [35, 65],
+            [36, 62], [37, 58], [38, 55], [39, 61], [40, 64], [41, 65],
+            [42, 63], [43, 66], [44, 67], [45, 69], [46, 69], [47, 70],
+            [48, 72], [49, 68], [50, 66], [51, 65], [52, 67], [53, 70],
+            [54, 71], [55, 72], [56, 73], [57, 75], [58, 70], [59, 68],
+            [60, 64], [61, 60], [62, 65], [63, 67], [64, 68], [65, 69],
+            [66, 70], [67, 72], [68, 75], [69, 80]
+          ]);
+
+          var options = {
+            
+        	title : '시간별 매출',	  
+        	width :'1100',
+            height : '500'
+          };
+          var chart = new google.visualization.LineChart(document.getElementById('chart_a'));
+          chart.draw(data, options);
+        }
+  </script>
+
+<script type="text/javascript">
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+function drawChart() {
+
+  var data = new google.visualization.DataTable();
+  data.addColumn('string', 'Pizza');
+  data.addColumn('number', 'Populartiy');
+  data.addRows([
+    ['Pepperoni', 33],
+    ['Hawaiian', 26],
+    ['Mushroom', 22],
+    ['Sausage', 10], // Below limit.
+    ['Anchovies', 9] // Below limit.
+  ]);
+
+  var options = {
+    title: '주문배송 접수 / 처리',
+    sliceVisibilityThreshold: .2,
+    width :'500',
+    height : '500'
+  };
+
+  var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+  chart.draw(data, options);
+}
+
+</script>
+
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">
+</script>
+
+<script>
+	google.charts.load('current', {packages:['corechart']});
+	google.charts.setOnLoadCallback(drawChart);
+
+	// 차트 옵션을 전역으로 설정했습니다. 설정을 바꿔보는 예제를 만들기 위해서요.
+	var chart_options = {
+		title : '회원가입 현황',
+		width : 500,
+		height : 400,
+		bar : {
+			groupWidth : '50%'
+		},
+		isStacked : true // 그래프 쌓기(스택), 기본값은 false
+	};
+
+	function drawChart(){
+
+		// 차트 데이터
+		var data = new google.visualization.arrayToDataTable([
+			['년대', '항목1', '항목2', '항목3', '항목4'], // 제목 그리고 항목들
+			['1950', 10, 20, 30, 40], // 제목과 항목수를 맞춰주어야 합니다.
+			['1960', 15, 30, 35, 20],
+			['1970', 20, 25, 40, 30],
+			['1980', 10, 30, 20, 50],
+			['1990', 5, 10, 25, 55]
+		]);
+
+		var chart = new google.visualization.ColumnChart(document.getElementById('chart_divv'));
+		chart.draw(data, chart_options);
+	}
+</script>
+
+
 </body>
 </html>

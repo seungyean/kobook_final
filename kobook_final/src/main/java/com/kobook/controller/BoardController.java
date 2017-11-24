@@ -1,6 +1,8 @@
 package com.kobook.controller;
 
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -41,33 +43,29 @@ public class BoardController {
 	public String notiPOST(BoardVO vo, RedirectAttributes rttr)throws Exception {
 		
 		service.boardRegist(vo);
-	
 		rttr.addFlashAttribute("result", "SUCCESS");
-		
 		return "redirect:/board/boardList";
 	}
 	
 	@RequestMapping(value="/boardList", method = RequestMethod.GET)
-	public void BoardList(@ModelAttribute("cri") SearchCriteria cri, Model model, HttpServletRequest request)throws Exception{
-		HttpSession session = request.getSession();
+	public void BoardList(@ModelAttribute("cri") SearchCriteria cri, Model model)throws Exception{
 		model.addAttribute("list", service.boardListCri(cri));
 		PageMaker pageMaker=new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(service.boardcountPaging(cri));
 		model.addAttribute("pageMaker",pageMaker);
-		model.addAttribute("cur_id", session.getAttribute("cur_id"));
 	}
 	
 	@RequestMapping("/adminMain")
 	public String admin()throws Exception {
-		logger.info("adminPage....loggging");
+		
 		return "/board/adminMain";
 	}
 	
 	
 	@RequestMapping("/boardDetail")
 	public void blackRead(@RequestParam("board_id") int board_id, Model model,
-			@ModelAttribute("cri") SearchCriteria cri) throws Exception{
+			@ModelAttribute("cri") SearchCriteria cri) throws Exception {	
 		model.addAttribute(service.boardRead(board_id));
 	}
 
@@ -75,13 +73,11 @@ public class BoardController {
 	public String boardRemove(@RequestParam("board_id")Integer board_id, SearchCriteria cri, RedirectAttributes rttr)throws Exception {
 
 		service.boardRemove(board_id);
-		
 		rttr.addAttribute("page", cri.getPage());
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());
 		rttr.addAttribute("searchType", cri.getSearchType());
 		rttr.addAttribute("keyword", cri.getKeyword());
 		rttr.addFlashAttribute("msg", "SUCCESS");
-		
 		return "redirect:/board/boardList";
 	}
 	
@@ -95,12 +91,11 @@ public class BoardController {
 	@RequestMapping(value = "/boardModify", method = RequestMethod.POST)
 	public String boardModifyPost(RedirectAttributes rtts, BoardVO vo, SearchCriteria cri) throws Exception {
 		service.boardModify(vo);
-		
 		rtts.addAttribute("page", cri.getPage());
 		rtts.addAttribute("perPageNum", cri.getPerPageNum());
 		rtts.addAttribute("searchType", cri.getSearchType());
 		rtts.addAttribute("keyword", cri.getKeyword());
-
+		
 		
 		return "redirect:/board/boardList";
 	}
