@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kobook.alarm.domain.AlarmVO;
+import com.kobook.alarm.service.AlarmService;
 import com.kobook.book.domain.BookVO;
 import com.kobook.mypage.service.MyPageService;
 import com.kobook.person.domain.PersonVO;
@@ -24,6 +26,9 @@ public class MyPageController {
 
 	@Inject
 	private MyPageService service;
+	
+	@Inject
+	private AlarmService alarmService;
 
 	/* 판매내역 */
 	@RequestMapping(value = "/sellList", method = RequestMethod.GET)
@@ -39,7 +44,7 @@ public class MyPageController {
 	
 	/* 판매상태 변경 */
 	@RequestMapping(value = "/sellStateUpdate", method = RequestMethod.POST)
-	public String sellStateUpdate(HttpServletRequest request, BookVO book, RedirectAttributes rttr) {
+	public String sellStateUpdate(HttpServletRequest request, BookVO book, RedirectAttributes rttr) throws Exception {
 		System.out.println("----------------Controller : 판매상태 변경-----------------");
 		
 		HttpSession session = request.getSession();
@@ -56,6 +61,17 @@ public class MyPageController {
 				temp.setBook_id(book_id);
 				temp.setBook_sell_state(book_sell_state);
 				service.sellStateUpdate(temp);
+				
+				/*//"판매가 완료되었습니다." 알림 주는 부분 (아름)
+				if(temp.getBook_sell_state().equals("C")) {
+					AlarmVO alarmVO = new AlarmVO();
+					
+					alarmVO.setAlarm_kind("SellBook");
+					alarmVO.setAlarm_content("판매가 완료되었습니다.");
+					alarmVO.setPerson_id(person_id);
+					
+					alarmService.alarmMessage(alarmVO);
+				}*/
 			}
 		}
 		
