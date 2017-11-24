@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="com.kobook.mappers.donateMapper">
+	
+	<insert id="donateInsert" parameterType="DonateVO">
+		insert into donate(
+			donate_id, donate_title, donate_date, donate_content, person_id
+			)values(
+			donate_id_seq.nextval, #{donate_title}, SYSDATE, #{donate_content}, #{person_id}
+			)
+	</insert>
+
+	<insert id="donateAddAttach" parameterType="DonateFileVO">
+		insert into donate_attach(donate_file_name, donate_id)
+		values(#{donate_file_name}, #{donate_id})
+	</insert>
+	
+	<select id="donateMaxNum" resultType="int">
+		select MAX(donate_id) from donate
+	</select>
+			
+	<!-- 
+	<select id="selectDonate_id" resultType="Integer">
+		select max(donate_id) from donate
+	</select>
+
+	
+	<select id="listDonate" resultType="Donate" parameterType="CommunitySearch">
+		select * from donate 
+		<if test="area != null">
+			<where>
+				<foreach collection="area" item="item" separator="OR" open="(" close=")">
+					${item} LIKE #{searchKey}
+				</foreach>
+			</where>
+		</if>
+		order by donate_id DESC
+	</select>
+	
+	<select id="countDonate" resultType="int" parameterType="CommunitySearch">
+		select count(*) from donate
+		<if test="area != null">
+			<where>
+				<foreach collection="area" item="item" separator="OR" open="(" close=")">
+					${item} LIKE #{searchKey}
+				</foreach>
+			</where>
+		</if>
+	</select>
+	
+	<select id="selectPersonName" resultType="Person" parameterType="int">
+		select P.PERSON_NAME from donate D join person P on D.person_id = P.person_id
+			where D.PERSON_ID =#{person_id} and D.donate_id = #{donate_id}
+	</select>
+	
+	<select id="selectDonateDetail" parameterType="int" resultType="Donate">
+		select * from donate where donate_id = #{donate_id}
+	</select>
+	
+	<update id="donateHitCount" parameterType="int">
+		update donate set donate_hit=donate_hit+1 where donate_id = #{donate_id}
+	</update>
+	
+	<update id="updateDonate" parameterType="Donate">
+		update donate set donate_title=#{donate_title}, donate_content=#{donate_content}
+		<if test="donate_img != null">, donate_img = #{donate_img}</if>  where donate_id = #{donate_id}
+	</update>
+	
+	<delete id="deleteDonate" parameterType="int">
+		DELETE FROM donate WHERE donate_id=#{donate_id}
+	</delete>
+	
+	<update id="updateDonate_id" parameterType="int">
+		update donate set donate_id = donate_id-1 where donate_id > #{donate_id}
+	</update>
+	
+	<select id="selectReply_id" resultType="Integer" parameterType="DonateReply">
+		select max(reply_id) from reply
+	</select>
+	
+	<insert id="insertDonateReply" parameterType="DonateReply">
+		insert into reply(
+			reply_id, reply_content, reply_date, donate_id, person_id
+		)values(
+			#{reply_id}, #{reply_content}, SYSDATE, #{donate_id}, #{person_id}
+		)
+	</insert>
+	
+	<select id="listDonateReply" resultType="DonateReply" parameterType="int">
+		select * from reply where donate_id = #{donate_id} order by reply_date DESC
+	</select>
+	
+	<update id="updateDonateReply" parameterType="DonateReply">
+		update reply set reply_content=#{reply_content}
+			where reply_id = #{reply_id}
+	</update>
+	
+	<delete id="deleteDonateReply" parameterType="int">
+		DELETE FROM reply WHERE reply_id=#{reply_id}
+	</delete>
+	
+	<update id="updateReply_id" parameterType="int">
+		update reply set donate_id = donate_id-1 where donate_id > #{donate_id}
+	</update>
+	
+	<select id="countReply" resultType="int" parameterType="int">
+		SELECT count(*) FROM reply WHERE donate_id = #{donate_id}
+	</select>
+	
+	<delete id="deleteAllReply" parameterType="int">
+		DELETE FROM reply WHERE donate_id=#{donate_id}
+	</delete>
+	 -->
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

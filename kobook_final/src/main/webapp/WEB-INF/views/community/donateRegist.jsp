@@ -25,6 +25,18 @@
 
     <link rel="stylesheet" type="text/css" href="/resources/css/switcher.css" media="screen" />
 </head>
+
+<style>
+.fileDrop {
+  width: 80%;
+  height: 100px;
+  border: 1px dotted gray;
+  background-color: lightslategrey;
+  margin: auto;
+  
+}
+</style>
+
 <body class="home">
 	<!-- 헤더 -->
  		 <jsp:include page="/WEB-INF/views/include/header.jsp" />
@@ -60,8 +72,8 @@
 							</h4>
 						</div>
 						<!-- 나중에 로그인되면 아래 person_id의 value는 sessionid로 변경 -->
-						<form action="donateInsertAction.do" id="registerform"
-							method="post" name="registerform" enctype="multipart/form-data">
+						<form role="form" id="registerForm"
+							method="post" name="registerForm" >
 							<div class="form-group">
 								<input type="hidden" class="form-control" name="person_id"
 									value="${person_id }">
@@ -71,12 +83,21 @@
 									placeholder="글 제목">
 							</div>
 							<div class="form-group">
-								<input type="file" class="form-control" name="donate_img"
-									placeholder="ImageFile">
-							</div>
-							<div class="form-group">
 								<textarea rows="10" cols="73" class="form-control"
 									name="donate_content">글 내용</textarea>
+							</div>
+							<div class="form-group">
+								<label for="exampleInputEmail1">File DROP Here</label>
+									<div class="fileDrop"></div>
+							</div>
+							<div class="box-footer">
+								<div>
+									<hr>
+								</div>
+								
+								<ul class="mailbox-attachments clearfix uploadedList">
+								</ul>
+								
 							</div>
 							<div class="form-group">
 								<input type="submit" class="btn btn-default btn-lg button"
@@ -109,9 +130,100 @@
     <script type="text/javascript" src="/resources/js/jquery.isotope.min.js"></script>
     <script type="text/javascript" src="/resources/js/swipe.js"></script>
     <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
-
+	
+	<script type="text/javascript" src="/resources/js/upload.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
     <script src="/resources/js/main.js"></script>
+    
+<script id="template" type="text/x-handlebars-template">
+<li>
+  <div class="mailbox-attachment-info">
+	<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}
+  <span class="mailbox-attachment-icon has-img"><br><img src="{{imgsrc}}" alt="Attachment">
+</a>
+	<a href="{{fullName}}" 
+     class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a>
+	</span>
+  </div>
+</li>                
+</script>
 
+<script>
+var template = Handlebars.compile($("#template").html());
+
+$(".fileDrop").on("dragenter dragover", function(event){
+	event.preventDefault();
+});
+
+
+$(".fileDrop").on("drop", function(event){
+	event.preventDefault();
+	
+	var files = event.originalEvent.dataTransfer.files;
+	
+	var file = files[0];
+
+	var formData = new FormData();
+	
+	formData.append("file", file);	
+	
+	
+	$.ajax({
+		  url: '/community/uploadAjax',
+		  data: formData,
+		  dataType:'text',
+		  processData: false,
+		  contentType: false,
+		  type: 'POST',
+		  success: function(data){
+			  
+			  var fileInfo = getFileInfo(data);
+			  
+			  var html = template(fileInfo);
+			  
+			  $(".uploadedList").append(html);
+		  }
+		});	
+});
+
+$(".uploadedList").on("click", ".delbtn", function(event){
+	
+	event.preventDefault();
+	
+	var that = $(this);
+	 
+	$.ajax({
+	   url:"/community/deleteFile",
+	   type:"post",
+	   data: {fileName:$(this).attr("href")},
+	   dataType:"text",
+	   success:function(result){
+		   if(result == 'deleted'){
+			   that.closest("li").remove();
+		   }
+	   }
+   });
+});
+
+$("#registerForm").submit(function(event){
+	event.preventDefault();
+	
+	var that1 = $(this);
+	
+	var str1 ="";
+	$(".uploadedList .delbtn").each(function(index){
+		 str1 += "<input type='hidden' name='files["+index+"]' value='"+$(this).attr("href") +"'> ";
+	});
+	
+	that1.append(str1);
+
+	that1.get(0).submit();
+});
+
+
+
+</script>
 	<!-- Start Style Switcher -->
 	<div class="switcher"></div>
 	<!-- End Style Switcher -->

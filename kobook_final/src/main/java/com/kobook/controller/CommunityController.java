@@ -27,7 +27,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kobook.book.domain.PageMaker;
 import com.kobook.book.domain.SearchCriteria;
 import com.kobook.community.domain.BlackVO;
+import com.kobook.community.domain.DonateVO;
 import com.kobook.community.service.BlackService;
+import com.kobook.community.service.DonateService;
 import com.kobook.util.MediaUtils;
 import com.kobook.util.UploadFileUtils;
 
@@ -36,74 +38,14 @@ import com.kobook.util.UploadFileUtils;
 public class CommunityController {
 
 	@Inject
-	private BlackService service;
+	private BlackService blackService;
+	
+	@Inject
+	private DonateService donateService;
 	
 	@Resource(name = "uploadPath")
 	private String uploadPath;
-
-	@RequestMapping(value = "blackRegist", method = RequestMethod.GET)
-	public void blackRegistGet() throws Exception {
-
-	}
-
-	@RequestMapping(value = "blackRegist", method = RequestMethod.POST)
-	public String blackRegistPost(BlackVO vo, Model model) throws Exception {
-		service.blackRegist(vo);
-		return "redirect:/community/blackList";
-	}
 	
-	@RequestMapping(value = "blackList", method = RequestMethod.GET)
-	public void blackList(@ModelAttribute SearchCriteria cri, Model model)throws Exception{
-		model.addAttribute("list", service.blackList(cri));
-		
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(service.blackCount(cri));
-		
-		model.addAttribute("pageMaker", pageMaker);
-	}
-	
-	@RequestMapping("blackRead")
-	public void blackRead(@RequestParam("black_id") int black_id, Model model,
-			@ModelAttribute("cri") SearchCriteria cri) throws Exception{
-		model.addAttribute(service.blackRead(black_id));
-	}
-	
-	@RequestMapping(value = "blackModify", method = RequestMethod.GET)
-	public void blackModifyGet(@RequestParam("black_id") int black_id, Model model,
-			@ModelAttribute("cri") SearchCriteria cri) throws Exception {
-		model.addAttribute(service.blackRead(black_id));
-	}
-	
-	@RequestMapping(value = "blackModify", method = RequestMethod.POST)
-	public String blackModifyPost(RedirectAttributes rtts, BlackVO vo, SearchCriteria cri) throws Exception {
-		service.blackModify(vo);
-		
-		rtts.addAttribute("page", cri.getPage());
-		rtts.addAttribute("perPageNum", cri.getPerPageNum());
-		rtts.addAttribute("searchType", cri.getSearchType());
-		rtts.addAttribute("keyword", cri.getKeyword());
-		
-		return "redirect:/community/blackList";
-	}
-	
-	@RequestMapping("blackRemove")
-	public String blackRemove(RedirectAttributes rtts, SearchCriteria cri
-			, @RequestParam("black_id") Integer black_id) throws Exception {
-		service.blackRemove(black_id);
-		
-		rtts.addAttribute("page", cri.getPage());
-		rtts.addAttribute("perPageNum", cri.getPerPageNum());
-		rtts.addAttribute("searchType", cri.getSearchType());
-		rtts.addAttribute("keyword", cri.getKeyword());
-		
-		return "redirect:/community/blackList";
-	}
-/*
-	@RequestMapping(value = "/uploadAjax", method = RequestMethod.GET)
-	public void uploadAjax() {
-	}
-*/
 	@ResponseBody
 	@RequestMapping(value = "/uploadAjax", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
 	public ResponseEntity<String> uploadAjax(MultipartFile file) throws Exception {
@@ -203,10 +145,82 @@ public class CommunityController {
 		return new ResponseEntity<String>("deleted", HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "blackRegist", method = RequestMethod.GET)
+	public void blackRegistGet() throws Exception {
+
+	}
+
+	@RequestMapping(value = "blackRegist", method = RequestMethod.POST)
+	public String blackRegistPost(BlackVO vo, Model model) throws Exception {
+		blackService.blackRegist(vo);
+		return "redirect:/community/blackList";
+	}
+	
+	@RequestMapping(value = "blackList", method = RequestMethod.GET)
+	public void blackList(@ModelAttribute SearchCriteria cri, Model model)throws Exception{
+		model.addAttribute("list", blackService.blackList(cri));
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(blackService.blackCount(cri));
+		
+		model.addAttribute("pageMaker", pageMaker);
+	}
+	
+	@RequestMapping("blackRead")
+	public void blackRead(@RequestParam("black_id") int black_id, Model model,
+			@ModelAttribute("cri") SearchCriteria cri) throws Exception{
+		model.addAttribute(blackService.blackRead(black_id));
+	}
+	
+	@RequestMapping(value = "blackModify", method = RequestMethod.GET)
+	public void blackModifyGet(@RequestParam("black_id") int black_id, Model model,
+			@ModelAttribute("cri") SearchCriteria cri) throws Exception {
+		model.addAttribute(blackService.blackRead(black_id));
+	}
+	
+	@RequestMapping(value = "blackModify", method = RequestMethod.POST)
+	public String blackModifyPost(RedirectAttributes rtts, BlackVO vo, SearchCriteria cri) throws Exception {
+		blackService.blackModify(vo);
+		
+		rtts.addAttribute("page", cri.getPage());
+		rtts.addAttribute("perPageNum", cri.getPerPageNum());
+		rtts.addAttribute("searchType", cri.getSearchType());
+		rtts.addAttribute("keyword", cri.getKeyword());
+		
+		return "redirect:/community/blackList";
+	}
+	
+	@RequestMapping("blackRemove")
+	public String blackRemove(RedirectAttributes rtts, SearchCriteria cri
+			, @RequestParam("black_id") Integer black_id) throws Exception {
+		blackService.blackRemove(black_id);
+		
+		rtts.addAttribute("page", cri.getPage());
+		rtts.addAttribute("perPageNum", cri.getPerPageNum());
+		rtts.addAttribute("searchType", cri.getSearchType());
+		rtts.addAttribute("keyword", cri.getKeyword());
+		
+		return "redirect:/community/blackList";
+	}
+
 	@RequestMapping("/blackGetAttach/{black_id}")
 	@ResponseBody
 	public List<String> blackGetAttach(@PathVariable("black_id") Integer black_id) throws Exception{
-		return service.blackGetAttach(black_id);
+		return blackService.blackGetAttach(black_id);
 	}
+	
+	@RequestMapping(value = "donateRegist", method = RequestMethod.GET)
+	public void donateRegistGet() throws Exception {
+
+	}
+
+	@RequestMapping(value = "donateRegist", method = RequestMethod.POST)
+	public void donateRegistPost(DonateVO vo, Model model) throws Exception {
+		System.out.println(vo.toString());
+		donateService.donateRegist(vo);
+		//return "redirect:/community/blackList";
+	}
+	
 
 }

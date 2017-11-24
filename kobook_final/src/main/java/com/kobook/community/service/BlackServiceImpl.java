@@ -27,11 +27,9 @@ public class BlackServiceImpl implements BlackService {
 		
 		BlackFileVO fileVO = new BlackFileVO();
 		fileVO.setBlack_id(black_id);
-		
 		if(files == null){
 			return;
 		}
-		
 		for(String black_file_name : files) {
 			fileVO.setBlack_file_name(black_file_name);
 			dao.blackAddAttach(fileVO);
