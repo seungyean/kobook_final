@@ -23,15 +23,15 @@ public class ChatbotDAOTest {
 	@Inject
 	private ChatbotDAO dao;
 	
-	@Test
+	/*@Test
 	public void registerTest() throws Exception{
 		
 		ChatlogVO vo = new ChatlogVO();
-		vo.setChatlog_content("chatvoTest");
+		vo.setChatlog_content("chatvoTest2");
 		vo.setChatlog_speaker("C");
 		vo.setPerson_id(3);
 		
 		dao.registerLog(vo);
-	}
+	}*/
 
 }

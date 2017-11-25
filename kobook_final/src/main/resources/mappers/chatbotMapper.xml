@@ -17,7 +17,7 @@
  	<select id="listLog" resultType="ChatlogVO">
 		select *
 		from chatlog
-		where person_id = ${person_id}
+		where person_id = #{person_id}
 	</select>
 	
 </mapper>

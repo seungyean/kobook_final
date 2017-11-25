@@ -18,13 +18,13 @@ public class ChatbotDAOImpl implements ChatbotDAO {
 	private static String namespace = "com.kobook.mappers.chatbotMapper";
 	
 	@Override
-	public void registerLog(ChatlogVO chatlog) throws Exception {
-		session.insert(namespace  + ".registerLog", chatlog);
+	public void registerLog(ChatlogVO vo) throws Exception {
+		session.insert(namespace  + ".registerLog", vo);
 	}
 
 	@Override
-	public List<ChatlogVO> listLog(int person_id) throws Exception {
-		return session.selectOne(namespace + ".listLog", person_id);
+	public List<ChatlogVO> listLog(Integer person_id) throws Exception {
+		return session.selectList(namespace + ".listLog", person_id);
 	}
 
 }

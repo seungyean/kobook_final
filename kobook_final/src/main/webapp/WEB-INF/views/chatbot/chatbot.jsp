@@ -192,10 +192,14 @@ textarea {
 			</div>
 		</div>
 	</div>
-<script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.28/js/uikit.min.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.28/js/uikit-icons.min.js'></script>
+<script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.28/js/uikit.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.28/js/uikit-icons.min.js'></script>
+<script src='https://code.jquery.com/jquery-2.2.4.js'></script>
 <script >
 
-$('#chatSendBtn').on('click', function(){
+/* $('#chatSendBtn').on('click', function(){
 	var msg = ('#chatMsg').html();
 	$.ajax(
 		url: "",
@@ -203,8 +207,8 @@ $('#chatSendBtn').on('click', function(){
 		data:,
 		
 	);
-})
-;
+}); */
+
 $('.uk-button').on('click', function (){
 	$('.uk-section').toggleClass('uk-dark uk-light');
 	$('.uk-container > .uk-card').toggleClass('uk-card-default uk-card-secondary');

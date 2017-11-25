@@ -16,13 +16,13 @@ public class ChatbotServiceImpl implements ChatbotService {
 	private ChatbotDAO dao;
 
 	@Override
-	public void registerLog(ChatlogVO chatlog) throws Exception {
-		dao.registerLog(chatlog);
+	public void registerLog(ChatlogVO vo) throws Exception {
+		dao.registerLog(vo);
 		
 	}
 
 	@Override
-	public List<ChatlogVO> listLog(int person_id) throws Exception {
+	public List<ChatlogVO> listLog(Integer person_id) throws Exception {
 		return dao.listLog(person_id);
 	}
 	
