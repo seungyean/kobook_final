@@ -19,5 +19,6 @@ public class MessageDAOImpl implements MessageDAO {
 	public void send(MessageVO message) throws Exception {
 		session.insert(namespace + ".send", message);
 	}
+	
 
 }
