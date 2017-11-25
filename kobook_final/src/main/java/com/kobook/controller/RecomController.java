@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kobook.board.domain.BoardVO;
+import com.kobook.board.service.BoardService;
+import com.kobook.book.domain.SearchCriteria;
 import com.kobook.recom.domain.FavoriteBookVO;
 import com.kobook.recom.domain.FavoriteVO;
 import com.kobook.recom.service.FavoriteService;
@@ -26,6 +29,8 @@ public class RecomController {
 	@Inject
 	private FavoriteService service;
 	
+	@Inject BoardService boardService;
+	
 	@RequestMapping(value="/recom", method = RequestMethod.GET)
 	public String recommend(Model model, HttpServletRequest request) throws Exception {
 		System.out.println("controller - recom");
@@ -34,9 +39,15 @@ public class RecomController {
 		HttpSession session = request.getSession();
 		int person_id = Integer.parseInt((String)session.getAttribute("person_id"));
 		
+		
+		SearchCriteria cri = new SearchCriteria();
+		cri.setPerPageNum(boardService.boardListCri(cri).size());
+		
 		List<FavoriteBookVO> favoriteList = service.getFavorite(person_id);
+		List<BoardVO> boardList = boardService.boardListCri(cri);
 		
 		request.setAttribute("list", favoriteList);
+		request.setAttribute("boardList", boardList);
 		
 		return "/main";
 	}

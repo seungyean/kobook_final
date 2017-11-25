@@ -274,75 +274,21 @@
                     <div class="dividerHeading">
                         <h4><span>Recent news</span></h4>
                     </div>
-
-                    <div id="post-slider" class="owl-carousel">
-                        <div class="post-slide">
-                            <div class="post-img">
-                                <img src="images/blog/blog_1.png">
-                            </div>
-                            <h5 class="post-title"><a href="blog-post.html">Latest News Post</a></h5>
-                            <div class="post-date">
-                                <i class="fa fa-calendar"></i> April 23, 2015
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed eleifend urna eu ...</p>
-                            <a class="readmore" href="">Read more</a>
-                        </div>
-                        <div class="post-slide">
-                            <div class="post-img">
-                                <img src="images/blog/blog_2.png">
-                            </div>
-                            <h5 class="post-title"><a href="blog-post.html">Latest News Post</a></h5>
-                            <div class="post-date">
-                                <i class="fa fa-calendar"></i> April 23, 2015
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed eleifend urna eu ...</p>
-                            <a class="readmore" href="">Read more</a>
-                        </div>
-                        <div class="post-slide">
-                            <div class="post-img">
-                                <img src="images/blog/blog_3.png">
-                            </div>
-                            <h5 class="post-title"><a href="blog-post.html">Latest News Post</a></h5>
-                            <div class="post-date">
-                                <i class="fa fa-calendar"></i> April 23, 2015
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed eleifend urna eu ...</p>
-                            <a class="readmore" href="">Read more</a>
-                        </div>
-                        <div class="post-slide">
-                            <div class="post-img">
-                                <img src="images/blog/blog-4.png">
-                            </div>
-                            <h5 class="post-title"><a href="blog-post.html">Latest News Post</a></h5>
-                            <div class="post-date">
-                                <i class="fa fa-calendar"></i> April 23, 2015
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed eleifend urna eu ...</p>
-                            <a class="readmore" href="">Read more</a>
-                        </div>
-                        <div class="post-slide">
-                            <div class="post-img">
-                                <img src="images/blog/blog_1.png">
-                            </div>
-                            <h5 class="post-title"><a href="blog-post.html">Latest News Post</a></h5>
-                            <div class="post-date">
-                                <i class="fa fa-calendar"></i> April 23, 2015
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed eleifend urna eu ...</p>
-                            <a class="readmore" href="">Read more</a>
-                        </div>
-                        <div class="post-slide">
-                            <div class="post-img">
-                                <img src="images/blog/blog_2.png">
-                            </div>
-                            <h5 class="post-title"><a href="blog-post.html">Latest News Post</a></h5>
-                            <div class="post-date">
-                                <i class="fa fa-calendar"></i> April 23, 2015
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed eleifend urna eu ...</p>
-                            <a class="readmore" href="">Read more</a>
-                        </div>
-                    </div>
+						<div id="post-slider" class="owl-carousel">
+							<c:forEach var="b" items="${boardList }">
+		                        <div class="post-slide">	
+		                            <div class="post-img">
+		                                <img src="images/blog/blog_1.png">
+		                            </div>
+		                            <h5 class="post-title"><a href="blog-post.html">${b.board_title }</a></h5>
+		                            <div class="post-date">
+		                                <i class="fa fa-calendar"></i> ${b.board_date }
+		                            </div>
+		                            <p>${b.board_content }</p>
+		                            <a class="readmore" href="/board/boardDetail?board_id=${b.board_id }">Read more</a>
+		                        </div>
+	                        </c:forEach>
+                    	</div>
                 </div>
             </div>
         </div>
