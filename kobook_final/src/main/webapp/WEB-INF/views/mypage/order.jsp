@@ -44,8 +44,20 @@
 		});
 	   
 	   //결제버튼 클릭 
-	   $("#orderSuccess").click(function() {
-           location.href="/mypage/orderSuccess";
+ 	   $("#orderSuccess").click(function() {
+		   var data = $('#bookID').html();
+		   console.log("vvvvvvvvvvvv"+data);
+		   $("#form1").attr("action", "/mypage/order2");
+		   $("#form1").attr("method", "post");
+		   $("#form1").submit();
+		   
+/* 			$.ajax({
+				type: 'post',
+				url: '/mypage/order2',
+				data: data,
+				dataType:'text'
+				  
+				}); */
 		});
 	   
 	   // 우편번호 api
@@ -171,6 +183,9 @@
 							    <div class="row">
 							        <div class="col-sm-12 col-md-10 col-md-offset-1">
 							            <h3>주문 내역</h3>
+							            <form id="form1" action="/mypage/order2" method="post">
+							            <input type="hidden" name="book_id" value="${oneBook.book_id }">
+							            </form>
 							            	<table class="table table-hover">
 								                <thead>
 								                    <tr>
@@ -182,21 +197,21 @@
 								                    </tr>
 								                </thead>
 								                <tbody>
-								                    <c:forEach var="element" items="${orderList }" varStatus="s">
 													<tr>
 								                        <td class="col-sm-8 col-md-6">
 									                        <div class="media">
 									                            <a class="thumbnail pull-left" href="#"> <img class="media-object" src="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/72/product-icon.png" style="width: 72px; height: 72px;"> </a>
 									                            <div class="media-body">
-									                                <h4 class="media-heading"><a href="#">&nbsp;&nbsp;${element.BOOK_NAME }</a></h4>
-									                                <h5 class="media-heading"><a href="#">&nbsp;&nbsp;&nbsp;${element.BOOK_PUBLISH }</a></h5>
+									                                <h4 class="media-heading"><a href="#">&nbsp;&nbsp;${oneBook.book_name }</a></h4>
+									                                <h5 class="media-heading"><a href="#">&nbsp;&nbsp;&nbsp;${oneBook.book_publish }</a></h5>
 									                            </div>
 									                        </div>
 								                        </td>
-								                        <td class="col-sm-1 col-md-1 text-center" id="m_price" ><strong>${element.BOOK_M_PRICE }</strong></td>
+								                        <td class="col-sm-1 col-md-1 text-center" id="m_price" ><strong>${oneBook.book_m_price }</strong><strong>원</strong></td>
+								                        <td class="col-sm-1 col-md-1 text-center" id="bookID" style="display:none;" >${oneBook.book_id }</td>
 								                        <td class="col-sm-1 col-md-1 text-center"><strong>1</strong></td>
 								                        <td class="col-sm-1 col-md-1 text-center">
-								                        <c:set var="avg" value="${element.BOOK_M_PRICE }"/>
+								                        <c:set var="avg" value="${oneBook.book_m_price }"/>
 								                        	<strong>
 								                        	${avg/100}P
 								                        	
@@ -206,7 +221,6 @@
 								                        
 								                        <td class="col-sm-1 col-md-1 text-center"><strong>2000원</strong></td>
 								                    </tr>
-												</c:forEach>
 								                </tbody>
 							            </table>
 							        </div>
@@ -457,10 +471,8 @@
 															<tr>
 																<td class="price">
 																	<div style="text-align: center;">
-																	<c:forEach var="element" items="${orderList }" varStatus="s">
-																		<strong id="book_price">${element.BOOK_M_PRICE }</strong>
+																		<strong id="book_price">${oneBook.book_m_price }</strong>
 																		<strong>원</strong>
-																	</c:forEach>
 																	</div>
 																</td>
 																<td class="option ">
@@ -544,7 +556,7 @@
 
 							<div class="col-lg-2 col-md-2 col-xs-12" style="float: right;">
 								<!-- Standard button -->
-								<button class="btn btn-default btn-lg btn-block" type="button" id="orderSuccess">
+								<button class="btn btn-default btn-lg btn-block" type="submit" id="orderSuccess">
 									결제하기
 								</button>
 							</div>

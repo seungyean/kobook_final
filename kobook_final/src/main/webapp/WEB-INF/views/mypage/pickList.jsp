@@ -36,13 +36,13 @@
     	var pay_amount = "";
     	var total_pick_id = "";
     	
-    	$(".btn-default").click(function() {
+    	/* $(".btn-default").click(function() {
     		var pick_id = $('#pick_id').val();
     		var book_id = $('#bookId').html();
     		console.log(book_id);
-            location.href="/mypage/orderSuccess?pick_id="+pick_id+"&book_id="+book_id;
+            location.href="/mypage/order?book_id="+book_id;
 		});
-    	
+    	 */
     	// 결제창 모달 
     	/*  $(".btn-default").click(function(){
      		pick_id = $(this).parent().parent().find('td:first').text().trim();
@@ -70,7 +70,9 @@
     	// 주문 버튼 
     	 $("#order").click(function(){
     		var pick_id = $(this).parent().parent().find('td:first').text().trim();
-            location.href="/mypage/order?pick_id=" + pick_id;
+    		var book_id = $('#bookId').html();
+    		console.log(book_id);
+            location.href="/mypage/order?book_id="+book_id;
          });
     	
     	$("#use_mileage").keyup(function() {

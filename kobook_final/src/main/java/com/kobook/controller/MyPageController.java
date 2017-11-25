@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kobook.alarm.domain.AlarmVO;
 import com.kobook.alarm.service.AlarmService;
 import com.kobook.book.domain.BookVO;
+import com.kobook.book.service.BookService;
 import com.kobook.mypage.domain.OrderVO;
 import com.kobook.mypage.service.MyPageService;
 import com.kobook.person.domain.PersonVO;
@@ -30,6 +31,11 @@ public class MyPageController {
 	
 	@Inject
 	private AlarmService alarmService;
+	
+	@Inject
+	private BookService bookService;
+	
+	
 
 	/* 판매내역 */
 	@RequestMapping(value = "/sellList", method = RequestMethod.GET)
@@ -130,19 +136,22 @@ public class MyPageController {
 	
 	/* 주문 */
 	@RequestMapping(value = "/order", method = RequestMethod.GET)
-	public void orderList(HttpServletRequest request, Model model) {
+	public void orderList(@RequestParam("book_id") int book_id,HttpServletRequest request, Model model) {
 		System.out.println("----------------Controller : 주문 출력-----------------");
 		
 		HttpSession session = request.getSession();
 		int person_id = Integer.parseInt((String)session.getAttribute("person_id"));
 		
-		List<HashMap<String, String>> list = service.orderList(person_id);
-		model.addAttribute("orderList", service.orderList(person_id));
+		model.addAttribute("book_id", book_id);
+		model.addAttribute("oneBook", service.oneBook(book_id));
 		model.addAttribute( service.orderPerson(person_id));
+		
+		
+		System.out.println(service.oneBook(book_id));
 		
 		PersonVO person = service.orderPerson(person_id);
 		
-		list.get(0).get("book_id");
+		
 		
 		// 휴대폰 - 
 		String strPhone[] = person.getPerson_phone().split("-");
@@ -157,23 +166,33 @@ public class MyPageController {
 		
 	}
 	
-	@RequestMapping(value="/order", method=RequestMethod.POST)
-	public void orderSuccessPOST(OrderVO order,RedirectAttributes rttr, HttpServletRequest request)throws Exception{
+	@RequestMapping(value="/order2", method=RequestMethod.POST)
+	public String orderSuccessPOST(RedirectAttributes rttr, HttpServletRequest request,@RequestParam("book_id") int book_id)throws Exception{
 		System.out.println("주문등록 post~~~~~~~~~~~~~~~~~");
-		System.out.println(order.toString());
+		
 		OrderVO temp = new OrderVO();
+		System.out.println(temp.toString());
 		HttpSession session = request.getSession();
 		int person_id = Integer.parseInt((String)session.getAttribute("person_id"));
-		List<HashMap<String, String>> list = service.orderList(person_id);
-		int book_id = Integer.parseInt(list.get(0).get("book_id"));
 		
 		temp.setPerson_id(person_id);
 		temp.setBook_id(book_id);
 		
-		
 		service.orderInsert(temp);
+		return  "redirect:/mypage/orderSuccess";
+		
 		
 	}
+	
+	/* 판매내역 */
+	@RequestMapping(value = "/orderSuccess", method = RequestMethod.GET)
+	public void orderSuccess(HttpServletRequest request, Model model) {
+		System.out.println("----------------Controller : 주문완료 -----------------");
+		
+		
+		
+	}
+	
 	
 
 

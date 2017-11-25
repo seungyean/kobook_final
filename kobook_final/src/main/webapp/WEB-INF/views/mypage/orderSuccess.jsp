@@ -63,13 +63,8 @@
             
             <!-- 버튼 -->
             <div class="login-form" style="margin-left: 450px;">
-                <form style="float: left; width: 25%;">
-                    <button type="button" class="btn btn-default" >이전페이지</button>
-                    <br>
-                </form>
-                
                 <form style="float: left; width: 20%;">
-                    <a href="/kobook/main/main.jsp"><button type="button" class="btn btn-default">홈으로</button></a>
+                    <a href="/recom"><button type="button" class="btn btn-default">홈으로</button></a>
                     <br>
                 </form>
             </div>

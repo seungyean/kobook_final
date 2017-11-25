@@ -84,8 +84,9 @@
 
 
    <!-- 주문내역 -->
-   <select id="orderList" resultType="hashMap">
-      SELECT b.book_img,
+   <select id="oneBook" resultType="BookVO">
+   	select * from book where book_id = #{book_id}
+     <!--  SELECT b.book_img,
       b.book_name,
       b.book_m_price,
       b.book_publish
@@ -94,7 +95,7 @@
       book_order o
       WHERE b.book_id = o.book_id
       AND o.person_id = p.person_id
-      AND o.person_id = #{person_id}
+      AND o.person_id = #{person_id} -->
    </select>
 
    <!-- 주문등록 -->

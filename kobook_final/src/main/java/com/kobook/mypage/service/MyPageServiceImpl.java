@@ -50,10 +50,10 @@ public class MyPageServiceImpl implements MyPageService {
 		return dao.mileageList(person_id);
 	}
 
-	@Override
+	/*@Override
 	public List<HashMap<String, String>> orderList(int person_id) {
 		return dao.orderList(person_id);
-	}
+	}*/
 
 	@Override
 	public PersonVO orderPerson(int person_id) {
@@ -63,6 +63,11 @@ public class MyPageServiceImpl implements MyPageService {
 	@Override
 	public void orderInsert(OrderVO vo) {
 		dao.orderInsert(vo);
+	}
+
+	@Override
+	public BookVO oneBook(int book_id) {
+		return dao.oneBook(book_id);
 	}
 
 

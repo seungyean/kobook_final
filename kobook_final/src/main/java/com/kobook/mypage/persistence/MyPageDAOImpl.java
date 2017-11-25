@@ -52,10 +52,10 @@ public class MyPageDAOImpl implements MyPageDAO {
 		return session.selectList(namespace + ".mileageList", person_id);
 	}
 
-	@Override
-	public List<HashMap<String, String>> orderList(int person_id) {
-		return session.selectList(namespace + ".orderList", person_id);
-	}
+//	@Override
+//	public List<HashMap<String, String>> orderList(int person_id) {
+//		return session.selectList(namespace + ".orderList", person_id);
+//	}
 
 	@Override
 	public PersonVO orderPerson(int person_id) {
@@ -66,6 +66,11 @@ public class MyPageDAOImpl implements MyPageDAO {
 	public void orderInsert(OrderVO vo) {
 		session.insert(namespace + ".orderInsert", vo);
 		
+	}
+
+	@Override
+	public BookVO oneBook(int book_id) {
+		return session.selectOne(namespace + ".oneBook", book_id);
 	}
 
 

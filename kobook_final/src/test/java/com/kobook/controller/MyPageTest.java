@@ -54,18 +54,19 @@ public class MyPageTest {
 		System.out.println("주문내역 : " + dao.orderList(7).toString());
 	}
 	*/
-	/*@Test
-	public void Test(){
-		System.out.println("주문자 정보: " + dao.orderPerson(7));
-	}
-	*/
+//	@Test
+//	public void Test(){
+////		System.out.println("주문자 정보: " + dao.orderPerson(7));
+////		System.out.println("주문자 정보: " + dao.orderList(7));
+//	}
 	
-	// 주문 인서트
+	
+//	 주문 인서트
 	@Test
 	public void Test(){
 		OrderVO vo = new OrderVO();
 		vo.setPerson_id(7);
-		vo.setBook_id(2);
+		vo.setBook_id(3);
 		dao.orderInsert(vo);
 	}
 }
