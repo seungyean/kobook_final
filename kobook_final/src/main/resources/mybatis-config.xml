@@ -7,15 +7,15 @@
 
 	<typeAliases>
 		<!-- 앞으로 com.kobook.domain은 안써도 됨 -->
+		<package name="com.kobook.alarm.domain"/>
+		<package name="com.kobook.board.domain" />
 		<package name="com.kobook.book.domain" />
+		<package name="com.kobook.chatbot.domain"/>
+		<package name="com.kobook.community.domain" />
 		<package name="com.kobook.message.domain" />
 		<package name="com.kobook.mypage.domain" />
-		<package name="com.kobook.board.domain" />
 		<package name="com.kobook.person.domain" />
-		<package name="com.kobook.community.domain" />
-		<package name="com.kobook.alarm.domain"/>
 		<package name="com.kobook.recom.domain"/>
-		<package name="com.kobook.chatbot.domain"/>
 	</typeAliases>
 
 </configuration>
