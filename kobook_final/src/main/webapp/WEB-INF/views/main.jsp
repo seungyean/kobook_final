@@ -2,9 +2,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-	int alarm_new=0;
-%>
+
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
@@ -160,8 +158,7 @@
 										                  <div>
 										                     <h5>전공 상세보기</h5>
 										                     <a href="/kobook/img/bookImg/${f.book_id }.PNG" class="fa fa-search mfp-image"></a>
-										                     <a href="/kobook/book/detailAction.do?book_id=${f.book_id}" class="fa fa-link"></a>
-															 <a href="/deleteRecom?book_id=${f.book_id }&favorite_id=${f.favorite_id}&favorite_major=${f.favorite_major}&favorite_name=${f.favorite_name}" class="fa fa-times"></a>			                  </div>
+										                     <a href="/kobook/book/detailAction.do?book_id=${f.book_id}" class="fa fa-link"></a>	                  </div>
 										               </div>
 								     	  </div>
 										</div>

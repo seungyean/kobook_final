@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-	//int alarm_new=0;
-%>
-
 <% 
 	String cur_id = "-1";
 	
@@ -51,7 +47,7 @@
 	function popupChat(){
 		
 		window.name = "mainPage";
-		window.open("/chatbot/chatbot","chatbotPage", "width=400, height=650, menubar=yes, statebar=yes, scrollbar=yes, left=800");
+		window.open("/chatbot/chatbot","chatbotPage", "width=410, height=650, menubar=yes, statebar=yes, scrollbar=yes, left=800");
  		
 		if(<%=person_id%> > 0){
 			document.session_id.action = "/chatbot/chatbot";
@@ -112,7 +108,7 @@
                     <!-- Logo / Mobile Menu -->
                     <div  class="col-lg-3 col-sm-3 ">
                         <div id="logo">
-                            <h1><a href="/kobook/index.do">KOBOOK</a></h1>
+                            <h1><a href="/">KOBOOK</a></h1>
                         </div>
                     </div>
                     <!-- Navigation
@@ -135,11 +131,6 @@
 									
 									<span>
 									${person_email }님 로그인중 
-<%-- 										<c:forEach var="z" items="${alarmList }">
-	    									<c:if test="${z.hit_yn == 'N' }">
-	             								<% alarm_new += 1;%>
-	        								</c:if> 
-	    								</c:forEach> --%>
 										<a href="#" onclick="fn_newAlarm()">새로온 알림  [ </a> 
 										<a href="#" id="alarm_new"></a> 
 										<a href="#"> ]</a> 
@@ -148,38 +139,7 @@
 									</span> 
 								</c:if>
 							</div>
-        					
-        						
 
-								<%-- <a href="#" onclick="fn_logout()">로그아웃</a>
-								
-								<c:choose>
-									<c:when test="${person_email == 0}">
-										<h4>관리자 로그인</h4>
-										<form action="/kobook/admin/listUser.do">
-            					  			<input type="hidden" name="person_id" value="${person_id }">
-											<input type="submit" value="회원관리이동">
-										</form>
-									</c:when>
-									<c:otherwise>
-										<h4>${person_email }님  환영합니다앙~^0^</h4> 
-											     <c:forEach var="z" items="${alarmList }">
-	    											<c:if test="${z.hit_yn == 'N' }">
-	             											<% alarm_new += 1;%>
-	        										</c:if> 
-	    										</c:forEach>
-        								<h4>새로운 알람의 갯수 : [ <%=alarm_new %> ]</h4>
-            					  		<form action="/kobook/recom/alarmListAction.do">
-            					  			<input type="hidden" name="person_id" value="${person_id }">
-											<input type="submit" value="알림">
-										</form> 
-									</c:otherwise>
-								</c:choose>
-								</c:if> --%>
-        					
-        					
-        					
-                            
                             <div class="navbar-header">
                                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                                     <span class="sr-only">Toggle navigation</span>
