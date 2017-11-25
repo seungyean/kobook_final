@@ -48,17 +48,6 @@ public class MessageController {
 		
 		int receiver_id = pService.findPersonId(dto.getReceiver_email());
 		
-		
-		//메세지를 보내면 알람 보내는 서비스 (아름)
-		AlarmVO alarmVO = new AlarmVO();
-		
-		alarmVO.setAlarm_kind("Message");
-		alarmVO.setAlarm_content("새 쪽지가 도착하였습니다.");
-		alarmVO.setPerson_id(receiver_id);
-		
-		alarmService.alarmMessage(alarmVO);
-		
-		
 		// 해당 email을 가진 사용자가 존재하지 않으면 -1 반환
 		if(receiver_id == -1){
 			
@@ -73,6 +62,17 @@ public class MessageController {
 			message.setMessage_content(dto.getMessage_content());
 			
 			mService.messageSend(message);
+			
+			
+			//메세지를 보내면 알람 보내는 서비스 (아름)
+			AlarmVO alarmVO = new AlarmVO();
+			
+			alarmVO.setAlarm_kind("Message");
+			alarmVO.setAlarm_content("새 쪽지가 도착하였습니다.");
+			alarmVO.setPerson_id(receiver_id);
+			
+			alarmService.alarmMessage(alarmVO);
+			
 			
 			return "/message/sendOk";
 		}
