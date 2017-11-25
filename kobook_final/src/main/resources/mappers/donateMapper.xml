@@ -8,9 +8,9 @@
 	
 	<insert id="donateInsert" parameterType="DonateVO">
 		insert into donate(
-			donate_id, donate_title, donate_date, donate_content, person_id
+			donate_id, donate_title, donate_date, donate_content, person_id, donate_thumbnail
 			)values(
-			donate_id_seq.nextval, #{donate_title}, SYSDATE, #{donate_content}, #{person_id}
+			donate_id_seq.nextval, #{donate_title}, SYSDATE, #{donate_content}, #{person_id}, #{donate_thumbnail}
 			)
 	</insert>
 
@@ -68,6 +68,9 @@
 		insert into donate_attach(donate_file_name, donate_id) values(#{donate_file_name},#{donate_id})
 	</insert>
 
+	<select id="donateSelect" parameterType="int" resultType="DonateVO">
+		select * from donate where donate_id = #{donate_id}
+	</select>
 
 	<!-- 
 			
@@ -77,9 +80,6 @@
 			where D.PERSON_ID =#{person_id} and D.donate_id = #{donate_id}
 	</select>
 	
-	<select id="selectDonateDetail" parameterType="int" resultType="Donate">
-		select * from donate where donate_id = #{donate_id}
-	</select>
 	
 	<update id="donateHitCount" parameterType="int">
 		update donate set donate_hit=donate_hit+1 where donate_id = #{donate_id}

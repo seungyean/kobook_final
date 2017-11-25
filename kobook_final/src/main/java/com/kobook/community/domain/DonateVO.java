@@ -12,13 +12,14 @@ public class DonateVO implements Serializable {
 	private int donate_hit;
 	private String donate_content;
 	private int person_id;
+	private String donate_thumbnail;
 	
 	private String[] files;
 
 	public DonateVO() {}
 
 	public DonateVO(int donate_id, String donate_title, Timestamp donate_date, int donate_hit, String donate_content,
-			int person_id, String[] files) {
+			int person_id, String[] files, String donate_thumbnail) {
 		super();
 		this.donate_id = donate_id;
 		this.donate_title = donate_title;
@@ -27,6 +28,7 @@ public class DonateVO implements Serializable {
 		this.donate_content = donate_content;
 		this.person_id = person_id;
 		this.files = files;
+		this.donate_thumbnail = donate_thumbnail;
 	}
 
 	public int getDonate_id() {
@@ -85,12 +87,23 @@ public class DonateVO implements Serializable {
 		this.files = files;
 	}
 
+	public String getDonate_thumbnail() {
+		return donate_thumbnail;
+	}
+
+	public void setDonate_thumbnail(String donate_thumbnail) {
+		this.donate_thumbnail = donate_thumbnail;
+	}
+
 	@Override
 	public String toString() {
 		return "DonateVO [donate_id=" + donate_id + ", donate_title=" + donate_title + ", donate_date=" + donate_date
 				+ ", donate_hit=" + donate_hit + ", donate_content=" + donate_content + ", person_id=" + person_id
-				+ ", files=" + Arrays.toString(files) + "]";
+				+ ", donate_thumbnail=" + donate_thumbnail + ", files=" + Arrays.toString(files) + "]";
 	}
+	
+	
+
 	
 	
 	

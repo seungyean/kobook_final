@@ -23,4 +23,6 @@ public interface DonateDAO {
 	public void donateDeleteAttach(Integer donate_id) throws Exception;
 	//donateReplaceAttach
 	public void donateReplaceAttach(DonateFileVO fileVO) throws Exception;
+	//donateSelect
+	public DonateVO donateSelect(Integer donate_id) throws Exception;
 }

@@ -72,8 +72,7 @@
 							</h4>
 						</div>
 						<!-- 나중에 로그인되면 아래 person_id의 value는 sessionid로 변경 -->
-						<form role="form" id="registerForm"
-							method="post" name="registerForm" >
+						<form action="donateRegist" id="registerForm" method="post" enctype="multipart/form-data">
 							<div class="form-group">
 								<input type="hidden" class="form-control" name="person_id"
 									value="${person_id }">
@@ -87,10 +86,20 @@
 									name="donate_content">글 내용</textarea>
 							</div>
 							<div class="form-group">
-								<label for="exampleInputEmail1">File DROP Here</label>
-									<div class="fileDrop"></div>
+								<input type="file" name="file">
 							</div>
-							<div class="box-footer">
+							<div class="form-group">
+								<input type="submit" class="btn btn-default btn-lg button"
+									value="작성 완료">
+							</div>
+						</form>
+ 						<button class="fileButton">파일 추가</button>
+							<div class="form-group" id="fileAdd">
+								<label for="exampleInputEmail1">추가 파일은 아래영역에 드래그하십시오.</label>
+									<div class="fileDrop"></div>
+								<button class="cancleFile">취소</button>
+							</div>
+ 							<div class="box-footer">
 								<div>
 									<hr>
 								</div>
@@ -99,11 +108,7 @@
 								</ul>
 								
 							</div>
-							<div class="form-group">
-								<input type="submit" class="btn btn-default btn-lg button"
-									value="작성 완료">
-							</div>
-						</form>
+							 
 					</div>
 				</div>
 			</div>
@@ -130,12 +135,12 @@
     <script type="text/javascript" src="/resources/js/jquery.isotope.min.js"></script>
     <script type="text/javascript" src="/resources/js/swipe.js"></script>
     <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
-	
+    
+    <script src="/resources/js/main.js"></script>
+
 	<script type="text/javascript" src="/resources/js/upload.js"></script>
 	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
-    <script src="/resources/js/main.js"></script>
-    
 <script id="template" type="text/x-handlebars-template">
 <li>
   <div class="mailbox-attachment-info">
@@ -148,8 +153,21 @@
   </div>
 </li>                
 </script>
-
 <script>
+ $("#fileAdd").hide();
+
+$(".fileButton").on("click", function(){
+	event.preventDefault();
+	$("#fileAdd").show();
+	$(this).hide();
+});
+
+$(".cancleFile").on("click", function(){
+	event.preventDefault();
+	$("#fileAdd").hide();
+	$(".fileButton").show();
+});
+
 var template = Handlebars.compile($("#template").html());
 
 $(".fileDrop").on("dragenter dragover", function(event){
@@ -220,8 +238,6 @@ $("#registerForm").submit(function(event){
 
 	that1.get(0).submit();
 });
-
-
 
 </script>
 	<!-- Start Style Switcher -->

@@ -23,9 +23,10 @@
     <link rel="stylesheet" href="/resources/css/layout/wide.css" data-name="layout">
 
     <link rel="stylesheet" type="text/css" href="/resources/css/switcher.css" media="screen" />
+    
     <style type="text/css">
     .popup {position: absolute;}
-    .back { background-color: gray; opacity:0.5; width: 100%; height: 300%; overflow:hidden;  z-index:1101;}
+    .back { background-color: gray; opacity:0.5; width: 78%; height: 31%; overflow:hidden;  z-index:1101;}
     .front { 
        z-index:1110; opacity:1; boarder:1px; margin: auto; 
       }
@@ -34,7 +35,11 @@
        max-width: 900px; 
        max-height: 500px; 
        overflow: auto;       
-     } 
+     }
+     #popup_img{
+     	width: 500%;
+     	height: 500%;
+     }
   	
     </style>
 </head>
@@ -92,27 +97,13 @@
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach var="donate" items="${list}">
+										<c:forEach var="donate" items="${list}" varStatus="st">
 											<tr>
 												<td align="center">${donate.donate_id}</td>
-												<%-- <td align="center"><a
-													href="/community/donateRead?donate_id=${donate.donate_id}"> <c:if
-															test="${donate.donate_img != null }">
-															<c:set var="head"
-																value="${fn:substring(donate.donate_img, 0, fn:length(donate.donate_img)-4) }"></c:set>
-															<c:set var="pattern"
-																value="${fn:substring(donate.donate_img, fn:length(head) +1, fn:length(donate.donate_img)) }"></c:set>
-
-															<c:choose>
-																<c:when
-																	test="${pattern == 'jpg' || pattern == 'gif' || pattern == 'png'}">
-																	<img src="../upload/${head }_small.${pattern}" height="100" width="120">
-																</c:when>
-															</c:choose>
-														</c:if> <c:if test="${donate.donate_img == null }">
-															<img alt="NO IMAGE" src="">
-														</c:if>
-												</a></td> --%>
+												<td align="center" >
+												<img class="thumbnail" alt="NO IMAGE"
+												 src="/community/displayFile?fileName=${donate.donate_thumbnail }" height="100" width="200">
+												</td>
 												<td><a
 													href="/community/donateRead?donate_id=${donate.donate_id}">${donate.donate_title }</a></td>
 												<td align="center">${donate.person_id}</td>
@@ -126,8 +117,6 @@
 								</table>
 								<input type="submit" value="글쓰기" class="btn-default">
 							</form>
-							<ul class="mailbox-attachments clearfix uploadedList">
-							 					</ul>
 				<!-- Search Form -->
 				<div class='box-body' align="right">
 
@@ -199,73 +188,37 @@
     <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
 
     <script src="/resources/js/main.js"></script>
-	
-	<script type="text/javascript" src="/resources/js/upload.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>   
-<script id="templateAttach" type="text/x-handlebars-template">
-<li data-src='{{fullName}}'>
-<div class="mailbox-attachment-info">
-<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}
-  <span class="mailbox-attachment-icon has-img"><br><img src="{{imgsrc}}" alt="Attachment"></span>
-</a>
-  </div>
-</li>
-</script>
+
     <script type="text/javascript">
 	$(function() {
-				$('#searchBtn').on(
-						"click",
-						function(event) {
-
-							self.location = "donateList"
-									+ '${pageMaker.makeQuery(1)}'
-									+ "&searchType="
-									+ $("select option:selected").val()
-									+ "&keyword=" + $('#keywordInput').val();
-
-						});
-
-			});
-
- 	var donate_id = 11;
-	var template = Handlebars.compile($("#templateAttach").html());
+		$('#searchBtn').on("click", function(event) {
+			self.location = "donateList" + '${pageMaker.makeQuery(1)}'
+							+ "&searchType=" + $("select option:selected").val()
+							+ "&keyword=" + $('#keywordInput').val();
+		});
+		
+ 		$(".thumbnail").on("click", function(event){
+ 			event.preventDefault();
+			var str = $(this).attr("src");
+			var str2 = str.split("s_");
+			var str3 = str2[0]+str2[1];
+	  		var imgTag = $("#popup_img");
+			imgTag.attr("src", str3);
+						
+			$(".popup").show('slow');
+			imgTag.addClass("show");
+		}); 
 	
-	$.getJSON("/community/donateGetAttach/"+donate_id,function(list){
-		$(list).each(function(){
-			
-			var fileInfo = getFileInfo(this);
-			
-			var html = template(fileInfo);
-			
-			 $(".uploadedList").append(html);
-			
+		$("#popup_img").on("click", function(){		
+			$(".popup").hide('slow');		
+		});
+		
+		$(".back").on("click", function(){		
+			$(".popup").hide('slow');		
 		});
 	});
-
-	$(".uploadedList").on("click", ".mailbox-attachment-info a", function(event){
-		
-		var fileLink = $(this).attr("href");
-		
-		if(checkImageType(fileLink)){
-			
-			event.preventDefault();
-					
-			var imgTag = $("#popup_img");
-			imgTag.attr("src", fileLink);
-			
-			console.log(imgTag.attr("src"));
-					
-			$(".popup").show('slow');
-			imgTag.addClass("show");		
-		}	
-	});
-	
-	$("#popup_img").on("click", function(){
-		
-		$(".popup").hide('slow');
-		
-	});
 	</script>
+	
 	<!-- Start Style Switcher -->
 	<div class="switcher"></div>
 	<!-- End Style Switcher -->

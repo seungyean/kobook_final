@@ -27,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kobook.book.domain.PageMaker;
 import com.kobook.book.domain.SearchCriteria;
 import com.kobook.community.domain.BlackVO;
+import com.kobook.community.domain.DonateFileVO;
 import com.kobook.community.domain.DonateVO;
 import com.kobook.community.service.BlackService;
 import com.kobook.community.service.DonateService;
@@ -208,22 +209,28 @@ public class CommunityController {
 	@ResponseBody
 	public List<String> blackGetAttach(@PathVariable("black_id") Integer black_id) throws Exception{
 		return blackService.blackGetAttach(black_id);
+		
 	}
 	
-	@RequestMapping(value = "donateRegist", method = RequestMethod.GET)
+	@RequestMapping(value = "/donateRegist", method = RequestMethod.GET)
 	public void donateRegistGet() throws Exception {
-
+		
 	}
 
-	@RequestMapping(value = "donateRegist", method = RequestMethod.POST)
-	public void donateRegistPost(DonateVO vo, Model model) throws Exception {
+
+	@RequestMapping(value = "/donateRegist", method = RequestMethod.POST)
+	public String donateRegistPost(DonateVO vo , @RequestParam("file") MultipartFile file ) throws Exception {
+		System.out.println("donatepost controller...");
 		System.out.println(vo.toString());
+		String donate_thumbnail = UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes());
+		vo.setDonate_thumbnail(donate_thumbnail);
 		donateService.donateRegist(vo);
-		//return "redirect:/community/donateList";
+		
+		return "redirect:/community/donateList";
 	}
 	
 	@RequestMapping("donateList")
-	public void donateList(@ModelAttribute SearchCriteria cri, Model model) throws Exception {
+	public void donateList(@ModelAttribute SearchCriteria cri, Model model, @ModelAttribute DonateFileVO fileVO) throws Exception {
 		model.addAttribute("list", donateService.donateList(cri));
 		
 		PageMaker pageMaker = new PageMaker();
@@ -237,6 +244,12 @@ public class CommunityController {
 	@ResponseBody
 	public List<String> donateGetAttach(@PathVariable("donate_id")Integer donate_id) throws Exception {		
 		return donateService.donateGetAttach(donate_id);
+	}
+	
+	@RequestMapping("donateRead")
+	public void donateRead(@RequestParam("donate_id") Integer donate_id, Model model,
+			@ModelAttribute("cri") SearchCriteria cri)throws Exception{
+		model.addAttribute(donateService.donateRead(donate_id));
 	}
 
 }

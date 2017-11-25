@@ -61,4 +61,9 @@ public class DonateDAOImpl implements DonateDAO {
 		session.insert(namespace+".donateReplaceAttach", fileVO);
 	}
 
+	@Override
+	public DonateVO donateSelect(Integer donate_id) throws Exception {
+		return session.selectOne(namespace+".donateSelect", donate_id);
+	}
+
 }

@@ -33,6 +33,7 @@ public class DonateServiceImpl implements DonateService {
 			fileVO.setDonate_file_name(donate_file_name);
 			dao.donateAddAttach(fileVO);
 		}
+		
 	}
 
 	@Override
@@ -48,6 +49,11 @@ public class DonateServiceImpl implements DonateService {
 	@Override
 	public List<String> donateGetAttach(Integer donate_id) throws Exception {
 		return dao.donateGetAttach(donate_id);
+	}
+
+	@Override
+	public DonateVO donateRead(Integer donate_id) throws Exception {
+		return dao.donateSelect(donate_id);
 	}
 
 }
