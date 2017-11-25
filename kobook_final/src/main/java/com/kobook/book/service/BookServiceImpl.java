@@ -122,11 +122,26 @@ public class BookServiceImpl implements BookService {
 
 
 
-	/*@Override
-	public int getPayId() throws Exception {
-		return dao.getPayId();
-	}*/
+	@Override
+	public int countReview(int person_id) throws Exception {
+		return dao.countReview(person_id);
+	}
 
+
+
+
+	@Override
+	public int countStar(int person_id) throws Exception {
+		int b=dao.countStar(person_id);
+		System.out.println("service"+b);
+		return b;
+	}
+
+
+
+	
+
+	
 	
 	
 

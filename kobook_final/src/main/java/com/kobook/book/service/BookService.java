@@ -36,4 +36,9 @@ public interface BookService {
 	
 	public void reviewregist(ReviewVO review)throws Exception;
 	
+	//평점을 위한 리뷰갯수
+	public int countReview(int person_id)throws Exception;
+	
+	//평점을 위한 총별점
+	public int countStar(int person_id)throws Exception;
 }

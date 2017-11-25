@@ -141,6 +141,9 @@ public class BookController {
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(service.countPaging(cri));
 		model.addAttribute("pageMaker",pageMaker);
+		
+
+		
 	}
 	
 	
@@ -149,6 +152,7 @@ public class BookController {
 	public void locationlist(@ModelAttribute("cri") SearchCriteria cri, Model model)throws Exception{
 		model.addAttribute("list", service.directListCriteria(cri));
 		model.addAttribute("list2", service.safeListCriteria(cri));
+		
 		PageMaker pageMaker=new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(service.countPaging(cri));
@@ -158,9 +162,29 @@ public class BookController {
 	
 	@RequestMapping(value="/bookRead",method=RequestMethod.GET)
 	public void read(@RequestParam("book_id")int book_id, PersonDTO person, Model model)throws Exception{
+		System.out.println("1");
+		System.out.println("컨트롤러2"+service.countStar(service.getPersonIdByBookId(book_id)));
+		System.out.println("컨트롤러1:"+service.countReview(service.getPersonIdByBookId(book_id)));
+	
+		System.out.println("2");
 		System.out.println("readCon: book_id: " + book_id);
 		model.addAttribute(service.read(book_id));
+		
+		System.out.println("3");
+		//판매자정보보여주기
 		model.addAttribute("s",service.readSellPerson(service.getPersonIdByBookId(book_id)));
+		
+		System.out.println("5");
+		model.addAttribute("countstar",service.countStar(service.getPersonIdByBookId(book_id)));
+		
+		System.out.println("4");
+		model.addAttribute("reviewcount",service.countReview(service.getPersonIdByBookId(book_id)));
+
+		
+		
+		
+		
+		
 		model.addAttribute("slist",service.sellPersonList(service.getPersonIdByBookId(book_id)));
 	}
 	

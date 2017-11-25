@@ -212,60 +212,26 @@ body{
      	</form>
 		
 								
-			        <%--     <div id="tab-2" class="tab-content">	
-								<c:forEach var="b2" items="${list2}">
-									<tr>
-										<td>${b2.book_id}</td>
-										<td><a href="/book/bookRead?book_id=${b2.book_id}">${b2.book_name}</a></td>
-										<td><c:if test="${b2.book_status !=null}">
-												<c:choose>
-													<c:when test="${b2.book_status=='A'}">양호</c:when>
-													<c:when test="${b2.book_status=='C'}">나쁨</c:when>
-													<c:otherwise>보통</c:otherwise>
-												</c:choose>
-											</c:if>
-										</td>
-										<td><c:if test="${b2.book_sell_state !=null}">
-												<c:choose>
-													<c:when test="${b2.book_sell_state=='I'}">판매중</c:when>
-													<c:when test="${b2.book_sell_state=='C'}">판매완료</c:when>
-												</c:choose>
-											</c:if>
-										</td>
-										<td>${b2.book_m_price}</td>
-										<td>${b2.book_safe_yn}</td>
-										<td><fmt:formatDate value="${b.book_date}"pattern='yyyy-MM-dd' /></td>
-									</tr>
-								</c:forEach>				
-			             </div> <!--/tab-2  -->	 --%>
-					 
-					  	
-		
-	
-				
-					
-						
-
-
+			      
 		<div class="col-sm-12 text-center">
 			<ul class="pagination">
 
 				<c:if test="${pageMaker.prev}">
 					<li><a
-						href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
+						href="booklocationList${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
 				</c:if>
 
 				<c:forEach begin="${pageMaker.startPage }"
 					end="${pageMaker.endPage }" var="idx">
 					<li
 						<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-						<a href="list${pageMaker.makeSearch(idx)}">${idx}</a>
+						<a href="booklocationList${pageMaker.makeSearch(idx)}">${idx}</a>
 					</li>
 				</c:forEach>
 
 				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 					<li><a
-						href="list${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
+						href="booklocationList${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
 				</c:if>
 
 			</ul>

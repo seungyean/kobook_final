@@ -118,6 +118,26 @@ public class BookDAOImpl implements BookDAO {
 
 
 
+	@Override
+	public int countReview(int person_id) throws Exception {
+		return session.selectOne(namespace+".countReview",person_id);
+	}
+
+
+
+
+	@Override
+	public int countStar(int person_id) throws Exception {
+
+		
+		int a = session.selectOne(namespace+".countStar",person_id);
+		System.out.println("dao"+a);
+		return a;
+	}
+
+	
+
+
 
 	
 	

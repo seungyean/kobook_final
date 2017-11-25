@@ -5,13 +5,11 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<% 
+<%-- <% 
 	int person_id = Integer.parseInt((String)(session.getAttribute("person_id")));
 
-%>
-<%-- <%
-	Book book = (Book)request.getAttribute("book");
 %> --%>
+
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -145,12 +143,13 @@
                 
                 	
 							
-				
+				<c:if test="${bookVO.person_id==person_id}">
 				<form action="/book/pick" method="post" name="pick">	
                      <input type="hidden" name="book_id" value="${bookVO.book_id}">
                      <input type="hidden" name = "person_id" value="${person_id}">
                      <input type="submit" value="찜하기" class="btn btn-default btn-lg button">
                  </form>
+                 </c:if>
 	   		</div>  <!--/col-lg-4 col-md-4 col-sm-4  -->		
 		</div>  <!--/row sub_content  -->
 		
@@ -175,7 +174,35 @@
 								<img alt="" src="/resources/img/green.jpg">
 								</c:when>
 								</c:choose> &nbsp;&nbsp;
-                       		 평점 :${s.person_avg}
+                       		 
+                       		 평점 :
+                       		 <c:choose>
+                       		<%--  <fmt:formatNumber value="${countstar/reviewcount}" pattern="#.#"/><br> --%>
+                       		<c:when test="${reviewcount}<=0">
+                       		no 
+                       		</c:when>
+								<c:when test="${countstar/reviewcount=='5'}">
+								<img alt="" src="/resources/img/5.PNG">
+								</c:when>
+								<c:when test="${countstar/reviewcount=='4'}">
+								<img alt="" src="/resources/img/4.PNG">
+								</c:when>
+								<c:when test="${countstar/reviewcount=='3'}">
+								<img alt="" src="/resources/img/3.PNG">
+								</c:when>
+								<c:when test="${countstar/reviewcount=='2'}">
+								<img alt="" src="/resources/img/2.PNG">
+								</c:when>
+								<c:when test="${countstar/reviewcount=='1'}">
+								<img alt="" src="/resources/img/1.png">
+								</c:when>
+								<c:otherwise>
+								test
+								</c:otherwise>
+								
+								</c:choose>
+								
+                       		 
 							</h2>
                     </div>
                </div>

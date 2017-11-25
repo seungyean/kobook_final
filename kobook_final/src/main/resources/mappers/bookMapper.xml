@@ -76,6 +76,24 @@
     select person_id, person_email,person_sell_grade, person_avg from person where person_id=#{person_id}
 	</select>
 	
+	<!--판매자 평점을 위한 리뷰 수  -->
+ 	<select id="countReview" resultType="Integer">
+	select count(r.review_id)
+	from pay p, book_order o, review r
+	where p.ORDER_ID = o.ORDER_ID and
+	r.PAY_ID = p.PAY_ID and
+	o.person_id=#{person_id}
+	</select>
+	
+	<!--판매자 평점을 위한 총별점  -->
+	<select id="countStar" resultType="Integer">
+	select nvl(sum(r.review_star),0)
+	from pay p, book_order o, review r
+	where p.ORDER_ID = o.ORDER_ID and
+	r.PAY_ID = p.PAY_ID and
+	o.person_id=#{person_id}
+	</select>
+	
 	
 	<!--리뷰작성-->
 	<insert id="reviewCreate" parameterType="ReviewVO">
@@ -201,26 +219,5 @@ and p.person_address like '%'|| #{keyword}||'%'
 		pick_id_seq.nextval, #{person_id}, #{book_id},'Y'
 		)
 	</insert>
-
-
-	<!-- <insert id="addAttach" parameterType="BookFileVO"> insert into book_attach(book_file_name, 
-		book_id) values(#{book_file_name},#{book_id}) </insert> <select id="maxNum" 
-		resultType="int"> select MAX(book_id) from book </select> <select id="getAttach" 
-		resultType="string"> select book_file_name from book_attach where book_id 
-		= #{book_id} order by book_date </select> <delete id="deleteAttach"> delete 
-		from book_attach where book_id=#{book_id} </delete> <insert id="replaceAttach"> 
-		insert into book_attach(book_file_name, book_id) values(#{book_file_name},#{book_id}) 
-		</insert> -->
-		
-		
-	<!-- <select id="payPerson" resultType="PersonVO" parameterType="int">
-		SELECT *
-		FROM person
-		WHERE person_id = #{person_id}
-	</select> -->
-
-
-
-
 
 </mapper>

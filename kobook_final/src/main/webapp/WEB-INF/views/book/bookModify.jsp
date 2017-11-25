@@ -8,12 +8,12 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
-<%
+<%-- <%
 
 	int person_id=Integer.parseInt((String)(session.getAttribute("person_id")));
 	System.out.print(person_id);
 
-%>
+%> --%>
 
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->

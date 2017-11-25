@@ -20,6 +20,7 @@ public interface BookDAO {
 	
 	public List<BookVO> sellPersonList(int person_id) throws Exception;
 	
+	//판매자정보
 	public PersonDTO readSellPerson(int person_id) throws Exception;
 	
 	
@@ -33,10 +34,14 @@ public interface BookDAO {
 	public void pick(PickVO pick) throws Exception;
 	
 	public int getPersonIdByBookId(int book_id) throws Exception;
-	
-	//public int getPayId()throws Exception;
+
 	public void reviewCreate(ReviewVO review)throws Exception;
 	
+	//평점을 위한 리뷰갯수
+	public int countReview(int person_id)throws Exception;
+	
+	//평점을 위한 총별점
+	public int countStar(int person_id)throws Exception;
 	
 	
 }
