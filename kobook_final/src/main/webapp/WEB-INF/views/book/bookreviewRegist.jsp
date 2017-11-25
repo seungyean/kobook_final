@@ -36,18 +36,7 @@
 
 
 </head>
-<script type="text/javascript">
-/* function fn_review(){
-	
-		window.name = "mainPage";
-		window.open("/book/bookreviewRegist","reviewForm","width=400,height=300,left=550,top=200");
-		document.reviewForm.action = "/book/bookreviewRegist";
-		document.reviewForm.target = "messagePage";
-		document.reviewForm.submit;
-	
-	
-} */
-</script>
+
 
 <body>
 
@@ -58,7 +47,7 @@
 	<h1 style="text-align: center;">후기 등록하기</h1>
 	<br>
 
-	<form action="/book/bookreviewRegist" method="post" name="reviewForm">
+	<form action="/book/bookreviewRegist" method="post">
 	<input type="hidden" name="pay_id" value="${pay_id}">
 		<!-- <input type="hidden" id="parentURI" name="parentURI" value=""> -->
 		<b> 책상태: </b>
@@ -72,7 +61,7 @@
 		<textarea name="review_content" placeholder="내용을  입력하세요." style="height: 30px; width: 250px; margin-left: 60px;"></textarea>
 		<br>
 		<br> 
-		<input type="submit" value="글쓰기" style="margin-left: 150px; width: 60px; height: 30px" onclick="fn_review()">
+		<input type="submit" value="글쓰기" style="margin-left: 150px; width: 60px; height: 30px">
 	</form>
 
 

@@ -82,12 +82,12 @@ public class BookController {
 	public String modifyPOST(@RequestParam("book_id")int book_id,RedirectAttributes rttr, BookVO book, @ModelAttribute("cri") SearchCriteria cri, Model model,@RequestParam("file")MultipartFile file)throws Exception{
 		
 		 String savedName=uploadFile(file.getOriginalFilename(), file.getBytes());
-		 System.out.println("¼öÁ¤Àü:"+book.toString());
+		 System.out.println("Â¼Ã¶ÃÂ¤Ã€Ã¼:"+book.toString());
 	       book.setBook_img(savedName);
 		
 		 
 		service.modify(book);
-		 System.out.println("¼öÁ¤ÈÄ:"+book.toString()); 
+		 System.out.println("Â¼Ã¶ÃÂ¤ÃˆÃ„:"+book.toString()); 
 		rttr.addAttribute("page",cri.getPage());
 		rttr.addAttribute("perPageNum",cri.getPerPageNum());
 		//rttr.addAttribute("searchType", cri.getSearchType());
@@ -164,42 +164,46 @@ public class BookController {
 		model.addAttribute("slist",service.sellPersonList(service.getPersonIdByBookId(book_id)));
 	}
 	
-/*	
-	@RequestMapping(value="/bookRead",method=RequestMethod.POST)
-	public void sellPersonListread(@RequestParam("book_id")int book_id, Model model)throws Exception{
+
+	@RequestMapping(value="/bookreviewRegist",method=RequestMethod.GET)
+	public void reviewRegist(Model model,@RequestParam("pay_id")int pay_id)throws Exception{
+		System.out.println("ë¦¬ë·°ì‘ì„± ì „ form");
+		
+		ReviewVO reviewVO = new ReviewVO();
+		reviewVO.setPay_id(pay_id);
+		model.addAttribute("pay_id", reviewVO.getPay_id());
+		System.out.println("ê²°ì œë²ˆí˜¸: "+reviewVO.getPay_id());
 		
 		
-	}*/
+	}
 	
-	/*@RequestMapping(value="/reviewRegist",method=RequestMethod.POST)
-	public void reviewRegist(ReviewVO review, Model model)throws Exception{
-		System.out.println("ÈÄ±â±ÛÆû");
-	}*/
 	
-	/*@RequestMapping(value="/reviewRegist",method=RequestMethod.POST)
-	public String reviewRegistPOST(ReviewVO review, Model model)throws Exception{
-		
-		 System.out.println(review.toString()); 
+	@RequestMapping(value="/bookreviewRegist",method=RequestMethod.POST)
+	public void reviewRegistPOST(@RequestParam("pay_id")int pay_id,ReviewVO review, Model model)throws Exception{
+		 System.out.println("í›„ê¸°ì‘ì„±");
+		 System.out.println("ì „: "+review.toString());
+
 	     service.reviewregist(review);
-		 return "redirect:/book/bookRead";
+	     System.out.println("í›„: "+review.toString());
 		
-	}*/
+		
+	}
 	
 	
 	private String uploadFile(String originalName, byte[] fileData) throws Exception{
-        //¿øº»ÆÄÀÏÀÌ¸§, ÆÄÀÏµ¥ÀÌÅÍ¸¦ byte[]·Î º¯È¯ÇÑ Á¤º¸¸¦ÅëÇØ ½ÇÁ¦ÆÄÀÏ ¾÷·Îµå
+     
        
-        UUID uid=UUID.randomUUID();     //Áßº¹µÇÁö¾ÊÀº °íÀ¯Å° °ª ¼³Á¤½Ã »ç¿ë//ÆÄÀÏÀÌ¸§»ı¼º
+        UUID uid=UUID.randomUUID();     
         String savedName=uid.toString()+"_"+originalName;
         File target=new File(uploadPath,savedName);
-       FileCopyUtils.copy(fileData, target);  //½ÇÁ¦ÆÄÀÏÃ³¸®- spring¿¡¼­ Á¦°øÇÏ´Â FileCopyUtilsÀÌ¿ë
+       FileCopyUtils.copy(fileData, target);  
         return savedName;
 }
 	@RequestMapping(value="/pick")
 	public String pick(PickVO pick, Model model)throws Exception{
-		System.out.println("PICKÄÁÆ®·Ñ·¯ÁøÀÔ");
+		System.out.println("PICKì»¨íŠ¸ë¡¤ëŸ¬ ì§„ì…");
 		service.pick(pick);
-		System.out.println("Âò¼º°ø");
+		System.out.println("pick ì„±ê³µ");
 		return "redirect:/book/bookList";
 	}
 	

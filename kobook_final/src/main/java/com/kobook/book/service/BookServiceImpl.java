@@ -90,6 +90,7 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public void reviewregist(ReviewVO review) throws Exception {
 		dao.reviewCreate(review);
+		System.out.println(review.toString());
 		
 	}
 

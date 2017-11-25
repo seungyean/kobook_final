@@ -71,24 +71,24 @@
 		where book_id = #{book_id}
 	</select>
 	
-	<!--?먮ℓ?먯젙蹂? -->
+	<!--판매자정보  -->
 	<select id="readSellPerson" resultType="PersonDTO">
     select person_id, person_email,person_sell_grade, person_avg from person where person_id=#{person_id}
 	</select>
 	
 	
-	<!--由щ럭?묒꽦-->
+	<!--리뷰작성-->
 	<insert id="reviewCreate" parameterType="ReviewVO">
 	insert into review(
 	review_id, review_content, review_date, review_star, pay_id
 	)
 	values(
 		review_id_seq.nextval, #{review_content}, SYSDATE,
-		#{review_star},#{pay_id},
+		#{review_star},#{pay_id}
 		)
 	</insert>
 	
-	<!--寃곗젣踰덊샇 媛?몄삤湲? -->
+	<!--결제번호 가져오기  -->
 <!-- 	<select id="getPayId" resultType="Integer">
 	select p.pay_id 
 	from pay p, book_order o

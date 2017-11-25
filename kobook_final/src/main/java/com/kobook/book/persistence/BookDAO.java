@@ -22,7 +22,7 @@ public interface BookDAO {
 	
 	public PersonDTO readSellPerson(int person_id) throws Exception;
 	
-	public void reviewCreate(ReviewVO review)throws Exception;
+	
 	
 	public int countPaging(SearchCriteria cri)throws Exception;
 	
@@ -35,7 +35,7 @@ public interface BookDAO {
 	public int getPersonIdByBookId(int book_id) throws Exception;
 	
 	//public int getPayId()throws Exception;
-	
+	public void reviewCreate(ReviewVO review)throws Exception;
 	
 	
 	

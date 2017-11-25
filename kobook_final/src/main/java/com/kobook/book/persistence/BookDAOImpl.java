@@ -112,8 +112,7 @@ public class BookDAOImpl implements BookDAO {
 
 	@Override
 	public void reviewCreate(ReviewVO review) throws Exception {
-		session.insert(namespace+".reviewCreate");
-		
+		session.insert(namespace+".reviewCreate",review);
 	}
 
 

@@ -26,7 +26,7 @@ public interface BookService {
 
 	public int countPaging(SearchCriteria cri)throws Exception;
 	
-	public void reviewregist(ReviewVO review)throws Exception;
+	
 	
 	public void modify(BookVO book)throws Exception;
 	
@@ -34,6 +34,6 @@ public interface BookService {
 	
 	public int getPersonIdByBookId(int book_id) throws Exception;
 	
-	//public int getPayId()throws Exception;
+	public void reviewregist(ReviewVO review)throws Exception;
 	
 }

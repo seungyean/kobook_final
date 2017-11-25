@@ -80,7 +80,7 @@
 										<tbody>
 											<c:forEach var="element" items="${buyList }" varStatus="s">
 												<tr>
-												<td id="pi" align="center">${element.PAY_ID}</td>
+												<td align="center" id="pi" data-rno = "${element.PAY_ID}">${element.PAY_ID}</td>
 													<td align="center">
 													<c:if test="${board.b_fname != null }">
 														<c:set var="head"
@@ -101,12 +101,13 @@
 													<td align="center">${element.PAY_AMOUNT}</td>
 													<td align="center">${element.ORDER_DATE}</td>
 													<td>
-													 	
-														<input type="button" value="후기작성" class="btn-default" onclick="fn_review()">
-													
-													</td>
-												</tr>`
-											</c:forEach>
+													 	<!-- 
+														<input  type="button" value="후기작성"  class="btn-default" onclick="fn_review()"> -->
+														<input  type="button" value="후기작성"  class="btn-default" >
+														<%--  <input type="hidden" class="form-control" value="${element.PAY_ID}"> --%>
+									</td>
+												</tr>
+									</c:forEach>
 										</tbody>
 										</table>
 									<!-- </form> -->
@@ -159,7 +160,7 @@
     <script src="/resources/js/retina-1.1.0.min.js"></script>
     <script type="text/javascript" src="/resources/js/jquery.cookie.js"></script> <!-- jQuery cookie -->
     <script type="text/javascript" src="/resources/js/styleswitch.js"></script> <!-- Style Colors Switcher -->
-    <script src="resources/js/jquery.fractionslider.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/resources/js/jquery.fractionslider.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script>
     <script type="text/javascript" src="/resources/js/jquery.smartmenus.bootstrap.min.js"></script>
     <script type="text/javascript" src="/resources/js/owl.carousel.min.js"></script>
@@ -172,12 +173,49 @@
     <script type="text/javascript" src="/resources/js/jquery.matchHeight-min.js"></script>
     <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
 
-    <script src="resources/js/main.js"></script>
+    <script src="/resources/js/main.js"></script>
 	<script type="text/javascript">
-		function fn_review(){
-		/* 	var i = $(this).parent().parent().childeren().first().nodeValue; */
-			var i = $("#pi").html();
+	
+	
+	$(function(){
+		$(".btn-default").on("click",function(event){
+			event.preventDefault();
+			console.log($(this).val());
+			var i = $(this).parent().parent().find("td:eq(0)").attr("data-rno");
 			window.open("/book/bookreviewRegist?pay_id="+i,"","width=400,height=300,left=550,top=200");
+		});
+	});
+	
+	
+		function fn_review(){
+
+			/* $('input[name=pi]').each(function(index){
+				var i = $('input[name=pi]').eq(index).attr('etc');
+				window.open("/book/bookreviewRegist?pay_id="+i,"","width=400,height=300,left=550,top=200");
+			}) */
+			/* var i = $(this).attr("name").val(); */
+			
+	/* 		var i = $(this).parent().parent().child.val(); */
+	
+			//var i=$('input[name=pi]').html();
+	 		//var i=$('#pi').html();
+	 				
+	 			
+	 				//var i = $(this).parent().parent().find("td:eq(0)").attr("data-rno");
+	 				window.open("/book/bookreviewRegist?pay_id="+i,"","width=400,height=300,left=550,top=200");
+	 			
+	 			
+	 			
+	 			/* $('#pi').each(function(index){
+	 				
+	 				var i=$(this).html();
+		 			window.open("/book/bookreviewRegist?pay_id="+i,"","width=400,height=300,left=550,top=200");
+	 				
+	 			})
+	 			 */
+	 		
+			
+			
 		}
 </script>
     <!-- Start Style Switcher -->
