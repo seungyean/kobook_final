@@ -10,7 +10,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>main</title>
+    <title>KOBOOK</title>
     <meta name="description" content="">
 
     <!-- CSS FILES -->
@@ -225,48 +225,6 @@
             	</c:choose>
             </div>
 		</section>
-
-
-
-
-
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="serviceBox_6 same-height">
-                        <div class="service-content">
-                            <h3>Clean& powerful code</h3>
-                            <span class="line"></span>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas luctus condimentum felis, sit amet placerat felis. Mauris porta lorem.</p>
-                            <a class="btn btn-default" href="">Read more <i class="fa fa-thumbs-up"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="serviceBox_6 same-height purple">
-                        <div class="service-content">
-                            <h3>Incredibly Flexible</h3>
-                            <span class="line"></span>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas luctus condimentum felis, sit amet placerat felis. Mauris porta lorem.</p>
-                            <a class="btn btn-default" href="">Read more <i class="fa fa-thumbs-up"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="serviceBox_6 same-height black">
-                        <div class="service-content">
-                            <h3>Quick Support</h3>
-                            <span class="line"></span>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas luctus condimentum felis, sit amet placerat felis. Mauris porta lorem.</p>
-                            <a class="btn btn-default" href="">Read more <i class="fa fa-thumbs-up"></i></a>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        
 
         <div class="container">
             <div class="row super_sub_content">

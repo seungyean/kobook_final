@@ -15,44 +15,46 @@
                         <h4><span>About Us</span></h4>
                     </div>
                     <div class="widget_content">
-                        <p>Donec earum rerum hic tenetur ans sapiente delectus, ut aut reiciendise voluptat maiores alias consequaturs aut perferendis doloribus asperiores.</p>
+                        <p>This site is made for every students that want to buy the cheep and variable books. Find the book what you want.</p>
                         <ul class="contact-details-alt">
-                            <li><i class="fa fa-map-marker"></i> <p><strong>Address</strong>: #2021 Lorem Ipsum</p></li>
-                            <li><i class="fa fa-user"></i> <p><strong>Phone</strong>:(+91) 9000-12345</p></li>
-                            <li><i class="fa fa-envelope"></i> <p><strong>Email</strong>: <a href="#">mail@example.com</a></p></li>
+                            <li><i class="fa fa-map-marker"></i> <p><strong>Address</strong>: Seoul Gasan Digital Complex 1-151</p></li>
+                            <li><i class="fa fa-user"></i> <p><strong>Phone</strong>: 070)5039-5815</p></li>
+                            <li><i class="fa fa-envelope"></i> <p><strong>Email</strong>: <a href="#"> admin@kobook.com</a></p></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-3 col-lg-3">
                     <div class="widget_title">
-                        <h4><span>Recent Posts</span></h4>
+                        <h4><span>PRODUCERS</span></h4>
                     </div>
                     <div class="widget_content">
                         <ul class="links">
-                            <li><a href="#">Aenean commodo ligula eget dolor<span>November 07, 2015</span></a></li>
-                            <li><a href="#">Temporibus autem quibusdam <span>November 05, 2015</span></a></li>
-                            <li><a href="#">Debitis aut rerum saepe <span>November 03, 2015</span></a></li>
-                            <li><a href="#">Et voluptates repudiandae <span>November 02, 2015</span></a></li>
+                            <li><a href="#">LEE JAE SEUNG<span>December 01, 1991</span></a></li>
+                            <li><a href="#">JUNG A REUM<span>July 03, 1993</span></a></li>
+                            <li><a href="#">LEE SEUNG YEON<span>June 29, 1993</span></a></li>
+                            <li><a href="#">JO JI HO<span>March 21, 1989</span></a></li>
+                            <li><a href="#">SIM DONG GIL<span>July 04, 1990</span></a></li>
+                            <li><a href="#">KIM MIN JU<span>March 14, 1994</span></a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-3 col-lg-3">
                     <div class="widget_title">
-                        <h4><span>Twitter</span></h4>
+                        <h4><span>SOCIAL</span></h4>
                     </div>
                     <div class="widget_content">
                         <ul class="tweet_list">
                             <li class="tweet_content item">
-                                <p class="tweet_link"><a href="#">@jquery_rain </a> Lorem ipsum dolor et, consectetur adipiscing eli</p>
-                                <span class="time">29 September 2015</span>
+                                <p class="tweet_link"><a href="#">@kobook_official </a> 코북 사이트 공식 계정</p>
+                                <span class="time">25 November 2017</span>
                             </li>
                             <li class="tweet_content item">
-                                <p class="tweet_link"><a href="#">@jquery_rain </a> Lorem ipsum dolor et, consectetur adipiscing eli</p>
-                                <span class="time">29 September 2015</span>
+                                <p class="tweet_link"><a href="#">@kobook_masters6</a> 개발자 공식 계정</p>
+                                <span class="time">25 November 2017</span>
                             </li>
                             <li class="tweet_content item">
-                                <p class="tweet_link"><a href="#">@jquery_rain </a> Lorem ipsum dolor et, consectetur adipiscing eli</p>
-                                <span class="time">29 September 2015</span>
+                                <p class="tweet_link"><a href="#">@kobook_for_you</a> 코북 신간도서 및 찾는 도서 알림 계정</p>
+                                <span class="time">25 November 2017</span>
                             </li>
                         </ul>
                     </div>
@@ -62,7 +64,7 @@
                 </div>
                 <div class="col-sm-6 col-md-3 col-lg-3">
                     <div class="widget_title">
-                        <h4><span>Flickr Gallery</span></h4>
+                        <h4><span>GALLERY</span></h4>
                     </div>
                     <div class="widget_content">
                         <div class="flickr">
@@ -78,7 +80,7 @@
 		<div class="container">
 			<div class="row">
             <div class="col-sm-6">
-                <p class="copyright">&copy; Copyright 2015 Electrify | Powered by  <a href="http://www.jqueryrain.com/">jQuery Rain</a></p>
+                <p class="copyright">&copy; Copyright 2017 kobook | Powered by  <a href="http://www.jqueryrain.com/">jQuery Rain</a></p>
             </div>
 
             <div class="col-sm-6 ">
