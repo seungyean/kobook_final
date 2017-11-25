@@ -66,7 +66,7 @@
 									</div>
 									</c:when>
 									<c:otherwise>
-										<form>
+										<!-- <form> -->
 									<table class="table table-hover">
 										<thead>
 											<tr>
@@ -80,12 +80,13 @@
 										<tbody>
 											<c:forEach var="element" items="${buyList }" varStatus="s">
 												<tr>
+												<td id="pi" align="center">${element.PAY_ID}</td>
 													<td align="center">
 													<c:if test="${board.b_fname != null }">
 														<c:set var="head"
 															value="${fn:substring(element.BOOK_IMG, 0, fn:length(element.BOOK_IMG)-4) }"></c:set>
 														<c:set var="pattern"
-															value="${fn:substring(element.BOOK_IMG, fn:length(head) +1, fn:length(element.BOOK_IMG)) }"></c:set>
+															value="${fn:substring(element.BOOK_IMG, fn:length(head) +1, fn:length(element.BOOK_IMG))}"></c:set>
 
 														<c:choose>
 															<c:when test="${pattern == 'jpg' || pattern == 'gif' }">
@@ -99,12 +100,16 @@
 													<td>${element.BOOK_NAME}</td>
 													<td align="center">${element.PAY_AMOUNT}</td>
 													<td align="center">${element.ORDER_DATE}</td>
-													<td><input type="button" value="후기작성" class="btn-default" src=""></td>
-												</tr>
+													<td>
+													 	
+														<input type="button" value="후기작성" class="btn-default" onclick="fn_review()">
+													
+													</td>
+												</tr>`
 											</c:forEach>
 										</tbody>
 										</table>
-									</form>
+									<!-- </form> -->
 									</c:otherwise>
 								</c:choose>
 							
@@ -168,7 +173,13 @@
     <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
 
     <script src="resources/js/main.js"></script>
-
+	<script type="text/javascript">
+		function fn_review(){
+		/* 	var i = $(this).parent().parent().childeren().first().nodeValue; */
+			var i = $("#pi").html();
+			window.open("/book/bookreviewRegist?pay_id="+i,"","width=400,height=300,left=550,top=200");
+		}
+</script>
     <!-- Start Style Switcher -->
     <div class="switcher"></div>
     <!-- End Style Switcher -->

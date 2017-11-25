@@ -4,31 +4,32 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kobook.mappers.myPageMapper">
 
-<!-- 주문자 정보 -->
+<!-- 二쇰Ц???뺣낫 -->
 	<select id="orderPerson" resultType="PersonVO" parameterType="int">
 		SELECT *
 		FROM person
 		WHERE person_id = #{person_id}
 	</select>
 
-	<!-- 판매내역 리스트 -->
+	<!-- ?먮ℓ?댁뿭 由ъ뒪??-->
 	<select id="sellList" resultType="BookVO" parameterType="int">
 		SELECT *
 		FROM book
 		WHERE person_id = #{person_id}
 	</select>
 
-	<!-- 판매상태 업데이트 -->
+	<!-- ?먮ℓ?곹깭 ?낅뜲?댄듃 -->
 	<update id="sellStateUpdate" parameterType="BookVO">
 		UPDATE book
 		SET
-		book_sell_state = #{book_sell_state}
+		book_sell_state = # {book_sell_state}
 		WHERE book_id = #{book_id}
 	</update>
 
-	<!-- 구매내역 리스트 -->
+	<!-- 援щℓ?댁뿭 由ъ뒪??-->
 	<select id="buyList" resultType="hashMap" parameterType="int">
 		SELECT
+		p.pay_id,
 		b.book_img,
 		b.book_name,
 		p.pay_amount,
@@ -41,7 +42,7 @@
 		AND o.person_id = #{person_id}
 	</select>
 
-	<!-- 찜리 -->
+	<!-- 李쒕━ -->
 	<select id="pickList" resultType="hashMap" parameterType="int">
 		SELECT
 		b.book_img,
@@ -59,14 +60,14 @@
 		AND person.person_id = #{person_id}
 	</select>
 
-	<!-- 찜 상태 변경 -->
+	<!-- 李??곹깭 蹂寃?-->
 	<update id="pickUpdate" parameterType="int">
 		UPDATE pick
 		SET pick_state = 'N'
 		WHERE pick_id = #{pick_id}
 	</update>
 
-	<!-- 마일리지 리스트 -->
+	<!-- 留덉씪由ъ? 由ъ뒪??-->
 	<select id="mileageList" resultType="hashMap">
 		SELECT o.order_date,
 		m.mileage_point,
@@ -81,7 +82,7 @@
 	</select>
 
 
-	<!-- 주문내역 -->
+	<!-- 二쇰Ц?댁뿭 -->
 	<select id="orderList" resultType="hashMap">
 		SELECT b.book_img,
 		b.book_name,
@@ -95,7 +96,7 @@
 		AND o.person_id = #{person_id}
 	</select>
 
-	<!-- 주문내역 -->
+	<!-- 二쇰Ц?댁뿭 -->
 	<insert id="orderInsert" parameterType="OrderVO">
 		INSERT INTO book_order 
 		VALUES (order_id_seq.NEXTVAL, 

@@ -118,6 +118,15 @@ public class BookServiceImpl implements BookService {
 		return dao.getPersonIdByBookId(book_id);
 	}
 
+
+
+
+	/*@Override
+	public int getPayId() throws Exception {
+		return dao.getPayId();
+	}*/
+
+	
 	
 
 }

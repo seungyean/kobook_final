@@ -71,12 +71,14 @@
 		where book_id = #{book_id}
 	</select>
 	
-	<!--판매자정보  -->
+	<!--?먮ℓ?먯젙蹂? -->
 	<select id="readSellPerson" resultType="PersonDTO">
     select person_id, person_email,person_sell_grade, person_avg from person where person_id=#{person_id}
 	</select>
 	
-<!-- 	<insert id="reviewCreate" parameterType="ReviewVO">
+	
+	<!--由щ럭?묒꽦-->
+	<insert id="reviewCreate" parameterType="ReviewVO">
 	insert into review(
 	review_id, review_content, review_date, review_star, pay_id
 	)
@@ -84,7 +86,15 @@
 		review_id_seq.nextval, #{review_content}, SYSDATE,
 		#{review_star},#{pay_id},
 		)
-	</insert> -->
+	</insert>
+	
+	<!--寃곗젣踰덊샇 媛?몄삤湲? -->
+<!-- 	<select id="getPayId" resultType="Integer">
+	select p.pay_id 
+	from pay p, book_order o
+	where p.ORDER_ID = o.ORDER_ID
+	and p.pay_id=#{pay_id}
+	</select> -->
 	
 
 <sql id="locationsearch">

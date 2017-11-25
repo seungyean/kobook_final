@@ -6,25 +6,13 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<% 
-	
-	/* BookVO book = (BookVO)request.getAttribute("book");
-	String book_safe_yn = book.getBook_safe_yn();
-	String book_status = book.getBook_status();
-	String book_sell_state = book.getBook_sell_state();
-	String book_kind = book.getBook_kind();
-	System.out.println(book_safe_yn);
-	System.out.println(book_status);
-	System.out.println(book_sell_state);
-	System.out.println(book_kind); */
- 
-%>
+
 
 <%
-/* if(session.getAttribute("person_id")!=null){
+
 	int person_id=Integer.parseInt((String)(session.getAttribute("person_id")));
-} */
-//session.setAttribute("person_id", 5);
+	System.out.print(person_id);
+
 %>
 
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
@@ -79,7 +67,7 @@
 
 
                 <form action="/book/bookModify" id="subscribe"  name="subscribe" method="post" enctype="multipart/form-data">
-              <%--   	 <input type="hidden" class="form-control" name="person_id" value="${person_id}">  --%>
+             	<%--  <input type="hidden" class="form-control" name="person_id" value="${person_id}"> --%>
                 	 <input type="hidden" class="form-control" name="book_id" value="${bookVO.book_id}"> 
                   	<%-- <input type="hidden" name="page" value="${cri.page}">
                 	<input type="hidden" name="perPageNum" value="${cri.perPageNum}"> --%>

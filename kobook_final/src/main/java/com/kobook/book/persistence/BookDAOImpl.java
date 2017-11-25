@@ -99,6 +99,15 @@ public class BookDAOImpl implements BookDAO {
 	}
 
 
+	
+
+
+	/*@Override
+	public int getPayId() throws Exception {
+		return session.selectOne(namespace+".getPayId");
+	}*/
+
+
 
 
 	@Override

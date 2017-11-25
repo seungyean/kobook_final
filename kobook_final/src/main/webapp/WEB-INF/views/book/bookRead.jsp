@@ -7,7 +7,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <% 
 	int person_id = Integer.parseInt((String)(session.getAttribute("person_id")));
-	//session.setAttribute("person_id", 5);
+
 %>
 <%-- <%
 	Book book = (Book)request.getAttribute("book");
@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="/resources/css/layout/wide.css" data-name="layout">
 
     <link rel="stylesheet" type="text/css" href="/resources/css/switcher.css" media="screen" />
+    
 </head>
 
 
@@ -72,25 +73,15 @@
 				<div class="row sub_content">
 			
 			
-				<form role="form" action="/book/bookModify" method="GET">
-				 <input type="hidden" name="person_id" value="${person_id}"> 
-				  <input type="hidden" name="book_id" value="${bookVO.book_id}"> 
-             <%--    	<input type="hidden" name="page" value="${cri.page}">
-                	<input type="hidden" name="perPageNum" value="${cri.perPageNum}"> --%>
-                </form>
-                	
+				<form role="form" action="/book/bookModify"  name="modifyForm" method="get">
+					<input type="hidden" name="book_id" value="${bookVO.book_id}"> 
+				  	
                 	
 					<div class="col-lg-8 col-md-8 col-sm-8">
 						<!--Project Details Page-->
 						<div class="porDetCarousel">
 							<div class="carousel-content">
-							
-				
-									 <img alt="aa" class="carousel-item" src="displayFile?fileName=${bookVO.book_img}" width="10px" height="800px">
-								<!--<img class="carousel-item" src="images/portfolio/portfolio_slider1.png" alt="">
-								<img class="carousel-item" src="images/portfolio/portfolio_slider2.png" alt="">
-								<img class="carousel-item" src="images/portfolio/portfolio_slider3.png" alt=""> -->
-									
+							  <img alt="aa" class="carousel-item" src="displayFile?fileName=${bookVO.book_img}" width="10px" height="800px">	
 							</div>
 						</div>
 					</div>
@@ -107,8 +98,7 @@
 							<div class="widget_title">
 								<h4><span>상세내용</span></h4>
 							</div>
-							
-					<ul class="details">
+					   <ul class="details">
 								<li><span>책이름 :</span>${bookVO.book_name}</li>
 								<li><span>책종류 :</span>${bookVO.book_kind}</li>
 								<li><span>해시태그 :</span>${bookVO.book_hash}</li>
@@ -143,10 +133,17 @@
 								</c:choose>
 								</li>
 						</ul> 
-				</div>  <!--/project_details  -->
-									<span>
-								<input type="submit" value="수정하기" id="submit" class="btn btn-default btn-lg button">
-								</span>
+				    </div>  <!--/project_details  -->
+								
+						<c:if test="${bookVO.person_id==person_id}">
+					 	<button id="modifyBtn" class="btn btn-default btn-lg button">수정하기</button>
+					 	</c:if>
+					 	
+					 	</form>
+                 	<%--<input type="hidden" name="page" value="${cri.page}">
+                		<input type="hidden" name="perPageNum" value="${cri.perPageNum}"> --%>
+                
+                	
 							
 				
 				<form action="/book/pick" method="post" name="pick">	
@@ -154,11 +151,11 @@
                      <input type="hidden" name = "person_id" value="${person_id}">
                      <input type="submit" value="찜하기" class="btn btn-default btn-lg button">
                  </form>
-		</div>  <!--/col-lg-4 col-md-4 col-sm-4  -->		
+	   		</div>  <!--/col-lg-4 col-md-4 col-sm-4  -->		
 		</div>  <!--/row sub_content  -->
 		
 		     
-		 <!--     <img alt="" src="resources/img/vip.jpg"> -->
+		
 		       <div class="row sub_content">
                     <div class="col-md-12">
                         <div class="dividerHeading">
@@ -177,8 +174,7 @@
 								<c:when test="${s.person_sell_grade=='D'}">
 								<img alt="" src="/resources/img/green.jpg">
 								</c:when>
-								</c:choose>
-                       		 &nbsp;&nbsp;
+								</c:choose> &nbsp;&nbsp;
                        		 평점 :${s.person_avg}
 							</h2>
                     </div>
@@ -361,9 +357,14 @@
        });
     });
 		
-		
 	</script>
 	
+<!-- 	<script type="text/javascript">
+    function modifyForm(){
+    	modifyForm.attr("action","/book/bookModify");
+        modifyForm.subtmit();
+    };
+    </script> -->
 	
 	 <script src="/resources/js/main.js"></script>
 	<!-- Start Style Switcher -->

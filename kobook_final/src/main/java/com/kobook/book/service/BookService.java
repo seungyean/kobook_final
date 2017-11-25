@@ -34,4 +34,6 @@ public interface BookService {
 	
 	public int getPersonIdByBookId(int book_id) throws Exception;
 	
+	//public int getPayId()throws Exception;
+	
 }

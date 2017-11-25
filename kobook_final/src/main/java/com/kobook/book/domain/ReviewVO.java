@@ -58,7 +58,14 @@ public class ReviewVO {
 
 	public void setPay_id(int pay_id) {
 		this.pay_id = pay_id;
+	}
+
+	@Override
+	public String toString() {
+		return "ReviewVO [review_id=" + review_id + ", review_content=" + review_content + ", review_date="
+				+ review_date + ", review_star=" + review_star + ", pay_id=" + pay_id + "]";
 	};
+	
 	
 	
 

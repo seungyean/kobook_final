@@ -1,10 +1,16 @@
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
 	/* if(session.getAttribute("person_id")!=null){
 		int person_id=Integer.parseInt((String)(session.getAttribute("person_id")));
 	} */
 %>
+<%-- <%
+
+	int pay_id=Integer.parseInt((String)(session.getAttribute("pay_id")));
+	System.out.print(pay_id);
+
+%> --%>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -31,7 +37,7 @@
 
 </head>
 <script type="text/javascript">
-function fn_review(){
+/* function fn_review(){
 	
 		window.name = "mainPage";
 		window.open("/book/bookreviewRegist","reviewForm","width=400,height=300,left=550,top=200");
@@ -40,13 +46,11 @@ function fn_review(){
 		document.reviewForm.submit;
 	
 	
-}
+} */
 </script>
 
 <body>
-	<!-- 헤더 -->
-	<jsp:include page="/WEB-INF/views/include/header.jsp" />
-	<!-- /헤더 -->
+
 
 	<!--start wrapper-->
 
@@ -54,12 +58,12 @@ function fn_review(){
 	<h1 style="text-align: center;">후기 등록하기</h1>
 	<br>
 
-	<form action="/book/reviewRegist" method="post" name="reviewForm">
-	<input type="hidden" name="pay_id" value="~~~~~~~~~">
+	<form action="/book/bookreviewRegist" method="post" name="reviewForm">
+	<input type="hidden" name="pay_id" value="${pay_id}">
 		<!-- <input type="hidden" id="parentURI" name="parentURI" value=""> -->
 		<b> 책상태: </b>
 			<select name="review_star">
-			<option value="5">★★★★★</option>
+			<option value="5" selected="selected">★★★★★</option>
 			<option value="4">★★★★☆</option>
 			<option value="3">★★★☆☆</option>
 			<option value="2">★★☆☆☆</option>
@@ -78,9 +82,7 @@ function fn_review(){
 
 	<!--end wrapper-->
 
-	<!-- 푸터 -->
-	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
-	<!-- /푸터 -->
+
 
 	<script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
@@ -119,4 +121,3 @@ function fn_review(){
 	<!-- End Style Switcher -->
 </body>
 </html>
- --%>
