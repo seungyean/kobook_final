@@ -6,7 +6,7 @@
 <configuration>
 
 	<typeAliases>
-		<!-- 앞으로 org.zerock.domain은 안써도 됨 -->
+		<!-- 앞으로 com.kobook.domain은 안써도 됨 -->
 		<package name="com.kobook.book.domain" />
 		<package name="com.kobook.message.domain" />
 		<package name="com.kobook.mypage.domain" />
@@ -15,6 +15,7 @@
 		<package name="com.kobook.community.domain" />
 		<package name="com.kobook.alarm.domain"/>
 		<package name="com.kobook.recom.domain"/>
+		<package name="com.kobook.chatbot.domain"/>
 	</typeAliases>
 
 </configuration>

@@ -8,8 +8,6 @@
 <script type="text/javascript">
 	function closeWin(){
 		window.self.close();
-		window.opener.name = "main.jsp";
-		document.mmessageForm.action = "/kobook/recom/loginAction.do";
 	}
 </script>
 </head>
