@@ -59,14 +59,13 @@ public class MyPageTest {
 		System.out.println("주문자 정보: " + dao.orderPerson(7));
 	}
 	*/
+	
+	// 주문 인서트
 	@Test
 	public void Test(){
 		OrderVO vo = new OrderVO();
-		SimpleDateFormat dformat = new SimpleDateFormat("dd-MM-yyyy");
-		dformat.format("2017-11-24");
 		vo.setPerson_id(7);
 		vo.setBook_id(2);
-//		vo.setOrder_id(3);
-		 dao.orderInsert(vo);
+		dao.orderInsert(vo);
 	}
 }

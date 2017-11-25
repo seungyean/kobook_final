@@ -10,7 +10,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>결제완료창</title>
+	<title>주문완료창</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
@@ -34,7 +34,7 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <div class="page_title">
-                            <h2>결제완료</h2>
+                            <h2>주문완료</h2>
                         </div>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
 				<div class="row sub_content">
 					<div class="col-lg-12 col-md-12 col-sm-12">
 						<div class="dividerHeading">
-							<h4><span>결제</span></h4>
+							<h4><span>주문</span></h4>
 							<br>
 							<br>
 								

@@ -36,14 +36,15 @@
     	var pay_amount = "";
     	var total_pick_id = "";
     	
-    	$("#pay_success").click(function() {
-    		pay_amount = $('#total_price').val();
+    	$(".btn-default").click(function() {
     		var pick_id = $('#pick_id').val();
-            location.href="/kobook/mypage/paySuccess.do?pay_amount="+ pay_amount + "&pick_id="+pick_id;
+    		var book_id = $('#bookId').html();
+    		console.log(book_id);
+            location.href="/mypage/orderSuccess?pick_id="+pick_id+"&book_id="+book_id;
 		});
     	
     	// 결제창 모달 
-    	 $(".btn-default").click(function(){
+    	/*  $(".btn-default").click(function(){
      		pick_id = $(this).parent().parent().find('td:first').text().trim();
      		
      		$('#pick_id').val(pick_id);
@@ -58,7 +59,7 @@
     		
     		$('#sum_mileage').val(sum_mileage);
             $('#payModal').modal();
-         });
+         }); */
     	 
     	// 찜 삭제 버튼 
     	 $(".btn-danger").click(function(){
@@ -144,6 +145,7 @@
 											<c:forEach var="element" items="${pickList }" varStatus="s">
 												<tr>
 													<td align="center" hidden="">${element.PICK_ID }</td>
+													<td align="center" hidden="" id="bookId">${element.BOOK_ID }</td>
 													<td align="center"><input type="checkbox"></td>
 													<td align="center">	${element.BOOK_IMG }</td>
 													<td>${element.BOOK_NAME }</td>

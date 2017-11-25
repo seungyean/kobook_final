@@ -157,31 +157,23 @@ public class MyPageController {
 		
 	}
 	
-	/* 주문 등록 */
-	@RequestMapping(value="/orderSuccess", method=RequestMethod.GET)
-	public void orderSuccessGET(OrderVO order, Model model)throws Exception{
-		System.out.println("주문등록 get~~~~~~~~~~~~~~~~~");
-	}
-	
-	@RequestMapping(value="/orderSuccess", method=RequestMethod.POST)
-	public String orderSuccessPOST(OrderVO order,RedirectAttributes rttr, HttpServletRequest request)throws Exception{
+	@RequestMapping(value="/order", method=RequestMethod.POST)
+	public void orderSuccessPOST(OrderVO order,RedirectAttributes rttr, HttpServletRequest request)throws Exception{
 		System.out.println("주문등록 post~~~~~~~~~~~~~~~~~");
 		System.out.println(order.toString());
-		
+		OrderVO temp = new OrderVO();
 		HttpSession session = request.getSession();
 		int person_id = Integer.parseInt((String)session.getAttribute("person_id"));
 		List<HashMap<String, String>> list = service.orderList(person_id);
 		int book_id = Integer.parseInt(list.get(0).get("book_id"));
 		
-		order.setPerson_id(person_id);
-		order.setBook_id(book_id);
+		temp.setPerson_id(person_id);
+		temp.setBook_id(book_id);
 		
 		
-		service.orderInsert(order);
+		service.orderInsert(temp);
 		
-		return "redirect:/mypage/order";
 	}
-	
 	
 
 

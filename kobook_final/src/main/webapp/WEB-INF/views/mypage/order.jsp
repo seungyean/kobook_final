@@ -41,7 +41,6 @@
    		
    		$('#total_price').html($('#book_price').text() - input_mile + del_price );
    		$('#sale_price').html($('#input_mile').val());
-   		
 		});
 	   
 	   //결제버튼 클릭 

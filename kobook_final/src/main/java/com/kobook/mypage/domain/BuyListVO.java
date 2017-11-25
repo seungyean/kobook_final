@@ -9,6 +9,15 @@ public class BuyListVO {
 	private String book_name;
 	private String pay_amount;
 	private Timestamp order_date;
+	private int pay_id;
+	
+	
+	public int getPay_id() {
+		return pay_id;
+	}
+	public void setPay_id(int pay_id) {
+		this.pay_id = pay_id;
+	}
 	public String getBook_img() {
 		return book_img;
 	}
@@ -36,7 +45,7 @@ public class BuyListVO {
 	@Override
 	public String toString() {
 		return "BuyListVO [book_img=" + book_img + ", book_name=" + book_name + ", pay_amount=" + pay_amount
-				+ ", order_date=" + order_date + "]";
+				+ ", order_date=" + order_date + ", pay_id=" + pay_id + "]";
 	}
 	
 	
