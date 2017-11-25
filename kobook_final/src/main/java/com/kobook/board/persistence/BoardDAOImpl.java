@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kobook.board.domain.BoardVO;
 import com.kobook.book.domain.SearchCriteria;
+import com.kobook.person.domain.PersonVO;
 
 
 @Repository
@@ -46,12 +47,12 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 	
 	@Override
-	public void boardUpdateView(Integer board_id)throws Exception {
+	public void boardUpdateView(Integer board_id) throws Exception {
 		session.update(namespace +".boardUpdateView", board_id);
 	}
 	
 	@Override
-	public void boardRemove(Integer board_id)throws Exception {
+	public void boardRemove(Integer board_id) throws Exception {
 		session.delete(namespace +".boardRemove", board_id);
 	}
 	
@@ -59,4 +60,9 @@ public class BoardDAOImpl implements BoardDAO {
 	public void boardUpdate(BoardVO vo) throws Exception {
 		session.update(namespace+".boardUpdate", vo);
 	}
+	
+/*	@Override
+	public List<PersonVO> currentPerson(PersonVO vo) throws Exception {
+		return session.selectList(namespace+".currentPerson", vo);
+	}*/
 }

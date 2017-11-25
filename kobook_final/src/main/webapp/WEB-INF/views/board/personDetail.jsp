@@ -200,7 +200,8 @@ function delete_fn(){
 			<td align="center" height="30">${person.person_address }</td>
 			<td align="center" height="30">${person.person_phone }</td>
 			<td align="center" height="30">${person.person_mileage }</td>
-			<td align="center" height="30"><select name="person_sell_grade">
+			<td align="center" height="30">
+					<select name="person_sell_grade">
                        <option value="U">U</option>
                        <option value="M">M</option>
                        <option value="D">D</option>
@@ -211,7 +212,7 @@ function delete_fn(){
                        <option value="B">B. 블랙</option>
                        <option value="R">R. 휴면</option>
                </select>
-               </td>
+            </td>
 	</table>
 	
 	<br>

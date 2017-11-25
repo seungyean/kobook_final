@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.kobook.board.domain.BoardVO;
 import com.kobook.book.domain.SearchCriteria;
+import com.kobook.person.domain.PersonVO;
 
 public interface BoardService {
 	
@@ -21,4 +22,8 @@ public interface BoardService {
 	public void boardRemove(Integer board_id) throws Exception;
 	
 	public void boardModify(BoardVO vo) throws Exception;
+	
+	//@@@@@@@@@@@@@@@@@@@@@@@@  관리자용 @@@@@@@@@@@@@@@@@@@@@@@@
+	
+	
 }

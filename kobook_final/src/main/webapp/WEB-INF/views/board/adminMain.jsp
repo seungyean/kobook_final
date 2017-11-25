@@ -130,7 +130,7 @@
                     <div class="col-sm-4">
                         <div class="serviceBox_1">
                             <div class="service-icon">
-                                <i class="fa fa-folder-open-o"></i>
+                                <i class="fa fa-money"></i>
                             </div>
                             <div class="service-content">
                                 <h3>오늘 총 매출</h3>
@@ -141,7 +141,7 @@
                     <div class="col-sm-4">
                         <div class="serviceBox_1">
                             <div class="service-icon">
-                                <i class="fa fa-folder-o"></i>
+                                <i class="fa fa-user"></i>
                             </div>
                             <div class="service-content">
                                 <h3>오늘 가입자</h3>
@@ -152,11 +152,11 @@
                     <div class="col-sm-4">
                         <div class="serviceBox_1">
                             <div class="service-icon">
-                                <i class="fa fa-heart-o"></i>
+                                <i class="fa fa-android"></i>
                             </div>
                             <div class="service-content">
                                 <h3>오늘 총 접속자</h3>
-                                <p>10명 ${personVO.person_total }</p>
+                                <p>10명 ${personVO.USER }</p>
                             </div>
                         </div>
                     </div>

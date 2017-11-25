@@ -6,6 +6,7 @@ import java.util.List;
 import com.kobook.board.domain.BoardVO;
 import com.kobook.book.domain.SearchCriteria;
 import com.kobook.community.domain.BlackVO;
+import com.kobook.person.domain.PersonVO;
 
 
 public interface BoardDAO {
@@ -33,4 +34,9 @@ public interface BoardDAO {
 	
 	//공시사항 수정
 	public void boardUpdate(BoardVO vo) throws Exception;
+	
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@    관리자용       @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@	
+	
+/*	public List<PersonVO> currentPerson(PersonVO vo)throws Exception;*/
+	
 }

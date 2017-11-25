@@ -23,6 +23,7 @@ import com.kobook.board.domain.BoardVO;
 import com.kobook.board.service.BoardService;
 import com.kobook.book.domain.PageMaker;
 import com.kobook.book.domain.SearchCriteria;
+import com.kobook.person.domain.PersonVO;
 
 
 @Controller
@@ -99,4 +100,5 @@ public class BoardController {
 		
 		return "redirect:/board/boardList";
 	}
+	
 }

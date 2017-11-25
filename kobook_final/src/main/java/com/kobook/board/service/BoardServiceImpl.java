@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kobook.board.domain.BoardVO;
 import com.kobook.board.persistence.BoardDAO;
 import com.kobook.book.domain.SearchCriteria;
+import com.kobook.person.domain.PersonVO;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -56,4 +57,5 @@ public class BoardServiceImpl implements BoardService {
 	public void boardModify(BoardVO vo) throws Exception {
 		dao.boardUpdate(vo);
 	}
+	
 }
