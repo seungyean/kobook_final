@@ -102,69 +102,6 @@
                 </form>
             </div>
 </div></div></section>
-<!-- <section class="content contact">
-        <div class="container">
-            <div class="row sub_content">
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <div class="maps">
-                        <div id="page_maps"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row sub_content">
-                <div class="col-lg-8 col-md-8 col-sm-8">
-                    <div class="dividerHeading">
-                        <h4><span>책등록</span></h4>
-                    </div>
-                    <p>Vidit nulla errem ea mea. Dolore apeirian insolens mea ut, indoctum consequuntur hasi. No aeque dictas dissenti as tusu, sumo quodsi fuisset mea in. Ea nobis populo interesset cum, ne sit quis elit officiis, min im tempor iracundia sit anet. Facer falli aliquam nec te. In eirmod utamur offendit vis, posidonium instructior sed te.</p>
-
-                    <div class="alert alert-success hidden alert-dismissable" id="contactSuccess">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <strong>Success!</strong> Your message has been sent to us.
-                    </div>
-
-                    <div class="alert alert-error hidden" id="contactError">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <strong>Error!</strong> There was an error sending your message.
-                    </div>
-
-                    <form id="contactForm" action="" novalidate="novalidate">
-                        <div class="row">
-                            <div class="form-group">
-                                <div class="col-lg-6 ">
-                                    <input type="text" id="name" name="name" class="form-control" maxlength="100" data-msg-required="Please enter your name." value="" placeholder="책이름" >
-                                </div>
-                                <div class="col-lg-6 ">
-                                    <input type="email" id="email" name="email" class="form-control" maxlength="100" data-msg-email="Please enter a valid email address." data-msg-required="Please enter your email address." value="" placeholder="" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <input type="text" id="subject" name="subject" class="form-control" maxlength="100" data-msg-required="Please enter the subject." value="" placeholder="Subject">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <textarea id="message" class="form-control" name="message" rows="10" cols="50" data-msg-required="Please enter your message." maxlength="5000" placeholder="Message"></textarea>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <input type="submit" data-loading-text="Loading..." class="btn btn-default btn-lg" value="Send Message">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-		</div>
-</div>
-</section> -->
 		
 	<!--end wrapper-->
 

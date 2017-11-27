@@ -22,6 +22,8 @@ public interface BookService {
 	
 	public List<BookVO> sellPersonList(int person_id) throws Exception;
 	
+	public List<ReviewVO> reviewList(int person_id)throws Exception;
+	
 	public PersonDTO readSellPerson(int person_id) throws Exception;
 
 	public int countPaging(SearchCriteria cri)throws Exception;
@@ -33,6 +35,9 @@ public interface BookService {
 	public void pick(PickVO pick)throws Exception;
 	
 	public int getPersonIdByBookId(int book_id) throws Exception;
+	
+	//리뷰 작성자
+	public int writeId(int person_id) throws Exception;
 	
 	public void reviewregist(ReviewVO review)throws Exception;
 	

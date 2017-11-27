@@ -69,6 +69,17 @@ public class BookDAOImpl implements BookDAO {
 		return session.selectList(namespace+".sellPersonList", person_id);
 	}
 
+	
+	
+	
+	@Override
+	public List<ReviewVO> reviewList(int person_id) throws Exception {
+		return session.selectList(namespace+".reviewList",person_id);
+	}
+
+
+
+
 	@Override
 	public int countPaging(SearchCriteria cri) throws Exception {
 		return session.selectOne(namespace+".countPaging",cri);
@@ -100,12 +111,21 @@ public class BookDAOImpl implements BookDAO {
 
 
 	
+	
 
 
 	/*@Override
 	public int getPayId() throws Exception {
 		return session.selectOne(namespace+".getPayId");
 	}*/
+
+
+
+
+	@Override
+	public int writeId(int person_id) throws Exception {
+		return session.selectOne(namespace+".writeId",person_id);
+	}
 
 
 

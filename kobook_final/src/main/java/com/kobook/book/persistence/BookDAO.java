@@ -18,7 +18,12 @@ public interface BookDAO {
 	
 	public List<BookVO> safeListCriteria(SearchCriteria cri) throws Exception;
 	
+	//판매자의 다른상품 리스트
 	public List<BookVO> sellPersonList(int person_id) throws Exception;
+	
+	//판매자 후기 리스트
+	public List<ReviewVO> reviewList(int person_id)throws Exception;
+	
 	
 	//판매자정보
 	public PersonDTO readSellPerson(int person_id) throws Exception;
@@ -34,6 +39,9 @@ public interface BookDAO {
 	public void pick(PickVO pick) throws Exception;
 	
 	public int getPersonIdByBookId(int book_id) throws Exception;
+	
+	//리뷰 작성자
+	public int writeId(int person_id)throws Exception;
 
 	public void reviewCreate(ReviewVO review)throws Exception;
 	

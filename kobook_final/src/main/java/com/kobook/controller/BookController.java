@@ -162,26 +162,23 @@ public class BookController {
 	
 	@RequestMapping(value="/bookRead",method=RequestMethod.GET)
 	public void read(@RequestParam("book_id")int book_id, PersonDTO person, Model model)throws Exception{
-		System.out.println("1");
-		System.out.println("컨트롤러2"+service.countStar(service.getPersonIdByBookId(book_id)));
-		System.out.println("컨트롤러1:"+service.countReview(service.getPersonIdByBookId(book_id)));
-	
-		System.out.println("2");
 		System.out.println("readCon: book_id: " + book_id);
 		model.addAttribute(service.read(book_id));
 		
-		System.out.println("3");
 		//판매자정보보여주기
 		model.addAttribute("s",service.readSellPerson(service.getPersonIdByBookId(book_id)));
 		
-		System.out.println("5");
+		//별점 남긴 사람 수
 		model.addAttribute("countstar",service.countStar(service.getPersonIdByBookId(book_id)));
 		
-		System.out.println("4");
+		//리뷰 갯수
 		model.addAttribute("reviewcount",service.countReview(service.getPersonIdByBookId(book_id)));
 
+		//판매자 후기 리스트
+		model.addAttribute("reviewList", service.reviewList(service.getPersonIdByBookId(book_id)));
 		
-		
+		//리뷰 작성자
+		model.addAttribute("reviewer", service.writeId(service.getPersonIdByBookId(book_id)));
 		
 		
 		
@@ -196,6 +193,12 @@ public class BookController {
 		ReviewVO reviewVO = new ReviewVO();
 		reviewVO.setPay_id(pay_id);
 		model.addAttribute("pay_id", reviewVO.getPay_id());
+		
+		
+		/*reviewVO.setReview_star(reviewVO.getReview_star());
+		model.addAttribute("review_star",reviewVO.getReview_star());*/
+		
+		
 		System.out.println("결제번호: "+reviewVO.getPay_id());
 		
 		
@@ -206,7 +209,10 @@ public class BookController {
 	public void reviewRegistPOST(@RequestParam("pay_id")int pay_id,ReviewVO review, Model model)throws Exception{
 		 System.out.println("후기작성");
 		 System.out.println("전: "+review.toString());
-
+		 
+		// review.setReview_star(review.getReview_star());
+		 //model.addAttribute("review_star",review.getReview_star());
+		 
 	     service.reviewregist(review);
 	     System.out.println("후: "+review.toString());
 		

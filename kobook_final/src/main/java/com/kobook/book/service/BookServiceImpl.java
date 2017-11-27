@@ -74,6 +74,17 @@ public class BookServiceImpl implements BookService {
 		return dao.sellPersonList(person_id);
 	}
 
+	
+
+	
+	
+	
+
+	@Override
+	public List<ReviewVO> reviewList(int person_id) throws Exception {
+		return dao.reviewList(person_id);
+	}
+
 
 
 
@@ -117,6 +128,16 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public int getPersonIdByBookId(int book_id) throws Exception {
 		return dao.getPersonIdByBookId(book_id);
+	}
+
+
+	
+	
+
+
+	@Override
+	public int writeId(int person_id) throws Exception {
+		return dao.writeId(person_id);
 	}
 
 
