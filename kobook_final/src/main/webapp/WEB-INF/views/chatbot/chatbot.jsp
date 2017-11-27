@@ -107,15 +107,19 @@ textarea {
 
 .uk-scroll{
 	overflow: auto;
-	width: 360px;
+	width: 500px;
 	height: 400px;
-	
 }
+
+.uk-width-larger{
+	width: 600px;
+}
+
 </style>
 </head>
 <body>
 	<div class="uk-section">
-		<div class="uk-container uk-width-large">
+		<div class="uk-container uk-width-larger">
 		
 			<!-- <button class="uk-button uk-button-default uk-position-top-right uk-margin-small-top uk-margin-small-right" uk-toggle="target: .button-label">
 				<span class="button-label">Turn off the lights</span>

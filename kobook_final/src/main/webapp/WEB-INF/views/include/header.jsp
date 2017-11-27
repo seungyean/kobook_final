@@ -47,7 +47,7 @@
 	function popupChat(){
 		
 		window.name = "mainPage";
-		window.open("/chatbot/chatbot","chatbotPage", "width=410, height=650, menubar=yes, statebar=yes, scrollbar=yes, left=800");
+		window.open("/chatbot/chatbot","chatbotPage", "width=560, height=620, menubar=yes, statebar=yes, scrollbar=yes, left=600");
  		
 		if(<%=person_id%> > 0){
 			document.session_id.action = "/chatbot/chatbot";
