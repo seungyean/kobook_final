@@ -121,53 +121,17 @@ textarea {
 				<span class="button-label">Turn off the lights</span>
 				<span class="button-label" hidden>Turn on the lights</span>
 			</button> -->
-			<div class="uk-card uk-card-default uk-border-rounded uk-margin-large-top" >
 			
-				<div class="uk-card-body uk-padding-small uk-scroll">
+			<div class="uk-card uk-card-default uk-border-rounded uk-margin-large-top" id="big-container">
+			
+				<div class="uk-card-body uk-padding-small uk-scroll" id="mid-container">
 				
-					<div class="guest uk-grid-small uk-flex-bottom uk-flex-left" uk-grid>
-						<div class="uk-width-auto">
-							<img class="uk-border-circle" width="32" height="32" src="https://getuikit.com/docs/images/avatar.jpg">
-						</div>
-						<div class="uk-width-auto">
-							<div class="uk-card uk-card-body uk-card-small uk-card-default uk-border-rounded">
-								<p class="uk-margin-remove">Hey dude!</p>
-							</div>
-						</div>
-					</div>
-					
-					
-					<div class="me uk-grid-small uk-flex-bottom uk-flex-right uk-text-right" uk-grid>
-						<div class="uk-width-auto">
-							<div class="uk-card uk-card-body uk-card-small uk-card-primary uk-border-rounded">
-								<p class="uk-margin-remove">Hi brow :)</p>
-								<p class="uk-margin-remove">What's up?</p>
-							</div>
-						</div>
-						<div class="uk-width-auto">
-							<img class="uk-border-circle" width="32" height="32" src="https://getuikit.com/docs/images/avatar.jpg">
-						</div>
-					</div>
-					        
-					        
-					
-					<div class="guest uk-grid-small uk-flex-bottom uk-flex-left" uk-grid>
-						<div class="uk-width-auto">
-							<img class="uk-border-circle" width="32" height="32" src="https://getuikit.com/docs/images/avatar.jpg">
-						</div>
-						<div class="uk-width-auto">
-							<div class="uk-card uk-card-body uk-card-small uk-card-default uk-border-rounded">
-								<p class="uk-margin-remove">
-									<span class="etc"><i></i><i></i><i></i></span>
-								</p>
-							</div>
-						</div>
-					</div>
+				<!-- 대화 내용 들어가는 자리 -->
 				
 				</div>
 			
 				<div class="uk-card-footer uk-padding-remove">
-					<div class="uk-grid-small uk-flex-middle" uk-grid>
+					<div class="uk-grid-small uk-flex-middle" id="control-container" uk-grid>
 						<div class="uk-width-auto">
 							<a href="#" class="uk-icon-link uk-margin-small-left" uk-icon="icon: happy"></a>
 						</div>
@@ -204,19 +168,51 @@ textarea {
 <script src='https://code.jquery.com/jquery-2.2.4.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
+<script id="user-template" type="text/x-handlebars-template">
+<div class="me uk-grid-small uk-flex-bottom uk-flex-right uk-text-right chat-container" uk-grid>
+	<div class="uk-width-auto">
+		<div class="uk-card uk-card-body uk-card-small uk-card-primary uk-border-rounded">
+			<p class="uk-margin-remove">{{chatlog_content}}</p>
+		</div>
+	</div>
+	<div class="uk-width-auto">
+		<img class="uk-border-circle" width="32" height="32" src="https://getuikit.com/docs/images/avatar.jpg">
+	</div>
+</div>
+</script>
+
+<script id="com-template" type="text/x-handlebars-template">
+<div class="guest uk-grid-small uk-flex-bottom uk-flex-left chat-container" uk-grid>
+	<div class="uk-width-auto">
+		<img class="uk-border-circle" width="32" height="32" src="https://getuikit.com/docs/images/avatar.jpg">
+	</div>
+	<div class="uk-width-auto">
+		<div class="uk-card uk-card-body uk-card-small uk-card-default uk-border-rounded">
+			<p class="uk-margin-remove">{{chatlog_content}}</p>
+		</div>
+	</div>
+</div>
+</script>
+
 <script type="text/javascript">
 
-	var printData = function(chatArr, target, templateObject){
-		
-		var template 
-	}
+	Handlebars.registerHelper("prettifyDate", function(timeValue) {
+		var dateObj = new Date(timeValue);
+/* 		var year = dateObj.getFullYear();
+		var month = dateObj.getMonth() + 1;
+		var date = dateObj.getDate(); */
+		var hour = dateObj.getHours();
+		var minute = dateObj.getMinutes();
+		return hour + ":" + minute;
+	});
 
 	$(function(){
+	
 		$('#chatSendBtn').on('click', function(){
 			
 			var chatlog_contentObj = $('#chatMsg');
 			var chatlog_content = chatlog_contentObj.val();
-			var person_id =  "<%= Integer.parseInt((String)session.getAttribute("person_id"))%>";
+			var person_id = "<%= Integer.parseInt((String)session.getAttribute("person_id"))%>";
 			var chatlog_speaker = "U";
 			
 			console.log("====================채팅창");
@@ -235,7 +231,6 @@ textarea {
 				success:function(result){
 					console.log("result : " + result);
 					if(result == 'SUCCESS'){
-						alert('등록!!');
 						chatlog_contentObj.val("");
 						getList("/chat/" + person_id);
 					}
@@ -246,10 +241,26 @@ textarea {
 		
 	});
 	
+	var printData = function(chatWindow, templateObject){
+		var template = Handlebars.compile(templateObject.html());
+		var html = template(chatWindow);
+		return html;
+	}
+	
 	function getList(chatInfo){
 		
-		$.getJSON(chatInfo, function(data){
+		$.getJSON(chatInfo, function(data){		// "/chat/{person_id}" 로부터 나오는 전체 데이터 (array)
 			console.log(data);
+			var html = "";
+			for(i=0; i< data.length; i++){
+				if(data[i].chatlog_speaker == 'C'){
+					html += printData(data[i], $('#com-template'));
+				} else {
+					html += printData(data[i], $('#user-template'));
+				}
+			}
+			$(".chat-container").remove();
+			$("#mid-container").append(html);
 		});
 	}
 
