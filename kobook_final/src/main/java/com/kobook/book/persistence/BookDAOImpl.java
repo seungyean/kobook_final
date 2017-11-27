@@ -73,8 +73,11 @@ public class BookDAOImpl implements BookDAO {
 	
 	
 	@Override
-	public List<ReviewVO> reviewList(int person_id) throws Exception {
-		return session.selectList(namespace+".reviewList",person_id);
+	public List<ReviewVO> reviewList(int person_id,SearchCriteria cri) throws Exception {
+		Map<String, Object>hmap=new HashMap<String,Object>();
+		hmap.put("person_id", person_id);
+		hmap.put("cri", cri);
+		return session.selectList(namespace+".reviewList",hmap,new RowBounds(cri.getPageStart(),cri.getPerPageNum()));
 	}
 
 
@@ -153,6 +156,46 @@ public class BookDAOImpl implements BookDAO {
 		int a = session.selectOne(namespace+".countStar",person_id);
 		System.out.println("dao"+a);
 		return a;
+	}
+
+
+
+
+	@Override
+	public int fivestar(int person_id) throws Exception {
+		return session.selectOne(namespace+".fivestar",person_id);
+	}
+
+
+
+
+	@Override
+	public int fourstar(int person_id) throws Exception {
+		return session.selectOne(namespace+".fourstar",person_id);
+	}
+
+
+
+
+	@Override
+	public int threestar(int person_id) throws Exception {
+		return session.selectOne(namespace+".threestar",person_id);
+	}
+
+
+
+
+	@Override
+	public int twostar(int person_id) throws Exception {
+		return session.selectOne(namespace+".twostar",person_id);
+	}
+
+
+
+
+	@Override
+	public int onestar(int person_id) throws Exception {
+		return session.selectOne(namespace+".onestar",person_id);
 	}
 
 	

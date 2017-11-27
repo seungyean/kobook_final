@@ -161,28 +161,41 @@ public class BookController {
 	
 	
 	@RequestMapping(value="/bookRead",method=RequestMethod.GET)
-	public void read(@RequestParam("book_id")int book_id, PersonDTO person, Model model)throws Exception{
+	public void read(@RequestParam("book_id")int book_id, PersonDTO person, Model model,@ModelAttribute("cri") SearchCriteria cri)throws Exception{
 		System.out.println("readCon: book_id: " + book_id);
 		model.addAttribute(service.read(book_id));
 		
 		//판매자정보보여주기
 		model.addAttribute("s",service.readSellPerson(service.getPersonIdByBookId(book_id)));
 		
-		//별점 남긴 사람 수
+		//총별점
 		model.addAttribute("countstar",service.countStar(service.getPersonIdByBookId(book_id)));
 		
 		//리뷰 갯수
 		model.addAttribute("reviewcount",service.countReview(service.getPersonIdByBookId(book_id)));
 
 		//판매자 후기 리스트
-		model.addAttribute("reviewList", service.reviewList(service.getPersonIdByBookId(book_id)));
+		model.addAttribute("reviewList", service.reviewList(service.getPersonIdByBookId(book_id), cri));
 		
 		//리뷰 작성자
 		model.addAttribute("reviewer", service.writeId(service.getPersonIdByBookId(book_id)));
 		
+		//5점 준 사람 수,4,3,2,1
+		model.addAttribute("fivestar",service.fivestar(service.getPersonIdByBookId(book_id)));
+		model.addAttribute("fourstar",service.fourstar(service.getPersonIdByBookId(book_id)));
+		model.addAttribute("threestar",service.threestar(service.getPersonIdByBookId(book_id)));
+		model.addAttribute("twostar",service.twostar(service.getPersonIdByBookId(book_id)));
+		model.addAttribute("onestar",service.onestar(service.getPersonIdByBookId(book_id)));
+		
+		
 		
 		
 		model.addAttribute("slist",service.sellPersonList(service.getPersonIdByBookId(book_id)));
+		
+		PageMaker pageMaker=new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(service.countReview(service.getPersonIdByBookId(book_id)));
+		model.addAttribute("pageMaker",pageMaker);
 	}
 	
 

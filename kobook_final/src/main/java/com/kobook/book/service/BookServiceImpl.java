@@ -81,8 +81,8 @@ public class BookServiceImpl implements BookService {
 	
 
 	@Override
-	public List<ReviewVO> reviewList(int person_id) throws Exception {
-		return dao.reviewList(person_id);
+	public List<ReviewVO> reviewList(int person_id,SearchCriteria cri) throws Exception {
+		return dao.reviewList(person_id,cri);
 	}
 
 
@@ -159,6 +159,47 @@ public class BookServiceImpl implements BookService {
 	}
 
 
+
+
+	@Override
+	public int fivestar(int person_id) throws Exception {
+		return dao.fivestar(person_id);
+	}
+
+
+
+
+	@Override
+	public int fourstar(int person_id) throws Exception {
+		return dao.fourstar(person_id);
+	}
+
+
+
+
+	@Override
+	public int threestar(int person_id) throws Exception {
+		return dao.threestar(person_id);
+	}
+
+
+
+
+	@Override
+	public int twostar(int person_id) throws Exception {
+		return dao.twostar(person_id);
+	}
+
+
+
+
+	@Override
+	public int onestar(int person_id) throws Exception {
+		return dao.onestar(person_id);
+	}
+
+
+	
 
 	
 

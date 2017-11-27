@@ -183,7 +183,8 @@ border-radius: 4px;
     <h2>후기 등록하기</h2>
   <p>판매자 또는 도서에 대한 후기를 남겨주세용</p>
 </header>
-
+<b>리뷰제목:</b>     
+<input type="text" name="review_title" id="name" class="form-control" placeholder="리뷰제목">
 <section class='rating-widget'>
   <!-- Rating Stars Box -->
   <div class='rating-stars text-center'>

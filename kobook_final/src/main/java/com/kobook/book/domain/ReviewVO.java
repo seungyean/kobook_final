@@ -8,17 +8,32 @@ public class ReviewVO {
 	private Timestamp review_date;
 	private int review_star;
 	private int pay_id;
+	private String review_title;
 	
 	public ReviewVO(){}
 
-	public ReviewVO(int review_id, String review_content, Timestamp review_date, int review_star, int pay_id) {
+	
+	public String getReview_title() {
+		return review_title;
+	}
+
+
+	public void setReview_title(String review_title) {
+		this.review_title = review_title;
+	}
+
+
+	public ReviewVO(int review_id, String review_content, Timestamp review_date, int review_star, int pay_id,
+			String review_title) {
 		super();
 		this.review_id = review_id;
 		this.review_content = review_content;
 		this.review_date = review_date;
 		this.review_star = review_star;
 		this.pay_id = pay_id;
+		this.review_title = review_title;
 	}
+
 
 	public int getReview_id() {
 		return review_id;
@@ -60,12 +75,15 @@ public class ReviewVO {
 		this.pay_id = pay_id;
 	}
 
+
 	@Override
 	public String toString() {
 		return "ReviewVO [review_id=" + review_id + ", review_content=" + review_content + ", review_date="
-				+ review_date + ", review_star=" + review_star + ", pay_id=" + pay_id + "]";
-	};
-	
+				+ review_date + ", review_star=" + review_star + ", pay_id=" + pay_id + ", review_title=" + review_title
+				+ "]";
+	}
+
+
 	
 	
 

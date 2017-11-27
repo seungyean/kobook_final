@@ -79,30 +79,88 @@
 	<!--판매자 평점을 위한 리뷰 수  -->
  	<select id="countReview" resultType="Integer">
 	select count(r.review_id)
-	from pay p, book_order o, review r
+	from pay p, book_order o, review r, book b
 	where p.ORDER_ID = o.ORDER_ID and
+ 	 o.BOOK_ID = b.BOOK_ID and
 	r.PAY_ID = p.PAY_ID and
-	o.person_id=#{person_id}
+	b.person_id=#{person_id}
 	</select>
 	
 	<!--판매자 평점을 위한 총별점  -->
 	<select id="countStar" resultType="Integer">
 	select nvl(sum(r.review_star),0)
-	from pay p, book_order o, review r
+	from pay p, book_order o, review r, book b
 	where p.ORDER_ID = o.ORDER_ID and
+  	o.BOOK_ID = b.BOOK_ID and
 	r.PAY_ID = p.PAY_ID and
-	o.person_id=#{person_id}
+	b.person_id=#{person_id}
 	</select>
 	
+
+	
+	<!--5점준 사람수  -->
+	<select id="fivestar" resultType="Integer">
+	select count(r.review_star)
+	from pay p, book_order o, review r, book b
+	where p.ORDER_ID = o.ORDER_ID 
+ 	and o.BOOK_ID = b.BOOK_ID
+  	and r.PAY_ID = p.PAY_ID 
+  	and r.review_star=5
+ 	and b.person_id=#{person_id}
+	</select>
+	
+	<!--4점준 사람수  -->
+	<select id="fourstar" resultType="Integer">
+	select count(r.review_star)
+	from pay p, book_order o, review r, book b
+	where p.ORDER_ID = o.ORDER_ID 
+ 	and o.BOOK_ID = b.BOOK_ID
+  	and r.PAY_ID = p.PAY_ID 
+  	and r.review_star=4
+ 	and b.person_id=#{person_id}
+	</select>
+	
+	<!--3점준 사람수  -->
+	<select id="threestar" resultType="Integer">
+	select count(r.review_star)
+	from pay p, book_order o, review r, book b
+	where p.ORDER_ID = o.ORDER_ID 
+ 	and o.BOOK_ID = b.BOOK_ID
+  	and r.PAY_ID = p.PAY_ID 
+  	and r.review_star=3
+ 	and b.person_id=#{person_id}
+	</select>
+	
+	<!--2점준 사람수  -->
+	<select id="twostar" resultType="Integer">
+	select count(r.review_star)
+	from pay p, book_order o, review r, book b
+	where p.ORDER_ID = o.ORDER_ID 
+ 	and o.BOOK_ID = b.BOOK_ID
+  	and r.PAY_ID = p.PAY_ID 
+  	and r.review_star=2
+ 	and b.person_id=#{person_id}
+	</select>
+	
+	<!--1점준 사람수  -->
+	<select id="onestar" resultType="Integer">
+	select count(r.review_star)
+	from pay p, book_order o, review r, book b
+	where p.ORDER_ID = o.ORDER_ID 
+ 	and o.BOOK_ID = b.BOOK_ID
+  	and r.PAY_ID = p.PAY_ID 
+  	and r.review_star=1
+ 	and b.person_id=#{person_id}
+	</select>
 	
 	<!--리뷰작성-->
 	<insert id="reviewCreate" parameterType="ReviewVO">
 	insert into review(
-	review_id, review_content, review_date, review_star, pay_id
+	review_id, review_content, review_date, review_star, pay_id,review_title
 	)
 	values(
 		review_id_seq.nextval, #{review_content}, SYSDATE,
-		#{review_star},#{pay_id}
+		#{review_star},#{pay_id},#{review_title}
 		)
 	</insert>
 	
@@ -119,7 +177,7 @@
 	
 	<!--리뷰 리스트  -->
 	<select id="reviewList" resultType="ReviewVO">
-	select r.review_id, r.review_content, r.review_star, o.person_id, r.review_date, o.person_id
+	select r.review_id, r.review_title, r.review_content,r.review_star, o.person_id, r.review_date, o.person_id
 	from pay p, book_order o, review r, book b
 	where p.ORDER_ID = o.ORDER_ID
 	and r.PAY_ID = p.PAY_ID

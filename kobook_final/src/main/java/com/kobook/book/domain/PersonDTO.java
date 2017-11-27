@@ -5,13 +5,13 @@ public class PersonDTO {
 	private int person_id;
 	private String person_email;
 	private String person_sell_grade;
-	private int person_avg;
+	private double person_avg;
 	
 	public PersonDTO(){}
 
 
 
-	public PersonDTO(int person_id, String person_email, String person_sell_grade, int person_avg) {
+	public PersonDTO(int person_id, String person_email, String person_sell_grade, double person_avg) {
 		super();
 		this.person_id = person_id;
 		this.person_email = person_email;
@@ -50,11 +50,11 @@ public class PersonDTO {
 		this.person_sell_grade = person_sell_grade;
 	}
 
-	public int getPerson_avg() {
+	public double getPerson_avg() {
 		return person_avg;
 	}
 
-	public void setPerson_avg(int person_avg) {
+	public void setPerson_avg(double person_avg) {
 		this.person_avg = person_avg;
 	};
 	

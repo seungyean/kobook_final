@@ -22,7 +22,7 @@ public interface BookService {
 	
 	public List<BookVO> sellPersonList(int person_id) throws Exception;
 	
-	public List<ReviewVO> reviewList(int person_id)throws Exception;
+	public List<ReviewVO> reviewList(int person_id,SearchCriteria cri)throws Exception;
 	
 	public PersonDTO readSellPerson(int person_id) throws Exception;
 
@@ -46,4 +46,12 @@ public interface BookService {
 	
 	//평점을 위한 총별점
 	public int countStar(int person_id)throws Exception;
+	
+	//5점,4,3,2,1,
+	public int fivestar(int person_id)throws Exception;
+	public int fourstar(int person_id)throws Exception;
+	public int threestar(int person_id)throws Exception;
+	public int twostar(int person_id)throws Exception;
+	public int onestar(int person_id)throws Exception;
+	
 }

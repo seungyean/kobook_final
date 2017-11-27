@@ -22,7 +22,7 @@ public interface BookDAO {
 	public List<BookVO> sellPersonList(int person_id) throws Exception;
 	
 	//판매자 후기 리스트
-	public List<ReviewVO> reviewList(int person_id)throws Exception;
+	public List<ReviewVO> reviewList(int person_id,SearchCriteria cri)throws Exception;
 	
 	
 	//판매자정보
@@ -50,6 +50,15 @@ public interface BookDAO {
 	
 	//평점을 위한 총별점
 	public int countStar(int person_id)throws Exception;
+	
+	//5점,4,3,2,1,
+	public int fivestar(int person_id)throws Exception;
+	public int fourstar(int person_id)throws Exception;
+	public int threestar(int person_id)throws Exception;
+	public int twostar(int person_id)throws Exception;
+	public int onestar(int person_id)throws Exception;
+	
+	
 	
 	
 }

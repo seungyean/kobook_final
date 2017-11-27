@@ -9,7 +9,12 @@
 	int person_id = Integer.parseInt((String)(session.getAttribute("person_id")));
 
 %> --%>
-
+<%
+	int countstar = (int)request.getAttribute("countstar");
+	int reviewcount = (int)request.getAttribute("reviewcount");
+	int ceil = countstar/reviewcount;
+	
+%>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -24,6 +29,54 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1" />
 
+<style type="text/css">
+body {
+  padding-top: 70px;
+}
+.btn-grey{
+    background-color:#D8D8D8;
+	color:#FFF;
+}
+.rating-block{
+	background-color:#FAFAFA;
+	border:1px solid #EFEFEF;
+	padding:15px 15px 20px 15px;
+	border-radius:3px;
+}
+.bold{
+	font-weight:700;
+}
+.padding-bottom-7{
+	padding-bottom:7px;
+}
+
+.review-block{
+	background-color:#FAFAFA;
+	border:1px solid #EFEFEF;
+	padding:15px;
+	border-radius:3px;
+	margin-bottom:15px;
+}
+.review-block-name{
+	font-size:12px;
+	margin:10px 0;
+}
+.review-block-date{
+	font-size:12px;
+}
+.review-block-rate{
+	font-size:13px;
+	margin-bottom:15px;
+}
+.review-block-title{
+	font-size:15px;
+	font-weight:700;
+	margin-bottom:10px;
+}
+.review-block-description{
+	font-size:13px;
+}
+</style>
      <!-- CSS FILES -->
     <link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/resources/css/style.css">
@@ -33,7 +86,6 @@
     <link rel="stylesheet" type="text/css" href="/resources/css/switcher.css" media="screen" />
     
 </head>
-
 
 <body>
 	<!-- 헤더 -->
@@ -153,8 +205,264 @@
 		</div>  <!--/row sub_content  -->
 		
 		     
+		<div class="container">
+            
+      <div class="row">
+         <div class="col-sm-3">
+            <div class="rating-block">
+               <h4>Average user rating</h4>
+               <h2 class="bold padding-bottom-7"><fmt:formatNumber value="${countstar/reviewcount}" pattern=".0"/> <small>/ 5</small></h2>
+               
+               <%
+				for(int j=0; j<ceil; j++){
+				%>
+					<button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                 		<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+               		</button>
+				<%		
+					}
+					for(int j=ceil; j<5; j++){
+				%>
+					<button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+                 		<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+               		</button>
+				<%		
+				}
+               %>
+               
+             	<%-- <c:forEach begin="1" end='<fmt:parseNumber var="test" value="${countstar/reviewcount}" integerOnly="true"/>'>
+             		<button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+               		<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+             		</button>
+             	</c:forEach>
+             	<c:forEach begin='<fmt:parseNumber var="test" value="${countstar/reviewcount}" integerOnly="true"/>+1' end="5">
+             		<button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+               		<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+             		</button>
+             	</c:forEach> --%>
+               
+               <!-- <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                 <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+               </button>
+               <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                 <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+               </button>
+               <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                 <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+               </button>
+               <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+                 <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+               </button>
+               <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+                 <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+               </button> -->
+            </div>
+         </div>
+         <div class="col-sm-3">
+            <h4>Rating breakdown</h4>
+            <div class="pull-left">
+               <div class="pull-left" style="width:35px; line-height:1;">
+                  <div style="height:9px; margin:5px 0;">5 <span class="glyphicon glyphicon-star"></span></div>
+               </div>
+               <div class="pull-left" style="width:180px;">
+                  <div class="progress" style="height:9px; margin:8px 0;">
+                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="5" style="width: 1000%">
+                     <span class="sr-only">80% Complete (danger)</span>
+                    </div>
+                  </div>
+               </div>
+               
+               <div class="pull-right" style="margin-left:10px;">${fivestar}</div>
+            </div>
+            <div class="pull-left">
+               <div class="pull-left" style="width:35px; line-height:1;">
+                  <div style="height:9px; margin:5px 0;">4 <span class="glyphicon glyphicon-star"></span></div>
+               </div>
+               <div class="pull-left" style="width:180px;">
+                  <div class="progress" style="height:9px; margin:8px 0;">
+                    <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="4" aria-valuemin="0" aria-valuemax="5" style="width: 80%">
+                     <span class="sr-only">80% Complete (danger)</span>
+                    </div>
+                  </div>
+               </div>
+              
+                <div class="pull-right" style="margin-left:10px;">${fourstar}</div>
+            </div>
+            <div class="pull-left">
+               <div class="pull-left" style="width:35px; line-height:1;">
+                  <div style="height:9px; margin:5px 0;">3 <span class="glyphicon glyphicon-star"></span></div>
+               </div>
+               <div class="pull-left" style="width:180px;">
+                  <div class="progress" style="height:9px; margin:8px 0;">
+                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="3" aria-valuemin="0" aria-valuemax="5" style="width: 60%">
+                     <span class="sr-only">80% Complete (danger)</span>
+                    </div>
+                  </div>
+               </div>
+                
+                <div class="pull-right" style="margin-left:10px;">${threestar}</div>
+            </div>
+            <div class="pull-left">
+               <div class="pull-left" style="width:35px; line-height:1;">
+                  <div style="height:9px; margin:5px 0;">2 <span class="glyphicon glyphicon-star"></span></div>
+               </div>
+               <div class="pull-left" style="width:180px;">
+                  <div class="progress" style="height:9px; margin:8px 0;">
+                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="5" style="width: 40%">
+                     <span class="sr-only">80% Complete (danger)</span>
+                    </div>
+                  </div>
+               </div>
+              
+                <div class="pull-right" style="margin-left:10px;">${twostar}</div>
+            </div>
+            <div class="pull-left">
+               <div class="pull-left" style="width:35px; line-height:1;">
+                  <div style="height:9px; margin:5px 0;">1 <span class="glyphicon glyphicon-star"></span></div>
+               </div>
+               <div class="pull-left" style="width:180px;">
+                  <div class="progress" style="height:9px; margin:8px 0;">
+                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="5" style="width: 20%">
+                     <span class="sr-only">80% Complete (danger)</span>
+                    </div>
+                  </div>
+               </div>
+                
+                <div class="pull-right" style="margin-left:10px;">${onestar}</div>
+            </div>
+         </div>         
+      </div>         
+      
+      <div class="row sub_content">
+                    <div class="col-md-12">
+                        <div class="dividerHeading">
+                            <h4><span>판매자 후기</span></h4>
+                        </div>
+                        
+                        <!-- <form> -->
+									<table class="table table-hover">
+										<thead>
+											<tr>
+												<td align="center">글번호</td>
+												<td></td>
+												<td align="center">제목</td>
+												<td></td>
+												<td align="center">별점</td>
+												<td></td>
+												<td align="center">작성자</td>
+												
+												<td align="center">날짜</td>
+												
+											</tr>
+										</thead>
+										
+										<c:forEach var="rlist" items="${reviewList}">
+												
+												<tr>
+													<td align="center" >${rlist.review_id}</td>
+													<td align="center"colspan="4" class="flip">${rlist.review_title}</td>
+													<td align="center">${rlist.review_star}</td>
+													
+													
+													<td align="center">${reviewer}</td>
+													<td align="center"><fmt:formatDate value="${rlist.review_date}" pattern='yyyy-MM-dd' /></td>
+													
+												</tr>
+												
+										
+												
+										
+										<tbody class="section">	
+										
+												<tr align="center">
+												<td align="center"></td>
+												<td align="center">${rlist.review_content}</td>
+												<td align="center"></td>
+												<td align="center"></td>
+												<td align="center"></td>
+												</tr>
+											</tbody>
+										</c:forEach>
+									</table>
+									<!-- </form> --> 
+  
+  
+                      		
+                    </div>
+           <div class="text-center">
+			<ul class="pagination">
+
+				<c:if test="${pageMaker.prev}">
+					<li><a
+						href="bookRead${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
+				</c:if>
+
+				<c:forEach begin="${pageMaker.startPage }"
+					end="${pageMaker.endPage }" var="idx">
+					<li
+						<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+						<a href="bookRead${pageMaker.makeSearch(idx)}">${idx}</a>
+					</li>
+				</c:forEach>
+
+				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+					<li><a
+						href="bookRead${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
+				</c:if>
+
+			</ul>
+		</div>
+               </div>
+               
+         
+               
+      <%-- <div class="row">
+         <div class="col-sm-7">
+            <hr/>
+            <div class="review-block">
+             <c:forEach var="rlist" items="${reviewList}">
+               <div class="row">
+                  <div class="col-sm-3">
+                 
+                  
+                    
+                     <div class="review-block-name"><a href="#">작성자: ${reviewer}</a></div>
+                     <div class="review-block-date"><fmt:formatDate value="${rlist.review_date}" pattern='yyyy-MM-dd' /><br/></div>
+                  </div>
+                  <div class="col-sm-9">
+                     <div class="review-block-rate">
+                        <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
+                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
+                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                        </button>
+                     </div>
+                     <div class="review-block-title">${rlist.review_title}</div>
+                     <div class="review-block-description">${rlist.review_content }</div>
+                  </div>
+               </div>
+               <hr/>
+               </c:forEach>
+            </div>
+         </div>
+      </div> --%>
+      
+    </div> <!-- /container -->
+						
+						<!--/여기까지  -->	
 		
-		       <div class="row sub_content">
+		
+		    <%--    <div class="row sub_content">
                     <div class="col-md-12">
                         <div class="dividerHeading">
                             <h4><span>판매자정보</span></h4>
@@ -176,13 +484,11 @@
                        		 
                        		 평점 :
                        		 <c:choose>
-                       		<%--  <fmt:formatNumber value="${countstar/reviewcount}" pattern="#.#"/><br> --%>
+                       		 <fmt:formatNumber value="${countstar/reviewcount}" pattern="#.#"/><br>
                        		<c:when test="${reviewcount}<=0">
-                       		no 
+                       		등록된 후기 글이 없습니다.
                        		</c:when>
-                       		<%-- ${s.person_avg}=${countstar/reviewcount} --%>
-                       		
-                       		
+
 								<c:when test="${countstar/reviewcount=='5'}">
 								<img alt="" src="/resources/img/5.PNG">
 								</c:when>
@@ -210,43 +516,8 @@
                </div>
                
                
-                <div class="row sub_content">
-                    <div class="col-md-12">
-                        <div class="dividerHeading">
-                            <h4><span>판매자 후기</span></h4>
-                        </div>
-                        
-                        <!-- <form> -->
-									<table class="table table-hover">
-										<thead>
-											<tr>
-												<td align="center">글번호</td>
-												<td>내용</td>
-												<td align="center">별점</td>
-												<td align="center">작성자</td>
-												<td align="center">날짜</td>
-												<td></td>
-											</tr>
-										</thead>
-										<tbody>
-											<c:forEach var="rlist" items="${reviewList}">
-												<tr>
-													<td align="center" >${rlist.review_id}</td>
-													<td align="center">${rlist.review_content}</td>
-													<td align="center">${rlist.review_star}</td>
-													<td align="center">${reviewer}</td>
-													<td align="center">${rlist.review_date}</td>
-												</tr>
-											</c:forEach>
-										</tbody>
-									</table>
-									<!-- </form> --> 
-  
-  
-                      		
-                    </div>
-               </div>
-               
+                
+                --%>
                
 		     
 		     
@@ -426,12 +697,20 @@
 		
 	</script>
 	
-<!-- 	<script type="text/javascript">
-    function modifyForm(){
-    	modifyForm.attr("action","/book/bookModify");
-        modifyForm.subtmit();
-    };
-    </script> -->
+<script type="text/javascript">
+$(function(){
+	$('.section').hide();	
+})
+
+$('.flip').click(function() {
+   /*  $(this).closest('tbody').next('.section').show('fast'); */
+    $(this).closest('tbody').next('.section').slideToggle();
+   /*  $(this).addClass('opened'); */
+   
+});
+
+</script>
+
 	
 	 <script src="/resources/js/main.js"></script>
 	<!-- Start Style Switcher -->
