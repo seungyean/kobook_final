@@ -220,10 +220,10 @@ public class CommunityController {
 
 	@RequestMapping(value = "/donateRegist", method = RequestMethod.POST)
 	public String donateRegistPost(DonateVO vo , @RequestParam("file") MultipartFile file ) throws Exception {
-		System.out.println("donatepost controller...");
-		System.out.println(vo.toString());
 		String donate_thumbnail = UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes());
-		vo.setDonate_thumbnail(donate_thumbnail);
+		if(donate_thumbnail !=null){
+			vo.setDonate_thumbnail(donate_thumbnail);
+		}
 		donateService.donateRegist(vo);
 		
 		return "redirect:/community/donateList";

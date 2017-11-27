@@ -8,9 +8,11 @@
 	
 	<insert id="donateInsert" parameterType="DonateVO">
 		insert into donate(
-			donate_id, donate_title, donate_date, donate_content, person_id, donate_thumbnail
+			donate_id, donate_title, donate_date, donate_content, person_id
+			<if test="donate_thumbnail != null">, donate_thumbnail</if>
 			)values(
-			donate_id_seq.nextval, #{donate_title}, SYSDATE, #{donate_content}, #{person_id}, #{donate_thumbnail}
+			donate_id_seq.nextval, #{donate_title}, SYSDATE, #{donate_content}, #{person_id}
+			<if test="donate_thumbnail != null">, #{donate_thumbnail}</if>
 			)
 	</insert>
 
@@ -71,7 +73,16 @@
 	<select id="donateSelect" parameterType="int" resultType="DonateVO">
 		select * from donate where donate_id = #{donate_id}
 	</select>
-
+	
+	<update id="donateUpdate" parameterType="DonateVO">
+		update donate set donate_title=#{donate_title}, donate_content=#{donate_content}
+		<if test="donate_thumbnail != null">, donate_thumbnail = #{donate_thumbnail}</if>  where donate_id = #{donate_id}
+	</update>
+	
+	<delete id="donateDelete" parameterType="int">
+		DELETE FROM donate WHERE donate_id=#{donate_id}
+	</delete>
+	
 	<!-- 
 			
 	
@@ -84,16 +95,7 @@
 	<update id="donateHitCount" parameterType="int">
 		update donate set donate_hit=donate_hit+1 where donate_id = #{donate_id}
 	</update>
-	
-	<update id="updateDonate" parameterType="Donate">
-		update donate set donate_title=#{donate_title}, donate_content=#{donate_content}
-		<if test="donate_img != null">, donate_img = #{donate_img}</if>  where donate_id = #{donate_id}
-	</update>
-	
-	<delete id="deleteDonate" parameterType="int">
-		DELETE FROM donate WHERE donate_id=#{donate_id}
-	</delete>
-	
+
 	<update id="updateDonate_id" parameterType="int">
 		update donate set donate_id = donate_id-1 where donate_id > #{donate_id}
 	</update>

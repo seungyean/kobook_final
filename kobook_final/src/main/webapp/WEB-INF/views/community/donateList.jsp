@@ -105,7 +105,7 @@
 												 src="/community/displayFile?fileName=${donate.donate_thumbnail }" height="100" width="200">
 												</td>
 												<td><a
-													href="/community/donateRead?donate_id=${donate.donate_id}">${donate.donate_title }</a></td>
+													href="/community/donateRead${pageMaker.makeSearch(pageMaker.cri.page) }&donate_id=${donate.donate_id }">${donate.donate_title }</a></td>
 												<td align="center">${donate.person_id}</td>
 												<td align="center"><fmt:formatDate
 														value="${donate.donate_date }" pattern="yyyy-MM-dd" /></td>
