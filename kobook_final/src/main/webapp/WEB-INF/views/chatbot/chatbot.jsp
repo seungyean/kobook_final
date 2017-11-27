@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	if(session.getAttribute("person_id") != null){		// 로그인 했다면
 		int cur_id = Integer.parseInt((String)session.getAttribute("person_id"));
@@ -14,8 +15,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script src='//production-assets.codepen.io/assets/editor/live/console_runner-079c09a0e3b9ff743e39ee2d5637b9216b3545af0de366d4b9aad9dc87e26bfd.js'></script><script src='//production-assets.codepen.io/assets/editor/live/events_runner-73716630c22bbc8cff4bd0f07b135f00a0bdc5d14629260c3ec49e5606f98fdd.js'></script><script src='//production-assets.codepen.io/assets/editor/live/css_live_reload_init-2c0dc5167d60a5af3ee189d570b1835129687ea2a61bee3513dee3a50c115a77.js'></script><meta charset='UTF-8'><meta name="robots" content="noindex"><link rel="shortcut icon" type="image/x-icon" href="//production-assets.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" /><link rel="mask-icon" type="" href="//production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" /><link rel="canonical" href="https://codepen.io/clemer/pen/xLqaKm?limit=all&page=4&q=uikit" />
-
+<!-- <script src='//production-assets.codepen.io/assets/editor/live/console_runner-079c09a0e3b9ff743e39ee2d5637b9216b3545af0de366d4b9aad9dc87e26bfd.js'></script>
+<script src='//production-assets.codepen.io/assets/editor/live/events_runner-73716630c22bbc8cff4bd0f07b135f00a0bdc5d14629260c3ec49e5606f98fdd.js'></script>
+<script src='//production-assets.codepen.io/assets/editor/live/css_live_reload_init-2c0dc5167d60a5af3ee189d570b1835129687ea2a61bee3513dee3a50c115a77.js'></script> -->
+<meta charset='UTF-8'><meta name="robots" content="noindex">
+<link rel="shortcut icon" type="image/x-icon" href="//production-assets.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" />
+<link rel="mask-icon" type="" href="//production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
+<link rel="canonical" href="https://codepen.io/clemer/pen/xLqaKm?limit=all&page=4&q=uikit" />
 <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.28/css/uikit.min.css'>
 <style class="cp-pen-styles">
 
@@ -111,11 +117,10 @@ textarea {
 	<div class="uk-section">
 		<div class="uk-container uk-width-large">
 		
-			<button class="uk-button uk-button-default uk-position-top-right uk-margin-small-top uk-margin-small-right" uk-toggle="target: .button-label">
+			<!-- <button class="uk-button uk-button-default uk-position-top-right uk-margin-small-top uk-margin-small-right" uk-toggle="target: .button-label">
 				<span class="button-label">Turn off the lights</span>
 				<span class="button-label" hidden>Turn on the lights</span>
-			</button>
-			
+			</button> -->
 			<div class="uk-card uk-card-default uk-border-rounded uk-margin-large-top" >
 			
 				<div class="uk-card-body uk-padding-small uk-scroll">
@@ -192,30 +197,70 @@ textarea {
 			</div>
 		</div>
 	</div>
-<script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script>
+<!-- <script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script> -->
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.28/js/uikit.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.28/js/uikit-icons.min.js'></script>
 <script src='https://code.jquery.com/jquery-2.2.4.js'></script>
-<script >
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
-/* $('#chatSendBtn').on('click', function(){
-	var msg = ('#chatMsg').html();
-	$.ajax(
-		url: "",
-		type: "post",
-		data:,
+<script type="text/javascript">
+
+	var printData = function(chatArr, target, templateObject){
 		
-	);
-}); */
+		var template 
+	}
 
-$('.uk-button').on('click', function (){
+	$(function(){
+		$('#chatSendBtn').on('click', function(){
+			
+			var chatlog_contentObj = $('#chatMsg');
+			var chatlog_content = chatlog_contentObj.val();
+			var person_id =  "<%= Integer.parseInt((String)session.getAttribute("person_id"))%>";
+			var chatlog_speaker = "U";
+			
+			console.log("====================채팅창");
+			console.log("chatlog_content: " + chatlog_content);
+			console.log("person_id: " + person_id);
+			console.log("chatlog_speaker: " + chatlog_speaker);
+			
+			$.ajax({
+				type:'post',
+				url:'/chat/',
+				headers: { 
+				      "Content-Type": "application/json",
+				      "X-HTTP-Method-Override": "POST" },
+				dataType:'text',
+				data: JSON.stringify({chatlog_content:chatlog_content, person_id:person_id, chatlog_speaker:chatlog_speaker}),
+				success:function(result){
+					console.log("result : " + result);
+					if(result == 'SUCCESS'){
+						alert('등록!!');
+						chatlog_contentObj.val("");
+						getList("/chat/" + person_id);
+					}
+				}
+			});
+			
+		});
+		
+	});
+	
+	function getList(chatInfo){
+		
+		$.getJSON(chatInfo, function(data){
+			console.log(data);
+		});
+	}
+
+
+/* $('.uk-button').on('click', function (){
 	$('.uk-section').toggleClass('uk-dark uk-light');
 	$('.uk-container > .uk-card').toggleClass('uk-card-default uk-card-secondary');
 	$('html').toggleClass('uk-background-muted uk-background-secondary');
-});
+}); */
 
-//# sourceURL=pen.js
 </script>
+
 </body>
 </html>

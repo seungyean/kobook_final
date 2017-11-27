@@ -13,11 +13,12 @@
 		)		
 	</insert>
 	
-	<!-- 해당 회원의 채팅로그 뽑기 -->
+	<!-- 해당 회원의 채팅로그 뽑기(시,분 단위로) -->
  	<select id="listLog" resultType="ChatlogVO">
-		select *
+		select chatlog_id, person_id, chatlog_content, chatlog_speaker, to_char(chatlog_date, 'hh24:mi')
 		from chatlog
 		where person_id = #{person_id}
+		order by chatlog_date
 	</select>
 	
 </mapper>

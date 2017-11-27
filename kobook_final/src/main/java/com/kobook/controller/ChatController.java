@@ -22,6 +22,7 @@ public class ChatController {
 	@Inject
 	private ChatbotService service;
 	
+	// 유저가 채팅창에 글을 입력하면 먼저 채팅로그에 기록됨
 	@RequestMapping(value="", method=RequestMethod.POST)
 	public ResponseEntity<String> register(@RequestBody ChatlogVO vo) {
 		
@@ -37,6 +38,7 @@ public class ChatController {
 		return entity;
 	}
 
+	// 특정 사용자가 채팅했던 모든 기록(사용자, 챗봇)들을 가져오는 것을 관장
 	@RequestMapping(value = "/{person_id}", method = RequestMethod.GET)
 	public ResponseEntity<List<ChatlogVO>> listLog(@PathVariable("person_id") Integer person_id) {
 		
