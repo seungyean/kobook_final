@@ -82,7 +82,7 @@
 						<div class="blog_single">
 
     			<form role="form" action="donateModify" method="post">
-					<input type='hidden' name='black_id' value="${donateVO.donate_id}">
+					<input type='hidden' name='donate_id' value="${donateVO.donate_id}">
 					<input type='hidden' name='page' value="${cri.page}">
 					<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
 					<input type='hidden' name='searchType' value="${cri.searchType}">
@@ -90,10 +90,6 @@
 				</form>
    
 							<article class="post">
-<!-- 								<form action="donateDelete" method="post"> -->
-									<input type="hidden" name="donate_id"
-										value="${donateVO.donate_id}">
-
 									<div class="post_date">
 										<span class="day">${donateVO.donate_id }</span>
 									</div>

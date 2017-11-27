@@ -221,7 +221,9 @@ public class CommunityController {
 	@RequestMapping(value = "/donateRegist", method = RequestMethod.POST)
 	public String donateRegistPost(DonateVO vo , @RequestParam("file") MultipartFile file ) throws Exception {
 		String donate_thumbnail = UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes());
-		if(donate_thumbnail !=null){
+		String[] donate_thumbnail1 =donate_thumbnail.split("_");
+		
+		if(donate_thumbnail1.length>2) {
 			vo.setDonate_thumbnail(donate_thumbnail);
 		}
 		donateService.donateRegist(vo);
@@ -250,6 +252,44 @@ public class CommunityController {
 	public void donateRead(@RequestParam("donate_id") Integer donate_id, Model model,
 			@ModelAttribute("cri") SearchCriteria cri)throws Exception{
 		model.addAttribute(donateService.donateRead(donate_id));
+	}
+	
+	@RequestMapping(value = "donateModify", method = RequestMethod.GET)
+	public void donateModifyGet(@RequestParam("donate_id") int donate_id, Model model,
+			@ModelAttribute("cri") SearchCriteria cri) throws Exception {
+		model.addAttribute(donateService.donateRead(donate_id));
+	}
+	
+	@RequestMapping(value = "donateModify", method = RequestMethod.POST)
+	public String donateModifyPost(RedirectAttributes rtts, DonateVO vo, SearchCriteria cri
+			, @RequestParam("file") MultipartFile file ) throws Exception {
+		String donate_thumbnail = UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes());
+		String[] donate_thumbnail1 =donate_thumbnail.split("_");
+		
+		if(donate_thumbnail1.length>2) {
+			vo.setDonate_thumbnail(donate_thumbnail);
+		}
+		donateService.donateModify(vo);
+		
+		rtts.addAttribute("page", cri.getPage());
+		rtts.addAttribute("perPageNum", cri.getPerPageNum());
+		rtts.addAttribute("searchType", cri.getSearchType());
+		rtts.addAttribute("keyword", cri.getKeyword());
+		
+		return "redirect:/community/donateList";
+	}
+	
+	@RequestMapping("donateRemove")
+	public String donateRemove(RedirectAttributes rtts, SearchCriteria cri
+			, @RequestParam("donate_id") Integer donate_id) throws Exception {
+		donateService.donateRemove(donate_id);
+		
+		rtts.addAttribute("page", cri.getPage());
+		rtts.addAttribute("perPageNum", cri.getPerPageNum());
+		rtts.addAttribute("searchType", cri.getSearchType());
+		rtts.addAttribute("keyword", cri.getKeyword());
+		
+		return "redirect:/community/donateList";
 	}
 
 }

@@ -56,4 +56,33 @@ public class DonateServiceImpl implements DonateService {
 		return dao.donateSelect(donate_id);
 	}
 
+	@Transactional
+	@Override
+	public void donateModify(DonateVO vo) throws Exception {
+		dao.donateUpdate(vo);
+		
+		Integer donate_id = vo.getDonate_id();
+		dao.donateDeleteAttach(donate_id);
+		
+		DonateFileVO fileVO = new DonateFileVO();
+		
+		fileVO.setDonate_id(donate_id);
+		
+		String[] files = vo.getFiles();
+		
+		if(files == null){return;}
+		
+		for(String donate_file_name : files) {
+			fileVO.setDonate_file_name(donate_file_name);
+			dao.donateReplaceAttach(fileVO);
+		}
+	}
+
+	@Transactional
+	@Override
+	public void donateRemove(Integer donate_id) throws Exception {
+		dao.donateDeleteAttach(donate_id);
+		dao.donateDelete(donate_id);
+	}
+
 }

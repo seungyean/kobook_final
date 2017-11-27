@@ -71,7 +71,6 @@
 								<span>무료 나눔 글 작성</span>
 							</h4>
 						</div>
-						<!-- 나중에 로그인되면 아래 person_id의 value는 sessionid로 변경 -->
 						<form action="donateRegist" id="registerForm" method="post" enctype="multipart/form-data">
 							<div class="form-group">
 								<input type="hidden" class="form-control" name="person_id"
@@ -83,7 +82,7 @@
 							</div>
 							<div class="form-group">
 								<textarea rows="10" cols="73" class="form-control"
-									name="donate_content">글 내용</textarea>
+									name="donate_content" placeholder="글 내용"></textarea>
 							</div>
 							<div class="form-group">
 								<input type="file" name="file">

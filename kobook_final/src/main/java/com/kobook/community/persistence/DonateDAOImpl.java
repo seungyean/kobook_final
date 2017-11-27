@@ -66,4 +66,14 @@ public class DonateDAOImpl implements DonateDAO {
 		return session.selectOne(namespace+".donateSelect", donate_id);
 	}
 
+	@Override
+	public void donateUpdate(DonateVO vo) throws Exception {
+		session.update(namespace+".donateUpdate", vo);
+	}
+
+	@Override
+	public void donateDelete(Integer donate_id) throws Exception {
+		session.delete(namespace+".donateDelete", donate_id);
+	}
+
 }

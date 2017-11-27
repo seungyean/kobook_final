@@ -11,4 +11,6 @@ public interface DonateService {
 	public int donateCount(SearchCriteria cri) throws Exception;
 	public List<String> donateGetAttach(Integer donate_id) throws Exception;
 	public DonateVO donateRead(Integer donate_id) throws Exception;
+	public void donateModify(DonateVO vo) throws Exception;
+	public void donateRemove(Integer donate_id) throws Exception;
 }

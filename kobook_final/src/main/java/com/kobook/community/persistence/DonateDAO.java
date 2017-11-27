@@ -25,4 +25,8 @@ public interface DonateDAO {
 	public void donateReplaceAttach(DonateFileVO fileVO) throws Exception;
 	//donateSelect
 	public DonateVO donateSelect(Integer donate_id) throws Exception;
+	//donateUpdate
+	public void donateUpdate(DonateVO vo) throws Exception;
+	//donateDelete
+	public void donateDelete(Integer donate_id) throws Exception;
 }
