@@ -16,6 +16,7 @@
 		<package name="com.kobook.mypage.domain" />
 		<package name="com.kobook.person.domain" />
 		<package name="com.kobook.recom.domain"/>
+		<package name="com.kobook.visit.domain"/>
 	</typeAliases>
 
 </configuration>
