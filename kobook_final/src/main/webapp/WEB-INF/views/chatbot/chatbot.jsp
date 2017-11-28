@@ -115,25 +115,27 @@ textarea {
 	width: 600px;
 }
 
+.chat-div{
+	max-width: 260px;
+}
+
+.chat-paragraph{
+	white-space: normal;
+}
+
 </style>
 </head>
 <body>
 	<div class="uk-section">
-		<div class="uk-container uk-width-larger">
-		
-			<!-- <button class="uk-button uk-button-default uk-position-top-right uk-margin-small-top uk-margin-small-right" uk-toggle="target: .button-label">
-				<span class="button-label">Turn off the lights</span>
-				<span class="button-label" hidden>Turn on the lights</span>
-			</button> -->
-			
+		<div class="uk-container uk-width-larger">			
 			<div class="uk-card uk-card-default uk-border-rounded uk-margin-large-top" id="big-container">
-			
 				<div class="uk-card-body uk-padding-small uk-scroll" id="mid-container">
 				
 				<!-- 대화 내용 들어가는 자리 -->
 				
 				</div>
 			
+				<!-- 채팅 입력하는 부분 -->
 				<div class="uk-card-footer uk-padding-remove">
 					<div class="uk-grid-small uk-flex-middle" id="control-container" uk-grid>
 						<div class="uk-width-auto">
@@ -158,7 +160,6 @@ textarea {
 								</li>
 							</ul>
 						</div>
-						
 					</div>
 				</div>
 			
@@ -175,8 +176,8 @@ textarea {
 <script id="user-template" type="text/x-handlebars-template">
 <div class="me uk-grid-small uk-flex-bottom uk-flex-right uk-text-right chat-container" uk-grid>
 	<div class="uk-width-auto">
-		<div class="uk-card uk-card-body uk-card-small uk-card-primary uk-border-rounded">
-			<p class="uk-margin-remove">{{chatlog_content}}</p>
+		<div class="uk-card uk-card-body uk-card-small uk-card-primary uk-border-rounded chat-div">
+			<p class="uk-margin-remove chat-paragraph">{{chatlog_content}}</p>
 		</div>
 	</div>
 	<div class="uk-width-auto">
@@ -191,8 +192,8 @@ textarea {
 		<img class="uk-border-circle" width="32" height="32" src="https://getuikit.com/docs/images/avatar.jpg">
 	</div>
 	<div class="uk-width-auto">
-		<div class="uk-card uk-card-body uk-card-small uk-card-default uk-border-rounded">
-			<p class="uk-margin-remove">{{chatlog_content}}</p>
+		<div class="uk-card uk-card-body uk-card-small uk-card-default uk-border-rounded chat-div">
+			<p class="uk-margin-remove chat-paragraph">{{chatlog_content}}</p>
 		</div>
 	</div>
 </div>
@@ -224,22 +225,26 @@ textarea {
 			console.log("person_id: " + person_id);
 			console.log("chatlog_speaker: " + chatlog_speaker);
 			
-			$.ajax({
-				type:'post',
-				url:'/chat/',
-				headers: { 
-				      "Content-Type": "application/json",
-				      "X-HTTP-Method-Override": "POST" },
-				dataType:'text',
-				data: JSON.stringify({chatlog_content:chatlog_content, person_id:person_id, chatlog_speaker:chatlog_speaker}),
-				success:function(result){
-					console.log("result : " + result);
-					if(result == 'SUCCESS'){
-						chatlog_contentObj.val("");
-						getList("/chat/" + person_id);
+			if(chatlog_content == ""){
+				
+			} else {
+				$.ajax({
+					type:'post',
+					url:'/chat/',
+					headers: { 
+					      "Content-Type": "application/json",
+					      "X-HTTP-Method-Override": "POST" },
+					dataType:'text',
+					data: JSON.stringify({chatlog_content:chatlog_content, person_id:person_id, chatlog_speaker:chatlog_speaker}),
+					success:function(result){
+						console.log("result : " + result);
+						if(result == 'SUCCESS'){
+							chatlog_contentObj.val("");
+							getList("/chat/" + person_id);
+						}
 					}
-				}
-			});
+				});
+			}
 			
 		});
 		
@@ -267,13 +272,6 @@ textarea {
 			$("#mid-container").append(html);
 		});
 	}
-
-
-/* $('.uk-button').on('click', function (){
-	$('.uk-section').toggleClass('uk-dark uk-light');
-	$('.uk-container > .uk-card').toggleClass('uk-card-default uk-card-secondary');
-	$('html').toggleClass('uk-background-muted uk-background-secondary');
-}); */
 
 </script>
 
