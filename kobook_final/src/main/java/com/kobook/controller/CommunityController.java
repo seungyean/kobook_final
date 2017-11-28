@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.validation.Valid;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.http.HttpHeaders;
@@ -17,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -159,13 +161,16 @@ public class CommunityController {
 	
 	//신고게시판 글 등록 폼 이동
 	@RequestMapping(value = "blackRegist", method = RequestMethod.GET)
-	public void blackRegistGet() throws Exception {
+	public void blackRegistGet(@ModelAttribute("blackCommand") BlackVO vo) throws Exception {
 
 	}
 
 	//신고게시판 글 등록(DB)
 	@RequestMapping(value = "blackRegist", method = RequestMethod.POST)
-	public String blackRegistPost(BlackVO vo, Model model) throws Exception {
+	public String blackRegistPost(@ModelAttribute("blackCommand") @Valid BlackVO vo, BindingResult errors, Model model) throws Exception {
+		if(errors.hasErrors()) {
+			return "/community/blackRegist";
+		}
 		blackService.blackRegist(vo);
 		return "redirect:/community/blackList";
 	}
@@ -245,13 +250,16 @@ public class CommunityController {
 	
 	//무료나눔 게시판 글 등록 폼 이동
 	@RequestMapping(value = "/donateRegist", method = RequestMethod.GET)
-	public void donateRegistGet() throws Exception {
+	public void donateRegistGet(@ModelAttribute("donateCommand") DonateVO vo) throws Exception {
 		
 	}
 
 	//무료나눔 글 등록(DB)
 	@RequestMapping(value = "/donateRegist", method = RequestMethod.POST)
-	public String donateRegistPost(DonateVO vo , @RequestParam("file") MultipartFile file ) throws Exception {
+	public String donateRegistPost(@ModelAttribute("donateCommand") @Valid DonateVO vo , BindingResult errors, @RequestParam("file") MultipartFile file ) throws Exception {
+		if(errors.hasErrors()) {
+			return "/community/donateRegist";
+		}
 		String donate_thumbnail = UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes());
 		String[] donate_thumbnail1 =donate_thumbnail.split("_");
 		

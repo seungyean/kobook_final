@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -36,6 +36,9 @@
   margin: auto;
   
 }
+	.error{
+		color: #ff0000;
+	}
 </style>
 <body class="home">
 	<!-- 헤더 -->
@@ -71,23 +74,26 @@
 								<span>신고합니다 글 작성</span>
 							</h4>
 						</div>
-						<form id='registerForm' role="form" 
-							method="post" name="registerform">
+						<form:form id='registerForm' role="form" 
+							method="post" name="registerform" commandName="blackCommand">
 							<div class="form-group">
 								<input type="hidden" class="form-control" name="person_id"
 									value="${person_id}">
 							</div>
 							<div class="form-group">
-								<input type="text" class="form-control" name="black_title"
-									placeholder="글 제목">
+								<form:input type="text" class="form-control" path="black_title"
+									placeholder="글 제목"/>
+									<form:errors path="black_title" cssClass="error"/>
 							</div>
 							<div class="form-group">
-								<input type="text" class="form-control" name="black_email"
-									placeholder="신고email">
+								<form:input type="text" class="form-control" path="black_email"
+									placeholder="신고email"/>
+									<form:errors path="black_email" cssClass="error"/>
 							</div>
 							<div class="form-group">
-								<textarea rows="10" cols="73" class="form-control"
-									name="black_content" placeholder="신고 내용 작성"></textarea>
+								<form:textarea rows="10" cols="73" class="form-control"
+									path="black_content" placeholder="신고 내용 작성"/>
+									<form:errors path="black_content" cssClass="error"/>
 							</div>
 							<div class="form-group">
 								<label for="exampleInputEmail1">File DROP Here</label>
@@ -107,7 +113,7 @@
 								<input type="submit" class="btn btn-default btn-lg button"
 									value="작성 완료">
 							</div>
-						</form>
+						</form:form>
 					</div>
 				</div>
 			</div>

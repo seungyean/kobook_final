@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -32,9 +32,11 @@
   height: 100px;
   border: 1px dotted gray;
   background-color: lightslategrey;
-  margin: auto;
-  
+  margin: auto;  
 }
+	.error{
+		color: #ff0000;
+	}
 </style>
 
 <body class="home">
@@ -71,18 +73,20 @@
 								<span>무료 나눔 글 작성</span>
 							</h4>
 						</div>
-						<form action="donateRegist" id="registerForm" method="post" enctype="multipart/form-data">
+						<form:form action="donateRegist" id="registerForm" commandName="donateCommand" method="post" enctype="multipart/form-data">
 							<div class="form-group">
 								<input type="hidden" class="form-control" name="person_id"
 									value="${person_id }">
 							</div>
 							<div class="form-group">
-								<input type="text" class="form-control" name="donate_title"
-									placeholder="글 제목">
+								<form:input type="text" class="form-control" path="donate_title"
+									placeholder="글 제목"/>
+									<form:errors path="donate_title" cssClass="error"/>
 							</div>
 							<div class="form-group">
-								<textarea rows="10" cols="73" class="form-control"
-									name="donate_content" placeholder="글 내용"></textarea>
+								<form:textarea rows="10" cols="73" class="form-control"
+									path="donate_content" placeholder="글 내용"/>
+									<form:errors path="donate_content" cssClass="error"/>
 							</div>
 							<div class="form-group">
 								<input type="file" name="file">
@@ -91,7 +95,7 @@
 								<input type="submit" class="btn btn-default btn-lg button"
 									value="작성 완료">
 							</div>
-						</form>
+						</form:form>
  						<button class="fileButton">파일 추가</button>
 							<div class="form-group" id="fileAdd">
 								<label for="exampleInputEmail1">추가 파일은 아래영역에 드래그하십시오.</label>

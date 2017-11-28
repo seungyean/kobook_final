@@ -4,11 +4,19 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Arrays;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class BlackVO implements Serializable {
 	private int black_id;
+	@NotEmpty(message="제목을 입력하셔야 합니다.")
 	private String black_title;
 	private Timestamp black_date;
+	@NotEmpty(message="내용을 입력하셔야 합니다.")
 	private String black_content;
+
+	@NotEmpty(message="신고하시려는 Email을 입력하셔야 합니다.")
+	@Email(message="Email형식을 맞춰주세요.")
 	private String black_email;
 	private int person_id;
 	
