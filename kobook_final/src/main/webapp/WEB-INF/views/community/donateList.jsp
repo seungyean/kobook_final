@@ -77,26 +77,27 @@
 							<h4>
 								<span>무료 나눔 리스트</span>
 							</h4>
-							<br> <br>
-    <div class='popup back' style="display:none;"></div>
-    <div id="popup_front" class='popup front' style="display:none;">
-     <img id="popup_img">
-    </div>
-    
+							<br> <br>    
 												
 							<form action="/community/donateRegist" method="get">
 								<table class="table table-hover">
 									<thead>
 										<tr>
 											<td align="center">No</td>
-											<td align="center">이미지</td>
+											<td align="center">이미지
+												<div class='popup back' style="display:none;"></div>
+											    <div id="popup_front" class='popup front' style="display:none;">
+											    	<img id="popup_img">
+											    </div>
+											</td>
 											<td>글 제목</td>
 											<td align="center">작성자</td>
 											<td align="center">작성일</td>
-											<td align="center">조회수</td>
-										</tr>
-									</thead>
-									<tbody>
+											<td align="center">조회수
+											</td>											
+										</tr>										
+									</thead>									
+									<tbody>									
 										<c:forEach var="donate" items="${list}" varStatus="st">
 											<tr>
 												<td align="center">${donate.donate_id}</td>
@@ -104,15 +105,16 @@
 												<img class="thumbnail" alt="NO IMAGE"
 												 src="/community/displayFile?fileName=${donate.donate_thumbnail }" height="100" width="200">
 												</td>
-												<td><a
-													href="/community/donateRead${pageMaker.makeSearch(pageMaker.cri.page) }&donate_id=${donate.donate_id }">${donate.donate_title }
-												<strong>[ ${donate.reply_count} ]</strong>
-												</a></td>
+												<td>
+													<a href="/community/donateRead${pageMaker.makeSearch(pageMaker.cri.page) }&donate_id=${donate.donate_id }">${donate.donate_title }
+													<strong>[ ${donate.reply_count} ]</strong>
+													</a>
+												</td>
 												<td align="center">${userMap[donate.donate_id]}</td>
-												<td align="center"><fmt:formatDate
-														value="${donate.donate_date }" pattern="yyyy-MM-dd" /></td>
+												<td align="center">
+													<fmt:formatDate value="${donate.donate_date }" pattern="yyyy-MM-dd" />
+												</td>
 												<td align="center"><span class="badge bg-red">${donate.donate_hit }</span></td>
-
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -146,7 +148,6 @@
 								<li><a
 									href="donateList${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
 							</c:if>
-
 							<c:forEach begin="${pageMaker.startPage }"
 								end="${pageMaker.endPage }" var="idx">
 								<li
@@ -206,7 +207,7 @@
 			var str3 = str2[0]+str2[1];
 	  		var imgTag = $("#popup_img");
 			imgTag.attr("src", str3);
-						
+			
 			$(".popup").show('slow');
 			imgTag.addClass("show");
 		}); 

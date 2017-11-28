@@ -4,12 +4,16 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Arrays;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class DonateVO implements Serializable {
 
 	private int donate_id;
+	@NotEmpty(message="제목을 입력하셔야 합니다.")
 	private String donate_title;
 	private Timestamp donate_date;
 	private int donate_hit;
+	@NotEmpty(message="내용을 입력하셔야 합니다.")
 	private String donate_content;
 	private int person_id;
 	private String donate_thumbnail;
