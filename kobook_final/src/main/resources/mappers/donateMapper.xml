@@ -83,18 +83,16 @@
 		DELETE FROM donate WHERE donate_id=#{donate_id}
 	</delete>
 	
-	<!-- 
-			
-	
-	<select id="selectPersonName" resultType="Person" parameterType="int">
-		select P.PERSON_NAME from donate D join person P on D.person_id = P.person_id
-			where D.PERSON_ID =#{person_id} and D.donate_id = #{donate_id}
-	</select>
-	
-	
 	<update id="donateHitCount" parameterType="int">
 		update donate set donate_hit=donate_hit+1 where donate_id = #{donate_id}
 	</update>
+	
+	<select id="donateWriter" resultType="string" parameterType="int">
+		select P.PERSON_NAME from donate D join person P on D.person_id = P.person_id
+			where D.donate_id = #{donate_id}
+	</select>
+	
+	<!-- 
 
 	<update id="updateDonate_id" parameterType="int">
 		update donate set donate_id = donate_id-1 where donate_id > #{donate_id}

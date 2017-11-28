@@ -105,11 +105,13 @@
 												 src="/community/displayFile?fileName=${donate.donate_thumbnail }" height="100" width="200">
 												</td>
 												<td><a
-													href="/community/donateRead${pageMaker.makeSearch(pageMaker.cri.page) }&donate_id=${donate.donate_id }">${donate.donate_title }</a></td>
-												<td align="center">${donate.person_id}</td>
+													href="/community/donateRead${pageMaker.makeSearch(pageMaker.cri.page) }&donate_id=${donate.donate_id }">${donate.donate_title }
+												<strong>[ ${donate.reply_count} ]</strong>
+												</a></td>
+												<td align="center">${userMap[donate.donate_id]}</td>
 												<td align="center"><fmt:formatDate
 														value="${donate.donate_date }" pattern="yyyy-MM-dd" /></td>
-												<td align="center">${donate.donate_hit }</td>
+												<td align="center"><span class="badge bg-red">${donate.donate_hit }</span></td>
 
 											</tr>
 										</c:forEach>

@@ -13,4 +13,5 @@ public interface BlackService {
 	public BlackVO blackRead(Integer black_id) throws Exception;
 	public void blackModify(BlackVO vo) throws Exception;
 	public void blackRemove(Integer black_id) throws Exception;
+	public String blackWriter(Integer black_id) throws Exception;
 }

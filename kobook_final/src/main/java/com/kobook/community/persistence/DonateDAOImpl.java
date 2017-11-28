@@ -76,4 +76,14 @@ public class DonateDAOImpl implements DonateDAO {
 		session.delete(namespace+".donateDelete", donate_id);
 	}
 
+	@Override
+	public int donateHitCount(Integer donate_id) throws Exception {
+		return session.update(namespace+".donateHitCount", donate_id);
+	}
+
+	@Override
+	public String donateWriter(Integer donate_id) throws Exception {
+		return session.selectOne(namespace+".donateWriter", donate_id);
+	}
+
 }

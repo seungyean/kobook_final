@@ -3,6 +3,7 @@ package com.kobook.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -14,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,7 +48,8 @@ public class CommunityController {
 	
 	@Resource(name = "uploadPath")
 	private String uploadPath;
-	
+
+	//파일 업로드
 	@ResponseBody
 	@RequestMapping(value = "/uploadAjax", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
 	public ResponseEntity<String> uploadAjax(MultipartFile file) throws Exception {
@@ -57,6 +60,7 @@ public class CommunityController {
 				HttpStatus.CREATED);
 	}
 
+	//파일(이미지) 출력
 	@ResponseBody
 	@RequestMapping("/displayFile")
 	public ResponseEntity<byte[]> displayFile(String fileName) throws Exception {
@@ -96,6 +100,7 @@ public class CommunityController {
 		return entity;
 	}
 
+	//attach 테이블에서 업로드된 파일 삭제
 	@ResponseBody
 	@RequestMapping(value = "/deleteFile", method = RequestMethod.POST)
 	public ResponseEntity<String> deleteFile(String fileName) {
@@ -146,20 +151,39 @@ public class CommunityController {
 		return new ResponseEntity<String>("deleted", HttpStatus.OK);
 	}
 	
+	//자주묻는질문
+	@RequestMapping(value = "/qna", method = RequestMethod.GET)
+	public void qna() throws Exception {
+		
+	}	
+	
+	//신고게시판 글 등록 폼 이동
 	@RequestMapping(value = "blackRegist", method = RequestMethod.GET)
 	public void blackRegistGet() throws Exception {
 
 	}
 
+	//신고게시판 글 등록(DB)
 	@RequestMapping(value = "blackRegist", method = RequestMethod.POST)
 	public String blackRegistPost(BlackVO vo, Model model) throws Exception {
 		blackService.blackRegist(vo);
 		return "redirect:/community/blackList";
 	}
 	
+	//신고 게시판 List출력
 	@RequestMapping(value = "blackList", method = RequestMethod.GET)
 	public void blackList(@ModelAttribute SearchCriteria cri, Model model)throws Exception{
-		model.addAttribute("list", blackService.blackList(cri));
+		List<BlackVO> list = blackService.blackList(cri);
+		HashMap<Integer, String> userMap = new HashMap<Integer,String>();
+		
+		int black_id;
+		
+		for(int index = 0; index<list.size(); index++){
+			black_id = list.get(index).getBlack_id();		
+			userMap.put(black_id, blackService.blackWriter(black_id));
+		}
+		model.addAttribute("list", list);
+		model.addAttribute("userMap", userMap);
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
@@ -168,18 +192,23 @@ public class CommunityController {
 		model.addAttribute("pageMaker", pageMaker);
 	}
 	
+	//신고게시판 상세보기
 	@RequestMapping("blackRead")
 	public void blackRead(@RequestParam("black_id") int black_id, Model model,
 			@ModelAttribute("cri") SearchCriteria cri) throws Exception{
 		model.addAttribute(blackService.blackRead(black_id));
+		model.addAttribute("writer", blackService.blackWriter(black_id));
 	}
 	
+	//신고게시판 수정 폼 이동
 	@RequestMapping(value = "blackModify", method = RequestMethod.GET)
 	public void blackModifyGet(@RequestParam("black_id") int black_id, Model model,
 			@ModelAttribute("cri") SearchCriteria cri) throws Exception {
 		model.addAttribute(blackService.blackRead(black_id));
+		model.addAttribute("writer", blackService.blackWriter(black_id));
 	}
 	
+	//신고게시판 글 수정(DB)
 	@RequestMapping(value = "blackModify", method = RequestMethod.POST)
 	public String blackModifyPost(RedirectAttributes rtts, BlackVO vo, SearchCriteria cri) throws Exception {
 		blackService.blackModify(vo);
@@ -192,6 +221,7 @@ public class CommunityController {
 		return "redirect:/community/blackList";
 	}
 	
+	//신고게시판 글 삭제(DB)
 	@RequestMapping("blackRemove")
 	public String blackRemove(RedirectAttributes rtts, SearchCriteria cri
 			, @RequestParam("black_id") Integer black_id) throws Exception {
@@ -205,6 +235,7 @@ public class CommunityController {
 		return "redirect:/community/blackList";
 	}
 
+	//black_attach 파일명 추출
 	@RequestMapping("/blackGetAttach/{black_id}")
 	@ResponseBody
 	public List<String> blackGetAttach(@PathVariable("black_id") Integer black_id) throws Exception{
@@ -212,12 +243,13 @@ public class CommunityController {
 		
 	}
 	
+	//무료나눔 게시판 글 등록 폼 이동
 	@RequestMapping(value = "/donateRegist", method = RequestMethod.GET)
 	public void donateRegistGet() throws Exception {
 		
 	}
 
-
+	//무료나눔 글 등록(DB)
 	@RequestMapping(value = "/donateRegist", method = RequestMethod.POST)
 	public String donateRegistPost(DonateVO vo , @RequestParam("file") MultipartFile file ) throws Exception {
 		String donate_thumbnail = UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes());
@@ -231,9 +263,21 @@ public class CommunityController {
 		return "redirect:/community/donateList";
 	}
 	
+	//무료나눔 List 출력
 	@RequestMapping("donateList")
 	public void donateList(@ModelAttribute SearchCriteria cri, Model model, @ModelAttribute DonateFileVO fileVO) throws Exception {
-		model.addAttribute("list", donateService.donateList(cri));
+		List<DonateVO> list = donateService.donateList(cri);
+		HashMap<Integer, String> userMap = new HashMap<Integer,String>();
+		
+		int donate_id;
+		
+		for(int index = 0; index<list.size(); index++){
+			donate_id = list.get(index).getDonate_id();		
+			userMap.put(donate_id, donateService.donateWriter(donate_id));		
+		}
+
+		model.addAttribute("list", list);
+		model.addAttribute("userMap", userMap);
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
@@ -242,24 +286,30 @@ public class CommunityController {
 		model.addAttribute("pageMaker", pageMaker);
 	}
 	
+	//무료나눔 첨부파일 추출
 	@RequestMapping(value="/donateGetAttach/{donate_id}")
 	@ResponseBody
 	public List<String> donateGetAttach(@PathVariable("donate_id")Integer donate_id) throws Exception {		
 		return donateService.donateGetAttach(donate_id);
 	}
 	
+	//무료나눔 게시판 상세보기
 	@RequestMapping("donateRead")
 	public void donateRead(@RequestParam("donate_id") Integer donate_id, Model model,
 			@ModelAttribute("cri") SearchCriteria cri)throws Exception{
-		model.addAttribute(donateService.donateRead(donate_id));
+		model.addAttribute(donateService.donateRead(donate_id, true));
+		model.addAttribute("writer",donateService.donateWriter(donate_id));
 	}
 	
+	//무료나눔 글 수정 폼 이동
 	@RequestMapping(value = "donateModify", method = RequestMethod.GET)
 	public void donateModifyGet(@RequestParam("donate_id") int donate_id, Model model,
 			@ModelAttribute("cri") SearchCriteria cri) throws Exception {
-		model.addAttribute(donateService.donateRead(donate_id));
+		model.addAttribute(donateService.donateRead(donate_id, false));
+		model.addAttribute("writer",donateService.donateWriter(donate_id));
 	}
 	
+	//무료나눔 글 수정(DB)
 	@RequestMapping(value = "donateModify", method = RequestMethod.POST)
 	public String donateModifyPost(RedirectAttributes rtts, DonateVO vo, SearchCriteria cri
 			, @RequestParam("file") MultipartFile file ) throws Exception {
@@ -279,6 +329,7 @@ public class CommunityController {
 		return "redirect:/community/donateList";
 	}
 	
+	//무료나눔 글 삭제(DB)
 	@RequestMapping("donateRemove")
 	public String donateRemove(RedirectAttributes rtts, SearchCriteria cri
 			, @RequestParam("donate_id") Integer donate_id) throws Exception {
@@ -291,5 +342,8 @@ public class CommunityController {
 		
 		return "redirect:/community/donateList";
 	}
+	
+	//무료나눔 댓글 등록(DB)
+	//
 
 }

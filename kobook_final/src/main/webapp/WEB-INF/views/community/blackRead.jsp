@@ -92,8 +92,8 @@
 											<div class="metaInfo">
 												<span><i class="fa fa-calendar"></i> <fmt:formatDate
 														value="${blackVO.black_date }" pattern="MMM dd, yyyy" /> </span> <span><i
-													class="fa fa-user"></i> By ${blackVO.person_id} </span>
-										<c:if test="${blackVO.person_id == person_id }">
+													class="fa fa-user"></i> By ${writer} </span>
+										<c:if test="${blackVO.person_id == person_id || person_id == 1}">
 											<button type="submit" class="btn btn-warning" id="modifyBtn">수정</button>
 											<button type="submit" class="btn btn-danger" id="removeBtn">삭제</button>
 										</c:if>

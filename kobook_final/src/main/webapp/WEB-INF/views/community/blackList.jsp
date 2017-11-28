@@ -74,7 +74,7 @@
 											<tr>
 												<td align="center">${black.black_id}</td>
 												<td><a href="/community/blackRead${pageMaker.makeSearch(pageMaker.cri.page) }&black_id=${black.black_id }">${black.black_title }</a></td>
-												<td align="center">${black.person_id }</td>
+												<td align="center">${userMap[black.black_id] }</td>
 												<td align="center"><fmt:formatDate
 														value="${black.black_date }" pattern="yyyy-MM-dd" /></td>
 											</tr>

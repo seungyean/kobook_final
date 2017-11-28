@@ -51,8 +51,12 @@ public class DonateServiceImpl implements DonateService {
 		return dao.donateGetAttach(donate_id);
 	}
 
+	@Transactional
 	@Override
-	public DonateVO donateRead(Integer donate_id) throws Exception {
+	public DonateVO donateRead(Integer donate_id, boolean bool) throws Exception {
+		if(bool) {
+			dao.donateHitCount(donate_id);
+		}
 		return dao.donateSelect(donate_id);
 	}
 
@@ -83,6 +87,11 @@ public class DonateServiceImpl implements DonateService {
 	public void donateRemove(Integer donate_id) throws Exception {
 		dao.donateDeleteAttach(donate_id);
 		dao.donateDelete(donate_id);
+	}
+
+	@Override
+	public String donateWriter(Integer donate_id) throws Exception {
+		return dao.donateWriter(donate_id);
 	}
 
 }

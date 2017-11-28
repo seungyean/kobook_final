@@ -85,7 +85,7 @@
 												<span><i class="fa fa-calendar"></i> <fmt:formatDate
 														value="${donateVO.donate_date }" pattern="MMM dd, yyyy" />
 												</span> <span><i class="fa fa-user"></i> By
-													${donateVO.person_id} </span> <span><i class="fa fa-eye"></i>
+													${writer} </span> <span><i class="fa fa-eye"></i>
 													${donateVO.donate_hit} </span>
 												<!-- <span><i class="fa fa-comments"></i> <a href="#">12 Comments</a></span> -->
 											</div>

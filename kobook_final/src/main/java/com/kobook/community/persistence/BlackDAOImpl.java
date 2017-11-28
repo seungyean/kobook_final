@@ -76,5 +76,10 @@ public class BlackDAOImpl implements BlackDAO {
 	public void blackDelete(Integer black_id) throws Exception {
 		session.delete(namespace+".blackDelete", black_id);
 	}
+
+	@Override
+	public String blackWriter(Integer black_id) throws Exception {
+		return session.selectOne(namespace+".blackWriter", black_id);
+	}
 	
 }

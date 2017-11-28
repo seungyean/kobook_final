@@ -84,7 +84,7 @@
 											<div class="metaInfo">
 												<span><i class="fa fa-calendar"></i> <fmt:formatDate
 														value="${blackVO.black_date }" pattern="MMM dd, yyyy" /> </span> <span><i
-													class="fa fa-user"></i> By ${blackVO.person_id} </span>
+													class="fa fa-user"></i> By ${writer} </span>
 											</div>
 										</div>
 										<span>신고email : <input type="text" name="black_email"

@@ -86,6 +86,11 @@ public class BlackServiceImpl implements BlackService {
 		dao.blackDeleteAttach(black_id);
 		dao.blackDelete(black_id);
 	}
+
+	@Override
+	public String blackWriter(Integer black_id) throws Exception {
+		return dao.blackWriter(black_id);
+	}
 	
 	
 

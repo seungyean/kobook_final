@@ -29,4 +29,8 @@ public interface DonateDAO {
 	public void donateUpdate(DonateVO vo) throws Exception;
 	//donateDelete
 	public void donateDelete(Integer donate_id) throws Exception;
+	//donateHitCount
+	public int donateHitCount(Integer donate_id) throws Exception;
+	//donateWriter
+	public String donateWriter(Integer donate_id) throws Exception;
 }

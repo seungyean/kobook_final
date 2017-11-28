@@ -100,14 +100,10 @@
 												<span><i class="fa fa-calendar"></i> <fmt:formatDate
 														value="${donateVO.donate_date }" pattern="MMM dd, yyyy" />
 												</span> <span><i class="fa fa-user"></i> By
-													${donateVO.person_id} </span> <span><i class="fa fa-eye"></i>
+													${writer} </span> <span><i class="fa fa-eye"></i>
 													${donateVO.donate_hit} </span>
-												<!-- <span><i class="fa fa-comments"></i> <a href="#">12 Comments</a></span>  -->
-<!-- 												<input type="button"
-													class="btn btn-lg btn-default" value="수정"
-													onclick="fn_update()"> <input
-													class="btn btn-lg btn-default" type="submit" value="삭제"> -->
-										<c:if test="${donateVO.person_id == person_id }">
+												<span><i class="fa fa-comments"></i> ${donateVO.reply_count} Comments</span>
+										<c:if test="${donateVO.person_id == person_id || person_id == 1}">
 											<button type="submit" class="btn btn-warning" id="modifyBtn">수정</button>
 											<button type="submit" class="btn btn-danger" id="removeBtn">삭제</button>
 										</c:if>
@@ -116,9 +112,7 @@
 										</div>
 										<blockquote class="default">
 											${donateVO.donate_content }</blockquote>
-
 									</div>
-<!-- 								</form> -->
 							</article>
 					    <div class='popup back' style="display:none;"></div>
 					    <div id="popup_front" class='popup front' style="display:none;">
@@ -131,7 +125,7 @@
 							 <ul class="mailbox-attachments clearfix uploadedList">
 							 </ul>
 						</div>
-<%-- 
+ 
 						<!--News Comments-->
 						<div class="news_comments">
 							<div class="dividerHeading">
@@ -176,7 +170,7 @@
 									<span>Leave a comment</span>
 								</h4>
 							</div>
-							<form action="donateReply.do" method="post">
+							<form action="donateReplyRegist" method="post">
 
 								<input type="hidden" name="rDonate_id"
 									value="${donateVO.donate_id}" />
@@ -201,8 +195,6 @@
 									value="댓글 작성" />
 							</form>
 						</div>
- --%>
-
 					</div>
 				</div>
 				<!--/.row-->
