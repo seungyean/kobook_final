@@ -59,13 +59,6 @@ public class BoardController {
 		model.addAttribute("pageMaker",pageMaker);
 	}
 	
-	@RequestMapping("/adminMain")
-	public String admin()throws Exception {
-		
-		return "/board/adminMain";
-	}
-	
-	
 	@RequestMapping("/boardDetail")
 	public void boardRead(@RequestParam("board_id") int board_id, Model model,
 			@ModelAttribute("cri") SearchCriteria cri) throws Exception {	
@@ -119,13 +112,6 @@ public class BoardController {
 		model.addAttribute(service.personRead(person_id));
 	}
 	
-/*	@RequestMapping(value="/personModify", method = RequestMethod.GET)
-	public void personModifyGET(@RequestParam("person_id") Integer person_id, Model model, @RequestParam("person_sell_grade") Integer person_sell_grade, @RequestParam("person_kind") Integer person_kind,
-			@ModelAttribute("cri") SearchCriteria cri) throws Exception {	
-		
-		model.addAttribute(service.personRead(person_id));
-
-	}*/
 	
 	@RequestMapping(value="/personModify", method = RequestMethod.POST)
 	public String personModifyPOST(RedirectAttributes rttr, PersonVO vo, SearchCriteria cri, Model model, @RequestParam("person_id") Integer person_id
