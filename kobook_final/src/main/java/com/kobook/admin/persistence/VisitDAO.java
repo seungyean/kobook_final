@@ -4,7 +4,5 @@ import com.kobook.admin.domain.VisitVO;
 
 public interface VisitDAO {
 
-	//ÃÑ Á¢¼ÓÀÚ
-	public void visitTotal(VisitVO vo) throws Exception;
-
+	public int visitCount(VisitVO vo) throws Exception;
 }

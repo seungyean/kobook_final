@@ -158,7 +158,7 @@
                             </div>
                             <div class="service-content">
                                 <h3>오늘 총 접속자</h3>
-                                <p>10명 ${personVO.USER }</p>
+                                <p>${VisitVO.count } 명</p>
                             </div>
                         </div>
                     </div>

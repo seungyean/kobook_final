@@ -5,7 +5,7 @@
 
 <mapper namespace="com.kobook.mappers.visitMapper">
 
-	<select id="visitTotal" resultType="VisitVO">
+	<select id="visitCount" resultType="VisitVO">
 		select count(*) from visit
 	</select>
 	

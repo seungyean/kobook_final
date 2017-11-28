@@ -2,11 +2,15 @@ package com.kobook.admin.domain;
 
 import java.sql.Timestamp;
 
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionEvent;
+import javax.servlet.http.HttpSessionListener;
+
 public class VisitVO {
 
 	private Integer visit_id;
 	private Timestamp visit_date;
-	private int visit_total;
+	private int count;
 	
 	public Integer getVisit_id() {
 		return visit_id;
@@ -20,18 +24,16 @@ public class VisitVO {
 	public void setVisit_date(Timestamp visit_date) {
 		this.visit_date = visit_date;
 	}
-	public int getVisit_total() {
-		return visit_total;
+	public int getCount() {
+		return count;
 	}
-	public void setVisit_total(int visit_total) {
-		this.visit_total = visit_total;
+	public void setCount(int count) {
+		this.count = count++;
 	}
 	
 	@Override
 	public String toString() {
-		return "VisitVO [visit_id=" + visit_id + ", visit_date=" + visit_date + ", visit_total=" + visit_total + "]";
+		return "VisitVO [visit_id=" + visit_id + ", visit_date=" + visit_date + ", count=" + count + "]";
 	}
-	
-	
 	
 }

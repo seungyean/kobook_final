@@ -1,9 +1,14 @@
 package com.kobook.login.interceptor;
 
+
+
+import java.util.Hashtable;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -15,7 +20,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	@Inject
 	private PersonService service;
 
-	
+	private static Hashtable loginPersons = new Hashtable();
+		
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
@@ -41,9 +47,10 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			session.setAttribute("person_id", person_id);
 			
 			
-			
 			if(person_email.equals("admin@kobook.com") && person_pwd.equals("0000")){
 				session.setAttribute("person_id", person_id);
+				System.out.println("login admin");
+				response.sendRedirect("/admin/adminMain");
 			}
 			
 			else if(person_email.equals(person_emailCheck) && person_pwd.equals(person_pwdCheck)){
@@ -52,7 +59,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 				if(!parentURI.equals("http://localhost:8081/#")){
 					response.sendRedirect(parentURI != null ? parentURI:"/");
 				}
-				
 				
 
 			}else{
@@ -75,6 +81,5 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		}
 		return true;
 	}
-
 	
 }
