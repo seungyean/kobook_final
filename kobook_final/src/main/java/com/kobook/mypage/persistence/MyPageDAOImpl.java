@@ -9,7 +9,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kobook.book.domain.BookVO;
+import com.kobook.mypage.domain.DeliveryVO;
+import com.kobook.mypage.domain.MileageVO;
 import com.kobook.mypage.domain.OrderVO;
+import com.kobook.mypage.domain.PayVO;
 import com.kobook.person.domain.PersonVO;
 
 
@@ -52,11 +55,6 @@ public class MyPageDAOImpl implements MyPageDAO {
 		return session.selectList(namespace + ".mileageList", person_id);
 	}
 
-//	@Override
-//	public List<HashMap<String, String>> orderList(int person_id) {
-//		return session.selectList(namespace + ".orderList", person_id);
-//	}
-
 	@Override
 	public PersonVO orderPerson(int person_id) {
 		return session.selectOne(namespace + ".orderPerson", person_id);
@@ -71,6 +69,34 @@ public class MyPageDAOImpl implements MyPageDAO {
 	@Override
 	public BookVO oneBook(int book_id) {
 		return session.selectOne(namespace + ".oneBook", book_id);
+	}
+
+	@Override
+	public int mileageInsert(MileageVO vo) {
+		return session.insert(namespace + ".mileageInsert", vo);
+	}
+
+	@Override
+	public void mileageUpdate(int person_id, int mileage_point) {
+		session.update(namespace + ".mileageUpdate", person_id);
+		
+	}
+
+	@Override
+	public void payInsert(PayVO vo) {
+		session.insert(namespace + ".payInsert", vo);
+		
+	}
+
+	@Override
+	public int maxOrderID(int order_id) {
+		return session.selectOne(namespace + ".maxOrderID", order_id);
+	}
+
+	@Override
+	public void deliveryInsert(DeliveryVO vo) {
+		session.insert(namespace + ".deliveryInsert", vo);
+		
 	}
 
 

@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 public class MileageVO {
 	
+	private int mileage_id;
 	private Timestamp order_date;
 	private int mileage_point;
 	private char mileage_kind;
@@ -40,11 +41,18 @@ public class MileageVO {
 	public void setPerson_id(int person_id) {
 		this.person_id = person_id;
 	}
+	public int getMileage_id() {
+		return mileage_id;
+	}
+	public void setMileage_id(int mileage_id) {
+		this.mileage_id = mileage_id;
+	}
 	@Override
 	public String toString() {
-		return "MileageVO [order_date=" + order_date + ", mileage_point=" + mileage_point + ", mileage_kind="
-				+ mileage_kind + ", pay_id=" + pay_id + ", person_id=" + person_id + "]";
+		return "MileageVO [mileage_id=" + mileage_id + ", order_date=" + order_date + ", mileage_point=" + mileage_point
+				+ ", mileage_kind=" + mileage_kind + ", pay_id=" + pay_id + ", person_id=" + person_id + "]";
 	}
+	
 	
 	
 	

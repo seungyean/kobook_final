@@ -4,109 +4,140 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kobook.mappers.myPageMapper">
 
-<!-- 주문자 정보 -->
-   <select id="orderPerson" resultType="PersonVO" parameterType="int">
-      SELECT *
-      FROM person
-      WHERE person_id = #{person_id}
-   </select>
+	<!-- 주문자 정보 -->
+	<select id="orderPerson" resultType="PersonVO" parameterType="int">
+		SELECT *
+		FROM person
+		WHERE person_id = #{person_id}
+	</select>
 
-   <!-- 판매내역 리스트 -->
-   <select id="sellList" resultType="BookVO" parameterType="int">
-      SELECT *
-      FROM book
-      WHERE person_id = #{person_id}
-   </select>
+	<!-- 판매내역 리스트 -->
+	<select id="sellList" resultType="BookVO" parameterType="int">
+		SELECT *
+		FROM book
+		WHERE person_id = #{person_id}
+	</select>
 
-   <!-- 판매상태 업데이트 -->
-   <update id="sellStateUpdate" parameterType="BookVO">
-      UPDATE book
-      SET
-      book_sell_state = #{book_sell_state}
-      WHERE book_id = #{book_id}
-   </update>
+	<!-- 판매상태 업데이트 -->
+	<update id="sellStateUpdate" parameterType="BookVO">
+		UPDATE book
+		SET
+		book_sell_state = #{book_sell_state}
+		WHERE book_id = #{book_id}
+	</update>
 
-   <!-- 구매내역 리스트 -->
-   <select id="buyList" resultType="hashMap" parameterType="int">
-      SELECT
-      p.pay_id,
-      b.book_img,
-      b.book_name,
-      p.pay_amount,
-      o.order_date
-      FROM book_order o,
-      book b,
-      pay p
-      WHERE o.order_id = p.order_id
-      AND o.book_id = b.book_id
-      AND o.person_id = #{person_id}
-   </select>
+	<!-- 구매내역 리스트 -->
+	<select id="buyList" resultType="hashMap" parameterType="int">
+		SELECT
+		p.pay_id,
+		b.book_img,
+		b.book_name,
+		p.pay_amount,
+		o.order_date
+		FROM
+		book_order o,
+		book b,
+		pay p
+		WHERE o.order_id = p.order_id
+		AND o.book_id =
+		b.book_id
+		AND o.person_id = #{person_id}
+	</select>
 
-   <!-- 찜리 -->
-   <select id="pickList" resultType="hashMap" parameterType="int">
-      SELECT
-      b.book_id,
-      b.book_img,
-      b.book_name,
-      b.book_m_price,
-      b.book_sell_state,
-      p.pick_id
-      FROM
-      book b,
-      pick p,
-      person person
-      WHERE b.book_id = p.book_id
-      AND p.person_id = person.person_id
-      AND p.pick_state = 'Y'
-      AND person.person_id = #{person_id}
-   </select>
+	<!-- 찜리 -->
+	<select id="pickList" resultType="hashMap" parameterType="int">
+		SELECT
+		b.book_id,
+		b.book_img,
+		b.book_name,
+		b.book_m_price,
+		b.book_sell_state,
+		p.pick_id
+		FROM
+		book b,
+		pick p,
+		person person
+		WHERE b.book_id = p.book_id
+		AND p.person_id = person.person_id
+		AND p.pick_state = 'Y'
+		AND
+		person.person_id = #{person_id}
+	</select>
 
-   <!-- 찜 상태 변경 -->
-   <update id="pickUpdate" parameterType="int">
-      UPDATE pick
-      SET pick_state = 'N'
-      WHERE pick_id = #{pick_id}
-   </update>
+	<!-- 찜 상태 변경 -->
+	<update id="pickUpdate" parameterType="int">
+		UPDATE pick
+		SET pick_state
+		= 'N'
+		WHERE pick_id = #{pick_id}
+	</update>
 
-   <!-- 마일리지 리스트 -->
-   <select id="mileageList" resultType="hashMap">
-      SELECT o.order_date,
-      m.mileage_point,
-      m.mileage_kind
-      FROM mileage m,
-      pay p,
-      book_order o
-      WHERE
-      m.pay_id = p.pay_id
-      AND p.order_id = o.order_id
-      AND o.person_id = #{person_id}
-   </select>
+	<!-- 마일리지 리스트 -->
+	<select id="mileageList" resultType="hashMap">
+		SELECT o.order_date,
+		m.mileage_point,
+		m.mileage_kind
+		FROM mileage m,
+		pay p,
+		book_order o
+		WHERE
+		m.pay_id = p.pay_id
+		AND p.order_id = o.order_id
+		AND o.person_id =
+		#{person_id}
+	</select>
 
 
-   <!-- 주문내역 -->
-   <select id="oneBook" resultType="BookVO">
-   	select * from book where book_id = #{book_id}
-     <!--  SELECT b.book_img,
-      b.book_name,
-      b.book_m_price,
-      b.book_publish
-      FROM book b,
-      person p,
-      book_order o
-      WHERE b.book_id = o.book_id
-      AND o.person_id = p.person_id
-      AND o.person_id = #{person_id} -->
-   </select>
+	<!-- 주문내역 -->
+	<select id="oneBook" resultType="BookVO">
+		select * from book where book_id = #{book_id}
+		<!-- SELECT b.book_img, b.book_name, b.book_m_price, b.book_publish FROM 
+			book b, person p, book_order o WHERE b.book_id = o.book_id AND o.person_id 
+			= p.person_id AND o.person_id = #{person_id} -->
+	</select>
 
-   <!-- 주문등록 -->
-   <insert id="orderInsert" parameterType="OrderVO">
-      INSERT INTO book_order 
-      VALUES (order_id_seq.NEXTVAL, 
-                To_char(To_date(sysdate), 'YYYY-MM-DD'), 
-               #{book_id}, 
-                #{person_id})
-   </insert>
-   
+	<!-- 주문등록 -->
+	<insert id="orderInsert" parameterType="OrderVO">
+		INSERT INTO book_order
+		VALUES (order_id_seq.NEXTVAL,
+		To_char(To_date(sysdate), 'YYYY-MM-DD'),
+		#{book_id},
+		#{person_id})
+	</insert>
+
+	<!-- MAX order_id -->
+	<select id="maxOrderID" resultType="int">
+		select max(order_id)
+		from
+		book_order
+	</select>
+
+	<!-- 결제 등록 -->
+	<insert id="payInsert" parameterType="PayVO">
+		INSERT INTO pay
+		VALUES(pay_id_seq.NEXTVAL,#{pay_amount},TO_DATE(SYSDATE,'YYYY-MM-DD'),#{order_id})
+	</insert>
+
+	<!-- 배달 등록 -->
+	<insert id="deliveryInsert" parameterType="DeliveryVO">
+		INSERT INTO delivery (delivery_id, order_id, delivery_msg, delivery_address)
+		VALUES(delivery_id_seq.NEXTVAL,#{order_id},#{delivery_msg},#{delivery_address})
+	</insert>
+
+	<!-- 마일리지 등록 -->
+	<insert id="mileageInsert" parameterType="MileageVO">
+		INSERT INTO mileage
+		VALUES(mileage_id_seq.NEXTVAL,#{mileage_kind},TO_DATE(SYSDATE,'YYYY-MM-DD'),#{mileage_point},#{pay_id},#{person_id})
+	</insert>
+
+	<!-- 회원 마일리지 포인트 업데이트 -->
+	<update id="mileageUpdate" parameterType="MileageVO">
+		UPDATE person
+		SET
+		mileage_point = mileage_point + #{mileage_point}
+		WHERE person_id = 7;
+	</update>
+
 
 
 </mapper>

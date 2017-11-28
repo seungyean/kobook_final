@@ -18,7 +18,10 @@ import com.kobook.alarm.domain.AlarmVO;
 import com.kobook.alarm.service.AlarmService;
 import com.kobook.book.domain.BookVO;
 import com.kobook.book.service.BookService;
+import com.kobook.mypage.domain.DeliveryVO;
+import com.kobook.mypage.domain.MileageVO;
 import com.kobook.mypage.domain.OrderVO;
+import com.kobook.mypage.domain.PayVO;
 import com.kobook.mypage.service.MyPageService;
 import com.kobook.person.domain.PersonVO;
 
@@ -67,7 +70,7 @@ public class MyPageController {
 				BookVO temp = new BookVO();
 				temp.setBook_id(book_id);
 				temp.setBook_sell_state(book_sell_state);
-				service.sellStateUpdate(temp);
+				service.sellStateModify(temp);
 				
 				//"판매가 완료되었습니다." 알림 주는 부분 (아름)
 				if(temp.getBook_sell_state().equals("C")) {
@@ -117,7 +120,7 @@ public class MyPageController {
 	public String pickStateUpdate(@RequestParam("pick_id") int pick_id, RedirectAttributes rttr) {
 		System.out.println("----------------Controller :찜리스트 상태 변경-----------------");
 		System.out.println(pick_id);
-		service.pickUpdate(pick_id);
+		service.pickModify(pick_id);
 		
 		return "redirect:/mypage/pickList";
 
@@ -137,7 +140,7 @@ public class MyPageController {
 	/* 주문 */
 	@RequestMapping(value = "/order", method = RequestMethod.GET)
 	public void orderList(@RequestParam("book_id") int book_id,HttpServletRequest request, Model model) {
-		System.out.println("----------------Controller : 주문 출력-----------------");
+		System.out.println("----------------Controller : 주문내역 출력-----------------");
 		
 		HttpSession session = request.getSession();
 		int person_id = Integer.parseInt((String)session.getAttribute("person_id"));
@@ -145,7 +148,6 @@ public class MyPageController {
 		model.addAttribute("book_id", book_id);
 		model.addAttribute("oneBook", service.oneBook(book_id));
 		model.addAttribute( service.orderPerson(person_id));
-		
 		
 		System.out.println(service.oneBook(book_id));
 		
@@ -166,19 +168,39 @@ public class MyPageController {
 		
 	}
 	
-	@RequestMapping(value="/order2", method=RequestMethod.POST)
-	public String orderSuccessPOST(RedirectAttributes rttr, HttpServletRequest request,@RequestParam("book_id") int book_id)throws Exception{
+	@RequestMapping(value="/order", method=RequestMethod.POST)
+	public String orderSuccessPOST(RedirectAttributes rttr, HttpServletRequest request,
+			@RequestParam("book_id") int book_id,
+			@RequestParam("total_price2") int total_price,
+			@RequestParam("addr") String delivery_address,
+			@RequestParam("msg") String delivery_msg
+			)throws Exception{
 		System.out.println("주문등록 post~~~~~~~~~~~~~~~~~");
 		
 		OrderVO temp = new OrderVO();
-		System.out.println(temp.toString());
 		HttpSession session = request.getSession();
 		int person_id = Integer.parseInt((String)session.getAttribute("person_id"));
 		
 		temp.setPerson_id(person_id);
 		temp.setBook_id(book_id);
+		System.out.println("주문등록 person_id : " + person_id);
+		System.out.println("주문등록 book_id : " + book_id);
 		
-		service.orderInsert(temp);
+		PayVO pay = new PayVO();
+		pay.setPay_amount(total_price);
+		System.out.println("주문등록 total_price :  " + total_price);
+		
+		DeliveryVO deliveryVO = new DeliveryVO();
+		deliveryVO.setDelivery_address(delivery_address);
+		deliveryVO.setDelivery_msg(delivery_msg);
+		
+		System.out.println("주문등록 delivery_address :  " + delivery_address);
+		System.out.println("주문등록 delivery_msg :  " + delivery_msg);
+		
+		
+		service.orderRegist(temp, pay, deliveryVO);
+		
+		
 		return  "redirect:/mypage/orderSuccess";
 		
 		

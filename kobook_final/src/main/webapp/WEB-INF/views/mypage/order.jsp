@@ -30,7 +30,7 @@
 	   
 	   var del_price = 2000;
 	   
-	   $('#total_price').html(parseInt($('#book_price').text()) + del_price);
+	  $('#total_price').html(parseInt($('#book_price').text()) + del_price);
 	   
 	   // 마일리지 사용
 	   $("#input_mile").keyup(function() {
@@ -43,21 +43,22 @@
    		$('#sale_price').html($('#input_mile').val());
 		});
 	   
+	   
 	   //결제버튼 클릭 
  	   $("#orderSuccess").click(function() {
 		   var data = $('#bookID').html();
-		   console.log("vvvvvvvvvvvv"+data);
-		   $("#form1").attr("action", "/mypage/order2");
+		   var data2 = $('#total_price').html();
+		   var data3 = $('#dpostcode').attr("placeholder")+', ' + $('#daddr1').attr("placeholder")+', ' + $('#daddr2').attr("placeholder"); 
+		   var data4 = $('#omessage').val();
+		   
+		   $('#total_price2').val(data2);
+		   $('#addr').val(data3);
+		   $('#msg').val(data4);
+		   $("#form1").attr("action", "/mypage/order");
 		   $("#form1").attr("method", "post");
 		   $("#form1").submit();
 		   
-/* 			$.ajax({
-				type: 'post',
-				url: '/mypage/order2',
-				data: data,
-				dataType:'text'
-				  
-				}); */
+
 		});
 	   
 	   // 우편번호 api
@@ -185,6 +186,9 @@
 							            <h3>주문 내역</h3>
 							            <form id="form1" action="/mypage/order2" method="post">
 							            <input type="hidden" name="book_id" value="${oneBook.book_id }">
+							            <input type="hidden" id="total_price2" name="total_price2" value="">
+							            <input type="hidden" id="addr" name="addr" value="">
+							            <input type="hidden" id="msg" name="msg" value="">
 							            </form>
 							            	<table class="table table-hover">
 								                <thead>
@@ -200,7 +204,9 @@
 													<tr>
 								                        <td class="col-sm-8 col-md-6">
 									                        <div class="media">
-									                            <a class="thumbnail pull-left" href="#"> <img class="media-object" src="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/72/product-icon.png" style="width: 72px; height: 72px;"> </a>
+									                            <a class="thumbnail pull-left" href="#"> 
+									                            	<img class="media-object" src="displayFile?fileName=${oneBook.book_img}" style="width: 72px; height: 72px;"> 
+									                            </a>
 									                            <div class="media-body">
 									                                <h4 class="media-heading"><a href="#">&nbsp;&nbsp;${oneBook.book_name }</a></h4>
 									                                <h5 class="media-heading"><a href="#">&nbsp;&nbsp;&nbsp;${oneBook.book_publish }</a></h5>
@@ -563,7 +569,7 @@
 
 
 
-
+	
 
 
 

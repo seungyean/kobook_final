@@ -10,6 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.kobook.mypage.domain.OrderVO;
+import com.kobook.mypage.domain.PayVO;
 import com.kobook.mypage.persistence.MyPageDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -68,5 +69,10 @@ public class MyPageTest {
 		vo.setPerson_id(7);
 		vo.setBook_id(3);
 		dao.orderInsert(vo);
+		
+		PayVO pay = new PayVO();
+		pay.setOrder_id(vo.getOrder_id());
+		pay.setPay_amount(2000);
+		dao.payInsert(pay);
 	}
 }
