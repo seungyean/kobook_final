@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -54,7 +55,7 @@ public class BoardController {
 		model.addAttribute("list", service.boardListCri(cri));
 		PageMaker pageMaker=new PageMaker();
 		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(service.boardcountPaging(cri));
+		pageMaker.setTotalCount(service.boardCountPaging(cri));
 		model.addAttribute("pageMaker",pageMaker);
 	}
 	
@@ -66,7 +67,7 @@ public class BoardController {
 	
 	
 	@RequestMapping("/boardDetail")
-	public void blackRead(@RequestParam("board_id") int board_id, Model model,
+	public void boardRead(@RequestParam("board_id") int board_id, Model model,
 			@ModelAttribute("cri") SearchCriteria cri) throws Exception {	
 		model.addAttribute(service.boardRead(board_id));
 	}
@@ -84,14 +85,14 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "/boardModify", method = RequestMethod.GET)
-	public void boardModifyGet(@RequestParam("board_id") int board_id, Model model,
+	public void boardModifyGET(@RequestParam("board_id") int board_id, Model model,
 			@ModelAttribute("cri") SearchCriteria cri) throws Exception {
 			System.out.println("modifyGET");
 		model.addAttribute(service.boardRead(board_id));
 	}
 	
 	@RequestMapping(value = "/boardModify", method = RequestMethod.POST)
-	public String boardModifyPost(RedirectAttributes rtts, BoardVO vo, SearchCriteria cri) throws Exception {
+	public String boardModifyPOST(RedirectAttributes rtts, BoardVO vo, SearchCriteria cri) throws Exception {
 		service.boardModify(vo);
 		rtts.addAttribute("page", cri.getPage());
 		rtts.addAttribute("perPageNum", cri.getPerPageNum());
@@ -102,4 +103,59 @@ public class BoardController {
 		return "redirect:/board/boardList";
 	}
 	
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  관리자용  회원   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	@RequestMapping(value="/personList", method = RequestMethod.GET)
+	public void personList(@ModelAttribute("cri") SearchCriteria cri, Model model)throws Exception {
+		model.addAttribute("list", service.personList(cri));
+		PageMaker pageMaker=new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(service.personCountPage(cri));
+		model.addAttribute("pageMaker",pageMaker);
+	}
+	
+	@RequestMapping("/personDetail")
+	public void personRead(@RequestParam("person_id") int person_id, Model model,
+			@ModelAttribute("cri") SearchCriteria cri) throws Exception {	
+		model.addAttribute(service.personRead(person_id));
+	}
+	
+/*	@RequestMapping(value="/personModify", method = RequestMethod.GET)
+	public void personModifyGET(@RequestParam("person_id") Integer person_id, Model model, @RequestParam("person_sell_grade") Integer person_sell_grade, @RequestParam("person_kind") Integer person_kind,
+			@ModelAttribute("cri") SearchCriteria cri) throws Exception {	
+		
+		model.addAttribute(service.personRead(person_id));
+
+	}*/
+	
+	@RequestMapping(value="/personModify", method = RequestMethod.POST)
+	public String personModifyPOST(RedirectAttributes rttr, PersonVO vo, SearchCriteria cri, Model model, @RequestParam("person_id") Integer person_id
+			) throws Exception {
+/*		@RequestParam("person_kind") String person_kind, @RequestParam("person_sell_grade") String person_sell_grade*/
+		
+		/*model.addAttribute(service.personRead(person_id));*/
+		service.personModify(vo);
+	
+		System.out.println(vo.toString());
+		rttr.addAttribute("page", cri.getPage());
+		rttr.addAttribute("perPageNum", cri.getPerPageNum());
+		rttr.addAttribute("searchType", cri.getSearchType());
+		rttr.addAttribute("keyword", cri.getKeyword());
+		rttr.addFlashAttribute("msg", "SUCCESS");
+		
+		return "redirect:/board/personList";
+	}
+	
+	@RequestMapping("/personRemove")
+	public String personRemove(@RequestParam("person_id")Integer person_id, SearchCriteria cri, RedirectAttributes rttr) throws Exception {
+
+		service.personRemove(person_id);
+		
+		rttr.addAttribute("page", cri.getPage());
+		rttr.addAttribute("perPageNum", cri.getPerPageNum());
+		rttr.addAttribute("searchType", cri.getSearchType());
+		rttr.addAttribute("keyword", cri.getKeyword());
+		rttr.addFlashAttribute("msg", "SUCCESS");
+		return "redirect:/board/personList";
+	}
+
 }

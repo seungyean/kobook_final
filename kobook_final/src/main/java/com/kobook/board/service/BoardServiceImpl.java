@@ -32,8 +32,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public int boardcountPaging(SearchCriteria cri) throws Exception {
-		return dao.boardcountPaging(cri);
+	public int boardCountPaging(SearchCriteria cri) throws Exception {
+		return dao.boardCountPaging(cri);
 	}
 	
 	@Transactional(isolation=Isolation.READ_COMMITTED)
@@ -58,4 +58,30 @@ public class BoardServiceImpl implements BoardService {
 		dao.boardUpdate(vo);
 	}
 	
+	
+	//@@@@@@@@@@@@@@  È¸¿ø¿ë
+	@Override
+	public List<PersonVO> personList(SearchCriteria cri) throws Exception {
+		return dao.personList(cri);
+	}
+	
+	@Override
+	public int personCountPage(SearchCriteria cri) throws Exception {
+		return dao.personCount(cri);
+	}
+	
+	@Override
+	public PersonVO personRead(Integer person_id)throws Exception {
+		return dao.personRead(person_id);
+	}
+	
+	@Override
+	public void personModify(PersonVO vo) throws Exception {
+		dao.personModify(vo);
+	}
+
+	@Override
+	public void personRemove(Integer person_id) throws Exception {
+		dao.personRemove(person_id);
+	}
 }

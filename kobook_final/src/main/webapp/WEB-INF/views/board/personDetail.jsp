@@ -1,23 +1,16 @@
-<%-- <%@page import="resources.admin.domain.Person"%>
-<%@page import="resources.admin.dao.PersonDA --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!-->
-<html class="no-js" lang="en">
-<!--<![endif]-->
-
-<html>
+<!--[if (gte IE 9)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>Electrify Responsive Multipurpose Template</title>
+<title>회원 정보</title>
 <meta name="description" content="">
 
 <!-- CSS FILES -->
@@ -37,114 +30,83 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-<script type="text/javascript">
-function delete_fn(){
-	alert("삭제가 완료되었습니다.");
-	location.href = "/resources/admin/delete.do?person_id=${person.person_id}";
-}
-</script>
 </head>
 <body>
 
 <!--Start Header-->
-	<header id="header">
-		<div id="top-bar">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-8 top-info hidden-xs">
-						<span><i class="fa fa-phone"></i>Phone: (123) 456-7890</span> <span><i
-							class="fa fa-envelope"></i>Email: mail@example.com</span>
-					</div>
-					<div class="col-sm-4 top-info">
-						<ul>
-							<li><a href="" class="my-tweet"><i class="fa fa-twitter"></i></a></li>
-							<li><a href="" class="my-facebook"><i
-									class="fa fa-facebook"></i></a></li>
-							<li><a href="" class="my-skype"><i class="fa fa-skype"></i></a></li>
-							<li><a href="" class="my-pint"><i
-									class="fa fa-pinterest"></i></a></li>
-							<li><a href="" class="my-rss"><i class="fa fa-rss"></i></a></li>
-							<li><a href="" class="my-google"><i
-									class="fa fa-google-plus"></i></a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div id="logo-bar">
-			<div class="container">
-				<div class="row">
-					<!-- Logo / Mobile Menu -->
-					<div class="col-lg-3 col-sm-3 ">
-						<div id="resources">
-							<h1>
-								<a href="/resources/index.html"><img alt="관리자"
-									src="/resources/images/logo.png" /></a>
-							</h1>
-						</div>
-					</div>
-					<!-- Navigation
+    <header id="header">
+        <div id="top-bar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8 top-info hidden-xs">
+                        <span><i class="fa fa-phone"></i>Phone: (123) 456-7890</span>
+                        <span><i class="fa fa-envelope"></i>Email: mail@example.com</span>
+                    </div>
+                    <div class="col-sm-4 top-info">
+                        <ul>
+                            <li><a href="" class="my-tweet"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="" class="my-facebook"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="" class="my-skype"><i class="fa fa-skype"></i></a></li>
+                            <li><a href="" class="my-pint"><i class="fa fa-pinterest"></i></a></li>
+                            <li><a href="" class="my-rss"><i class="fa fa-rss"></i></a></li>
+                            <li><a href="" class="my-google"><i class="fa fa-google-plus"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="logo-bar">
+            <div class="container">
+                <div class="row">
+                    <!-- Logo / Mobile Menu -->
+                    <div  class="col-lg-3 col-sm-3 ">
+                        <div id="logo">
+                           <h1><a href="/board/adminMain">관리자WORLD</a></h1>
+                        </div>
+                    </div>
+                    <!-- Navigation
     ================================================== -->
-					<div class="col-lg-9 col-sm-9">
-						<div class="navbar navbar-default navbar-static-top"
-							role="navigation">
-							<!--  <div class="container">-->
-							<div class="navbar-header">
-								<button type="button" class="navbar-toggle"
-									data-toggle="collapse" data-target=".navbar-collapse">
-									<span class="sr-only">Toggle navigation</span> <span
-										class="icon-bar"></span> <span class="icon-bar"></span> <span
-										class="icon-bar"></span>
-								</button>
-							</div>
-							<div class="navbar-collapse collapse">
-								<ul class="nav navbar-nav">
-									<li><a href="/resources/admin/listUser.do">회원관리</a>
-										<ul class="dropdown-menu">
-											<li><a href="index.html">회원수정</a></li>
-											<li><a href="index_2.html">회원등급</a></li>
-											<li><a href="index_3.html">회원분류</a></li>
-										</ul></li>
+                    <div class="col-lg-9 col-sm-9">
+                        <div class="navbar navbar-default navbar-static-top" role="navigation">
+                            <!--  <div class="container">-->
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div>
+                            <div class="navbar-collapse collapse">
+                                <ul class="nav navbar-nav">
+                                    <li><a href="/board/personList">회원관리</a>
+                                    </li>
 
-									<li><a href="#">게시판관리(미구현)</a>
-										<ul class="dropdown-menu">
-											<li><a href="elements.html">게시판 1</a></li>
-											<li><a href="form-elements.html">게시판 2</a></li>
-											<li><a href="columns.html">게시판 3</a></li>
-										</ul></li>
+                                    <li><a href="#">주문배송 관리</a>
 
-									<li class="active"><a href="#">안전거래관리(미구현)</a>
-										<ul class="dropdown-menu">
-											<li><a href="about.html">About</a>
-												<ul class="dropdown-menu">
-													<li><a href="about.html">About Us 1</a></li>
-													<li><a href="about-2.html">About Us 2</a></li>
-												</ul></li>
-											<li><a href="services.html">Services</a></li>
-											<li class="active"><a href="faq.html">FAQ</a></li>
-											<li><a href="sidebar-right.html">Right Sidebar</a></li>
-											<li><a href="sidebar-left.html">Left Sidebar</a></li>
-											<li><a href="404-page.html">404 Page</a></li>
-										</ul></li>
+                                    </li>
 
-									<li><a href="/resources/admin/noti.do">공지사항관리</a>
-										<ul class="dropdown-menu">
-											<li><a href="#">Portfolio Classic</a>
-												<ul class="dropdown-menu">
-													<li><a href="portfolio_2.html">Portfolio 2</a></li>
-													<li><a href="portfolio_3.html">Portfolio 3</a></li>
-													<li><a href="portfolio_4.html">Portfolio 4</a></li>
-												</ul></li>
-										</ul></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
-	<!--End Header-->
+                                    <li><a href="#">게시판 관리</a>
+                                         
+                                    </li>
+
+                                    <li><a href="#">매출정산 관리</a>
+                                        
+                                    </li>
+
+                                    <li><a href="#">접속통계 관리</a>
+                                        
+                                    </li>
+                                   
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+<!--End Header-->
 	
 	<!--start wrapper-->
 	<section class="wrapper">
@@ -180,8 +142,10 @@ function delete_fn(){
 				</div>
 			</div>
 
-		<form action="/board/boardDetail" method="post">
+	<!-- 	<form action="/board/personDetail" method="post"> -->
 
+
+	
 		<table border="1" cellpadding ="0" cellspacing ="0" >
 			<tr height="50">
 				<td width="70" align="center" height="30">회원번호</td>
@@ -194,38 +158,141 @@ function delete_fn(){
 				<td width="60" align="center" height="30">회원분류</td>
 			<tr>
 		<tr>
- 			<td align="center" name="person_id" height="30">${person.person_id }</td>
-			<td align="center" height="30">${person.person_email }</td>
-			<td align="center" height="30">${person.person_name }</td>
-			<td align="center" height="30">${person.person_address }</td>
-			<td align="center" height="30">${person.person_phone }</td>
-			<td align="center" height="30">${person.person_mileage }</td>
+ 			<td align="center" height="30">${personVO.person_id }</td>
+			<td align="center" height="30">${personVO.person_email }</td>
+			<td align="center" height="30">${personVO.person_name }</td>
+			<td align="center" height="30">${personVO.person_address }</td>
+			<td align="center" height="30">${personVO.person_phone }</td>
+			<td align="center" height="30">${personVO.person_mileage }</td>
 			<td align="center" height="30">
-					<select name="person_sell_grade">
-                       <option value="U">U</option>
-                       <option value="M">M</option>
-                       <option value="D">D</option>
-               </select> <br></td>
-			<td align="center"><select name ="person_kind">
-                       <option value="A">A. 관리자</option>
-                       <option value="N">N. 일반</option>
-                       <option value="B">B. 블랙</option>
-                       <option value="R">R. 휴면</option>
+				<select id="person_sell_grade" >
+					<option value="U">U</option>	
+					<option value="M">M</option>	
+					<option value="D">D</option>	
+               </select>
+               
+   															
+               	<br>
+               </td>
+			<td align="center">
+				<select id="person_kind" >
+                       <option value="A">A</option>
+<%--                        <option value="A"<c:out value="${person_kind eq 'A'?'selected':'' }" />>A</option> --%>
+                       <option value="N">N</option>
+<%--                        <option value="N"<c:out value="${person_kind eq 'N'?'selected':'' }" />>N</option> --%>
+                       <option value="B">B</option>
+                      <%--  <option value="B"<c:out value="${person_kind eq 'B'?'selected':'' }" />>B</option> --%>
+                       <option value="R">R</option>
+                      <%--  <option value="R"<c:out value="${person_kind eq 'R'?'selected':'' }" />>R</option> --%>
                </select>
             </td>
 	</table>
-	
-	<br>
-		<%--회원삭제  --%>
-			<input type="button" value="회원삭제" onclick="delete_fn()"> 
 
+			<form role="form" action="personModify" method="post">	
+ 					<input type='hidden' name='person_id' value="${personVO.person_id }">
+  					<input type='hidden' name='person_kind' value="${personVO.person_kind }">
+ 					<input type='hidden' name='person_sell_grade' value="${personVO.person_sell_grade }"> 
+ 					<input type='hidden' name='page' value="${cri.page}">
+					<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
+					<input type='hidden' name='searchType' value="${cri.searchType}">
+					<input type='hidden' name='keyword' value="${cri.keyword}"> 
+					<button type="submit" value="정보수정" id="modifyBtn">수정</button>		
+					<button type="submit" value="회원삭제" id="removeBtn">삭제</button>	
+			</form>
+		
+			<div align="center">
+				<button type="submit" value="목록" onclick='history.back(-1); return false;'>목록</button> 
+			</div>		
+		</div>
+	</section>
 	
-		<%--회원등급/분류 변경 --%>
-			<input name="person_id" value="${person.person_id }" type="hidden"/>
-			<input name="person_sell_grade" value="${person.person_sell_grade }" type="hidden"/>
-			<input name="person_kind" value="${person.person_kind }" type="hidden" />
-			<input type="submit" value="정보수정" onclick="javascript:alert('수정 완료했습니다.');">
-		</form>
+	
+	<script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
+    <script src="/resources/js/bootstrap.min.js"></script>
+    <script src="/resources/js/jquery.easing.1.3.js"></script>
+    <script src="/resources/js/retina-1.1.0.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.cookie.js"></script> <!-- jQuery cookie -->
+    <script type="text/javascript" src="/resources/js/styleswitch.js"></script> <!-- Style Colors Switcher -->
+    <script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.smartmenus.bootstrap.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jflickrfeed.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.magnific-popup.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.isotope.min.js"></script>
+    <script type="text/javascript" src="/resources/js/swipe.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
 
+	<script type="text/javascript" src="/resources/js/upload.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+    <script src="/resources/js/main.js"></script>
+	
+		
 </body>
+<script>
+ 
+	var result = '${msg}';
+
+	if (result == 'SUCCESS') {
+	alert("처리가  완료되었습니다.");
+	location.replace(self.location);
+	}
+
+	
+	$(document).ready(function(){
+		var formObj = $("form[role='form']").serialize();
+		console.log(formObj);
+
+  	
+ 		$("#modifyBtn").on("click", function(){
+ 			
+			var person_sell_grade = $("#person_sell_grade option:selected").val();
+			var person_kind = $("#person_kind option:selected").val();
+ 
+			
+		 	var data = {
+					person_sell_grade :  person_sell_grade,
+					person_kind : person_kind
+			};  
+ 			 
+ 			alert(data.person_sell_grade);
+			alert(data.person_kind);   
+			
+			formObj.attr("data", "data");
+ 			formObj.attr("method", "post");
+			formObj.attr("action", "/board/personModify");  
+			formObj.submit();
+			 */
+			
+ 			/*  $.ajax({
+ 				type : "POST",
+ 				url : "/board/personModify",
+ 				dataType : "text",
+ 				data: JSON.stringify({
+					person_sell_grade : person_sell_grade,
+					person_kind : person_kind
+			}),
+ 				success : function(result){
+ 					console.log(result);
+ 					if(result == 'SUCCESS'){
+ 						alert("등록");
+ 					}
+ 				}
+ 			})  */
+ 			
+		/* 	
+		    formObj.attr("data", data);
+			formObj.attr("method", "post");
+			formObj.attr("action", "/board/personModify");  
+			formObj.submit();	 */		
+			
+		}); 
+	  
+		 $("#removeBtn").on("click", function(){
+			formObj.attr("method", "post");
+			formObj.attr("action", "/board/personRemove");
+			formObj.submit();
+	}); 
+});
+
+</script>
+
 </html>

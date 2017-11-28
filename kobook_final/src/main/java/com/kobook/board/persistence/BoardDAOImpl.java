@@ -32,7 +32,7 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public int boardcountPaging(SearchCriteria cri) throws Exception {
+	public int boardCountPaging(SearchCriteria cri) throws Exception {
 		return session.selectOne(namespace+".countPaging",cri);
 	}
 	
@@ -60,9 +60,30 @@ public class BoardDAOImpl implements BoardDAO {
 	public void boardUpdate(BoardVO vo) throws Exception {
 		session.update(namespace+".boardUpdate", vo);
 	}
+
+	@Override
+	public List<PersonVO> personList(SearchCriteria cri) throws Exception {
+		return session.selectList(namespace+".personList", cri, new RowBounds(cri.getPageStart(),cri.getPerPageNum()));
+	}
 	
-/*	@Override
-	public List<PersonVO> currentPerson(PersonVO vo) throws Exception {
-		return session.selectList(namespace+".currentPerson", vo);
-	}*/
+	@Override
+	public int personCount(SearchCriteria cri) throws Exception {
+		return session.selectOne(namespace +".personCount", cri);
+	}
+	
+	@Override
+	public PersonVO personRead(Integer person_id) throws Exception {
+		return session.selectOne(namespace+".personRead", person_id);
+	}
+	
+	@Override
+	public void personModify(PersonVO vo) throws Exception {
+		  session.update(namespace+".personModify", vo);
+	}
+	
+	@Override
+	public void personRemove(Integer person_id) throws Exception {
+		session.delete(namespace+".personRemove", person_id);
+	}
+	
 }

@@ -1,11 +1,14 @@
+<%-- <%@page import="kobook.book.dao.BookDAO"%> --%>
+<%-- <%@page import="kobook.book.domain.BookSearch"%>
+<%@page import="kobook.book.domain.Book"%> --%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%
-	int cur_id = Integer.parseInt((String) session.getAttribute("person_id"));
-	System.out.println("리스트 cur_id: " + cur_id); 
+	//session.setAttribute("person_id", 5);
 %>
 
 <!DOCTYPE html>
@@ -18,36 +21,24 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>Electrify Responsive Multipurpose Template</title>
+<title>공지사항</title>
 <meta name="description" content="">
 
 <!-- CSS FILES -->
- <!-- CSS FILES -->
-    <link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/resources/css/style.css">
-    <link rel="stylesheet" type="text/css" href="/resources/css/style.css" media="screen" data-name="skins">
-    <link rel="stylesheet" href="/resources/css/layout/wide.css" data-name="layout">
+<link rel="stylesheet" href="/resources/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/resources/css/style.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/style.css"
+	media="screen" data-name="skins">
+<link rel="stylesheet" href="/resources/css/layout/wide.css"
+	data-name="layout">
 
-<link rel="stylesheet" type="/resources/text/css"
+<link rel="stylesheet" type="text/css"
 	href="/resources/css/switcher.css" media="screen" />
-
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
-</head>
-<!-- <script type="text/javascript">
-alert("회원용");
-</script> -->
-
-<body class="home">
+<body>
 	<!-- 헤더 -->
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
 	<!-- /헤더 -->
-
 
 	<!--start wrapper-->
 	<section class="wrapper">
@@ -56,26 +47,24 @@ alert("회원용");
 				<div class="row">
 					<div class="col-lg-12 col-md-12 col-sm-12">
 						<div class="page_title">
-							<h2>FAQ</h2>
+							<h2>공지사항</h2>
 						</div>
 						<nav id="breadcrumbs">
 							<ul>
-								<li><a href="/resources/admin/noti.jsp">Home</a>/</li>
-								<li>Pages</li>
+								<li><a href="index.html">홈</a>/</li>
+								<li>전체검색</li>
 							</ul>
 						</nav>
 					</div>
 				</div>
 			</div>
 		</section>
-	</section>
 
 	<section class="content faq">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8"></div>
 			</div>
-
 
 			<h3>글목록보기</h3>
 
@@ -124,20 +113,27 @@ alert("회원용");
 				</c:forEach>
 			</table>
 
-<%
-	if(cur_id==1){
-%>		
-			<div class="box-footer" align="center">
+<%	
+	if(session.getAttribute("person_id") != null){
+		int cur_id = Integer.parseInt((String) session.getAttribute("person_id"));
+		if(cur_id==1){
+%>	
+			<div class="box-footer">	
 			<form role="form" action="insert" method="get">
 			 	<input type='hidden' name='board_id' value="${boardVo.board_id }">
 			 	<input type="submit" value="등록" id="insertBtn">					
 			</form>
 <%
-	}else{
+		}
+	}
+	else{
 %>
 <%
 	}
 %>
+</div>
+			</div>
+			<div class="box-footer" align="center">
 				<div class="text-center">
 					<ul class="pagination">
 
@@ -184,7 +180,6 @@ alert("회원용");
 
 				</div>
 			</div>
-		</div>
 	</section>
 
 <!--Sidebar Widget-->
@@ -202,11 +197,17 @@ alert("회원용");
 						<!-- end site search -->
 					</div>
 				</div>
-			</div>
-
+	</div>
+</section>
 
 	<!--end wrapper-->
 
+
+		<!-- 푸터 -->
+ 		 <jsp:include page="/WEB-INF/views/include/footer.jsp" />
+  	<!-- /푸터 -->
+
+	
 
 	<script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
     <script src="/resources/js/bootstrap.min.js"></script>
@@ -216,16 +217,13 @@ alert("회원용");
     <script type="text/javascript" src="/resources/js/styleswitch.js"></script> <!-- Style Colors Switcher -->
     <script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script>
     <script type="text/javascript" src="/resources/js/jquery.smartmenus.bootstrap.min.js"></script>
-    <script type="text/javascript" src="/resources/js/jflickrfeed.js"></script>
+        <script type="text/javascript" src="/resources/js/jflickrfeed.js"></script>
     <script type="text/javascript" src="/resources/js/jquery.magnific-popup.min.js"></script>
     <script type="text/javascript" src="/resources/js/jquery.isotope.min.js"></script>
     <script type="text/javascript" src="/resources/js/swipe.js"></script>
     <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
 
-	<script type="text/javascript" src="/resources/js/upload.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
     <script src="/resources/js/main.js"></script>
-
 	<script>
 		var result = '${msg}';
 
@@ -233,10 +231,9 @@ alert("회원용");
 			alert("처리가 완료되었습니다.");
 			location.replace(self.location);
 		}
-		
 	</script>
 
-	<script>
+	<script> 
 		$(document).ready(
 				function() {
 
@@ -271,7 +268,6 @@ alert("회원용");
 		});
 		
 	</script>
-
 
 
 </body>

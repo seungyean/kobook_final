@@ -7,6 +7,7 @@ import com.kobook.board.domain.BoardVO;
 import com.kobook.book.domain.SearchCriteria;
 import com.kobook.community.domain.BlackVO;
 import com.kobook.person.domain.PersonVO;
+import com.kobook.person.persistence.PersonDAO;
 
 
 public interface BoardDAO {
@@ -24,7 +25,7 @@ public interface BoardDAO {
 	public int getBno() throws Exception;
 	
 	//공지사항 페이징카운터
-	public int boardcountPaging(SearchCriteria cri)throws Exception;
+	public int boardCountPaging(SearchCriteria cri)throws Exception;
 	
 	//공지사항 조회수
 	public void boardUpdateView(Integer board_id)throws Exception;
@@ -35,8 +36,21 @@ public interface BoardDAO {
 	//공시사항 수정
 	public void boardUpdate(BoardVO vo) throws Exception;
 	
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@    관리자용       @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@	
 	
-/*	public List<PersonVO> currentPerson(PersonVO vo)throws Exception;*/
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@    관리자용(회원)       @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@	
 	
+	//회원 리스트
+	public List<PersonVO> personList(SearchCriteria cri) throws Exception;
+	
+	//회원 페이징카운터
+	public int personCount(SearchCriteria cri)throws Exception;
+	
+	//회원 디테일
+	public PersonVO personRead(Integer person_id) throws Exception;
+	
+	//회원정보 수정
+	public void personModify(PersonVO vo) throws Exception;
+	
+	//회원 삭제
+	public void personRemove(Integer person_id) throws Exception;
 }

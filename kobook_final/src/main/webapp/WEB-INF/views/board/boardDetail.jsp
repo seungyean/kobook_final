@@ -2,10 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%
+<%-- <%
 int cur_id = Integer.parseInt((String) session.getAttribute("person_id"));
 System.out.println("리스트 cur_id: " + cur_id); 
-%>
+%> --%>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -90,6 +90,8 @@ System.out.println("리스트 cur_id: " + cur_id);
 
 
 <%
+if(session.getAttribute("person_id") != null){
+	int cur_id = Integer.parseInt((String) session.getAttribute("person_id"));
 	if(cur_id==1){
 %>	
 			<div class="box-footer">			
@@ -103,6 +105,7 @@ System.out.println("리스트 cur_id: " + cur_id);
 					<button type="submit" value="수정" id="modifyBtn">수정</button>			
 			</form>
 <%
+	}
 	}else{
 %>
 <%

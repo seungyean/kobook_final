@@ -81,11 +81,50 @@
 	</update> 
 
 
-<!-- 관리자용 메인 sql문 -->
-<!-- 	<select id="currentPerson" resultType="PersonVO">
-		SELECT count(*) FROM v$session WHERE type='USER' order by PREV_EXEC_START;
-	</select> -->
+<!-- 관리자용 회원 sql문 -->
 
+	<select id="personList" resultType="PersonVO">
+    <![CDATA[
+          select 
+            *
+          from 
+            person where person_id > 0           
+      ]]>
+		 <include refid="search"></include>
+         <![CDATA[     
+          order by person_id desc
+       ]]>
+
+	</select>
+	
+	<select id="personCount" resultType="int">
+   <![CDATA[
+      select count(person_id) from person where person_id > 0         
+   ]]>      
+   
+<!--      <include refid="search"></include> -->
+   </select>
+   
+   
+   <select id="personRead" resultType="PersonVO">
+   		select * from person where person_id = #{person_id}
+   </select>
+   
+   
+    <update id="personModify" parameterType="PersonVO">
+   		update person set person_kind = #{person_kind}, person_sell_grade = #{person_sell_grade}
+   		where person_id = #{person_id}  
+   </update> 
+   
+<!-- 	<update id="personModify">
+   		update person set person_sell_grade = #{person_sell_grade}
+   		where person_id = #{person_id}  
+   </update> -->
+
+	<delete id="personRemove" parameterType="Integer">
+		delete from person where person_id = #{person_id}
+	</delete>   
+   
 </mapper>
 
 
