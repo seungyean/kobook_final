@@ -186,14 +186,17 @@ textarea {
 </div>
 </script>
 
-<script id="com-template" type="text/x-handlebars-template">
+<script id="com-template1" type="text/x-handlebars-template">
 <div class="guest uk-grid-small uk-flex-bottom uk-flex-left chat-container" uk-grid>
 	<div class="uk-width-auto">
 		<img class="uk-border-circle" width="32" height="32" src="https://getuikit.com/docs/images/avatar.jpg">
 	</div>
 	<div class="uk-width-auto">
 		<div class="uk-card uk-card-body uk-card-small uk-card-default uk-border-rounded chat-div">
-			<p class="uk-margin-remove chat-paragraph">{{chatlog_content}}</p>
+			<p class="uk-margin-remove chat-paragraph">
+</script>
+
+<script id="com-template2" type="text/x-handlebars-template">
 		</div>
 	</div>
 </div>
@@ -233,9 +236,8 @@ textarea {
 			console.log("person_id: " + person_id);
 			console.log("chatlog_speaker: " + chatlog_speaker);
 			
-			if(chatlog_content == ""){
-				
-			} else {
+			if(chatlog_content == ""){}	// 아무 내용을 입력하지 않고 전송을 누를시 빈 string이 넘어가지 않게
+			else {
 				$.ajax({
 					type:'post',
 					url:'/chat/',
@@ -270,7 +272,19 @@ textarea {
 			var html = "";
 			for(i=0; i< data.length; i++){
 				if(data[i].chatlog_speaker == 'C'){
-					html += printData(data[i], $('#com-template'));
+					
+					var dataArr = data[i].chatlog_content.split('\n');	//개행되는 문자는 '\n'으로 가름
+					console.log("arr 길이: "+dataArr.length);
+					
+					//개행이 필요한 경우 p태그가 중간에 여러개 삽입되어야 하므로 com-template을 1,2로 갈랐다
+					//그리고 샌드위치처럼 중간에 들어갈 데이터를 넣는 방식으로
+					html += printData(data[i], $('#com-template1'));
+					
+					for(j=0; j<dataArr.length; j++){
+						html += '<p class="uk-margin-remove chat-paragraph">'+ dataArr[j] + '</p>';
+					}
+					//html += '<p class="uk-margin-remove chat-paragraph">' + data[i].chatlog_content + '</p>';
+					html += printData(data[i], $('#com-template2'));
 				} else {
 					html += printData(data[i], $('#user-template'));
 				}

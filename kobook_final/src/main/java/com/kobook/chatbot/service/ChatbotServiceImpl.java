@@ -18,7 +18,6 @@ public class ChatbotServiceImpl implements ChatbotService {
 	@Override
 	public void registerLog(ChatlogVO vo) throws Exception {
 		dao.registerLog(vo);
-		
 	}
 
 	@Override

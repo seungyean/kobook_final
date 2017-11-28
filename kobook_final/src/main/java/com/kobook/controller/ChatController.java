@@ -54,10 +54,15 @@ public class ChatController {
 		return entity;
 	}
 	
+	// 사용자가 마지막에 한 대화를 가지고 와서 인식 및 처리하는 것을 관장
 	@RequestMapping(value="/chatProcess", method=RequestMethod.POST)
 	public ResponseEntity<String> chatProcess(@RequestBody ChatlogVO vo){
 	
 		ResponseEntity<String> entity = null;
+	
+		
+		// 이부분에서 대화를 인식 및 처리하는 로직을 구현하는 서비스 호출
+		
 		
 		vo.setChatlog_speaker("C");
 		if(vo.getChatlog_content().equals("난 잘생김")){
@@ -65,7 +70,7 @@ public class ChatController {
 		} else if(vo.getChatlog_content().equals("꺄륵")){
 			vo.setChatlog_content("노잼");
 		} else {
-			vo.setChatlog_content("응");
+			vo.setChatlog_content("응응\n응응응\n응응응");
 		}
 		
 		
