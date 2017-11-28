@@ -210,8 +210,16 @@ textarea {
 		var minute = dateObj.getMinutes();
 		return hour + ":" + minute;
 	});
+	
+	var printData = function(chatWindow, templateObject){
+		var template = Handlebars.compile(templateObject.html());
+		var html = template(chatWindow);
+		return html;
+	}
 
 	$(function(){
+		
+		getList("/chat/" + "<%= Integer.parseInt((String)session.getAttribute("person_id"))%>");
 	
 		$('#chatSendBtn').on('click', function(){
 			
@@ -240,7 +248,12 @@ textarea {
 						console.log("result : " + result);
 						if(result == 'SUCCESS'){
 							chatlog_contentObj.val("");
+
+							// 유저가 입력한 문장을 즉각적으로 보여주기 위해 리프레시
 							getList("/chat/" + person_id);
+							
+							// 방금 입력한 문장을 분석 및 로직처리 하기 위해
+							chatProcess(person_id, chatlog_content);
 						}
 					}
 				});
@@ -249,12 +262,6 @@ textarea {
 		});
 		
 	});
-	
-	var printData = function(chatWindow, templateObject){
-		var template = Handlebars.compile(templateObject.html());
-		var html = template(chatWindow);
-		return html;
-	}
 	
 	function getList(chatInfo){
 		
@@ -268,10 +275,31 @@ textarea {
 					html += printData(data[i], $('#user-template'));
 				}
 			}
-			$(".chat-container").remove();
-			$("#mid-container").append(html);
+			$('.chat-container').remove();
+			$('#mid-container').append(html);
+		});
+		
+	}
+	
+	function chatProcess(person_id, chatlog_content){
+		
+		$.ajax({
+			type:'post',
+			url:'/chat/chatProcess',
+			headers: { 
+			      "Content-Type": "application/json",
+			      "X-HTTP-Method-Override": "POST" },
+			dataType:'text',
+			data: JSON.stringify({person_id:person_id, chatlog_content:chatlog_content}),
+			success:function(result){
+				console.log("result : " + result);
+				if(result == 'SUCCESS'){
+					getList("/chat/" + person_id);
+				}
+			}
 		});
 	}
+	
 
 </script>
 

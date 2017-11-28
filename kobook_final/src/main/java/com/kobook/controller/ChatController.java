@@ -22,11 +22,12 @@ public class ChatController {
 	@Inject
 	private ChatbotService service;
 	
-	// 유저가 채팅창에 글을 입력하면 먼저 채팅로그에 기록됨
+	// 유저가 채팅창에 글을 입력하면 먼저 채팅로그에 등록
 	@RequestMapping(value="", method=RequestMethod.POST)
 	public ResponseEntity<String> register(@RequestBody ChatlogVO vo) {
 		
 		ResponseEntity<String> entity = null;
+		
 		try {
 			service.registerLog(vo);
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
@@ -52,5 +53,33 @@ public class ChatController {
 		}
 		return entity;
 	}
+	
+	@RequestMapping(value="/chatProcess", method=RequestMethod.POST)
+	public ResponseEntity<String> chatProcess(@RequestBody ChatlogVO vo){
+	
+		ResponseEntity<String> entity = null;
+		
+		vo.setChatlog_speaker("C");
+		if(vo.getChatlog_content().equals("난 잘생김")){
+			vo.setChatlog_content("꺼져맨");
+		} else if(vo.getChatlog_content().equals("꺄륵")){
+			vo.setChatlog_content("노잼");
+		} else {
+			vo.setChatlog_content("응");
+		}
+		
+		
+		// 유저의 가장 최근 대화에 대한 답을 채팅로그에 등록
+		try {
+			service.registerLog(vo);
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
+
 
 }

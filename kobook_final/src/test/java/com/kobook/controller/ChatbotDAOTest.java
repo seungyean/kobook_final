@@ -2,6 +2,8 @@ package com.kobook.controller;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.junit.Test;
@@ -33,5 +35,12 @@ public class ChatbotDAOTest {
 		
 		dao.registerLog(vo);
 	}*/
+	
+	@Test
+	public void listTest() throws Exception{
+		
+		int person_id = 3;
+		dao.listLog(person_id);
+	}
 
 }
