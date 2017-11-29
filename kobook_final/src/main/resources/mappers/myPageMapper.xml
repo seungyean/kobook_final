@@ -34,6 +34,7 @@
 		b.book_name,
 		p.pay_amount,
 		o.order_date
+<!-- 		TO_CHAR(o.order_date, 'YYYY-MM-DD') -->
 		FROM
 		book_order o,
 		book b,
@@ -42,6 +43,7 @@
 		AND o.book_id =
 		b.book_id
 		AND o.person_id = #{person_id}
+		ORDER  BY p.pay_id DESC
 	</select>
 
 	<!-- 찜리 -->

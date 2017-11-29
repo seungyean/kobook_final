@@ -20,6 +20,12 @@
 
     <script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+    <script id="template" type="text/x-handlebars-template">
+<div class="alert alert-danger alert-dismissable">
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            <strong>Oh snap! </strong> You message goes here.
+       		 </div>               
+</script> 
    	<script>
    
    $(function(){
@@ -36,7 +42,7 @@
    		var total_mile = $('#totalMileage').html();
    		
    		if(input_mile > total_mile ){
-   			alert("사용가능 마일리지 초과!!");
+   			$('#mileModal').modal();
    			$('#input_mile').val(0);
    		}
    		
@@ -496,7 +502,41 @@
 							        </div>
 							    </div>
 							</div>
-							
+							<!-- 모달 -->
+							<div class="modal fade" id="mileModal" tabindex="-1" role="dialog"
+								aria-labelledby="modalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">
+												<span aria-hidden="true">×</span><span class="sr-only">취소</span>
+											</button>
+											<h3 class="modal-title" id="lineModalLabel" style="text-align: center;">경고창</h3>
+										</div>
+										<div class="modal-body">
+											<!-- content goes here -->
+											<br>
+											<h3 style="text-align: center;"> 사용가능마일리지를 초과하셨습니다!!</h3>
+											<br>
+										</div>
+										<div class="modal-footer">
+											<div class="btn-group btn-group-justified" role="group"
+												aria-label="group button">
+												<div class="btn-group" role="group">
+													<button type="button" class="btn btn-default"
+														data-dismiss="modal" role="button">닫기</button>
+												</div>
+												<div class="btn-group btn-delete hidden" role="group">
+													<button type="button" id="delImage"
+														class="btn btn-default btn-hover-red" data-dismiss="modal"
+														role="button">취소</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
 							<!-- 결제 -->
 							<div class="container">
 							    <div class="row">
