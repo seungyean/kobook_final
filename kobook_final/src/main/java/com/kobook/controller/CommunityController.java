@@ -33,6 +33,7 @@ import com.kobook.book.domain.SearchCriteria;
 import com.kobook.community.domain.BlackVO;
 import com.kobook.community.domain.DonateFileVO;
 import com.kobook.community.domain.DonateVO;
+import com.kobook.community.domain.ReplyVO;
 import com.kobook.community.service.BlackService;
 import com.kobook.community.service.DonateService;
 import com.kobook.util.MediaUtils;
@@ -304,9 +305,15 @@ public class CommunityController {
 	//무료나눔 게시판 상세보기
 	@RequestMapping("donateRead")
 	public void donateRead(@RequestParam("donate_id") Integer donate_id, Model model,
-			@ModelAttribute("cri") SearchCriteria cri)throws Exception{
+			@ModelAttribute("cri") SearchCriteria cri, ReplyVO vo)throws Exception{
+		
+		//Integer person_id = vo.getPerson_id();
+		//System.out.println("person_id"+person_id);
+		//System.out.println("reply_id : "+vo.getReply_id());
 		model.addAttribute(donateService.donateRead(donate_id, true));
 		model.addAttribute("writer",donateService.donateWriter(donate_id));
+		model.addAttribute("replyList",donateService.donateReplyList(donate_id));
+		//model.addAttribute("reply_person", donateService.selectPersonName(person_id,donate_id));
 	}
 	
 	//무료나눔 글 수정 폼 이동
@@ -352,6 +359,16 @@ public class CommunityController {
 	}
 	
 	//무료나눔 댓글 등록(DB)
+	@RequestMapping(value="donateReplyRegist", method=RequestMethod.POST)
+	public String donateReplyRegist(ReplyVO vo, Model model, @ModelAttribute("cri") SearchCriteria cri) throws Exception {
+		donateService.donateReplyRegist(vo);
+		int donate_id = vo.getDonate_id();
+		
+		model.addAttribute(donateService.donateRead(donate_id, false));
+		model.addAttribute("writer",donateService.donateWriter(donate_id));
+		model.addAttribute("replyList",donateService.donateReplyList(donate_id));
+		return "/community/donateRead";
+	}
 	//
 
 }

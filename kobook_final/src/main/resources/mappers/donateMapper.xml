@@ -92,28 +92,42 @@
 			where D.donate_id = #{donate_id}
 	</select>
 	
+	<insert id="donateReplyInsert" parameterType="ReplyVO">
+		insert into reply(
+			reply_id, reply_content, reply_date, donate_id, person_id
+			<if test="secret_yn != null">, secret_yn</if>
+		)values(
+			reply_id_seq.nextval, #{reply_content}, SYSDATE, #{donate_id}, #{person_id}
+			<if test="secret_yn != null">, 'Y'</if>
+		)
+	</insert>
+
+	<update id="updateReplyCount">
+		update donate set reply_count = reply_count + #{amount}
+			where donate_id = #{donate_id}
+	</update>
+	
+	<select id="donateReplyList" resultType="ReplyVO" parameterType="int">
+		select * from reply where donate_id = #{donate_id} order by reply_date DESC
+	</select>
+	<select id="getPersonId" resultType="Integer">
+		select person_id
+		from reply
+		where reply_id = #{reply_id}
+	</select>
+	<select id="selectPersonName" resultType="string">
+		select P.PERSON_NAME from person P, reply R, donate D
+			where P.PERSON_ID = R.PERSON_ID 
+			and R.DONATE_ID=D.DONATE_ID 
+			AND R.person_id = #{person_id} 
+			and R.DONATE_ID=#{donate_id}
+	</select>
 	<!-- 
 
 	<update id="updateDonate_id" parameterType="int">
 		update donate set donate_id = donate_id-1 where donate_id > #{donate_id}
 	</update>
-	
-	<select id="selectReply_id" resultType="Integer" parameterType="DonateReply">
-		select max(reply_id) from reply
-	</select>
-	
-	<insert id="insertDonateReply" parameterType="DonateReply">
-		insert into reply(
-			reply_id, reply_content, reply_date, donate_id, person_id
-		)values(
-			#{reply_id}, #{reply_content}, SYSDATE, #{donate_id}, #{person_id}
-		)
-	</insert>
-	
-	<select id="listDonateReply" resultType="DonateReply" parameterType="int">
-		select * from reply where donate_id = #{donate_id} order by reply_date DESC
-	</select>
-	
+
 	<update id="updateDonateReply" parameterType="DonateReply">
 		update reply set reply_content=#{reply_content}
 			where reply_id = #{reply_id}

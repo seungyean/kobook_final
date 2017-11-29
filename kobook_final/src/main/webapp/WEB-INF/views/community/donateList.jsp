@@ -40,6 +40,9 @@
      	width: 500%;
      	height: 500%;
      }
+     a:HOVER {
+		color: red;
+	}
   	
     </style>
 </head>

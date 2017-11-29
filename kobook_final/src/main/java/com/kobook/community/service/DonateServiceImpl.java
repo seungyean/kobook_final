@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kobook.book.domain.SearchCriteria;
 import com.kobook.community.domain.DonateFileVO;
 import com.kobook.community.domain.DonateVO;
+import com.kobook.community.domain.ReplyVO;
 import com.kobook.community.persistence.DonateDAO;
 
 @Service
@@ -93,5 +94,23 @@ public class DonateServiceImpl implements DonateService {
 	public String donateWriter(Integer donate_id) throws Exception {
 		return dao.donateWriter(donate_id);
 	}
+
+	@Transactional
+	@Override
+	public void donateReplyRegist(ReplyVO vo) throws Exception {
+		dao.donateReplyInsert(vo);
+		dao.updateReplyCount(1, vo.getDonate_id());
+	}
+
+	@Override
+	public List<ReplyVO> donateReplyList(Integer donate_id) throws Exception {
+		return dao.donateReplyList(donate_id);
+	}
+
+	@Override
+	public String selectPersonName(Integer person_id, Integer donate_id) throws Exception {
+		return dao.selectPersonName(person_id, donate_id);
+	}
+
 
 }

@@ -1,6 +1,8 @@
 package com.kobook.community.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.kobook.book.domain.SearchCriteria;
 import com.kobook.community.domain.DonateFileVO;
 import com.kobook.community.domain.DonateVO;
+import com.kobook.community.domain.ReplyVO;
 
 @Repository
 public class DonateDAOImpl implements DonateDAO {
@@ -84,6 +87,33 @@ public class DonateDAOImpl implements DonateDAO {
 	@Override
 	public String donateWriter(Integer donate_id) throws Exception {
 		return session.selectOne(namespace+".donateWriter", donate_id);
+	}
+
+	@Override
+	public void donateReplyInsert(ReplyVO vo) throws Exception {
+		session.insert(namespace+".donateReplyInsert", vo);
+	}
+
+	@Override
+	public List<ReplyVO> donateReplyList(Integer donate_id) throws Exception {
+		return session.selectList(namespace+".donateReplyList", donate_id);
+	}
+
+	@Override
+	public String selectPersonName(Integer person_id, Integer donate_id) throws Exception {
+		Map<String, Integer> paramMap = new HashMap<String, Integer>();
+		paramMap.put("person_id", person_id);
+		paramMap.put("donate_id", donate_id);
+		return session.selectOne(namespace+".selectPersonName", paramMap);
+	}
+
+	@Override
+	public void updateReplyCount(int amount, Integer donate_id) throws Exception {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("amount", amount);
+		paramMap.put("donate_id", donate_id);
+		
+		session.update(namespace+".updateReplyCount", paramMap);
 	}
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import com.kobook.book.domain.SearchCriteria;
 import com.kobook.community.domain.DonateFileVO;
 import com.kobook.community.domain.DonateVO;
+import com.kobook.community.domain.ReplyVO;
 
 public interface DonateDAO {
 	//donateInsert
@@ -33,4 +34,12 @@ public interface DonateDAO {
 	public int donateHitCount(Integer donate_id) throws Exception;
 	//donateWriter
 	public String donateWriter(Integer donate_id) throws Exception;
+	//donateReplyInsert
+	public void donateReplyInsert(ReplyVO vo) throws Exception;
+	//donateReplyList
+	public List<ReplyVO> donateReplyList(Integer donate_id) throws Exception;
+	//selectPersonName
+	public String selectPersonName(Integer person_id, Integer donate_id) throws Exception;
+	//updateReplyCount
+	public void updateReplyCount(int amount, Integer donate_id) throws Exception;
 }

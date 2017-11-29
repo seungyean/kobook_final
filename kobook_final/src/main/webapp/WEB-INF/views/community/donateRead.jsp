@@ -42,12 +42,7 @@
      	height: 500%;
      }
   	
-    </style>   
-<script type="text/javascript">
-	function fn_update() {
-		location.href = "donateModify?donate_id=${donate.donate_id}";
-	}
-</script>
+    </style>
 </head>
 <body class="home">
 	<!-- 헤더 -->
@@ -146,10 +141,12 @@
 													<div class="comment-meta">
 														<a class="comment-date link-style1"><fmt:formatDate
 																value="${reply.reply_date}" pattern="yy-MM-dd, HH:mm" /></a>
-														<a
-															href="donateReplyUpdateForm.do?donate_id=${reply.donate_id}&reply_id=${reply.reply_id}">
-															수정</a> <a
-															href="donateReplyDelete.do?reply_id=${reply.reply_id}">삭제</a>
+														<c:if test="${reply.person_id == person_id }">
+														<a href="donateReplyModify?donate_id=${reply.donate_id}&reply_id=${reply.reply_id}">
+															수정
+														</a>
+														<a href="donateReplyRemove?reply_id=${reply.reply_id}">삭제</a>
+														</c:if>
 														<!-- 댓글의 답글(추후보강) -->
 														<!-- 		
 														<a class="comment-reply-link link-style3" href="#respond">Reply &raquo;</a>
@@ -172,14 +169,15 @@
 							</div>
 							<form action="donateReplyRegist" method="post">
 
-								<input type="hidden" name="rDonate_id"
+								<input type="hidden" name="donate_id"
 									value="${donateVO.donate_id}" />
 								<div class="comment_form">
 									<div class="row">
 										<div class="col-sm-4">
 											<input class="col-lg-4 col-md-4 form-control" type="hidden"
-												size="30" id="name" name="rperson_id" value="${person_id}"
+												size="30" id="name" name="person_id" value="${person_id}"
 												placeholder="person_id">
+												<input type="checkbox" name="secret_yn" value="secret_yn">비밀 글 설정
 										</div>
 									</div>
 								</div>
