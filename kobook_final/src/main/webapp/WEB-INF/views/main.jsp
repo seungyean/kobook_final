@@ -115,7 +115,8 @@
 		
 		
 <%-- 		<br>
-      <h2>추천도서</h2>
+       --%>
+		<h2>추천도서</h2>
 		<table border="1">
 			<tr>
 				<td>책이름</td>
@@ -125,6 +126,7 @@
 				<td>분야이름</td>
 				<td>회원ID</td>
 				<td>회원전공여부</td>
+				<td>우선순위</td>
 			</tr>	
 			<c:forEach var="f" items="${list }">
 			<tr>
@@ -135,11 +137,11 @@
 				<td>${f.favorite_name }</td>
 				<td>${f.person_id }</td>
 				<td>${f.favorite_major }</td>
+				<td>${f.favorite_rank }</td>
 
 			</tr>
 			</c:forEach>
-		</table> --%>
-		
+		</table>
 		
 		
 		<section class="super_sub_content">

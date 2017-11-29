@@ -6,18 +6,23 @@
 <mapper namespace="com.kobook.mappers.recomMapper">
 
 	<select id="getFavorite" resultType="FavoriteBookVO" parameterType="int">
-		SELECT BOOK.BOOK_NAME,BOOK.BOOK_KIND,BOOK.BOOK_ID,FAVORITE.FAVORITE_ID,FAVORITE.FAVORITE_NAME,FAVORITE.PERSON_ID,FAVORITE.FAVORITE_MAJOR
+		SELECT BOOK.BOOK_NAME,BOOK.BOOK_KIND,BOOK.BOOK_ID,FAVORITE.FAVORITE_ID,FAVORITE.FAVORITE_NAME,FAVORITE.PERSON_ID,FAVORITE.FAVORITE_MAJOR,FAVORITE.FAVORITE_RANK
 		FROM FAVORITE ,BOOK 
 		WHERE FAVORITE.PERSON_ID = #{person_id}
 		AND BOOK.BOOK_ID = FAVORITE.BOOK_ID
 	</select>
 
 	<delete id="deleteFavorite" parameterType="FavoriteVO">
-		DELETE FROM FAVORITE
+		DELETE 
+		FROM FAVORITE
 		WHERE PERSON_ID=#{person_id}
 		AND BOOK_ID=#{book_id}
 	</delete>
 
+	<select id="getRdata" resultType="RdataVO">
+		SELECT * 
+		FROM RDATA
+	</select>
 </mapper>
 
 

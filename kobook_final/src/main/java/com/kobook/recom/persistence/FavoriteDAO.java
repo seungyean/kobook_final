@@ -4,9 +4,11 @@ import java.util.List;
 
 import com.kobook.recom.domain.FavoriteBookVO;
 import com.kobook.recom.domain.FavoriteVO;
+import com.kobook.recom.domain.RdataVO;
 
 public interface FavoriteDAO {
 
 	public List<FavoriteBookVO> getFavorite(int person_id);
 	public void deleteFavorite(FavoriteVO favorite);
+	public List<RdataVO> getRdata();
 }

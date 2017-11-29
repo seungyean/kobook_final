@@ -9,11 +9,12 @@ public class FavoriteBookVO {
 	private String book_kind;
 	private int person_id;
 	private String favorite_major;
+	private double favorite_rank;
 	
 	public FavoriteBookVO(){}
-	
+
 	public FavoriteBookVO(String book_name, int book_id, int favorite_id, String favorite_name, String book_kind,
-			int person_id, String favorite_major) {
+			int person_id, String favorite_major, double favorite_rank) {
 		super();
 		this.book_name = book_name;
 		this.book_id = book_id;
@@ -22,6 +23,7 @@ public class FavoriteBookVO {
 		this.book_kind = book_kind;
 		this.person_id = person_id;
 		this.favorite_major = favorite_major;
+		this.favorite_rank = favorite_rank;
 	}
 
 	public String getBook_name() {
@@ -78,6 +80,14 @@ public class FavoriteBookVO {
 
 	public void setFavorite_major(String favorite_major) {
 		this.favorite_major = favorite_major;
+	}
+
+	public double getFavorite_rank() {
+		return favorite_rank;
+	}
+
+	public void setFavorite_rank(double favorite_rank) {
+		this.favorite_rank = favorite_rank;
 	}
 	
 	

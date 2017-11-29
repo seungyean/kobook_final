@@ -19,6 +19,7 @@ import com.kobook.board.service.BoardService;
 import com.kobook.book.domain.SearchCriteria;
 import com.kobook.recom.domain.FavoriteBookVO;
 import com.kobook.recom.domain.FavoriteVO;
+import com.kobook.recom.domain.RdataVO;
 import com.kobook.recom.service.FavoriteService;
 
 
@@ -29,7 +30,8 @@ public class RecomController {
 	@Inject
 	private FavoriteService service;
 	
-	@Inject BoardService boardService;
+	@Inject 
+	private BoardService boardService;
 	
 	@RequestMapping(value="/recom", method = RequestMethod.GET)
 	public String recommend(Model model, HttpServletRequest request) throws Exception {
@@ -45,6 +47,25 @@ public class RecomController {
 		
 		List<FavoriteBookVO> favoriteList = service.getFavorite(person_id);
 		List<BoardVO> boardList = boardService.boardListCri(cri);
+		List<RdataVO> rdataList = service.getRdata();
+		
+
+		for (int i = 0; i < favoriteList.size(); i++) {
+			//favorite_rank++ ,  favorite_major='M'확인.
+			int temp = 0;
+			if(favoriteList.get(i).getFavorite_major().equals("M")){
+				favoriteList.get(i).setFavorite_rank(favoriteList.get(i).getFavorite_rank()+20);
+				
+			}else{
+			}
+			
+			while(temp < 20){
+				if(favoriteList.get(i).getFavorite_name().equals(rdataList.get(temp).getRdata_m())){
+					favoriteList.get(i).setFavorite_rank(favoriteList.get(i).getFavorite_rank() + rdataList.get(i).getRdata_support());
+				}
+				temp++;
+			}
+		}
 		
 		request.setAttribute("list", favoriteList);
 		request.setAttribute("boardList", boardList);

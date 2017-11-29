@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kobook.recom.domain.FavoriteBookVO;
 import com.kobook.recom.domain.FavoriteVO;
+import com.kobook.recom.domain.RdataVO;
 
 @Repository
 public class FavoriteDAOImpl implements FavoriteDAO {
@@ -21,14 +22,17 @@ public class FavoriteDAOImpl implements FavoriteDAO {
 	
 	@Override
 	public List<FavoriteBookVO> getFavorite(int person_id) {
-		System.out.println("dao - getfavorite");
 		return session.selectList(namespace + ".getFavorite", person_id);
 	}
 
 	@Override
 	public void deleteFavorite(FavoriteVO favorite) {
-		System.out.println("dao - delete");
 		session.delete(namespace + ".deleteFavorite", favorite);
+	}
+
+	@Override
+	public List<RdataVO> getRdata() {
+		return session.selectList(namespace + ".getRdata");
 	}
 
 }
