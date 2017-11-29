@@ -161,7 +161,7 @@
 	values(
 		review_id_seq.nextval, #{review_content}, SYSDATE,
 		#{review_star},#{pay_id},#{review_title}
-		)
+	)
 	</insert>
 	
 	<!--리뷰 작성자  -->

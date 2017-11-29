@@ -187,8 +187,8 @@ border-radius: 4px;
 <input type="text" name="review_title" id="name" class="form-control" placeholder="리뷰제목">
 <section class='rating-widget'>
   <!-- Rating Stars Box -->
-  <div class='rating-stars text-center'>
-    <ul id='stars' name="review_star">
+  <div class='rating-stars text-center' >
+    <ul id='stars'>
       <li class='star' title='Poor' data-value='1' >
         <i class='fa fa-star fa-fw'></i>
       </li>
@@ -311,8 +311,7 @@ border-radius: 4px;
 	        msg = "We will improve ourselves. You rated this " + review_star + " stars.";
 	    }
 	    responseMessage(msg);
-	    
-	    
+ 
 	  });
 	  
 	  

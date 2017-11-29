@@ -280,15 +280,15 @@ public class BookController {
 	
 	
 	@RequestMapping(value="/bookreviewRegist",method=RequestMethod.POST)
-	public void reviewRegistPOST(@RequestParam("pay_id")int pay_id,ReviewVO review, Model model)throws Exception{
-		 System.out.println("��湲곗����");
-		 System.out.println("��: "+review.toString());
-		 
-		// review.setReview_star(review.getReview_star());
-		 //model.addAttribute("review_star",review.getReview_star());
-		 
+	public void reviewRegistPOST(@RequestParam("pay_id") int pay_id,  ReviewVO review, Model model)throws Exception{
+		 System.out.println("후기 값 넘어가ㄴ기전");
+		 System.out.println("등록전: "+review.toString());
+	
+	//	 review.setReview_star(review.getReview_star());
+		// model.addAttribute("review_star",review.getReview_star());
 	     service.reviewregist(review);
-	     System.out.println("��: "+review.toString());
+	     
+	     System.out.println("등록후: "+review.toString());
 		
 		
 	}

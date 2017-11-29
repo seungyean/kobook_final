@@ -198,7 +198,7 @@ body {
                 
                 	
 							
-				<c:if test="${bookVO.person_id==person_id}">
+				<c:if test="${bookVO.person_id!=person_id}">
 				<form action="/book/pick" method="post" name="pick">	
                      <input type="hidden" name="book_id" value="${bookVO.book_id}">
                      <input type="hidden" name = "person_id" value="${person_id}">
