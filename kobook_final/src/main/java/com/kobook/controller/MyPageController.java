@@ -155,6 +155,9 @@ public class MyPageController {
 		
 		
 		
+		model.addAttribute("mileageTotal", service.mileageTotal(person_id) );
+		model.addAttribute("mileageUse", service.mileageUse(person_id) );
+		
 		// 휴대폰 - 
 		String strPhone[] = person.getPerson_phone().split("-");
 		model.addAttribute("phone0", strPhone[0]);
@@ -173,10 +176,13 @@ public class MyPageController {
 			@RequestParam("book_id") int book_id,
 			@RequestParam("total_price2") int total_price,
 			@RequestParam("addr") String delivery_address,
-			@RequestParam("msg") String delivery_msg
+			@RequestParam("msg") String delivery_msg,
+			@RequestParam("mileageAvg2") int mileageAvg,
+			@RequestParam("input_mile2") int input_mile
 			)throws Exception{
 		System.out.println("주문등록 post~~~~~~~~~~~~~~~~~");
 		
+		// 주문등록
 		OrderVO temp = new OrderVO();
 		HttpSession session = request.getSession();
 		int person_id = Integer.parseInt((String)session.getAttribute("person_id"));
@@ -186,10 +192,12 @@ public class MyPageController {
 		System.out.println("주문등록 person_id : " + person_id);
 		System.out.println("주문등록 book_id : " + book_id);
 		
+		//결제등록
 		PayVO pay = new PayVO();
 		pay.setPay_amount(total_price);
 		System.out.println("주문등록 total_price :  " + total_price);
 		
+		// 배달등록
 		DeliveryVO deliveryVO = new DeliveryVO();
 		deliveryVO.setDelivery_address(delivery_address);
 		deliveryVO.setDelivery_msg(delivery_msg);
@@ -197,8 +205,24 @@ public class MyPageController {
 		System.out.println("주문등록 delivery_address :  " + delivery_address);
 		System.out.println("주문등록 delivery_msg :  " + delivery_msg);
 		
+		// 결제 후 마일리지 적립
+		MileageVO mileageVO = new MileageVO();
+		mileageVO.setMileage_kind('P');
+		mileageVO.setMileage_point(mileageAvg);
+		mileageVO.setPerson_id(person_id);
 		
-		service.orderRegist(temp, pay, deliveryVO);
+		
+		if (input_mile != 0) {
+			MileageVO mileageVO2 = new MileageVO();
+			mileageVO2.setMileage_kind('M');
+			mileageVO2.setMileage_point(input_mile);
+			mileageVO2.setPerson_id(person_id);
+			service.orderRegist(temp, pay, deliveryVO, mileageVO2);
+		} else{
+			service.orderRegist(temp, pay, deliveryVO, mileageVO);
+		}
+		
+		
 		
 		
 		return  "redirect:/mypage/orderSuccess";

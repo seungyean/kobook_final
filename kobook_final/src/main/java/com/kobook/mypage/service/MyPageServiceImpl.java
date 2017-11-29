@@ -60,13 +60,24 @@ public class MyPageServiceImpl implements MyPageService {
 
 	@Transactional
 	@Override
-	public void orderRegist(OrderVO orderVO, PayVO payVO, DeliveryVO deliveryVO) {
+	public void orderRegist(OrderVO orderVO, PayVO payVO, DeliveryVO deliveryVO, MileageVO mileageVO) {
+		
+		// 주문
 		dao.orderInsert(orderVO);
 		
+		// 주문 후 결제를 하고
 		int order_id = dao.maxOrderID(orderVO.getOrder_id());
 		payVO.setOrder_id(order_id);
 		dao.payInsert(payVO);
 		
+		// 주문을 하고 결제를 하면 마일리지를 적립해줌 and 마일리지를 사용하면 차감도 해줌
+		int pay_id = dao.maxPayID(payVO.getPay_id());
+		mileageVO.setPay_id(pay_id);
+		dao.mileageInsert(mileageVO);
+		
+//		dao.mileageMinus(mileageVO);
+		
+		// 주문 후 결제 후 배달 등록
 		deliveryVO.setOrder_id(order_id);
 		dao.deliveryInsert(deliveryVO);
 		
@@ -80,14 +91,20 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	@Override
-	public int mileageRegist(MileageVO vo) {
-		return dao.mileageInsert(vo);
+	public int mileageTotal(int person_id) {
+		return dao.mileageTotal(person_id);
 	}
 
 	@Override
-	public void mileageModify(int person_id, int mileage_point) {
-		dao.mileageUpdate(person_id, mileage_point);
+	public int mileageUse(int person_id) {
+		return dao.mileageUse(person_id);
 	}
+
+//	@Override
+//	public void mileageMinus(MileageVO vo) {
+//		dao.mileageMinus(vo);
+//		
+//	}
 
 	
 	

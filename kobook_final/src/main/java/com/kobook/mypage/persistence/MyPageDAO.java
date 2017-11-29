@@ -31,16 +31,22 @@ public interface MyPageDAO {
 	public void orderInsert(OrderVO vo);
 	/* max order_id */
 	public int maxOrderID(int order_id);
+	/* max pay_id */
+	public int maxPayID(int pay_id);
 	/* 배달 등록 */
 	public void deliveryInsert(DeliveryVO vo);
 	/* 결제 등록 */
 	public void payInsert(PayVO vo);
 	/* 선택한 책 */
 	public BookVO oneBook(int book_id);
-	/* 마일리지 등록 */
+	/* 마일리지 등록(적립) */
 	public int mileageInsert(MileageVO vo);
-	/* 회원의 마일리지 수정(적립) */
-	public void mileageUpdate(int person_id, int mileage_point);
+	/* 회원의 총 마일리지  조회*/
+	public int mileageTotal(int person_id);
+	/* 회원의 사용 마일리지  조회*/
+	public int mileageUse(int person_id);
+	/* 회원의 마일리지 수정(차감) */
+	public void mileageMinus(MileageVO vo);
 	
 	
 }

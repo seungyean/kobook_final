@@ -112,6 +112,13 @@
 		book_order
 	</select>
 
+	<!-- MAX pay_id -->
+	<select id="maxPayID" resultType="int">
+		select max(pay_id)
+		from
+		pay
+	</select>
+
 	<!-- 결제 등록 -->
 	<insert id="payInsert" parameterType="PayVO">
 		INSERT INTO pay
@@ -120,7 +127,8 @@
 
 	<!-- 배달 등록 -->
 	<insert id="deliveryInsert" parameterType="DeliveryVO">
-		INSERT INTO delivery (delivery_id, order_id, delivery_msg, delivery_address)
+		INSERT INTO delivery
+		(delivery_id, order_id, delivery_msg, delivery_address)
 		VALUES(delivery_id_seq.NEXTVAL,#{order_id},#{delivery_msg},#{delivery_address})
 	</insert>
 
@@ -130,13 +138,29 @@
 		VALUES(mileage_id_seq.NEXTVAL,#{mileage_kind},TO_DATE(SYSDATE,'YYYY-MM-DD'),#{mileage_point},#{pay_id},#{person_id})
 	</insert>
 
+	<!-- 회원의 적립된 총 마일리지 -->
+	<select id="mileageTotal" resultType="int">
+		select sum(mileage_point)
+		from mileage
+		where mileage_kind = 'P'
+		and person_id = #{person_id}
+	</select>
+	
+	<!-- 회원의 사용 마일리지 -->
+	<select id="mileageUse" resultType="int">
+		select sum(mileage_point)
+		from mileage
+		where mileage_kind = 'M'
+		and person_id = #{person_id}
+	</select>
+
 	<!-- 회원 마일리지 포인트 업데이트 -->
-	<update id="mileageUpdate" parameterType="MileageVO">
-		UPDATE person
-		SET
-		mileage_point = mileage_point + #{mileage_point}
-		WHERE person_id = 7;
-	</update>
+<!-- 	<update id="mileageMinus" parameterType="int"> -->
+<!-- 		UPDATE mileage -->
+<!-- 		SET -->
+<!-- 		mileage_point = mileage_point - #{mileage_point} -->
+<!-- 		WHERE person_id = #{person_id} -->
+<!-- 	</update> -->
 
 
 

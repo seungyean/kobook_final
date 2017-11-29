@@ -28,12 +28,13 @@ public interface MyPageService {
 	/* 주문자 */
 	public PersonVO orderPerson(int person_id);
 	/* 주문 등록 */
-	public void orderRegist(OrderVO orderVO, PayVO payVO, DeliveryVO deliveryVO);
-
+	public void orderRegist(OrderVO orderVO, PayVO payVO, DeliveryVO deliveryVO, MileageVO mileageVO);
 	/* 선택한 책 */
 	public BookVO oneBook(int book_id);
-	/* 마일리지 등록 */
-	public int mileageRegist(MileageVO vo);
-	/* 회원의 마일리지 수정(적립) */
-	public void mileageModify(int person_id, int mileage_point);
+	/* 회원의 마일리지 수정(차감) */
+//	public void mileageMinus(MileageVO vo);
+	/* 회원의 총 마일리지  조회*/
+	public int mileageTotal(int person_id);
+	/* 회원의 사용가능 마일리지  조회*/
+	public int mileageUse(int person_id);
 }

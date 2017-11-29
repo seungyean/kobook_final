@@ -31,13 +31,11 @@
 	   var del_price = 2000;
 	   
 	  $('#total_price').html(parseInt($('#book_price').text()) + del_price);
-	   
 	   // 마일리지 사용
 	   $("#input_mile").keyup(function() {
 		   
 		var book_price = parseInt($('#book_price').text());
    		var input_mile = parseInt($('#input_mile').val());
-   		
    		
    		$('#total_price').html($('#book_price').text() - input_mile + del_price );
    		$('#sale_price').html($('#input_mile').val());
@@ -50,10 +48,14 @@
 		   var data2 = $('#total_price').html();
 		   var data3 = $('#dpostcode').attr("placeholder")+', ' + $('#daddr1').attr("placeholder")+', ' + $('#daddr2').attr("placeholder"); 
 		   var data4 = $('#omessage').val();
+		   var data5 = $('#mileageAvg').html();
+		   var data6 = $('#input_mile').val();
 		   
 		   $('#total_price2').val(data2);
 		   $('#addr').val(data3);
 		   $('#msg').val(data4);
+		   $('#mileageAvg2').val(data5);
+		   $('#input_mile2').val(data6);
 		   $("#form1").attr("action", "/mypage/order");
 		   $("#form1").attr("method", "post");
 		   $("#form1").submit();
@@ -189,6 +191,8 @@
 							            <input type="hidden" id="total_price2" name="total_price2" value="">
 							            <input type="hidden" id="addr" name="addr" value="">
 							            <input type="hidden" id="msg" name="msg" value="">
+							            <input type="hidden" id="mileageAvg2" name="mileageAvg2" value="">
+							            <input type="hidden" id="input_mile2" name="input_mile2" value="">
 							            </form>
 							            	<table class="table table-hover">
 								                <thead>
@@ -217,11 +221,11 @@
 								                        <td class="col-sm-1 col-md-1 text-center" id="bookID" style="display:none;" >${oneBook.book_id }</td>
 								                        <td class="col-sm-1 col-md-1 text-center"><strong>1</strong></td>
 								                        <td class="col-sm-1 col-md-1 text-center">
-								                        <c:set var="avg" value="${oneBook.book_m_price }"/>
-								                        	<strong>
-								                        	${avg/100}P
-								                        	
+								                       <fmt:parseNumber var="avg" value="${oneBook.book_m_price /100}" integerOnly="true" />
+								                        	<strong id="mileageAvg">
+								                        	${avg}
 								                        	</strong>
+								                        	<strong>P</strong>
 								                        	
 								                        	</td>
 								                        
@@ -508,7 +512,7 @@
 																<td >
 																	<p>
 																		<input id="input_mile" name="input_mile" class="inputTypeText" placeholder="" size="10" value="" type="text" /> 
-																		원 (총 사용가능 적립금 : <strong class="point" id="totalMileage">${personVO.person_mileage }</strong>원)
+																		원 (총 사용가능 적립금 : <strong class="point" id="totalMileage">${mileageTotal - mileageUse }</strong>원)
 																	</p>
 																	<ul class="info">
 																		<li id="mileage_max_unlimit" class="">최대 사용금액은 제한이 없습니다.</li>

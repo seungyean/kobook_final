@@ -77,8 +77,8 @@ public class MyPageDAOImpl implements MyPageDAO {
 	}
 
 	@Override
-	public void mileageUpdate(int person_id, int mileage_point) {
-		session.update(namespace + ".mileageUpdate", person_id);
+	public void mileageMinus(MileageVO vo) {
+		session.update(namespace + ".mileageMinus", vo);
 		
 	}
 
@@ -97,6 +97,21 @@ public class MyPageDAOImpl implements MyPageDAO {
 	public void deliveryInsert(DeliveryVO vo) {
 		session.insert(namespace + ".deliveryInsert", vo);
 		
+	}
+
+	@Override
+	public int maxPayID(int pay_id) {
+		return session.selectOne(namespace + ".maxPayID", pay_id);
+	}
+
+	@Override
+	public int mileageTotal(int person_id) {
+		return session.selectOne(namespace + ".mileageTotal", person_id);
+	}
+
+	@Override
+	public int mileageUse(int person_id) {
+		return session.selectOne(namespace + ".mileageUse", person_id);
 	}
 
 

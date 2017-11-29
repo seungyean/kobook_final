@@ -83,6 +83,9 @@
    															<c:when test="${name eq 'R' }">
      												 		   <td align="center">포토리뷰에 의한 적립</td>
   															</c:when>
+  															<c:when test="${name eq 'M' }">
+     												 		   <td align="center">안심결제 마일리지 사용</td>
+  															</c:when>
   														</c:choose>
 												<td align="center">${element.MILEAGE_POINT }P</td>
 											</tr>
