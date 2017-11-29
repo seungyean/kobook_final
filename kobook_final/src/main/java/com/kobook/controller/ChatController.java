@@ -29,7 +29,7 @@ public class ChatController {
 		ResponseEntity<String> entity = null;
 		
 		try {
-			service.registerLog(vo);
+			service.chatRegister(vo);
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -46,7 +46,7 @@ public class ChatController {
 		ResponseEntity<List<ChatlogVO>> entity = null;
 		
 		try {
-			entity = new ResponseEntity<>(service.listLog(person_id), HttpStatus.OK);
+			entity = new ResponseEntity<>(service.chatList(person_id), HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -59,28 +59,20 @@ public class ChatController {
 	public ResponseEntity<String> chatProcess(@RequestBody ChatlogVO vo){
 	
 		ResponseEntity<String> entity = null;
-	
+		ChatlogVO newVo = new ChatlogVO();
 		
-		// 이부분에서 대화를 인식 및 처리하는 로직을 구현하는 서비스 호출
-		
-		
-		vo.setChatlog_speaker("C");
-		if(vo.getChatlog_content().equals("난 잘생김")){
-			vo.setChatlog_content("꺼져맨");
-		} else if(vo.getChatlog_content().equals("꺄륵")){
-			vo.setChatlog_content("노잼");
-		} else {
-			vo.setChatlog_content("응응\n응응응\n응응응");
-		}
-		
-		
-		// 유저의 가장 최근 대화에 대한 답을 채팅로그에 등록
 		try {
-			service.registerLog(vo);
+			
+			// 대화를  인식 및 처리하는 로직을 구현하는 서비스 호출
+			newVo = service.chatResponse(vo);
+			
+			// 유저의 가장 최근 대화에 대한 답을 채팅로그에 등록
+			service.chatRegister(newVo);
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
-			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		
 		return entity;

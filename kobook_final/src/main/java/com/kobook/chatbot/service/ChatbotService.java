@@ -6,7 +6,8 @@ import com.kobook.chatbot.domain.ChatlogVO;
 
 public interface ChatbotService {
 	
-	public void registerLog(ChatlogVO vo) throws Exception;
-	public List<ChatlogVO> listLog(Integer person_id) throws Exception;
+	public void chatRegister(ChatlogVO vo) throws Exception;
+	public List<ChatlogVO> chatList(Integer person_id) throws Exception;
+	public ChatlogVO chatResponse(ChatlogVO vo) throws Exception;
 
 }

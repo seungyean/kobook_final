@@ -105,7 +105,7 @@ textarea {
 	clip-path: polygon(0 70%, 0% 100%, 100% 100%);
 }
 
-.uk-scroll{
+#mid-container{
 	overflow: auto;
 	width: 500px;
 	height: 400px;
@@ -129,7 +129,7 @@ textarea {
 	<div class="uk-section">
 		<div class="uk-container uk-width-larger">			
 			<div class="uk-card uk-card-default uk-border-rounded uk-margin-large-top" id="big-container">
-				<div class="uk-card-body uk-padding-small uk-scroll" id="mid-container">
+				<div class="uk-card-body uk-padding-small" id="mid-container">
 				
 				<!-- 대화 내용 들어가는 자리 -->
 				
@@ -292,7 +292,8 @@ textarea {
 			$('.chat-container').remove();
 			$('#mid-container').append(html);
 		});
-		
+		$('body').scrollTop($('body').height());
+
 	}
 	
 	function chatProcess(person_id, chatlog_content){
