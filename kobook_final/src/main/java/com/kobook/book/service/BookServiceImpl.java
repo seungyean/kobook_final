@@ -1,5 +1,6 @@
 package com.kobook.book.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -9,9 +10,12 @@ import org.springframework.stereotype.Service;
 import com.kobook.book.domain.PickVO;
 import com.kobook.book.domain.ReviewVO;
 import com.kobook.book.domain.BookVO;
+
 import com.kobook.book.domain.PersonDTO;
 import com.kobook.book.domain.SearchCriteria;
 import com.kobook.book.persistence.BookDAO;
+import com.kobook.mypage.domain.DeliveryVO;
+import com.kobook.person.domain.PersonVO;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -136,8 +140,8 @@ public class BookServiceImpl implements BookService {
 
 
 	@Override
-	public int writeId(int person_id) throws Exception {
-		return dao.writeId(person_id);
+	public String writeName(int person_id) throws Exception {
+		return dao.writeName(person_id);
 	}
 
 
@@ -199,6 +203,33 @@ public class BookServiceImpl implements BookService {
 	}
 
 
+
+
+	@Override
+	public List<HashMap<String, String>> deliveryList(SearchCriteria cri) throws Exception {
+		return dao.deliveryList(cri);
+	}
+
+
+
+
+	@Override
+	public int countdelList() throws Exception {
+		return dao.countdelList();
+	}
+
+
+
+
+	@Override
+	public void delstateUpdate(DeliveryVO delivery) {
+		dao.delstateUpdate(delivery);
+		
+	}
+
+
+	
+	
 	
 
 	

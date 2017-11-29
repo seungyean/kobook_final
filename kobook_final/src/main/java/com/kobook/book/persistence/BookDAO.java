@@ -1,12 +1,16 @@
 package com.kobook.book.persistence;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.kobook.book.domain.PickVO;
 import com.kobook.book.domain.ReviewVO;
 import com.kobook.book.domain.BookVO;
+
 import com.kobook.book.domain.PersonDTO;
 import com.kobook.book.domain.SearchCriteria;
+import com.kobook.mypage.domain.DeliveryVO;
+import com.kobook.person.domain.PersonVO;
 
 public interface BookDAO {
 
@@ -41,7 +45,7 @@ public interface BookDAO {
 	public int getPersonIdByBookId(int book_id) throws Exception;
 	
 	//리뷰 작성자
-	public int writeId(int person_id)throws Exception;
+	public String writeName(int person_id)throws Exception;
 
 	public void reviewCreate(ReviewVO review)throws Exception;
 	
@@ -58,7 +62,13 @@ public interface BookDAO {
 	public int twostar(int person_id)throws Exception;
 	public int onestar(int person_id)throws Exception;
 	
+	//안심거래 배송리스트
+	public List<HashMap<String, String>> deliveryList(SearchCriteria cri);
 	
+	//배송리스트 카운팅
+	public int countdelList()throws Exception;
 	
+	//배송상태 업데이트
+	public void delstateUpdate(DeliveryVO delivery);
 	
 }

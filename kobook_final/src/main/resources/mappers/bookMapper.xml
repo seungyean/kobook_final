@@ -81,7 +81,7 @@
 	select count(r.review_id)
 	from pay p, book_order o, review r, book b
 	where p.ORDER_ID = o.ORDER_ID and
- 	 o.BOOK_ID = b.BOOK_ID and
+ 	o.BOOK_ID = b.BOOK_ID and
 	r.PAY_ID = p.PAY_ID and
 	b.person_id=#{person_id}
 	</select>
@@ -165,12 +165,14 @@
 	</insert>
 	
 	<!--리뷰 작성자  -->
-	<select id="writeId" resultType="Integer" >
-	select o.person_id
-	from book_order o, pay p, book b
-	where o.BOOK_ID = b.BOOK_ID
-	and p.ORDER_ID = o.ORDER_ID
-	and b.person_id=#{person_id}
+	<select id="writeName" resultType="string" >
+	 select per.person_name
+	from book_order o, pay p, person per,review r,book b
+ 	 where p.pay_id=r.pay_id
+  	and p.order_id=o.order_id
+ 	 and o.person_id=per.person_id
+ 	 and o.book_id=b.book_id
+ 	 and b.person_id=#{person_id}
 	</select>
 	
 	
@@ -186,20 +188,69 @@
 	
 	</select>
 	
-	<!--결제번호 가져오기  -->
-<!-- 	<select id="getPayId" resultType="Integer">
-	select p.pay_id 
-	from pay p, book_order o
-	where p.ORDER_ID = o.ORDER_ID
-	and p.pay_id=#{pay_id}
-	</select> -->
+	
+	<!--관리자 안심거래배송리스트  -->
+	<select id="deliveryList" resultType="hashMap" parameterType="SearchCriteria">
+	<![CDATA[
+ 	 select d.delivery_id, b.book_name, per.person_name, p.pay_amount, p.pay_date ,d.delivery_state,d.delivery_msg
+	from pay p, book b, book_order o, delivery d,person per
+	where 
+	p.order_id=o.order_id
+  	and o.ORDER_ID=d.ORDER_ID
+	and o.book_id=b.book_id
+ 	 and o.PERSON_ID=per.PERSON_ID
+	and b.book_safe_yn='Y'
+	and o.person_id=per.person_id
+	]]>
+    <include refid="delsearch"></include>
+    <![CDATA[  
+       order by d.delivery_id
+     ]]> 
+	</select>
+	
+		<!--배송리스트에서 검색  -->
+		 <sql id="delsearch">
+			<if test="searchType != null">
+				<if test="searchType == 't'.toString()">
+					and per.person_name like '%'|| #{keyword}||'%'
+				</if>
+				<if test="searchType == 'c'.toString()">
+					and b.book_name like '%'|| #{keyword}||'%'
+				</if>
+			</if>
+		</sql>
+	
+	<!--페이징처리-배송리스트  -->
+	<select id="countdelList" resultType="Integer" >
+	  select count(d.delivery_id)
+	from pay p, book b, book_order o, delivery d,person per
+	where 
+	p.order_id=o.order_id
+  	and o.ORDER_ID=d.ORDER_ID
+	and o.book_id=b.book_id
+  	and o.PERSON_ID=per.PERSON_ID
+	and b.book_safe_yn='Y'
+	and o.person_id=per.person_id
+	</select>
+	
+	<!--배송상태변경  -->
+ 	<update id="delstateUpdate" parameterType="DeliveryVO">
+	  UPDATE delivery
+      SET delivery_state = #{delivery_state}
+      WHERE delivery_id = #{delivery_id}
+	</update>
+	
+
+	
+	
 	
 
 <sql id="locationsearch">
-<if test="keyword !=null">
-and p.person_address like '%'|| #{keyword}||'%'
-</if>
+	<if test="keyword !=null">
+	and p.person_address like '%'|| #{keyword}||'%'
+	</if>
 </sql>
+
 
 	<sql id="search">
 		<if test="searchType != null">

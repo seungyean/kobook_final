@@ -229,33 +229,7 @@ body {
 				<%		
 				}
                %>
-               
-             	<%-- <c:forEach begin="1" end='<fmt:parseNumber var="test" value="${countstar/reviewcount}" integerOnly="true"/>'>
-             		<button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-               		<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-             		</button>
-             	</c:forEach>
-             	<c:forEach begin='<fmt:parseNumber var="test" value="${countstar/reviewcount}" integerOnly="true"/>+1' end="5">
-             		<button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
-               		<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-             		</button>
-             	</c:forEach> --%>
-               
-               <!-- <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-                 <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-               </button>
-               <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-                 <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-               </button>
-               <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-                 <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-               </button>
-               <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
-                 <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-               </button>
-               <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
-                 <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-               </button> -->
+
             </div>
          </div>
          <div class="col-sm-3">

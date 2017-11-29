@@ -1,12 +1,17 @@
 package com.kobook.book.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.kobook.book.domain.PickVO;
 import com.kobook.book.domain.ReviewVO;
 import com.kobook.book.domain.BookVO;
+
 import com.kobook.book.domain.PersonDTO;
 import com.kobook.book.domain.SearchCriteria;
+import com.kobook.mypage.domain.DeliveryVO;
+import com.kobook.person.domain.PersonVO;
+
 
 public interface BookService {
 
@@ -37,7 +42,7 @@ public interface BookService {
 	public int getPersonIdByBookId(int book_id) throws Exception;
 	
 	//리뷰 작성자
-	public int writeId(int person_id) throws Exception;
+	public String writeName(int person_id) throws Exception;
 	
 	public void reviewregist(ReviewVO review)throws Exception;
 	
@@ -53,5 +58,13 @@ public interface BookService {
 	public int threestar(int person_id)throws Exception;
 	public int twostar(int person_id)throws Exception;
 	public int onestar(int person_id)throws Exception;
+	
+	
+	public List<HashMap<String, String>> deliveryList(SearchCriteria cri)throws Exception;
+	
+	public int countdelList() throws Exception;
+	
+	//배송상태 업데이트
+		public void delstateUpdate(DeliveryVO delivery);
 	
 }

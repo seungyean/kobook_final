@@ -3,6 +3,8 @@ package com.kobook.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.List;import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -19,6 +21,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,6 +36,8 @@ import com.kobook.book.domain.PageMaker;
 import com.kobook.book.domain.PersonDTO;
 import com.kobook.book.domain.SearchCriteria;
 import com.kobook.book.service.BookService;
+import com.kobook.mypage.domain.DeliveryVO;
+import com.kobook.person.domain.PersonVO;
 import com.kobook.util.MediaUtils;
 import com.kobook.util.UploadFileUtils;
 
@@ -45,6 +50,60 @@ public class BookController {
 	
 	@Inject
 	private BookService service;
+	
+	
+	//관리자 페이지
+	@RequestMapping("/delivery")
+	public void deliveryList(@ModelAttribute("cri") SearchCriteria cri, Model model)throws Exception{
+		System.out.println("----------------Controller : 배송리스트 출력-----------------");
+		
+		model.addAttribute("dlist",service.deliveryList(cri));
+		System.out.println(service.deliveryList(cri).toString());
+		System.out.println("----");	
+		PageMaker pageMaker=new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(service.countdelList());
+		model.addAttribute("pageMaker",pageMaker);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/deliveryAjax", method=RequestMethod.POST)
+	public ResponseEntity<List<HashMap<String, String>>> deliveryAjaxPost(SearchCriteria cri,@RequestParam(value="d_id", required=false) int d_id, @RequestParam(value="check", required=false) char check)throws Exception{
+		System.out.println("d_id : " + d_id);
+		System.out.println("check : " + check);
+	
+/*		List<HashMap<String, String>> list = null;
+		HashMap<String, String> map = new HashMap<>();
+		list = service.deliveryList(cri);
+		
+		for(int i=0;i<list.size();i++){
+		String del_id=String.valueOf(((Map<String, String>)list.get(i)).get("d_id"));
+		}		*/
+		ResponseEntity<List<HashMap<String, String>>> entity =null;
+		
+		DeliveryVO delivery=new DeliveryVO();
+		delivery.setDelivery_id(d_id);
+		delivery.setDelivery_state(check);
+		
+		
+
+		try {
+			service.delstateUpdate(delivery);
+			entity=new ResponseEntity<List<HashMap<String,String>>>(service.deliveryList(cri), HttpStatus.OK);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		
+		System.out.println(service.deliveryList(cri));
+		
+	
+		
+		
+		
+		return entity;
+	}
 	
 	@RequestMapping(value="/bookRegist",method=RequestMethod.GET)
 	public void bookRegistGET(BookVO book, Model model)throws Exception{
@@ -141,9 +200,7 @@ public class BookController {
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(service.countPaging(cri));
 		model.addAttribute("pageMaker",pageMaker);
-		
 
-		
 	}
 	
 	
@@ -164,6 +221,9 @@ public class BookController {
 	public void read(@RequestParam("book_id")int book_id, PersonDTO person, Model model,@ModelAttribute("cri") SearchCriteria cri)throws Exception{
 		System.out.println("readCon: book_id: " + book_id);
 		model.addAttribute(service.read(book_id));
+	
+		PersonVO vo=new PersonVO();
+		vo.setPerson_name(service.writeName(service.getPersonIdByBookId(book_id)));
 		
 		//판매자정보보여주기
 		model.addAttribute("s",service.readSellPerson(service.getPersonIdByBookId(book_id)));
@@ -178,7 +238,7 @@ public class BookController {
 		model.addAttribute("reviewList", service.reviewList(service.getPersonIdByBookId(book_id), cri));
 		
 		//리뷰 작성자
-		model.addAttribute("reviewer", service.writeId(service.getPersonIdByBookId(book_id)));
+		model.addAttribute("reviewer", vo.getPerson_name());
 		
 		//5점 준 사람 수,4,3,2,1
 		model.addAttribute("fivestar",service.fivestar(service.getPersonIdByBookId(book_id)));

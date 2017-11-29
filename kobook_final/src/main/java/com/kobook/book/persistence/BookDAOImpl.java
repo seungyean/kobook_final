@@ -13,8 +13,11 @@ import org.springframework.stereotype.Repository;
 import com.kobook.book.domain.PickVO;
 import com.kobook.book.domain.ReviewVO;
 import com.kobook.book.domain.BookVO;
+
 import com.kobook.book.domain.PersonDTO;
 import com.kobook.book.domain.SearchCriteria;
+import com.kobook.mypage.domain.DeliveryVO;
+import com.kobook.person.domain.PersonVO;
 
 @Repository
 public class BookDAOImpl implements BookDAO {
@@ -126,8 +129,8 @@ public class BookDAOImpl implements BookDAO {
 
 
 	@Override
-	public int writeId(int person_id) throws Exception {
-		return session.selectOne(namespace+".writeId",person_id);
+	public String writeName(int person_id) throws Exception {
+		return session.selectOne(namespace+".writeName",person_id);
 	}
 
 
@@ -198,8 +201,35 @@ public class BookDAOImpl implements BookDAO {
 		return session.selectOne(namespace+".onestar",person_id);
 	}
 
+
+
+
+	@Override
+	public List<HashMap<String, String>> deliveryList(SearchCriteria cri){
+		return session.selectList(namespace + ".deliveryList",cri,new RowBounds(cri.getPageStart(),cri.getPerPageNum()));
+	}
+
+
+
+
+	@Override
+	public int countdelList() throws Exception {
+		return session.selectOne(namespace+".countdelList");
+	}
+
+
+
+
+	@Override
+	public void delstateUpdate(DeliveryVO delivery) {
+		session.update(namespace+".delstateUpdate",delivery);
+	}
+
+	
+	
 	
 
+	
 
 
 	
