@@ -2,11 +2,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
- 
-
 <!DOCTYPE html>
-<!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+<html class="no-js" lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,28 +16,31 @@
     <link rel="stylesheet" href="/resources/css/style.css">
     <link rel="stylesheet" type="text/css" href="/resources/css/style.css" media="screen" data-name="skins">
     <link rel="stylesheet" href="/resources/css/layout/wide.css" data-name="layout">
+    <link rel="stylesheet" type="text/css" href="/resources/css/switcher.css" media="screen" />
 
-    <link rel="stylesheet" type="text/css" href="/resources/css/switcher.css" media="screen" /></head>
     <script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-	   
-   <script>
+   	<script>
    
    $(function(){
 	   
 	   var del_price = 2000;
+	   $('#total_price').html(parseInt($('#book_price').text()) + del_price);
 	   
-	  $('#total_price').html(parseInt($('#book_price').text()) + del_price);
 	   // 마일리지 사용
 	   $("#input_mile").keyup(function() {
-		   
 		var book_price = parseInt($('#book_price').text());
    		var input_mile = parseInt($('#input_mile').val());
-   		
    		$('#total_price').html($('#book_price').text() - input_mile + del_price );
    		$('#sale_price').html($('#input_mile').val());
+   		var total_mile = $('#totalMileage').html();
+   		
+   		if(input_mile > total_mile ){
+   			alert("사용가능 마일리지 초과!!");
+   			$('#input_mile').val(0);
+   		}
+   		
 		});
-	   
 	   
 	   //결제버튼 클릭 
  	   $("#orderSuccess").click(function() {
@@ -59,16 +59,12 @@
 		   $("#form1").attr("action", "/mypage/order");
 		   $("#form1").attr("method", "post");
 		   $("#form1").submit();
-		   
-
 		});
 	   
 	   // 우편번호 api
-   $("#btn_post").on("click",function(){
-		   
+  	  $("#btn_post").on("click",function(){
 	   new daum.Postcode({
 		   oncomplete: function(data) {
-
                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
                var fullAddr = ''; // 최종 주소 변수
@@ -77,7 +73,6 @@
                // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
                    fullAddr = data.roadAddress;
-
                } else { // 사용자가 지번 주소를 선택했을 경우(J)
                    fullAddr = data.jibunAddress;
                }
@@ -107,46 +102,29 @@
 	   }); 
 	   
 	 //배송지 정보 : 새로운배송지 라디오 버튼 클릭시
-   $("#newDel").on("click",function(){
-	  
-		   $('#dname').attr("placeholder", " ");
-		   $('#dpostcode').attr("placeholder", " ");
-		   $('#daddr1').attr("placeholder", " ");
-		   $('#daddr2').attr("placeholder", " ");
-// 		   $('#dphone1_1').val().$("#sel_test1 option:selected").val();
-		   $('#dphone1_1').attr("placeholder", " ");
-		   $('#dphone1_2').attr("placeholder", " ");
-		   $('#dphone1_3').attr("placeholder", " ");
-		   
-	   }); 
+	   $("#newDel").on("click",function(){
+			   $('#dname').attr("placeholder", " ");
+			   $('#dpostcode').attr("placeholder", " ");
+			   $('#daddr1').attr("placeholder", " ");
+			   $('#daddr2').attr("placeholder", " ");
+			   $('#dphone1_1').attr("placeholder", " ");
+			   $('#dphone1_2').attr("placeholder", " ");
+			   $('#dphone1_3').attr("placeholder", " ");
+		   }); 
    
  	//배송지 정보 : 주문자 동일 라디오 버튼 클릭시
-   $("#orderDel").on("click",function(){
-	   
-	   $('#dname').attr("placeholder", $('#oname').attr("placeholder"));
-	   $('#dpostcode').attr("placeholder", $('#opostcode').attr("placeholder"));
-	   $('#daddr1').attr("placeholder", $('#oaddr1').attr("placeholder"));
-	   $('#daddr2').attr("placeholder", $('#oaddr2').attr("placeholder"));
-	   $('#dphone1_1').attr("placeholder", $('#ophone1_1').attr("placeholder"));
-	   $('#dphone1_2').attr("placeholder", $('#ophone1_2').attr("placeholder"));
-	   $('#dphone1_3').attr("placeholder", $('#ophone1_3').attr("placeholder"));
-	   
-   }); 
-   
-   
-  
-	   
-	   
-	   
-		
-	   
-	   
+	   $("#orderDel").on("click",function(){
+		   $('#dname').attr("placeholder", $('#oname').attr("placeholder"));
+		   $('#dpostcode').attr("placeholder", $('#opostcode').attr("placeholder"));
+		   $('#daddr1').attr("placeholder", $('#oaddr1').attr("placeholder"));
+		   $('#daddr2').attr("placeholder", $('#oaddr2').attr("placeholder"));
+		   $('#dphone1_1').attr("placeholder", $('#ophone1_1').attr("placeholder"));
+		   $('#dphone1_2').attr("placeholder", $('#ophone1_2').attr("placeholder"));
+		   $('#dphone1_3').attr("placeholder", $('#ophone1_3').attr("placeholder"));
+		   
+	   }); 
 	});
-
-   
-   
    </script>
-   
 </head>
 <body>
 	<!-- 헤더 -->
@@ -177,10 +155,7 @@
 				<div class="row sub_content">
 					<div class="col-lg-12 col-md-12 col-sm-12">
 						<div >
-							<h4><img src="/resources/img/order.PNG" style="width: 1000px; margin-left: 85px "></h4>
-							<br>
-							<br>
-							
+							<h4><img src="/resources/img/order.PNG" style="width: 1000px; margin-left: 85px "></h4><br><br>
 							<!-- 주문정보 -->
 							<div class="container">
 							    <div class="row">
@@ -209,7 +184,7 @@
 								                        <td class="col-sm-8 col-md-6">
 									                        <div class="media">
 									                            <a class="thumbnail pull-left" href="#"> 
-									                            	<img class="media-object" src="displayFile?fileName=${oneBook.book_img}" style="width: 72px; height: 72px;"> 
+									                            	<img class="thumbnail" alt="NO IMAGE" src="/mypage/displayFile?fileName=${oneBook.book_img}" style="width: 72px; height: 72px;">
 									                            </a>
 									                            <div class="media-body">
 									                                <h4 class="media-heading"><a href="#">&nbsp;&nbsp;${oneBook.book_name }</a></h4>
@@ -222,13 +197,9 @@
 								                        <td class="col-sm-1 col-md-1 text-center"><strong>1</strong></td>
 								                        <td class="col-sm-1 col-md-1 text-center">
 								                       <fmt:parseNumber var="avg" value="${oneBook.book_m_price /100}" integerOnly="true" />
-								                        	<strong id="mileageAvg">
-								                        	${avg}
-								                        	</strong>
+								                        	<strong id="mileageAvg">${avg}</strong>
 								                        	<strong>P</strong>
-								                        	
-								                        	</td>
-								                        
+								                        </td>
 								                        <td class="col-sm-1 col-md-1 text-center"><strong>2000원</strong></td>
 								                    </tr>
 								                </tbody>
@@ -249,12 +220,10 @@
 											<div class="boardWrite">
 												<table  summary="" class="table table-hover"  id="order">
 													<tbody class="address_form ">
-													
 														<tr>
 															<th scope="row">주문하시는 분 <img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif"alt="필수"></th>
 															<td><input id="oname" name="oname" class="inputTypeText" placeholder="${personVO.person_name}" size="15" value=""type="text" readonly="readonly"></td>
 														</tr>
-														
 														<tr>
 															<th scope="row">주소 <img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수"></th>
 															<td><input id="opostcode" name="opostcode" class="inputTypeText" placeholder="${personVO.person_postcode}" size="6" maxlength="6" readonly="readonly" value="" type="text">
@@ -266,11 +235,9 @@
 																<input id="oaddr2" name="oaddr2" class="inputTypeText" placeholder="${personVO.person_address2}" size="40" value="" type="text" readonly="readonly"> <span class="grid">나머지주소</span>
 															</td>
 														</tr>
-														
 														<tr>
 															<th scope="row">휴대전화 <img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수"></th>
 															<td>
-															
 															<c:set var="name" value="${phone0}" />
 																<select id="ophone1_1" name="ophone1_[]" >
 																	<c:choose>
@@ -511,7 +478,7 @@
 																<th scope="row" style="text-align: center;">적립금</th>
 																<td >
 																	<p>
-																		<input id="input_mile" name="input_mile" class="inputTypeText" placeholder="" size="10" value="" type="text" /> 
+																		<input id="input_mile" name="input_mile" class="inputTypeText" placeholder="" size="10" value="0" type="text" /> 
 																		원 (총 사용가능 적립금 : <strong class="point" id="totalMileage">${mileageTotal - mileageUse }</strong>원)
 																	</p>
 																	<ul class="info">
@@ -522,7 +489,6 @@
 																	</ul>
 																</td>
 															</tr>
-      														    
 													</tbody>
 												</table>
 											</div>
@@ -570,25 +536,11 @@
 									결제하기
 								</button>
 							</div>
-
-
-
-	
-
-
-
-
-
-
-
 						</div>
-							</div>
-							
-							</div>
-						</div>
+					</div>
+				</div>
+			</div>
 		</section>
-		
-	
 	
 		<section class="promo_box">
             <div class="container">
@@ -611,18 +563,10 @@
             </div>
         </section>
 	</section><!--end wrapper-->
-	
-
-
-
-	
 
 	<!-- 푸터 -->
  		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
   	<!-- /푸터 -->
-	
-	
-  	
     <script src="/resources/js/bootstrap.min.js"></script>
     <script src="/resources/js/jquery.easing.1.3.js"></script>
     <script src="/resources/js/retina-1.1.0.min.js"></script>
@@ -640,7 +584,6 @@
     <script type="text/javascript" src="/resources/js/jquery-hoverdirection.min.js"></script>
     <script type="text/javascript" src="/resources/js/jquery.matchHeight-min.js"></script>
     <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
-
     <script src="/resources/js/main.js"></script>
 
     <!-- Start Style Switcher -->

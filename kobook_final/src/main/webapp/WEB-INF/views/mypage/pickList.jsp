@@ -149,7 +149,10 @@
 													<td align="center" hidden="">${element.PICK_ID }</td>
 													<td align="center" hidden="" id="bookId">${element.BOOK_ID }</td>
 													<td align="center"><input type="checkbox"></td>
-													<td align="center">	${element.BOOK_IMG }</td>
+													<td align="center">	
+													<img class="thumbnail" alt="NO IMAGE"
+												 src="/mypage/displayFile?fileName=${element.BOOK_IMG  }" style="width: 72px; height: 72px;">
+													 </td>
 													<td>${element.BOOK_NAME }</td>
 													<td align="center">${element.BOOK_M_PRICE }</td>
 													<td align="center">

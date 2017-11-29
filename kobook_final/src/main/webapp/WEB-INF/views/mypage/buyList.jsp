@@ -82,21 +82,8 @@
 												<tr>
 												<td align="center" id="pi" data-rno = "${element.PAY_ID}">${element.PAY_ID}</td>
 													<td align="center">
-													<c:if test="${board.b_fname != null }">
-														<c:set var="head"
-															value="${fn:substring(element.BOOK_IMG, 0, fn:length(element.BOOK_IMG)-4) }"></c:set>
-														<c:set var="pattern"
-															value="${fn:substring(element.BOOK_IMG, fn:length(head) +1, fn:length(element.BOOK_IMG))}"></c:set>
-
-														<c:choose>
-															<c:when test="${pattern == 'jpg' || pattern == 'gif' }">
-																<img src="../upload/${head }_small.${pattern}">
-															</c:when>
-															<c:otherwise>
-																<c:out value="NO IMAGE"></c:out>
-															</c:otherwise>
-														</c:choose>
-													</c:if> ${element.BOOK_IMG}</td>
+													<img class="thumbnail" alt="NO IMAGE"
+												 src="/mypage/displayFile?fileName=${element.BOOK_IMG}" style="width: 72px; height: 72px;"></td>
 													<td>${element.BOOK_NAME}</td>
 													<td align="center">${element.PAY_AMOUNT}</td>
 													<td align="center">${element.ORDER_DATE}</td>
