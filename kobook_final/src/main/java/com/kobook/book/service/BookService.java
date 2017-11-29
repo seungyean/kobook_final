@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.kobook.book.domain.PickVO;
+import com.kobook.book.domain.RankingVO;
 import com.kobook.book.domain.ReviewVO;
 import com.kobook.book.domain.BookVO;
 
@@ -41,18 +42,18 @@ public interface BookService {
 	
 	public int getPersonIdByBookId(int book_id) throws Exception;
 	
-	//리뷰 작성자
+	//由щ럭 ���깆��
 	public String writeName(int person_id) throws Exception;
 	
 	public void reviewregist(ReviewVO review)throws Exception;
 	
-	//평점을 위한 리뷰갯수
+	//������ ���� 由щ럭媛���
 	public int countReview(int person_id)throws Exception;
 	
-	//평점을 위한 총별점
+	//������ ���� 珥�蹂���
 	public int countStar(int person_id)throws Exception;
 	
-	//5점,4,3,2,1,
+	//5��,4,3,2,1,
 	public int fivestar(int person_id)throws Exception;
 	public int fourstar(int person_id)throws Exception;
 	public int threestar(int person_id)throws Exception;
@@ -64,7 +65,9 @@ public interface BookService {
 	
 	public int countdelList() throws Exception;
 	
-	//배송상태 업데이트
-		public void delstateUpdate(DeliveryVO delivery);
+	//諛곗�≪���� ���곗�댄��
+		public void delstateUpdate(DeliveryVO delivery)throws Exception;
+		
+		public void registerkeyword(RankingVO ranking)throws Exception;
 	
 }

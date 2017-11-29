@@ -52,10 +52,10 @@ public class BookController {
 	private BookService service;
 	
 	
-	//관리자 페이지
+	//愿�由ъ�� ���댁�
 	@RequestMapping("/delivery")
 	public void deliveryList(@ModelAttribute("cri") SearchCriteria cri, Model model)throws Exception{
-		System.out.println("----------------Controller : 배송리스트 출력-----------------");
+		System.out.println("----------------Controller : 諛곗�〓━�ㅽ�� 異���-----------------");
 		
 		model.addAttribute("dlist",service.deliveryList(cri));
 		System.out.println(service.deliveryList(cri).toString());
@@ -141,12 +141,12 @@ public class BookController {
 	public String modifyPOST(@RequestParam("book_id")int book_id,RedirectAttributes rttr, BookVO book, @ModelAttribute("cri") SearchCriteria cri, Model model,@RequestParam("file")MultipartFile file)throws Exception{
 		
 		 String savedName=uploadFile(file.getOriginalFilename(), file.getBytes());
-		 System.out.println("¼öÁ¤Àü:"+book.toString());
+		 System.out.println("쩌철�짚�체:"+book.toString());
 	       book.setBook_img(savedName);
 		
 		 
 		service.modify(book);
-		 System.out.println("¼öÁ¤ÈÄ:"+book.toString()); 
+		 System.out.println("쩌철�짚��:"+book.toString()); 
 		rttr.addAttribute("page",cri.getPage());
 		rttr.addAttribute("perPageNum",cri.getPerPageNum());
 		//rttr.addAttribute("searchType", cri.getSearchType());
@@ -196,6 +196,7 @@ public class BookController {
 	@RequestMapping("/bookList")
 	public void list(@ModelAttribute("cri") SearchCriteria cri, Model model)throws Exception{
 		model.addAttribute("list", service.listCriteria(cri));
+	//	model.addAttribute("rankinglist", service.)
 		PageMaker pageMaker=new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(service.countPaging(cri));
@@ -225,22 +226,22 @@ public class BookController {
 		PersonVO vo=new PersonVO();
 		vo.setPerson_name(service.writeName(service.getPersonIdByBookId(book_id)));
 		
-		//판매자정보보여주기
+		//��留ㅼ����蹂대낫�ъ＜湲�
 		model.addAttribute("s",service.readSellPerson(service.getPersonIdByBookId(book_id)));
 		
-		//총별점
+		//珥�蹂���
 		model.addAttribute("countstar",service.countStar(service.getPersonIdByBookId(book_id)));
 		
-		//리뷰 갯수
+		//由щ럭 媛���
 		model.addAttribute("reviewcount",service.countReview(service.getPersonIdByBookId(book_id)));
 
-		//판매자 후기 리스트
+		//��留ㅼ�� ��湲� 由ъ�ㅽ��
 		model.addAttribute("reviewList", service.reviewList(service.getPersonIdByBookId(book_id), cri));
 		
-		//리뷰 작성자
+		//由щ럭 ���깆��
 		model.addAttribute("reviewer", vo.getPerson_name());
 		
-		//5점 준 사람 수,4,3,2,1
+		//5�� 以� �щ�� ��,4,3,2,1
 		model.addAttribute("fivestar",service.fivestar(service.getPersonIdByBookId(book_id)));
 		model.addAttribute("fourstar",service.fourstar(service.getPersonIdByBookId(book_id)));
 		model.addAttribute("threestar",service.threestar(service.getPersonIdByBookId(book_id)));
@@ -261,7 +262,7 @@ public class BookController {
 
 	@RequestMapping(value="/bookreviewRegist",method=RequestMethod.GET)
 	public void reviewRegist(Model model,@RequestParam("pay_id")int pay_id)throws Exception{
-		System.out.println("리뷰작성 전 form");
+		System.out.println("由щ럭���� �� form");
 		
 		ReviewVO reviewVO = new ReviewVO();
 		reviewVO.setPay_id(pay_id);
@@ -272,7 +273,7 @@ public class BookController {
 		model.addAttribute("review_star",reviewVO.getReview_star());*/
 		
 		
-		System.out.println("결제번호: "+reviewVO.getPay_id());
+		System.out.println("寃곗��踰���: "+reviewVO.getPay_id());
 		
 		
 	}
@@ -280,14 +281,14 @@ public class BookController {
 	
 	@RequestMapping(value="/bookreviewRegist",method=RequestMethod.POST)
 	public void reviewRegistPOST(@RequestParam("pay_id")int pay_id,ReviewVO review, Model model)throws Exception{
-		 System.out.println("후기작성");
-		 System.out.println("전: "+review.toString());
+		 System.out.println("��湲곗����");
+		 System.out.println("��: "+review.toString());
 		 
 		// review.setReview_star(review.getReview_star());
 		 //model.addAttribute("review_star",review.getReview_star());
 		 
 	     service.reviewregist(review);
-	     System.out.println("후: "+review.toString());
+	     System.out.println("��: "+review.toString());
 		
 		
 	}
@@ -304,9 +305,9 @@ public class BookController {
 }
 	@RequestMapping(value="/pick")
 	public String pick(PickVO pick, Model model)throws Exception{
-		System.out.println("PICK컨트롤러 진입");
+		System.out.println("PICK而⑦�몃·�� 吏���");
 		service.pick(pick);
-		System.out.println("pick 성공");
+		System.out.println("pick �깃났");
 		return "redirect:/book/bookList";
 	}
 	

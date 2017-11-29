@@ -11,6 +11,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kobook.book.domain.PickVO;
+import com.kobook.book.domain.RankingVO;
 import com.kobook.book.domain.ReviewVO;
 import com.kobook.book.domain.BookVO;
 
@@ -223,6 +224,15 @@ public class BookDAOImpl implements BookDAO {
 	@Override
 	public void delstateUpdate(DeliveryVO delivery) {
 		session.update(namespace+".delstateUpdate",delivery);
+	}
+
+
+
+
+	@Override
+	public void registerkeyword(RankingVO ranking) throws Exception {
+	session.insert(namespace+".registerkeyword",ranking);
+		
 	}
 
 	

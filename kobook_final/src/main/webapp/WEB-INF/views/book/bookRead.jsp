@@ -12,7 +12,11 @@
 <%
 	int countstar = (int)request.getAttribute("countstar");
 	int reviewcount = (int)request.getAttribute("reviewcount");
-	int ceil = countstar/reviewcount;
+	int ceil=0;
+
+	if(reviewcount>0){
+	 ceil=countstar/reviewcount;
+	}
 	
 %>
 <!DOCTYPE html>
@@ -211,8 +215,24 @@ body {
          <div class="col-sm-3">
             <div class="rating-block">
                <h4>Average user rating</h4>
-               <h2 class="bold padding-bottom-7"><fmt:formatNumber value="${countstar/reviewcount}" pattern=".0"/> <small>/ 5</small></h2>
                
+               
+               <c:choose>
+									<c:when test="${reviewcount<=0}">
+									<h2 class="bold padding-bottom-7">0<small>/ 5</small></h2>
+									<%
+									for(int j=0;j<5;j++)
+									{
+									%>
+									<button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+                 					<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+               					</button>
+									<%		
+									}
+					               %>
+									</c:when>
+               <c:otherwise>
+               <h2 class="bold padding-bottom-7"><fmt:formatNumber value="${countstar/reviewcount}" pattern=".0"/> <small>/ 5</small></h2>
                <%
 				for(int j=0; j<ceil; j++){
 				%>
@@ -229,7 +249,8 @@ body {
 				<%		
 				}
                %>
-
+               </c:otherwise>
+				</c:choose>
             </div>
          </div>
          <div class="col-sm-3">

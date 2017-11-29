@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.kobook.book.domain.PickVO;
+import com.kobook.book.domain.RankingVO;
 import com.kobook.book.domain.ReviewVO;
 import com.kobook.book.domain.BookVO;
 
@@ -222,10 +223,19 @@ public class BookServiceImpl implements BookService {
 
 
 	@Override
-	public void delstateUpdate(DeliveryVO delivery) {
+	public void delstateUpdate(DeliveryVO delivery)throws Exception {
 		dao.delstateUpdate(delivery);
-		
 	}
+
+
+
+
+	@Override
+	public void registerkeyword(RankingVO ranking) throws Exception {
+		dao.registerkeyword(ranking);
+	}
+	
+	
 
 
 	

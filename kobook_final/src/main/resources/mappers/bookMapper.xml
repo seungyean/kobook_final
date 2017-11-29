@@ -350,5 +350,11 @@
 		pick_id_seq.nextval, #{person_id}, #{book_id},'Y'
 		)
 	</insert>
-
+	
+	<!--검색어 insert  -->
+	<insert id="registerkeyword" parameterType="RankingVO">
+	insert into ranking(ranking_id, ranking_keyword) 
+	values(
+	ranking_id_seq.nextval, #{ranking_keyword})
+	</insert>
 </mapper>

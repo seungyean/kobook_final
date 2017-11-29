@@ -10,9 +10,6 @@
 <%
 	//session.setAttribute("person_id", 5);
 %>
-
-
-
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -25,7 +22,13 @@
 	content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>전체검색[전공]</title>
 <meta name="description" content="">
-
+<style type="text/css">
+.block {border:2px solid #d81f25; padding:0 5px; height:20px; overflow:hidden; background:#fff; width:100px; font-family:Gulim; font-size:12px;}
+.block ul,
+.block li {margin:0; padding:0; list-style:none;}
+.block li a {display:block; height:20px; line-height:20px; color:#555; text-decoration:none;}
+.block li span {padding:2px 5px; background:#d81f25; color:#fff; font-weight:bold; margin-right:3px;}
+</style>
 <!-- CSS FILES -->
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css" />
 <link rel="stylesheet" href="/resources/css/style.css">
@@ -37,6 +40,28 @@
 <link rel="stylesheet" type="text/css"
 	href="/resources/css/switcher.css" media="screen" />
 </head>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(function()
+		{
+		    var ticker = function()
+		    {
+		        setTimeout(function(){
+		            $('#ticker li:first').animate( {marginTop: '-20px'}, 400, function()
+		            {
+		                $(this).detach().appendTo('ul#ticker').removeAttr('style');
+		            });
+		            ticker();
+		        }, 3000);
+		    };
+		    ticker();
+		});
+</script>
+
+<script type="text/javascript">
+
+</script>
 <body>
 	<!-- 헤더 -->
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
@@ -120,6 +145,16 @@
 		</div>
 
 
+<div class="block">
+    <ul id="ticker">
+        <li><a href="#"><span>1</span> 김연아</a></li>
+        <li><a href="#"><span>2</span> 손연재</a></li>
+        <li><a href="#"><span>3</span> 유아니</a></li>
+        <li><a href="#"><span>4</span> 차승원</a></li>
+        <li><a href="#"><span>5</span> 전지현</a></li>
+
+    </ul>
+</div>
 
 		<section class="content portfolio small-images">
 			<form action="/book/bookRegist" method="get">
@@ -128,7 +163,7 @@
 					<!--begin portfolio filter -->
 					<ul id="filter" class="option-set clearfix">
 						<!-- <li data-filter="*" class="selected"><a href="#">All</a></li> -->
-						<li data-filter="*" class="selected"><a href="#">All</a></li>
+						<li data-filter=".*" class="selected"><a href="#">All</a></li>
 						<li data-filter=".Social"><a href="#">사회계열</a></li>
 						<li data-filter=".Law"><a href="#">법학계열</a></li>
 						<li data-filter=".Medical"><a href="#">의학계열</a></li>
@@ -146,7 +181,7 @@
 
 						<!--begin List Item -->
 						<c:forEach var="b" items="${list}">
-							<c:set var="b.book_kind" value="Social" />
+							<%-- <c:set var="b.book_kind" value="Social" /> --%>
 							<c:if test="${b.book_kind=='사회계열'}">
 								<li class="list_item col-lg-3 col-md-4 col-sm-6 Social">
 									<div class="recent-item box">
@@ -189,7 +224,7 @@
 
 						<!--begin List Item -->
 						<c:forEach var="b" items="${list}">
-							<c:set var="b.book_kind" value="Law" />
+							<%-- <c:set var="b.book_kind" value="Law" /> --%>
 							<c:if test="${b.book_kind=='법학계열'}">
 								<li class="list_item col-lg-3 col-md-4 col-sm-6 Law">
 									<div class="recent-item box">
@@ -229,7 +264,7 @@
 
 						<!--begin List Item -->
 						<c:forEach var="b" items="${list}">
-							<c:set var="b.book_kind" value="Medical" />
+							<%-- <c:set var="b.book_kind" value="Medical" /> --%>
 							<c:if test="${b.book_kind=='의학계열'}">
 								<li class="list_item col-lg-3 col-md-4 col-sm-6 Medical">
 									<div class="recent-item box">
@@ -267,7 +302,7 @@
 
 						<!--begin List Item -->
 						<c:forEach var="b" items="${list}">
-							<c:set var="b.book_kind" value="Engineering" />
+						<%-- 	<c:set var="b.book_kind" value="Engineering" /> --%>
 							<c:if test="${b.book_kind=='공학계열'}">
 								<li class="list_item col-lg-3 col-md-4 col-sm-6 Engineering">
 									<div class="recent-item box">
@@ -305,7 +340,7 @@
 
 						<!--begin List Item -->
 						<c:forEach var="b" items="${list}">
-							<c:set var="b.book_kind" value="Science" />
+							<%-- <c:set var="b.book_kind" value="Science" /> --%>
 							<c:if test="${b.book_kind=='자연계열'}">
 								<li class="list_item col-lg-3 col-md-4 col-sm-6 Science">
 									<div class="recent-item box">
@@ -343,7 +378,7 @@
 
 						<!--begin List Item -->
 						<c:forEach var="b" items="${list}">
-							<c:set var="b.book_kind" value="Art" />
+							<%-- <c:set var="b.book_kind" value="Art" /> --%>
 							<c:if test="${b.book_kind=='예체능계열'}">
 								<li class="list_item col-lg-3 col-md-4 col-sm-6 Art">
 									<div class="recent-item box">
@@ -381,7 +416,7 @@
 
 						<!--begin List Item -->
 						<c:forEach var="b" items="${list}">
-							<c:set var="b.book_kind" value="Language" />
+							<%-- <c:set var="b.book_kind" value="Language" /> --%>
 							<c:if test="${b.book_kind=='어문학계열'}">
 								<li class="list_item col-lg-3 col-md-4 col-sm-6 Language">
 									<div class="recent-item box">
@@ -513,6 +548,8 @@
 										+ $("select option:selected").val()
 										+ "&keyword="
 										+ $('#keywordInput').val();
+										
+								
 
 							});
 
