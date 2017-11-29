@@ -181,7 +181,7 @@ textarea {
 		</div>
 	</div>
 	<div class="uk-width-auto">
-		<img class="uk-border-circle" width="32" height="32" src="https://getuikit.com/docs/images/avatar.jpg">
+		<img class="uk-border-circle" width="32" height="32" src="/resources/img/user.png">
 	</div>
 </div>
 </script>
@@ -189,7 +189,7 @@ textarea {
 <script id="com-template1" type="text/x-handlebars-template">
 <div class="guest uk-grid-small uk-flex-bottom uk-flex-left chat-container" uk-grid>
 	<div class="uk-width-auto">
-		<img class="uk-border-circle" width="32" height="32" src="https://getuikit.com/docs/images/avatar.jpg">
+		<img class="uk-border-circle" width="32" height="32" src="/resources/img/counselor.png">
 	</div>
 	<div class="uk-width-auto">
 		<div class="uk-card uk-card-body uk-card-small uk-card-default uk-border-rounded chat-div">
