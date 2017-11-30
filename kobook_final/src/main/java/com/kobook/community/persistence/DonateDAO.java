@@ -47,7 +47,9 @@ public interface DonateDAO {
 	//replyDelete
 	public void replyDelete(Integer reply_id) throws Exception;
 	//replyDeleteAll
-	public void replyDeleteAll(Integer donte_id) throws Exception;
+	public void replyDeleteAll(Integer donate_id) throws Exception;
 	//getDonateId
 	public Integer getDonateId(Integer reply_id) throws Exception;
+	//replyCount
+	public int replyCount(Integer donate_id) throws Exception;
 }

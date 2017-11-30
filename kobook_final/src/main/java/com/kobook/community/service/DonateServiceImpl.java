@@ -85,7 +85,13 @@ public class DonateServiceImpl implements DonateService {
 
 	@Transactional
 	@Override
-	public void donateRemove(Integer donate_id) throws Exception {
+	public void donateRemove(Integer donate_id) throws Exception {		
+		int replyCnt = dao.replyCount(donate_id);
+		
+		if(replyCnt > 0) {
+			dao.replyDeleteAll(donate_id);
+		}
+
 		dao.donateDeleteAttach(donate_id);
 		dao.donateDelete(donate_id);
 	}
@@ -126,8 +132,8 @@ public class DonateServiceImpl implements DonateService {
 	}
 
 	@Override
-	public void replyRemoveAll(Integer donte_id) throws Exception {
-		dao.replyDeleteAll(donte_id);
+	public void replyRemoveAll(Integer donate_id) throws Exception {
+		dao.replyDeleteAll(donate_id);
 	}
 
 

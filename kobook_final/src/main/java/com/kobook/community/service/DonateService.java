@@ -20,5 +20,5 @@ public interface DonateService {
 	public String selectPersonName(Integer person_id, Integer donate_id) throws Exception;
 	public void replyModify(ReplyVO vo) throws Exception;
 	public void replyRemove(Integer reply_id) throws Exception;
-	public void replyRemoveAll(Integer donte_id) throws Exception;
+	public void replyRemoveAll(Integer donate_id) throws Exception;
 }

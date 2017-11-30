@@ -154,6 +154,10 @@
 	<select id="getDonateId" parameterType="int" resultType="int"> 
 		SELECT donate_id FROM reply WHERE reply_id = #{reply_id}
 	</select>
+	
+	<select id="replyCount" resultType="int">
+		SELECT count(*) FROM reply WHERE donate_id=#{donate_id}
+	</select>
 
 	<!-- 
 

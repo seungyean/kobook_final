@@ -127,13 +127,18 @@ public class DonateDAOImpl implements DonateDAO {
 	}
 
 	@Override
-	public void replyDeleteAll(Integer donte_id) throws Exception {
-		session.delete(namespace+".replyDeleteAll", donte_id);
+	public void replyDeleteAll(Integer donate_id) throws Exception {
+		session.delete(namespace+".replyDeleteAll", donate_id);
 	}
 
 	@Override
 	public Integer getDonateId(Integer reply_id) throws Exception {
 		return session.selectOne(namespace+".getDonateId", reply_id);
+	}
+
+	@Override
+	public int replyCount(Integer donate_id) throws Exception {
+		return session.selectOne(namespace+".replyCount", donate_id);
 	}
 
 }
