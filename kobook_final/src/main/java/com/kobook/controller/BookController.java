@@ -30,6 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kobook.book.domain.PickVO;
+import com.kobook.book.domain.RankingVO;
 import com.kobook.book.domain.ReviewVO;
 import com.kobook.book.domain.BookVO;
 import com.kobook.book.domain.PageMaker;
@@ -37,6 +38,7 @@ import com.kobook.book.domain.PersonDTO;
 import com.kobook.book.domain.SearchCriteria;
 import com.kobook.book.service.BookService;
 import com.kobook.mypage.domain.DeliveryVO;
+import com.kobook.mypage.domain.MileageVO;
 import com.kobook.person.domain.PersonVO;
 import com.kobook.util.MediaUtils;
 import com.kobook.util.UploadFileUtils;
@@ -193,9 +195,38 @@ public class BookController {
     }
     
 
-	@RequestMapping("/bookList")
+    @RequestMapping("/bookList")
 	public void list(@ModelAttribute("cri") SearchCriteria cri, Model model)throws Exception{
-		model.addAttribute("list", service.listCriteria(cri));
+		
+    	RankingVO ranking=new RankingVO();
+    	ranking.setRanking_keyword(cri.getKeyword());
+    	System.out.println("검색내용:"+cri.getKeyword());
+    	//service.rankingList();
+    	
+    	if(cri.getKeyword()==null){
+    		service.listCriteria(cri);
+    		
+    	}
+    	else{
+    		service.registerkeyword(ranking);
+
+    	}
+    	
+    
+    	
+    	model.addAttribute("list", service.listCriteria(cri));
+    	model.addAttribute("rankingList", service.rankingList());
+    	
+    	System.out.println("rankinglist"+service.rankingList());
+	
+		
+		
+		
+
+		
+		
+		
+		
 	//	model.addAttribute("rankinglist", service.)
 		PageMaker pageMaker=new PageMaker();
 		pageMaker.setCri(cri);
@@ -204,6 +235,30 @@ public class BookController {
 
 	}
 	
+	
+	
+	
+	/*@RequestMapping(value="/bookList" , method=RequestMethod.POST)
+	public void listPOST(@ModelAttribute("cri") SearchCriteria cri, Model model,@RequestParam("key_word")String key_word)throws Exception{
+		RankingVO ranking=new RankingVO();
+		//ranking.setRanking_keyword(key_word);
+		model.addAttribute("list", service.listCriteria(cri, ranking));
+		
+		//RankingVO ranking=new RankingVO();
+		
+		//service.registerkeyword(ranking);
+		
+		
+	//	model.addAttribute("rankinglist", service.)
+		PageMaker pageMaker=new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(service.countPaging(cri));
+		model.addAttribute("pageMaker",pageMaker);
+
+	}*/
+	
+
+
 	
 	
 	@RequestMapping("/booklocationList")
@@ -284,7 +339,7 @@ public class BookController {
 		 System.out.println("후기 값 넘어가ㄴ기전");
 		 System.out.println("등록전: "+review.toString());
 	
-	//	 review.setReview_star(review.getReview_star());
+		 //review.setReview_star(review.getReview_star());
 		// model.addAttribute("review_star",review.getReview_star());
 	     service.reviewregist(review);
 	     

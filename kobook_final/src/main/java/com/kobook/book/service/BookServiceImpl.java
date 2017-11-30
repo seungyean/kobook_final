@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kobook.book.domain.PickVO;
 import com.kobook.book.domain.RankingVO;
@@ -47,6 +48,7 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public List<BookVO> listCriteria(SearchCriteria cri) throws Exception {
+		//검색 된거 보여줌
 		return dao.listCriteria(cri);
 	}
 
@@ -233,9 +235,23 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public void registerkeyword(RankingVO ranking) throws Exception {
 		dao.registerkeyword(ranking);
+		
+	}
+
+
+
+
+	@Override
+	public List<RankingVO> rankingList() throws Exception {
+		return dao.rankingList();
 	}
 	
 	
+
+	
+
+
+
 
 
 	

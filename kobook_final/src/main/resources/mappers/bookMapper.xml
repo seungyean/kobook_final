@@ -357,4 +357,19 @@
 	values(
 	ranking_id_seq.nextval, #{ranking_keyword})
 	</insert>
+	
+	<!--인기검색어5개 list  -->
+	<select id="rankingList" resultType="RankingVO">
+	<![CDATA[     
+    select *
+	from
+	(select ranking_keyword
+	from ranking
+	group by ranking_keyword
+	order by count(ranking_keyword) desc)
+	where ROWNUM<=3
+      ]]>
+	</select>
+	
+	
 </mapper>

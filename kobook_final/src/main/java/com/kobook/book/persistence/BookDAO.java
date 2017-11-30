@@ -73,4 +73,6 @@ public interface BookDAO {
 	public void delstateUpdate(DeliveryVO delivery)throws Exception;
 	
 	public void registerkeyword(RankingVO ranking)throws Exception;
+	
+	public List<RankingVO> rankingList() throws Exception;
 }

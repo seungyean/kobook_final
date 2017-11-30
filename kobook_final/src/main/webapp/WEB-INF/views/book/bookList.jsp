@@ -23,7 +23,7 @@
 <title>전체검색[전공]</title>
 <meta name="description" content="">
 <style type="text/css">
-.block {border:2px solid #d81f25; padding:0 5px; height:20px; overflow:hidden; background:#fff; width:100px; font-family:Gulim; font-size:12px;}
+.block {border:2px solid #d81f25; padding:0 5px; height:26px; overflow:hidden; background:#fff; width:220px; font-family:Gulim; font-size:17px; margin-left: 600px; margin-top: 10px;}
 .block ul,
 .block li {margin:0; padding:0; list-style:none;}
 .block li a {display:block; height:20px; line-height:20px; color:#555; text-decoration:none;}
@@ -59,9 +59,6 @@ $(function()
 		});
 </script>
 
-<script type="text/javascript">
-
-</script>
 <body>
 	<!-- 헤더 -->
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
@@ -89,6 +86,7 @@ $(function()
 
 		<div class='box-body' align="center">
 
+		<!-- <form action="/book/ranking" method="post"> -->
 			<select name="searchType">
 
 				<option value="n"
@@ -114,12 +112,14 @@ $(function()
 					제목 + 내용 + 해시태그</option>
 			</select> 
 			<input type="text" name="keyword" id="keywordInput"
-				value='${cri.keyword }' placeholder="Enter Search keywords..."
+				value='${cri.keyword}' placeholder="Enter Search keywords..."
 				size="25">
+				
+			
 			<button id='searchBtn' class="btn-default">
 				<i class="fa fa-search"></i>
 			</button>
-
+			<!-- </form> -->
 
 
 			<select id="sortType">
@@ -147,12 +147,18 @@ $(function()
 
 <div class="block">
     <ul id="ticker">
-        <li><a href="#"><span>1</span> 김연아</a></li>
-        <li><a href="#"><span>2</span> 손연재</a></li>
-        <li><a href="#"><span>3</span> 유아니</a></li>
-        <li><a href="#"><span>4</span> 차승원</a></li>
-        <li><a href="#"><span>5</span> 전지현</a></li>
+    
+    <c:forEach var="rl" items="${rankingList}" varStatus="status">
+        <li><a href="#"><span><c:out value="${status.count}"/></span> ${rl.ranking_keyword}</a></li>
 
+        
+ <%--        <c:forEach var = "i" begin = "1" end = "5">
+         Item <c:out value = "${i}"/><p>
+      </c:forEach> --%>
+        
+        
+        
+		</c:forEach>
     </ul>
 </div>
 
@@ -549,7 +555,6 @@ $(function()
 										+ "&keyword="
 										+ $('#keywordInput').val();
 										
-								
 
 							});
 

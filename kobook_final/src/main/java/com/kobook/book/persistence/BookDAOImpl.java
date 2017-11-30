@@ -235,6 +235,16 @@ public class BookDAOImpl implements BookDAO {
 		
 	}
 
+
+
+
+	@Override
+	public List<RankingVO> rankingList() throws Exception {
+		return session.selectList(namespace+".rankingList");
+	}
+	
+	
+
 	
 	
 	
