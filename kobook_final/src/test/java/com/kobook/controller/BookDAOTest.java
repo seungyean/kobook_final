@@ -27,7 +27,8 @@ public class BookDAOTest {
 		
 		SearchCriteria cri=new SearchCriteria();
 		cri.setKeyword("aaa");
-	//	dao.registerkeyword(cri.getKeyword());
+		dao.registerkeyword(cri);
+		System.out.println(cri.getKeyword());
 	
 	
 	}

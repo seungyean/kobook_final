@@ -85,7 +85,7 @@ $(function()
 		</section>
 
 		<div class='box-body' align="center">
-<!-- 		<form action="/book/rankingRegist" method="post" name="rankingForm" > -->
+		<form action="/book/rankingRegist" method="post" name="rankingForm" > 
 
 			<select name="searchType">
 				<option value="n"
@@ -133,7 +133,7 @@ $(function()
 					<c:out value="${cri.sortType eq 'b'?'selected':''}"/>>
 					책상태순</option>
 			</select> --%>
-			<!-- </form> -->
+			</form> 
 		</div>
 
 
@@ -559,15 +559,6 @@ $(function()
 
 		}); */
 		
-	</script>
-	
-	<script type="text/javascript">
-	$('#searchBtn').on(
-			"click",
-			function(event) {
-				var key_word=$('#keywordInput').attr("data-rno");
-				console.log("키워드: "+key_word);
-			});
 	</script>
 	<!-- Start Style Switcher -->
 	<div class="switcher"></div>

@@ -72,7 +72,7 @@ public interface BookDAO {
 	//諛곗�≪���� ���곗�댄��
 	public void delstateUpdate(DeliveryVO delivery)throws Exception;
 	
-	public void registerkeyword(RankingVO ranking)throws Exception;
+	public void registerkeyword(SearchCriteria cri)throws Exception;
 	
 	public List<RankingVO> rankingList() throws Exception;
 	

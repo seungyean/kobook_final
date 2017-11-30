@@ -233,8 +233,8 @@ public class BookServiceImpl implements BookService {
 
 
 	@Override
-	public void registerkeyword(RankingVO ranking) throws Exception {
-		dao.registerkeyword(ranking);
+	public void registerkeyword(SearchCriteria cri) throws Exception {
+		dao.registerkeyword(cri);
 		
 	}
 

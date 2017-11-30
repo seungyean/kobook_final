@@ -208,13 +208,29 @@ public class BookController {
         //검색값 있을때,없을때 다보여줘야함(책리스트, 인기검색어리스트,)
     	model.addAttribute("list", service.listCriteria(cri));
     	model.addAttribute("rankingList", service.rankingList());
-    	
-
-		
 	}
     
  
+    @RequestMapping(value="/rankingRegist",method=RequestMethod.POST)
+	public String rankingRegistPOST(@ModelAttribute("cri") SearchCriteria cri,Model model,RedirectAttributes rttr)throws Exception{
+    	System.out.println(cri.getKeyword());
+    	RankingVO ranking=new RankingVO();
+    	ranking.setRanking_keyword(cri.getKeyword());
+    	service.registerkeyword(cri);
+    	System.out.println("등록된값: "+ranking.getRanking_keyword());
+    	
+    	rttr.addAttribute("page", cri.getPage());
+        rttr.addAttribute("perPageNum", cri.getPerPageNum());
+        rttr.addAttribute("searchType", cri.getSearchType());
+        rttr.addAttribute("keyword", cri.getKeyword());
 
+    	
+    	return "redirect:/book/bookList";
+	
+    }
+
+    
+    
 	
 	@RequestMapping("/booklocationList")
 	public void locationlist(@ModelAttribute("cri") SearchCriteria cri, Model model)throws Exception{

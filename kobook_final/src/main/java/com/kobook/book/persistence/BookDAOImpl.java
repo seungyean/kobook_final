@@ -219,8 +219,8 @@ public class BookDAOImpl implements BookDAO {
 
 
 	@Override
-	public void registerkeyword(RankingVO ranking) throws Exception {
-	session.insert(namespace+".registerkeyword",ranking);
+	public void registerkeyword(SearchCriteria cri) throws Exception {
+	session.insert(namespace+".registerkeyword",cri);
 		
 	}
 

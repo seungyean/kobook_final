@@ -371,10 +371,10 @@
 	</insert>
 	
 	<!--검색어 insert  -->
-	<insert id="registerkeyword" parameterType="RankingVO">
+	<insert id="registerkeyword" parameterType="SearchCriteria">
 	insert into ranking(ranking_id, ranking_keyword) 
 	values(
-	ranking_id_seq.nextval, #{ranking_keyword})
+	ranking_id_seq.nextval, #{keyword})
 	</insert>
 	
 	<!--인기검색어5개 list  -->
