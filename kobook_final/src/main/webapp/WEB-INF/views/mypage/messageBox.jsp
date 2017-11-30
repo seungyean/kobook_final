@@ -1,28 +1,30 @@
-<%@ page import="com.kobook.mypage.domain.*" %>
-<%@ page import="com.kobook.mypage.persistence.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+ 
+
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>판매내역</title>
+	<title>쪽지보관함</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-    <!-- CSS FILES -->
+     <!-- CSS FILES -->
     <link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/resources/css/style.css">
     <link rel="stylesheet" type="text/css" href="/resources/css/style.css" media="screen" data-name="skins">
     <link rel="stylesheet" href="/resources/css/layout/wide.css" data-name="layout">
 
     <link rel="stylesheet" type="text/css" href="/resources/css/switcher.css" media="screen" />
-</head>
+    </head>
 <body>
 	<!-- 헤더 -->
- 		 <jsp:include page="/WEB-INF/views/include/header.jsp" />
+ 		  <jsp:include page="/WEB-INF/views/include/header.jsp" />
   	<!-- /헤더 -->
 	
 	<!--start wrapper-->
@@ -32,13 +34,13 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <div class="page_title">
-                            <h2>판매 내역</h2>
+                            <h2>쪽지보관함</h2>
                         </div>
                         <nav id="breadcrumbs">
                             <ul>
                                 <li><a href="index.html">홈</a>/</li>
                                 <li>마이페이지 /</li>
-                                <li>판매내역</li>
+                                <li>쪽지보관함</li>
                             </ul>
                         </nav>
                     </div>
@@ -51,74 +53,55 @@
 				<div class="row sub_content">
 					<div class="col-lg-12 col-md-12 col-sm-12">
 						<div class="dividerHeading">
-							<h4><span>판매내역 리스트</span></h4>
 							<br>
 							<br>
 							<c:choose>
-									<c:when test="${empty sellList }">
+									<c:when test="${empty receivedMsgTotal }">
 
 									<div class="media-body">
 										<div class="well" style="margin-left: 50px;">
-											<h2 align="center">판매 상품이 존재하지 않습니다.</h2>
+											<h2 align="center">쪽지가 존재하지 않습니다.</h2>
 										</div>
 									</div>
 									</c:when>
 									<c:otherwise>
-										<form action="sellStateUpdate" method="post">
-										<input type="submit" value="변경" class="btn-default" style="margin-left: 1050px">
-										<br>
-										<br>
+										<!-- <form> -->
 									<table class="table table-hover">
 										<thead>
 											<tr>
 												<td align="center">No</td>
-												<td align="center">이미지</td>
-												<td>책 제목</td>
-												<td align="center">등록날짜</td>
-												<td align="center">가격</td>
-												<td align="center">판매상태 변경</td>
-												<td align="center">현재상태</td>
+												<td align="center">보낸이</td>
+												<td align="center">내용</td>
+												<td align="center">상태</td>
+												<td align="center"></td>
+												<td></td>
 											</tr>
 										</thead>
+										
 										<tbody>
-										<c:forEach var="bookSellList" items="${sellList }" >
-											<tr>
-												<td align="center">${bookSellList.book_id }</td>
+											<c:forEach var="element" items="${receivedMsgTotal}" varStatus="s">
+												<tr>
+												<td align="center">${element.message_id}</td>
+<%-- 												<td align="center">${element.MESSAGE_ID}</td> --%>
+												<td align="center">${element.person_id}</td>
+												<td align="center">${element.message_content}</td>
 												<td align="center">
-													<img class="thumbnail" alt="NO IMAGE"
-												 src="/mypage/displayFile?fileName=${bookSellList.book_img}" style="width: 72px; height: 72px;"></td>
-												<td>${bookSellList.book_name  }</td>
-												<td align="center">${bookSellList.book_date  }</td>
-												<td align="center">${bookSellList.book_m_price }</td>
-												<td align="center">
-													<c:set var="name" value="${bookSellList.book_sell_state}" />
+												<c:set var="name" value="${element.message_hit}" />
 														<c:choose>
-   															<c:when test="${name eq 'I' }">
-      														    <input type="radio" name="${bookSellList.book_id}" value="I" checked>판매중 &nbsp;&nbsp;
-																<input type="radio" name="${bookSellList.book_id}" value="C">판매완료 &nbsp;&nbsp;
+   															<c:when test="${element.message_hit eq '0' }">
+      														    안읽음
    															</c:when>
-   															<c:when test="${name eq 'C' }">
-     												 		    <input type="radio" name="${bookSellList.book_id}" value="I">판매중 &nbsp;&nbsp;
-																<input type="radio" name="${bookSellList.book_id}" value="C" checked>판매완료 &nbsp;&nbsp;
+   															<c:when test="${element.message_hit eq '1' }">
+     														   	읽음
   															</c:when>
   														</c:choose>
 												</td>
-												<td align="center">
-												<c:set var="name" value="${bookSellList.book_sell_state}" />
-												<c:choose>
-   													<c:when test="${bookSellList.book_sell_state eq 'I' }">
-      												    판매중
-   													</c:when>
-   													<c:when test="${bookSellList.book_sell_state eq 'C' }">
-     												   판매완료
-  													</c:when>
-  												</c:choose>
-												</td>
-											</tr>
-										</c:forEach>
+												<td align="center"><input  type="button" value="답장보내기"  class="btn-default" style="color: white;"></td>
+												</tr>
+									</c:forEach>
 										</tbody>
 										</table>
-								</form>
+									<!-- </form> -->
 									</c:otherwise>
 								</c:choose>
 						</div>
@@ -126,8 +109,8 @@
 				</div>
 			</div>
 		</section>
-        
-        
+		
+		
         <section class="promo_box">
             <div class="container">
                 <div class="row">
@@ -151,18 +134,18 @@
 	</section><!--end wrapper-->
 
 	<!-- 푸터 -->
- 		 <jsp:include page="/WEB-INF/views/include/footer.jsp" />
+ 	 <jsp:include page="/WEB-INF/views/include/footer.jsp" />
   	<!-- /푸터 -->
 	
 	
 
-    <script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
+   <script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
     <script src="/resources/js/bootstrap.min.js"></script>
     <script src="/resources/js/jquery.easing.1.3.js"></script>
     <script src="/resources/js/retina-1.1.0.min.js"></script>
     <script type="text/javascript" src="/resources/js/jquery.cookie.js"></script> <!-- jQuery cookie -->
     <script type="text/javascript" src="/resources/js/styleswitch.js"></script> <!-- Style Colors Switcher -->
-    <script src="resources/js/jquery.fractionslider.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/resources/js/jquery.fractionslider.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script>
     <script type="text/javascript" src="/resources/js/jquery.smartmenus.bootstrap.min.js"></script>
     <script type="text/javascript" src="/resources/js/owl.carousel.min.js"></script>
@@ -175,15 +158,31 @@
     <script type="text/javascript" src="/resources/js/jquery.matchHeight-min.js"></script>
     <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
 
-    <script src="resources/js/main.js"></script>
-
+    <script src="/resources/js/main.js"></script>
+	<script type="text/javascript">
+	
+	
+	$(function(){
+		$(".btn-default").on("click",function(event){
+			event.preventDefault();
+			console.log($(this).val());
+			
+	 		
+window.name = "mainPage";
+window.open("/message/messageSend","messagePage", "width=630, height=300, menubar=yes, statebar=yes, scrollbar=yes");
+	
+document.session_id.action = "/message/messageSend";
+document.session_id.target = "messagePage";
+document.session_id.submit;
+			
+		});
+	});
+	
+	
+		
+</script>
     <!-- Start Style Switcher -->
     <div class="switcher"></div>
     <!-- End Style Switcher -->
 </body>
-
-<script>
-	
-
-</script>
 </html>

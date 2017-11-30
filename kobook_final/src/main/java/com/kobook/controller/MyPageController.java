@@ -27,6 +27,7 @@ import com.kobook.alarm.domain.AlarmVO;
 import com.kobook.alarm.service.AlarmService;
 import com.kobook.book.domain.BookVO;
 import com.kobook.book.service.BookService;
+import com.kobook.message.domain.MessageVO;
 import com.kobook.mypage.domain.DeliveryVO;
 import com.kobook.mypage.domain.MileageVO;
 import com.kobook.mypage.domain.OrderVO;
@@ -34,6 +35,8 @@ import com.kobook.mypage.domain.PayVO;
 import com.kobook.mypage.service.MyPageService;
 import com.kobook.person.domain.PersonVO;
 import com.kobook.util.MediaUtils;
+
+import oracle.net.aso.s;
 
 @Controller
 @RequestMapping("/mypage/*")
@@ -284,6 +287,30 @@ public class MyPageController {
 	public void orderSuccess(HttpServletRequest request, Model model) {
 		System.out.println("----------------Controller : 주문완료 -----------------");
 		
+		
+		
+	}
+	
+	/* 쪽지보관함 */
+	@RequestMapping(value = "/messageBox", method = RequestMethod.GET)
+	public void messageBox(HttpServletRequest request, Model model) {
+		System.out.println("----------------Controller : 쪽지보관함 -----------------");
+		HttpSession session = request.getSession();
+		int person_id = Integer.parseInt((String)session.getAttribute("person_id"));
+		System.out.println(person_id);
+		
+		
+		
+		List<MessageVO>list = service.receivedMsgTotal(person_id);
+		
+		for (MessageVO messageVO : list) {
+			System.out.println(messageVO.toString());
+		}
+		
+//		MessageVO vo = new MessageVO();
+//		vo.setReceiver_id(person_id);
+//		System.out.println(vo);
+		model.addAttribute("receivedMsgTotal", service.receivedMsgTotal(person_id));
 		
 		
 	}

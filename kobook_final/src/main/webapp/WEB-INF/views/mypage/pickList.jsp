@@ -22,70 +22,43 @@
 
     <link rel="stylesheet" type="text/css" href="/resources/css/switcher.css" media="screen" /></head>
 	<script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
-    
-    
-    <script type="text/javascript">
-    
 
-    $(function(){
-    	
-//     	var sum_mileage = ${sumMileage};
-    	var pick_id = "";
-    	var book_name = "";
-    	var book_m_price = "";
-    	var pay_amount = "";
-    	var total_pick_id = "";
-    	
-    	/* $(".btn-default").click(function() {
-    		var pick_id = $('#pick_id').val();
-    		var book_id = $('#bookId').html();
-    		console.log(book_id);
-            location.href="/mypage/order?book_id="+book_id;
+
+<script type="text/javascript">
+	$(function() {
+
+		var pick_id = "";
+		var book_name = "";
+		var book_m_price = "";
+		var pay_amount = "";
+		var total_pick_id = "";
+
+		// 찜 삭제 버튼 
+		$(".btn-danger").click(
+				function() {
+					var pick_id = $(this).parent().parent().find('td:first')
+							.text().trim();
+					location.href = "/mypage/pickStateUpdate?pick_id="
+							+ pick_id;
+				});
+
+		// 주문 버튼 
+		$(".btn-default").click(
+				function() {
+					var pick_id = $(this).parent().parent().find('td:first')
+							.text().trim();
+					var book_id = $('#bookId').html();
+					console.log(book_id);
+					location.href = "/mypage/order?book_id="+book_id+"&pick_id="+pick_id;
+				});
+
+		$("#use_mileage").keyup(function() {
+			var use_mileage = $('#use_mileage').val();
+			$('#total_price').val(book_m_price - use_mileage);
 		});
-    	 */
-    	// 결제창 모달 
-    	/*  $(".btn-default").click(function(){
-     		pick_id = $(this).parent().parent().find('td:first').text().trim();
-     		
-     		$('#pick_id').val(pick_id);
-     		//total_pick_id = pick_id;
-     		//alert(total_pick_id);
-     		
-     		book_name = $(this).parent().parent().find('td:eq(2)').text().trim();
-     		$('#book_name').val(book_name);
-     		
-    		book_m_price = $(this).parent().parent().find('td:eq(4)').text().trim();
-    		$('#book_m_price').val(book_m_price);
-    		
-    		$('#sum_mileage').val(sum_mileage);
-            $('#payModal').modal();
-         }); */
-    	 
-    	// 찜 삭제 버튼 
-    	 $(".btn-danger").click(function(){
-    		var pick_id = $(this).parent().parent().find('td:first').text().trim();
-            location.href="/mypage/pickStateUpdate?pick_id=" + pick_id;
-         });
-    	
-    	// 주문 버튼 
-    	 $("#order").click(function(){
-    		var pick_id = $(this).parent().parent().find('td:first').text().trim();
-    		var book_id = $('#bookId').html();
-    		console.log(book_id);
-            location.href="/mypage/order?book_id="+book_id;
-         });
-    	
-    	$("#use_mileage").keyup(function() {
-    		var use_mileage = $('#use_mileage').val();
-    		$('#total_price').val(book_m_price - use_mileage);
-		});
-    	
-    	
-    
-    	 
-    });
-    </script>
-    
+	});
+</script>
+
 </head>
 <body>
 	<!-- 헤더 -->
@@ -167,9 +140,8 @@
   														</c:choose>
 													</td>
 													<td>
-													<input type="button" value="삭제" class="btn-danger" id="del" >
-													<input type="button" value="결제" class="btn-default" id="popPay">
-													<input type="button" value="주문" class="btn-default" id="order">
+													<input type="button" value="삭제" class="btn btn-danger" id="del" style="color: white;" >
+													<input type="button" value="주문" class="btn btn-default" id="order" style="color: white;">
 													</td>
 												</tr>
 											</c:forEach>
@@ -184,61 +156,6 @@
 			</div>
 		</section>
 		
-		<!-- 모달 -->
-	<div class="modal fade" id="payModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">
-						<span aria-hidden="true">×</span><span class="sr-only">취소</span>
-					</button>
-					<h3 class="modal-title" id="lineModalLabel">결제창</h3>
-				</div>
-				<div class="modal-body">
-					<!-- content goes here -->
-					<form>
-						<div class="form-group">
-							<label>- 결제상품  </label>
-							<input type="text" name="text" size="20" style="width:100%; border: 0;" id="book_name"> 
-						</div>
-						<div class="form-group">
-							<label >- 결제금액  </label> 
-							<input type="text" name="text" size="20" style="width:100%; border: 0;" id="book_m_price"> 
-						</div>
-						<div class="form-group">
-							<label >- 마일리지  </label> 
-							<input type="text" name="text" size="20" style="width:100%; border: 0;" id="sum_mileage"> 
-						</div>
-						<div class="form-group">
-							<label>- 사용 마일리지 </label>
-							<input type="text" name="text" size="20" style="width:100%; border: 0;" id="use_mileage"class="form-control" placeholder="사용할 적립금액을 입력하세요"> 
-						</div>
-						<div class="form-group">
-							<h3>- 총 결제 금액 </h3>
-							<input type="text" name="text" size="20" style="width:100%; border: 0;" id="total_price"  class="form-control"> 
-							<input type="hidden" name="text" id="pick_id" class="form-control"> 
-							
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-			<div class="btn-group btn-group-justified" role="group" aria-label="group button">
-				<div class="btn-group" role="group">
-					<button type="button" class="btn btn-default" data-dismiss="modal"  role="button">취소</button>
-				</div>
-				<div class="btn-group btn-delete hidden" role="group">
-					<button type="button" id="delImage" class="btn btn-default btn-hover-red" data-dismiss="modal"  role="button">취소</button>
-				</div>
-				<div class="btn-group" role="group">
-					<button type="button" id="pay_success" class="btn btn-default btn-hover-green" data-action="save" role="button">결제</button>
-				</div>
-			</div>
-		</div>
-			</div>
-		</div>
-	</div>
-	
-	
 		<section class="promo_box">
             <div class="container">
                 <div class="row">
@@ -260,11 +177,6 @@
             </div>
         </section>
 	</section><!--end wrapper-->
-	
-
-
-
-	
 
 	<!-- 푸터 -->
  		<jsp:include page="/WEB-INF/views/include/footer.jsp" />

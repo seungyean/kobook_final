@@ -9,6 +9,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kobook.book.domain.BookVO;
+import com.kobook.message.DTO.MessageDTO;
+import com.kobook.message.domain.MessageVO;
 import com.kobook.mypage.domain.DeliveryVO;
 import com.kobook.mypage.domain.MileageVO;
 import com.kobook.mypage.domain.OrderVO;
@@ -112,6 +114,11 @@ public class MyPageDAOImpl implements MyPageDAO {
 	@Override
 	public int mileageUse(int person_id) {
 		return session.selectOne(namespace + ".mileageUse", person_id);
+	}
+
+	@Override
+	public List<MessageVO> receivedMsgTotal(int receiver_id) {
+		return  session.selectList(namespace + ".receivedMsgTotal", receiver_id);
 	}
 
 

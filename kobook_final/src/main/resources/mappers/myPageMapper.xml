@@ -34,16 +34,18 @@
 		b.book_name,
 		p.pay_amount,
 		o.order_date
-<!-- 		TO_CHAR(o.order_date, 'YYYY-MM-DD') -->
+		<!-- TO_CHAR(o.order_date, 'YYYY-MM-DD') -->
 		FROM
 		book_order o,
 		book b,
 		pay p
 		WHERE o.order_id = p.order_id
-		AND o.book_id =
+		AND
+		o.book_id =
 		b.book_id
 		AND o.person_id = #{person_id}
-		ORDER  BY p.pay_id DESC
+		ORDER BY p.pay_id
+		DESC
 	</select>
 
 	<!-- 찜리 -->
@@ -92,10 +94,8 @@
 
 	<!-- 주문내역 -->
 	<select id="oneBook" resultType="BookVO">
-		select * from book where book_id = #{book_id}
-		<!-- SELECT b.book_img, b.book_name, b.book_m_price, b.book_publish FROM 
-			book b, person p, book_order o WHERE b.book_id = o.book_id AND o.person_id 
-			= p.person_id AND o.person_id = #{person_id} -->
+		select * from book where book_id
+		= #{book_id}
 	</select>
 
 	<!-- 주문등록 -->
@@ -147,7 +147,7 @@
 		where mileage_kind = 'P'
 		and person_id = #{person_id}
 	</select>
-	
+
 	<!-- 회원의 사용 마일리지 -->
 	<select id="mileageUse" resultType="int">
 		select sum(mileage_point)
@@ -156,13 +156,19 @@
 		and person_id = #{person_id}
 	</select>
 
-	<!-- 회원 마일리지 포인트 업데이트 -->
-<!-- 	<update id="mileageMinus" parameterType="int"> -->
-<!-- 		UPDATE mileage -->
-<!-- 		SET -->
-<!-- 		mileage_point = mileage_point - #{mileage_point} -->
-<!-- 		WHERE person_id = #{person_id} -->
-<!-- 	</update> -->
+	<!-- 회원이 받은 쪽지 -->
+	<select id="receivedMsgTotal" resultType="MessageVO">
+		SELECT message_id,
+		person_id,
+		message_content,
+		message_hit
+		FROM message
+		WHERE receiver_id = #{person_id}
+		ORDER BY message_id
+		DESC
+	</select>
+
+
 
 
 

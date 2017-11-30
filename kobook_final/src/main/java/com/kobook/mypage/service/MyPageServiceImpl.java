@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kobook.book.domain.BookVO;
+import com.kobook.message.DTO.MessageDTO;
+import com.kobook.message.domain.MessageVO;
 import com.kobook.mypage.domain.DeliveryVO;
 import com.kobook.mypage.domain.MileageVO;
 import com.kobook.mypage.domain.OrderVO;
@@ -75,14 +77,9 @@ public class MyPageServiceImpl implements MyPageService {
 		mileageVO.setPay_id(pay_id);
 		dao.mileageInsert(mileageVO);
 		
-//		dao.mileageMinus(mileageVO);
-		
 		// 주문 후 결제 후 배달 등록
 		deliveryVO.setOrder_id(order_id);
 		dao.deliveryInsert(deliveryVO);
-		
-		
-		
 	}
 
 	@Override
@@ -100,11 +97,11 @@ public class MyPageServiceImpl implements MyPageService {
 		return dao.mileageUse(person_id);
 	}
 
-//	@Override
-//	public void mileageMinus(MileageVO vo) {
-//		dao.mileageMinus(vo);
-//		
-//	}
+	@Override
+	public List<MessageVO> receivedMsgTotal(int receiver_id) {
+		return dao.receivedMsgTotal(receiver_id);
+	}
+
 
 	
 	

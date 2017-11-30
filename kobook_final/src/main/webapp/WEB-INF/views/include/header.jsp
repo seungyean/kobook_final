@@ -172,7 +172,7 @@
                                                     <li><a href="/mypage/pickList">찜 리스트</a></li>
                                                     <li><a href="/mypage/buyList">구매내역</a></li>
                                                     <li><a href="/mypage/sellList">판매내역</a></li>
-                                                    <li><a href="/mypage/reviewList">판매후기</a></li>
+                                                    <li><a href="/mypage/messageBox">쪽지보관함</a></li>
                                         </ul>
                                     </li>
                                 </ul>

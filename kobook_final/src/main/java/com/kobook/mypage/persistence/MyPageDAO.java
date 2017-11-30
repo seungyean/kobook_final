@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.kobook.book.domain.BookVO;
+import com.kobook.message.domain.MessageVO;
 import com.kobook.mypage.domain.DeliveryVO;
 import com.kobook.mypage.domain.MileageVO;
 import com.kobook.mypage.domain.OrderVO;
@@ -47,6 +48,8 @@ public interface MyPageDAO {
 	public int mileageUse(int person_id);
 	/* 회원의 마일리지 수정(차감) */
 	public void mileageMinus(MileageVO vo);
+	/* 회원이 받은 쪽지 조회 */
+	public List<MessageVO> receivedMsgTotal (int receiver_id);
 	
 	
 }

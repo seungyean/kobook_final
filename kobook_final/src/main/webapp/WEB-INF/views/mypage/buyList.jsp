@@ -95,8 +95,8 @@ fieldset {
 										<img src="http://img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date5.gif" alt="6개월" />
 										</a>
 										</span> 
-										<input id="history_start_date" name="history_start_date" class="fText" readonly="readonly" size="10" value="2017-08-31" type="text" /> 
-										~ <input id="history_end_date" name="history_end_date" class="fText" readonly="readonly" size="10" value="2017-11-29" type="text" />
+										<input type="date" id="start_date" name="start_date" value=""> 
+										~ <input type="date" id="end_date" name="end_date" value=""> 
 										<input alt="조회" id="order_search_btn" type="image" src="//img.echosting.cafe24.com/skin/admin_ko_KR/myshop/btn_search.gif" />
 									</fieldset>
 									<br>
@@ -105,8 +105,8 @@ fieldset {
 										<li>&nbsp;&nbsp;- 주문번호를 클릭하시면 해당 주문에 대한 상세내역을 확인하실 수 있습니다.</li>
 									</ul>
 								</div>
-								<input id="mode" name="mode" value="" type="hidden" /> <input
-									id="term" name="term" value="" type="hidden" />
+<!-- 								<input id="mode" name="mode" value="" type="hidden" />  -->
+<!-- 								<input id="term" name="term" value="" type="hidden" /> -->
 							</form>
 							</div>
 							<br>
@@ -225,34 +225,7 @@ fieldset {
 	
 	
 		function fn_review(){
-
-			/* $('input[name=pi]').each(function(index){
-				var i = $('input[name=pi]').eq(index).attr('etc');
-				window.open("/book/bookreviewRegist?pay_id="+i,"","width=400,height=300,left=550,top=200");
-			}) */
-			/* var i = $(this).attr("name").val(); */
-			
-	/* 		var i = $(this).parent().parent().child.val(); */
-	
-			//var i=$('input[name=pi]').html();
-	 		//var i=$('#pi').html();
-	 				
-	 			
-	 				//var i = $(this).parent().parent().find("td:eq(0)").attr("data-rno");
 	 				window.open("/book/bookreviewRegist?pay_id="+i,"","width=400,height=300,left=550,top=200");
-	 			
-	 			
-	 			
-	 			/* $('#pi').each(function(index){
-	 				
-	 				var i=$(this).html();
-		 			window.open("/book/bookreviewRegist?pay_id="+i,"","width=400,height=300,left=550,top=200");
-	 				
-	 			})
-	 			 */
-	 		
-			
-			
 		}
 </script>
     <!-- Start Style Switcher -->

@@ -44,6 +44,7 @@
    		if(input_mile > total_mile ){
    			$('#mileModal').modal();
    			$('#input_mile').val(0);
+   			$('#sale_price').html(0);
    		}
    		
 		});

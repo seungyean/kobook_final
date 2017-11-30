@@ -65,14 +65,7 @@ public class MyPageTest {
 //	 주문 인서트
 	@Test
 	public void Test(){
-		OrderVO vo = new OrderVO();
-		vo.setPerson_id(7);
-		vo.setBook_id(3);
-		dao.orderInsert(vo);
-		
-		PayVO pay = new PayVO();
-		pay.setOrder_id(vo.getOrder_id());
-		pay.setPay_amount(2000);
-		dao.payInsert(pay);
+		dao.receivedMsgTotal(7);
+		System.out.println(dao.receivedMsgTotal(7));
 	}
 }
