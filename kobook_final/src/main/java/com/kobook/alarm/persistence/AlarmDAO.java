@@ -7,8 +7,9 @@ import com.kobook.alarm.domain.AlarmVO;
 public interface AlarmDAO {
 	public List<AlarmVO> alarmListDAO(int person_id);
 	public void alarmUpdate(int person_id);
+	public void alarmUpdateByMessage(int person_id);
 	public int alarmCount(int person_id);
 	
-	//¾Ë¶÷ ¸®½ºÆ® ROW ³»¿ë
+	//ï¿½Ë¶ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ROW ï¿½ï¿½ï¿½ï¿½
 	public void alarmMessage(AlarmVO alarmVO);
 }

@@ -16,6 +16,10 @@
 		UPDATE ALARM SET HIT_YN='Y' WHERE PERSON_ID=#{person_id}
 	</update>
 	
+	<update id="alarmUpdateByMessage" parameterType="int">
+		UPDATE ALARM SET HIT_YN='Y' WHERE PERSON_ID=#{person_id} and alarm_kind='Message'
+	</update>
+	
 	
 	<select id="alarmCount" resultType="int" parameterType="int">
 		SELECT COUNT(*)

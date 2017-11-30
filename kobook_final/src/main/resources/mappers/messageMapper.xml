@@ -13,6 +13,7 @@
 		)		
 	</insert>
 	
+	<!-- 쪽지 보관함 보기 -->
 	<select id="getList" resultType="MessageVO" parameterType="Integer">
 		select message_id, message_date, message_content, message_hit, person_id, receiver_id
 		from message
@@ -20,11 +21,13 @@
 		order by message_date desc
 	</select>
 	
+	<!-- 새로온 쪽지 보기 -->
 	<select id="getNewList" resultType="MessageVO" parameterType="Integer">
 		select message_id, message_date, message_content, message_hit, person_id, receiver_id
 		from message
 		where message_hit = 0 and receiver_id = #{receiver_id}
 		order by message_date desc
 	</select>
+
 	
 </mapper>

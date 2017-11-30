@@ -114,36 +114,48 @@ public class ChatbotServiceImpl implements ChatbotService {
 
 	@Override
 	public String manageMessage(String text, int person_id) throws Exception {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yy-MM-dd");
+		/*SimpleDateFormat dateFormat = new SimpleDateFormat("yy-MM-dd");
+		dateFormat.format(m.getMessage_date();*/
 		
 		String newText = "";
 		List<MessageVO> list = null;
 		
-		
-		newText += "(최신의 쪽지가 상단에 표시됩니다)\n\n";
-		newText += "&nbsp;보낸 사람 &nbsp;&nbsp;&nbsp; 내용 &nbsp;&nbsp;&nbsp; 보낸날짜";
-		
 		if(text.contains("새") || text.contains("새로운") || text.contains("새로온") || text.contains("새로 온")){		// 새 쪽지 보여줘
-			if(messageDao.newMessageList(person_id) != null){
+			if(messageDao.newMessageList(person_id).size() != 0){	// 리스트의 크기가 0이라는 것은 검색된 메시지가 없다는 뜻
 				list = messageDao.newMessageList(person_id);
+				newText += "(최신의 쪽지가 상단에 표시됩니다)<hr/>";
+				newText += "<b>&nbsp;보낸 사람 &nbsp;&nbsp;&nbsp; 내용 </b>";
 				
 				for(MessageVO m : list){
-					newText += "\n" + "* " + personDao.findPersonName(m.getPerson_id()) + "&nbsp; &nbsp; &nbsp;" + m.getMessage_content() + "&nbsp; &nbsp; &nbsp;" + dateFormat.format(m.getMessage_date());
-				}	
+					newText += "* " + personDao.findPersonName(m.getPerson_id()) + "&nbsp; &nbsp; &nbsp;" + m.getMessage_content();
+				}
+				
+				// 쪽지를 조회함과 동시에 쪽지 알림도 0으로 됨 
+				alarmDao.alarmUpdateByMessage(person_id);
+				
+			} else {
+				newText += "\n새로운 쪽지가 없습니다.";
 			}
 			
 		} else if(text.contains("보관함") || text.contains("쪽지함")){	// 내 쪽지함 보여줘
-			if(messageDao.messageList(person_id) != null){
+			if(messageDao.messageList(person_id).size() != 0){	// 리스트의 크기가 0이라는 것은 검색된 메시지가 없다는 뜻
 				list = messageDao.messageList(person_id);
+				newText += "(최신의 쪽지가 상단에 표시됩니다)<hr/>";
+				newText += "<b>&nbsp;보낸 사람 &nbsp;&nbsp;&nbsp; 내용 </b>";
 				
 				for(MessageVO m : list){
-					newText += "\n" + "* " + personDao.findPersonName(m.getPerson_id()) + "&nbsp; &nbsp; &nbsp;" + m.getMessage_content() + "&nbsp; &nbsp; &nbsp;" + dateFormat.format(m.getMessage_date());
+					newText += "\n" + "* " + personDao.findPersonName(m.getPerson_id()) + "&nbsp; &nbsp; &nbsp;" + m.getMessage_content();
 				}
+				
+				newText +="<hr/>더보고 싶으면 \n <a href='#'>쪽지보관함으로 이동 </a>";
+				
+				// 쪽지를 조회함과 동시에 쪽지 알림도 0으로 됨 
+				alarmDao.alarmUpdateByMessage(person_id);
+				
+			} else {
+				newText += "\n쪽지함에 쪽지가 없습니다.";
 			}
 		}
-		
-		// 쪽지를 조회함과 동시에 쪽지 알림도 0으로 됨 
-		
 		
 		return newText;
 	}

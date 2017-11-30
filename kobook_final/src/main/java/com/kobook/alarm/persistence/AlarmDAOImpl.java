@@ -28,6 +28,11 @@ public class AlarmDAOImpl implements AlarmDAO {
 		session.update(namespace + ".alarmUpdate", person_id);
 		System.out.println("dao - update");
 	}
+	
+	@Override
+	public void alarmUpdateByMessage(int person_id) {
+		session.update(namespace + ".alarmUpdateByMessage", person_id);	
+	}
 
 	@Override
 	public void alarmMessage(AlarmVO alarmVO) {

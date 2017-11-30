@@ -44,7 +44,7 @@ public class MessageController {
 	public String sendPOST(MessageDTO dto, HttpSession session) throws Exception {
 		
 		System.out.println(dto.toString());
-		System.out.println("���� ��� id:" + pService.findPersonId(dto.getReceiver_email()));
+		System.out.println("보낼 사람 id:" + pService.findPersonId(dto.getReceiver_email()));
 		
 		int receiver_id = pService.findPersonId(dto.getReceiver_email());
 		
@@ -68,7 +68,7 @@ public class MessageController {
 			AlarmVO alarmVO = new AlarmVO();
 			
 			alarmVO.setAlarm_kind("Message");
-			alarmVO.setAlarm_content("�� ������ �����Ͽ����ϴ�.");
+			alarmVO.setAlarm_content("새 쪽지가 도착하였습니다.");
 			alarmVO.setPerson_id(receiver_id);
 			
 			alarmService.alarmMessage(alarmVO);
