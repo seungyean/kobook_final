@@ -10,6 +10,20 @@
  		from person
  		where person_email = #{person_email}
  	</select>
+ 	
+ 	<!-- id로 사용자 email찾기 -->
+ 	<select id="findEmail" resultType="String">
+ 		select person_email
+ 		from person
+ 		where person_id = #{person_id}
+ 	</select>
+ 	
+ 	<!-- id로 사용자 이름 찾기 -->
+ 	<select id="findName" resultType="String">
+ 		select person_name
+ 		from person
+ 		where person_id = #{person_id}
+ 	</select>
 	
 	<select id="login" resultType="PersonVO">
 		select person_email, person_pwd from person where person_email= #{person_email} and person_pwd=#{person_pwd}

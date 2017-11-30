@@ -22,7 +22,7 @@ public class ChatController {
 	@Inject
 	private ChatbotService service;
 	
-	// À¯Àú°¡ Ã¤ÆÃÃ¢¿¡ ±ÛÀ» ÀÔ·ÂÇÏ¸é ¸ÕÀú Ã¤ÆÃ·Î±×¿¡ µî·Ï
+	// ìœ ì €ê°€ ëŒ€í™”ì°½ì— ì…ë ¥í•˜ê³  ì „ì†¡ì‹œ ì±„íŒ…ë¡œê·¸ì— ê¸°ë¡
 	@RequestMapping(value="", method=RequestMethod.POST)
 	public ResponseEntity<String> register(@RequestBody ChatlogVO vo) {
 		
@@ -39,7 +39,7 @@ public class ChatController {
 		return entity;
 	}
 
-	// Æ¯Á¤ »ç¿ëÀÚ°¡ Ã¤ÆÃÇß´ø ¸ğµç ±â·Ï(»ç¿ëÀÚ, Ãªº¿)µéÀ» °¡Á®¿À´Â °ÍÀ» °üÀå
+	// í•´ë‹¹ ìœ ì €ì— ëŒ€í•œ ëª¨ë“  ì±„íŒ… ê¸°ë¡ì„ ê°€ì ¸ì˜´
 	@RequestMapping(value = "/{person_id}", method = RequestMethod.GET)
 	public ResponseEntity<List<ChatlogVO>> listLog(@PathVariable("person_id") Integer person_id) {
 		
@@ -54,7 +54,7 @@ public class ChatController {
 		return entity;
 	}
 	
-	// »ç¿ëÀÚ°¡ ¸¶Áö¸·¿¡ ÇÑ ´ëÈ­¸¦ °¡Áö°í ¿Í¼­ ÀÎ½Ä ¹× Ã³¸®ÇÏ´Â °ÍÀ» °üÀå
+	// ìœ ì €ì˜ ë§ˆì§€ë§‰ ë‹µì— ëŒ€í•œ ì¸ì‹ê³¼ ì²˜ë¦¬ë¥¼ ë™ì‹œì— ì§„í–‰
 	@RequestMapping(value="/chatProcess", method=RequestMethod.POST)
 	public ResponseEntity<String> chatProcess(@RequestBody ChatlogVO vo){
 	
@@ -63,10 +63,10 @@ public class ChatController {
 		
 		try {
 			
-			// ´ëÈ­¸¦  ÀÎ½Ä ¹× Ã³¸®ÇÏ´Â ·ÎÁ÷À» ±¸ÇöÇÏ´Â ¼­ºñ½º È£Ãâ
+			// ì…ë ¥í•œ ëŒ€í™”ì— ëŒ€í•œ ì»´í“¨í„°ì˜ ì‘ë‹µì„ ìƒˆë¡œìš´ ê°ì²´ì— ì €ì¥
 			newVo = service.chatResponse(vo);
 			
-			// À¯ÀúÀÇ °¡Àå ÃÖ±Ù ´ëÈ­¿¡ ´ëÇÑ ´äÀ» Ã¤ÆÃ·Î±×¿¡ µî·Ï
+			// ì»´í“¨í„°ì˜ ì‘ë‹µì„ ì±„íŒ… ë¡œê·¸ì— ê¸°ë¡
 			service.chatRegister(newVo);
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 			

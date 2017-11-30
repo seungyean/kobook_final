@@ -33,22 +33,22 @@ public class MessageController {
 	@Inject
 	private AlarmService alarmService;
 	
-	// ÂÊÁö formÀ¸·Î ÀÌµ¿
+	// ë©”ì‹œì§€ formì°½ìœ¼ë¡œ ì´ë™
 	@RequestMapping(value="/messageSend")
 	public void messageSendPOST(HttpSession session) throws Exception{
 		
 	}
 	
-	// ÂÊÁö º¸³»±â
+	// ë©”ì‹œì§€ ì „ì†¡
 	@RequestMapping(value="/send", method=RequestMethod.POST)
 	public String sendPOST(MessageDTO dto, HttpSession session) throws Exception {
 		
 		System.out.println(dto.toString());
-		System.out.println("º¸³¾ »ç¶÷ id:" + pService.findPersonId(dto.getReceiver_email()));
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ id:" + pService.findPersonId(dto.getReceiver_email()));
 		
 		int receiver_id = pService.findPersonId(dto.getReceiver_email());
 		
-		// ÇØ´ç emailÀ» °¡Áø »ç¿ëÀÚ°¡ Á¸ÀçÇÏÁö ¾ÊÀ¸¸é -1 ¹İÈ¯
+		// ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ìœ ì €ì¼ ê²½ìš° -1ì„ ë¦¬í„´
 		if(receiver_id == -1){
 			
 			return "/message/sendFail";
@@ -64,11 +64,11 @@ public class MessageController {
 			mService.messageSend(message);
 			
 			
-			//¸Ş¼¼Áö¸¦ º¸³»¸é ¾Ë¶÷ º¸³»´Â ¼­ºñ½º (¾Æ¸§)
+			// ìª½ì§€ ë³´ë‚¼ì‹œ ìƒˆë¡œìš´ ì•ŒëŒì— ë“±ë¡ (ì•„ë¦„)
 			AlarmVO alarmVO = new AlarmVO();
 			
 			alarmVO.setAlarm_kind("Message");
-			alarmVO.setAlarm_content("»õ ÂÊÁö°¡ µµÂøÇÏ¿´½À´Ï´Ù.");
+			alarmVO.setAlarm_content("ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
 			alarmVO.setPerson_id(receiver_id);
 			
 			alarmService.alarmMessage(alarmVO);

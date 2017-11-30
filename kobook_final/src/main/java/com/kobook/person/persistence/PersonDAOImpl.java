@@ -26,6 +26,16 @@ public class PersonDAOImpl implements PersonDAO {
 	}
 	
 	@Override
+	public String findPersonEmail(int person_id) throws Exception {
+		return session.selectOne(namespace + ".findEmail", person_id);
+	}
+	
+	@Override
+	public String findPersonName(int person_id) throws Exception {
+		return session.selectOne(namespace + ".findName", person_id);
+	}
+	
+	@Override
 	public PersonVO login(LoginDTO dto) throws Exception {
 		
 		return session.selectOne(namespace + ".login", dto);
