@@ -33,6 +33,7 @@ import com.kobook.book.domain.SearchCriteria;
 import com.kobook.community.domain.BlackVO;
 import com.kobook.community.domain.DonateFileVO;
 import com.kobook.community.domain.DonateVO;
+import com.kobook.community.domain.PhotoFileVO;
 import com.kobook.community.domain.PhotoVO;
 import com.kobook.community.domain.ReplyVO;
 import com.kobook.community.service.BlackService;
@@ -434,7 +435,31 @@ public class CommunityController {
 		}
 		photoService.photoRegist(vo);
 		
-		return "redirect:/community/photoReviewRegist";
+		return "redirect:/community/photoReviewList";
 	}
+	
+	//포토리뷰 List 출력
+	@RequestMapping("photoReviewList")
+	public void photoList(@ModelAttribute SearchCriteria cri, Model model, @ModelAttribute PhotoFileVO fileVO) throws Exception {
+		List<PhotoVO> list = photoService.photoList(cri);
+		HashMap<Integer, String> userMap = new HashMap<Integer,String>();
+		
+		int photo_id;
+		
+		for(int index = 0; index<list.size(); index++){
+			photo_id = list.get(index).getPhoto_id();	
+			userMap.put(photo_id, photoService.photoWriter(photo_id));		
+		}
+
+		model.addAttribute("list", list);
+		model.addAttribute("userMap", userMap);
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(photoService.photoCount(cri));
+		
+		model.addAttribute("pageMaker", pageMaker);
+	}	
+	
 	
 }

@@ -24,32 +24,59 @@
 	<select id="photoMaxNum" resultType="int">
 		select MAX(photo_id) from photo
 	</select>
-	
-<!-- 	
-	
-	<select id="listPhoto" resultType="Photo" parameterType="CommunitySearch">
-		select * from photo 
-		<if test="area != null">
-			<where>
-				<foreach collection="area" item="item" separator="OR" open="(" close=")">
-					${item} LIKE #{searchKey}
-				</foreach>
-			</where>
-		</if>
-		order by photo_id DESC
-	</select>
-	
-	<select id="countPhoto" resultType="int" parameterType="CommunitySearch">
-		select count(*) from photo
-		<if test="area != null">
-			<where>
-				<foreach collection="area" item="item" separator="OR" open="(" close=")">
-					${item} LIKE #{searchKey}
-				</foreach>
-			</where>
-		</if>
+
+	<select id="photoList" resultType="PhotoVO" parameterType="SearchCriteria">
+		<![CDATA[
+			 select * from photo where photo_id > 0
+		]]>
+		<include refid="search" />
+		<![CDATA[	  
+			 order by photo_id DESC
+ 		]]>
 	</select>
 
+	<select id="photoCount" resultType="int" parameterType="SearchCriteria">
+		<![CDATA[
+			select count(*) from photo where photo_id > 0
+		]]>
+		<include refid="search" />
+	</select>
+			
+ 	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				and photo_title like '%'|| #{keyword}||'%'
+			</if>
+			<if test="searchType == 'c'.toString()">
+				and photo_content like '%'|| #{keyword}||'%'
+			</if>
+			<if test="searchType == 'tc'.toString()">
+				and ( photo_title like '%'|| #{keyword}||'%' OR photo_content like
+				'%'|| #{keyword}||'%')
+			</if>
+		</if>
+	</sql>
+
+	<select id="photoWriter" resultType="string" parameterType="int">
+		select P.PERSON_NAME from photo pt join person P on pt.person_id =
+		P.person_id
+		where pt.photo_id = #{photo_id}
+	</select>
+	
+	<select id="photoGetAttach" resultType="string">
+		select photo_file_name from photo_attach where photo_id = #{photo_id}
+	</select>
+
+	<delete id="photoDeleteAttach">
+		delete from photo_attach where photo_id=#{photo_id}
+	</delete>
+
+	<insert id="photoReplaceAttach">
+		insert into photo_attach(photo_file_name, photo_id)
+			values(#{photo_file_name},#{photo_id})
+	</insert>
+	
+<!-- 	
 	<select id="selectPhotoDetail" parameterType="int" resultType="Photo">
 		select * from photo where photo_id = #{photo_id}
 	</select>

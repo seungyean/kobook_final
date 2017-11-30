@@ -54,7 +54,7 @@
 			<div class="container">
 				<div class="row sub_content">
 					<!--begin isotope -->
-							<form action="photoInsertForm.do" method="post">
+							<form action="/community/photoReviewRegist" method="get">
 					<div class="col-lg-12 isotope">
 					
                     <!--begin portfolio filter -->
@@ -67,20 +67,20 @@
                     <!--end portfolio filter -->
 						<!--begin portfolio_masonry -->
 						<div class="mixed-container masonry_wrapper">
-							<c:forEach var="photo" items="${photoListModel.list}">
+							<c:forEach var="photo" items="${list}">
 							<div class="item responsive">
 								<div class="recent-item box">
 									<figure class="touching ">
-											<a href="photoDetail.do?photo_id=${photo.photo_id }">
-										<img src="../upload/${photo.photo_img }"
-											alt="NO IMAGE" class="img-responsive" /></a>
+											<a href="/community/photoReviewRead?photo_id=${photo.photo_id }">
+										<img src="/community/displayFile?fileName=${photo.photo_thumbnail}"
+											alt="NO IMAGE" height="280" class="img-responsive" /></a>
 										<div class="option inner">
 											<div>
 												<h5>${photo.photo_title }</h5>
-												<a href="../upload/${photo.photo_img }"
+												<a href="/community/displayFile?fileName=${photo.photo_thumbnail}"
 													class="fa fa-search mfp-image"></a> <a
-													href="photoDetail.do?photo_id=${photo.photo_id}" class="fa fa-link"></a>
-													<span>${photo.person_id}</span>
+													href="/community/photoReviewRead?photo_id=${photo.photo_id}" class="fa fa-link"></a>
+													<span>${userMap[photo.photo_id]}</span>
 											</div>
 										</div>
 									</figure>
@@ -92,47 +92,46 @@
 						<!--end portfolio_masonry -->
 					</div>
 							</form>
-					<div align="right">
-						<form action="photoReviewList.do" method="post">
-							<input type="hidden" name="temp" value="temp"> <input
-								type="checkbox" name="area" value="photo_title">제목 <input
-								type="checkbox" name="area" value="photo_content">내용 <input
-								type="checkbox" name="area" value="person_id">작성자 <input
-								type="text" name="searchKey"
-								placeholder="Enter Search keywords..." size="25"> <input
-								type="submit" class="btn-default" value="검색">
-						</form>
-					</div>
-					<div class="col-sm-12 text-center">
-						<ul class="pagination">
-							<li><a href="photoReviewList.do?pageNum=1">&#x27EA;</a></li>
-							<li class="active"><c:if
-									test="${photoListModel.startPage > 3 }">
-									<a
-										href="photoReviewList.do?pageNum=${photoListModel.startPage -1}">
-										&lang; </a>
-								</c:if></li>
-							<c:forEach var="pageNo" begin="${photoListModel.startPage}"
-								end="${photoListModel.endPage}">
-								<li><c:if test="${photoListModel.requestPage == pageNo }">
+				<!-- Search Form -->
+				<div class='box-body' align="right">
 
-									</c:if> <a href="photoReviewList.do?pageNum=${pageNo}">${pageNo}</a> <c:if
-										test="${photoListModel.requestPage == pageNo }">
-
-									</c:if></li>
+					<select name="searchType">
+						<option value="n"
+							<c:out value="${cri.searchType == null?'selected':''}"/>>
+							---</option>
+						<option value="t"
+							<c:out value="${cri.searchType eq 't'?'selected':''}"/>>
+							제목</option>
+						<option value="c"
+							<c:out value="${cri.searchType eq 'c'?'selected':''}"/>>
+							내용</option>
+						<option value="tc"
+							<c:out value="${cri.searchType eq 'tc'?'selected':''}"/>>
+							제목 + 내용</option>
+					</select><input type="text" name="keyword" id="keywordInput" value='${cri.keyword }' placeholder="Enter Search keywords..." size="25">
+					<button id='searchBtn' class="btn-default">  <i class="fa fa-search"></i>  </button>
+				</div>
+				<!-- 페이징 -->
+							<div class="col-sm-12 text-center">
+								<ul class="pagination">
+							<c:if test="${pageMaker.prev}">
+								<li><a
+									href="photoReviewList${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
+							</c:if>
+							<c:forEach begin="${pageMaker.startPage }"
+								end="${pageMaker.endPage }" var="idx">
+								<li
+									<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+									<a href="photoReviewList${pageMaker.makeSearch(idx)}">${idx}</a>
+								</li>
 							</c:forEach>
-							<li><c:if
-									test="${photoListModel.endPage < photoListModel.totalPageCount}">
-									<a
-										href="photoReviewList.do?pageNum=${photoListModel.endPage +1}">
-										&rang; </a>
 
-								</c:if></li>
-							<li><a
-								href="photoReviewList.do?pageNum=${photoListModel.totalPageCount}">
-									&#x27EB; </a></li>
-						</ul>
-					</div>
+							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+								<li><a
+									href="photoReviewList${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
+							</c:if>
+								</ul>
+							</div>
 				</div>
 				<!--./row-->
 			</div>
@@ -147,20 +146,36 @@
   	<!-- /푸터 -->
 
 	<script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
-    <script src="/resources/js/bootstrap.min.js"></script>
-    <script src="/resources/js/jquery.easing.1.3.js"></script>
-    <script src="/resources/js/retina-1.1.0.min.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.cookie.js"></script> <!-- jQuery cookie -->
-    <script type="text/javascript" src="/resources/js/styleswitch.js"></script> <!-- Style Colors Switcher -->
-    <script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.smartmenus.bootstrap.min.js"></script>
-        <script type="text/javascript" src="/resources/js/jflickrfeed.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.magnific-popup.min.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.isotope.min.js"></script>
-    <script type="text/javascript" src="/resources/js/swipe.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
+	<script src="/resources/js/bootstrap.min.js"></script>
+	<script src="/resources/js/jquery.easing.1.3.js"></script>
+	<script src="/resources/js/retina-1.1.0.min.js"></script>
+	<script type="text/javascript" src="/resources/js/jquery.cookie.js"></script>
+	<!-- jQuery cookie -->
+	<script type="text/javascript" src="/resources/js/styleswitch.js"></script>
+	<!-- Style Colors Switcher -->
+	<script src="/resources/js/jquery.fractionslider.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script>
+	<script type="text/javascript" src="/resources/js/jquery.smartmenus.bootstrap.min.js"></script>
+	<script type="text/javascript" src="/resources/js/owl.carousel.min.js"></script>
+	<script type="text/javascript" src="/resources/js/jflickrfeed.js"></script>
+	<script type="text/javascript" src="/resources/js/jquery.magnific-popup.min.js"></script>
+	<script type="text/javascript" src="/resources/js/jquery.isotope.min.js"></script>
+	<script type="text/javascript" src="/resources/js/jquery.easypiechart.min.js"></script>
+	<script type="text/javascript" src="/resources/js/swipe.js"></script>
+	<script type="text/javascript" src="/resources/js/jquery-hoverdirection.min.js"></script>
+	<script type="text/javascript" src="/resources/js/jquery.matchHeight-min.js"></script>
+	<script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
 
     <script src="/resources/js/main.js"></script>
+    <script type="text/javascript">
+	$(function() {
+		$('#searchBtn').on("click", function(event) {
+			self.location = "photoReviewList" + '${pageMaker.makeQuery(1)}'
+							+ "&searchType=" + $("select option:selected").val()
+							+ "&keyword=" + $('#keywordInput').val();
+		});
+	});
+	</script>
 	<script>
     (function ($) {
         var $container = $('.masonry_wrapper'),
