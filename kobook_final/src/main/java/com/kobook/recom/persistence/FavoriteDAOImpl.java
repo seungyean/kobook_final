@@ -38,6 +38,12 @@ public class FavoriteDAOImpl implements FavoriteDAO {
 	@Override
 	public void updateFavoriteRank(FavoriteVO favorite) {
 		session.update(namespace + ".updateFavoriteRank", favorite);
-		
 	}
+
+	@Override
+	public List<String> favoriteList(int person_id) throws Exception {
+		return session.selectList(namespace + ".favoriteList", person_id);
+	}
+	
+	
 }

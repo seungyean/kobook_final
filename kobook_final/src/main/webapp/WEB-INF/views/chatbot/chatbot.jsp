@@ -152,12 +152,12 @@ textarea {
 								<li>
 									<button id="chatSendBtn">전송</button>									
 								</li>
-								<li>
+								<!-- <li>
 									<a href="#" uk-icon="icon: image"></a>
 								</li>
 								<li>
 									<a href="#" uk-icon="icon: location"></a>
-								</li>
+								</li> -->
 							</ul>
 						</div>
 					</div>

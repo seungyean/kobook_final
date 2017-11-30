@@ -2,12 +2,15 @@ package com.kobook.chatbot.service;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
 import com.kobook.alarm.persistence.AlarmDAO;
+import com.kobook.book.persistence.BookDAO;
 import com.kobook.chatbot.domain.ChatlogVO;
 import com.kobook.chatbot.persistence.ChatbotDAO;
 import com.kobook.message.domain.MessageVO;
@@ -28,6 +31,9 @@ public class ChatbotServiceImpl implements ChatbotService {
 	
 	@Inject
 	private AlarmDAO alarmDao;
+	
+	@Inject
+	private BookDAO bookDao;
 	
 	
 
@@ -50,21 +56,36 @@ public class ChatbotServiceImpl implements ChatbotService {
 		String newText = "";
 		
 		// user_text 판별
-		if(text.contains("책") || text.contains("도서") || text.contains("상품")){
-			newText = "책 관련 ㄱㄱ";
-		} else if(text.contains("쪽지")){
+		if(text.equals("야") || text.contains("도와줘")){
+			
+			newText += personDao.findPersonName(person_id) + "님, 오셨군요!"
+					+ "\n 무엇을 도와드릴까요??"
+					+ "\n 카테고리는 크게 책(도서), 게시판, 쪽지, 마이페이지로 구성되어있습니다."
+					+ "\n 물어보시면 성심성의껏 답변해드릴게요~~";
+		
+		} else if(text.contains("쪽지")){		// 쪽지 파트
+			
 			newText = manageMessage(text, person_id);
-//			newText = "쪽지 관련 그리고 ㅇㅏ이디는" + person_id;
-		} else if(text.contains("마일리지")){
+			
+		} else if(text.contains("책") || text.contains("도서") || text.contains("상품")){	// 책 파트
+			
+			newText = "책 관련 ㄱㄱ";
+		
+		} else if(text.contains("마일리지")){	//	마이페이지 파트
+			
 			newText = "마일리지 관련 ㄱㄱ";
-		} else if(text.contains("마이페이지")){
+		
+		} else if(text.contains("공지사항") || text.contains("블랙") || text.contains("포토리뷰") || text.contains("무료나눔")){	//게시판 파트
+			
 			newText = "마이페이지 관련 ㄱㄱ";
+		
 		} else {
+			
 			newText = "응\n그런거\n말구";
 		}
 		
 		vo.setChatlog_content(newText);
-		//computer의 speaker의 값 setting
+		//computer가 대답하는 것으로 값 setting
 		vo.setChatlog_speaker("C");
 		
 		return vo;
@@ -79,6 +100,8 @@ public class ChatbotServiceImpl implements ChatbotService {
 			
 		} else if(text.contains("관련") || text.contains("관한")){		//종류 관한 책보여줘
 			
+			
+			
 		}
 		
 		return newText;
@@ -87,13 +110,29 @@ public class ChatbotServiceImpl implements ChatbotService {
 	@Override
 	public String manageBoard(String text, int person_id) throws Exception {
 		String newText = "";
-		if(text.contains("공지사항")){
+		String regex;
+		Pattern p;
+		Matcher m;
+		
+		if(text.contains("공지사항") || text.contains("검색")){
+			regex = "";
+			p = Pattern.compile(regex);
+			m = p.matcher(text);
 			
 		} else if(text.contains("포토리뷰")){
+			regex = "";
+			p = Pattern.compile(regex);
+			m = p.matcher(text);
 			
 		} else if(text.contains("블랙")){
+			regex = "";
+			p = Pattern.compile(regex);
+			m = p.matcher(text);
 			
 		} else if(text.contains("무료나눔")){
+			regex = "";
+			p = Pattern.compile(regex);
+			m = p.matcher(text);
 			
 		}	
 		
@@ -102,10 +141,13 @@ public class ChatbotServiceImpl implements ChatbotService {
 
 	@Override
 	public String manageMypage(String text, int person_id) throws Exception {
+		
 		String newText = "";
+		List<String> list;
+		
 		if(text.contains("적립금") || text.contains("마일리지")){	// 내 마일리지 보여줘 
 			
-		} else if(text.contains("관심분야")){
+		} else if(text.contains("관심분야")){	//내 관심분야
 			
 		} 
 		

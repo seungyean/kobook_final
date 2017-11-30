@@ -36,6 +36,12 @@
 		AND BOOK_ID=#{book_id}
 	</update>
 	
+	<select id="favoriteList" resultType="String" parameterType="Integer">
+		SELECT favorite_name
+		FROM favorite
+		WHERE person_id = #{person_id}
+	</select>
+	
 </mapper>
 
 

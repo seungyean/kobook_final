@@ -12,4 +12,5 @@ public interface FavoriteDAO {
 	public void deleteFavorite(FavoriteVO favorite);
 	public List<RdataVO> getRdata();
 	public void updateFavoriteRank(FavoriteVO favorite);
+	public List<String> favoriteList(int person_id) throws Exception;
 }
