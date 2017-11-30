@@ -23,6 +23,24 @@
     <link rel="stylesheet" href="/resources/css/layout/wide.css" data-name="layout">
 
     <link rel="stylesheet" type="text/css" href="/resources/css/switcher.css" media="screen" />
+     <style type="text/css">
+    .popup {position: absolute;}
+    .back { background-color: gray; opacity:0.5; width: 78%; height: 31%; overflow:hidden;  z-index:1101;}
+    .front { 
+       z-index:1110; opacity:1; boarder:1px; margin: auto; 
+      }
+     .show{
+       position:relative;
+       max-width: 900px; 
+       max-height: 500px; 
+       overflow: auto;       
+     }
+     #popup_img{
+     	width: 500%;
+     	height: 500%;
+     }
+  	
+    </style>
 </head>
 <body class="home">
 	<!-- 헤더 -->
@@ -55,36 +73,53 @@
 				<div class="row">
 					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
 						<div class="blog_single">
+    			<form role="form" action="donateModify" method="post">
+					<input type='hidden' name='donate_id' value="${donateVO.donate_id}">
+					<input type='hidden' name='page' value="${cri.page}">
+					<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
+					<input type='hidden' name='searchType' value="${cri.searchType}">
+					<input type='hidden' name='keyword' value="${cri.keyword}">
+				</form>
 							<article class="post">
-								<!-- 글 이미지(있을 시) -->
-								<figure class="post_img">
-									<img src="../upload/${donate.donate_img }" alt="NO IMAGE"
-										height="500" width="600">
-								</figure>
 								<!-- 글 번호 -->
 								<div class="post_date">
-									<span class="day">${donate.donate_id }</span>
+									<span class="day">${donateVO.donate_id }</span>
 								</div>
 								<div class="post_content">
 									<div class="post_meta">
 										<!-- 글 제목 -->
-										<h2>${donate.donate_title }</h2>
+										<h2>${donateVO.donate_title }</h2>
 										<div class="metaInfo">
 
 											<!-- 글 작성일,작성자(person_id),조회수,수정/삭제폼 -->
 											<span><i class="fa fa-calendar"></i> <fmt:formatDate
-													value="${donate.donate_date }" pattern="MMM dd, yyyy" /> </span>
-											<span><i class="fa fa-user"></i> By ${donate.person_id}
-											</span> <span><i class="fa fa-eye"></i> ${donate.donate_hit}
+													value="${donateVO.donate_date }" pattern="MMM dd, yyyy" /> </span>
+											<span><i class="fa fa-user"></i> By ${writer}
+											</span> <span><i class="fa fa-eye"></i> ${donateVO.donate_hit}
 											</span>
-											<!-- <span><i class="fa fa-comments"></i> <a href="#">12 Comments</a></span> -->
+											<span><i class="fa fa-comments"></i> ${donateVO.reply_count} Comments</span>
+										<c:if test="${donateVO.person_id == person_id || person_id == 1}">
+											<button type="submit" class="btn btn-warning" id="modifyBtn">수정</button>
+											<button type="submit" class="btn btn-danger" id="removeBtn">삭제</button>
+										</c:if>
+										<button type="submit" class="btn btn-primary" id="goListBtn">목록으로</button>
 										</div>
 									</div>
 									<!-- 글 내용 -->
 									<blockquote class="default">
-										${donate.donate_content }</blockquote>
+										${donateVO.donate_content }</blockquote>
 								</div>
 							</article>
+					    <div class='popup back' style="display:none;"></div>
+					    <div id="popup_front" class='popup front' style="display:none;">
+					     <img id="popup_img">
+					    </div>
+									<figure class="post_img">
+									<img class="thumbnail" alt="NO Thumbnail"
+												 src="/community/displayFile?fileName=${donateVO.donate_thumbnail }" height="300" width="200">
+									</figure>
+							 <ul class="mailbox-attachments clearfix uploadedList">
+							 </ul>
 						</div>
 
 						<!--update Comments-->
@@ -107,6 +142,12 @@
 													<div class="comment-meta">
 														<a class="comment-date link-style1"><fmt:formatDate
 																value="${reply.reply_date}" pattern="yy-MM-dd, HH:mm" /></a>
+														<c:if test="${reply.person_id == person_id }">
+														<a href="donateReplyModify?donate_id=${reply.donate_id}&reply_id=${reply.reply_id}">
+															수정
+														</a>
+														<a href="donateReplyRemove?reply_id=${reply.reply_id}">삭제</a>
+														</c:if>
 													</div>
 													<c:if test="${reply_id != null }">
 														<div class="comment-body">
@@ -164,6 +205,106 @@
     <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
 
     <script src="/resources/js/main.js"></script>
+    
+<script type="text/javascript" src="/resources/js/upload.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<script id="templateAttach" type="text/x-handlebars-template">
+<li data-src='{{fullName}}'>
+<div class="mailbox-attachment-info">
+<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}
+  <span class="mailbox-attachment-icon has-img"><br><img src="{{imgsrc}}" alt="Attachment" height="200" width="200"></span>
+</a>
+  </div>
+</li>
+</script> 
+<script>
+$(function(){
+	var formObj = $("form[role='form']");
+	 	
+	$("#modifyBtn").on("click", function(){
+		formObj.attr("action", "/community/donateModify");
+		formObj.attr("method", "get");		
+		formObj.submit();
+	});
+
+	
+	$("#removeBtn").on("click", function(){		
+		var arr = [];
+		$(".uploadedList li").each(function(index){
+			 arr.push($(this).attr("data-src"));
+		});
+		
+		if(arr.length > 0){
+			$.post("/community/deleteAllFiles",{files:arr}, function(){
+				
+			});
+		}
+		
+		formObj.attr("action", "/community/donateRemove");
+		formObj.submit();
+	});	
+	
+	$("#goListBtn ").on("click", function(){
+		formObj.attr("method", "get");
+		formObj.attr("action", "/community/donateList");
+		formObj.submit();
+	});
+
+	var donate_id = ${donateVO.donate_id};
+	var template = Handlebars.compile($("#templateAttach").html());
+	
+	$.getJSON("/community/donateGetAttach/"+donate_id,function(list){
+		$(list).each(function(){
+			
+			var fileInfo = getFileInfo(this);
+			
+			var html = template(fileInfo);
+			
+			 $(".uploadedList").append(html);
+			
+		});
+	});
+
+	$(".uploadedList").on("click", ".mailbox-attachment-info a", function(event){
+		
+		var fileLink = $(this).attr("href");
+		
+		if(checkImageType(fileLink)){
+			
+			event.preventDefault();
+					
+			var imgTag = $("#popup_img");
+			imgTag.attr("src", fileLink);
+			
+			console.log(imgTag.attr("src"));
+					
+			$(".popup").show('slow');
+			imgTag.addClass("show");		
+		}	
+	});
+	
+	
+	$(".thumbnail").on("click", function(event){
+			event.preventDefault();
+		var str = $(this).attr("src");
+		var str2 = str.split("s_");
+		var str3 = str2[0]+str2[1];
+  		var imgTag = $("#popup_img");
+		imgTag.attr("src", str3);
+					
+		$(".popup").show('slow');
+		imgTag.addClass("show");
+	}); 
+
+	$("#popup_img").on("click", function(){		
+		$(".popup").hide('slow');		
+	});
+	
+	$(".back").on("click", function(){		
+		$(".popup").hide('slow');		
+	});
+});
+</script>
 	<!-- Start Style Switcher -->
 	<div class="switcher"></div>
 	<!-- End Style Switcher -->

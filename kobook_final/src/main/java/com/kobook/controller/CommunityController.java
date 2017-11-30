@@ -369,6 +369,43 @@ public class CommunityController {
 		model.addAttribute("replyList",donateService.donateReplyList(donate_id));
 		return "/community/donateRead";
 	}
-	//
+	
+	//무료나눔 게시판 댓글 수정 폼 이동
+	@RequestMapping(value="donateReplyModify", method=RequestMethod.GET)
+	public void donateReplyModifyGET(Model model, @ModelAttribute("cri") SearchCriteria cri,
+			@RequestParam("donate_id") Integer donate_id, @RequestParam("reply_id") Integer reply_id) throws Exception {
+		
+		model.addAttribute("reply_id", reply_id);
+		model.addAttribute(donateService.donateRead(donate_id, false));
+		model.addAttribute("writer",donateService.donateWriter(donate_id));
+		model.addAttribute("replyList",donateService.donateReplyList(donate_id));
+	}
+	
+	//무료나눔 게시판 댓글 수정(DB)
+	@RequestMapping(value="donateReplyModify", method=RequestMethod.POST)
+	public String donateReplyModifyPOST(Model model,ReplyVO vo
+			, @ModelAttribute("cri") SearchCriteria cri) throws Exception {
+		donateService.replyModify(vo);
+		System.out.println(vo.toString());
+		
+		model.addAttribute(donateService.donateRead(vo.getDonate_id(), false));
+		model.addAttribute("writer",donateService.donateWriter(vo.getDonate_id()));
+		model.addAttribute("replyList",donateService.donateReplyList(vo.getDonate_id()));
+		
+		return "/community/donateRead";
+	}
+	
+	//무료나눔 댓글 삭제
+	@RequestMapping("donateReplyRemove")
+	public String donateReplyRemove(Model model, @RequestParam("reply_id") Integer reply_id,
+			 @ModelAttribute("cri") SearchCriteria cri,@RequestParam("donate_id") Integer donate_id) throws Exception{
+		donateService.replyRemove(reply_id);
+		model.addAttribute(donateService.donateRead(donate_id, false));
+		model.addAttribute("writer",donateService.donateWriter(donate_id));
+		model.addAttribute("replyList",donateService.donateReplyList(donate_id));
+		return "/community/donateRead";
+	}
+	
+	//무료나눔 원본 글에 달린 댓글 전체 삭제
 
 }

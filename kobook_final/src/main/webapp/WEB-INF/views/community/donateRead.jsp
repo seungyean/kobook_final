@@ -41,7 +41,6 @@
      	width: 500%;
      	height: 500%;
      }
-  	
     </style>
 </head>
 <body class="home">
@@ -140,12 +139,12 @@
 													</h4>
 													<div class="comment-meta">
 														<a class="comment-date link-style1"><fmt:formatDate
-																value="${reply.reply_date}" pattern="yy-MM-dd, HH:mm" /></a>
+																value="${reply.reply_date}" pattern="yy-MM-dd, HH:mm" /></a>&nbsp;
 														<c:if test="${reply.person_id == person_id }">
-														<a href="donateReplyModify?donate_id=${reply.donate_id}&reply_id=${reply.reply_id}">
+														<a class="mod" href="donateReplyModify?donate_id=${reply.donate_id}&reply_id=${reply.reply_id}">
 															수정
-														</a>
-														<a href="donateReplyRemove?reply_id=${reply.reply_id}">삭제</a>
+														</a>&nbsp;
+														<a class="mod" href="donateReplyRemove?donate_id=${reply.donate_id}&reply_id=${reply.reply_id}">삭제</a>
 														</c:if>
 														<!-- 댓글의 답글(추후보강) -->
 														<!-- 		

@@ -42,4 +42,12 @@ public interface DonateDAO {
 	public String selectPersonName(Integer person_id, Integer donate_id) throws Exception;
 	//updateReplyCount
 	public void updateReplyCount(int amount, Integer donate_id) throws Exception;
+	//replyUpdate
+	public void replyUpdate(ReplyVO vo) throws Exception;
+	//replyDelete
+	public void replyDelete(Integer reply_id) throws Exception;
+	//replyDeleteAll
+	public void replyDeleteAll(Integer donte_id) throws Exception;
+	//getDonateId
+	public Integer getDonateId(Integer reply_id) throws Exception;
 }

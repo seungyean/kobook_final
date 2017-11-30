@@ -5,44 +5,47 @@
 
 
 <mapper namespace="com.kobook.mappers.donateMapper">
-	
+
 	<insert id="donateInsert" parameterType="DonateVO">
 		insert into donate(
-			donate_id, donate_title, donate_date, donate_content, person_id
-			<if test="donate_thumbnail != null">, donate_thumbnail</if>
-			)values(
-			donate_id_seq.nextval, #{donate_title}, SYSDATE, #{donate_content}, #{person_id}
-			<if test="donate_thumbnail != null">, #{donate_thumbnail}</if>
-			)
+		donate_id, donate_title, donate_date, donate_content, person_id
+		<if test="donate_thumbnail != null">, donate_thumbnail</if>
+		)values(
+		donate_id_seq.nextval, #{donate_title}, SYSDATE, #{donate_content}, #{person_id}
+		<if test="donate_thumbnail != null">, #{donate_thumbnail}</if>
+		)
 	</insert>
 
 	<insert id="donateAddAttach" parameterType="DonateFileVO">
-		insert into donate_attach(donate_file_name, donate_id)
-		values(#{donate_file_name}, #{donate_id})
+		insert into
+		donate_attach(donate_file_name, donate_id)
+		values(#{donate_file_name},
+		#{donate_id})
 	</insert>
-	
+
 	<select id="donateMaxNum" resultType="int">
-		select MAX(donate_id) from donate
+		select MAX(donate_id) from
+		donate
 	</select>
 
 	<select id="donateList" resultType="DonateVO" parameterType="SearchCriteria">
 		<![CDATA[
 			 select * from donate where donate_id > 0
 		]]>
-			 <include refid="search"/>
+		<include refid="search" />
 		<![CDATA[	  
 			 order by donate_id DESC
  		]]>
 	</select>
-	
+
 	<select id="donateCount" resultType="int" parameterType="SearchCriteria">
 		<![CDATA[
 			select count(*) from donate where donate_id > 0
 		]]>
-		 <include refid="search"/>
+		<include refid="search" />
 	</select>
-	
- 	<sql id="search">
+
+	<sql id="search">
 		<if test="searchType != null">
 			<if test="searchType == 't'.toString()">
 				and donate_title like '%'|| #{keyword}||'%'
@@ -51,64 +54,76 @@
 				and donate_content like '%'|| #{keyword}||'%'
 			</if>
 			<if test="searchType == 'tc'.toString()">
-				and ( donate_title like '%'|| #{keyword}||'%' OR donate_content like
+				and ( donate_title like '%'|| #{keyword}||'%' OR
+				donate_content like
 				'%'||
 				#{keyword}||'%')
 			</if>
 		</if>
 	</sql>
-	
+
 	<select id="donateGetAttach" resultType="string">
-		select donate_file_name from donate_attach where donate_id = #{donate_id}
+		select donate_file_name
+		from donate_attach where donate_id = #{donate_id}
 	</select>
 
 	<delete id="donateDeleteAttach">
-		delete from donate_attach where donate_id=#{donate_id}
+		delete from donate_attach where
+		donate_id=#{donate_id}
 	</delete>
 
 	<insert id="donateReplaceAttach">
-		insert into donate_attach(donate_file_name, donate_id) values(#{donate_file_name},#{donate_id})
+		insert into donate_attach(donate_file_name,
+		donate_id) values(#{donate_file_name},#{donate_id})
 	</insert>
 
 	<select id="donateSelect" parameterType="int" resultType="DonateVO">
-		select * from donate where donate_id = #{donate_id}
+		select
+		* from donate where donate_id = #{donate_id}
 	</select>
-	
+
 	<update id="donateUpdate" parameterType="DonateVO">
-		update donate set donate_title=#{donate_title}, donate_content=#{donate_content}
-		<if test="donate_thumbnail != null">, donate_thumbnail = #{donate_thumbnail}</if>  where donate_id = #{donate_id}
+		update donate set donate_title=#{donate_title},
+		donate_content=#{donate_content}
+		<if test="donate_thumbnail != null">, donate_thumbnail = #{donate_thumbnail}</if>
+		where donate_id = #{donate_id}
 	</update>
-	
+
 	<delete id="donateDelete" parameterType="int">
-		DELETE FROM donate WHERE donate_id=#{donate_id}
+		DELETE FROM donate WHERE
+		donate_id=#{donate_id}
 	</delete>
-	
+
 	<update id="donateHitCount" parameterType="int">
-		update donate set donate_hit=donate_hit+1 where donate_id = #{donate_id}
+		update donate set
+		donate_hit=donate_hit+1 where donate_id = #{donate_id}
 	</update>
-	
+
 	<select id="donateWriter" resultType="string" parameterType="int">
-		select P.PERSON_NAME from donate D join person P on D.person_id = P.person_id
-			where D.donate_id = #{donate_id}
+		select P.PERSON_NAME from donate D join person P on D.person_id =
+		P.person_id
+		where D.donate_id = #{donate_id}
 	</select>
-	
+
 	<insert id="donateReplyInsert" parameterType="ReplyVO">
 		insert into reply(
-			reply_id, reply_content, reply_date, donate_id, person_id
-			<if test="secret_yn != null">, secret_yn</if>
+		reply_id, reply_content, reply_date, donate_id, person_id
+		<if test="secret_yn != null">, secret_yn</if>
 		)values(
-			reply_id_seq.nextval, #{reply_content}, SYSDATE, #{donate_id}, #{person_id}
-			<if test="secret_yn != null">, 'Y'</if>
+		reply_id_seq.nextval, #{reply_content}, SYSDATE, #{donate_id}, #{person_id}
+		<if test="secret_yn != null">, 'Y'</if>
 		)
 	</insert>
 
 	<update id="updateReplyCount">
-		update donate set reply_count = reply_count + #{amount}
-			where donate_id = #{donate_id}
+		update donate set reply_count = reply_count +
+		#{amount}
+		where donate_id = #{donate_id}
 	</update>
-	
+
 	<select id="donateReplyList" resultType="ReplyVO" parameterType="int">
-		select * from reply where donate_id = #{donate_id} order by reply_date DESC
+		select * from reply where donate_id = #{donate_id} order by reply_date
+		DESC
 	</select>
 	<select id="getPersonId" resultType="Integer">
 		select person_id
@@ -116,38 +131,40 @@
 		where reply_id = #{reply_id}
 	</select>
 	<select id="selectPersonName" resultType="string">
-		select P.PERSON_NAME from person P, reply R, donate D
-			where P.PERSON_ID = R.PERSON_ID 
-			and R.DONATE_ID=D.DONATE_ID 
-			AND R.person_id = #{person_id} 
-			and R.DONATE_ID=#{donate_id}
+		select P.PERSON_NAME
+		from person P, reply R, donate D
+		where P.PERSON_ID = R.PERSON_ID
+		and R.DONATE_ID=D.DONATE_ID
+		AND R.person_id = #{person_id}
+		and R.DONATE_ID=#{donate_id}
 	</select>
+	
+	<update id="replyUpdate" parameterType="ReplyVO">
+		update reply set reply_content=#{reply_content} where reply_id = #{reply_id}
+	</update>
+
+	<delete id="replyDelete" parameterType="int">
+		DELETE FROM reply WHERE reply_id=#{reply_id}
+	</delete>
+
+	<delete id="replyDeleteAll" parameterType="int">
+		DELETE FROM reply WHERE donate_id=#{donate_id}
+	</delete>
+
+	<select id="getDonateId" parameterType="int" resultType="int"> 
+		SELECT donate_id FROM reply WHERE reply_id = #{reply_id}
+	</select>
+
 	<!-- 
 
 	<update id="updateDonate_id" parameterType="int">
 		update donate set donate_id = donate_id-1 where donate_id > #{donate_id}
 	</update>
 
-	<update id="updateDonateReply" parameterType="DonateReply">
-		update reply set reply_content=#{reply_content}
-			where reply_id = #{reply_id}
-	</update>
-	
-	<delete id="deleteDonateReply" parameterType="int">
-		DELETE FROM reply WHERE reply_id=#{reply_id}
-	</delete>
-	
 	<update id="updateReply_id" parameterType="int">
 		update reply set donate_id = donate_id-1 where donate_id > #{donate_id}
 	</update>
-	
-	<select id="countReply" resultType="int" parameterType="int">
-		SELECT count(*) FROM reply WHERE donate_id = #{donate_id}
-	</select>
-	
-	<delete id="deleteAllReply" parameterType="int">
-		DELETE FROM reply WHERE donate_id=#{donate_id}
-	</delete>
+
 	 -->
 </mapper>
 

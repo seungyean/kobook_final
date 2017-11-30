@@ -116,4 +116,24 @@ public class DonateDAOImpl implements DonateDAO {
 		session.update(namespace+".updateReplyCount", paramMap);
 	}
 
+	@Override
+	public void replyUpdate(ReplyVO vo) throws Exception {
+		session.update(namespace+".replyUpdate", vo);
+	}
+
+	@Override
+	public void replyDelete(Integer reply_id) throws Exception {
+		session.delete(namespace+".replyDelete", reply_id);
+	}
+
+	@Override
+	public void replyDeleteAll(Integer donte_id) throws Exception {
+		session.delete(namespace+".replyDeleteAll", donte_id);
+	}
+
+	@Override
+	public Integer getDonateId(Integer reply_id) throws Exception {
+		return session.selectOne(namespace+".getDonateId", reply_id);
+	}
+
 }

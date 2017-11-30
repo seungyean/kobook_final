@@ -112,5 +112,24 @@ public class DonateServiceImpl implements DonateService {
 		return dao.selectPersonName(person_id, donate_id);
 	}
 
+	@Override
+	public void replyModify(ReplyVO vo) throws Exception {
+		dao.replyUpdate(vo);
+	}
+
+	@Transactional
+	@Override
+	public void replyRemove(Integer reply_id) throws Exception {
+		Integer donate_id = dao.getDonateId(reply_id);
+		dao.replyDelete(reply_id);
+		dao.updateReplyCount(-1, donate_id);
+	}
+
+	@Override
+	public void replyRemoveAll(Integer donte_id) throws Exception {
+		dao.replyDeleteAll(donte_id);
+	}
+
+
 
 }

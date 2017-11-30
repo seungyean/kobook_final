@@ -18,4 +18,7 @@ public interface DonateService {
 	public void donateReplyRegist(ReplyVO vo) throws Exception;
 	public List<ReplyVO> donateReplyList(Integer donate_id) throws Exception;
 	public String selectPersonName(Integer person_id, Integer donate_id) throws Exception;
+	public void replyModify(ReplyVO vo) throws Exception;
+	public void replyRemove(Integer reply_id) throws Exception;
+	public void replyRemoveAll(Integer donte_id) throws Exception;
 }
