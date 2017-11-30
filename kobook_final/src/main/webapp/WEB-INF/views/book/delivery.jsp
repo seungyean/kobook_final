@@ -8,6 +8,7 @@
 %> --%>
 
 <!DOCTYPE html>
+
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
 <head>
@@ -15,6 +16,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>찜리스트</title>
 	<meta name="description" content="">
+	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
     <!-- CSS FILES -->
@@ -24,7 +26,21 @@
     <link rel="stylesheet" href="/resources/css/layout/wide.css" data-name="layout">
 
     <link rel="stylesheet" type="text/css" href="/resources/css/switcher.css" media="screen" /></head>
+    
+    <!--연산맨  -->
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+	<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
+	    
+  
+    
+    
 	<script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
+	<script src="/resources/layout/scripts/date.js"></script>
+
+<link href="/resources/layout/styles/layout.css" rel="stylesheet"
+   type="text/css" media="all">
+	
 <script type="text/javascript">
 $(function(){	
 	
@@ -268,6 +284,25 @@ function change() {
                     <!--검색 row-sub-content  -->
 			
 			
+			 <form action="#" method="post">
+			<!--기간조회 -->
+			<div class="one_third">
+                  <label for="startday">기간 </label> 
+                  <input type="text" id="datepicker" name="startday" size="22">
+               </div>
+               <div class="one_third">
+                  <label for="endday">&nbsp;</label> 
+                  <input type="text" id="datepicker" name="endday" size="22">
+               </div>
+			<!--/기간조회  -->
+			 <div>
+                  <input name="submit" type="submit" value="확인" id="submit" />
+               </div>
+			
+			</form>
+			
+			
+			
 				<div class="row sub_content">
 					<div class="col-lg-12 col-md-12 col-sm-12">
 						<div class="dividerHeading">
@@ -296,6 +331,7 @@ function change() {
 												<td align="center">책이름</td>
 												<td align="center">주문자</td>
 												<td align="center">총 주문액</td>
+												<td align="center">배송 주소</td>
 												<td align="center">결제 날짜</td>
 												<td align="center">배송 상태</td>
 												<td align="center">배송 메세지</td>
@@ -309,6 +345,7 @@ function change() {
 													<td align="center">${d.BOOK_NAME}</td>
 													<td align="center">${d.PERSON_NAME}</td>
 													<td align="center">${d.PAY_AMOUNT}</td>
+													<td align="center">${d.DELIVERY_ADDRESS}</td>
 													<td align="center"><fmt:formatDate value="${d.PAY_DATE}" pattern='yyyy-MM-dd' /></td>
 													<td align="center" >
 													<input type="radio" class="status" name="delState${d.DELIVERY_ID}" etc="W" value="W" <c:if test="${d.DELIVERY_STATE eq 'W'}">checked="checked"</c:if>>배송준비중 &nbsp;&nbsp;
@@ -507,6 +544,33 @@ function change() {
 			}); */
 
 	</script>
+	
+	<script type="text/javascript">
+	$(function(){
+               $("#datepicker").datepicker({
+                  showOn : "button",
+                  buttonImage:"resources/img/calendar.png",
+                  dateFormat : "yy-mm-dd",
+                  altField : '#startday'
+               });
+               
+               $("#datepicker").datepicker({
+                  dateFormat : "yy-mm-dd",
+                  altField : '#endday'
+               });
+            
+	})
+            /* $('#submit').on("click", function() {
+
+               event.preventDefault();
+         
+               var popupX = (window.screen.width/2) - (400/2);
+               var popupY= (window.screen.height/2) - (400/2);
+               
+               window.open('/facility/changePopup','childWindow', 'status=no, height=200, width=400, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY);
+      }); */
+                        
+         </script>
 	
 		
     <!-- Start Style Switcher -->

@@ -14,7 +14,7 @@ import com.kobook.book.domain.PickVO;
 import com.kobook.book.domain.RankingVO;
 import com.kobook.book.domain.ReviewVO;
 import com.kobook.book.domain.BookVO;
-
+import com.kobook.book.domain.DateDTO;
 import com.kobook.book.domain.PersonDTO;
 import com.kobook.book.domain.SearchCriteria;
 import com.kobook.mypage.domain.DeliveryVO;
@@ -197,6 +197,13 @@ public class BookDAOImpl implements BookDAO {
 	@Override
 	public List<HashMap<String, String>> deliveryList(SearchCriteria cri){
 		return session.selectList(namespace + ".deliveryList",cri,new RowBounds(cri.getPageStart(),cri.getPerPageNum()));
+	}
+
+
+
+	@Override
+	public List<HashMap<String, String>> selectDate(DateDTO dto) throws Exception {
+		return session.selectList(namespace+".selectDate",dto);
 	}
 
 

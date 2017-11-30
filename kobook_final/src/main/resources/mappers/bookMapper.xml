@@ -211,7 +211,7 @@
 	<!--관리자 안심거래배송리스트  -->
 	<select id="deliveryList" resultType="hashMap" parameterType="SearchCriteria">
 	<![CDATA[
- 	 select d.delivery_id, b.book_name, per.person_name, p.pay_amount, p.pay_date ,d.delivery_state,d.delivery_msg
+ 	 select d.delivery_id, b.book_name, per.person_name, p.pay_amount, p.pay_date ,d.delivery_state,d.delivery_msg,d.delivery_address
 	from pay p, book b, book_order o, delivery d,person per
 	where 
 	p.order_id=o.order_id
@@ -390,5 +390,20 @@
       ]]>
 	</select>
 	
+	<!--기간별 날짜 조회  -->
+	<select id="selectDate" resultType="hashMap" parameterType="DateDTO">
+	<![CDATA[     
+ 	select d.delivery_id, b.book_name, per.person_name, p.pay_amount, p.pay_date ,d.delivery_state,d.delivery_msg
+	from pay p, book b, book_order o, delivery d,person per
+	where 
+	p.order_id=o.order_id
+  	and o.ORDER_ID=d.ORDER_ID
+	and o.book_id=b.book_id
+ 	 and o.PERSON_ID=per.PERSON_ID
+	and b.book_safe_yn='Y'
+	and o.person_id=per.person_id
+  	and book_date >= to_date(#{startday},'YYYYMMDD') and book_date < to_date(#{endday},'YYYYMMDD') + 1
+	 ]]>
+	</select>
 	
 </mapper>

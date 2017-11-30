@@ -7,7 +7,7 @@ import com.kobook.book.domain.PickVO;
 import com.kobook.book.domain.RankingVO;
 import com.kobook.book.domain.ReviewVO;
 import com.kobook.book.domain.BookVO;
-
+import com.kobook.book.domain.DateDTO;
 import com.kobook.book.domain.PersonDTO;
 import com.kobook.book.domain.SearchCriteria;
 import com.kobook.mypage.domain.DeliveryVO;
@@ -80,5 +80,7 @@ public interface BookDAO {
 	
 	public int safeListCount() throws Exception;
 	
+	public List<HashMap<String, String>> selectDate(DateDTO dto) throws Exception;
+
 
 }
