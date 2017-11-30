@@ -33,9 +33,11 @@ import com.kobook.book.domain.SearchCriteria;
 import com.kobook.community.domain.BlackVO;
 import com.kobook.community.domain.DonateFileVO;
 import com.kobook.community.domain.DonateVO;
+import com.kobook.community.domain.PhotoVO;
 import com.kobook.community.domain.ReplyVO;
 import com.kobook.community.service.BlackService;
 import com.kobook.community.service.DonateService;
+import com.kobook.community.service.PhotoReviewService;
 import com.kobook.util.MediaUtils;
 import com.kobook.util.UploadFileUtils;
 
@@ -48,6 +50,9 @@ public class CommunityController {
 	
 	@Inject
 	private DonateService donateService;
+	
+	@Inject
+	private PhotoReviewService photoService;
 	
 	@Resource(name = "uploadPath")
 	private String uploadPath;
@@ -405,7 +410,31 @@ public class CommunityController {
 		model.addAttribute("replyList",donateService.donateReplyList(donate_id));
 		return "/community/donateRead";
 	}
-	
-	//무료나눔 원본 글에 달린 댓글 전체 삭제
 
+	//포토리뷰 글 등록 폼 이동
+	@RequestMapping(value = "photoReviewRegist", method = RequestMethod.GET)
+	public void photoReviewRegistGet(@ModelAttribute("photoCommand") PhotoVO vo) throws Exception {
+		
+	}
+
+	//포토리뷰 글 등록(DB)
+	@RequestMapping(value = "/photoReviewRegist", method = RequestMethod.POST)
+	public String photoReviewRegistPost(@ModelAttribute("photoCommand") @Valid PhotoVO vo,
+			BindingResult errors, @RequestParam("file") MultipartFile file ) throws Exception {
+		if(errors.hasErrors()) {
+			return "/community/photoReviewRegist";
+		}
+		String photo_thumbnail = UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes());
+		String[] photo_thumbnail1 =photo_thumbnail.split("_");
+		
+		if(photo_thumbnail1.length>2) {
+			String photo_img = photo_thumbnail.substring(0,12);
+			String photo_img2 = photo_thumbnail.substring(14);
+			vo.setPhoto_thumbnail((photo_img+photo_img2));
+		}
+		photoService.photoRegist(vo);
+		
+		return "redirect:/community/photoReviewRegist";
+	}
+	
 }

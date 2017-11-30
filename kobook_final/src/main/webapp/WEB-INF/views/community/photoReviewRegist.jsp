@@ -12,19 +12,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Kobook/donate</title>
+<title>Kobook/photoReview</title>
 <meta name="description" content="">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<!-- CSS FILES -->
+ <!-- CSS FILES -->
     <link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/resources/css/style.css">
     <link rel="stylesheet" type="text/css" href="/resources/css/style.css" media="screen" data-name="skins">
     <link rel="stylesheet" href="/resources/css/layout/wide.css" data-name="layout">
 
     <link rel="stylesheet" type="text/css" href="/resources/css/switcher.css" media="screen" />
-</head>
 
 <style>
 	.fileDrop {
@@ -40,10 +39,11 @@
 	}
 </style>
 
+</head>
 <body class="home">
 	<!-- 헤더 -->
  		 <jsp:include page="/WEB-INF/views/include/header.jsp" />
-  	<!-- /헤더 -->
+  	<!-- /헤더 -->	
 
 	<!--start wrapper-->
 	<section class="wrapper">
@@ -52,42 +52,44 @@
 				<div class="row">
 					<div class="col-lg-12 col-md-12 col-sm-12">
 						<div class="page_title">
-							<h2>무료 나눔 게시판</h2>
+							<h2>포토 리뷰 게시판</h2>
 						</div>
 						<nav id="breadcrumbs">
 							<ul>
 								<li><a href="/">홈</a>/</li>
 								<li>커뮤니티 /</li>
-								<li>무료나눔</li>
+								<li>포토리뷰</li>
 							</ul>
 						</nav>
 					</div>
 				</div>
 			</div>
 		</section>
+		
 		<section class="content typography">
 			<div class="container">
 				<div class="row sub_content">
 					<div class="col-lg-6 col-sm-6">
 						<div class="dividerHeading">
 							<h4>
-								<span>무료 나눔 글 작성</span>
+								<span>포토 리뷰 글 작성</span>
 							</h4>
 						</div>
-						<form:form action="donateRegist" id="registerForm" commandName="donateCommand" method="post" enctype="multipart/form-data">
+						<form:form action="photoReviewRegist" id="registerform" commandName="photoCommand"
+							method="post" enctype="multipart/form-data">
 							<div class="form-group">
 								<input type="hidden" class="form-control" name="person_id"
-									value="${person_id }">
+									value="${person_id}">
 							</div>
 							<div class="form-group">
-								<form:input type="text" class="form-control" path="donate_title"
+								<form:input type="text" class="form-control" path="photo_title"
 									placeholder="글 제목"/>
-								<form:errors path="donate_title" cssClass="error"/>
+								<form:errors path="photo_title" cssClass="error"/>
 							</div>
 							<div class="form-group">
 								<form:textarea rows="10" cols="73" class="form-control"
-									path="donate_content" placeholder="글 내용"/>
-								<form:errors path="donate_content" cssClass="error"/>
+									path="photo_content" placeholder="글 내용"/>
+								<form:errors path="photo_content" cssClass="error"/>
 							</div>
 							<div class="form-group">
 								<input type="file" name="file">
@@ -124,22 +126,26 @@
 
 	
 
-	 <script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
-    <script src="/resources/js/bootstrap.min.js"></script>
-    <script src="/resources/js/jquery.easing.1.3.js"></script>
-    <script src="/resources/js/retina-1.1.0.min.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.cookie.js"></script> <!-- jQuery cookie -->
-    <script type="text/javascript" src="/resources/js/styleswitch.js"></script> <!-- Style Colors Switcher -->
-    <script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.smartmenus.bootstrap.min.js"></script>
-        <script type="text/javascript" src="/resources/js/jflickrfeed.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.magnific-popup.min.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.isotope.min.js"></script>
-    <script type="text/javascript" src="/resources/js/swipe.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
-    
-    <script src="/resources/js/main.js"></script>
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+	<script src="../js/jquery.easing.1.3.js"></script>
+	<script src="../js/retina-1.1.0.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.cookie.js"></script>
+	<!-- jQuery cookie -->
+	<script type="text/javascript" src="../js/styleswitch.js"></script>
+	<!-- Style Colors Switcher -->
+	<script type="text/javascript" src="../js/jquery.smartmenus.min.js"></script>
+	<script type="text/javascript"
+		src="../js/jquery.smartmenus.bootstrap.min.js"></script>
+	<script type="text/javascript" src="../js/owl.carousel.js"></script>
+	<!-- Popover-JS -->
+	<script type="text/javascript" src="../js/jflickrfeed.js"></script>
+	<script type="text/javascript" src="../js/jquery.magnific-popup.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.isotope.min.js"></script>
+	<script type="text/javascript" src="../js/swipe.js"></script>
+	<script type="text/javascript" src="../js/jquery-scrolltofixed-min.js"></script>
 
+	<script src="../js/main.js"></script>
 	<script type="text/javascript" src="/resources/js/upload.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <script id="template" type="text/x-handlebars-template">
@@ -225,7 +231,7 @@ $(".uploadedList").on("click", ".delbtn", function(event){
    });
 });
 
-$("#registerForm").submit(function(event){
+$("#registerform").submit(function(event){
 	event.preventDefault();
 	
 	var that1 = $(this);
