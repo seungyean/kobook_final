@@ -133,9 +133,9 @@ body {
 					<div class="col-lg-8 col-md-8 col-sm-8">
 						<!--Project Details Page-->
 						<div class="porDetCarousel">
-							<div class="carousel-content">
+							<!-- <div class="carousel-content"> -->
 							  <img alt="aa" class="carousel-item" src="displayFile?fileName=${bookVO.book_img}" width="10px" height="800px">	
-							</div>
+							<!-- </div> -->
 						</div>
 					</div>
 
@@ -156,7 +156,8 @@ body {
 								<li><span>책종류 :</span>${bookVO.book_kind}</li>
 								<li><span>해시태그 :</span>${bookVO.book_hash}</li>
 								<li><span> 원가:</span> ${bookVO.book_o_price}</li>
-								<li><span> 판매가:</span> ${bookVO.book_m_price} 할인:<b>${(bookVO.book_o_price-bookVO.book_m_price)/100}%</b></li>
+								<li><span> 판매가:</span> ${bookVO.book_m_price}</li>
+								<li><span> 할인율 :</span>${(bookVO.book_o_price-bookVO.book_m_price)/100}%</li>
 								<li><span> 판 :</span>${bookVO.book_edition}</li>
 								<li><span>출판사 :</span>${bookVO.book_publish}</li>
 								<li><span>안심여부사용 :</span>${bookVO.book_safe_yn}</li>
@@ -685,7 +686,7 @@ body {
        
        $('.porDetCarousel').each(function() {
           $(this).carousel({
-             autoChange: true
+            // autoChange: true
           });
        });
     });

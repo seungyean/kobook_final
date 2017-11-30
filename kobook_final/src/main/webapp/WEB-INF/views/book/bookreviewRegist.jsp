@@ -166,7 +166,7 @@ border-radius: 4px;
 
 	<br>
 
-	<form action="/book/bookreviewRegist" method="post">
+	<form action="/book/bookreviewRegist" method="post" id="reviewForm">
 	<input type="hidden" name="pay_id" value="${pay_id}">
 	<%--  <input type="hidden" name="review_star" value="${review_star}"> --%>
 		<!-- <input type="hidden" id="parentURI" name="parentURI" value=""> -->
@@ -306,6 +306,8 @@ border-radius: 4px;
 	    if (review_star > 1) {
 	        msg = "Thanks! You rated this " + review_star + " stars.";
 	        alert(review_star);
+	        $('#reviewForm').append('<input type="hidden" name="review_star" value="'+review_star +'">');
+	        
 	    }
 	    else {
 	        msg = "We will improve ourselves. You rated this " + review_star + " stars.";

@@ -84,11 +84,11 @@
 					</select> &nbsp&nbsp
 			
 		<b> 	책종류: </b><select name="book_kind" id="kind">
-					<option value="사회계열" selected="selected">사회계열</option>
+					<option value="사회계열" selected="selected">사회과학계열</option>
 					<option value="법학계열">법학계열</option>
-					<option value="의학계열">의학계열</option>
+					<option value="의학계열">의학간호계열 </option>
 					<option value="공학계열">공학계열</option>
-					<option value="자연계열">자연계열</option>
+					<option value="자연계열">자연과학계열  </option>
 					<option value="예체능계열">예체능계열</option>
 					<option value="어문학계열">어문학계열</option>
 					</select><br>

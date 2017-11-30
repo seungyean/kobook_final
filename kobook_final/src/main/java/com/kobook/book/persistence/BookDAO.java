@@ -33,7 +33,7 @@ public interface BookDAO {
 	//��留ㅼ����蹂�
 	public PersonDTO readSellPerson(int person_id) throws Exception;
 	
-	
+
 	
 	public int countPaging(SearchCriteria cri)throws Exception;
 	
@@ -75,4 +75,10 @@ public interface BookDAO {
 	public void registerkeyword(RankingVO ranking)throws Exception;
 	
 	public List<RankingVO> rankingList() throws Exception;
+	
+	public int directListCount() throws Exception;
+	
+	public int safeListCount() throws Exception;
+	
+
 }

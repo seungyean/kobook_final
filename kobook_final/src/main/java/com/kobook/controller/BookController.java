@@ -197,74 +197,41 @@ public class BookController {
 
     @RequestMapping("/bookList")
 	public void list(@ModelAttribute("cri") SearchCriteria cri, Model model)throws Exception{
-		
-    	RankingVO ranking=new RankingVO();
-    	ranking.setRanking_keyword(cri.getKeyword());
-    	System.out.println("검색내용:"+cri.getKeyword());
-    	//service.rankingList();
-    	
-    	if(cri.getKeyword()==null){
+    		System.out.println("검색내용 없을 때 null이어야함:"+cri.getKeyword());
     		service.listCriteria(cri);
     		
-    	}
-    	else{
-    		service.registerkeyword(ranking);
+    		PageMaker pageMaker=new PageMaker();
+    		pageMaker.setCri(cri);
+    		pageMaker.setTotalCount(service.countPaging(cri));
+    		model.addAttribute("pageMaker",pageMaker);
 
-    	}
-    	
-    
-    	
+        //검색값 있을때,없을때 다보여줘야함(책리스트, 인기검색어리스트,)
     	model.addAttribute("list", service.listCriteria(cri));
     	model.addAttribute("rankingList", service.rankingList());
     	
-    	System.out.println("rankinglist"+service.rankingList());
-	
-		
-		
-		
 
 		
-		
-		
-		
-	//	model.addAttribute("rankinglist", service.)
-		PageMaker pageMaker=new PageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(service.countPaging(cri));
-		model.addAttribute("pageMaker",pageMaker);
-
 	}
-	
-	
-	
-	
-	/*@RequestMapping(value="/bookList" , method=RequestMethod.POST)
-	public void listPOST(@ModelAttribute("cri") SearchCriteria cri, Model model,@RequestParam("key_word")String key_word)throws Exception{
-		RankingVO ranking=new RankingVO();
-		//ranking.setRanking_keyword(key_word);
-		model.addAttribute("list", service.listCriteria(cri, ranking));
-		
-		//RankingVO ranking=new RankingVO();
-		
-		//service.registerkeyword(ranking);
-		
-		
-	//	model.addAttribute("rankinglist", service.)
-		PageMaker pageMaker=new PageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(service.countPaging(cri));
-		model.addAttribute("pageMaker",pageMaker);
+    
+ 
 
-	}*/
-	
-
-
-	
 	
 	@RequestMapping("/booklocationList")
 	public void locationlist(@ModelAttribute("cri") SearchCriteria cri, Model model)throws Exception{
 		model.addAttribute("list", service.directListCriteria(cri));
 		model.addAttribute("list2", service.safeListCriteria(cri));
+		
+/*		PageMaker pageMaker=new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(service.directListCount());
+		model.addAttribute("pageMaker",pageMaker);
+		
+		
+		PageMaker pageMaker2=new PageMaker();
+		pageMaker2.setCri(cri);
+		pageMaker2.setTotalCount(service.safeListCount());
+		model.addAttribute("pageMaker2",pageMaker2);*/
+		
 		
 		PageMaker pageMaker=new PageMaker();
 		pageMaker.setCri(cri);

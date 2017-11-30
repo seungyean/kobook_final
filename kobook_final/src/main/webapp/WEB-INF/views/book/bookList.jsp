@@ -85,10 +85,9 @@ $(function()
 		</section>
 
 		<div class='box-body' align="center">
+<!-- 		<form action="/book/rankingRegist" method="post" name="rankingForm" > -->
 
-		<!-- <form action="/book/ranking" method="post"> -->
 			<select name="searchType">
-
 				<option value="n"
 					<c:out value="${cri.searchType == null?'selected':''}"/>>
 					검색방법</option>
@@ -112,23 +111,16 @@ $(function()
 					제목 + 내용 + 해시태그</option>
 			</select> 
 			<input type="text" name="keyword" id="keywordInput"
-				value='${cri.keyword}' placeholder="Enter Search keywords..."
+				value="${review_keyword}"  data-rno="${review_keyword}" placeholder="Enter Search keywords..."
 				size="25">
-				
-			
 			<button id='searchBtn' class="btn-default">
 				<i class="fa fa-search"></i>
 			</button>
-			<!-- </form> -->
 
-
-			<select id="sortType">
-
+	<%-- 		<select id="sortType">
 				<option value="n"
 					<c:out value="${cri.searchType == null?'selected':''}"/>>
 					정렬방법</option>
-
-
 				<option value="d"
 					<c:out value="${cri.sortType eq 'd'?'selected':''}"/>>
 					날짜순</option>
@@ -140,27 +132,18 @@ $(function()
 				<option value="b"
 					<c:out value="${cri.sortType eq 'b'?'selected':''}"/>>
 					책상태순</option>
-			</select>
-
+			</select> --%>
+			<!-- </form> -->
 		</div>
 
 
-<div class="block">
-    <ul id="ticker">
-    
-    <c:forEach var="rl" items="${rankingList}" varStatus="status">
-        <li><a href="#"><span><c:out value="${status.count}"/></span> ${rl.ranking_keyword}</a></li>
-
-        
- <%--        <c:forEach var = "i" begin = "1" end = "5">
-         Item <c:out value = "${i}"/><p>
-      </c:forEach> --%>
-        
-        
-        
-		</c:forEach>
-    </ul>
-</div>
+			<div class="block">
+			    <ul id="ticker">
+			    <c:forEach var="rl" items="${rankingList}" varStatus="status">
+			        <li><a href="#"><span><c:out value="${status.count}"/></span> ${rl.ranking_keyword}</a></li>
+					</c:forEach>
+			    </ul>
+			</div>
 
 		<section class="content portfolio small-images">
 			<form action="/book/bookRegist" method="get">
@@ -170,11 +153,11 @@ $(function()
 					<ul id="filter" class="option-set clearfix">
 						<!-- <li data-filter="*" class="selected"><a href="#">All</a></li> -->
 						<li data-filter=".*" class="selected"><a href="#">All</a></li>
-						<li data-filter=".Social"><a href="#">사회계열</a></li>
+						<li data-filter=".Social"><a href="#">사회과학계열  </a></li>
 						<li data-filter=".Law"><a href="#">법학계열</a></li>
-						<li data-filter=".Medical"><a href="#">의학계열</a></li>
+						<li data-filter=".Medical"><a href="#">의학간호계열 </a></li>
 						<li data-filter=".Engineering"><a href="#">공학계열</a></li>
-						<li data-filter=".Science"><a href="#">자연계열</a></li>
+						<li data-filter=".Science"><a href="#">자연과학계열  </a></li>
 						<li data-filter=".Art"><a href="#">예체능계열</a></li>
 						<li data-filter=".Language"><a href="#">어문학계열</a></li>
 
@@ -188,7 +171,7 @@ $(function()
 						<!--begin List Item -->
 						<c:forEach var="b" items="${list}">
 							<%-- <c:set var="b.book_kind" value="Social" /> --%>
-							<c:if test="${b.book_kind=='사회계열'}">
+							<c:if test="${b.book_kind=='사회과학계열'}">
 								<li class="list_item col-lg-3 col-md-4 col-sm-6 Social">
 									<div class="recent-item box">
 										<figure class="touching ">
@@ -271,7 +254,7 @@ $(function()
 						<!--begin List Item -->
 						<c:forEach var="b" items="${list}">
 							<%-- <c:set var="b.book_kind" value="Medical" /> --%>
-							<c:if test="${b.book_kind=='의학계열'}">
+							<c:if test="${b.book_kind=='의학간호계열 '}">
 								<li class="list_item col-lg-3 col-md-4 col-sm-6 Medical">
 									<div class="recent-item box">
 										<figure class="touching ">
@@ -347,7 +330,7 @@ $(function()
 						<!--begin List Item -->
 						<c:forEach var="b" items="${list}">
 							<%-- <c:set var="b.book_kind" value="Science" /> --%>
-							<c:if test="${b.book_kind=='자연계열'}">
+							<c:if test="${b.book_kind=='자연과학계열  '}">
 								<li class="list_item col-lg-3 col-md-4 col-sm-6 Science">
 									<div class="recent-item box">
 										<figure class="touching ">
@@ -495,6 +478,11 @@ $(function()
 		</div>
 
 
+	
+	
+	
+
+
 		<!-- /.box-footer-->
 
 
@@ -540,24 +528,25 @@ $(function()
 
 
 
-	<script>
+	<script type="text/javascript">
 		$(document).ready(
 				function() {
-
 					$('#searchBtn').on(
 							"click",
 							function(event) {
 
-								self.location = "bookList"
+				 				self.location = "bookList"
 										+ '${pageMaker.makeQuery(1)}'
 										+ "&searchType="
 										+ $("select option:selected").val()
 										+ "&keyword="
-										+ $('#keywordInput').val();
+										+ $('#keywordInput').val();  
 										
-
+								var key_word=$('#keywordInput').attr("data-rno");
+								console.log("키워드: "+key_word);
 							});
 
+						       // $('#reviewForm').append('<input type="hidden" name="review_star" value="'+review_star +'">');
 				});
 
 		/*$('#sortType').change(
@@ -569,6 +558,16 @@ $(function()
 					+ $("select option:selected").val();
 
 		}); */
+		
+	</script>
+	
+	<script type="text/javascript">
+	$('#searchBtn').on(
+			"click",
+			function(event) {
+				var key_word=$('#keywordInput').attr("data-rno");
+				console.log("키워드: "+key_word);
+			});
 	</script>
 	<!-- Start Style Switcher -->
 	<div class="switcher"></div>

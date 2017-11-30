@@ -14,6 +14,7 @@ import com.kobook.mypage.domain.DeliveryVO;
 import com.kobook.person.domain.PersonVO;
 
 
+
 public interface BookService {
 
 	public void regist(BookVO book)throws Exception;
@@ -71,5 +72,11 @@ public interface BookService {
 		public void registerkeyword(RankingVO ranking)throws Exception;
 		
 		public List<RankingVO> rankingList() throws Exception;
+		
+		public int directListCount() throws Exception;
+		
+		public int safeListCount() throws Exception;
+		
+
 	
 }

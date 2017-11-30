@@ -10,6 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.kobook.book.domain.BookVO;
+import com.kobook.book.domain.SearchCriteria;
 import com.kobook.book.persistence.BookDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -22,7 +23,11 @@ public class BookDAOTest {
 	@Test
 	public void test() throws Exception {
 		
-		System.out.println(dao.rankingList());
+		//System.out.println(dao.rankingList());
+		
+		SearchCriteria cri=new SearchCriteria();
+		cri.setKeyword("aaa");
+	//	dao.registerkeyword(cri.getKeyword());
 	
 	
 	}

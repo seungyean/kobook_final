@@ -28,8 +28,11 @@
       ]]>
 		<include refid="search"></include>
 		<include refid="sort"></include>
-
 	</select>
+	
+
+	
+	
 
 	<select id="directListCriteria" resultType="BookVO" parameterType="SearchCriteria">
 	<![CDATA[
@@ -41,6 +44,13 @@
       and b.book_safe_yn='N'
       ]]>
        <include refid="locationsearch"></include>
+	</select>
+	
+	<select id="directListCount" resultType="Integer">
+	  select count(b.book_id)
+      from book b, person p
+      where b.person_id=p.person_id
+      and b.book_safe_yn='N'
 	</select>
 	
 		<select id="safeListCriteria" resultType="BookVO" parameterType="SearchCriteria">
@@ -55,6 +65,15 @@
             <include refid="locationsearch"></include>
 	</select>
 
+
+	<select id="safeListCount" resultType="Integer">
+	  select count(b.book_id)
+      from book b, person p
+      where b.person_id=p.person_id
+      and b.book_safe_yn='Y'
+	</select>
+	
+	
 
 	<select id="sellPersonList" resultType="BookVO">
 		<![CDATA[
@@ -332,7 +351,7 @@
 	</update>
 
 
-	<select id="countPaging" resultType="int">
+	<select id="countPaging" resultType="Integer">
    <![CDATA[
       select count(book_id) from book where book_id>0    
    ]]>

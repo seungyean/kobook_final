@@ -154,8 +154,8 @@ public class BookServiceImpl implements BookService {
 	public int countReview(int person_id) throws Exception {
 		return dao.countReview(person_id);
 	}
-
-
+	
+	
 
 
 	@Override
@@ -245,6 +245,24 @@ public class BookServiceImpl implements BookService {
 	public List<RankingVO> rankingList() throws Exception {
 		return dao.rankingList();
 	}
+	
+	
+	@Override
+	public int directListCount() throws Exception {
+		return dao.directListCount();
+	}
+
+
+
+
+	@Override
+	public int safeListCount() throws Exception {
+		return dao.safeListCount();
+	}
+
+
+
+
 	
 	
 

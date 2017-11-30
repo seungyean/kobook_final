@@ -117,17 +117,6 @@ public class BookDAOImpl implements BookDAO {
 	}
 
 
-	
-	
-
-
-	/*@Override
-	public int getPayId() throws Exception {
-		return session.selectOne(namespace+".getPayId");
-	}*/
-
-
-
 
 	@Override
 	public String writeName(int person_id) throws Exception {
@@ -242,6 +231,26 @@ public class BookDAOImpl implements BookDAO {
 	public List<RankingVO> rankingList() throws Exception {
 		return session.selectList(namespace+".rankingList");
 	}
+
+
+
+
+	@Override
+	public int directListCount() throws Exception {
+		return session.selectOne(namespace+".directListCount");
+	}
+
+
+
+
+	@Override
+	public int safeListCount() throws Exception {
+		return session.selectOne(namespace+".safeListCount");
+	}
+
+
+
+
 	
 	
 
