@@ -44,5 +44,8 @@ public class FavoriteServiceImpl implements FavoriteService {
 		return r_data;
 	}
 
-	
+	@Override
+	public void updateFavoriteRank(FavoriteVO favorite) {
+		dao.updateFavoriteRank(favorite);
+	}
 }

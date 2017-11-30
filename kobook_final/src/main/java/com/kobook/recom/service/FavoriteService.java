@@ -11,4 +11,5 @@ public interface FavoriteService {
 	public List<FavoriteBookVO> getFavorite(int person_id);
 	public void deleteFavorite(FavoriteVO favorite);
 	public List<RdataVO> getRdata();
+	public void updateFavoriteRank(FavoriteVO favorite);
 }

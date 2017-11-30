@@ -35,4 +35,9 @@ public class FavoriteDAOImpl implements FavoriteDAO {
 		return session.selectList(namespace + ".getRdata");
 	}
 
+	@Override
+	public void updateFavoriteRank(FavoriteVO favorite) {
+		session.update(namespace + ".updateFavoriteRank", favorite);
+		
+	}
 }
