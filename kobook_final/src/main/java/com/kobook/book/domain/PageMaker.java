@@ -12,7 +12,7 @@ public class PageMaker {
   private boolean prev;
   private boolean next;
 
-  private int displayPageNum = 10;
+  private int displayPageNum = 9;
 
   private Criteria cri;
 
@@ -73,7 +73,7 @@ public class PageMaker {
   }
 
   public String makeQuery(int page) {
-     //page¸¦ ³Ö¾úÀ»¶§ ¹®ÀÚ¿­°ªÀ¸·Î ¸¸µé¾îÁÖ´Â api
+     //pageï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ api
      //board/read?bno=12&perPageNum=20
     UriComponents uriComponents = UriComponentsBuilder.newInstance().queryParam("page", page)
         .queryParam("perPageNum", cri.getPerPageNum()).build();
