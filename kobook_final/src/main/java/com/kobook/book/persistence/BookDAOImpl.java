@@ -278,6 +278,23 @@ public class BookDAOImpl implements BookDAO {
 	public int cpercent() throws Exception {
 		return session.selectOne(namespace+".cpercent");
 	}
+
+
+
+
+	@Override
+	public int month(int m) throws Exception {
+		return session.selectOne(namespace+".month",m);
+	}
+
+
+
+
+	@Override
+	public int todayMoney() throws Exception {
+		return session.selectOne(namespace+".todayMoney");
+	}
+	
 	
 	
 	

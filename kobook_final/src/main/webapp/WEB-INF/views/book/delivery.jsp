@@ -236,42 +236,65 @@ function change() {
                             </div>
                             <div class="service-content">
                                 <h3>오늘 총 매출</h3>
-                                <p>1,000,000,000 </p>
+                                <h4>${todayMoney}원</h4>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-4">
-                        <div class="serviceBox_1">
-                            <div class="service-icon">
-                                <i class="fa fa-user"></i>
-                            </div>
-                            <div class="service-content">
-                                <h3>오늘 가입자</h3>
-                                <p>2명쯤 될라나?? 미구현</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="serviceBox_1">
-                            <div class="service-icon">
-                                <i class="fa fa-android"></i>
-                            </div>
-                            <div class="service-content">
-                                <h3>오늘 총 접속자</h3>
-                                <p> 명</p>
-                            </div>
-                        </div>
-                    </div>
+           
+
 				</div>
+				
+				
 				<div class="row sub_content">
-                    <div class="col-md-3 col-sm-6">
+                    <div class="col-md-12 col-lg-12">
                         <div class="serviceBox_2 blue">
-                               <div id="chart_a"></div>
+                               <div id="chart_a">
+                               <div data-rno="${thismonth}" id="thismonth"></div> 
+                               <div data-rno="${prevmonth}" id="prevmonth"></div> 
+                               <div data-rno="${nextmonth}" id="nextmonth"></div> 
+                               </div>
                         </div>
+                        
+                        
+                              <div class="col-sm-4">
+                                <div class="serviceBox_5">
+                                    <div id="chart_div">
+                                    	<div data-rno="${wpercent}" id="w"></div> 
+                                    	<div data-rno="${ipercent}" id="i"></div> 
+                                    	<div data-rno="${cpercent}" id="c"></div> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="serviceBox_5">
+                                       <div id="chart_divv"></div>
+                                    </div>
+                                </div>
+                        
                     </div>
+                    
+                    
+                      
+                            
+                            <div class="col-sm-4">
+                                <div class="serviceBox_5">
+                                    <div id="chart_div">
+                                    	<div data-rno="${wpercent}" id="w"></div> 
+                                    	<div data-rno="${ipercent}" id="i"></div> 
+                                    	<div data-rno="${cpercent}" id="c"></div> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="serviceBox_5">
+                                       <div id="chart_divv"></div>
+                                    </div>
+                                </div>
+                           
+                        
 				</div>
 
-                    <div class="container">
+                    <%-- <div class="container">
                        <!--  <div class="row sub_content"> -->
                             <div class="col-md-12 col-lg-12">
                             <div class="col-sm-4">
@@ -289,7 +312,9 @@ function change() {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --%>
+                        
+                        
                     </div>
 		</section>
         <!--/통계  -->
@@ -354,8 +379,8 @@ function change() {
                     <!--검색 row-sub-content  -->
 			
 			
-			 <form action="#" method="post">
-			<!--기간조회 -->
+	<!-- 		 <form action="#" method="post">
+			기간조회
 			<div class="one_third">
                   <label for="startday">기간 </label> 
                   <input type="text" id="datepicker" name="startday" size="22">
@@ -364,12 +389,12 @@ function change() {
                   <label for="endday">&nbsp;</label> 
                   <input type="text" id="datepicker" name="endday" size="22">
                </div>
-			<!--/기간조회  -->
+			/기간조회 
 			 <div>
                   <input name="submit" type="submit" value="확인" id="submit" />
                </div>
 			
-			</form>
+			</form> -->
 			
 			
 			
@@ -647,16 +672,59 @@ function change() {
        <script type="text/javascript">
     google.charts.load('current', {packages: ['corechart', 'line']});
     google.charts.setOnLoadCallback(drawBasic);
+    
+    
+    var thismonth=$('#thismonth').attr("data-rno");
+    var nextmonth=$('#nextmonth').attr("data-rno");
+    var prevmonth=$('#prevmonth').attr("data-rno");
+
+   
+    var date = new Date();
+    
+    var year  = date.getFullYear();
+    
+  // var prev_month=date.getMonth(); 
+ //이번달
+  var month=date.getMonth()+1;
+  if(month==12){
+		 var next_month=1;
+	 }
+ 
+ //다음달
+ var next_month=((date.getMonth()+1)%12)+1;
+   
+ 
+ //저번달
+ var prev_month=date.getMonth();
+ 
+ //12월이면 다음달 1월
+ //12월이면 내년 1월
+ if(year==12){
+  var year=date.getFullYear()+1;
+ }
+    
+console.log("저번달"+prev_month);
+console.log("이번달"+month);
+console.log("다음달"+next_month);
+
+    console.log("년"+year);
+    console.log("월"+month);
+    
+    
     function drawBasic() {
           var data = new google.visualization.DataTable();
-          data.addColumn('number', 'X');
-          data.addColumn('number', '접속자');
+          data.addColumn('string', 'X');
+          data.addColumn('number', '총금액');
           data.addRows([
+        	  
+        		[eval(year)+'년'+ eval(prev_month)+'월', eval(prevmonth) ],
+        	    [eval(year)+'년'+ eval(month)+'월', eval(thismonth)],
+        	    [eval(year)+'년'+ eval(next_month)+'월', eval(nextmonth)],
             
           ]);
           var options = {           
-        	title : '접속자 현황',	  
-        	width :'1100',
+        	title : '월별대비 비교',	  
+        	width :'600',
             height : '500'
           };
           var chart = new google.visualization.LineChart(document.getElementById('chart_a'));

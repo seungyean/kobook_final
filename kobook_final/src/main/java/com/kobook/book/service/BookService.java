@@ -83,6 +83,9 @@ public interface BookService {
 		public int ipercent() throws Exception;
 		public int cpercent() throws Exception;
 		
+		public int month(int m) throws Exception;
+		
+		public int todayMoney() throws Exception;
 
 	
 }

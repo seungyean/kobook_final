@@ -427,7 +427,7 @@
 	 ]]>
 	</select>
 	
-			<!-- 'C'비중 -->
+	<!-- 'C'비중 -->
 	<select id="cpercent" resultType="Integer" >
 	<![CDATA[ 
 	select round(((select count(delivery_state)
@@ -437,6 +437,21 @@
 	 ]]>
 	</select>
 	
+	<!--달별 -->
+	<select id="month" resultType="Integer" parameterType="Integer">
+	select nvl(sum(pay_amount)*0.5,0)
+	from pay
+	where to_char(pay_date, 'MM') = to_char(add_months(sysdate,#{value}),'MM')
+	group by to_char(pay_date,'MM')
+	</select>
+	
+	
+	<!--오늘 총 금액  -->
+	<select id="todayMoney" resultType="Integer">
+	select nvl(sum(pay_amount)*0.5,0)
+	from pay
+	where to_char(pay_date,'YY/MM/DD')=(select TO_CHAR(SYSDATE,'YY/MM/DD')from dual)
+	</select>
 	
 	
 </mapper>

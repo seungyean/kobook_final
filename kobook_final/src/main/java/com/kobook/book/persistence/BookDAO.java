@@ -85,6 +85,11 @@ public interface BookDAO {
 	public int wpercent() throws Exception;
 	public int ipercent() throws Exception;
 	public int cpercent() throws Exception;
+	
+	public int month(int m) throws Exception;
+	
+	public int todayMoney()throws Exception;
+	
 
 
 }
