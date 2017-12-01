@@ -38,7 +38,7 @@ public class PhotoReviewDAOImpl implements PhotoReviewDAO {
 	@Override
 	public List<PhotoVO> photoList(SearchCriteria cri) throws Exception {
 		return session.selectList(namespace+".photoList", cri
-				, new RowBounds(cri.getPage(), cri.getPerPageNum()));
+				, new RowBounds(cri.getPageStart(), cri.getPerPageNum()));
 	}
 
 	@Override

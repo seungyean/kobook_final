@@ -419,7 +419,7 @@ public class CommunityController {
 	}
 
 	//포토리뷰 글 등록(DB)
-	@RequestMapping(value = "/photoReviewRegist", method = RequestMethod.POST)
+	@RequestMapping(value = "photoReviewRegist", method = RequestMethod.POST)
 	public String photoReviewRegistPost(@ModelAttribute("photoCommand") @Valid PhotoVO vo,
 			BindingResult errors, @RequestParam("file") MultipartFile file ) throws Exception {
 		if(errors.hasErrors()) {

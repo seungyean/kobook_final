@@ -54,7 +54,7 @@
 			<div class="container">
 				<div class="row sub_content">
 					<!--begin isotope -->
-							<form action="/community/photoReviewRegist" method="get">
+					<form action="/community/photoReviewRegist" method="get">
 					<div class="col-lg-12 isotope">
 					
                     <!--begin portfolio filter -->
@@ -66,13 +66,15 @@
                     </ul> -->
                     <!--end portfolio filter -->
 						<!--begin portfolio_masonry -->
-						<div class="mixed-container masonry_wrapper">
+						<ul id="list" class="portfolio_list clearfix ">
 							<c:forEach var="photo" items="${list}">
-							<div class="item responsive">
+						<li class="list_item col-lg-3 col-md-4 col-sm-6">
+						<!-- <div class="mixed-container masonry_wrapper"> 
+							<div class="item responsive">-->
 								<div class="recent-item box">
 									<figure class="touching ">
 											<a href="/community/photoReviewRead?photo_id=${photo.photo_id }">
-										<img src="/community/displayFile?fileName=${photo.photo_thumbnail}"
+										<img id="photo" src="/community/displayFile?fileName=${photo.photo_thumbnail}"
 											alt="NO IMAGE" height="280" class="img-responsive" /></a>
 										<div class="option inner">
 											<div>
@@ -85,9 +87,12 @@
 										</div>
 									</figure>
 								</div>
-							</div>
+							<!--</div>
+						 </div> -->
+						</li>
+						
 							</c:forEach>
-						</div>
+						</ul>
 							<input type="submit" value="글쓰기" class="btn-default">
 						<!--end portfolio_masonry -->
 					</div>
@@ -176,7 +181,7 @@
 		});
 	});
 	</script>
-	<script>
+<!-- 	<script>
     (function ($) {
         var $container = $('.masonry_wrapper'),
                 colWidth = function () {
@@ -229,7 +234,7 @@
         isotope();
         $(window).smartresize(isotope);
     }(jQuery));
-</script>
+</script> -->
 	<!-- Start Style Switcher -->
 	<div class="switcher"></div>
 	<!-- End Style Switcher -->
