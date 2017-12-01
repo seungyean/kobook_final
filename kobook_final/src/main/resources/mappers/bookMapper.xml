@@ -391,7 +391,7 @@
 	</select>
 	
 	<!--기간별 날짜 조회  -->
-	<select id="selectDate" resultType="hashMap" parameterType="DateDTO">
+<!-- 	<select id="selectDate" resultType="hashMap" parameterType="DateDTO">
 	<![CDATA[     
  	select d.delivery_id, b.book_name, per.person_name, p.pay_amount, p.pay_date ,d.delivery_state,d.delivery_msg
 	from pay p, book b, book_order o, delivery d,person per
@@ -404,6 +404,39 @@
 	and o.person_id=per.person_id
   	and book_date >= to_date(#{startday},'YYYYMMDD') and book_date < to_date(#{endday},'YYYYMMDD') + 1
 	 ]]>
+	</select> -->
+	
+
+		<!-- 'W'비중 -->
+	<select id="wpercent" resultType="Integer" >
+	<![CDATA[ 
+	select round(((select count(delivery_state)
+	from delivery
+	where delivery_state='W')/(select count(delivery_id)
+	from delivery)*100),0) from dual
+	 ]]>
 	</select>
+	
+			<!-- 'I'비중 -->
+	<select id="ipercent" resultType="Integer" >
+	<![CDATA[ 
+	select round(((select count(delivery_state)
+	from delivery
+	where delivery_state='I')/(select count(delivery_id)
+	from delivery)*100),0) from dual
+	 ]]>
+	</select>
+	
+			<!-- 'C'비중 -->
+	<select id="cpercent" resultType="Integer" >
+	<![CDATA[ 
+	select round(((select count(delivery_state)
+	from delivery
+	where delivery_state='C')/(select count(delivery_id)
+	from delivery)*100),0) from dual
+	 ]]>
+	</select>
+	
+	
 	
 </mapper>

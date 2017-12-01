@@ -36,10 +36,10 @@
     
     
 	<script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
-	<script src="/resources/layout/scripts/date.js"></script>
+	<!-- <script src="/resources/layout/scripts/date.js"></script> -->
 
-<link href="/resources/layout/styles/layout.css" rel="stylesheet"
-   type="text/css" media="all">
+<!-- <link href="/resources/layout/styles/layout.css" rel="stylesheet"
+   type="text/css" media="all"> -->
 	
 <script type="text/javascript">
 $(function(){	
@@ -224,6 +224,76 @@ function change() {
                 </div>
             </div>
         </section>
+        
+        <!-- 통계 -->
+        <section class="content service">
+			<div class="container">
+				<div class="row sub_content">
+                    <div class="col-sm-4">
+                        <div class="serviceBox_1">
+                            <div class="service-icon">
+                                <i class="fa fa-money"></i>
+                            </div>
+                            <div class="service-content">
+                                <h3>오늘 총 매출</h3>
+                                <p>1,000,000,000 </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="serviceBox_1">
+                            <div class="service-icon">
+                                <i class="fa fa-user"></i>
+                            </div>
+                            <div class="service-content">
+                                <h3>오늘 가입자</h3>
+                                <p>2명쯤 될라나?? 미구현</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="serviceBox_1">
+                            <div class="service-icon">
+                                <i class="fa fa-android"></i>
+                            </div>
+                            <div class="service-content">
+                                <h3>오늘 총 접속자</h3>
+                                <p> 명</p>
+                            </div>
+                        </div>
+                    </div>
+				</div>
+				<div class="row sub_content">
+                    <div class="col-md-3 col-sm-6">
+                        <div class="serviceBox_2 blue">
+                               <div id="chart_a"></div>
+                        </div>
+                    </div>
+				</div>
+
+                    <div class="container">
+                       <!--  <div class="row sub_content"> -->
+                            <div class="col-md-12 col-lg-12">
+                            <div class="col-sm-4">
+                                <div class="serviceBox_5">
+                                    <div id="chart_div">
+                                    	<div data-rno="${wpercent}" id="w"></div> 
+                                    	<div data-rno="${ipercent}" id="i"></div> 
+                                    	<div data-rno="${cpercent}" id="c"></div> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="serviceBox_5">
+                                       <div id="chart_divv"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+		</section>
+        <!--/통계  -->
+        
 
 		<section class="content typography">
 			<div class="container">
@@ -546,7 +616,7 @@ function change() {
 	</script>
 	
 	<script type="text/javascript">
-	$(function(){
+/* 	$(function(){
                $("#datepicker").datepicker({
                   showOn : "button",
                   buttonImage:"resources/img/calendar.png",
@@ -559,7 +629,7 @@ function change() {
                   altField : '#endday'
                });
             
-	})
+	}) */
             /* $('#submit').on("click", function() {
 
                event.preventDefault();
@@ -572,6 +642,68 @@ function change() {
                         
          </script>
 	
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   
+       <script type="text/javascript">
+    google.charts.load('current', {packages: ['corechart', 'line']});
+    google.charts.setOnLoadCallback(drawBasic);
+    function drawBasic() {
+          var data = new google.visualization.DataTable();
+          data.addColumn('number', 'X');
+          data.addColumn('number', '접속자');
+          data.addRows([
+            
+          ]);
+          var options = {           
+        	title : '접속자 현황',	  
+        	width :'1100',
+            height : '500'
+          };
+          var chart = new google.visualization.LineChart(document.getElementById('chart_a'));
+          chart.draw(data, options);
+        }
+  </script> 
+
+<script type="text/javascript">
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+console.log($('#w').attr("data-rno"));
+var w=$('#w').attr("data-rno");
+var i=$('#i').attr("data-rno");
+var c=$('#c').attr("data-rno");
+
+
+
+
+function drawChart() {
+
+  var data = new google.visualization.DataTable();
+  data.addColumn('string', 'state');
+  data.addColumn('number', 'p');
+  data.addRows([
+    ['배송중',  eval(w)],
+    ['배송완료', eval(i)],
+    ['배송준비중', eval(c)],
+  //  ['Sausage', 10], // Below limit.
+  //  ['Anchovies', 9] // Below limit.
+  ]);
+
+  var options = {
+    title: '주문배송 접수 / 처리',
+    sliceVisibilityThreshold: .2,
+    width :'500',
+    height : '500'
+  };
+
+  var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+  chart.draw(data, options);
+}
+</script>
+
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">
+</script>
 		
     <!-- Start Style Switcher -->
     <div class="switcher"></div>

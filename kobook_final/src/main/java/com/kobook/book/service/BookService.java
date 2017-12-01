@@ -64,7 +64,7 @@ public interface BookService {
 	
 	public List<HashMap<String, String>> deliveryList(SearchCriteria cri)throws Exception;
 	
-	public List<HashMap<String, String>>selectDate(DateDTO dto)throws Exception;
+//	public List<HashMap<String, String>>selectDate(DateDTO dto)throws Exception;
 	
 	public int countdelList() throws Exception;
 	
@@ -78,6 +78,10 @@ public interface BookService {
 		public int directListCount() throws Exception;
 		
 		public int safeListCount() throws Exception;
+		
+		public int wpercent() throws Exception;
+		public int ipercent() throws Exception;
+		public int cpercent() throws Exception;
 		
 
 	

@@ -62,6 +62,12 @@ public class BookController {
 		model.addAttribute("dlist",service.deliveryList(cri));
 		System.out.println(service.deliveryList(cri).toString());
 		System.out.println("----");	
+		
+		model.addAttribute("wpercent", service.wpercent());
+		model.addAttribute("ipercent", service.ipercent());
+		model.addAttribute("cpercent", service.cpercent());
+		
+		
 		PageMaker pageMaker=new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(service.countdelList());

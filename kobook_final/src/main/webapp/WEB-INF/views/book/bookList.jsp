@@ -153,11 +153,11 @@ $(function()
 					<ul id="filter" class="option-set clearfix">
 						<!-- <li data-filter="*" class="selected"><a href="#">All</a></li> -->
 						<li data-filter=".*" class="selected"><a href="#">All</a></li>
-						<li data-filter=".Social"><a href="#">사회과학계열  </a></li>
+						<li data-filter=".Social"><a href="#">사회과학계열</a></li>
 						<li data-filter=".Law"><a href="#">법학계열</a></li>
-						<li data-filter=".Medical"><a href="#">의학간호계열 </a></li>
+						<li data-filter=".Medical"><a href="#">의학간호계열</a></li>
 						<li data-filter=".Engineering"><a href="#">공학계열</a></li>
-						<li data-filter=".Science"><a href="#">자연과학계열  </a></li>
+						<li data-filter=".Science"><a href="#">자연과학계열</a></li>
 						<li data-filter=".Art"><a href="#">예체능계열</a></li>
 						<li data-filter=".Language"><a href="#">어문학계열</a></li>
 
@@ -254,7 +254,7 @@ $(function()
 						<!--begin List Item -->
 						<c:forEach var="b" items="${list}">
 							<%-- <c:set var="b.book_kind" value="Medical" /> --%>
-							<c:if test="${b.book_kind=='의학간호계열 '}">
+							<c:if test="${b.book_kind=='의학간호계열'}">
 								<li class="list_item col-lg-3 col-md-4 col-sm-6 Medical">
 									<div class="recent-item box">
 										<figure class="touching ">
@@ -330,7 +330,7 @@ $(function()
 						<!--begin List Item -->
 						<c:forEach var="b" items="${list}">
 							<%-- <c:set var="b.book_kind" value="Science" /> --%>
-							<c:if test="${b.book_kind=='자연과학계열  '}">
+							<c:if test="${b.book_kind=='자연과학계열'}">
 								<li class="list_item col-lg-3 col-md-4 col-sm-6 Science">
 									<div class="recent-item box">
 										<figure class="touching ">

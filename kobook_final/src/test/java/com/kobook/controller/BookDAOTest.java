@@ -60,7 +60,7 @@ public class BookDAOTest {
 		 dto.setStartday(Timestamp.valueOf("2017-11-29"));
 		 dto.setEndday(Timestamp.valueOf("2017-11-30"));
 		 
-		 dao.selectDate(dto);
+		// dao.selectDate(dto);
 		 
 		 System.out.println(dto.toString());
 		

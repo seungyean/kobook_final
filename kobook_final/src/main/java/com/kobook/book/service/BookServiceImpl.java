@@ -217,12 +217,12 @@ public class BookServiceImpl implements BookService {
 	
 
 
-	@Override
+	/*@Override
 	public List<HashMap<String, String>> selectDate(DateDTO dto) throws Exception {
 		return dao.selectDate(dto);
 	}
 
-
+*/
 
 
 	@Override
@@ -268,6 +268,34 @@ public class BookServiceImpl implements BookService {
 	public int safeListCount() throws Exception {
 		return dao.safeListCount();
 	}
+
+
+
+
+	@Override
+	public int wpercent() throws Exception {
+		return dao.wpercent();
+	}
+
+
+
+
+	@Override
+	public int ipercent() throws Exception {
+		return dao.ipercent();
+	}
+
+
+
+
+	@Override
+	public int cpercent() throws Exception {
+		return dao.cpercent();
+	}
+	
+	
+	
+	
 
 
 

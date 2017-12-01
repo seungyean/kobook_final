@@ -200,12 +200,12 @@ public class BookDAOImpl implements BookDAO {
 	}
 
 
-
+/*
 	@Override
 	public List<HashMap<String, String>> selectDate(DateDTO dto) throws Exception {
 		return session.selectList(namespace+".selectDate",dto);
 	}
-
+*/
 
 
 
@@ -254,6 +254,34 @@ public class BookDAOImpl implements BookDAO {
 	public int safeListCount() throws Exception {
 		return session.selectOne(namespace+".safeListCount");
 	}
+
+
+
+
+	@Override
+	public int wpercent() throws Exception {
+	return session.selectOne(namespace+".wpercent");
+	}
+
+
+
+
+	@Override
+	public int ipercent() throws Exception {
+		return session.selectOne(namespace+".ipercent");
+	}
+
+
+
+
+	@Override
+	public int cpercent() throws Exception {
+		return session.selectOne(namespace+".cpercent");
+	}
+	
+	
+	
+	
 
 
 
