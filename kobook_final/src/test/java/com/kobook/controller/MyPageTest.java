@@ -1,6 +1,8 @@
 package com.kobook.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -9,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.kobook.mypage.domain.MyPageCriteria;
 import com.kobook.mypage.domain.OrderVO;
 import com.kobook.mypage.domain.PayVO;
 import com.kobook.mypage.persistence.MyPageDAO;
@@ -64,8 +67,14 @@ public class MyPageTest {
 	
 //	 주문 인서트
 	@Test
-	public void Test(){
-		dao.receivedMsgTotal(7);
-		System.out.println(dao.receivedMsgTotal(7));
+	public void Test() throws Exception{
+		MyPageCriteria cri = new MyPageCriteria();
+		cri.setPerson_id(7);
+		cri.setPage(1);
+		cri.setPerPageNum(10);
+		
+		 dao.buyList(cri);
+		 
+		 System.out.println( dao.buyList(cri).toString());
 	}
 }

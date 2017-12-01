@@ -17,6 +17,23 @@
     <link rel="stylesheet" href="/resources/css/layout/wide.css" data-name="layout">
 
     <link rel="stylesheet" type="text/css" href="/resources/css/switcher.css" media="screen" />
+    <style type="text/css">
+fieldset {
+    display: block;
+    height: 130px;
+    -webkit-margin-start: 2px;
+    -webkit-margin-end: 2px;
+    -webkit-padding-before: 0.85em;
+    -webkit-padding-start: 0.75em;
+    -webkit-padding-end: 0.75em;
+    -webkit-padding-after: 0.625em;
+    min-width: -webkit-min-content;
+    border-width: 2px;
+    border-style: groove;
+    border-color: threedface;
+    border-image: initial;
+}
+</style>
 </head>
 <body>
 	<!-- 헤더 -->
@@ -51,16 +68,34 @@
 							<h4><span>마일리지 내역</span></h4>
 									<br>
 									<br>
-							<!-- 간략 마일리지 -->
-							<!-- <div class="col-sm-5" style="margin: 20px">
+									<div class="media-body">
+							<form method="GET" id="OrderHistoryForm" name="OrderHistoryForm">
+								<div class="xans-element- xans-myshop xans-myshop-orderhistoryhead ">
+									<fieldset>
+											<div class="col-sm-3" style="margin: 20px">
 								<table>
 									<tr>
-										<td class="col-sm-3">총 적립금 :</td>
+										<td class="col-sm-3" style="text-align: right;">총 적립금 :</td>
+										<td class="col-sm-2">5160원</td>
+									</tr>
+									<tr>
+										<td class="col-sm-3" style="text-align: right;">사용 가능 적립금 :</td>
+										<td class="col-sm-2">5160원</td>
+									</tr>
+									<tr>
+										<td class="col-sm-3" style="text-align: right;">사용 적립금 :</td>
 										<td class="col-sm-2">5160원</td>
 									</tr>
 								</table>
-							</div> -->
-							<!-- 간략 마일리지 끝 -->
+							</div> 
+									</fieldset>
+									<br>
+									<ul>
+									</ul>
+								</div>
+							</form>
+							</div>
+							
 							<br>
 							<br>
 							<table class="table">

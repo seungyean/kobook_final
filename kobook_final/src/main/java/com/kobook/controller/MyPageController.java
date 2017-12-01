@@ -30,6 +30,8 @@ import com.kobook.book.service.BookService;
 import com.kobook.message.domain.MessageVO;
 import com.kobook.mypage.domain.DeliveryVO;
 import com.kobook.mypage.domain.MileageVO;
+import com.kobook.mypage.domain.MyPageCriteria;
+import com.kobook.mypage.domain.MyPageMaker;
 import com.kobook.mypage.domain.OrderVO;
 import com.kobook.mypage.domain.PayVO;
 import com.kobook.mypage.service.MyPageService;
@@ -94,7 +96,7 @@ public class MyPageController {
 
 	/* 판매내역 */
 	@RequestMapping(value = "/sellList", method = RequestMethod.GET)
-	public void sellList(HttpServletRequest request, Model model) {
+	public void sellList(HttpServletRequest request, Model model) throws Exception{
 		System.out.println("----------------Controller : 판매내역 출력-----------------");
 		
 		HttpSession session = request.getSession();
@@ -102,6 +104,7 @@ public class MyPageController {
 		
 		
 		model.addAttribute("sellList", service.sellList(person_id));
+		
 	}
 	
 	/* 판매상태 변경 */
@@ -145,18 +148,25 @@ public class MyPageController {
 
 	/* 구매내역 */
 	@RequestMapping(value = "/buyList", method = RequestMethod.GET)
-	public void buyList(HttpServletRequest request, Model model) {
+	public void buyList(HttpServletRequest request, Model model, MyPageCriteria cri)throws Exception {
 		System.out.println("----------------Controller : 구매내역 출력-----------------");
 		
 		HttpSession session = request.getSession();
 		int person_id = Integer.parseInt((String)session.getAttribute("person_id"));
-		System.out.println(service.buyList(person_id).toString());
-		model.addAttribute("buyList", service.buyList(person_id));
+		System.out.println(person_id);
+		cri.setPerson_id(person_id);
+		
+		model.addAttribute("buyList", service.buyList(cri));
+		
+		MyPageMaker pageMaker = new MyPageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(6);
+		model.addAttribute("pageMaker", pageMaker);
 	}
 	
 	/* 찜리스트 */
 	@RequestMapping(value = "/pickList", method = RequestMethod.GET)
-	public void pickList(HttpServletRequest request, Model model) {
+	public void pickList(HttpServletRequest request, Model model)throws Exception {
 		System.out.println("----------------Controller : 찜리스트 출력-----------------");
 		
 		HttpSession session = request.getSession();
@@ -169,7 +179,7 @@ public class MyPageController {
 	
 	/* 찜리스트 상태 변경 */
 	@RequestMapping(value = "/pickStateUpdate", method = RequestMethod.GET)
-	public String pickStateUpdate(@RequestParam("pick_id") int pick_id, RedirectAttributes rttr) {
+	public String pickStateUpdate(@RequestParam("pick_id") int pick_id, RedirectAttributes rttr)throws Exception {
 		System.out.println("----------------Controller :찜리스트 상태 변경-----------------");
 		System.out.println(pick_id);
 		service.pickModify(pick_id);
@@ -180,7 +190,7 @@ public class MyPageController {
 	
 	/* 마일리지 내역 */
 	@RequestMapping(value = "/mileageList", method = RequestMethod.GET)
-	public void mileageList(HttpServletRequest request, Model model) {
+	public void mileageList(HttpServletRequest request, Model model) throws Exception{
 		System.out.println("----------------Controller : 마일리지 내역 출력-----------------");
 		
 		HttpSession session = request.getSession();
@@ -191,7 +201,7 @@ public class MyPageController {
 	
 	/* 주문 */
 	@RequestMapping(value = "/order", method = RequestMethod.GET)
-	public void orderList(@RequestParam("book_id") int book_id,HttpServletRequest request, Model model) {
+	public void orderList(@RequestParam("book_id") int book_id,HttpServletRequest request, Model model) throws Exception{
 		System.out.println("----------------Controller : 주문내역 출력-----------------");
 		
 		HttpSession session = request.getSession();
@@ -284,7 +294,7 @@ public class MyPageController {
 	
 	/* 판매내역 */
 	@RequestMapping(value = "/orderSuccess", method = RequestMethod.GET)
-	public void orderSuccess(HttpServletRequest request, Model model) {
+	public void orderSuccess(HttpServletRequest request, Model model)throws Exception {
 		System.out.println("----------------Controller : 주문완료 -----------------");
 		
 		
@@ -293,26 +303,29 @@ public class MyPageController {
 	
 	/* 쪽지보관함 */
 	@RequestMapping(value = "/messageBox", method = RequestMethod.GET)
-	public void messageBox(HttpServletRequest request, Model model) {
+	public void messageBox(HttpServletRequest request, Model model) throws Exception{
 		System.out.println("----------------Controller : 쪽지보관함 -----------------");
 		HttpSession session = request.getSession();
 		int person_id = Integer.parseInt((String)session.getAttribute("person_id"));
 		System.out.println(person_id);
-		
-		
 		
 		List<MessageVO>list = service.receivedMsgTotal(person_id);
 		
 		for (MessageVO messageVO : list) {
 			System.out.println(messageVO.toString());
 		}
-		
-//		MessageVO vo = new MessageVO();
-//		vo.setReceiver_id(person_id);
-//		System.out.println(vo);
 		model.addAttribute("receivedMsgTotal", service.receivedMsgTotal(person_id));
+	}
+	
+	/* 쪽지보관함 쪽지읽음 상태변경 */
+	@RequestMapping(value = "/msgUpdate", method = RequestMethod.GET)
+	public String msgUpdate(@RequestParam("message_id") int message_id, RedirectAttributes rttr)throws Exception {
+		System.out.println("----------------Controller :쪽지읽음 상태 변경-----------------");
+		System.out.println("컨트롤러에 쪽지번호 들어옴  : " +message_id);
+		service.msgModify(message_id);
 		
-		
+		return "redirect:/mypage/messageBox";
+
 	}
 	
 	

@@ -167,7 +167,13 @@
 		ORDER BY message_id
 		DESC
 	</select>
-
+	
+	<!-- 찜 상태 변경 -->
+	<update id="msgUpdate" parameterType="int">
+		UPDATE message
+		SET message_hit = 1
+		WHERE message_id = #{message_id}
+	</update>
 
 
 

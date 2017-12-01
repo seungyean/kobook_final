@@ -83,9 +83,9 @@
 										<tbody>
 											<c:forEach var="element" items="${receivedMsgTotal}" varStatus="s">
 												<tr>
-												<td align="center">${element.message_id}</td>
-												<td align="center" id="msg_person">${element.person_id}</td>
-												<td align="center"><a id="msg_content" >${element.message_content}</a></td>
+												<td align="center" id="msg_id" class="msg_id">${element.message_id}</td>
+												<td align="center" id="msg_person" class="msg_person">${element.person_id}</td>
+												<td align="center" ><a id="msg_content" class="msg_content">${element.message_content}</a></td>
 												<td align="center">
 												<c:set var="name" value="${element.message_hit}" />
 														<c:choose>
@@ -129,6 +129,7 @@
 							<tr>
 								<td>보낸 사람</td>
 								<td><input type="text" id="modal_person" value=""></td>
+								<td><input type="hidden" id="modal_id" value=""></td>
 							</tr>
 							<tr>
 								<td>내용</td>
@@ -145,8 +146,8 @@
 														data-dismiss="modal" role="button">답장</button>
 												</div>
 												<div class="btn-group" role="group">
-													<button type="button" class="btn btn-default"
-														data-dismiss="modal" role="button">닫기</button>
+													<button type="button" class="btn btn-primary"
+														data-dismiss="modal" role="button " id="modal_close">닫기</button>
 												</div>
 												<div class="btn-group btn-delete hidden" role="group">
 													<button type="button" id="delImage"
@@ -213,7 +214,7 @@
 	$(function(){
 		
 		// 답장버튼 클릭
-		$("#send").on(	"click",	function(event) {
+		$(".btn-default").on(	"click",	function(event) {
 								event.preventDefault();
 								console.log("답장 클릭");
 
@@ -240,19 +241,27 @@
 		
 		var p = $("#modal_person");
 		var ta = $("#modal_content");
+		var id = $("#modal_id");
 		
 		//쪽지 상세보기
-		$("#msg_content").on(	"click",	function(event) {
+		$(".msg_content").on(	"click",	function(event) {
 			console.log("내용 클릭");
-			console.log($(this).html());
-			console.log($(this).parent().parent().find($("#msg_person")).text().trim());
+			console.log("쪽지내용: "+$(this).html());
+			console.log("회원번호: "+$(this).parent().parent().find($(".msg_person")).text().trim());
+			console.log("쪽지번호: "+$(this).parent().parent().find($(".msg_id")).text().trim());
 			
 			ta.val($(this).html());
-			p.val($(this).parent().parent().find($("#msg_person")).text().trim());
+			p.val($(this).parent().parent().find($(".msg_person")).text().trim());
+			id.val($(this).parent().parent().find($(".msg_id")).text().trim());
 			console.log("내용 클릭");
 			$('#content').modal();
-			
-			
+		});
+		
+		//쪽지 모달 닫기 버튼 클릭시
+		$(".btn-primary").on(	"click",	function(event) {
+			console.log("닫기 클릭");
+			console.log(id.val());
+			location.href = "/mypage/msgUpdate?message_id="+ id.val();
 			
 		});
 		

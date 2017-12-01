@@ -19,6 +19,24 @@
     <link rel="stylesheet" href="/resources/css/layout/wide.css" data-name="layout">
 
     <link rel="stylesheet" type="text/css" href="/resources/css/switcher.css" media="screen" />
+<style type="text/css">
+fieldset {
+	display: block;
+	height: 80px;
+	-webkit-margin-start: 2px;
+	-webkit-margin-end: 2px;
+	-webkit-padding-before: 1.35em;
+	-webkit-padding-start: 1.75em;
+	-webkit-padding-end: 0.75em;
+	-webkit-padding-after: 0.625em;
+	min-width: -webkit-min-content;
+	border-width: 2px;
+	border-style: groove;
+	border-color: threedface;
+	border-image: initial;
+}
+</style>
+    
 </head>
 <body>
 	<!-- 헤더 -->
@@ -52,6 +70,43 @@
 					<div class="col-lg-12 col-md-12 col-sm-12">
 						<div class="dividerHeading">
 							<h4><span>판매내역 리스트</span></h4>
+							<br>
+							<br>
+							<div class="media-body">
+							<form method="GET" id="OrderHistoryForm" name="OrderHistoryForm">
+								<div class="xans-element- xans-myshop xans-myshop-orderhistoryhead ">
+									<fieldset>
+										<span> 
+										<a href="#none" class="btnNormal" days="00">
+										<img src="http://img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date1.gif" alt="오늘" />
+										</a> 
+										<a href="#none" class="btnNormal" days="07">
+										<img src="http://img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date2.gif" alt="1주일" />
+										</a> 
+										<a href="#none" class="btnNormal" days="30">
+										<img src="http://img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date3.gif" alt="1개월" />
+										</a> 
+										<a href="#none" class="btnNormal" days="90">
+										<img src="http://img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date4.gif" alt="3개월" />
+										</a> 
+										<a href="#none" class="btnNormal" days="180">
+										<img src="http://img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date5.gif" alt="6개월" />
+										</a>
+										</span> 
+										<input type="date" id="start_date" name="start_date" value=""> 
+										~ <input type="date" id="end_date" name="end_date" value=""> 
+										<input alt="조회" id="order_search_btn" type="image" src="//img.echosting.cafe24.com/skin/admin_ko_KR/myshop/btn_search.gif" />
+									</fieldset>
+									<br>
+									<ul>
+										<li>&nbsp;&nbsp;- 기본적으로 최근 3개월간의 자료가 조회되며, 기간 검색시 지난 판매내역을 조회하실 수 있습니다.</li>
+										<li>&nbsp;&nbsp;- 주문번호를 클릭하시면 해당 주문에 대한 상세내역을 확인하실 수 있습니다.</li>
+									</ul>
+								</div>
+<!-- 								<input id="mode" name="mode" value="" type="hidden" />  -->
+<!-- 								<input id="term" name="term" value="" type="hidden" /> -->
+							</form>
+							</div>
 							<br>
 							<br>
 							<c:choose>
