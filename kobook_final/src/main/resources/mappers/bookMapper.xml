@@ -457,7 +457,7 @@
 	<select id="getRecentList" resultType="Integer">
 		select *
 		from book
-		where book_date between sysdate-30 AND sysdate
+		where book_date between sysdate-3 AND sysdate
 		order by book_date DESC;
 	</select>
 	

@@ -268,7 +268,7 @@ textarea {
 	function getList(chatInfo){
 		
 		$.getJSON(chatInfo, function(data){		// "/chat/{person_id}" 로부터 나오는 전체 데이터 (array)
-			console.log(data);
+			console.log("넘어온 데이터: "+data);
 			var html = "";
 			for(i=0; i< data.length; i++){
 				if(data[i].chatlog_speaker == 'C'){
