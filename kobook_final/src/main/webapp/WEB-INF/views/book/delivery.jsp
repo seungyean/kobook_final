@@ -228,7 +228,9 @@ function change() {
         <!-- 통계 -->
         <section class="content service">
 			<div class="container">
+			
 				<div class="row sub_content">
+				
                     <div class="col-sm-4">
                         <div class="serviceBox_1">
                             <div class="service-icon">
@@ -240,43 +242,41 @@ function change() {
                             </div>
                         </div>
                     </div>
-           
-
 				</div>
 				
 				
-				<div class="row sub_content">
-                    <div class="col-md-12 col-lg-12">
-                        <div class="serviceBox_2 blue">
+			<div class="row sub_content">
+				<!-- <div class="container"> -->
+                    <div class="col-md-6">
+                    	<!-- <div class="col-sm-4"> -->
+                        	<div class="serviceBox_2 blue">
                                <div id="chart_a">
-                               <div data-rno="${thismonth}" id="thismonth"></div> 
-                               <div data-rno="${prevmonth}" id="prevmonth"></div> 
-                               <div data-rno="${nextmonth}" id="nextmonth"></div> 
-                               </div>
-                        </div>
-                        
-                        
-                              <div class="col-sm-4">
-                                <div class="serviceBox_5">
-                                    <div id="chart_div">
-                                    	<div data-rno="${wpercent}" id="w"></div> 
-                                    	<div data-rno="${ipercent}" id="i"></div> 
-                                    	<div data-rno="${cpercent}" id="c"></div> 
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="serviceBox_5">
-                                       <div id="chart_divv"></div>
-                                    </div>
-                                </div>
-                        
-                    </div>
-                    
-                    
-                      
+	                               <div data-rno="${thismonth}" id="thismonth"></div> 
+	                               <div data-rno="${prevmonth}" id="prevmonth"></div> 
+	                               <div data-rno="${nextmonth}" id="nextmonth"></div> 
+	                             </div>
+	                          </div>
+	                 </div>
+	                          
+	                      <!-- </div> -->
+                               
+                               
+                        <!-- <div class="col-sm-4"> -->
+                        <div class="col-md-6">
+                        	<div class="serviceBox_2 blue">
+	                              <div id="chart_div">
+	                                   <div data-rno="${wpercent}" id="w"></div> 
+	                                    <div data-rno="${ipercent}" id="i"></div> 
+	                                    <div data-rno="${cpercent}" id="c"></div> 
+	                               </div>
+                       		 </div>
+                       	</div>	 
+                    	<!-- </div> -->
+                  
+                <!-- </div>   -->
+              </div>        
                             
-                            <div class="col-sm-4">
+   <%--                          <div class="col-sm-4">
                                 <div class="serviceBox_5">
                                     <div id="chart_div">
                                     	<div data-rno="${wpercent}" id="w"></div> 
@@ -289,10 +289,10 @@ function change() {
                                 <div class="serviceBox_5">
                                        <div id="chart_divv"></div>
                                     </div>
-                                </div>
+                                </div> --%>
                            
                         
-				</div>
+			
 
                     <%-- <div class="container">
                        <!--  <div class="row sub_content"> -->
