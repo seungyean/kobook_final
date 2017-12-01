@@ -209,11 +209,35 @@ body {
 	   		</div>  <!--/col-lg-4 col-md-4 col-sm-4  -->		
 		</div>  <!--/row sub_content  -->
 		
+		
+		<div class="row sub_content">
+                    <div class="col-md-12">
+                        <div class="dividerHeading">
+                            <h4><span>판매자정보</span></h4>
+                        </div>
+  
+                      		 <h2> 이메일 : ${s.person_email} &nbsp;&nbsp;
+                       		 등급 :
+                       		 	<c:choose>
+								<c:when test="${s.person_sell_grade=='U'}">
+								<img alt="" src="/resources/img/vip.jpg">
+								</c:when>
+								<c:when test="${s.person_sell_grade=='M'}">
+								<img alt="" src="/resources/img/gold.jpg">
+								</c:when>
+								<c:when test="${s.person_sell_grade=='D'}">
+								<img alt="" src="/resources/img/green.jpg">
+								</c:when>
+								</c:choose> &nbsp;&nbsp;
+                       		</h2>
+                    </div>
+               </div>
+		
 		     
 		<div class="container">
             
       <div class="row">
-         <div class="col-sm-3">
+         <div class="col-md-6">
             <div class="rating-block">
                <h4>Average user rating</h4>
                
@@ -329,6 +353,11 @@ body {
          </div>         
       </div>         
       
+      
+      
+      
+      
+      
       <div class="row sub_content">
                     <div class="col-md-12">
                         <div class="dividerHeading">
@@ -381,10 +410,9 @@ body {
 										</c:forEach>
 									</table>
 									<!-- </form> --> 
-  
-  
-                      		
+
                     </div>
+
            <div class="text-center">
 			<ul class="pagination">
 
@@ -458,7 +486,7 @@ body {
 						<!--/여기까지  -->	
 		
 		
-		    <%--    <div class="row sub_content">
+		        <%-- <div class="row sub_content">
                     <div class="col-md-12">
                         <div class="dividerHeading">
                             <h4><span>판매자정보</span></h4>
@@ -477,8 +505,13 @@ body {
 								<img alt="" src="/resources/img/green.jpg">
 								</c:when>
 								</c:choose> &nbsp;&nbsp;
+                       		</h2>
+                    </div>
+               </div> --%>
                        		 
-                       		 평점 :
+                       		 
+                       		 
+                  <%--      		 평점 :
                        		 <c:choose>
                        		 <fmt:formatNumber value="${countstar/reviewcount}" pattern="#.#"/><br>
                        		<c:when test="${reviewcount}<=0">
@@ -504,16 +537,10 @@ body {
 								test
 								</c:otherwise>
 								
-								</c:choose>
+								</c:choose> --%>
 								
                        		 
-							</h2>
-                    </div>
-               </div>
-               
-               
-                
-                --%>
+		
                
 		     
 		     

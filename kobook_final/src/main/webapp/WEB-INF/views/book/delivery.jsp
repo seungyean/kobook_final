@@ -1,46 +1,35 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%--  <%
-	String msg=(String)request.getAttribute("DELIVERY_MSG");
-	
-%> --%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
-
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>찜리스트</title>
-	<meta name="description" content="">
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>배송조회</title>
+<meta name="description" content="">
 
-    <!-- CSS FILES -->
-    <link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/resources/css/style.css">
-    <link rel="stylesheet" type="text/css" href="/resources/css/style.css" media="screen" data-name="skins">
-    <link rel="stylesheet" href="/resources/css/layout/wide.css" data-name="layout">
+<!-- CSS FILES -->
+<link rel="stylesheet" href="/resources/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/resources/css/style.css">
+<link rel="stylesheet" type="/resources/text/css"
+	href="/resources/css/style.css" media="screen" data-name="skins">
+<link rel="stylesheet" href="/resources/css/layout/wide.css"
+	data-name="layout">
 
-    <link rel="stylesheet" type="text/css" href="/resources/css/switcher.css" media="screen" /></head>
+<link rel="stylesheet" type="/resources/text/css"
+	href="/resources/css/switcher.css" media="screen" />
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
     
-    <!--연산맨  -->
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
-	<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
-	    
-  
-    
-    
-	<script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
-	<!-- <script src="/resources/layout/scripts/date.js"></script> -->
-
-<!-- <link href="/resources/layout/styles/layout.css" rel="stylesheet"
-   type="text/css" media="all"> -->
-	
 <script type="text/javascript">
 $(function(){	
 	
@@ -95,114 +84,85 @@ function change() {
  		});
  	})
 }
-</script>
-
-
+</script> 
 </head>
 
 
-
 <body>
-	<!--Start Header-->
-	<header id="header">
-		<div id="top-bar">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-8 top-info hidden-xs">
-						<span><i class="fa fa-phone"></i>Phone: (123) 456-7890</span> <span><i
-							class="fa fa-envelope"></i>Email: mail@example.com</span>
-					</div>
-					<div class="col-sm-4 top-info">
-						<ul>
-							<li><a href="" class="my-tweet"><i class="fa fa-twitter"></i></a></li>
-							<li><a href="" class="my-facebook"><i
-									class="fa fa-facebook"></i></a></li>
-							<li><a href="" class="my-skype"><i class="fa fa-skype"></i></a></li>
-							<li><a href="" class="my-pint"><i
-									class="fa fa-pinterest"></i></a></li>
-							<li><a href="" class="my-rss"><i class="fa fa-rss"></i></a></li>
-							<li><a href="" class="my-google"><i
-									class="fa fa-google-plus"></i></a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div id="logo-bar">
-			<div class="container">
-				<div class="row">
-					<!-- Logo / Mobile Menu -->
-					<div class="col-lg-3 col-sm-3 ">
-						<div id="logo">
-							<h1>
-								<a href="/resources/admin/noti.jsp"><img alt="resources - 관리자"
-									src="/resources/images/logo.png" /></a>
-							</h1>
-						</div>
-					</div>
-					<!-- Navigation
+<!--Start Header-->
+    <header id="header">
+        <div id="top-bar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8 top-info hidden-xs">
+                        <span><i class="fa fa-phone"></i>Phone: (123) 456-7890</span>
+                        <span><i class="fa fa-envelope"></i>Email: mail@example.com</span>
+                    </div>
+                    <div class="col-sm-4 top-info">
+                        <ul>
+                            <li><a href="" class="my-tweet"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="" class="my-facebook"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="" class="my-skype"><i class="fa fa-skype"></i></a></li>
+                            <li><a href="" class="my-pint"><i class="fa fa-pinterest"></i></a></li>
+                            <li><a href="" class="my-rss"><i class="fa fa-rss"></i></a></li>
+                            <li><a href="" class="my-google"><i class="fa fa-google-plus"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="logo-bar">
+            <div class="container">
+                <div class="row">
+                    <!-- Logo / Mobile Menu -->
+                    <div  class="col-lg-3 col-sm-3 ">
+                        <div id="logo">
+                           <h1><a href="index.html">관리자WORLD</a></h1>
+                        </div>
+                    </div>
+                    <!-- Navigation
     ================================================== -->
-					<div class="col-lg-9 col-sm-9">
-						<div class="navbar navbar-default navbar-static-top"
-							role="navigation">
-							<!--  <div class="container">-->
-							<div class="navbar-header">
-								<button type="button" class="navbar-toggle"
-									data-toggle="collapse" data-target=".navbar-collapse">
-									<span class="sr-only">Toggle navigation</span> <span
-										class="icon-bar"></span> <span class="icon-bar"></span> <span
-										class="icon-bar"></span>
-								</button>
-							</div>
-							<div class="navbar-collapse collapse">
-								<ul class="nav navbar-nav">
-									<li><a href="/resources/admin/listUser.do">회원관리</a>
-										<ul class="dropdown-menu">
-											<li><a href="index.html">회원수정</a></li>
-											<li><a href="index_2.html">회원등급</a></li>
-											<li><a href="index_3.html">회원분류</a></li>
-										</ul></li>
+                    <div class="col-lg-9 col-sm-9">
+                        <div class="navbar navbar-default navbar-static-top" role="navigation">
+                            <!--  <div class="container">-->
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div>
+                            <div class="navbar-collapse collapse">
+                                <ul class="nav navbar-nav">
+                                    <li><a href="/board/personList">회원관리</a>
+                                    </li>
 
-									<li><a href="#">게시판관리(미구현)</a>
-										<ul class="dropdown-menu">
-											<li><a href="elements.html">게시판 1</a></li>
-											<li><a href="form-elements.html">게시판 2</a></li>
-											<li><a href="columns.html">게시판 3</a></li>
-										</ul></li>
+                                    <li><a href="/book/delivery">주문배송 관리</a>
 
-									<li class="active"><a href="#">안전거래관리</a>
-										<ul class="dropdown-menu">
-											<li><a href="about.html">About</a>
-												<ul class="dropdown-menu">
-													<li><a href="about.html">About Us 1</a></li>
-													<li><a href="about-2.html">About Us 2</a></li>
-												</ul></li>
-											<li><a href="services.html">Services</a></li>
-											<li class="active"><a href="faq.html">FAQ</a></li>
-											<li><a href="sidebar-right.html">Right Sidebar</a></li>
-											<li><a href="sidebar-left.html">Left Sidebar</a></li>
-											<li><a href="404-page.html">404 Page</a></li>
-										</ul></li>
+                                    </li>
 
-									<li><a href="/resources/admin/notiAdmin.do">공지사항관리</a>
-										<ul class="dropdown-menu">
-											<li><a href="#">Portfolio Classic</a>
-												<ul class="dropdown-menu">
-													<li><a href="portfolio_2.html">Portfolio 2</a></li>
-													<li><a href="portfolio_3.html">Portfolio 3</a></li>
-													<li><a href="portfolio_4.html">Portfolio 4</a></li>
-												</ul></li>
-										</ul></li>
+                                    <li><a href="#">게시판 관리</a>
+                                         
+                                    </li>
 
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
-	<!--End Header-->
+                                    <li><a href="#">매출정산 관리</a>
+                                        
+                                    </li>
+
+                                    <li><a href="#">접속통계 관리</a>
+                                        
+                                    </li>
+                                   
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+<!--End Header-->
 
 	<!--start wrapper-->
 	<section class="wrapper">
@@ -211,7 +171,7 @@ function change() {
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <div class="page_title">
-                            <h2>구매내역</h2>
+                            <h2>주문배송 관리</h2>
                         </div>
                         <nav id="breadcrumbs">
                             <ul>
@@ -226,7 +186,7 @@ function change() {
         </section>
         
         <!-- 통계 -->
-        <section class="content service">
+        <section class="content typography">
 			<div class="container">
 			
 				<div class="row sub_content">
@@ -330,7 +290,7 @@ function change() {
                         </div>
                         
                         <!-- <form> -->
-						<div class='box-body' align="center">
+						<div class='box-body' align="center" >
 									<select name="searchType">
 										<option value="n"
 											<c:out value="${cri.searchType == null?'selected':''}"/>>
@@ -741,7 +701,7 @@ var w=$('#w').attr("data-rno");
 var i=$('#i').attr("data-rno");
 var c=$('#c').attr("data-rno");
 
-
+console.log(c);
 
 
 function drawChart() {
