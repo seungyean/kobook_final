@@ -453,5 +453,27 @@
 	where to_char(pay_date,'YY/MM/DD')=(select TO_CHAR(SYSDATE,'YY/MM/DD')from dual)
 	</select>
 	
+	<!-- 최근 등록된 책 -->
+	<select id="getRecentList" resultType="Integer">
+		select *
+		from book
+		where book_date between sysdate-30 AND sysdate
+		order by book_date DESC;
+	</select>
+	
+	<!-- 아이디로 책이름 찾기 -->
+	<select id="getNameById" resultType="String" parameterType="Integer">
+		select book_name
+		from book
+		where book_id = #{book_id}
+	</select>
+	
+	<!-- 내가 등록한 책 -->
+	<select id="getMyBookList" resultType="BookVO" parameterType="Integer">
+		select *
+		from book
+		where person_id = #{person_id}
+	</select>
+	
 	
 </mapper>

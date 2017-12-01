@@ -15,7 +15,9 @@ import com.kobook.chatbot.domain.ChatlogVO;
 import com.kobook.chatbot.persistence.ChatbotDAO;
 import com.kobook.message.domain.MessageVO;
 import com.kobook.message.persistence.MessageDAO;
+import com.kobook.mypage.persistence.MyPageDAO;
 import com.kobook.person.persistence.PersonDAO;
+import com.kobook.recom.persistence.FavoriteDAO;
 
 @Service
 public class ChatbotServiceImpl implements ChatbotService {
@@ -35,7 +37,11 @@ public class ChatbotServiceImpl implements ChatbotService {
 	@Inject
 	private BookDAO bookDao;
 	
+	@Inject
+	private FavoriteDAO favDao;
 	
+	@Inject
+	private MyPageDAO mypageDao;
 
 	@Override
 	public void chatRegister(ChatlogVO vo) throws Exception {
@@ -56,12 +62,17 @@ public class ChatbotServiceImpl implements ChatbotService {
 		String newText = "";
 		
 		// user_text 판별
-		if(text.equals("야") || text.contains("도와줘")){
+		if(text.equals("야") || text.contains("도와줘") || text.contains("도움")){
 			
 			newText += personDao.findPersonName(person_id) + "님, 오셨군요!"
 					+ "\n 무엇을 도와드릴까요??"
-					+ "\n 카테고리는 크게 책(도서), 게시판, 쪽지, 마이페이지로 구성되어있습니다."
-					+ "\n 물어보시면 성심성의껏 답변해드릴게요~~";
+					+ "\n 카테고리는 크게"
+					+ "\n &nbsp; 1. 책(도서) "
+					+ "\n &nbsp; 2. 게시판(공지, 포토, 무료나눔, 블랙)"
+					+ "\n &nbsp; 3. 쪽지"
+					+ "\n &nbsp; 4. 마이페이지"
+					+ "\n 로 구성되어있습니다."
+					+ "\n 물어보시면 성심성의껏 답변해드릴게요.";
 		
 		} else if(text.contains("쪽지")){		// 쪽지 파트
 			
@@ -71,9 +82,9 @@ public class ChatbotServiceImpl implements ChatbotService {
 			
 			newText = "책 관련 ㄱㄱ";
 		
-		} else if(text.contains("마일리지")){	//	마이페이지 파트
-			
-			newText = "마일리지 관련 ㄱㄱ";
+		} else if(text.contains("마일리지") || text.contains("관심")){	//	마이페이지 파트
+
+			newText = manageMypage(text, person_id);
 		
 		} else if(text.contains("공지사항") || text.contains("블랙") || text.contains("포토리뷰") || text.contains("무료나눔")){	//게시판 파트
 			
@@ -128,7 +139,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 			regex = "";
 			p = Pattern.compile(regex);
 			m = p.matcher(text);
-			
+				
 		} else if(text.contains("무료나눔")){
 			regex = "";
 			p = Pattern.compile(regex);
@@ -145,10 +156,19 @@ public class ChatbotServiceImpl implements ChatbotService {
 		String newText = "";
 		List<String> list;
 		
-		if(text.contains("적립금") || text.contains("마일리지")){	// 내 마일리지 보여줘 
-			
+		if(text.contains("내") || text.contains("마일리지")){	// 내 마일리지 보여줘 
+			System.out.println("토탈마일리지: " + mypageDao.mileageTotal(person_id));
+			System.out.println("사용 마일리지" + mypageDao.mileageUse(person_id));
+			newText += personDao.findPersonName(person_id) + "님의 마일리지는 "
+					+ (mypageDao.mileageTotal(person_id) - mypageDao.mileageUse(person_id)) + "입니다.";
 		} else if(text.contains("관심분야")){	//내 관심분야
+			list = favDao.favoriteList(person_id);
+			newText += personDao.findPersonName(person_id) + "님의 관심분야는";
 			
+			for(String s : list){
+				newText += "\n  * " + s;
+			}
+			newText += "\n 입니다.";
 		} 
 		
 		return newText;
@@ -165,11 +185,11 @@ public class ChatbotServiceImpl implements ChatbotService {
 		if(text.contains("새") || text.contains("새로운") || text.contains("새로온") || text.contains("새로 온")){		// 새 쪽지 보여줘
 			if(messageDao.newMessageList(person_id).size() != 0){	// 리스트의 크기가 0이라는 것은 검색된 메시지가 없다는 뜻
 				list = messageDao.newMessageList(person_id);
-				newText += "(최신의 쪽지가 상단에 표시됩니다)<hr/>";
+				newText += "(최신의 쪽지가 상단에 표시됩니다)<hr>";
 				newText += "<b>&nbsp;보낸 사람 &nbsp;&nbsp;&nbsp; 내용 </b>";
 				
 				for(MessageVO m : list){
-					newText += "* " + personDao.findPersonName(m.getPerson_id()) + "&nbsp; &nbsp; &nbsp;" + m.getMessage_content();
+					newText += "\n * " + personDao.findPersonName(m.getPerson_id()) + "&nbsp; &nbsp; &nbsp;" + m.getMessage_content();
 				}
 				
 				// 쪽지를 조회함과 동시에 쪽지 알림도 0으로 됨 
@@ -182,11 +202,11 @@ public class ChatbotServiceImpl implements ChatbotService {
 		} else if(text.contains("보관함") || text.contains("쪽지함")){	// 내 쪽지함 보여줘
 			if(messageDao.messageList(person_id).size() != 0){	// 리스트의 크기가 0이라는 것은 검색된 메시지가 없다는 뜻
 				list = messageDao.messageList(person_id);
-				newText += "(최신의 쪽지가 상단에 표시됩니다)<hr/>";
+				newText += "(최신의 쪽지가 상단에 표시됩니다)<hr>";
 				newText += "<b>&nbsp;보낸 사람 &nbsp;&nbsp;&nbsp; 내용 </b>";
 				
 				for(MessageVO m : list){
-					newText += "\n" + "* " + personDao.findPersonName(m.getPerson_id()) + "&nbsp; &nbsp; &nbsp;" + m.getMessage_content();
+					newText += "\n * " + personDao.findPersonName(m.getPerson_id()) + "&nbsp; &nbsp; &nbsp;" + m.getMessage_content();
 				}
 				
 				newText +="<hr/>더보고 싶으면 \n <a href='#'>쪽지보관함으로 이동 </a>";
@@ -197,6 +217,8 @@ public class ChatbotServiceImpl implements ChatbotService {
 			} else {
 				newText += "\n쪽지함에 쪽지가 없습니다.";
 			}
+		} else {
+			newText += "\n 해당 하는 질문이 없어요. 다른 질문을 해주세요.";
 		}
 		
 		return newText;
