@@ -66,7 +66,9 @@
 									</c:when>
 									<c:otherwise>
 										<!-- <form> -->
-									<table class="table table-hover">
+										<input  type="button" value="새쪽지보내기"  class="btn btn-success" style="color: white; float: right; margin-right: 50px;">
+										
+									<table class="table">
 										<thead>
 											<tr>
 												<td align="center">No</td>
@@ -82,21 +84,20 @@
 											<c:forEach var="element" items="${receivedMsgTotal}" varStatus="s">
 												<tr>
 												<td align="center">${element.message_id}</td>
-<%-- 												<td align="center">${element.MESSAGE_ID}</td> --%>
-												<td align="center">${element.person_id}</td>
-												<td align="center">${element.message_content}</td>
+												<td align="center" id="msg_person">${element.person_id}</td>
+												<td align="center"><a id="msg_content" >${element.message_content}</a></td>
 												<td align="center">
 												<c:set var="name" value="${element.message_hit}" />
 														<c:choose>
    															<c:when test="${element.message_hit eq '0' }">
-      														    안읽음
+      														    <img alt="" src="/resources/img/c.png" style="width: 20px; height: 20px;">
    															</c:when>
    															<c:when test="${element.message_hit eq '1' }">
-     														   	읽음
+     														   	 <img alt="" src="/resources/img/o.png" style="width: 20px; height: 20px;">
   															</c:when>
   														</c:choose>
 												</td>
-												<td align="center"><input  type="button" value="답장보내기"  class="btn-default" style="color: white;"></td>
+												<td align="center"><input  type="button" value="답장보내기"  class="btn-default" style="color: white;" id="send"></td>
 												</tr>
 									</c:forEach>
 										</tbody>
@@ -110,6 +111,53 @@
 			</div>
 		</section>
 		
+			<!-- 모달 -->
+							<div class="modal fade" id="content" tabindex="-1" role="dialog"
+								aria-labelledby="modalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">
+												<span aria-hidden="true">×</span><span class="sr-only">취소</span>
+											</button>
+											<h3 class="modal-title" id="lineModalLabel" style="text-align: center;">쪽지상세보기</h3>
+										</div>
+										<div class="modal-body">
+											<!-- content goes here -->
+											<br>
+						<table class="table">
+							<tr>
+								<td>보낸 사람</td>
+								<td><input type="text" id="modal_person" value=""></td>
+							</tr>
+							<tr>
+								<td>내용</td>
+								<td><textarea rows="10" cols="70"  id="modal_content"></textarea></td>
+							</tr>
+						</table>
+						<br>
+										</div>
+										<div class="modal-footer">
+											<div class="btn-group btn-group-justified" role="group"
+												aria-label="group button">
+												<div class="btn-group" role="group">
+													<button type="button" class="btn btn-default"
+														data-dismiss="modal" role="button">답장</button>
+												</div>
+												<div class="btn-group" role="group">
+													<button type="button" class="btn btn-default"
+														data-dismiss="modal" role="button">닫기</button>
+												</div>
+												<div class="btn-group btn-delete hidden" role="group">
+													<button type="button" id="delImage"
+														class="btn btn-default btn-hover-red" data-dismiss="modal"
+														role="button">취소</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 		
         <section class="promo_box">
             <div class="container">
@@ -163,26 +211,63 @@
 	
 	
 	$(function(){
-		$(".btn-default").on("click",function(event){
+		
+		// 답장버튼 클릭
+		$("#send").on(	"click",	function(event) {
+								event.preventDefault();
+								console.log("답장 클릭");
+
+								window.name = "mainPage";
+								window.open("/message/messageSend","messagePage",
+																		 "width=630, height=300, menubar=yes, statebar=yes, scrollbar=yes");
+								document.session_id.action = "/message/messageSend";
+								document.session_id.target = "messagePage";
+								document.session_id.submit;
+							});
+		
+		// 새쪽지버튼 클릭
+		$(".btn-success").on(	"click",	function(event) {
 			event.preventDefault();
-			console.log($(this).val());
+			console.log("새쪽지 클릭");
+
+			window.name = "mainPage";
+			window.open("/message/messageSend","messagePage",
+													 "width=630, height=300, menubar=yes, statebar=yes, scrollbar=yes");
+			document.session_id.action = "/message/messageSend";
+			document.session_id.target = "messagePage";
+			document.session_id.submit;
+		});
+		
+		var p = $("#modal_person");
+		var ta = $("#modal_content");
+		
+		//쪽지 상세보기
+		$("#msg_content").on(	"click",	function(event) {
+			console.log("내용 클릭");
+			console.log($(this).html());
+			console.log($(this).parent().parent().find($("#msg_person")).text().trim());
 			
-	 		
-window.name = "mainPage";
-window.open("/message/messageSend","messagePage", "width=630, height=300, menubar=yes, statebar=yes, scrollbar=yes");
-	
-document.session_id.action = "/message/messageSend";
-document.session_id.target = "messagePage";
-document.session_id.submit;
+			ta.val($(this).html());
+			p.val($(this).parent().parent().find($("#msg_person")).text().trim());
+			console.log("내용 클릭");
+			$('#content').modal();
+			
+			
 			
 		});
-	});
-	
-	
 		
-</script>
+		
+		
+		
+		
+		
+		
+		
+		});
+	</script>
     <!-- Start Style Switcher -->
     <div class="switcher"></div>
     <!-- End Style Switcher -->
 </body>
 </html>
+
