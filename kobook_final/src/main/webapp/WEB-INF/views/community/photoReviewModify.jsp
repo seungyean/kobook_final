@@ -58,42 +58,68 @@
 						<!--Project Details Page-->
 						<div class="porDetCarousel">
 							<div class="carousel-content">
-								<img src="/resources/upload/${photo.photo_img}" alt="NO IMAGE" height="500" width="700">
+								<img src="/community/displayFile?fileName=${photoVO.photo_thumbnail }" alt="NO IMAGE" height="500" width="700">
 							</div>
 						</div>
 					</div>
 					
-					<form action="photoUpdateAction.do" method="post" enctype="multipart/form-data">
-					<input type="hidden" name="photo_id" value="${photo.photo_id }">
+					<form role="form" action="photoReviewModify" method="post" enctype="multipart/form-data">
+					<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
+					<input type='hidden' name='searchType' value="${cri.searchType}">
+					<input type='hidden' name='keyword' value="${cri.keyword}">
+					<input type="hidden" name="photo_thumbnail" value="${photoVO.photo_thumbnail}">
+					<input type="hidden" name="photo_id" value="${photoVO.photo_id }">
 					<div class="col-lg-4 col-md-4 col-sm-4">
 						<div class="project_details">
 							<div class="widget_title">
 								<h4>
-									<span><input type="text" name="photo_title" value="${photo.photo_title}"></span>
+									<span><input type="text" name="photo_title" value="${photoVO.photo_title}"></span>
 								</h4>
 							</div>
 							<ul class="details">
-								<li><span><i class="fa fa-pencil"></i>글번호 :</span>${photo.photo_id }</li>
-								<li><span><i class="fa fa-user"></i>작성자 :</span>${photo.person_id }</li>
+								<li><span><i class="fa fa-pencil"></i>글번호 :</span>${photoVO.photo_id }</li>
+								<li><span><i class="fa fa-user"></i>작성자 :</span>${writer }</li>
 								<li><span><i class="fa fa-file-text"></i>내용 :</span>
 								<textarea cols="25" rows="2" name="photo_content"
-												placeholder="${photo.photo_content }">${photo.photo_content }</textarea>
-									</li>
+												placeholder="${photoVO.photo_content }">${photoVO.photo_content }</textarea>
+								</li>
 								<li><span><i class="fa fa-calendar"></i>작성일 :</span> <fmt:formatDate
-										value="${photo.photo_date }" pattern="MMM dd, yyyy" /></li>
+										value="${photoVO.photo_date }" pattern="MMM dd, yyyy" /></li>
 								<li><span><i class="fa fa-heart"></i>좋아요 :</span>
-									${photo.photo_heart }</li>
-								<li><span><i class="fa fa-eye"></i>조회수 :</span>${photo.photo_hit }</li>
+									${photoVO.photo_heart }</li>
+								<li><span><i class="fa fa-eye"></i>조회수 :</span>${photoVO.photo_hit }</li>
 							</ul>
 
-							<input type="hidden" name="photo_img" value="${photo.photo_img }">
+							<%-- <input type="hidden" name="photo_img" value="${photo.photo_img }">
 							<input type="file" name="photoUimg">
-							<input type="submit" class="btn btn-lg btn-default" value="수정완료">
+							<input type="submit" class="btn btn-lg btn-default" value="수정완료"> --%>
 						</div>
 					</div>
+						<input type="file" name="file"><br> 
+						<button type="submit" class="btn btn-primary">SAVE</button>
+						<button type="submit" class="btn btn-warning">CANCEL</button>
 					</form>
 				</div>
-							</div>
+				<button class="fileButton">파일 추가</button>
+					<div class="form-group" id="fileAdd">
+						<label for="exampleInputEmail1">추가 파일은 아래영역에 드래그하십시오.</label>
+						<div class="fileDrop"></div>
+						<button class="cancleFile">취소</button>
+					</div>
+ 				<div class="box-footer">
+					<div>
+						<hr>
+					</div>
+<%-- 
+					<figure class="post_img">
+						<img class="thumbnail" alt="NO Thumbnail" 
+							src="/community/displayFile?fileName=${photoVO.photo_thumbnail }" height="300" width="200">
+					</figure> --%>
+					<ul class="mailbox-attachments clearfix uploadedList">
+					</ul>
+								
+				</div>
+			</div>
 		</section>	
 		<!-- 여기까지 -->
 	</section>
@@ -119,7 +145,168 @@
     <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
 
     <script src="/resources/js/main.js"></script>
+	
+	<script type="text/javascript" src="/resources/js/upload.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+	
+<script id="template" type="text/x-handlebars-template">
+<li>
+	<div class="mailbox-attachment-info">
+<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}
+  <span class="mailbox-attachment-icon has-img"><br><img src="{{imgsrc}}" alt="Attachment">
+	</a>
+	<a href="{{fullName}}" 
+     class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a>
+	</span>
+  </div>
+</li>
+</script>
 
+<script>
+$(function(){
+	 $("#fileAdd").hide();
+
+	 $(".fileButton").on("click", function(){
+	 	event.preventDefault();
+	 	$("#fileAdd").show();
+	 	$(this).hide();
+	 });
+
+	 $(".cancleFile").on("click", function(){
+	 	event.preventDefault();
+	 	$("#fileAdd").hide();
+	 	$(".fileButton").show();
+	 });
+		
+	var formObj = $("form[role='form']");
+	
+	formObj.submit(function(event){
+		event.preventDefault();
+		
+		var that = $(this);
+		
+		var str ="";
+		$(".uploadedList .delbtn").each(function(index){
+			 str += "<input type='hidden' name='files["+index+"]' value='"+$(this).attr("href") +"'> ";
+		});
+		
+		that.append(str);
+
+		console.log(str);
+		
+		that.get(0).submit();
+	});
+	
+	
+	$(".btn-warning").on("click", function(){
+	  self.location = "/community/photoReviewList?page=${cri.page}&perPageNum=${cri.perPageNum}"+
+			  "&searchType=${cri.searchType}&keyword=${cri.keyword}";
+	});
+	
+});
+
+
+
+
+var template = Handlebars.compile($("#template").html());
+
+
+$(".fileDrop").on("dragenter dragover", function(event){
+	event.preventDefault();
+});
+
+
+$(".fileDrop").on("drop", function(event){
+	event.preventDefault();
+	
+	var files = event.originalEvent.dataTransfer.files;
+	
+	var file = files[0];
+	
+	var formData = new FormData();
+	
+	formData.append("file", file);	
+	
+	$.ajax({
+		  url: '/community/uploadAjax',
+		  data: formData,
+		  dataType:'text',
+		  processData: false,
+		  contentType: false,
+		  type: 'POST',
+		  success: function(data){
+			  
+			  var fileInfo = getFileInfo(data);
+			  
+			  var html = template(fileInfo);
+			  
+			  $(".uploadedList").append(html);
+		  }
+		});	
+});
+
+
+$(".uploadedList").on("click", ".delbtn", function(event){
+	
+	event.preventDefault();
+	
+	var that = $(this);
+	 
+	$.ajax({
+	   url:"/community/deleteFile",
+	   type:"post",
+	   data: {fileName:$(this).attr("href")},
+	   dataType:"text",
+	   success:function(result){
+		   if(result == 'deleted'){
+			   that.closest("li").remove();
+		   }
+	   }
+   });
+});
+
+
+var photo_id = ${photoVO.photo_id};
+var template = Handlebars.compile($("#template").html());
+
+$.getJSON("/community/photoGetAttach/"+photo_id,function(list){
+	$(list).each(function(){
+		
+		var fileInfo = getFileInfo(this);
+		
+		var html = template(fileInfo);
+		
+		 $(".uploadedList").append(html);
+		
+	});
+});
+
+$(".uploadedList").on("click", ".mailbox-attachment-info a", function(event){
+	
+	var fileLink = $(this).attr("href");
+	
+	if(checkImageType(fileLink)){
+		
+		event.preventDefault();
+				
+		var imgTag = $("#popup_img");
+		imgTag.attr("src", fileLink);
+		
+		console.log(imgTag.attr("src"));
+				
+		$(".popup").show('slow');
+		imgTag.addClass("show");		
+	}	
+});
+
+$("#popup_img").on("click", function(){
+	
+	$(".popup").hide('slow');
+	
+});	
+
+
+</script>
 	<!-- Start Style Switcher -->
 	<div class="switcher"></div>
 	<!-- End Style Switcher -->

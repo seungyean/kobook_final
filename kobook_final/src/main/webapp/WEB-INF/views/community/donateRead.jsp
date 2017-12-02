@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -40,6 +39,9 @@
      #popup_img{
      	width: 500%;
      	height: 500%;
+     }
+     .uploadedList li{
+     	display: inline-block;
      }
     </style>
 </head>
@@ -107,17 +109,17 @@
 										<blockquote class="default">
 											${donateVO.donate_content }</blockquote>
 									</div>
-							</article>
-					    <div class='popup back' style="display:none;"></div>
-					    <div id="popup_front" class='popup front' style="display:none;">
-					     <img id="popup_img">
-					    </div>
 									<figure class="post_img">
 									<img class="thumbnail" alt="NO Thumbnail"
 												 src="/community/displayFile?fileName=${donateVO.donate_thumbnail }" height="300" width="200">
 									</figure>
-							 <ul class="mailbox-attachments clearfix uploadedList">
-							 </ul>
+							    <div class='popup back' style="display:none;"></div>
+							    <div id="popup_front" class='popup front' style="display:none;">
+							    	<img id="popup_img">
+							    </div>
+								<ul class="mailbox-attachments clearfix uploadedList">
+								</ul>
+							</article>
 						</div>
  
 						<!--News Comments-->

@@ -52,7 +52,7 @@
 		<!-- 여기서부터 -->
 		<section class="content portfolio medium-images">
 			<div class="container">
-				<div class="row sub_content">
+				<!-- <div class="row sub_content"> -->
 					<!--begin isotope -->
 					<form action="/community/photoReviewRegist" method="get">
 					<div class="col-lg-12 isotope">
@@ -73,15 +73,16 @@
 							<div class="item responsive">-->
 								<div class="recent-item box">
 									<figure class="touching ">
-											<a href="/community/photoReviewRead?photo_id=${photo.photo_id }">
-										<img id="photo" src="/community/displayFile?fileName=${photo.photo_thumbnail}"
-											alt="NO IMAGE" height="280" class="img-responsive" /></a>
+										<img src="/community/displayFile?fileName=${photo.photo_thumbnail}"
+											alt="NO IMAGE" height="280" width="500" />
+										<a href="/community/photoReviewRead${pageMaker.makeSearch(pageMaker.cri.page) }&photo_id=${photo.photo_id }">
+										</a>
 										<div class="option inner">
 											<div>
 												<h5>${photo.photo_title }</h5>
 												<a href="/community/displayFile?fileName=${photo.photo_thumbnail}"
 													class="fa fa-search mfp-image"></a> <a
-													href="/community/photoReviewRead?photo_id=${photo.photo_id}" class="fa fa-link"></a>
+													href="/community/photoReviewRead${pageMaker.makeSearch(pageMaker.cri.page) }&photo_id=${photo.photo_id}" class="fa fa-link"></a>
 													<span>${userMap[photo.photo_id]}</span>
 											</div>
 										</div>
@@ -137,7 +138,7 @@
 							</c:if>
 								</ul>
 							</div>
-				</div>
+				<!-- </div> -->
 				<!--./row-->
 			</div>
 			<!--./div-->

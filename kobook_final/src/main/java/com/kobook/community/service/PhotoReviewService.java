@@ -11,4 +11,7 @@ public interface PhotoReviewService {
 	public int photoCount(SearchCriteria cri) throws Exception;
 	public String photoWriter(Integer photo_id) throws Exception;
 	public List<String> photoGetAttach(Integer photo_id) throws Exception;
+	public PhotoVO photoReviewRead(Integer photo_id, boolean bool) throws Exception;
+	public void photoReviewModify(PhotoVO vo) throws Exception;
+	public void photoReviewRemove(Integer photo_id) throws Exception;
 }

@@ -25,5 +25,13 @@ public interface PhotoReviewDAO {
 	public void photoDeleteAttach(Integer photo_id) throws Exception;
 	//photoReplaceAttach
 	public void photoReplaceAttach(PhotoFileVO fileVO) throws Exception;
+	//photoSelect
+	public PhotoVO photoSelect(Integer photo_id) throws Exception;
+	//photoHitCount
+	public int photoHitCount(Integer photo_id) throws Exception;
+	//photoUpdate
+	public void photoUpdate(PhotoVO vo) throws Exception;
+	//photoDelete
+	public void photoDelete(Integer photo_id) throws Exception;
 	
 }

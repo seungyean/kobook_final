@@ -65,4 +65,24 @@ public class PhotoReviewDAOImpl implements PhotoReviewDAO {
 	public void photoReplaceAttach(PhotoFileVO fileVO) throws Exception {
 		session.insert(namespace+".photoReplaceAttach", fileVO);
 	}
+
+	@Override
+	public PhotoVO photoSelect(Integer photo_id) throws Exception {
+		return session.selectOne(namespace+".photoSelect", photo_id);
+	}
+
+	@Override
+	public int photoHitCount(Integer photo_id) throws Exception {
+		return session.update(namespace+".photoHitCount", photo_id);
+	}
+
+	@Override
+	public void photoUpdate(PhotoVO vo) throws Exception {
+		session.update(namespace+".photoUpdate", vo);
+	}
+
+	@Override
+	public void photoDelete(Integer photo_id) throws Exception {
+		session.delete(namespace+".photoDelete", photo_id);
+	}
 }

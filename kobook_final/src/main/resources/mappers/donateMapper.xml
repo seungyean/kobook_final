@@ -85,7 +85,7 @@
 	<update id="donateUpdate" parameterType="DonateVO">
 		update donate set donate_title=#{donate_title},
 		donate_content=#{donate_content}
-		<if test="donate_thumbnail != null">, donate_thumbnail = #{donate_thumbnail}</if>
+		<if test="donate_thumbnail != null">, donate_thumbnail = #{donate_thumbnail} </if>
 		where donate_id = #{donate_id}
 	</update>
 

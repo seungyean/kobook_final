@@ -16,7 +16,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -184,7 +183,7 @@ public class CommunityController {
 	
 	//신고 게시판 List출력
 	@RequestMapping(value = "blackList", method = RequestMethod.GET)
-	public void blackList(@ModelAttribute SearchCriteria cri, Model model)throws Exception{
+	public void blackList(@ModelAttribute("cri") SearchCriteria cri, Model model)throws Exception{
 		List<BlackVO> list = blackService.blackList(cri);
 		HashMap<Integer, String> userMap = new HashMap<Integer,String>();
 		
@@ -280,7 +279,7 @@ public class CommunityController {
 	
 	//무료나눔 List 출력
 	@RequestMapping("donateList")
-	public void donateList(@ModelAttribute SearchCriteria cri, Model model, @ModelAttribute DonateFileVO fileVO) throws Exception {
+	public void donateList(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
 		List<DonateVO> list = donateService.donateList(cri);
 		HashMap<Integer, String> userMap = new HashMap<Integer,String>();
 		
@@ -440,7 +439,7 @@ public class CommunityController {
 	
 	//포토리뷰 List 출력
 	@RequestMapping("photoReviewList")
-	public void photoList(@ModelAttribute SearchCriteria cri, Model model, @ModelAttribute PhotoFileVO fileVO) throws Exception {
+	public void photoList(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
 		List<PhotoVO> list = photoService.photoList(cri);
 		HashMap<Integer, String> userMap = new HashMap<Integer,String>();
 		
@@ -461,5 +460,60 @@ public class CommunityController {
 		model.addAttribute("pageMaker", pageMaker);
 	}	
 	
+	//포토리뷰 상세보기
+	@RequestMapping("photoReviewRead")
+	public void photoReviewRead(@RequestParam("photo_id") Integer photo_id, Model model,
+			@ModelAttribute("cri") SearchCriteria cri) throws Exception{
+		model.addAttribute(photoService.photoReviewRead(photo_id, true));
+		model.addAttribute("writer", photoService.photoWriter(photo_id));
+	}
+	
+	//포토리뷰 첨부파일 추출
+	@RequestMapping(value="/photoGetAttach/{photo_id}")
+	@ResponseBody
+	public List<String> photoGetAttach(@PathVariable("photo_id")Integer photo_id) throws Exception {		
+		return photoService.photoGetAttach(photo_id);
+	}
+	
+	//포토리뷰 수정 폼 이동
+	@RequestMapping(value="photoReviewModify", method=RequestMethod.GET)
+	public void photoReviewModifyGet(@RequestParam("photo_id") Integer photo_id, Model model,
+			@ModelAttribute("cri") SearchCriteria cri) throws Exception {
+		model.addAttribute(photoService.photoReviewRead(photo_id, false));
+		model.addAttribute("writer", photoService.photoWriter(photo_id));		
+	}
+	//포토리뷰 수정(DB)
+	@RequestMapping(value="photoReviewModify", method=RequestMethod.POST)
+	public String photoReviewModifyPost(RedirectAttributes rtts, PhotoVO vo, SearchCriteria cri
+			, @RequestParam("file") MultipartFile file ) throws Exception {
+		
+		String photo_thumbnail = UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes());
+		String[] photo_thumbnail1 =photo_thumbnail.split("_");
+		
+		if(photo_thumbnail1.length>2) {
+			vo.setPhoto_thumbnail(photo_thumbnail);
+		}
+		photoService.photoReviewModify(vo);
+		
+		rtts.addAttribute("page", cri.getPage());
+		rtts.addAttribute("perPageNum", cri.getPerPageNum());
+		rtts.addAttribute("searchType", cri.getSearchType());
+		rtts.addAttribute("keyword", cri.getKeyword());
+		
+		return "redirect:/community/photoReviewList";
+	}
+	//포토리뷰 삭제
+	@RequestMapping("photoReviewRemove")
+	public String photoReviewRemove(RedirectAttributes rtts, SearchCriteria cri
+			, @RequestParam("photo_id") Integer photo_id) throws Exception {
+		photoService.photoReviewRemove(photo_id);
+		
+		rtts.addAttribute("page", cri.getPage());
+		rtts.addAttribute("perPageNum", cri.getPerPageNum());
+		rtts.addAttribute("searchType", cri.getSearchType());
+		rtts.addAttribute("keyword", cri.getKeyword());
+		
+		return "redirect:/community/photoReviewList";
+	}
 	
 }

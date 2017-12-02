@@ -23,14 +23,34 @@
     <link rel="stylesheet" href="/resources/css/layout/wide.css" data-name="layout">
 
     <link rel="stylesheet" type="text/css" href="/resources/css/switcher.css" media="screen" />
-<script type="text/javascript">
+     <style type="text/css">
+    .popup {position: absolute;}
+    .back { background-color: gray; opacity:0.5; width: 78%; height: 31%; overflow:hidden;  z-index:1101;}
+    .front { 
+       z-index:1110; opacity:1; boarder:1px; margin: auto; 
+      }
+     .show{
+       position:relative;
+       max-width: 900px; 
+       max-height: 500px; 
+       overflow: auto;       
+     }
+     #popup_img{
+     	width: 500%;
+     	height: 500%;
+     }
+     .uploadedList li{
+     	display: inline-block;
+     }
+    </style>
+<!-- <script type="text/javascript">
 	function fn_update() {
-		location.href="photoUpdateForm.do?photo_id=${photo.photo_id}";
+		location.href="photoReviewModify?photo_id=${photoVO.photo_id}";
 	}
 	function fn_delete() {
-		location.href="photoDelete.do?photo_id=${photo.photo_id}";
+		location.href="photoReviewRemove?photo_id=${photoVO.photo_id}";
 	}
-</script>
+</script> -->
 </head>
 <body class="home">
 	<!-- 헤더 -->
@@ -60,12 +80,21 @@
 		<!-- 여기서부터 -->
 <section class="content portfolio_single">
 			<div class="container">
+    			<form role="form" action="photoReviewModify" method="post">
+					<input type='hidden' name='photo_id' value="${photoVO.photo_id}">
+					<input type='hidden' name='page' value="${cri.page}">
+					<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
+					<input type='hidden' name='searchType' value="${cri.searchType}">
+					<input type='hidden' name='keyword' value="${cri.keyword}">
+				</form>
 				<div class="row sub_content">
 					<div class="col-lg-8 col-md-8 col-sm-8">
 						<!--Project Details Page-->
+
 						<div class="porDetCarousel">
 							<div class="carousel-content">
-								<img src="../upload/${photo.photo_img}" alt="NO IMAGE" height="500" width="700">
+								<img class="thumbnail" alt="NO Thumbnail"
+												 src="/community/displayFile?fileName=${photoVO.photo_thumbnail }" height="500" width="700">
 							</div>
 						</div>
 					</div>
@@ -84,33 +113,40 @@
 						
 						<div class="project_details">
 							<div class="widget_title">
-								<h4><span>${photo.photo_title }</span></h4>
+								<h4><span>${photoVO.photo_title }</span></h4>
 							</div>
 							<ul class="details">
-								<li><span><i class="fa fa-pencil"></i>글번호 :</span>${photo.photo_id }</li>
-								<li><span><i class="fa fa-user"></i>작성자 :</span>${photo.person_id }</li>
-								<li><span><i class="fa fa-file-text"></i>내용 :</span> ${photo.photo_content }</li>
+								<li><span><i class="fa fa-pencil"></i>글번호 :</span>${photoVO.photo_id }</li>
+								<li><span><i class="fa fa-user"></i>작성자 :</span>${writer}</li>
+								<li><span><i class="fa fa-file-text"></i>내용 :</span> ${photoVO.photo_content }</li>
 								<li><span><i class="fa fa-calendar"></i>작성일 :</span>
-								<fmt:formatDate value="${photo.photo_date }" pattern="MMM dd, yyyy" /></li>
-								<li><span><i class="fa fa-heart"></i>좋아요 :</span> ${photo.photo_heart }</li>
-								<li><span><i class="fa fa-eye"></i>조회수 :</span>${photo.photo_hit }</li>
+								<fmt:formatDate value="${photoVO.photo_date }" pattern="MM月 dd日, yyyy年" /></li>
+								<li><span><i class="fa fa-heart"></i>좋아요 :</span> ${photoVO.photo_heart }</li>
+								<li><span><i class="fa fa-eye"></i>조회수 :</span>${photoVO.photo_hit }</li>
 							</ul>
-							<c:if test="${photo.photo_heart==0 }">
-								<a href="photoHeartUp.do?photo_id=${photo.photo_id}"><i class="fa fa-thumbs-o-up">추천하기</i></a>
+							<c:if test="${photoVO.photo_heart==0 }">
+								<a href="photoHeartUp?photo_id=${photoVO.photo_id}"><i class="fa fa-thumbs-o-up">추천하기</i></a>
 							</c:if>
-							<c:if test="${photo.photo_heart>0 }">
-								<a href="photoHeartUp.do?photo_id=${photo.photo_id}"><i class="fa fa-thumbs-o-up">추천하기</i></a>
-								<a href="photoHeartDown.do?photo_id=${photo.photo_id}"><i class="fa fa-thumbs-o-down">추천해제</i></a>
+							<c:if test="${photoVO.photo_heart>0 }">
+								<a href="photoHeartUp?photo_id=${photoVO.photo_id}"><i class="fa fa-thumbs-o-up">추천하기</i></a>
+								<a href="photoHeartDown?photo_id=${photoVO.photo_id}"><i class="fa fa-thumbs-o-down">추천해제</i></a>
+							</c:if><br>
+							<c:if test="${photoVO.person_id == person_id }">
+								<!-- <input type="button" class="btn btn-lg btn-default" value="수정" onclick="fn_update()">
+								<input type="button" class="btn btn-lg btn-default" value="삭제" onclick="fn_delete()"> -->
+								<button type="submit" class="btn btn-warning" id="modifyBtn">수정</button>
+								<button type="submit" class="btn btn-danger" id="removeBtn">삭제</button>
 							</c:if>
-							<c:if test="${photo.person_id == person_id }">
-								<input type="button" class="btn btn-lg btn-default" value="수정" onclick="fn_update()">
-								<input type="button" class="btn btn-lg btn-default" value="삭제" onclick="fn_delete()">
-							</c:if>
-							
+							<button type="submit" class="btn btn-primary" id="goListBtn">목록으로</button>
 						</div>
 					</div>
 				</div>
-
+							    <div class='popup back' style="display:none;"></div>
+							    <div id="popup_front" class='popup front' style="display:none;">
+							    	<img id="popup_img">
+							    </div>
+								<ul class="mailbox-attachments clearfix uploadedList">
+								</ul>
 <!--                 
 <div class="row sub_content">
                     <div class="col-md-12">
@@ -247,7 +283,7 @@
 	<script type="text/javascript" src="/resources/js/styleswitch.js"></script>
 	<script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script>
 	<script type="text/javascript" src="/resources/js/jquery.smartmenus.bootstrap.min.js"></script>
-	<script type="text/javascript" src="/resources/js/owl.carousel.js"></script>
+	<!-- <script type="text/javascript" src="/resources/js/owl.carousel.js"></script> -->
 	<script type="text/javascript" src="/resources/js/jflickrfeed.js"></script>
 	<script type="text/javascript" src="/resources/js/jquery.magnific-popup.min.js"></script>
 	<script type="text/javascript" src="/resources/js/jquery.isotope.min.js"></script>
@@ -255,7 +291,106 @@
 	<script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
 
 	<script src="/resources/js/main.js"></script>
-	<script type="text/javascript">
+<script type="text/javascript" src="/resources/js/upload.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<script id="templateAttach" type="text/x-handlebars-template">
+<li data-src='{{fullName}}'>
+<div class="mailbox-attachment-info">
+<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}
+  <span class="mailbox-attachment-icon has-img"><br><img src="{{imgsrc}}" alt="Attachment" height="200" width="200"></span>
+</a>
+  </div>
+</li>
+</script> 
+<script type="text/javascript">
+$(function(){
+	var formObj = $("form[role='form']");
+	 	
+	$("#modifyBtn").on("click", function(){
+		formObj.attr("action", "/community/photoReviewModify");
+		formObj.attr("method", "get");		
+		formObj.submit();
+	});
+
+	
+	$("#removeBtn").on("click", function(){		
+		var arr = [];
+		$(".uploadedList li").each(function(index){
+			 arr.push($(this).attr("data-src"));
+		});
+		
+		if(arr.length > 0){
+			$.post("/community/deleteAllFiles",{files:arr}, function(){
+				
+			});
+		}
+		
+		formObj.attr("action", "/community/photoReviewRemove");
+		formObj.submit();
+	});	
+	
+	$("#goListBtn").on("click", function(){
+		formObj.attr("method", "get");
+		formObj.attr("action", "/community/photoReviewList");
+		formObj.submit();
+	});
+
+	var photo_id = ${photoVO.photo_id};
+	var template = Handlebars.compile($("#templateAttach").html());
+	
+	$.getJSON("/community/photoGetAttach/"+photo_id,function(list){
+		$(list).each(function(){
+			
+			var fileInfo = getFileInfo(this);
+			
+			var html = template(fileInfo);
+			
+			 $(".uploadedList").append(html);
+			
+		});
+	});
+
+	$(".uploadedList").on("click", ".mailbox-attachment-info a", function(event){
+		
+		var fileLink = $(this).attr("href");
+		
+		if(checkImageType(fileLink)){
+			
+			event.preventDefault();
+					
+			var imgTag = $("#popup_img");
+			imgTag.attr("src", fileLink);
+			
+			console.log(imgTag.attr("src"));
+					
+			$(".popup").show('slow');
+			imgTag.addClass("show");		
+		}	
+	});
+	
+	
+	$(".thumbnail").on("click", function(event){
+			event.preventDefault();
+		var str = $(this).attr("src");
+		var str2 = str.split("s_");
+		var str3 = str2[0]+str2[1];
+  		var imgTag = $("#popup_img");
+		imgTag.attr("src", str3);
+					
+		$(".popup").show('slow');
+		imgTag.addClass("show");
+	}); 
+
+	$("#popup_img").on("click", function(){		
+		$(".popup").hide('slow');		
+	});
+	
+	$(".back").on("click", function(){		
+		$(".popup").hide('slow');		
+	});
+});
+</script>
+<!-- 	<script type="text/javascript">
 		$(document).ready(function() {
 			$.fn.carousel = function(op) {
 				var op, ui = {};
@@ -367,7 +502,7 @@
 				});
 			});
 		});
-	</script>
+	</script> -->
 	<!-- Start Style Switcher -->
 	<div class="switcher"></div>
 	<!-- End Style Switcher -->

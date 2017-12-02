@@ -56,4 +56,41 @@ public class PhotoReviewServiceImpl implements PhotoReviewService {
 	public List<String> photoGetAttach(Integer photo_id) throws Exception {
 		return dao.photoGetAttach(photo_id);
 	}
+
+	@Transactional
+	@Override
+	public PhotoVO photoReviewRead(Integer photo_id, boolean bool) throws Exception {
+		if(bool){
+			dao.photoHitCount(photo_id);
+		}
+		return dao.photoSelect(photo_id);
+	}
+
+	@Transactional
+	@Override
+	public void photoReviewModify(PhotoVO vo) throws Exception {
+		dao.photoUpdate(vo);
+		
+		Integer photo_id = vo.getPhoto_id();
+		dao.photoDeleteAttach(photo_id);
+		
+		PhotoFileVO fileVO = new PhotoFileVO();
+		
+		fileVO.setPhoto_id(photo_id);
+		
+		String[] files = vo.getFiles();
+		
+		for(String photo_file_name : files) {
+			fileVO.setPhoto_file_name(photo_file_name);
+			dao.photoReplaceAttach(fileVO);
+		}
+		
+	}
+
+	@Transactional
+	@Override
+	public void photoReviewRemove(Integer photo_id) throws Exception {
+		dao.photoDeleteAttach(photo_id);
+		dao.photoDelete(photo_id);
+	}
 }
