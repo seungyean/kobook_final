@@ -200,12 +200,12 @@ public class BookDAOImpl implements BookDAO {
 	}
 
 
-/*
+
 	@Override
-	public List<HashMap<String, String>> selectDate(DateDTO dto) throws Exception {
-		return session.selectList(namespace+".selectDate",dto);
+	public List<HashMap<String, String>> selectDateList(DateDTO dto) throws Exception {
+		return session.selectList(namespace+".selectDateList",dto);
 	}
-*/
+
 
 
 

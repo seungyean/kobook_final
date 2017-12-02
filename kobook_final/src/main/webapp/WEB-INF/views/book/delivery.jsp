@@ -23,6 +23,27 @@
 
 <link rel="stylesheet" type="/resources/text/css"
 	href="/resources/css/switcher.css" media="screen" />
+	
+	<!-- 달력 -->
+	<!-- // jQuery UI CSS파일  -->
+<!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+// jQuery 기본 js파일
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+// jQuery UI 라이브러리 js파일
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>   -->
+
+<!-- 이거로 -->
+
+ 
+<!-- <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script type="text/javascript">
+    $('#datepicker').datepicker();
+</script> -->
+
+
+
+	
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -43,21 +64,6 @@ $(function(){
      });
 	
 });
-	
-	
-	/* 
-	$(document).ready(function() { 			     
-					$('.status').click(function(){
-						var i = $(this).val();						
-						alert(i);						
-						var arr=new Array();
-						for(var i=0; i<arr.length;i++){
-							arr.push(i);
-						console.log(i);
-						}
-					})
-			    });
- */
 </script>
 
 <script type="text/javascript">
@@ -85,6 +91,38 @@ function change() {
  	})
 }
 </script> 
+<script type="text/javascript">
+$('#datePick').on("click",function(event){
+	event.preventDefault();
+	var formData = new FormData();
+
+    console.log($('#startday').val());
+    console.log($('#endday').val());
+       
+/* 	
+	$.ajax({
+		url:'/deliverydateAjax',
+		data:formData,
+		dataType='json',
+		processData=false,
+		contentType=false,
+		type='POST',
+		success: function(data){
+			alert(data);
+			var str="";
+
+      
+               
+            //  $('#dateForm').append('<input type="hidden" name="startday" value="'+startday +'">');
+             //  $('#dateForm').append('<input type="hidden" name="endday" value="'+endday +'">');
+          
+
+		}
+		
+	}) */
+	
+});
+</script>
 </head>
 
 
@@ -283,7 +321,7 @@ function change() {
 		<section class="content typography">
 			<div class="container">
 			
-		 	 <div class="row sub_content">
+	<%-- 	 	 <div class="row sub_content">
                     <div class="col-md-12">
                         <div class="dividerHeading">
                             <h4><span>검색</span></h4>
@@ -312,7 +350,7 @@ function change() {
 						
 						
 						
-									<%-- <select id="sortType">
+									<select id="sortType">
 						
 										<option value="n"
 											<c:out value="${cri.searchType == null?'selected':''}"/>>
@@ -330,34 +368,85 @@ function change() {
 										<option value="b"
 											<c:out value="${cri.sortType eq 'b'?'selected':''}"/>>
 											책상태순</option>
-									</select> --%>
+									</select>
 						
 								</div>
 						<!-- </form> --> 
                     </div>
-                    </div>
+                    </div> --%>
                     <!--검색 row-sub-content  -->
+                    
+                    
+                    
+          <!-- // 1. Datepicker(데이트피커) 사용하기 -->
+        
+		<input type="text" id="startday" placeholder="시작 날짜를 선택하세요">
+		<input type="text" id="endday" placeholder="시작 날짜를 선택하세요">
+		 <input name="submit" type="submit" value="확인" id="datePick" />
+		 
+		 
+		
 			
+		
+		<!-- 날짜조회 -->
+	<%-- 	<div class="row sub_content">
+					<div class="col-lg-12 col-md-12 col-sm-12">
+						<div class="dividerHeading">
+							<h4><span>날짜조회 리스트</span></h4>
+							<br>
+							<br>
+										<!-- <form> -->
+									<table class="table table-hover">
+										<thead>
+											<tr>
+												<td align="center">번호</td>
+												<td align="center">책이름</td>
+												<td align="center">주문자</td>
+												<td align="center">총 주문액</td>
+												<td align="center">배송 주소</td>
+												<td align="center">결제 날짜</td>
+												<td align="center">배송 상태</td>
+												<td align="center">배송 메세지</td>
+												<td></td>
+											</tr>
+										</thead>
+										<tbody id="dtable">
+											<c:forEach var="sl" items="${selectDateList}">
+												<tr>
+													<td align="center" data-rno="${sl.DELIVERY_ID}" >${sl.DELIVERY_ID}</td>
+													<td align="center">${sl.BOOK_NAME}</td>
+													<td align="center">${sl.PERSON_NAME}</td>
+													<td align="center">${sl.PAY_AMOUNT}</td>
+													<td align="center">${sl.DELIVERY_ADDRESS}</td>
+													<td align="center"><fmt:formatDate value="${sl.PAY_DATE}" pattern='yyyy-MM-dd' /></td>
+													<td align="center" >
+												 	<c:if test="${sl.DELIVERY_STATE eq 'W'}"></c:if>>배송준비중 &nbsp;&nbsp;
+													<c:if test="${sl.DELIVERY_STATE eq 'I'}"></c:if>>배송중 &nbsp;&nbsp;
+													<c:if test="${sl.DELIVERY_STATE eq 'C'}"></c:if>>배송완료 &nbsp;&nbsp;
+													</td>
+													<td align="center">
+													<c:choose>
+													<c:when test="${empty sl.DELIVERY_MSG}">
+													</c:when>
+													<c:otherwise>
+													<img alt="" src="/resources/img/msg.png" data-rno="${sl.DELIVERY_MSG}" class="msgimg" width="22px" height="15px">
+													</c:otherwise>
+													</c:choose>
+													</td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+									<!-- </form> -->
+						</div>
+					</div>
+				</div>  --%>
+		<!--/날짜조회  -->
 			
-	<!-- 		 <form action="#" method="post">
-			기간조회
-			<div class="one_third">
-                  <label for="startday">기간 </label> 
-                  <input type="text" id="datepicker" name="startday" size="22">
-               </div>
-               <div class="one_third">
-                  <label for="endday">&nbsp;</label> 
-                  <input type="text" id="datepicker" name="endday" size="22">
-               </div>
-			/기간조회 
-			 <div>
-                  <input name="submit" type="submit" value="확인" id="submit" />
-               </div>
-			
-			</form> -->
-			
-			
-			
+
+
+
+		
 				<div class="row sub_content">
 					<div class="col-lg-12 col-md-12 col-sm-12">
 						<div class="dividerHeading">
@@ -576,84 +665,27 @@ function change() {
 							});
 
 				});
-
-		
-		
-		/* $('#update').on("click",function(event){
-			event.preventDefault();
-			var formData = new FormData();
-			
-			
-			$.ajax({
-				url:'/deliveryAjax',
-				data:formData,
-				dataType='text',
-				processData=false,
-				contentType=false,
-				type='POST',
-				success:function(data){
-					alert(data);
-					var str="";
-				}
-				
-			}); */
-
 	</script>
-	
-	<script type="text/javascript">
-/* 	$(function(){
-               $("#datepicker").datepicker({
-                  showOn : "button",
-                  buttonImage:"resources/img/calendar.png",
-                  dateFormat : "yy-mm-dd",
-                  altField : '#startday'
-               });
-               
-               $("#datepicker").datepicker({
-                  dateFormat : "yy-mm-dd",
-                  altField : '#endday'
-               });
-            
-	}) */
-            /* $('#submit').on("click", function() {
 
-               event.preventDefault();
-         
-               var popupX = (window.screen.width/2) - (400/2);
-               var popupY= (window.screen.height/2) - (400/2);
-               
-               window.open('/facility/changePopup','childWindow', 'status=no, height=200, width=400, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY);
-      }); */
-                        
-         </script>
-	
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-   
-       <script type="text/javascript">
+    <script type="text/javascript">
     google.charts.load('current', {packages: ['corechart', 'line']});
     google.charts.setOnLoadCallback(drawBasic);
-    
-    
+
     var thismonth=$('#thismonth').attr("data-rno");
     var nextmonth=$('#nextmonth').attr("data-rno");
     var prevmonth=$('#prevmonth').attr("data-rno");
 
-   
     var date = new Date();
-    
     var year  = date.getFullYear();
-    
-  // var prev_month=date.getMonth(); 
  //이번달
   var month=date.getMonth()+1;
   if(month==12){
 		 var next_month=1;
 	 }
- 
  //다음달
  var next_month=((date.getMonth()+1)%12)+1;
-   
- 
+
  //저번달
  var prev_month=date.getMonth();
  
@@ -663,10 +695,9 @@ function change() {
   var year=date.getFullYear()+1;
  }
     
-console.log("저번달"+prev_month);
-console.log("이번달"+month);
-console.log("다음달"+next_month);
-
+	console.log("저번달"+prev_month);
+	console.log("이번달"+month);
+	console.log("다음달"+next_month);
     console.log("년"+year);
     console.log("월"+month);
     
@@ -728,10 +759,29 @@ function drawChart() {
   chart.draw(data, options);
 }
 </script>
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script type="text/javascript">
+              $("#startday").datepicker({
+                  showButtonPanel : false,
+                  dateFormat : "yymmdd",
+                 // altField : '#startday'
+                  altField: ".selecter"
+                  
+               });
+               
+               $("#endday").datepicker({
+                  dateFormat : "yymmdd",
+                //  altField : '#endday'
+                  altField: ".selecter"
+               });
+            
 
+                        
+         </script>
 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">
-</script>
+         
+<!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
 		
     <!-- Start Style Switcher -->
     <div class="switcher"></div>

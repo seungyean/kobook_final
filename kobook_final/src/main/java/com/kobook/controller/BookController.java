@@ -33,6 +33,7 @@ import com.kobook.book.domain.PickVO;
 import com.kobook.book.domain.RankingVO;
 import com.kobook.book.domain.ReviewVO;
 import com.kobook.book.domain.BookVO;
+import com.kobook.book.domain.DateDTO;
 import com.kobook.book.domain.PageMaker;
 import com.kobook.book.domain.PersonDTO;
 import com.kobook.book.domain.SearchCriteria;
@@ -56,8 +57,8 @@ public class BookController {
 	
 	//愿�由ъ�� ���댁�
 	@RequestMapping("/delivery")
-	public void deliveryList(@ModelAttribute("cri") SearchCriteria cri, Model model)throws Exception{
-		System.out.println("----------------Controller : 諛곗�〓━�ㅽ�� 異���-----------------");
+	public void deliveryList(@ModelAttribute("cri") SearchCriteria cri, Model model, DateDTO dto)throws Exception{
+		System.out.println("----------------Controller : delivery컨트롤러-----------------");
 		
 		model.addAttribute("dlist",service.deliveryList(cri));
 		System.out.println(service.deliveryList(cri).toString());
@@ -79,12 +80,64 @@ public class BookController {
 		//오늘매출
 		model.addAttribute("todayMoney", service.todayMoney());
 		
-		
 		PageMaker pageMaker=new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(service.countdelList());
 		model.addAttribute("pageMaker",pageMaker);
 	}
+	
+/*	@RequestMapping(value="/delivery" , method=RequestMethod.POST)
+	public void deliveryListPOST(@ModelAttribute("cri") SearchCriteria cri, Model model, DateDTO dto)throws Exception{
+		
+		System.out.println("delivery post 컨트롤러 진입");
+				//기간별날짜조회
+				System.out.println("시작일"+dto.getStartday());
+				System.out.println("끝일"+dto.getEndday());
+				//dto.setStartday(startday);
+				//model.addAttribute("selectDate", service.selectDate(dto));
+				//model.addAttribute("selectDate", service.selectDateList(dto));
+	}*/
+	
+/*	
+	@ResponseBody
+	@RequestMapping(value="/deliverydateAjax", method=RequestMethod.POST)
+	public ResponseEntity<List<HashMap<String, String>>> deliverydateAjaxPOST(SearchCriteria cri,@RequestParam(value="d_id", required=false) int d_id, @RequestParam(value="check", required=false) char check)throws Exception{
+
+		System.out.println("deliverydateAjax post 컨트롤러 진입");
+				System.out.println("d_id : " + d_id);
+		System.out.println("check : " + check);
+	
+		List<HashMap<String, String>> list = null;
+		HashMap<String, String> map = new HashMap<>();
+		list = service.deliveryList(cri);
+		
+		for(int i=0;i<list.size();i++){
+		String del_id=String.valueOf(((Map<String, String>)list.get(i)).get("d_id"));
+		}		
+		ResponseEntity<List<HashMap<String, String>>> entity =null;
+		
+		DateDTO dto=new DateDTO();
+		dto.setStartday(startday);
+		dto.setEndday(endday);
+		
+
+		
+		try {
+			service.selectDateList(dto);
+			entity=new ResponseEntity<List<HashMap<String,String>>>(service.deliveryList(cri), HttpStatus.OK);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		
+		System.out.println(service.selectDateList(dto));
+
+		return entity;
+	}*/
+	
+	
+	
 	
 	@ResponseBody
 	@RequestMapping(value="/deliveryAjax", method=RequestMethod.POST)

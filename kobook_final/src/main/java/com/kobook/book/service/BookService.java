@@ -64,7 +64,7 @@ public interface BookService {
 	
 	public List<HashMap<String, String>> deliveryList(SearchCriteria cri)throws Exception;
 	
-//	public List<HashMap<String, String>>selectDate(DateDTO dto)throws Exception;
+	public List<HashMap<String, String>>selectDateList(DateDTO dto)throws Exception;
 	
 	public int countdelList() throws Exception;
 	

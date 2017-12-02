@@ -217,12 +217,12 @@ public class BookServiceImpl implements BookService {
 	
 
 
-	/*@Override
-	public List<HashMap<String, String>> selectDate(DateDTO dto) throws Exception {
-		return dao.selectDate(dto);
+	@Override
+	public List<HashMap<String, String>> selectDateList(DateDTO dto) throws Exception {
+		return dao.selectDateList(dto);
 	}
 
-*/
+
 
 
 	@Override

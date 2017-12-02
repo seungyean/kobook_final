@@ -1,33 +1,31 @@
 package com.kobook.book.domain;
 
-import java.sql.Timestamp;
-
 public class DateDTO {
 
-	private Timestamp  startday;
-	private Timestamp endday;
+	private String  startday;
+	private String endday;
 	
 	public DateDTO(){}
 
-	public DateDTO(Timestamp startday, Timestamp endday) {
+	public DateDTO(String startday, String endday) {
 		super();
 		this.startday = startday;
 		this.endday = endday;
 	}
 
-	public Timestamp getStartday() {
+	public String getStartday() {
 		return startday;
 	}
 
-	public void setStartday(Timestamp startday) {
+	public void setStartday(String startday) {
 		this.startday = startday;
 	}
 
-	public Timestamp getEndday() {
+	public String getEndday() {
 		return endday;
 	}
 
-	public void setEndday(Timestamp endday) {
+	public void setEndday(String endday) {
 		this.endday = endday;
 	}
 

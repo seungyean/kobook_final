@@ -80,7 +80,7 @@ public interface BookDAO {
 	
 	public int safeListCount() throws Exception;
 	
-	//public List<HashMap<String, String>> selectDate(DateDTO dto) throws Exception;
+	public List<HashMap<String, String>> selectDateList(DateDTO dto) throws Exception;
 	
 	public int wpercent() throws Exception;
 	public int ipercent() throws Exception;
@@ -95,5 +95,6 @@ public interface BookDAO {
 	public List<BookVO> getRecentList() throws Exception;
 	public String getNameById(int book_id) throws Exception;
 	public List<BookVO> getMyBookList(int person_id) throws Exception;
+
 
 }

@@ -223,7 +223,7 @@
 	]]>
     <include refid="delsearch"></include>
     <![CDATA[  
-       order by d.delivery_id
+       order by p.pay_date
      ]]> 
 	</select>
 	
@@ -391,9 +391,9 @@
 	</select>
 	
 	<!--기간별 날짜 조회  -->
-<!-- 	<select id="selectDate" resultType="hashMap" parameterType="DateDTO">
+	<select id="selectDateList" resultType="hashMap" parameterType="DateDTO">
 	<![CDATA[     
- 	select d.delivery_id, b.book_name, per.person_name, p.pay_amount, p.pay_date ,d.delivery_state,d.delivery_msg
+ 	select d.delivery_id, b.book_name, per.person_name, p.pay_amount, p.pay_date ,d.delivery_state,d.delivery_msg,d.delivery_address
 	from pay p, book b, book_order o, delivery d,person per
 	where 
 	p.order_id=o.order_id
@@ -402,12 +402,12 @@
  	 and o.PERSON_ID=per.PERSON_ID
 	and b.book_safe_yn='Y'
 	and o.person_id=per.person_id
-  	and book_date >= to_date(#{startday},'YYYYMMDD') and book_date < to_date(#{endday},'YYYYMMDD') + 1
+ 	and p.pay_date >= to_date(#{startday},'YYYYMMDD') and p.pay_date < to_date(#{endday},'YYYYMMDD') + 1
 	 ]]>
-	</select> -->
+	</select>
 	
 
-		<!-- 'W'비중 -->
+	<!-- 'W'비중 -->
 	<select id="wpercent" resultType="Integer" >
 	<![CDATA[ 
 	select round(((select count(delivery_state)
@@ -417,7 +417,7 @@
 	 ]]>
 	</select>
 	
-			<!-- 'I'비중 -->
+	<!-- 'I'비중 -->
 	<select id="ipercent" resultType="Integer" >
 	<![CDATA[ 
 	select round(((select count(delivery_state)
