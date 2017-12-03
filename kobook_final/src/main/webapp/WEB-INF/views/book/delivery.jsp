@@ -16,42 +16,10 @@
 <!-- CSS FILES -->
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css" />
 <link rel="stylesheet" href="/resources/css/style.css">
-<link rel="stylesheet" type="/resources/text/css"
-	href="/resources/css/style.css" media="screen" data-name="skins">
-<link rel="stylesheet" href="/resources/css/layout/wide.css"
-	data-name="layout">
-
-<link rel="stylesheet" type="/resources/text/css"
-	href="/resources/css/switcher.css" media="screen" />
+<link rel="stylesheet" type="/resources/text/css" href="/resources/css/style.css" media="screen" data-name="skins">
+<link rel="stylesheet" href="/resources/css/layout/wide.css"data-name="layout">
+<link rel="stylesheet" type="/resources/text/css" href="/resources/css/switcher.css" media="screen" />
 	
-	<!-- 달력 -->
-	<!-- // jQuery UI CSS파일  -->
-<!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
-// jQuery 기본 js파일
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
-// jQuery UI 라이브러리 js파일
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>   -->
-
-<!-- 이거로 -->
-
- 
-<!-- <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<script type="text/javascript">
-    $('#datepicker').datepicker();
-</script> -->
-
-
-
-	
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    
-
 </head>
 
 
@@ -175,9 +143,8 @@
 			<div class="row sub_content">
 				<!-- <div class="container"> -->
                     <div class="col-md-6">
-                    	<!-- <div class="col-sm-4"> -->
-                        	<div class="serviceBox_2 blue">
-                               <div id="chart_a">
+                       	<div class="serviceBox_2 blue">
+                              <div id="chart_a">
 	                                   <div data-rno="${janmonth}" id="janmonth"></div> 
 	                                   <div data-rno="${febmonth}" id="febmonth"></div> 
 	                            	   <div data-rno="${marmonth}" id="marmonth"></div> 
@@ -190,14 +157,11 @@
 		                               <div data-rno="${octmonth}" id="octmonth"></div>
 		                               <div data-rno="${novmonth}" id="novmonth"></div>
 		                               <div data-rno="${decmonth}" id="decmonth"></div> 
-	                             </div>
 	                          </div>
-	                 </div>
+	                    </div>
+	                </div>
 	                          
-	                      <!-- </div> -->
-                               
-                               
-                        <!-- <div class="col-sm-4"> -->
+	                   
                         <div class="col-md-6">
                         	<div class="serviceBox_2 blue">
 	                              <div id="chart_div">
@@ -207,52 +171,9 @@
 	                               </div>
                        		 </div>
                        	</div>	 
-                    	<!-- </div> -->
-                  
-                <!-- </div>   -->
-              </div>        
-                            
-   <%--                          <div class="col-sm-4">
-                                <div class="serviceBox_5">
-                                    <div id="chart_div">
-                                    	<div data-rno="${wpercent}" id="w"></div> 
-                                    	<div data-rno="${ipercent}" id="i"></div> 
-                                    	<div data-rno="${cpercent}" id="c"></div> 
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="serviceBox_5">
-                                       <div id="chart_divv"></div>
-                                    </div>
-                                </div> --%>
-                           
-                        
-			
-
-                    <%-- <div class="container">
-                       <!--  <div class="row sub_content"> -->
-                            <div class="col-md-12 col-lg-12">
-                            <div class="col-sm-4">
-                                <div class="serviceBox_5">
-                                    <div id="chart_div">
-                                    	<div data-rno="${wpercent}" id="w"></div> 
-                                    	<div data-rno="${ipercent}" id="i"></div> 
-                                    	<div data-rno="${cpercent}" id="c"></div> 
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="serviceBox_5">
-                                       <div id="chart_divv"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --%>
-                        
-                        
-                    </div>
-		</section>
+             </div>        
+         </div>
+	</section>
         <!--/통계  -->
         
 
@@ -626,33 +547,37 @@
 
 	$('#datePick').on("click",function(event){
 		event.preventDefault();
-		var formData = new FormData();
 	
+		/*  var jsonData=new Object();
+		jsonData.startday=$('#startday').val();
+		jsonData.endday=$('#endday').val();  */
+		
+		
+		var startday = $('#startday').val();
+		var endday = $('#endday').val();
+		
 	    console.log($('#startday').val());
 	    console.log($('#endday').val());
 	       
-	/* 	
+	    
 		$.ajax({
-			url:'/deliverydateAjax',
-			data:formData,
-			dataType='json',
-			processData=false,
-			contentType=false,
-			type='POST',
-			success: function(data){
-				alert(data);
-				var str="";
-	
-	      
-	               
-	            //  $('#dateForm').append('<input type="hidden" name="startday" value="'+startday +'">');
-	             //  $('#dateForm').append('<input type="hidden" name="endday" value="'+endday +'">');
-	          
-	
-			}
-			
-		}) */
-		
+			type:'post',
+			url:'/book/deliverydateAjax',
+			headers: { 
+			      "Content-Type": "application/json",
+			      "X-HTTP-Method-Override": "POST" },
+			dataType:'text',
+			//data : JSON.stringify(jsonData), 
+			data: JSON.stringify({startday:startday, endday:endday}),
+			success:function(result){
+				console.log("result : " + result);
+				//alert('성공');
+			},
+			error:function(e){  
+	            alert("에러"+e.responseText);  
+	        }  
+		});
+
 	});
 
 	

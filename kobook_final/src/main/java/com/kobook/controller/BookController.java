@@ -38,6 +38,7 @@ import com.kobook.book.domain.PageMaker;
 import com.kobook.book.domain.PersonDTO;
 import com.kobook.book.domain.SearchCriteria;
 import com.kobook.book.service.BookService;
+import com.kobook.chatbot.domain.ChatlogVO;
 import com.kobook.mypage.domain.DeliveryVO;
 import com.kobook.mypage.domain.MileageVO;
 import com.kobook.person.domain.PersonVO;
@@ -104,16 +105,33 @@ public class BookController {
 				//model.addAttribute("selectDate", service.selectDateList(dto));
 	}*/
 	
-/*	
+
 	@ResponseBody
 	@RequestMapping(value="/deliverydateAjax", method=RequestMethod.POST)
-	public ResponseEntity<List<HashMap<String, String>>> deliverydateAjaxPOST(SearchCriteria cri,@RequestParam(value="d_id", required=false) int d_id, @RequestParam(value="check", required=false) char check)throws Exception{
+	public ResponseEntity<List<HashMap<String, String>>> deliverydateAjaxPOST(@RequestParam(value="startday", required=false) String startday,@RequestParam(value="endday", required=false) String endday)throws Exception{
 
-		System.out.println("deliverydateAjax post 컨트롤러 진입");
-				System.out.println("d_id : " + d_id);
-		System.out.println("check : " + check);
+		System.out.println("deliverydateAjax post 컨트롤러진입--------------");
+		
+		DateDTO dto=new DateDTO();
+		dto.setStartday(startday);
+		dto.setEndday(endday);
+		
+		System.out.println(dto.toString());
+		ResponseEntity<List<HashMap<String, String>>> entity =null;
+		
+		try {
+			//service.selectDateList(dto);
+			entity = new ResponseEntity<List<HashMap<String, String>>>(service.selectDateList(dto), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+		
+	}
 	
-		List<HashMap<String, String>> list = null;
+		/*List<HashMap<String, String>> list = null;
 		HashMap<String, String> map = new HashMap<>();
 		list = service.deliveryList(cri);
 		
@@ -138,9 +156,9 @@ public class BookController {
 		}
 		
 		System.out.println(service.selectDateList(dto));
+*/
+	
 
-		return entity;
-	}*/
 	
 	
 	

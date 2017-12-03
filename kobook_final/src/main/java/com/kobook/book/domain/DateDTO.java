@@ -2,7 +2,7 @@ package com.kobook.book.domain;
 
 public class DateDTO {
 
-	private String  startday;
+	private String startday;
 	private String endday;
 	
 	public DateDTO(){}

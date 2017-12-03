@@ -41,13 +41,26 @@ public class BookDAOTest {
 		
 
 		//날짜관련 selectList 테스트
-		//List<Map<String, String>>list=null;
-		//HashMap<String, String>map=new HashMap<>();
+		HashMap<String, String> map = new HashMap<String, String>();
+		List<HashMap<String, String>> list = new ArrayList<HashMap<String,String>>();
+
+		map.put("DELIVERY_ID", "3");
+		map.put("BOOK_NAME", "제목1");
+		map.put("PERSON_NAME", "사람1");
+		map.put("PAY_AMOUNT", "3000");
+		map.put("PAY_DATE", "17/12/03");
+		map.put("DELIVERY_STATE", "W");
+		map.put("DELIVERY_MSG", "빨리용");
+		map.put("DELIVERY_ADDRESS", "초지동");
+		System.out.println(map.toString());
+		list.add(map);
+
 		DateDTO dto=new DateDTO();
-		dto.setStartday("20171201");
-		dto.setEndday("20171202");
+		dto.setStartday("20170101");
+		dto.setEndday("20170102");
 		dao.selectDateList(dto);
-		System.out.println(dao.selectDateList(dto).toString());	
+		System.out.println(dao.selectDateList(dto));
+
 	}
 	
 	
