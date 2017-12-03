@@ -54,6 +54,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 		return chatbotDao.listLog(person_id);
 	}
 
+	// 사용자가 마지막으로 입력한 문장을 분석 및 처리
 	@Override
 	public ChatlogVO chatResponse(ChatlogVO vo) throws Exception {
 		
@@ -75,25 +76,33 @@ public class ChatbotServiceImpl implements ChatbotService {
 					+ "\n 로 구성되어있습니다."
 					+ "\n 물어보시면 성심성의껏 답변해드릴게요.";
 		
-		} else if(text.contains("쪽지")){		// 쪽지 파트
+		} else if(text.contains("쪽지")){	
 			
 			newText = manageMessage(text, person_id);
 			
-		} else if(text.contains("책") || text.contains("도서") || text.contains("상품")){	// 책 파트
 			
-			newText = manageBoard(text, person_id);
+			// 쪽지 파트
+		} else if(text.contains("책") || text.contains("도서") || text.contains("상품")){
+			
+			newText = manageBook(text, person_id);
 		
+			
+			// 책 파트
 		} else if(text.contains("마일리지") || text.contains("관심")){	//	마이페이지 파트
 
 			newText = manageMypage(text, person_id);
 		
-		} else if(text.contains("공지사항") || text.contains("블랙") || text.contains("포토리뷰") || text.contains("무료나눔")){	//게시판 파트
+			
+			// 게시판 파트
+		} else if(text.contains("공지사항") || text.contains("블랙") || text.contains("포토리뷰") || text.contains("무료나눔")){
 			
 			newText = "마이페이지 관련 ㄱㄱ";
 		
+			
+			// 카테고리에 벗어난 키워드 입력
 		} else {
 			
-			newText = "응\n그런거\n말구";
+			newText = "카테고리 내에서 질문해 주시겠어요??";
 		}
 		
 		vo.setChatlog_content(newText);
@@ -103,6 +112,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 		return vo;
 	}
 
+	// 책 관련 사항
 	@Override
 	public String manageBook(String text, int person_id) throws Exception {
 		String newText = "";
@@ -126,14 +136,34 @@ public class ChatbotServiceImpl implements ChatbotService {
 			
 			
 		} else if(text.contains("내가") || text.contains("등록")){ //내가 등록한 책 보여줘
+			list = bookDao.getMyBookList(person_id);
+			System.out.println("내가 등록한책 리스트 크기: " + list.size());
+			if(list.size() == 0){
+				newText += personDao.findPersonName(person_id) + "님이 등록한 책이 없습니다.";
+			} else if(list.size() > 3){
+				
+				for(int i=0; i<3; i++){
+					newText += "\n * " + list.get(i).getBook_name();
+				}
+				
+				newText += "\n &nbsp; \n <a href='#'>더보기</a>";
+			} else {
+				
+				for(int i=0; i<list.size(); i++){
+					newText += "\n * " + list.get(i).getBook_name();
+				}
+			}
+		} else if(text.contains("관련") || text.contains("관한")){	 //종류 관한 책보여줘
 			
-		} else if(text.contains("관련") || text.contains("관한")){		//종류 관한 책보여줘
-			
+		} else {
+			newText += "책에 대해서 다시 질문해주시겠어요?";
 		}
 		
 		return newText;
 	}
 
+	
+	// 게시판 관련 사항
 	@Override
 	public String manageBoard(String text, int person_id) throws Exception {
 		String newText = "";
@@ -166,6 +196,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 		return newText;
 	}
 
+	// 마이페이지 관련 사항
 	@Override
 	public String manageMypage(String text, int person_id) throws Exception {
 		
@@ -177,6 +208,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 			System.out.println("사용 마일리지" + mypageDao.mileageUse(person_id));
 			newText += personDao.findPersonName(person_id) + "님의 마일리지는 "
 					+ (mypageDao.mileageTotal(person_id) - mypageDao.mileageUse(person_id)) + "입니다.";
+			
 		} else if(text.contains("관심분야")){	//내 관심분야
 			list = favDao.favoriteList(person_id);
 			newText += personDao.findPersonName(person_id) + "님의 관심분야는";
@@ -190,6 +222,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 		return newText;
 	}
 
+	// 메세지 관련 사항
 	@Override
 	public String manageMessage(String text, int person_id) throws Exception {
 		/*SimpleDateFormat dateFormat = new SimpleDateFormat("yy-MM-dd");
@@ -218,14 +251,20 @@ public class ChatbotServiceImpl implements ChatbotService {
 		} else if(text.contains("보관함") || text.contains("쪽지함")){	// 내 쪽지함 보여줘
 			if(messageDao.messageList(person_id).size() != 0){	// 리스트의 크기가 0이라는 것은 검색된 메시지가 없다는 뜻
 				list = messageDao.messageList(person_id);
-				newText += "(최신의 쪽지가 상단에 표시됩니다)<hr>";
+				newText += "(최신의 쪽지가 상단에 표시됩니다) \n 쪽지는 최대 5개만 보여드립니다.<hr>";
 				newText += "<b>&nbsp;보낸 사람 &nbsp;&nbsp;&nbsp; 내용 </b>";
 				
-				for(MessageVO m : list){
-					newText += "\n * " + personDao.findPersonName(m.getPerson_id()) + "&nbsp; &nbsp; &nbsp;" + m.getMessage_content();
-				}
-				
-				newText +="<hr/>더보고 싶으면 \n <a href='#'>쪽지보관함으로 이동 </a>";
+				// 쪽지 보관함에 5개 이상 있다면 최대 5개까지만 보여주고 링크를 걸어준다
+				if(list.size() > 5){
+					for(int i=0; i<5; i++){
+						newText += "\n * " + personDao.findPersonName(list.get(i).getPerson_id()) + "&nbsp; &nbsp; &nbsp;" + list.get(i).getMessage_content();
+					}
+					newText +="<hr/> &nbsp; 쪽지를 더보고 싶으면 \n <a href='#'>쪽지보관함으로 이동 </a>";
+				} else {
+					for(MessageVO m : list){
+						newText += "\n * " + personDao.findPersonName(m.getPerson_id()) + "&nbsp; &nbsp; &nbsp;" + m.getMessage_content();
+					}
+				}	
 				
 				// 쪽지를 조회함과 동시에 쪽지 알림도 0으로 됨 
 				alarmDao.alarmUpdateByMessage(person_id);
@@ -234,7 +273,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 				newText += "\n쪽지함에 쪽지가 없습니다.";
 			}
 		} else {
-			newText += "\n 해당 하는 질문이 없어요. 다른 질문을 해주세요.";
+			newText += "\n 쪽지 어떤거요?";
 		}
 		
 		return newText;
