@@ -74,7 +74,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 					+ "\n &nbsp; 3. 쪽지"
 					+ "\n &nbsp; 4. 마이페이지"
 					+ "\n 로 구성되어있습니다."
-					+ "\n 물어보시면 성심성의껏 답변해드릴게요.";
+					+ "\n 카테고리명 + 도움말을 입력하시면 가능한 질문들을 보실 수 있습니다.";
 		
 		} else if(text.contains("쪽지")){	
 			
@@ -84,8 +84,8 @@ public class ChatbotServiceImpl implements ChatbotService {
 			// 쪽지 파트
 		} else if(text.contains("책") || text.contains("도서") || text.contains("상품")){
 			
-			newText = manageBook(text, person_id);
-		
+			//newText = manageBook(text, person_id);
+			newText = "책은 좀 나중에 준비해드릴게요";
 			
 			// 책 파트
 		} else if(text.contains("마일리지") || text.contains("관심")){	//	마이페이지 파트
@@ -96,7 +96,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 			// 게시판 파트
 		} else if(text.contains("공지사항") || text.contains("블랙") || text.contains("포토리뷰") || text.contains("무료나눔")){
 			
-			newText = "마이페이지 관련 ㄱㄱ";
+			newText = "게시판 관련 ㄱㄱ";
 		
 			
 			// 카테고리에 벗어난 키워드 입력
@@ -170,26 +170,29 @@ public class ChatbotServiceImpl implements ChatbotService {
 	@Override
 	public String manageBoard(String text, int person_id) throws Exception {
 		String newText = "";
+		String[] strArr = text.split(" ");
+		String boardName = strArr[0];
+		
 		String regex;
 		Pattern p;
 		Matcher m;
 		
-		if(text.contains("공지사항") || text.contains("검색")){
+		if(boardName.contains("공지사항") || text.contains("검색")){
 			regex = "";
 			p = Pattern.compile(regex);
 			m = p.matcher(text);
 			
-		} else if(text.contains("포토리뷰")){
+		} else if(boardName.contains("포토리뷰")){
 			regex = "";
 			p = Pattern.compile(regex);
 			m = p.matcher(text);
 			
-		} else if(text.contains("블랙")){
+		} else if(boardName.contains("블랙")){
 			regex = "";
 			p = Pattern.compile(regex);
 			m = p.matcher(text);
 				
-		} else if(text.contains("무료나눔")){
+		} else if(boardName.contains("무료나눔")){
 			regex = "";
 			p = Pattern.compile(regex);
 			m = p.matcher(text);

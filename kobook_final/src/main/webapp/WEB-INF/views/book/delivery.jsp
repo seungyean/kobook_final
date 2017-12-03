@@ -51,78 +51,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     
-<script type="text/javascript">
-$(function(){	
-	
-	// 모달 
-    $(".msgimg").click(function(){
-    	console.log($(this).attr("data-rno"));
-    	$('#place').text("");
-    	$('#place').append($(this).attr("data-rno"));
-        $('#delModal').modal();
 
-     });
-	
-});
-</script>
-
-<script type="text/javascript">
-function change() {
-	var statusObject = new Object();
-
- 	$("input:radio[class='status']:checked").each(function (index) {
- 		statusObject.check = $(this).attr('etc');
- 		statusObject.d_id = $(this).parent().parent().find("td:eq(0)").attr("data-rno");
- 		
- 		$.ajax({
- 			url:"/book/deliveryAjax",
- 			type: "POST",
- 			data: statusObject,
- 			dataType:"json",
- 			
- 			success: function(data){
- 				//$('#dtable').empty();
- 				alert('gggg');
-	 			},
- 			error:function(request,status,error){
- 				alert('error');
- 				}
- 		});
- 	})
-}
-</script> 
-<script type="text/javascript">
-$('#datePick').on("click",function(event){
-	event.preventDefault();
-	var formData = new FormData();
-
-    console.log($('#startday').val());
-    console.log($('#endday').val());
-       
-/* 	
-	$.ajax({
-		url:'/deliverydateAjax',
-		data:formData,
-		dataType='json',
-		processData=false,
-		contentType=false,
-		type='POST',
-		success: function(data){
-			alert(data);
-			var str="";
-
-      
-               
-            //  $('#dateForm').append('<input type="hidden" name="startday" value="'+startday +'">');
-             //  $('#dateForm').append('<input type="hidden" name="endday" value="'+endday +'">');
-          
-
-		}
-		
-	}) */
-	
-});
-</script>
 </head>
 
 
@@ -272,8 +201,8 @@ $('#datePick').on("click",function(event){
                         <div class="col-md-6">
                         	<div class="serviceBox_2 blue">
 	                              <div id="chart_div">
-	                                   <div data-rno="${wpercent}" id="w"></div> 
-	                                    <div data-rno="${ipercent}" id="i"></div> 
+										<div data-rno="${wpercent}" id="w"></div> 
+										<div data-rno="${ipercent}" id="i"></div> 
 	                                    <div data-rno="${cpercent}" id="c"></div> 
 	                               </div>
                        		 </div>
@@ -391,7 +320,7 @@ $('#datePick').on("click",function(event){
         
 		<input type="text" id="startday" placeholder="시작 날짜를 선택하세요">
 		<input type="text" id="endday" placeholder="끝 날짜를 선택하세요">
-		 <input name="submit" type="submit" value="확인" id="datePick" />
+		<input name="submit" type="submit" value="확인" id="datePick" />
 		 
 		 
 		
@@ -464,16 +393,15 @@ $('#datePick').on("click",function(event){
 							<br>
 							
 							<c:choose>
-									<c:when test="${empty dlist }">
-
+								<c:when test="${empty dlist }">
 									<div class="media-body">
 										<div class="well" style="margin-left: 50px;">
 											<h2 align="center">안심거래 배송 리스트가 존재하지 않습니다.</h2>
 										</div>
 									</div>
-									</c:when>
-									<c:otherwise>
-									
+								</c:when>
+								<c:otherwise>
+								
 									<input type="button" value="변경" class="btn-default" id="update" onclick="change()">
 									
 										<!-- <form> -->
@@ -501,26 +429,26 @@ $('#datePick').on("click",function(event){
 													<td align="center">${d.DELIVERY_ADDRESS}</td>
 													<td align="center"><fmt:formatDate value="${d.PAY_DATE}" pattern='yyyy-MM-dd' /></td>
 													<td align="center" >
-													<input type="radio" class="status" name="delState${d.DELIVERY_ID}" etc="W" value="W" <c:if test="${d.DELIVERY_STATE eq 'W'}">checked="checked"</c:if>>배송준비중 &nbsp;&nbsp;
-													<input type="radio"  class="status" name="delState${d.DELIVERY_ID}" etc="I" value="I" <c:if test="${d.DELIVERY_STATE eq 'I'}">checked="checked"</c:if>>배송중 &nbsp;&nbsp;
-													<input type="radio"class="status"  name="delState${d.DELIVERY_ID}" etc="C" value="C" <c:if test="${d.DELIVERY_STATE eq 'C'}">checked="checked"</c:if>>배송완료 &nbsp;&nbsp;
+														<input type="radio" class="status" name="delState${d.DELIVERY_ID}" etc="W" value="W" <c:if test="${d.DELIVERY_STATE eq 'W'}">checked="checked"</c:if>>배송준비중 &nbsp;&nbsp;
+														<input type="radio"  class="status" name="delState${d.DELIVERY_ID}" etc="I" value="I" <c:if test="${d.DELIVERY_STATE eq 'I'}">checked="checked"</c:if>>배송중 &nbsp;&nbsp;
+														<input type="radio"class="status"  name="delState${d.DELIVERY_ID}" etc="C" value="C" <c:if test="${d.DELIVERY_STATE eq 'C'}">checked="checked"</c:if>>배송완료 &nbsp;&nbsp;
 													</td>
 													<td align="center">
-													<c:choose>
-													<c:when test="${empty d.DELIVERY_MSG}">
-													</c:when>
-													<c:otherwise>
-													<img alt="" src="/resources/img/msg.png" data-rno="${d.DELIVERY_MSG}" class="msgimg" width="22px" height="15px">
-													</c:otherwise>
-													</c:choose>
+														<c:choose>
+															<c:when test="${empty d.DELIVERY_MSG}">
+															</c:when>
+															<c:otherwise>
+																<img alt="" src="/resources/img/msg.png" data-rno="${d.DELIVERY_MSG}" class="msgimg" width="22px" height="15px">
+															</c:otherwise>
+														</c:choose>
 													</td>
 												</tr>
 											</c:forEach>
 										</tbody>
 									</table>
-									<!-- </form> -->
-									</c:otherwise>
-								</c:choose>	
+								<!-- </form> -->
+								</c:otherwise>
+							</c:choose>	
 						</div>
 					</div>
 				</div> <!--안심거래 배송리스트 row-sub-content  -->
@@ -547,19 +475,19 @@ $('#datePick').on("click",function(event){
                   </div>
                </form>
             </div>
-            <div class="modal-footer">
-         <div class="btn-group btn-group-justified" role="group" aria-label="group button">
-            <div class="btn-group" role="group">
-               <button type="button" class="btn btn-default" data-dismiss="modal"  role="button">취소</button>
-            </div>
-            <div class="btn-group btn-delete hidden" role="group">
-               <button type="button" id="delImage" class="btn btn-default btn-hover-red" data-dismiss="modal"  role="button">취소</button>
-            </div>
-          <!--   <div class="btn-group" role="group">
-               <button type="button" id="pay_success" class="btn btn-default btn-hover-green" data-action="save" role="button">결제</button>
-            </div> -->
-         </div>
-      </div>
+			<div class="modal-footer">
+				<div class="btn-group btn-group-justified" role="group" aria-label="group button">
+		            <div class="btn-group" role="group">
+		               <button type="button" class="btn btn-default" data-dismiss="modal"  role="button">취소</button>
+		            </div>
+		            <div class="btn-group btn-delete hidden" role="group">
+		               <button type="button" id="delImage" class="btn btn-default btn-hover-red" data-dismiss="modal"  role="button">취소</button>
+		            </div>
+	          <!--   <div class="btn-group" role="group">
+	               <button type="button" id="pay_success" class="btn btn-default btn-hover-green" data-action="save" role="button">결제</button>
+	            </div> -->
+	            </div>
+			</div>
          </div>
       </div>
    </div>
@@ -567,61 +495,48 @@ $('#datePick').on("click",function(event){
 		
 		
 		
-			<!-- 페이징 -->
-							<div class="col-sm-12 text-center">
-								<ul class="pagination">
-							<c:if test="${pageMaker.prev}">
-								<li><a
-									href="delivery${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
-							</c:if>
+	<!-- 페이징 -->
+	<div class="col-sm-12 text-center">
+		<ul class="pagination">
+			<c:if test="${pageMaker.prev}">
+				<li><a
+					href="delivery${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
+			</c:if>
+			<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
+				<li<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+					<a href="delivery${pageMaker.makeSearch(idx)}">${idx}</a>
+				</li>
+			</c:forEach>
 
-							<c:forEach begin="${pageMaker.startPage }"
-								end="${pageMaker.endPage }" var="idx">
-								<li
-									<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-									<a href="delivery${pageMaker.makeSearch(idx)}">${idx}</a>
-								</li>
-							</c:forEach>
-
-							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-								<li><a
-									href="delivery${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
-							</c:if>
-								</ul>
-							</div>
-							<!--/페이징  -->
+			<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+				<li><a
+					href="delivery${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
+			</c:if>
+		</ul>
+	</div>
+	<!--/페이징  -->
 		
 		
-		
-		
-		
-        <section class="promo_box">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-9 col-md-9 col-lg-9">
-                        <div class="promo_content">
-                            <h3>Electrify is awesome responsive template, with clean design.</h3>
-                            <p>Lorem ipsum dolor sit amet, cons adipiscing elit. Aenean commodo ligula eget dolor. </p>
-                        </div>
-                    </div>
-                    <div class="col-sm-3 col-md-3 col-lg-3">
-                        <div class="pb_action">
-                            <a class="btn btn-lg btn-default" href="#fakelink">
-                                <i class="fa fa-shopping-cart"></i>
-                                Download Now
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        
-        			
-        
-        
-        
-        
+     <section class="promo_box">
+         <div class="container">
+             <div class="row">
+                 <div class="col-sm-9 col-md-9 col-lg-9">
+                     <div class="promo_content">
+                         <h3>Electrify is awesome responsive template, with clean design.</h3>
+                         <p>Lorem ipsum dolor sit amet, cons adipiscing elit. Aenean commodo ligula eget dolor. </p>
+                     </div>
+                 </div>
+                 <div class="col-sm-3 col-md-3 col-lg-3">
+                     <div class="pb_action">
+                         <a class="btn btn-lg btn-default" href="#fakelink">
+                             <i class="fa fa-shopping-cart"></i>
+                             Download Now
+                         </a>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </section>        
         
 	</section>
 	
@@ -635,49 +550,113 @@ $('#datePick').on("click",function(event){
   	<!-- /푸터 -->
 	
 	
-  <script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
-    <script src="/resources/js/bootstrap.min.js"></script>
-    <script src="/resources/js/jquery.easing.1.3.js"></script>
-    <script src="/resources/js/retina-1.1.0.min.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.cookie.js"></script> <!-- jQuery cookie -->
-    <script type="text/javascript" src="/resources/js/styleswitch.js"></script> <!-- Style Colors Switcher -->
-    <script src="/resources/js/jquery.fractionslider.js" type="text/javascript" charset="utf-8"></script>
-    <script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.smartmenus.bootstrap.min.js"></script>
-    <script type="text/javascript" src="/resources/js/owl.carousel.min.js"></script>
-    <script type="text/javascript" src="/resources/js/jflickrfeed.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.magnific-popup.min.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.isotope.min.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.easypiechart.min.js"></script>
-    <script type="text/javascript" src="/resources/js/swipe.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery-hoverdirection.min.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.matchHeight-min.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
+<script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
+<script src="/resources/js/bootstrap.min.js"></script>
+<script src="/resources/js/jquery.easing.1.3.js"></script>
+<script src="/resources/js/retina-1.1.0.min.js"></script>
+<script type="text/javascript" src="/resources/js/jquery.cookie.js"></script> <!-- jQuery cookie -->
+<script type="text/javascript" src="/resources/js/styleswitch.js"></script> <!-- Style Colors Switcher -->
+<script src="/resources/js/jquery.fractionslider.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script>
+<script type="text/javascript" src="/resources/js/jquery.smartmenus.bootstrap.min.js"></script>
+<script type="text/javascript" src="/resources/js/owl.carousel.min.js"></script>
+<script type="text/javascript" src="/resources/js/jflickrfeed.js"></script>
+<script type="text/javascript" src="/resources/js/jquery.magnific-popup.min.js"></script>
+<script type="text/javascript" src="/resources/js/jquery.isotope.min.js"></script>
+<script type="text/javascript" src="/resources/js/jquery.easypiechart.min.js"></script>
+<script type="text/javascript" src="/resources/js/swipe.js"></script>
+<script type="text/javascript" src="/resources/js/jquery-hoverdirection.min.js"></script>
+<script type="text/javascript" src="/resources/js/jquery.matchHeight-min.js"></script>
+<script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<!-- <script src="//code.jquery.com/jquery-1.10.2.js"></script> -->
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
-    <script src="/resources/js/main.js"></script>
+<script src="/resources/js/main.js"></script>
 
-	<script>
-		$(document).ready(
-				function() {
 
-					$('#searchBtn').on(
-							"click",
-							function(event) {
+<script type="text/javascript">
+	$(function(){	
+		
+		// 모달 
+	    $(".msgimg").click(function(){
+	    	console.log($(this).attr("data-rno"));
+	    	$('#place').text("");
+	    	$('#place').append($(this).attr("data-rno"));
+	        $('#delModal').modal();
+	
+	     });
+		
+		
+		$('#searchBtn').on("click", function(event) {
 
-								self.location = "delivery"
-										+ '${pageMaker.makeQuery(1)}'
-										+ "&searchType="
-										+ $("select option:selected").val()
-										+ "&keyword="
-										+ $('#keywordInput').val();
+					self.location = "delivery"
+							+ '${pageMaker.makeQuery(1)}'
+							+ "&searchType="
+							+ $("select option:selected").val()
+							+ "&keyword="
+							+ $('#keywordInput').val();
+		});
+		
+	});
 
-							});
+	function change() {
+		var statusObject = new Object();
+	
+	 	$("input:radio[class='status']:checked").each(function (index) {
+	 		statusObject.check = $(this).attr('etc');
+	 		statusObject.d_id = $(this).parent().parent().find("td:eq(0)").attr("data-rno");
+	 		
+	 		$.ajax({
+	 			url:"/book/deliveryAjax",
+	 			type: "POST",
+	 			data: statusObject,
+	 			dataType:"json",
+	 			
+	 			success: function(data){
+	 				//$('#dtable').empty();
+	 				alert('gggg');
+		 			},
+	 			error:function(request,status,error){
+	 				alert('error');
+	 				}
+	 		});
+	 	})
+	}
 
-				});
-	</script>
+	$('#datePick').on("click",function(event){
+		event.preventDefault();
+		var formData = new FormData();
+	
+	    console.log($('#startday').val());
+	    console.log($('#endday').val());
+	       
+	/* 	
+		$.ajax({
+			url:'/deliverydateAjax',
+			data:formData,
+			dataType='json',
+			processData=false,
+			contentType=false,
+			type='POST',
+			success: function(data){
+				alert(data);
+				var str="";
+	
+	      
+	               
+	            //  $('#dateForm').append('<input type="hidden" name="startday" value="'+startday +'">');
+	             //  $('#dateForm').append('<input type="hidden" name="endday" value="'+endday +'">');
+	          
+	
+			}
+			
+		}) */
+		
+	});
 
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
+	
+	
     google.charts.load('current', {packages: ['corechart', 'line']});
     google.charts.setOnLoadCallback(drawBasic);
 
@@ -751,64 +730,57 @@ $('#datePick').on("click",function(event){
           var chart = new google.visualization.LineChart(document.getElementById('chart_a'));
           chart.draw(data, options);
         }
-  </script> 
 
-<script type="text/javascript">
-google.charts.load('current', {'packages':['corechart']});
-google.charts.setOnLoadCallback(drawChart);
-
-console.log($('#w').attr("data-rno"));
-var w=$('#w').attr("data-rno");
-var i=$('#i').attr("data-rno");
-var c=$('#c').attr("data-rno");
-
-console.log(c);
+	google.charts.load('current', {'packages':['corechart']});
+	google.charts.setOnLoadCallback(drawChart);
+	
+	console.log($('#w').attr("data-rno"));
+	var w=$('#w').attr("data-rno");
+	var i=$('#i').attr("data-rno");
+	var c=$('#c').attr("data-rno");
+	
+	console.log(c);
 
 
-function drawChart() {
+	function drawChart() {
+	
+	  var data = new google.visualization.DataTable();
+	  data.addColumn('string', 'state');
+	  data.addColumn('number', 'p');
+	  data.addRows([
+	    ['배송중',  eval(w)],
+	    ['배송완료', eval(i)],
+	    ['배송준비중', eval(c)],
+	  //  ['Sausage', 10], // Below limit.
+	  //  ['Anchovies', 9] // Below limit.
+	  ]);
+	
+	  var options = {
+	    title: '주문배송 접수 / 처리',
+	    sliceVisibilityThreshold: .2,
+	    width :'500',
+	    height : '500'
+	  };
+	
+	  var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+	  chart.draw(data, options);
+	}
 
-  var data = new google.visualization.DataTable();
-  data.addColumn('string', 'state');
-  data.addColumn('number', 'p');
-  data.addRows([
-    ['배송중',  eval(w)],
-    ['배송완료', eval(i)],
-    ['배송준비중', eval(c)],
-  //  ['Sausage', 10], // Below limit.
-  //  ['Anchovies', 9] // Below limit.
-  ]);
-
-  var options = {
-    title: '주문배송 접수 / 처리',
-    sliceVisibilityThreshold: .2,
-    width :'500',
-    height : '500'
-  };
-
-  var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-  chart.draw(data, options);
-}
-</script>
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<script type="text/javascript">
-              $("#startday").datepicker({
-                  showButtonPanel : false,
-                  dateFormat : "yymmdd",
-                 // altField : '#startday'
-                  altField: ".selecter"
-                  
-               });
+	$("#startday").datepicker({
+	    showButtonPanel : false,
+	    dateFormat : "yymmdd",
+	   // altField : '#startday'
+	    altField: ".selecter"
+	    
+	 });
+	 
+	 $("#endday").datepicker({
+	    dateFormat : "yymmdd",
+	  //  altField : '#endday'
+	    altField: ".selecter"
+	 });
                
-               $("#endday").datepicker({
-                  dateFormat : "yymmdd",
-                //  altField : '#endday'
-                  altField: ".selecter"
-               });
-            
-
-                        
-         </script>
+</script>
 
          
 <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
