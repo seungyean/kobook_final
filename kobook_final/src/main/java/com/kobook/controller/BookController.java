@@ -64,21 +64,22 @@ public class BookController {
 		System.out.println(service.deliveryList(cri).toString());
 		System.out.println("----");	
 		
-		model.addAttribute("wpercent", service.wpercent());
-		model.addAttribute("ipercent", service.ipercent());
-		model.addAttribute("cpercent", service.cpercent());
+		//model.addAttribute("wpercent", service.wpercent());
+		//model.addAttribute("ipercent", service.ipercent());
+		//model.addAttribute("cpercent", service.cpercent());
 		
 		//이번달통계
-		model.addAttribute("thismonth", service.month(0));
+		
+		//model.addAttribute("thismonth", service.month(0));
 		
 		//저번달
-		model.addAttribute("prevmonth", service.month(-1));
+		//model.addAttribute("prevmonth", service.month(-1));
 		
 		//다음달
-		model.addAttribute("nextmonth", service.month(1));
+		//model.addAttribute("nextmonth", service.month(1));
 		
 		//오늘매출
-		model.addAttribute("todayMoney", service.todayMoney());
+		//model.addAttribute("todayMoney", service.todayMoney());
 		
 		PageMaker pageMaker=new PageMaker();
 		pageMaker.setCri(cri);
