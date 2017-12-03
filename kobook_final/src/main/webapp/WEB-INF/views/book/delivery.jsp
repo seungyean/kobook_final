@@ -548,13 +548,13 @@
 	$('#datePick').on("click",function(event){
 		event.preventDefault();
 	
-		/*  var jsonData=new Object();
+		/*   var jsonData=new Object();
 		jsonData.startday=$('#startday').val();
-		jsonData.endday=$('#endday').val();  */
+		jsonData.endday=$('#endday').val();   */
 		
 		
 		var startday = $('#startday').val();
-		var endday = $('#endday').val();
+		var endday = $('#endday').val(); 
 		
 	    console.log($('#startday').val());
 	    console.log($('#endday').val());
@@ -569,8 +569,8 @@
 			dataType:'text',
 			//data : JSON.stringify(jsonData), 
 			data: JSON.stringify({startday:startday, endday:endday}),
-			success:function(result){
-				console.log("result : " + result);
+			success:function(data){
+				console.log("data : " + data);
 				//alert('성공');
 			},
 			error:function(e){  

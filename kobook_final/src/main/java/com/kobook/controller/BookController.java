@@ -108,13 +108,13 @@ public class BookController {
 
 	@ResponseBody
 	@RequestMapping(value="/deliverydateAjax", method=RequestMethod.POST)
-	public ResponseEntity<List<HashMap<String, String>>> deliverydateAjaxPOST(@RequestParam(value="startday", required=false) String startday,@RequestParam(value="endday", required=false) String endday)throws Exception{
+	public ResponseEntity<List<HashMap<String, String>>> deliverydateAjaxPOST(@RequestBody DateDTO dto)throws Exception{
 
 		System.out.println("deliverydateAjax post 컨트롤러진입--------------");
 		
-		DateDTO dto=new DateDTO();
+		/*DateDTO dto=new DateDTO();
 		dto.setStartday(startday);
-		dto.setEndday(endday);
+		dto.setEndday(endday);*/
 		
 		System.out.println(dto.toString());
 		ResponseEntity<List<HashMap<String, String>>> entity =null;
