@@ -454,12 +454,16 @@
 	</select>
 	
 	<!-- 최근 등록된 책 -->
-	<select id="getRecentList" resultType="Integer">
+	<!-- <select id="getRecentList" resultType="BookVOs">
 		select *
 		from book
-		where book_date between sysdate-3 AND sysdate
+		<![CDATA[
+			where to_date(book_date,'YYYYMMDD') >= to_date(sysdate,'YYYYMMDD')-3
+			and to_date(book_date,'YYYYMMDD') <= to_date(sysdate,'YYYYMMDD')
+		]]>
+		
 		order by book_date DESC;
-	</select>
+	</select> -->
 	
 	<!-- 아이디로 책이름 찾기 -->
 	<select id="getNameById" resultType="String" parameterType="Integer">

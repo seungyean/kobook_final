@@ -92,7 +92,7 @@ public interface BookDAO {
 	
 	
 	//챗봇용
-	public List<BookVO> getRecentList() throws Exception;
+	//public List<BookVO> getRecentList() throws Exception;
 	public String getNameById(int book_id) throws Exception;
 	public List<BookVO> getMyBookList(int person_id) throws Exception;
 

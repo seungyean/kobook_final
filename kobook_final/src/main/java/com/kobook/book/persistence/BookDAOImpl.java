@@ -298,10 +298,10 @@ public class BookDAOImpl implements BookDAO {
 
 	// 챗봇용
 	
-	@Override
+	/*@Override
 	public List<BookVO> getRecentList() throws Exception {
 		return session.selectList(namespace + ".getRecentList");
-	}
+	}*/
 
 	@Override
 	public String getNameById(int book_id) throws Exception {

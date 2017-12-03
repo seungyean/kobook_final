@@ -119,7 +119,10 @@ public class ChatbotServiceImpl implements ChatbotService {
 		List<BookVO> list = null;
 		
 		if(text.contains("최근") || text.contains("등록")){	//최근 등록된 책 보여줘
-			list = bookDao.getRecentList();
+			
+			// 좀 나중에....
+			
+			/*list = bookDao.getRecentList();
 			
 			if(list.size() == 0){
 				newText += "최근 3일간 등록된 책이 없습니다.";
@@ -132,7 +135,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 				for(int i=0; i<list.size(); i++){
 					newText += "\n * " + list.get(i).getBook_name();
 				}
-			}
+			}*/
 			
 			
 		} else if(text.contains("내가") || text.contains("등록")){ //내가 등록한 책 보여줘
