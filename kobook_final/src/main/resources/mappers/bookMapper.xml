@@ -439,9 +439,10 @@
 	
 	<!--달별 -->
 	<select id="month" resultType="Integer" parameterType="Integer">
-	select nvl(sum(pay_amount)*0.5,0)
+	select  sum(nvl(pay_amount,0))
 	from pay
-	where to_char(pay_date, 'MM') = to_char(add_months(sysdate,#{value}),'MM')
+  	right outer join dual
+  	on to_char(pay_date, 'MM') = to_char(add_months(sysdate,#{value}),'MM')
 	group by to_char(pay_date,'MM')
 	</select>
 	

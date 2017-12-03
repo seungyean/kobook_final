@@ -249,9 +249,18 @@ $('#datePick').on("click",function(event){
                     	<!-- <div class="col-sm-4"> -->
                         	<div class="serviceBox_2 blue">
                                <div id="chart_a">
-	                               <div data-rno="${thismonth}" id="thismonth"></div> 
-	                               <div data-rno="${prevmonth}" id="prevmonth"></div> 
-	                               <div data-rno="${nextmonth}" id="nextmonth"></div> 
+	                                   <div data-rno="${janmonth}" id="janmonth"></div> 
+	                                   <div data-rno="${febmonth}" id="febmonth"></div> 
+	                            	   <div data-rno="${marmonth}" id="marmonth"></div> 
+		                               <div data-rno="${aprmonth}" id="aprmonth"></div>
+		                               <div data-rno="${maymonth}" id="maymonth"></div>
+		                               <div data-rno="${junmonth}" id="junmonth"></div>
+		                               <div data-rno="${julmonth}" id="julmonth"></div>
+		                               <div data-rno="${augmonth}" id="augmonth"></div>
+		                               <div data-rno="${sepmonth}" id="sepmonth"></div>
+		                               <div data-rno="${octmonth}" id="octmonth"></div>
+		                               <div data-rno="${novmonth}" id="novmonth"></div>
+		                               <div data-rno="${decmonth}" id="decmonth"></div> 
 	                             </div>
 	                          </div>
 	                 </div>
@@ -381,7 +390,7 @@ $('#datePick').on("click",function(event){
           <!-- // 1. Datepicker(데이트피커) 사용하기 -->
         
 		<input type="text" id="startday" placeholder="시작 날짜를 선택하세요">
-		<input type="text" id="endday" placeholder="시작 날짜를 선택하세요">
+		<input type="text" id="endday" placeholder="끝 날짜를 선택하세요">
 		 <input name="submit" type="submit" value="확인" id="datePick" />
 		 
 		 
@@ -672,13 +681,25 @@ $('#datePick').on("click",function(event){
     google.charts.load('current', {packages: ['corechart', 'line']});
     google.charts.setOnLoadCallback(drawBasic);
 
-    var thismonth=$('#thismonth').attr("data-rno");
-    var nextmonth=$('#nextmonth').attr("data-rno");
-    var prevmonth=$('#prevmonth').attr("data-rno");
+    var janmonth=$('#janmonth').attr("data-rno");
+    var febmonth=$('#febmonth').attr("data-rno");
+    var marmonth=$('#marmonth').attr("data-rno");
+    var aprmonth=$('#aprmonth').attr("data-rno");
+    var maymonth=$('#maymonth').attr("data-rno");
+    var junmonth=$('#junmonth').attr("data-rno");
+    var julmonth=$('#julmonth').attr("data-rno");
+    var augmonth=$('#augmonth').attr("data-rno");
+    var sepmonth=$('#sepmonth').attr("data-rno");
+    var octmonth=$('#octmonth').attr("data-rno");
+    var novmonth=$('#novmonth').attr("data-rno");
+    var decmonth=$('#decmonth').attr("data-rno"); 
+    
 
     var date = new Date();
     var year  = date.getFullYear();
- //이번달
+  //  var month = date.getMonth()-10;
+
+/*  //이번달
   var month=date.getMonth()+1;
   if(month==12){
 		 var next_month=1;
@@ -693,13 +714,13 @@ $('#datePick').on("click",function(event){
  //12월이면 내년 1월
  if(year==12){
   var year=date.getFullYear()+1;
- }
+ } */
     
-	console.log("저번달"+prev_month);
+/* 	console.log("저번달"+prev_month);
 	console.log("이번달"+month);
 	console.log("다음달"+next_month);
     console.log("년"+year);
-    console.log("월"+month);
+    console.log("월"+month); */
     
     
     function drawBasic() {
@@ -708,13 +729,22 @@ $('#datePick').on("click",function(event){
           data.addColumn('number', '총금액');
           data.addRows([
         	  
-        		[eval(year)+'년'+ eval(prev_month)+'월', eval(prevmonth) ],
-        	    [eval(year)+'년'+ eval(month)+'월', eval(thismonth)],
-        	    [eval(year)+'년'+ eval(next_month)+'월', eval(nextmonth)],
+        		[eval(year)+'년 1월', eval(janmonth) ],
+        	    [eval(year)+'년 2월', eval(febmonth)],
+        	    [eval(year)+'년 3월', eval(marmonth)],
+        	    [eval(year)+'년 4월', eval(aprmonth)],
+        	    [eval(year)+'년 5월', eval(maymonth)],
+        	    [eval(year)+'년 6월', eval(junmonth)],
+        	    [eval(year)+'년 7월', eval(julmonth)],
+        	    [eval(year)+'년 8월', eval(augmonth)],
+        	    [eval(year)+'년 9월', eval(sepmonth)],
+        	    [eval(year)+'년 10월', eval(octmonth)],
+        	    [eval(year)+'년 11월', eval(novmonth)],
+        	    [eval(year)+'년 12월', eval(decmonth)],
             
           ]);
           var options = {           
-        	title : '월별대비 비교',	  
+        	title : '월별매출 비교',	  
         	width :'600',
             height : '500'
           };

@@ -64,22 +64,27 @@ public class BookController {
 		System.out.println(service.deliveryList(cri).toString());
 		System.out.println("----");	
 		
-		//model.addAttribute("wpercent", service.wpercent());
-		//model.addAttribute("ipercent", service.ipercent());
-		//model.addAttribute("cpercent", service.cpercent());
+		model.addAttribute("wpercent", service.wpercent());
+		model.addAttribute("ipercent", service.ipercent());
+		model.addAttribute("cpercent", service.cpercent());
 		
-		//이번달통계
+		//달별 통계
+		model.addAttribute("janmonth", service.month(-11));
+		model.addAttribute("febmonth", service.month(-10));
+		model.addAttribute("marmonth", service.month(-9));
+		model.addAttribute("aprmonth", service.month(-8));
+		model.addAttribute("maymonth", service.month(-7));
+		model.addAttribute("junmonth", service.month(-6));
+		model.addAttribute("julmonth", service.month(-5));
+		model.addAttribute("augmonth", service.month(-4));
+		model.addAttribute("sepmonth", service.month(-3));
+		model.addAttribute("octmonth", service.month(-2));
+		model.addAttribute("novmonth", service.month(-1));
+		model.addAttribute("decmonth", service.month(0));
 		
-		//model.addAttribute("thismonth", service.month(0));
-		
-		//저번달
-		//model.addAttribute("prevmonth", service.month(-1));
-		
-		//다음달
-		//model.addAttribute("nextmonth", service.month(1));
 		
 		//오늘매출
-		//model.addAttribute("todayMoney", service.todayMoney());
+		model.addAttribute("todayMoney", service.todayMoney());
 		
 		PageMaker pageMaker=new PageMaker();
 		pageMaker.setCri(cri);
