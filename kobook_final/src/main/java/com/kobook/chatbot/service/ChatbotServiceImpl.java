@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.kobook.alarm.persistence.AlarmDAO;
+import com.kobook.book.domain.BookVO;
 import com.kobook.book.persistence.BookDAO;
 import com.kobook.chatbot.domain.ChatlogVO;
 import com.kobook.chatbot.persistence.ChatbotDAO;
@@ -80,7 +81,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 			
 		} else if(text.contains("책") || text.contains("도서") || text.contains("상품")){	// 책 파트
 			
-			newText = "책 관련 ㄱㄱ";
+			newText = manageBoard(text, person_id);
 		
 		} else if(text.contains("마일리지") || text.contains("관심")){	//	마이페이지 파트
 
@@ -105,13 +106,28 @@ public class ChatbotServiceImpl implements ChatbotService {
 	@Override
 	public String manageBook(String text, int person_id) throws Exception {
 		String newText = "";
+		List<BookVO> list = null;
+		
 		if(text.contains("최근") || text.contains("등록")){	//최근 등록된 책 보여줘
+			list = bookDao.getRecentList();
+			
+			if(list.size() == 0){
+				newText += "최근 3일간 등록된 책이 없습니다.";
+			} else if(list.size() > 3){
+				for(int i=0; i<3; i++){
+					newText += "\n * " + list.get(i).getBook_name();
+				}
+				newText += "\n &nbsp; \n <a href='#'>더보기</a>";
+			} else {
+				for(int i=0; i<list.size(); i++){
+					newText += "\n * " + list.get(i).getBook_name();
+				}
+			}
+			
 			
 		} else if(text.contains("내가") || text.contains("등록")){ //내가 등록한 책 보여줘
 			
 		} else if(text.contains("관련") || text.contains("관한")){		//종류 관한 책보여줘
-			
-			
 			
 		}
 		
