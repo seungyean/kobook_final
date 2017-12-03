@@ -33,7 +33,7 @@
                             <li><a href="#">JUNG A REUM<span>July 03, 1993</span></a></li>
                             <li><a href="#">LEE SEUNG YEON<span>June 29, 1993</span></a></li>
                             <li><a href="#">JO JI HO<span>March 21, 1989</span></a></li>
-                            <li><a href="#">SIM DONG GIL<span>July 04, 1990</span></a></li>
+                            <li><a href="#">SHIM DONG KIL<span>July 04, 1990</span></a></li>
                             <li><a href="#">KIM MIN JU<span>March 14, 1994</span></a></li>
                         </ul>
                     </div>

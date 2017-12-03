@@ -491,7 +491,9 @@ public class CommunityController {
 		String[] photo_thumbnail1 =photo_thumbnail.split("_");
 		
 		if(photo_thumbnail1.length>2) {
-			vo.setPhoto_thumbnail(photo_thumbnail);
+			String photo_img = photo_thumbnail.substring(0,12);
+			String photo_img2 = photo_thumbnail.substring(14);
+			vo.setPhoto_thumbnail((photo_img+photo_img2));
 		}
 		photoService.photoReviewModify(vo);
 		

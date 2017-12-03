@@ -23,8 +23,7 @@
     <link rel="stylesheet" href="/resources/css/layout/wide.css" data-name="layout">
 
     <link rel="stylesheet" type="text/css" href="/resources/css/switcher.css" media="screen" />
-</head>
-<style>
+    <style>
 .fileDrop {
 	width: 80%;
 	height: 100px;
@@ -33,6 +32,8 @@
 	margin: auto;
 }
 </style>
+</head>
+
 <body class="home">
 	<!-- 헤더 -->
  		 <jsp:include page="/WEB-INF/views/include/header.jsp" />

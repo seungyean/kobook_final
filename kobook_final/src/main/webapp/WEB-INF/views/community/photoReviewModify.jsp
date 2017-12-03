@@ -23,6 +23,15 @@
     <link rel="stylesheet" href="/resources/css/layout/wide.css" data-name="layout">
 
     <link rel="stylesheet" type="text/css" href="/resources/css/switcher.css" media="screen" />
+<style>
+.fileDrop {
+	width: 80%;
+	height: 100px;
+	border: 1px dotted gray;
+	background-color: lightslategrey;
+	margin: auto;
+}
+</style>
 </head>
 <body class="home">
 	<!-- 헤더 -->
@@ -84,7 +93,7 @@
 												placeholder="${photoVO.photo_content }">${photoVO.photo_content }</textarea>
 								</li>
 								<li><span><i class="fa fa-calendar"></i>작성일 :</span> <fmt:formatDate
-										value="${photoVO.photo_date }" pattern="MMM dd, yyyy" /></li>
+										value="${photoVO.photo_date }" pattern="MM月 dd日, yyyy年" /></li>
 								<li><span><i class="fa fa-heart"></i>좋아요 :</span>
 									${photoVO.photo_heart }</li>
 								<li><span><i class="fa fa-eye"></i>조회수 :</span>${photoVO.photo_hit }</li>
