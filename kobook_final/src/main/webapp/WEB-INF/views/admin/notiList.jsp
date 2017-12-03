@@ -114,110 +114,89 @@
 	
 	<!--start wrapper-->
 	<section class="wrapper">
-        <section class="page_head">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                        <div class="page_title">
-                            <h2>Our Services</h2>
-                        </div>
-                        <nav id="breadcrumbs">
-                            <ul>
-                                <li><a href="index.html">Home </a>/</li>
-                                <li>Pages</li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-	<section class="content faq">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8"></div>
+		<section class="page_head">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12">
+						<div class="page_title">
+							<h2>Our Services</h2>
+						</div>
+						<nav id="breadcrumbs">
+							<ul>
+								<li><a href="index.html">Home </a>/</li>
+								<li>Pages</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
 			</div>
+		</section>
+
+		<section class="content faq">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8"></div>
+				</div>
 
 				<div id="container">
-						
-						<div id="tab1" >
-							
-								
-							<select name="searchType" id="search">
-								<option value="sin"
-									<c:out value="${cri.searchType eq 'sin'?'selected':''}"/>>
-									신고합니다.</option>
-								<option value="mu"
-									<c:out value="${cri.searchType eq 'mu'?'selected':''}"/>>
-									무료나눔</option>
-								<option value="pho"
-									<c:out value="${cri.searchType eq 'pho'?'selected':''}"/>>
-									포토리뷰</option>
-								<option value="gong"
-									<c:out value="${cri.searchType eq 'gong'?'selected':''}"/>>
-									공지사항</option>
-								<option value="ja"
-									<c:out value="${cri.searchType eq 'ja'?'selected':''}"/>>
-									자주묻는질문</option>	
-							</select> 
-							<input type="text" name='keyword' id="keywordInput" value='${cri.keyword }'> 
-							<input type="button" value="검색" id="search" onclick="selectButton()" />
-							</div>
 
-							<div class="box-footer" align="center">
-								<div class="text-center">
-									<ul class="pagination">
+					<div id="tab1">
 
-										<c:if test="${pageMaker.prev}">
-											<li><a
-												href="searchList${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
-										</c:if>
 
-										<c:forEach begin="${pageMaker.startPage }"
-											end="${pageMaker.endPage }" var="idx">
-											<li
-												<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-												<a href="searchList${pageMaker.makeSearch(idx)}">${idx}</a>
-											</li>
-										</c:forEach>
+						<select name="searchType" id="search">
+							<option value="sin"
+								<c:out value="${cri.searchType eq 'sin'?'selected':''}"/>>
+								신고합니다.</option>
+							<option value="mu"
+								<c:out value="${cri.searchType eq 'mu'?'selected':''}"/>>
+								무료나눔</option>
+							<option value="pho"
+								<c:out value="${cri.searchType eq 'pho'?'selected':''}"/>>
+								포토리뷰</option>
+							<option value="gong"
+								<c:out value="${cri.searchType eq 'gong'?'selected':''}"/>>
+								공지사항</option>
+							<option value="ja"
+								<c:out value="${cri.searchType eq 'ja'?'selected':''}"/>>
+								자주묻는질문</option>
+						</select> <input type="text" name='keyword' id="keywordInput"
+							value='${cri.keyword }'> <input type="button" value="검색"
+							id="search" onclick="selectButton()" />
+					</div>
 
-										<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-											<li><a
-												href="searchList${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
-										</c:if>
-									</ul>
-								</div>
-							</div>
+					<div class="box-footer" align="center">
+						<div class="text-center">
+							<ul class="pagination">
+
+								<c:if test="${pageMaker.prev}">
+									<li><a
+										href="searchList${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
+								</c:if>
+
+								<c:forEach begin="${pageMaker.startPage }"
+									end="${pageMaker.endPage }" var="idx">
+									<li
+										<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+										<a href="searchList${pageMaker.makeSearch(idx)}">${idx}</a>
+									</li>
+								</c:forEach>
+
+								<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+									<li><a
+										href="searchList${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
+								</c:if>
+							</ul>
 						</div>
-						
-							<div id="noti">
-							
-							</div>
-			 										
-						</div>
+					</div>
+				</div>
+
+				<div id="noti"></div>
+
+			</div>
 
 
 
 			<!--Sidebar Widget-->
-					<div class="col-lg-4">
-						<div class="sidebar">
-							<div class="widget widget_search">
-								<div class="site-search-area">
-									<!-- <form method="get" id="site-searchform" action="#">
-										<div>
-											<input class="input-text" name="s" id="s" placeholder="Enter Search keywords..." type="text" />
-											<input id="searchsubmit" value="Search" type="submit" />
-										</div>
-									</form> -->
-								</div>
-								<!-- end site search -->
-							</div>
-
-
-						</div>
-					</div></section>
-
-<!--Sidebar Widget-->
 			<div class="col-lg-4">
 				<div class="sidebar">
 					<div class="widget widget_search">
@@ -231,17 +210,35 @@
 						</div>
 						<!-- end site search -->
 					</div>
+
+
 				</div>
-	</div>
-</section>
+			</div>
+		</section>
+
+		<!--Sidebar Widget-->
+		<div class="col-lg-4">
+			<div class="sidebar">
+				<div class="widget widget_search">
+					<div class="site-search-area">
+						<!-- <form method="get" id="site-searchform" action="#">
+										<div>
+											<input class="input-text" name="s" id="s" placeholder="Enter Search keywords..." type="text" />
+											<input id="searchsubmit" value="Search" type="submit" />
+										</div>
+									</form> -->
+					</div>
+					<!-- end site search -->
+				</div>
+			</div>
+		</div>
+	</section>
+
 
 	<!--end wrapper-->
-
-
 	<!-- 푸터 -->
  		 <jsp:include page="/WEB-INF/views/include/footer.jsp" />
   	<!-- /푸터 -->
-
 	
 
 	<script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
@@ -252,7 +249,7 @@
     <script type="text/javascript" src="/resources/js/styleswitch.js"></script> <!-- Style Colors Switcher -->
     <script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script>
     <script type="text/javascript" src="/resources/js/jquery.smartmenus.bootstrap.min.js"></script>
-        <script type="text/javascript" src="/resources/js/jflickrfeed.js"></script>
+    <script type="text/javascript" src="/resources/js/jflickrfeed.js"></script>
     <script type="text/javascript" src="/resources/js/jquery.magnific-popup.min.js"></script>
     <script type="text/javascript" src="/resources/js/jquery.isotope.min.js"></script>
     <script type="text/javascript" src="/resources/js/swipe.js"></script>
@@ -280,48 +277,38 @@
             success:function(data){
             	// data = list
             	
-            	if(noti_select == "sin"){
-        			
+            	 if(noti_select=="sin"){
             		$('#noti').remove();
-            		html += "<table class='table table-bordered' style='text-align:center'><tr><td>BNO</td><td>TITLE</td><td>DATE</td><td>CONTENT</td><td>WRITER</td></tr>";
-        			$.each(data, function(index, result){
+            		html += "<table class='table table-bordered' style='text-align: center'><tr><td>BNO</td><td>TITLE</td><td>DATE</td><td>CONTENT</td><td>WRITER</td></tr>";
+        			 $.each(data, function(index, result){ 
                 		
-                		if(result> 0){
-    	            	
-    	            		for(var i=0; i<result.size; i++){
+                		   if(result > 0){ 
+    	            		for(var i=0; i<result.size(); i++){
     	            			html += "<tr><td>"+ result.black_id +"</td>"
     	            			html += "<td>"+ result.black_title +"</td>"
     	            			html += "<td>"+ result.black_date +"</td>"
     	            			html += "<td>"+ result.black_content +"</td>"
     	            			html += "<td>"+ result.person_id +"</td></tr>"
     	            		}
-    	            		
                 			html += "</table>";
     						$('#noti').append(html);
-                		}
-                	});
+                		 } 
+                	 });   
         			
-        		} else if (noti_select == "mu"){
-        			alert("mu");
-        			
+        		} else if (noti_select= "mu"){
+        		
+        			$('#noti').remove();
+            		html += "<table class='table table-bordered' style='text-align:center'><tr><td>BNO</td><td>TITLE</td><td>DATE</td><td>CONTENT</td><td>WRITER</td></tr>";
         			$.each(data, function(index, result){
-                		// result가 list에 속한 하나의 객체(ex.boardVO)
                 		
-                		
-                		
-                		console.log("result : " + result.black_id);
-                		$('#noti').remove();
-                		
-                		
-                		
-                		
+                		                		
                 		if(result> 0){
-    	            		html += "<table class='table table-bordered' style='text-align:center'><tr><td>BNO</td><td>TITLE</td><td>CONTENT</td><td>DATE</td><td>WRITER</td></tr>";
+                			
     	            		for(var i=0; i<result.size; i++){
-    	            			html += "<tr><td>"+ result.black_id +"</td>"
-    	            			html += "<td>"+ result.black_title +"</td>"
-    	            			html += "<td>"+ result.black_date +"</td>"
-    	            			html += "<td>"+ result.black_content +"</td>"
+    	            			html += "<tr><td>"+ result.donate_id +"</td>"
+    	            			html += "<td>"+ result.donate_title +"</td>"
+    	            			html += "<td>"+ result.donate_date +"</td>"
+    	            			html += "<td>"+ result.donate_content +"</td>"
     	            			html += "<td>"+ result.person_id +"</td></tr>"
     	
     	            		}

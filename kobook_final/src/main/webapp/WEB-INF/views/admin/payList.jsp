@@ -197,7 +197,7 @@ ul.tabs li.active {
 				<div id="container">
 					<ul class="tabs">
 						<li class="active" rel="tab1">월별매출</li>
-						<li rel="tab2">일별매출</li>
+			<!-- 			<li rel="tab2">일별매출</li> -->
 					</ul>
 					<div class="tab_container">
 					<!-- #tab1 -->
@@ -216,7 +216,7 @@ ul.tabs li.active {
 			 										
 						</div>
 						
-						<!-- #tab2 -->
+<!-- 						#tab2
 						<div id="tab2" class="tab_content">
 							<div>
 								<select id="pay_day">
@@ -235,7 +235,7 @@ ul.tabs li.active {
 								</select>
 			 					<input type="submit" value="검색" id="day" onclick="payDayButton()" />
 							</div>	
-						</div>
+						</div> -->
 						
 					</div>
 			</div>
@@ -350,8 +350,6 @@ ul.tabs li.active {
 				success : function(data) {
 					
 					$('#month_deal').remove();
-					console.log(data.month);
-					
 					
 					html += "<table id='month_deal' class='table table-bordered' style='text-align: center'><tr height='20'><td>월</td><td>매출(원)</td><td>전월대비</td></tr>";
 					for(var i=0; i<12; i++){

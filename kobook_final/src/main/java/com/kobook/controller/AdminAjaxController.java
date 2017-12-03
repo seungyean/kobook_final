@@ -32,7 +32,7 @@ import com.kobook.community.service.DonateService;
 
 @RestController
 @RequestMapping("/pay/*")
-public class PayAjaxController {
+public class AdminAjaxController {
 
 	@Inject
 	private PayService service;
@@ -89,7 +89,6 @@ public class PayAjaxController {
 		
 		System.out.println("선택한 게시판: "+ noti_select);
 		try {
-			/*System.out.println(cri);*/
 			if(noti_select.equals("sin")){
 				list = blackservice.blackList(cri);
 				System.out.println(list);
