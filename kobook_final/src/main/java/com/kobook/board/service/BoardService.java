@@ -9,7 +9,7 @@ import com.kobook.person.domain.PersonVO;
 
 public interface BoardService {
 	
-	//@@@@@@@@@@@@@@@@@@@@@@@@  °øÁö»çÇ×   @@@@@@@@@@@@@@@@@@@@@@@@
+	//@@@@@@@@@@@@@@@@@@@@@@@@  ê³µì§€ì‚¬í•­   @@@@@@@@@@@@@@@@@@@@@@@@
 	
 	public void boardRegist(BoardVO vo) throws Exception;
 	
@@ -25,7 +25,7 @@ public interface BoardService {
 	
 	public void boardModify(BoardVO vo) throws Exception;
 	
-	//@@@@@@@@@@@@@@@@@@@@@@@@  °ü¸®ÀÚ¿ë  (È¸¿ø)  @@@@@@@@@@@@@@@@@@@@@@@@
+	//@@@@@@@@@@@@@@@@@@@@@@@@  ê´€ë¦¬ììš©  (íšŒì›)  @@@@@@@@@@@@@@@@@@@@@@@@
 	
 	public List<PersonVO> personList(SearchCriteria cri) throws Exception;
 	

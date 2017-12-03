@@ -59,7 +59,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	
-	//@@@@@@@@@@@@@@  È¸¿ø¿ë
+	//@@@@@@@@@@@@@@  íšŒì›ìš©
 	@Override
 	public List<PersonVO> personList(SearchCriteria cri) throws Exception {
 		return dao.personList(cri);

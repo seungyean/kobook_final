@@ -23,7 +23,12 @@ public class VisitServiceImpl implements VisitService {
 	private VisitDAO dao;
 	
 	@Override
-	public int visitCount(VisitVO vo) throws Exception {
-		return dao.visitCount(vo);
+	public int visitCount() throws Exception {
+		return dao.visitCount();
 	}
+	
+	/*@Override
+	public List<VisitVO> visitList() throws Exception {
+		return dao.visitList();
+	}*/
 }

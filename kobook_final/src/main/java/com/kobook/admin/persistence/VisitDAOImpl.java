@@ -18,7 +18,12 @@ public class VisitDAOImpl implements VisitDAO{
 	private static String namespace="com.kobook.mappers.visitMapper";
 	
 	@Override
-	public int visitCount(VisitVO vo) throws Exception {
-		return session.update(namespace+".visitCount", vo);
+	public int visitCount() throws Exception {
+		return session.selectOne(namespace+".visitCount");
 	}
+	
+	/*@Override
+	public List<VisitVO> visitList() throws Exception {
+		return session.selectList(namespace+".visitList");
+	}*/
 }

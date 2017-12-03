@@ -65,7 +65,7 @@
                     <!-- Logo / Mobile Menu -->
                     <div  class="col-lg-3 col-sm-3 ">
                         <div id="logo">
-                           <h1><a href="/board/adminMain">관리자WORLD</a></h1>
+                           <h1><a href="/admin/adminMain">관리자WORLD</a></h1>
                         </div>
                     </div>
                     <!-- Navigation
@@ -90,7 +90,7 @@
 
                                     </li>
 
-                                    <li><a href="#">게시판 관리</a>
+                                    <li><a href="/admin/notiList">게시판 관리</a>
                                          
                                     </li>
 
@@ -161,8 +161,8 @@
 				<option value="tc"
 					<c:out value="${cri.searchType eq 'tc'?'selected':''}"/>>
 					Title OR Content</option>
-			</select> <input type="text" name='keyword' id="keywordInput"
-				value='${cri.keyword }'>
+			</select> 
+			<input type="text" name='keyword' id="keywordInput"	value='${cri.keyword }'>
 			<button id='searchBtn'>Search</button>
 			<button id='newBtn'>New Board</button>
 			<br> <br>

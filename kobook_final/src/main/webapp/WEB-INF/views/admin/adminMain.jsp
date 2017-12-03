@@ -59,7 +59,7 @@
                     <!-- Logo / Mobile Menu -->
                     <div  class="col-lg-3 col-sm-3 ">
                         <div id="logo">
-                           <h1><a href="index.html">관리자WORLD</a></h1>
+                           <h1><a href="/admin/adminMain">관리자WORLD</a></h1>
                         </div>
                     </div>
                     <!-- Navigation
@@ -84,11 +84,11 @@
 
                                     </li>
 
-                                    <li><a href="#">게시판 관리</a>
+                                    <li><a href="/admin/notiList">게시판 관리</a>
                                          
                                     </li>
 
-                                    <li><a href="#">매출정산 관리</a>
+                                    <li><a href="/admin/payList">매출정산 관리</a>
                                         
                                     </li>
 
@@ -136,8 +136,13 @@
                             </div>
                             <div class="service-content">
                                 <h3>오늘 총 매출</h3>
-                                <p>1,000,000,000 ${payVO.pay_price }</p>
-                            </div>
+                                <fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />  
+								<fmt:formatDate value="${pay_date }" pattern="yyyy-MM-dd" var="pay_date"/>
+
+								<c:if test="${today == pay_date }" var="result">
+									<td>${paySum.pay_amount }</td>
+								</c:if>
+							</div>
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -158,7 +163,8 @@
                             </div>
                             <div class="service-content">
                                 <h3>오늘 총 접속자</h3>
-                                <p>${VisitVO.count } 명</p>
+                                	<p>${visit} 명</p>
+                                <%-- <p>${visit} 명</p> --%>
                             </div>
                         </div>
                     </div>
@@ -302,7 +308,7 @@
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
    
-       <script type="text/javascript">
+     <!--   <script type="text/javascript">
     google.charts.load('current', {packages: ['corechart', 'line']});
     google.charts.setOnLoadCallback(drawBasic);
     function drawBasic() {
@@ -310,8 +316,11 @@
           data.addColumn('number', 'X');
           data.addColumn('number', '접속자');
           data.addRows([
-            
-          ]);
+            /* for(int i=0; i<list.size(); i++){
+            	htmlString += "[" + list.get(i).getvisit_date() + "', " + list.get(i).getcount() + "]" ,'; 
+            }
+            htmlString += "]);" */
+            ])
           var options = {           
         	title : '접속자 현황',	  
         	width :'1100',
@@ -320,7 +329,7 @@
           var chart = new google.visualization.LineChart(document.getElementById('chart_a'));
           chart.draw(data, options);
         }
-  </script> 
+  </script> --> 
 
 <script type="text/javascript">
 google.charts.load('current', {'packages':['corechart']});
@@ -349,6 +358,7 @@ function drawChart() {
   var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
   chart.draw(data, options);
 }
+
 </script>
 
 

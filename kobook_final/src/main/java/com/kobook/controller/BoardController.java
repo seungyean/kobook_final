@@ -38,6 +38,7 @@ public class BoardController {
 	@Inject
 	private BoardService service;
 	
+	//공지사항 입력
 	@RequestMapping(value="/boardInsert", method=RequestMethod.GET)
 	public void notiGET(BoardVO vo, Model model)throws Exception{
 	}
@@ -50,8 +51,9 @@ public class BoardController {
 		return "redirect:/board/boardList";
 	}
 	
+	//공지사항 LIST
 	@RequestMapping(value="/boardList", method = RequestMethod.GET)
-	public void BoardList(@ModelAttribute("cri") SearchCriteria cri, Model model)throws Exception{
+	public void boardList(@ModelAttribute("cri") SearchCriteria cri, Model model)throws Exception{
 		model.addAttribute("list", service.boardListCri(cri));
 		PageMaker pageMaker=new PageMaker();
 		pageMaker.setCri(cri);
@@ -59,12 +61,14 @@ public class BoardController {
 		model.addAttribute("pageMaker",pageMaker);
 	}
 	
+	//공지사항 상세보기
 	@RequestMapping("/boardDetail")
 	public void boardRead(@RequestParam("board_id") int board_id, Model model,
 			@ModelAttribute("cri") SearchCriteria cri) throws Exception {	
 		model.addAttribute(service.boardRead(board_id));
 	}
 
+	//공지사항 제거
 	@RequestMapping("/boardRemove")
 	public String boardRemove(@RequestParam("board_id")Integer board_id, SearchCriteria cri, RedirectAttributes rttr)throws Exception {
 
@@ -77,6 +81,7 @@ public class BoardController {
 		return "redirect:/board/boardList";
 	}
 	
+	//공지사항 수정
 	@RequestMapping(value = "/boardModify", method = RequestMethod.GET)
 	public void boardModifyGET(@RequestParam("board_id") int board_id, Model model,
 			@ModelAttribute("cri") SearchCriteria cri) throws Exception {
@@ -91,12 +96,13 @@ public class BoardController {
 		rtts.addAttribute("perPageNum", cri.getPerPageNum());
 		rtts.addAttribute("searchType", cri.getSearchType());
 		rtts.addAttribute("keyword", cri.getKeyword());
-		
+		System.out.println("Modify - post");
 		
 		return "redirect:/board/boardList";
 	}
 	
-	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  °ü¸®ÀÚ¿ë  È¸¿ø   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 공지사항 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	//회원리스트
 	@RequestMapping(value="/personList", method = RequestMethod.GET)
 	public void personList(@ModelAttribute("cri") SearchCriteria cri, Model model)throws Exception {
 		model.addAttribute("list", service.personList(cri));
@@ -106,19 +112,18 @@ public class BoardController {
 		model.addAttribute("pageMaker",pageMaker);
 	}
 	
+	//회원 상세보기
 	@RequestMapping("/personDetail")
 	public void personRead(@RequestParam("person_id") int person_id, Model model,
 			@ModelAttribute("cri") SearchCriteria cri) throws Exception {	
 		model.addAttribute(service.personRead(person_id));
 	}
 	
-	
+	//회원 수정
 	@RequestMapping(value="/personModify", method = RequestMethod.POST)
 	public String personModifyPOST(RedirectAttributes rttr, PersonVO vo, SearchCriteria cri, Model model, @RequestParam("person_id") Integer person_id
 			) throws Exception {
-/*		@RequestParam("person_kind") String person_kind, @RequestParam("person_sell_grade") String person_sell_grade*/
-		
-		/*model.addAttribute(service.personRead(person_id));*/
+	
 		service.personModify(vo);
 	
 		System.out.println(vo.toString());
@@ -131,6 +136,8 @@ public class BoardController {
 		return "redirect:/board/personList";
 	}
 	
+	
+	//회원 제거
 	@RequestMapping("/personRemove")
 	public String personRemove(@RequestParam("person_id")Integer person_id, SearchCriteria cri, RedirectAttributes rttr) throws Exception {
 

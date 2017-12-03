@@ -6,7 +6,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
-public class VisitVO {
+public class VisitVO  {
 
 	private Integer visit_id;
 	private Timestamp visit_date;
@@ -28,7 +28,7 @@ public class VisitVO {
 		return count;
 	}
 	public void setCount(int count) {
-		this.count = count++;
+		this.count = count;
 	}
 	
 	@Override

@@ -12,45 +12,45 @@ import com.kobook.person.persistence.PersonDAO;
 
 public interface BoardDAO {
 
-	//°øÁö»çÇ× ÀÔ·Â(°ü¸®ÀÚ)
+	//ê³µì§€ì‚¬í•­ ì…ë ¥(ê´€ë¦¬ì)
 	public int boardInsert(BoardVO vo)throws Exception;
 
-	//°øÁö»çÇ× Ãâ·Â
+	//ê³µì§€ì‚¬í•­ ì¶œë ¥
 	public List<BoardVO> boardListCri(SearchCriteria cri)throws Exception;
 	
-	//°øÁö»çÇ× µğÅ×ÀÏ
+	//ê³µì§€ì‚¬í•­ ë””í…Œì¼
 	public BoardVO boardRead(Integer board_id) throws Exception;	
 	
-	//°øÁö»çÇ× ¼±ÅÃ¹øÈ£
+	//ê³µì§€ì‚¬í•­ ì„ íƒë²ˆí˜¸
 	public int getBno() throws Exception;
 	
-	//°øÁö»çÇ× ÆäÀÌÂ¡Ä«¿îÅÍ
+	//ê³µì§€ì‚¬í•­ í˜ì´ì§•ì¹´ìš´í„°
 	public int boardCountPaging(SearchCriteria cri)throws Exception;
 	
-	//°øÁö»çÇ× Á¶È¸¼ö
+	//ê³µì§€ì‚¬í•­ ì¡°íšŒìˆ˜
 	public void boardUpdateView(Integer board_id)throws Exception;
 	
-	//°øÁö»çÇ× »èÁ¦
+	//ê³µì§€ì‚¬í•­ ì‚­ì œ
 	public void boardRemove(Integer board_id)throws Exception;
 	
-	//°ø½Ã»çÇ× ¼öÁ¤
+	//ê³µì‹œì‚¬í•­ ìˆ˜ì •
 	public void boardUpdate(BoardVO vo) throws Exception;
 	
 	
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@    °ü¸®ÀÚ¿ë(È¸¿ø)       @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@	
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@    ê´€ë¦¬ììš©(íšŒì›)       @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@	
 	
-	//È¸¿ø ¸®½ºÆ®
+	//íšŒì› ë¦¬ìŠ¤íŠ¸
 	public List<PersonVO> personList(SearchCriteria cri) throws Exception;
 	
-	//È¸¿ø ÆäÀÌÂ¡Ä«¿îÅÍ
+	//íšŒì› í˜ì´ì§•ì¹´ìš´í„°
 	public int personCount(SearchCriteria cri)throws Exception;
 	
-	//È¸¿ø µğÅ×ÀÏ
+	//íšŒì› ë””í…Œì¼
 	public PersonVO personRead(Integer person_id) throws Exception;
 	
-	//È¸¿øÁ¤º¸ ¼öÁ¤
+	//íšŒì›ì •ë³´ ìˆ˜ì •
 	public void personModify(PersonVO vo) throws Exception;
 	
-	//È¸¿ø »èÁ¦
+	//íšŒì› ì‚­ì œ
 	public void personRemove(Integer person_id) throws Exception;
 }

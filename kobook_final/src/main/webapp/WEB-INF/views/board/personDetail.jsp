@@ -61,7 +61,7 @@
                     <!-- Logo / Mobile Menu -->
                     <div  class="col-lg-3 col-sm-3 ">
                         <div id="logo">
-                           <h1><a href="/board/adminMain">관리자WORLD</a></h1>
+                           <h1><a href="/admin/adminMain">관리자WORLD</a></h1>
                         </div>
                     </div>
                     <!-- Navigation
@@ -86,7 +86,7 @@
 
                                     </li>
 
-                                    <li><a href="#">게시판 관리</a>
+                                    <li><a href="/admin/notiList">게시판 관리</a>
                                          
                                     </li>
 
@@ -145,7 +145,7 @@
 	<!-- 	<form action="/board/personDetail" method="post"> -->
 
 
-	
+			<form role="form" action="personModify" method="post">		
 		<table border="1" cellpadding ="0" cellspacing ="0" >
 			<tr height="50">
 				<td width="70" align="center" height="30">회원번호</td>
@@ -188,7 +188,7 @@
             </td>
 	</table>
 
-			<form role="form" action="personModify" method="post">	
+
  					<input type='hidden' name='person_id' value="${personVO.person_id }">
   					<input type='hidden' name='person_kind' value="${personVO.person_kind }">
  					<input type='hidden' name='person_sell_grade' value="${personVO.person_sell_grade }"> 
@@ -238,12 +238,10 @@
 
 	
 	$(document).ready(function(){
-		var formObj = $("form[role='form']").serialize();
-		console.log(formObj);
 
   	
  		$("#modifyBtn").on("click", function(){
- 			
+ 			var formObj = $("form[role=form]").serialize();
 			var person_sell_grade = $("#person_sell_grade option:selected").val();
 			var person_kind = $("#person_kind option:selected").val();
  
@@ -256,11 +254,31 @@
  			alert(data.person_sell_grade);
 			alert(data.person_kind);   
 			
-			formObj.attr("data", "data");
+			
+		 	formObj.attr("data", "data");
  			formObj.attr("method", "post");
 			formObj.attr("action", "/board/personModify");  
 			formObj.submit();
-			 */
+			
+			
+			/* $.ajax({
+				type : "POST",
+				url : "/board/personModify",
+				dataType : "json",
+				data : data,
+				headers : {
+	                     "Content-Type": "application/json",
+	                     "X-HTTP-Method-Override": "POST"
+				},
+				success : function(data) {
+					console.log(data);
+					if(data == success){
+						alert("성공");
+					}
+				}
+			}) */
+			
+			
 			
  			/*  $.ajax({
  				type : "POST",
