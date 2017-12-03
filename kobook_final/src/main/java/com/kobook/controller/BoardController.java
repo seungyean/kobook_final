@@ -96,7 +96,7 @@ public class BoardController {
 		return "redirect:/board/boardList";
 	}
 	
-	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  °ü¸®ÀÚ¿ë  È¸¿ø   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  Â°Ã¼Â¸Â®Ã€ÃšÂ¿Ã«  ÃˆÂ¸Â¿Ã¸   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	@RequestMapping(value="/personList", method = RequestMethod.GET)
 	public void personList(@ModelAttribute("cri") SearchCriteria cri, Model model)throws Exception {
 		model.addAttribute("list", service.personList(cri));
