@@ -109,7 +109,7 @@
 												 src="/community/displayFile?fileName=${donate.donate_thumbnail }" height="100" width="200">
 												</td>
 												<td>
-													<a href="/community/donateRead${pageMaker.makeSearch(pageMaker.cri.page) }&donate_id=${donate.donate_id }">${donate.donate_title }
+													<a class="readMove" href="/community/donateRead${pageMaker.makeSearch(pageMaker.cri.page) }&donate_id=${donate.donate_id }">${donate.donate_title }
 													<strong>[ ${donate.reply_count} ]</strong>
 													</a>
 												</td>

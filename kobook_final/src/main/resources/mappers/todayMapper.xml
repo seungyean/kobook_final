@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kobook.mappers.todayMapper">
+	<insert id="todayInsert" parameterType="TodayVO">
+		INSERT INTO today(
+			today_id, person_id
+			<if test="donate_id != 0">, donate_id</if>
+			<if test="book_id != 0">, book_id</if>
+		) VALUES (
+			today_id_seq.nextval, #{person_id}
+			<if test="donate_id != 0">, #{donate_id}</if>
+			<if test="book_id != 0">, #{book_id}</if>
+		)
+	</insert>
+	
+	<select id="checkPersonIdByDonateID" resultType="int">
+		select count(today_id) from today where donate_id = #{donate_id} and person_id = #{person_id}
+	</select>
+	
+	<select id="todayDonateViewList" resultType="HashMap">
+		select D.* from today T, donate D where T.donate_id = D.donate_id AND T.person_id = #{person_id}
+	</select>
+	   
+</mapper>
+
+
+
+
+
+
+
+
+
+
+

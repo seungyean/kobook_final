@@ -17,6 +17,7 @@
 		<package name="com.kobook.person.domain" />
 		<package name="com.kobook.recom.domain"/>
 		<package name="com.kobook.admin.domain"/>
+		<package name="com.kobook.today.domain"/>
 	</typeAliases>
 
 </configuration>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <% 
 	String cur_id = "-1";
 	
@@ -71,8 +72,101 @@
 	}
 	
 </script>
+<script type="text/javascript">
+//sidebar 관련 script
+	$(function(){
+			$.ajax({
+				url:'/include/donateViewList',
+				dataType:"json",
+				success:function(list){
+					$.each(list, function() {
+						$("#today-list").append(
+								"<li><a href='/community/donateRead?donate_id="+this.DONATE_ID+"'><b>"
+										+this.DONATE_TITLE+"</b><br>"+"</a></li>")
+					})
+				}
+			})
+	});
+ var stmnLEFT = 6; // 오른쪽 여백 
+ var stmnGAP1 = 0; // 위쪽 여백 
+ var stmnGAP2 = 270; // 스크롤시 브라우저 위쪽과 떨어지는 거리 
+ var stmnBASE = 270; // 스크롤 시작위치 
+ var stmnActivateSpeed = 15; //스크롤을 인식하는 딜레이 (숫자가 클수록 느리게 인식)
+ var stmnScrollSpeed = 15; //스크롤 속도 (클수록 느림)
+ var stmnTimer; 
+ 
+ function RefreshStaticMenu() {
+	 var stmnStartPoint, stmnEndPoint;
+	 stmnStartPoint = parseInt(document.getElementById('STATICMENU').style.top, 10);
+	 stmnEndPoint = Math.max(document.documentElement.scrollTop, document.body.scrollTop) + stmnGAP2;
+	 
+	 if (stmnEndPoint < stmnGAP1) {
+		 stmnEndPoint = stmnGAP1;
+	 }
+	 
+	 if (stmnStartPoint != stmnEndPoint) {
+		 stmnScrollAmount = Math.ceil( Math.abs( stmnEndPoint - stmnStartPoint ) / 15 );
+		 
+		 document.getElementById('STATICMENU').style.top =
+			 parseInt(document.getElementById('STATICMENU').style.top, 10)
+			 + ( ( stmnEndPoint<stmnStartPoint ) ? -stmnScrollAmount : stmnScrollAmount )
+			 + 'px';
+		 
+		 stmnRefreshTimer = stmnScrollSpeed;
+	 }
+	 
+	 stmnTimer = setTimeout("RefreshStaticMenu();", stmnActivateSpeed);
+	 
+ }
+ 
+ function InitializeStaticMenu() {
+	 document.getElementById('STATICMENU').style.right = stmnLEFT + 'px';  //처음에 오른쪽에 위치. left로 바꿔도.
+	 document.getElementById('STATICMENU').style.top = document.body.scrollTop + stmnBASE + 'px';
+	 
+	 RefreshStaticMenu();
+	
+ }
+
+</script>
+
+<style type="text/css">
+	#STATICMENU { 
+		margin: 0pt;
+		padding: 0pt;
+		position: absolute;
+		right: 0px;
+		top: 0px;
+		z-index: 3000;
+	}
+	
+	#today-list{
+		background-color:white;
+		z-index: 2900;
+	}
+</style>
+
+
 </head>
-<body>
+<body onload="InitializeStaticMenu();">
+	<c:if test="${person_email != null }">
+    	<div id="STATICMENU" class="col-sm-1 col-md-1 col-lg-1">
+    		<div class="sidebar">
+				<div class="widget widget_tab">
+					<div class="velocity-tab sidebar-tab">
+    					<ul class="nav nav-tabs">
+                        	<li class="active"><a href="#Recent"> 오늘 본 상품 </a></li>
+                        </ul>
+                        <div class="tab-content clearfix">
+	                        <div class="tab-pane fade active in" id="Recent">
+		    					<ul class="recent_tab_list" id="today-list">
+		    					</ul>
+	    					</div>
+    					</div>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    </c:if>
 <header id="header">
 		
 		<!-- 팝업창으로 session값을 post로 보내는 과정 -->

@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.commons.io.IOUtils;
@@ -38,6 +40,8 @@ import com.kobook.community.domain.ReplyVO;
 import com.kobook.community.service.BlackService;
 import com.kobook.community.service.DonateService;
 import com.kobook.community.service.PhotoReviewService;
+import com.kobook.today.domain.TodayVO;
+import com.kobook.today.service.TodayService;
 import com.kobook.util.MediaUtils;
 import com.kobook.util.UploadFileUtils;
 
@@ -53,6 +57,9 @@ public class CommunityController {
 	
 	@Inject
 	private PhotoReviewService photoService;
+	
+	@Inject
+	private TodayService todayService;
 	
 	@Resource(name = "uploadPath")
 	private String uploadPath;
@@ -310,7 +317,7 @@ public class CommunityController {
 	//무료나눔 게시판 상세보기
 	@RequestMapping("donateRead")
 	public void donateRead(@RequestParam("donate_id") Integer donate_id, Model model,
-			@ModelAttribute("cri") SearchCriteria cri, ReplyVO vo)throws Exception{
+			@ModelAttribute("cri") SearchCriteria cri, ReplyVO vo, HttpServletRequest request)throws Exception{
 		
 		//Integer person_id = vo.getPerson_id();
 		//System.out.println("person_id"+person_id);
@@ -319,6 +326,16 @@ public class CommunityController {
 		model.addAttribute("writer",donateService.donateWriter(donate_id));
 		model.addAttribute("replyList",donateService.donateReplyList(donate_id));
 		//model.addAttribute("reply_person", donateService.selectPersonName(person_id,donate_id));
+		
+		TodayVO todayVO = new TodayVO();
+		HttpSession session = request.getSession();
+		int person_id = Integer.parseInt((String)session.getAttribute("person_id"));
+		
+		if(todayService.checkPersonIdByDonateID(donate_id, person_id) == 0){
+			todayVO.setPerson_id(person_id);
+			todayVO.setDonate_id(donate_id);
+			todayService.todayRegist(todayVO);
+		}
 	}
 	
 	//무료나눔 글 수정 폼 이동

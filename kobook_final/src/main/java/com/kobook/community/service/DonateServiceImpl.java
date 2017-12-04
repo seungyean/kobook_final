@@ -3,6 +3,8 @@ package com.kobook.community.service;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +14,8 @@ import com.kobook.community.domain.DonateFileVO;
 import com.kobook.community.domain.DonateVO;
 import com.kobook.community.domain.ReplyVO;
 import com.kobook.community.persistence.DonateDAO;
+import com.kobook.today.domain.TodayVO;
+import com.kobook.today.persistence.TodayDAO;
 
 @Service
 public class DonateServiceImpl implements DonateService {
