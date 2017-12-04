@@ -5,6 +5,8 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kobook.person.service.PersonService;
+import com.kobook.alarm.domain.AlarmMailVO;
 import com.kobook.alarm.domain.AlarmVO;
 import com.kobook.alarm.service.AlarmService;
 import com.kobook.message.DTO.MessageDTO;
@@ -32,6 +35,9 @@ public class MessageController {
 	
 	@Inject
 	private AlarmService alarmService;
+	
+	@Autowired
+	private JavaMailSender mailSender;
 	
 	// 메시지 form창으로 이동
 	@RequestMapping(value="/messageSend")
@@ -66,13 +72,14 @@ public class MessageController {
 			
 			// 쪽지 보낼시 새로운 알람에 등록 (아름)
 			AlarmVO alarmVO = new AlarmVO();
+			AlarmMailVO mailVO = new AlarmMailVO();
 			
 			alarmVO.setAlarm_kind("Message");
 			alarmVO.setAlarm_content("새 쪽지가 도착하였습니다.");
 			alarmVO.setPerson_id(receiver_id);
-			
+
 			alarmService.alarmMessage(alarmVO);
-			
+			mailVO.sendMail(alarmVO,mailSender,pService);
 			
 			return "/message/sendOk";
 		}

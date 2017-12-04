@@ -48,6 +48,24 @@
 	<context:component-scan base-package="com.kobook.*.service"/>
 	
 	<context:component-scan base-package="com.kobook.util"/>
+
+	<context:component-scan base-package="com.kobook.alarm.domain"/>
+	
+	<!-- 메일 발송시 필요한 부분 -->
+	<bean id="mailSender" class = "org.springframework.mail.javamail.JavaMailSenderImpl">
+	      <property name="host" value="smtp.gmail.com" />
+	      <property name="port" value="587" />
+	      <property name="username" value="dkfma93703@gmail.com" />
+	      <property name="password" value="Dkfma_8788" />
+	      <property name="javaMailProperties">
+	         <props>
+	               <prop key="mail.transport.protocol">smtp</prop>
+	               <prop key="mail.smtp.auth">true</prop>
+	               <prop key="mail.smtp.starttls.enable">true</prop>
+	               <prop key="mail.debug">true</prop>
+	         </props>
+	      </property>
+   </bean>
 	
 	
 </beans>

@@ -6,17 +6,17 @@ public class AlarmVO {
 	private String alarm_kind;
 	private String alarm_content;
 	private int person_id;
-	private String hit_yn;
+	private String alarm_hit_yn;
 	
 	public AlarmVO(){}
 
-	public AlarmVO(int alarm_id, String alarm_kind, String alarm_content, int person_id, String hit_yn) {
+	public AlarmVO(int alarm_id, String alarm_kind, String alarm_content, int person_id, String alarm_hit_yn) {
 		super();
 		this.alarm_id = alarm_id;
 		this.alarm_kind = alarm_kind;
 		this.alarm_content = alarm_content;
 		this.person_id = person_id;
-		this.hit_yn = hit_yn;
+		this.alarm_hit_yn = alarm_hit_yn;
 	}
 
 	public int getAlarm_id() {
@@ -52,11 +52,11 @@ public class AlarmVO {
 	}
 
 	public String getHit_yn() {
-		return hit_yn;
+		return alarm_hit_yn;
 	}
 
-	public void setHit_yn(String hit_yn) {
-		this.hit_yn = hit_yn;
+	public void setHit_yn(String alarm_hit_yn) {
+		this.alarm_hit_yn = alarm_hit_yn;
 	}
 	
 	

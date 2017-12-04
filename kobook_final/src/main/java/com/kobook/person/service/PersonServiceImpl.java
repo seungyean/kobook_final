@@ -28,5 +28,15 @@ public class PersonServiceImpl implements PersonService {
 	public PersonVO loginCheck(String person_email) {
 		return dao.loginCheck(person_email);
 	}
+
+	@Override
+	public String findPersonEmail(int person_id) throws Exception {
+		return dao.findPersonEmail(person_id);
+	}
+
+	@Override
+	public String findPersonName(int person_id) throws Exception {
+		return dao.findPersonName(person_id);
+	}
 	
 }
