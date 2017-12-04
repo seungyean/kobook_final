@@ -14,4 +14,7 @@ public interface ChatbotService {
 	public String manageMypage(String text, int person_id) throws Exception;
 	public String manageMessage(String text, int person_id) throws Exception;
 	
+	
+	public String boardNameReplace(String text);
+	public String keyWordReplace(String text);
 }

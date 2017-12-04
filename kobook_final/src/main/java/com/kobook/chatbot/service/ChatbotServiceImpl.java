@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.kobook.alarm.persistence.AlarmDAO;
 import com.kobook.book.domain.BookVO;
@@ -19,6 +20,7 @@ import com.kobook.message.persistence.MessageDAO;
 import com.kobook.mypage.persistence.MyPageDAO;
 import com.kobook.person.persistence.PersonDAO;
 import com.kobook.recom.persistence.FavoriteDAO;
+import com.sun.media.jfxmedia.logging.Logger;
 
 @Service
 public class ChatbotServiceImpl implements ChatbotService {
@@ -84,7 +86,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 			// 쪽지 파트
 		} else if(text.contains("책") || text.contains("도서") || text.contains("상품")){
 			
-			//newText = manageBook(text, person_id);
+//			newText = manageBook(text, person_id);
 			newText = "책은 좀 나중에 준비해드릴게요";
 			
 			// 책 파트
@@ -94,10 +96,10 @@ public class ChatbotServiceImpl implements ChatbotService {
 		
 			
 			// 게시판 파트
-		} else if(text.contains("공지사항") || text.contains("블랙") || text.contains("포토리뷰") || text.contains("무료나눔")){
+		} else if(text.contains("공지사항") || text.contains("블랙") || text.contains("포토") || text.contains("무료나눔")){
 			
-			newText = "게시판 관련 ㄱㄱ";
-		
+//			newText = "게시판 관련 ㄱㄱ";
+			newText = manageBoard(text, person_id);
 			
 			// 카테고리에 벗어난 키워드 입력
 		} else {
@@ -118,7 +120,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 		String newText = "";
 		List<BookVO> list = null;
 		
-		if(text.contains("최근") || text.contains("등록")){	//최근 등록된 책 보여줘
+		if(text.contains("최근") && text.contains("등록")){	//최근 등록된 책 보여줘
 			
 			// 좀 나중에....
 			
@@ -138,7 +140,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 			}*/
 			
 			
-		} else if(text.contains("내가") || text.contains("등록")){ //내가 등록한 책 보여줘
+		} else if(text.contains("내가") && text.contains("등록")){ //내가 등록한 책 보여줘
 			list = bookDao.getMyBookList(person_id);
 			System.out.println("내가 등록한책 리스트 크기: " + list.size());
 			if(list.size() == 0){
@@ -156,6 +158,11 @@ public class ChatbotServiceImpl implements ChatbotService {
 					newText += "\n * " + list.get(i).getBook_name();
 				}
 			}
+			
+		} else if(text.contains("모든")){
+			
+			// select book_name 
+			
 		} else if(text.contains("관련") || text.contains("관한")){	 //종류 관한 책보여줘
 			
 		} else {
@@ -170,32 +177,49 @@ public class ChatbotServiceImpl implements ChatbotService {
 	@Override
 	public String manageBoard(String text, int person_id) throws Exception {
 		String newText = "";
-		String[] strArr = text.split(" ");
-		String boardName = strArr[0];
+	//	String[] strArr = text.split(" ");
+	//	String boardName = strArr[0];
 		
-		String regex;
-		Pattern p;
-		Matcher m;
+		Pattern bPattern = Pattern.compile("^공지|^포토|^블랙|^무료나눔");
+		Matcher bMatcher = bPattern.matcher(text);
+		String boardName = null;
 		
-		if(boardName.contains("공지사항") || text.contains("검색")){
-			regex = "";
-			p = Pattern.compile(regex);
-			m = p.matcher(text);
+		while(bMatcher.find()){
+			boardName = boardNameReplace(bMatcher.group());
 			
-		} else if(boardName.contains("포토리뷰")){
-			regex = "";
-			p = Pattern.compile(regex);
-			m = p.matcher(text);
+			if(boardName != null){
+				System.out.println("boardname 추출 ::" + boardName);
+			}
+		}
+		
+		String rawKeyword = text.substring(text.indexOf(" ")+1);
+		
+		Pattern kPattern = Pattern.compile(" {0,1}검색$|보여줘$|알려줘$");
+		Matcher kMatcher = kPattern.matcher(rawKeyword);
+		String keyword = "";
+	
+		while(kMatcher.find()){
+			keyword = keyWordReplace(rawKeyword);
+		}
+		
+		System.out.println("rawkeyword 추출 ::" + rawKeyword);
+		System.out.println("keyword 추출 ::" + keyword);
+		
+		if(boardName.equals("공지사항") && (text.contains("검색")||(text.contains("보여줘"))||(text.contains("알려줘")))){
+		
+			newText += boardName;
 			
-		} else if(boardName.contains("블랙")){
-			regex = "";
-			p = Pattern.compile(regex);
-			m = p.matcher(text);
+		} else if(boardName.equals("포토리뷰")){
+			
+			newText += boardName;
+			
+		} else if(boardName.equals("블랙")){
+		
+			newText += boardName;
 				
-		} else if(boardName.contains("무료나눔")){
-			regex = "";
-			p = Pattern.compile(regex);
-			m = p.matcher(text);
+		} else if(boardName.equals("무료나눔")){
+			
+			newText += boardName;
 			
 		}	
 		
@@ -283,6 +307,39 @@ public class ChatbotServiceImpl implements ChatbotService {
 		}
 		
 		return newText;
+	}
+
+	@Override
+	public String boardNameReplace(String text) {
+		String boardName = "";
+		
+		if(text.contains("에서")){
+			boardName = StringUtils.replace(text, "에서", "");
+		}
+		boardName = StringUtils.replace(text, " ", "");
+		return boardName;
+	}
+
+	@Override
+	public String keyWordReplace(String text) {
+		String keyword = "";
+		
+		Pattern p = Pattern.compile(" {0,1}검색$|보여줘$|알려줘$");
+		Matcher m = p.matcher(text);
+		
+		if(text.contains(" ")){
+			keyword = StringUtils.replace(text, " ", "");
+			
+			if(text.contains("검색")){
+				keyword = StringUtils.replace(text, "검색", "");
+			} else if(text.contains("보여줘")){
+				keyword = StringUtils.replace(text, "보여줘", "");
+			} else if(text.contains("알려줘")){
+				keyword = StringUtils.replace(text, "알려줘", "");
+			}
+		}
+		
+		return keyword;
 	}
 	
 }
