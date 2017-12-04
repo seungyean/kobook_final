@@ -23,7 +23,15 @@
 	<select id="todayDonateViewList" resultType="HashMap">
 		select D.* from today T, donate D where T.donate_id = D.donate_id AND T.person_id = #{person_id}
 	</select>
-	   
+	
+	<select id="checkPersonIdByBookID" resultType="int">
+		select count(today_id) from today where book_id = #{book_id} and person_id = #{person_id}
+	</select>
+	
+	<select id="todayBookViewList" resultType="HashMap">
+		select B.* from today T, book B where T.book_id = B.book_id AND T.person_id = #{person_id}
+	</select>
+	
 </mapper>
 
 

@@ -39,4 +39,19 @@ public class TodayDAOImpl implements TodayDAO {
 		return session.selectOne(namespace+".checkPersonIdByDonateID", paramMap);
 	}
 
+	@Override
+	public int checkPersonIdByBookID(int book_id, int person_id) throws Exception {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		
+		paramMap.put("book_id", book_id);
+		paramMap.put("person_id", person_id);
+		
+		return session.selectOne(namespace+".checkPersonIdByBookID", paramMap);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> todayBookViewList(int person_id) throws Exception {
+		return session.selectList(namespace+".todayBookViewList", person_id);
+	}
+
 }

@@ -10,6 +10,7 @@ import java.util.UUID;
 import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.http.HttpHeaders;
@@ -42,6 +43,8 @@ import com.kobook.chatbot.domain.ChatlogVO;
 import com.kobook.mypage.domain.DeliveryVO;
 import com.kobook.mypage.domain.MileageVO;
 import com.kobook.person.domain.PersonVO;
+import com.kobook.today.domain.TodayVO;
+import com.kobook.today.service.TodayService;
 import com.kobook.util.MediaUtils;
 import com.kobook.util.UploadFileUtils;
 
@@ -55,6 +58,8 @@ public class BookController {
 	@Inject
 	private BookService service;
 	
+	@Inject
+	private TodayService todayService;
 	
 	//愿�由ъ�� ���댁�
 	@RequestMapping("/delivery")
@@ -382,7 +387,8 @@ public class BookController {
 	
 	
 	@RequestMapping(value="/bookRead",method=RequestMethod.GET)
-	public void read(@RequestParam("book_id")int book_id, PersonDTO person, Model model,@ModelAttribute("cri") SearchCriteria cri)throws Exception{
+	public void read(@RequestParam("book_id")int book_id, PersonDTO person, Model model,
+			@ModelAttribute("cri") SearchCriteria cri, HttpServletRequest request)throws Exception{
 		System.out.println("readCon: book_id: " + book_id);
 		model.addAttribute(service.read(book_id));
 	
@@ -420,6 +426,16 @@ public class BookController {
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(service.countReview(service.getPersonIdByBookId(book_id)));
 		model.addAttribute("pageMaker",pageMaker);
+		
+		TodayVO todayVO = new TodayVO();
+		HttpSession session = request.getSession();
+		int person_id = Integer.parseInt((String)session.getAttribute("person_id"));
+		
+		if(todayService.checkPersonIdByBookID(book_id, person_id) == 0) {
+			todayVO.setBook_id(book_id);
+			todayVO.setPerson_id(person_id);
+			todayService.todayRegist(todayVO);
+		}
 	}
 	
 

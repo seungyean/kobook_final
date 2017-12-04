@@ -2,6 +2,7 @@ package com.kobook.today.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -30,5 +31,15 @@ public class TodayServiceImpl implements TodayService {
 	@Override
 	public int checkPersonIdByDonateID(int donate_id, int person_id) throws Exception {
 		return dao.checkPersonIdByDonateID(donate_id, person_id);
+	}
+
+	@Override
+	public int checkPersonIdByBookID(int book_id, int person_id) throws Exception {
+		return dao.checkPersonIdByBookID(book_id, person_id);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> todayBookViewList(int person_id) throws Exception {
+		return dao.todayBookViewList(person_id);
 	}
 }
