@@ -29,6 +29,7 @@ import com.kobook.community.domain.BlackVO;
 import com.kobook.community.domain.DonateVO;
 import com.kobook.community.service.BlackService;
 import com.kobook.community.service.DonateService;
+import com.kobook.community.service.PhotoReviewService;
 
 @RestController
 @RequestMapping("/pay/*")
@@ -46,6 +47,8 @@ public class AdminAjaxController {
 	@Inject
 	private BoardService boardservice;
 
+	@Inject
+	private PhotoReviewService photoservice;
 
 	private ArrayList<?> listt;
 
@@ -62,7 +65,12 @@ public class AdminAjaxController {
 		try {
 			for(int i=0; i<12; i++){
 				if(i<9){
-					sum = service.paySum(pay_date.substring(2)+"/0"+(i+1)+"%");
+					if(i==0) {
+						// 전년도 12월
+						sum = service.paySum(Integer.parseInt(pay_date.substring(2))-1+"/12");
+						list.add(sum);
+					}
+					sum = service.paySum(pay_date.substring(2)+"/0"+(i+1)+"%"); 
 					list.add(sum);
 				}else {
 					sum = service.paySum(pay_date.substring(2)+"/"+(i+1)+"%");
@@ -78,10 +86,9 @@ public class AdminAjaxController {
 			
 		return entity;
 	}
-	
 
-	@ResponseBody	
 	@RequestMapping(value="/notiList", method=RequestMethod.POST)
+	@ResponseBody	
 	public ResponseEntity<List<?>> notiListPOST(@RequestParam("noti_select") String noti_select, SearchCriteria cri) throws Exception {
 
 		ResponseEntity<List<?>> entity = null;
@@ -92,25 +99,22 @@ public class AdminAjaxController {
 			if(noti_select.equals("sin")){
 				list = blackservice.blackList(cri);
 				System.out.println(list);
-			} else if(noti_select.equals("mu")){
+			} else if (noti_select.equals("mu")){
 				list = donateservice.donateList(cri);
 				System.out.println(list);
-			} else if(noti_select.equals("pho")){
-				
-			} else if(noti_select.equals("gong")){
+			} else if (noti_select.equals("pho")){
+				list = photoservice.photoList(cri);
+				System.out.println(list);
+			} else if (noti_select.equals("gong")){
 				list = boardservice.boardListCri(cri);
 				System.out.println(list);
 			}
-			
 			entity = new ResponseEntity<List<?>>(list, HttpStatus.OK);
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<List<?>>(HttpStatus.BAD_REQUEST);
 		}
-		
 		return entity;
 	}
-	
 	
 }

@@ -71,13 +71,13 @@ System.out.println("리스트 cur_id: " + cur_id);
 			</div>
 
 
-			<h4>공지사항 세부  </h4>
-
+			<h4>공지사항 세부</h4>
+			<pre>	
 			<table class="table table-bordered" style="text-align: center;">
-				<tr height="50">
+			<tr height="50">
 					<td align="left" width="700">글제목 : ${boardVO.board_title }</td>
 					<td width="200" align="right">날짜 : <fmt:formatDate
-							value="${boardVO.board_date}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+								value="${boardVO.board_date}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
 				</tr>
 				<tr height="50">
 					<td align="left" width="700">작성자 : ${boardVO.board_writer }</td>
@@ -87,10 +87,11 @@ System.out.println("리스트 cur_id: " + cur_id);
 					<td colspan="2" align="left">${boardVO.board_content }</td>
 				</tr>
 			</table>
+			</pre>
 
 
 <%
-if(session.getAttribute("person_id") != null){
+	if(session.getAttribute("person_id") != null){
 	int cur_id = Integer.parseInt((String) session.getAttribute("person_id"));
 	if(cur_id==1){
 %>	

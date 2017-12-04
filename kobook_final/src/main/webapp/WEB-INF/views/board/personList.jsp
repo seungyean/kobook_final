@@ -86,7 +86,7 @@
                                     <li><a href="/board/personList">회원관리</a>
                                     </li>
 
-                                    <li><a href="#">주문배송 관리</a>
+                                    <li><a href="/book/delivery">주문배송 관리</a>
 
                                     </li>
 
@@ -94,7 +94,7 @@
                                          
                                     </li>
 
-                                    <li><a href="#">매출정산 관리</a>
+                                    <li><a href="/admin/payList">매출정산 관리</a>
                                         
                                     </li>
 
@@ -154,13 +154,13 @@
 					---</option>
 				<option value="t"
 					<c:out value="${cri.searchType eq 't'?'selected':''}"/>>
-					Title</option>
+					이름</option>
 				<option value="c"
 					<c:out value="${cri.searchType eq 'c'?'selected':''}"/>>
-					Content</option>
+					핸드폰</option>
 				<option value="tc"
 					<c:out value="${cri.searchType eq 'tc'?'selected':''}"/>>
-					Title OR Content</option>
+					이름 & 핸드폰</option>
 			</select> 
 			<input type="text" name='keyword' id="keywordInput"	value='${cri.keyword }'>
 			<button id='searchBtn'>Search</button>

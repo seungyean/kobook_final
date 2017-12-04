@@ -8,18 +8,19 @@
 	<select id="visitCount" resultType="int">
 		select sum(count) from visit
 	</select>
-	
-   <select id="paySum" resultType="Integer">
-   		select sum(pay_amount) from pay
-   		where pay_date like #{pay_date}
-   </select>
-   
 
-	<select id="payDaySum" resultType="Integer">
+	<select id="paySum" resultType="Integer">
 		select sum(pay_amount) from pay
 		where pay_date like #{pay_date}
-	</select>   
-   
+	</select>
+
+
+	<select id="payDaySum" resultType="Integer">
+		select sum(pay_amount) from	pay
+		where pay_date like #{pay_date} 
+	</select>
+
+	
 </mapper>
 
 

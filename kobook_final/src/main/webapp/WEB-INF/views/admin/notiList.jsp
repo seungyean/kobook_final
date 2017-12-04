@@ -7,9 +7,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<%
-	//session.setAttribute("person_id", 5);
-%>
 
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
@@ -164,6 +161,14 @@
 							id="search" onclick="selectButton()" />
 					</div>
 
+
+					<br>
+					<div id="total">
+						<div id="noti"></div>
+					</div>
+
+
+
 					<div class="box-footer" align="center">
 						<div class="text-center">
 							<ul class="pagination">
@@ -189,10 +194,9 @@
 						</div>
 					</div>
 				</div>
-
-				<div id="noti"></div>
-
 			</div>
+
+
 
 
 
@@ -226,7 +230,7 @@
 											<input class="input-text" name="s" id="s" placeholder="Enter Search keywords..." type="text" />
 											<input id="searchsubmit" value="Search" type="submit" />
 										</div>
-									</form> -->
+							</form> -->
 					</div>
 					<!-- end site search -->
 				</div>
@@ -254,79 +258,96 @@
     <script type="text/javascript" src="/resources/js/jquery.isotope.min.js"></script>
     <script type="text/javascript" src="/resources/js/swipe.js"></script>
     <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
-
-
     <script src="/resources/js/main.js"></script>
 	
 	<script type="text/javascript">
-		
+	
+	function GetDateString(jsonDate) {
+        var year, month, day, hour, minute, second , returnValue  , date , replaceStr
+
+        replaceStr = jsonDate.replace(/\D/g, "");
+        date = new Date(parseInt(replaceStr));
+
+        year = date.getFullYear();
+        month = Pad(date.getMonth());
+        day = Pad(date.getDate());
+        hour = Pad(date.getHours());
+        minute = Pad(date.getMinutes());
+        second = Pad(date.getSeconds());
+
+        returnValue = year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
+        return returnValue;
+    }
+	
+    function Pad(num) {
+        num = "0" + num;
+        return num.slice(-2);
+    }
+
+
 	function selectButton(){
 		
+      	var html = "";		
 		var noti_select = $("#search option:selected").val();
-		var html = "";
 		
 		console.log(noti_select);
 		
 		$.ajax({
             type:"POST",
             url:"/pay/notiList",
-            dataType:'json',
+            dataType:"json",
             data: {
             	noti_select : noti_select
             	},
-            success:function(data){
-            	// data = list
-            	
+            success: function(data){
+
             	 if(noti_select=="sin"){
-            		$('#noti').remove();
-            		html += "<table class='table table-bordered' style='text-align: center'><tr><td>BNO</td><td>TITLE</td><td>DATE</td><td>CONTENT</td><td>WRITER</td></tr>";
-        			 $.each(data, function(index, result){ 
-                		
-                		   if(result > 0){ 
-    	            		for(var i=0; i<result.size(); i++){
-    	            			html += "<tr><td>"+ result.black_id +"</td>"
-    	            			html += "<td>"+ result.black_title +"</td>"
-    	            			html += "<td>"+ result.black_date +"</td>"
-    	            			html += "<td>"+ result.black_content +"</td>"
-    	            			html += "<td>"+ result.person_id +"</td></tr>"
-    	            		}
-                			html += "</table>";
-    						$('#noti').append(html);
-                		 } 
+            		 
+  					$("#noti").empty();
+            		html += "<table class='table table-bordered' style='text-align:center'><tr><td style='width: 10px'></td><td style='width: 5px'>BNO</td><td style='width: 320px'>TITLE</td><td style='width: 20px'>DATE</td><td style='width: 20px'>WRITER</td></tr>";
+
+            		$.each(data, function(index, result){ 
+            	        html += "<tr><td>"+ "<input type='checkbox'>" + "</td>"
+            	        html += "<td>"+ result.black_id +"</td>"
+    	            	html += "<td>"+ result.black_title +"</td>"
+    	            	html += "<td>"+ GetDateString("/Date(result.black_date)/") +"</td>"
+    	            	html += "<td>"+ result.black_email +"</td></tr>"
                 	 });   
+        			 html += "</table>";
+            		 $('#noti').append(html);        			
+         			 
+        		} else if (noti_select=="gong") {
+
+  					$("#noti").empty();
+            		html += "<table class='table table-bordered' style='text-align:center'><tr><td></td><td>BNO</td><td>TITLE</td><td>DATE</td><td>WRITER</td></tr>";
+            		$.each(data, function(index, result){
+    	            	html += "<tr><td>"+ "<input type='checkbox'>" + "</td>"
+        				html += "<td>"+ result.board_id +"</td>"
+            			html += "<td>"+ result.board_title +"</td>"
+            			html += "<td>"+ result.board_date +"</td>"
+            			html += "<td>"+ result.board_writer +"</td></tr>"
+                	});
+            		html += "</table>";
+					$('#noti').append(html);
+					
+        		} else if (noti_select=="mu"){
         			
-        		} else if (noti_select= "mu"){
-        		
-        			$('#noti').remove();
-            		html += "<table class='table table-bordered' style='text-align:center'><tr><td>BNO</td><td>TITLE</td><td>DATE</td><td>CONTENT</td><td>WRITER</td></tr>";
-        			$.each(data, function(index, result){
-                		
-                		                		
-                		if(result> 0){
-                			
-    	            		for(var i=0; i<result.size; i++){
-    	            			html += "<tr><td>"+ result.donate_id +"</td>"
-    	            			html += "<td>"+ result.donate_title +"</td>"
-    	            			html += "<td>"+ result.donate_date +"</td>"
-    	            			html += "<td>"+ result.donate_content +"</td>"
-    	            			html += "<td>"+ result.person_id +"</td></tr>"
-    	
-    	            		}
-                		
-                			html += "</table>";
-    						$('#noti').append(html);
-                		}
+        			$("#noti").empty();
+            		html += "<table class='table table-bordered' style='text-align:center'><tr><td></td><td>BNO</td><td>TITLE</td><td>DATE</td><td>WRITER</td></tr>";
+            		$.each(data, function(index, result){
+    	            	html += "<tr><td>"+ "<input type='checkbox'>" + "</td>"
+        				html += "<td>"+ result.board_id +"</td>"
+            			html += "<td>"+ result.board_title +"</td>"
+            			html += "<td>"+ result.board_date +"</td>"
+            			html += "<td>"+ result.board_writer +"</td></tr>"
                 		});
+            		html += "</table>";
+					$('#noti').append(html);
         		}
-            
-            	
             }
          });
+		
 	}
-	
-	
 	</script>
-	
-	
 </body>
 </html>

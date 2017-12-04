@@ -349,26 +349,39 @@ ul.tabs li.active {
 				data : obj,			
 				success : function(data) {
 					
-					$('#month_deal').remove();
-					
+        			$("#month").empty();
 					html += "<table id='month_deal' class='table table-bordered' style='text-align: center'><tr height='20'><td>월</td><td>매출(원)</td><td>전월대비</td></tr>";
-					for(var i=0; i<12; i++){
+					for(var i=1; i<=12; i++){
 						
-						html += "<tr><td>"+(i+1)+"</td>"
+						html += "<tr><td>"+(i)+"</td>"
 						html += "<td>"+data.month[i]+"</td>"
 						if(i > 0){
-							html += "<td>"+(data.month[i] - data.month[i-1])+"</td></tr>"
+							if(eval((data.month[i] - data.month[i-1]))>0){
+								html += "<td>"+"+"+(data.month[i] - data.month[i-1])+"</td></tr>"
+							}else {
+								html += "<td>"+(data.month[i] - data.month[i-1])+"</td></tr>"
+							}
 						} else {
 							html += "<td> \ </td></tr>"
 						}
 						
-						
 					}
+				
 					html +="</table>";
 					$('#month').append(html);
-				}
-			})
-		}		
+					
+					 $("td").each(function(){
+							if ($(this).text().indexOf('-') > -1) {
+								$(this).text($(this).text().replace('-','▼'));
+								$(this).css("color", "red");
+							} else if($(this).text().indexOf('+') > -1) {
+								$(this).text($(this).text().replace('+','▲'));
+								$(this).css("color", "blue");
+							}
+						})
+					}
+				})
+			}		
 	
 	</script>
 	<script> 
