@@ -19,6 +19,7 @@
 <link rel="stylesheet" type="/resources/text/css" href="/resources/css/style.css" media="screen" data-name="skins">
 <link rel="stylesheet" href="/resources/css/layout/wide.css"data-name="layout">
 <link rel="stylesheet" type="/resources/text/css" href="/resources/css/switcher.css" media="screen" />
+<link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/themes/ui-lightness/jquery-ui.css" rel="stylesheet" />
 	
 </head>
 
@@ -470,10 +471,13 @@
  		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
   	<!-- /푸터 -->
 	
-	
+ <script type="text/javascript" src="./jquery-1.4.4.min.js"></script> 
+ <script type="text/javascript" src="./jquery-ui-1.8.7.min.js"></script>
+
+
 <script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
-<script src="/resources/js/jquery.easing.1.3.js"></script>
+ <script src="/resources/js/jquery.easing.1.3.js"></script>
 <script src="/resources/js/retina-1.1.0.min.js"></script>
 <script type="text/javascript" src="/resources/js/jquery.cookie.js"></script> <!-- jQuery cookie -->
 <script type="text/javascript" src="/resources/js/styleswitch.js"></script> <!-- Style Colors Switcher -->
@@ -560,7 +564,7 @@
 	    console.log($('#endday').val());
 	       
 	    
-		$.ajax({
+/* 		$.ajax({
 			type:'post',
 			url:'/book/deliverydateAjax',
 			headers: { 
@@ -571,16 +575,41 @@
 			data: JSON.stringify({startday:startday, endday:endday}),
 			success:function(data){
 				console.log("data : " + data);
-				//alert('성공');
+				console.log("data길이"+data.length);
+				 getList("/book/deliverydate/"+startday+"/"+endday);
 			},
 			error:function(e){  
 	            alert("에러"+e.responseText);  
 	        }  
-		});
+		}); */
+		
+	    getList("/book/deliverydate/"+startday+"/"+endday);
 
 	});
 
-	
+	 function getList(deliveryInfo){
+		$.getJSON(deliveryInfo, function(data){		// "/chat/{person_id}" 로부터 나오는 전체 데이터 (array)
+			
+			 alert(data);
+			console.log("넘어온 데이터: "+data);
+			console.log("dataArray: " + data.length);
+			$.each(data,function(){
+				 
+				 alert(data);
+				 
+						$('.srow').remove();
+						$(".datelist").append(
+						'<tr class="srow"><td>'+this.DELIVERY_ID+'</td>'
+						+'<td>'+this.BOOK_NAME+'</td>'
+						+'<td>'+this.PERSON_NAME+'</td>'
+						+'<td>'+this.PAY_AMOUNT+'</td>'
+						+'<td>'+this.DELIVERY_ADDRESS+'</td>'
+						+'<td>'+this.PAY_DATE+'</td></tr>'
+						)
+					
+				 })
+		});
+	}  
 	
     google.charts.load('current', {packages: ['corechart', 'line']});
     google.charts.setOnLoadCallback(drawBasic);
@@ -694,15 +723,15 @@
 	$("#startday").datepicker({
 	    showButtonPanel : false,
 	    dateFormat : "yymmdd",
-	   // altField : '#startday'
-	    altField: ".selecter"
+	    altField : '#startday'
+	    //altField: ".selecter"
 	    
 	 });
 	 
 	 $("#endday").datepicker({
 	    dateFormat : "yymmdd",
-	  //  altField : '#endday'
-	    altField: ".selecter"
+	   altField : '#endday'
+	   // altField: ".selecter"
 	 });
                
 </script>

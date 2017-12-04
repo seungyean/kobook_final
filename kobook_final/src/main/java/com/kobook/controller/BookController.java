@@ -106,22 +106,51 @@ public class BookController {
 	}*/
 	
 
-	@ResponseBody
+/*	@ResponseBody
 	@RequestMapping(value="/deliverydateAjax", method=RequestMethod.POST)
-	public ResponseEntity<List<HashMap<String, String>>> deliverydateAjaxPOST(@RequestBody DateDTO dto)throws Exception{
+	public ResponseEntity<List<HashMap<String, String>>> deliverydateAjaxPOST(SearchCriteria cri,@RequestBody DateDTO dto)throws Exception{
 
 		System.out.println("deliverydateAjax post 컨트롤러진입--------------");
 		
-		/*DateDTO dto=new DateDTO();
+		DateDTO dto=new DateDTO();
 		dto.setStartday(startday);
-		dto.setEndday(endday);*/
+		dto.setEndday(endday);
 		
 		System.out.println(dto.toString());
 		ResponseEntity<List<HashMap<String, String>>> entity =null;
 		
 		try {
 			//service.selectDateList(dto);
+			entity = new ResponseEntity<List<HashMap<String, String>>>(service.deliveryList(cri),HttpStatus.OK);
+			System.out.println(service.deliveryList(cri));
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+		
+	}*/
+	
+	
+	
+	@ResponseBody
+	@RequestMapping(value="/deliverydate/{startday}/{endday}", method=RequestMethod.GET)
+	public ResponseEntity<List<HashMap<String, String>>> deliverydate(@PathVariable("startday") String startday, @PathVariable("endday") String endday)throws Exception{
+
+		System.out.println("deliverydate  컨트롤러진입--------------");
+		
+		DateDTO dto=new DateDTO();
+		dto.setStartday(startday);
+		dto.setEndday(endday);
+		System.out.println(dto.toString());
+	
+		ResponseEntity<List<HashMap<String, String>>> entity =null;
+		
+		try {
+			//service.selectDateList(dto);
 			entity = new ResponseEntity<List<HashMap<String, String>>>(service.selectDateList(dto), HttpStatus.OK);
+			System.out.println(service.selectDateList(dto));
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -130,6 +159,7 @@ public class BookController {
 		return entity;
 		
 	}
+	
 	
 		/*List<HashMap<String, String>> list = null;
 		HashMap<String, String> map = new HashMap<>();
