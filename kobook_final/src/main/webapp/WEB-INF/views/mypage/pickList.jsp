@@ -47,7 +47,8 @@
 				function() {
 					var pick_id = $(this).parent().parent().find('td:first')
 							.text().trim();
-					var book_id = $('#bookId').html();
+					var book_id = $(this).parent().parent().find('.bookId')
+					.text().trim();
 					console.log(book_id);
 					location.href = "/mypage/order?book_id="+book_id+"&pick_id="+pick_id;
 				});
@@ -120,7 +121,7 @@
 											<c:forEach var="element" items="${pickList }" varStatus="s">
 												<tr>
 													<td align="center" hidden="">${element.PICK_ID }</td>
-													<td align="center" hidden="" id="bookId">${element.BOOK_ID }</td>
+													<td align="center" hidden="" id="bookId" class="bookId">${element.BOOK_ID }</td>
 													<td align="center"><input type="checkbox"></td>
 													<td align="center">	
 													<img class="thumbnail" alt="NO IMAGE"

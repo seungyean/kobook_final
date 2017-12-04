@@ -1,5 +1,6 @@
 package com.kobook.mypage.service;
 
+import java.awt.print.Book;
 import java.util.HashMap;
 import java.util.List;
 
@@ -63,7 +64,7 @@ public class MyPageServiceImpl implements MyPageService {
 
 	@Transactional
 	@Override
-	public void orderRegist(OrderVO orderVO, PayVO payVO, DeliveryVO deliveryVO, MileageVO mileageVO) throws Exception{
+	public void orderRegist(OrderVO orderVO, PayVO payVO, DeliveryVO deliveryVO, MileageVO mileageVO,BookVO bookVO) throws Exception{
 		
 		// 주문
 		dao.orderInsert(orderVO);
@@ -81,6 +82,8 @@ public class MyPageServiceImpl implements MyPageService {
 		// 주문 후 결제 후 배달 등록
 		deliveryVO.setOrder_id(order_id);
 		dao.deliveryInsert(deliveryVO);
+		
+		dao.sellStateUpdate(bookVO);
 	}
 
 	@Override
@@ -89,12 +92,12 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	@Override
-	public int mileageTotal(int person_id)throws Exception {
+	public Integer mileageTotal(Integer person_id)throws Exception {
 		return dao.mileageTotal(person_id);
 	}
 
 	@Override
-	public int mileageUse(int person_id)throws Exception {
+	public Integer mileageUse(Integer person_id)throws Exception {
 		return dao.mileageUse(person_id);
 	}
 
@@ -107,6 +110,16 @@ public class MyPageServiceImpl implements MyPageService {
 	public void msgModify(int message_id)throws Exception {
 		dao.msgUpdate(message_id);
 		
+	}
+
+	@Override
+	public Integer countPaging(MyPageCriteria cri) throws Exception {
+		return dao.countPaging(cri);
+	}
+
+	@Override
+	public List<HashMap<String, String>> buyListDate(MyPageCriteria cri) throws Exception {
+		return dao.buyListDate(cri);
 	}
 
 

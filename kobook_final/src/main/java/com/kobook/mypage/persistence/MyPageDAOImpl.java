@@ -109,12 +109,12 @@ public class MyPageDAOImpl implements MyPageDAO {
 	}
 
 	@Override
-	public int mileageTotal(int person_id) throws Exception{
+	public Integer mileageTotal(Integer person_id) throws Exception{
 		return session.selectOne(namespace + ".mileageTotal", person_id);
 	}
 
 	@Override
-	public int mileageUse(int person_id) throws Exception{
+	public Integer mileageUse(Integer person_id) throws Exception{
 		return session.selectOne(namespace + ".mileageUse", person_id);
 	}
 
@@ -128,6 +128,18 @@ public class MyPageDAOImpl implements MyPageDAO {
 		session.selectOne(namespace+".msgUpdate", message_id);
 		
 	}
+
+	@Override
+	public Integer countPaging(MyPageCriteria cri) throws Exception {
+		return session.selectOne(namespace+".countPaging", cri);
+	}
+
+	@Override
+	public List<HashMap<String, String>> buyListDate(MyPageCriteria cri) throws Exception {
+		return session.selectList(namespace + "buyListDate", cri);
+	}
+
+	
 
 
 

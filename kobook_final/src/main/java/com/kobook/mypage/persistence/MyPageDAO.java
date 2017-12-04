@@ -21,6 +21,10 @@ public interface MyPageDAO {
 	public void sellStateUpdate(BookVO vo) throws Exception;
 	/* 구매내역 */
 	public List<HashMap<String, String>> buyList(MyPageCriteria cri) throws Exception;
+	/* 구매내역 날짜별 조회 */
+	public List<HashMap<String, String>> buyListDate(MyPageCriteria cri) throws Exception;
+	/* 구매내역 리스트 카운팅 */
+	public Integer countPaging(MyPageCriteria cri)throws Exception;
 	/* 찜 내역 */
 	public List<HashMap<String, String>> pickList(int person_id) throws Exception;
 	/* 찜 상태 변경 */
@@ -44,9 +48,9 @@ public interface MyPageDAO {
 	/* 마일리지 등록(적립) */
 	public int mileageInsert(MileageVO vo) throws Exception;
 	/* 회원의 총 마일리지  조회*/
-	public int mileageTotal(int person_id) throws Exception;
+	public Integer mileageTotal(Integer person_id) throws Exception;
 	/* 회원의 사용 마일리지  조회*/
-	public int mileageUse(int person_id) throws Exception;
+	public Integer mileageUse(Integer person_id) throws Exception;
 	/* 회원의 마일리지 수정(차감) */
 	public void mileageMinus(MileageVO vo) throws Exception;
 	/* 회원이 받은 쪽지 조회 */

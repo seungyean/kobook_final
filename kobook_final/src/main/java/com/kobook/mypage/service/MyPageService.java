@@ -22,6 +22,10 @@ public interface MyPageService {
 	public void sellStateModify(BookVO vo)throws Exception;
 	/* 구매내역 */
 	public List<HashMap<String, String>> buyList(MyPageCriteria cri)throws Exception;
+	/* 구매내역 날짜별 조회 */
+	public List<HashMap<String, String>> buyListDate(MyPageCriteria cri) throws Exception;
+	/* 구매내역 리스트 카운팅 */
+	public Integer countPaging(MyPageCriteria cri)throws Exception;
 	/* 찜 내역 */
 	public List<HashMap<String, String>> pickList(int person_id)throws Exception;
 	/* 찜 상태 변경 */
@@ -31,13 +35,13 @@ public interface MyPageService {
 	/* 주문자 */
 	public PersonVO orderPerson(int person_id)throws Exception;
 	/* 주문 등록 */
-	public void orderRegist(OrderVO orderVO, PayVO payVO, DeliveryVO deliveryVO, MileageVO mileageVO)throws Exception;
+	public void orderRegist(OrderVO orderVO, PayVO payVO, DeliveryVO deliveryVO, MileageVO mileageVO,BookVO bookVO)throws Exception;
 	/* 선택한 책 */
 	public BookVO oneBook(int book_id)throws Exception;
 	/* 회원의 총 마일리지  조회*/
-	public int mileageTotal(int person_id)throws Exception;
+	public Integer mileageTotal(Integer person_id)throws Exception;
 	/* 회원의 사용가능 마일리지  조회*/
-	public int mileageUse(int person_id)throws Exception;
+	public Integer mileageUse(Integer person_id)throws Exception;
 	/* 회원이 받은 쪽지 조회 */
 	public List<MessageVO> receivedMsgTotal (int receiver_id)throws Exception;
 	/* 받은쪽지 읽기 */

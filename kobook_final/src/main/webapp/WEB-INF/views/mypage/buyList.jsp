@@ -97,7 +97,7 @@ fieldset {
 										</span> 
 										<input type="date" id="start_date" name="start_date" value=""> 
 										~ <input type="date" id="end_date" name="end_date" value=""> 
-										<input alt="조회" id="order_search_btn" type="image" src="//img.echosting.cafe24.com/skin/admin_ko_KR/myshop/btn_search.gif" />
+										<input id="order_search_btn" type="button" class="btn-default" style="color: white;" value="조회" />
 									</fieldset>
 									<br>
 									<ul>
@@ -105,8 +105,6 @@ fieldset {
 										<li>&nbsp;&nbsp;- 주문번호를 클릭하시면 해당 주문에 대한 상세내역을 확인하실 수 있습니다.</li>
 									</ul>
 								</div>
-<!-- 								<input id="mode" name="mode" value="" type="hidden" />  -->
-<!-- 								<input id="term" name="term" value="" type="hidden" /> -->
 							</form>
 							</div>
 							<br>
@@ -158,28 +156,47 @@ fieldset {
 								</c:choose>
 						</div>
 						<div class="text-center">
-					<ul class="pagination">
+<!-- 						<ul class="pagination"> -->
 
-						<c:if test="${pageMaker.prev}">
-							<li><a
-								href="buyList?page=${pageMaker.startPage - 1 }">&laquo;</a></li>
-						</c:if>
+<%-- 						<c:if test="${pageMaker.prev}"> --%>
+<!-- 							<li><a -->
+<%-- 								href="buyList${pageMaker.makeSearch(pageMaker.startPage - 1 )}">&laquo;</a></li> --%>
+<%-- 						</c:if> --%>
 
-						<c:forEach begin="${pageMaker.startPage }"
-							end="${pageMaker.endPage }" var="idx">
-							<li
-								<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-								<a href="buyList?page=${idx}">${idx}</a>
-							</li>
-						</c:forEach>
+<%-- 						<c:forEach begin="${pageMaker.startPage }" --%>
+<%-- 							end="${pageMaker.endPage }" var="idx"> --%>
+<!-- 							<li -->
+<%-- 								<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>> --%>
+<%-- 								<a href="buyList${pageMaker.makeSearch(idx)}">${idx}</a> --%>
+<!-- 							</li> -->
+<%-- 						</c:forEach> --%>
 
-						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-							<li><a
-								href="buyList?page=${pageMaker.endPage + 1 }">&raquo;</a></li>
-						</c:if>
+<%-- 						<c:if test="${pageMaker.next && pageMaker.endPage > 0}"> --%>
+<!-- 							<li><a -->
+<%-- 								href="buyList${pageMaker.makeSearch(pageMaker.endPage - 1 )}">&raquo;</a></li> --%>
+<%-- 						</c:if> --%>
 
-					</ul>
-				</div>
+<!-- 					</ul> -->
+							<ul class="pagination">
+
+								<c:if test="${pageMaker.prev}">
+									<li><a href="buyList?${pageMaker.startPage - 1 }">&laquo;</a></li>
+								</c:if>
+
+								<c:forEach begin="${pageMaker.startPage }"
+									end="${pageMaker.endPage }" var="idx">
+									<li
+										<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+										<a href="buyList?page=${idx}">${idx}</a>
+									</li>
+								</c:forEach>
+
+								<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+									<li><a href="buyList?page=${pageMaker.endPage + 1 }">&raquo;</a></li>
+								</c:if>
+
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>

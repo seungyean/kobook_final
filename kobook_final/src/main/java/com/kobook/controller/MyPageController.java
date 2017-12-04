@@ -11,10 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kobook.alarm.domain.AlarmMailVO;
 import com.kobook.alarm.domain.AlarmVO;
 import com.kobook.alarm.service.AlarmService;
 import com.kobook.book.domain.BookVO;
@@ -36,6 +39,7 @@ import com.kobook.mypage.domain.OrderVO;
 import com.kobook.mypage.domain.PayVO;
 import com.kobook.mypage.service.MyPageService;
 import com.kobook.person.domain.PersonVO;
+import com.kobook.person.service.PersonService;
 import com.kobook.util.MediaUtils;
 
 import oracle.net.aso.s;
@@ -49,6 +53,12 @@ public class MyPageController {
 	
 	@Inject
 	private AlarmService alarmService;
+	
+	   @Inject
+	   private PersonService pService;
+
+	   @Autowired
+	   private JavaMailSender mailSender;
 	
 	@Resource(name = "uploadPath")
 	private String uploadPath;
@@ -130,10 +140,12 @@ public class MyPageController {
 				//"판매가 완료되었습니다." 알림 주는 부분 (아름)
 				if(temp.getBook_sell_state().equals("C")) {
 					AlarmVO alarmVO = new AlarmVO();
-					
+					AlarmMailVO mailVO = new AlarmMailVO();
+
 					alarmVO.setAlarm_kind("SellBook");
 					alarmVO.setAlarm_content("판매가 완료되었습니다.");
 					alarmVO.setPerson_id(person_id);
+					mailVO.sendMail(alarmVO,mailSender,pService);
 					
 					alarmService.alarmMessage(alarmVO);
 				}
@@ -148,7 +160,7 @@ public class MyPageController {
 
 	/* 구매내역 */
 	@RequestMapping(value = "/buyList", method = RequestMethod.GET)
-	public void buyList(HttpServletRequest request, Model model, MyPageCriteria cri)throws Exception {
+	public void buyList(HttpServletRequest request, Model model, MyPageCriteria cri )throws Exception {
 		System.out.println("----------------Controller : 구매내역 출력-----------------");
 		
 		HttpSession session = request.getSession();
@@ -160,7 +172,13 @@ public class MyPageController {
 		
 		MyPageMaker pageMaker = new MyPageMaker();
 		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(6);
+
+//		if(start_date != null && end_date !=null){
+//			System.out.println("날짜조회 들어옴");
+//			service.buyListDate(cri);
+//		}
+		
+		pageMaker.setTotalCount(service.countPaging(cri));
 		model.addAttribute("pageMaker", pageMaker);
 	}
 	
@@ -215,10 +233,20 @@ public class MyPageController {
 		
 		PersonVO person = service.orderPerson(person_id);
 		
+		Integer mileageTotal = service.mileageTotal(person_id);
+		Integer mileageUse = service.mileageUse(person_id);
 		
-		
-		model.addAttribute("mileageTotal", service.mileageTotal(person_id) );
-		model.addAttribute("mileageUse", service.mileageUse(person_id) );
+		if(mileageTotal == null && mileageUse == null){
+			System.out.println("널값이라 들어왔다!!!");
+			mileageTotal = 0;
+			mileageUse = 0;
+			model.addAttribute("mileageTotal", mileageTotal);
+			model.addAttribute("mileageUse", mileageUse);
+		}else{
+			System.out.println("널값아니라 안 들어왔다!!!");
+			model.addAttribute("mileageTotal", service.mileageTotal(person_id) );
+			model.addAttribute("mileageUse", service.mileageUse(person_id) );
+		}
 		
 		// 휴대폰 - 
 		String strPhone[] = person.getPerson_phone().split("-");
@@ -273,15 +301,19 @@ public class MyPageController {
 		mileageVO.setMileage_point(mileageAvg);
 		mileageVO.setPerson_id(person_id);
 		
+		// 결제 후 책 판매상태 변경
+		BookVO bookVO = new BookVO();
+		bookVO.setBook_id(book_id);
+		bookVO.setBook_sell_state("C");
 		
 		if (input_mile != 0) {
 			MileageVO mileageVO2 = new MileageVO();
 			mileageVO2.setMileage_kind('M');
 			mileageVO2.setMileage_point(input_mile);
 			mileageVO2.setPerson_id(person_id);
-			service.orderRegist(temp, pay, deliveryVO, mileageVO2);
+			service.orderRegist(temp, pay, deliveryVO, mileageVO2,bookVO);
 		} else{
-			service.orderRegist(temp, pay, deliveryVO, mileageVO);
+			service.orderRegist(temp, pay, deliveryVO, mileageVO,bookVO);
 		}
 		
 		

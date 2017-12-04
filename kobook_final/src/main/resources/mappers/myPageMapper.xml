@@ -34,18 +34,50 @@
 		b.book_name,
 		p.pay_amount,
 		o.order_date
-		<!-- TO_CHAR(o.order_date, 'YYYY-MM-DD') -->
 		FROM
 		book_order o,
 		book b,
 		pay p
 		WHERE o.order_id = p.order_id
 		AND
-		o.book_id =
-		b.book_id
+		o.book_id = b.book_id
 		AND o.person_id = #{person_id}
 		ORDER BY p.pay_id
 		DESC
+	</select>
+	
+	<!-- 구매내역 리스트 카운팅-->
+	<select id="countPaging" resultType="Integer" parameterType="int">
+		SELECT
+		count(p.pay_id) as pay_cnt
+		FROM
+		book_order o,
+		book b,
+		pay p
+		WHERE o.order_id = p.order_id
+		AND
+		o.book_id = b.book_id
+		AND o.person_id =#{person_id}
+	</select>
+	
+	<!-- 구매내역 리스트 날짜별 조회 -->
+	<select id="buyListDate" resultType="hashMap" parameterType="int">
+		SELECT
+		p.pay_id,
+		b.book_img,
+		b.book_name,
+		p.pay_amount,
+		o.order_date
+		FROM
+		book_order o,
+		book b,
+		pay p
+		WHERE o.order_id = p.order_id
+		AND
+		o.book_id = b.book_id
+		AND o.person_id = #{person_id
+    and o.order_date between #{start_date} and #{end_date}
+		ORDER BY p.pay_id DESC
 	</select>
 
 	<!-- 찜리 -->
@@ -66,6 +98,7 @@
 		AND p.pick_state = 'Y'
 		AND
 		person.person_id = #{person_id}
+		ORDER BY p.pick_id DESC
 	</select>
 
 	<!-- 찜 상태 변경 -->
@@ -87,8 +120,8 @@
 		WHERE
 		m.pay_id = p.pay_id
 		AND p.order_id = o.order_id
-		AND o.person_id =
-		#{person_id}
+		AND o.person_id = #{person_id}
+		ORDER BY o.order_date DESC
 	</select>
 
 
@@ -141,7 +174,7 @@
 	</insert>
 
 	<!-- 회원의 적립된 총 마일리지 -->
-	<select id="mileageTotal" resultType="int">
+	<select id="mileageTotal" resultType="Integer">
 		select sum(mileage_point)
 		from mileage
 		where mileage_kind = 'P'
@@ -149,7 +182,7 @@
 	</select>
 
 	<!-- 회원의 사용 마일리지 -->
-	<select id="mileageUse" resultType="int">
+	<select id="mileageUse" resultType="Integer">
 		select sum(mileage_point)
 		from mileage
 		where mileage_kind = 'M'
