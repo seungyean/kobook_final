@@ -45,8 +45,8 @@ public class MyPageDAOImpl implements MyPageDAO {
 	}
 
 	@Override
-	public List<HashMap<String, String>> pickList(int person_id) throws Exception {
-		return session.selectList(namespace + ".pickList", person_id);
+	public List<HashMap<String, String>> pickList(MyPageCriteria cri) throws Exception {
+		return session.selectList(namespace + ".pickList", cri,  new RowBounds(cri.getPageStart(), cri.getPerPageNum()));
 	}
 
 	@Override
@@ -119,7 +119,7 @@ public class MyPageDAOImpl implements MyPageDAO {
 	}
 
 	@Override
-	public List<MessageVO> receivedMsgTotal(int receiver_id) throws Exception{
+	public List<HashMap<String, String>> receivedMsgTotal(int receiver_id) throws Exception{
 		return  session.selectList(namespace + ".receivedMsgTotal", receiver_id);
 	}
 
@@ -138,6 +138,13 @@ public class MyPageDAOImpl implements MyPageDAO {
 	public List<HashMap<String, String>> buyListDate(MyPageCriteria cri) throws Exception {
 		return session.selectList(namespace + "buyListDate", cri);
 	}
+
+	@Override
+	public Integer countPagingPick(MyPageCriteria cri) throws Exception {
+		return session.selectOne(namespace + ".countPagingPick", cri);
+	}
+
+	
 
 	
 

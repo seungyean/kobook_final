@@ -95,7 +95,7 @@ fieldset {
 										</span> 
 										<input type="date" id="start_date" name="start_date" value=""> 
 										~ <input type="date" id="end_date" name="end_date" value=""> 
-										<input alt="조회" id="order_search_btn" type="image" src="//img.echosting.cafe24.com/skin/admin_ko_KR/myshop/btn_search.gif" />
+										<input alt="조회" id="order_search_btn" type="submit" class="btn-warning" value="조회"/>
 									</fieldset>
 									<br>
 									<ul>

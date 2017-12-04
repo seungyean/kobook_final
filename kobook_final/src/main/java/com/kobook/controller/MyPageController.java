@@ -19,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -160,7 +161,7 @@ public class MyPageController {
 
 	/* 구매내역 */
 	@RequestMapping(value = "/buyList", method = RequestMethod.GET)
-	public void buyList(HttpServletRequest request, Model model, MyPageCriteria cri )throws Exception {
+	public void buyList(HttpServletRequest request, Model model, @ModelAttribute("cri") MyPageCriteria cri )throws Exception {
 		System.out.println("----------------Controller : 구매내역 출력-----------------");
 		
 		HttpSession session = request.getSession();
@@ -184,15 +185,22 @@ public class MyPageController {
 	
 	/* 찜리스트 */
 	@RequestMapping(value = "/pickList", method = RequestMethod.GET)
-	public void pickList(HttpServletRequest request, Model model)throws Exception {
+	public void pickList(HttpServletRequest request, Model model, @ModelAttribute("cri") MyPageCriteria cri)throws Exception {
 		System.out.println("----------------Controller : 찜리스트 출력-----------------");
 		
 		HttpSession session = request.getSession();
 		int person_id = Integer.parseInt((String)session.getAttribute("person_id"));
+		cri.setPerson_id(person_id);
 		
-		List<HashMap<String, String>> pickList = service.pickList(person_id);
-		request.setAttribute("pickList", pickList);
-		model.addAttribute("pickList", service.pickList(person_id));
+		model.addAttribute("pickList", service.pickList(cri));
+		
+		MyPageMaker pageMaker = new MyPageMaker();
+		pageMaker.setCri(cri);
+		
+		pageMaker.setTotalCount(service.countPagingPick(cri));
+		model.addAttribute("pageMaker", pageMaker);
+		
+		
 	}
 	
 	/* 찜리스트 상태 변경 */
@@ -306,6 +314,21 @@ public class MyPageController {
 		bookVO.setBook_id(book_id);
 		bookVO.setBook_sell_state("C");
 		
+		//"판매가 완료되었습니다." 알림 주는 부분 (아름)
+		if(bookVO.getBook_sell_state().equals("C")) {
+			AlarmVO alarmVO = new AlarmVO();
+			AlarmMailVO mailVO = new AlarmMailVO();
+
+			alarmVO.setAlarm_kind("SellBook");
+			alarmVO.setAlarm_content("판매가 완료되었습니다.");
+			alarmVO.setPerson_id(person_id);
+			mailVO.sendMail(alarmVO,mailSender,pService);
+			
+			alarmService.alarmMessage(alarmVO);
+		}
+		
+		
+		
 		if (input_mile != 0) {
 			MileageVO mileageVO2 = new MileageVO();
 			mileageVO2.setMileage_kind('M');
@@ -341,10 +364,10 @@ public class MyPageController {
 		int person_id = Integer.parseInt((String)session.getAttribute("person_id"));
 		System.out.println(person_id);
 		
-		List<MessageVO>list = service.receivedMsgTotal(person_id);
+		List<HashMap<String, String>> list = service.receivedMsgTotal(person_id);
 		
-		for (MessageVO messageVO : list) {
-			System.out.println(messageVO.toString());
+		for (HashMap<String, String> hashMap : list) {
+			System.out.println(hashMap.toString());
 		}
 		model.addAttribute("receivedMsgTotal", service.receivedMsgTotal(person_id));
 	}

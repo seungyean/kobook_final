@@ -100,6 +100,21 @@
 		person.person_id = #{person_id}
 		ORDER BY p.pick_id DESC
 	</select>
+	
+	<!-- 찜 리스트 카운팅-->
+	<select id="countPagingPick" resultType="Integer" parameterType="int">
+		 SELECT
+		count(p.pick_id) as pick_cnt	
+		FROM
+		book b,
+		pick p,
+		person person
+		WHERE b.book_id = p.book_id
+		AND p.person_id = person.person_id
+		AND p.pick_state = 'Y'
+		AND
+		person.person_id = #{person_id}
+	</select>
 
 	<!-- 찜 상태 변경 -->
 	<update id="pickUpdate" parameterType="int">
@@ -190,16 +205,14 @@
 	</select>
 
 	<!-- 회원이 받은 쪽지 -->
-	<select id="receivedMsgTotal" resultType="MessageVO">
-		SELECT message_id,
-		person_id,
-		message_content,
-		message_hit
-		FROM message
-		WHERE receiver_id = #{person_id}
-		ORDER BY message_id
-		DESC
+	<select id="receivedMsgTotal" resultType="hashMap" parameterType="int">
+		select m.message_id,m.person_id,m.message_content,m.message_hit, p.person_email, p.person_name as p_name
+    from message m , person p 
+    where m.person_id = p.person_id
+    and m.RECEIVER_ID = #{person_id}
+    ORDER BY message_id DESC
 	</select>
+	
 	
 	<!-- 찜 상태 변경 -->
 	<update id="msgUpdate" parameterType="int">

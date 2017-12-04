@@ -43,8 +43,8 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	@Override
-	public List<HashMap<String, String>> pickList(int person_id)throws Exception {
-		return dao.pickList(person_id);
+	public List<HashMap<String, String>> pickList(MyPageCriteria cri)throws Exception {
+		return dao.pickList(cri);
 	}
 
 	@Override
@@ -102,7 +102,7 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	@Override
-	public List<MessageVO> receivedMsgTotal(int receiver_id) throws Exception{
+	public List<HashMap<String, String>> receivedMsgTotal(int receiver_id) throws Exception{
 		return dao.receivedMsgTotal(receiver_id);
 	}
 
@@ -121,6 +121,13 @@ public class MyPageServiceImpl implements MyPageService {
 	public List<HashMap<String, String>> buyListDate(MyPageCriteria cri) throws Exception {
 		return dao.buyListDate(cri);
 	}
+
+	@Override
+	public Integer countPagingPick(MyPageCriteria cri) throws Exception {
+		return dao.countPagingPick(cri);
+	}
+
+	
 
 
 	

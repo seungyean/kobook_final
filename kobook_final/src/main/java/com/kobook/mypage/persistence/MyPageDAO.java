@@ -25,8 +25,9 @@ public interface MyPageDAO {
 	public List<HashMap<String, String>> buyListDate(MyPageCriteria cri) throws Exception;
 	/* 구매내역 리스트 카운팅 */
 	public Integer countPaging(MyPageCriteria cri)throws Exception;
+	public Integer countPagingPick(MyPageCriteria cri)throws Exception;
 	/* 찜 내역 */
-	public List<HashMap<String, String>> pickList(int person_id) throws Exception;
+	public List<HashMap<String, String>> pickList(MyPageCriteria cri) throws Exception;
 	/* 찜 상태 변경 */
 	public void pickUpdate(int pick_id) throws Exception;
 	/* 마일리지 내역 */
@@ -54,7 +55,7 @@ public interface MyPageDAO {
 	/* 회원의 마일리지 수정(차감) */
 	public void mileageMinus(MileageVO vo) throws Exception;
 	/* 회원이 받은 쪽지 조회 */
-	public List<MessageVO> receivedMsgTotal (int receiver_id) throws Exception;
+	public List<HashMap<String, String>> receivedMsgTotal (int receiver_id) throws Exception;
 	/* 받은쪽지 읽기 */
 	public void msgUpdate(int message_id) throws Exception;
 	
