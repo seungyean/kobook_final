@@ -83,11 +83,11 @@ public class AlarmMailVO {
         messageHelper.setText(alarmVO.getAlarm_content(), true);
         messageHelper.setText(alarmVO.getAlarm_content(), htmlText);
         
-        FileSystemResource file = new FileSystemResource(new File("C:/Users/Areum Jung/Documents/logo.PNG"));
-        messageHelper.addInline("logo", file);	
+        FileSystemResource file = new FileSystemResource(new File("/kobook_final//resources/img/logo.PNG"));
+        //messageHelper.addInline("logo", file);	
         
-        FileSystemResource file2 = new FileSystemResource(new File("C:/Users/Areum Jung/Documents/line.PNG"));
-        messageHelper.addInline("line", file2);	
+        FileSystemResource file2 = new FileSystemResource(new File("/resources/img//line.PNG"));
+        //messageHelper.addInline("line", file2);	
         
  
         messageHelper.setFrom(setfrom);  // 보내는사람 생략하거나 하면 정상작동을 안함
