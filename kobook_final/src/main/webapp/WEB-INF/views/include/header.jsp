@@ -225,7 +225,7 @@
                     <!-- Logo / Mobile Menu -->
                     <div  class="col-lg-3 col-sm-3 ">
                         <div id="logo">
-                            <h1><a href="/recom">KOBOOK</a></h1>
+                            <h1><a href="/main">KOBOOK</a></h1>
                         </div>
                     </div>
                     <!-- Navigation
@@ -267,7 +267,7 @@
                             </div>
                             <div class="navbar-collapse collapse">
                                 <ul class="nav navbar-nav">
-                                    <li><a href="/recom">Home</a></li>
+                                    <li><a href="/main">Home</a></li>
 
                                     <li><a href="/book/bookList">전체검색</a></li>
                                     <li><a href="/book/booklocationList">지역검색</a></li>

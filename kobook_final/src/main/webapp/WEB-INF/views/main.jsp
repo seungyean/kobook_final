@@ -158,7 +158,7 @@
 										    	<img src="resources/img/7.png" alt="">
 										              <div class="option inner">
 										                  <div>
-										                     <h5>전공 상세보기</h5>
+										                     <h5>상세보기</h5>
 										                     <a href="/kobook/img/bookImg/${f.book_id }.PNG" class="fa fa-search mfp-image"></a>
 										                     <a href="/kobook/book/detailAction.do?book_id=${f.book_id}" class="fa fa-link"></a>	                  </div>
 										               </div>
@@ -169,7 +169,7 @@
 				        </div>  
             		</c:when>
             		<c:otherwise>
-            			<h4>${person_email }님을 위한 추천도서</h4>
+            			<h4>${person_name }님을 위한 추천도서</h4>
             			
             			 <nav class="clearfix">
                 			<ul id="filter">

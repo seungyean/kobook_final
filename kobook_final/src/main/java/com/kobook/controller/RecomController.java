@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kobook.board.domain.BoardVO;
 import com.kobook.board.service.BoardService;
 import com.kobook.book.domain.SearchCriteria;
+import com.kobook.person.service.PersonService;
 import com.kobook.recom.domain.FavoriteBookVO;
 import com.kobook.recom.domain.FavoriteVO;
 import com.kobook.recom.domain.RdataVO;
@@ -37,7 +38,13 @@ public class RecomController {
 	@Inject 
 	private BoardService boardService;
 	
+	@Inject
+	private PersonService pService;
 	
+	@RequestMapping(value="/main", method=RequestMethod.GET)
+	public String goMain(){
+		return "/main";
+	}
 	
 	//메인으로 가기 전 로그인한 사용자의 추천도서 목록을 추출하는 메소드. 모든 메인은 이 메소드를 거친다.
 	@RequestMapping(value="/recom", method = RequestMethod.GET)
@@ -56,7 +63,7 @@ public class RecomController {
 		List<BoardVO> boardList = boardService.boardListCri(cri);
 		List<RdataVO> rdataList = service.getRdata();
 		
-
+		String person_name = pService.findPersonName(person_id);
 		
 		//사용자의 추천도서를 우선순위별로 출력하는 반복문.
 		// favorite + rdata 테이블을 사용해서 추천도서의 우선순위(rank)를 매기고, 출력한다.
@@ -90,6 +97,7 @@ public class RecomController {
 		favoriteList = service.getFavorite(person_id);
 		request.setAttribute("list", favoriteList);
 		request.setAttribute("boardList", boardList);
+		request.setAttribute("person_name", person_name);
 		
 		return "/main";
 	}
