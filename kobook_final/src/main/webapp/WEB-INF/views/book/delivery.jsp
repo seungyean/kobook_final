@@ -240,9 +240,45 @@
                     
           <!-- // 1. Datepicker(데이트피커) 사용하기 -->
         
-		<input type="text" id="startday" placeholder="시작 날짜를 선택하세요">
+	<!-- 	<input type="text" id="startday" placeholder="시작 날짜를 선택하세요">
 		<input type="text" id="endday" placeholder="끝 날짜를 선택하세요">
-		<input name="submit" type="submit" value="확인" id="datePick" />
+		<input name="submit" type="submit" value="확인" id="datePick" /> -->
+		
+				<div class="media-body">
+							<form method="GET" id="OrderHistoryForm" name="OrderHistoryForm">
+								<div class="xans-element- xans-myshop xans-myshop-orderhistoryhead ">
+									<fieldset>
+									<span> 
+										<a href="#none" class="btnNormal" days="00">
+										<img src="http://img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date1.gif" alt="오늘" />
+										</a> 
+										<a href="#none" class="btnNormal" days="07">
+										<img src="http://img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date2.gif" alt="1주일" />
+										</a> 
+										<a href="#none" class="btnNormal" days="30">
+										<img src="http://img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date3.gif" alt="1개월" />
+										</a> 
+										<a href="#none" class="btnNormal" days="90">
+										<img src="http://img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date4.gif" alt="3개월" />
+										</a> 
+										<a href="#none" class="btnNormal" days="180">
+										<img src="http://img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date5.gif" alt="6개월" />
+										</a>
+										</span> 
+										<input type="text" id="startday" placeholder="시작 날짜를 선택하세요">
+										~	<input type="text" id="endday" placeholder="끝 날짜를 선택하세요">
+										<input name="submit" type="submit" value="확인" id="datePick" /> 
+									</fieldset>
+									<br>
+									<ul>
+										<li>&nbsp;&nbsp;- 기본적으로 최근 3개월간의 자료가 조회되며, 기간 검색시 지난 판매내역을 조회하실 수 있습니다.</li>
+										<li>&nbsp;&nbsp;- 주문번호를 클릭하시면 해당 주문에 대한 상세내역을 확인하실 수 있습니다.</li>
+									</ul>
+								</div>
+<!-- 								<input id="mode" name="mode" value="" type="hidden" />  -->
+<!-- 								<input id="term" name="term" value="" type="hidden" /> -->
+							</form>
+							</div>
 		 
 		 
 		
@@ -314,7 +350,7 @@
 							<br>
 							<br>
 							
-							<c:choose>
+							<%-- <c:choose>
 								<c:when test="${empty dlist }">
 									<div class="media-body">
 										<div class="well" style="margin-left: 50px;">
@@ -323,7 +359,7 @@
 									</div>
 								</c:when>
 								<c:otherwise>
-								
+								 --%>
 									<input type="button" value="변경" class="btn-default" id="update" onclick="change()">
 									
 										<!-- <form> -->
@@ -341,8 +377,8 @@
 												<td></td>
 											</tr>
 										</thead>
-										<tbody id="dtable">
-											<c:forEach var="d" items="${dlist}">
+										<tbody class="dtable">
+											<%-- <c:forEach var="d" items="${dlist}">
 												<tr>
 													<td align="center" id="d_id" data-rno="${d.DELIVERY_ID}" >${d.DELIVERY_ID}</td>
 													<td align="center">${d.BOOK_NAME}</td>
@@ -365,12 +401,12 @@
 														</c:choose>
 													</td>
 												</tr>
-											</c:forEach>
+											</c:forEach> --%>
 										</tbody>
 									</table>
 								<!-- </form> -->
-								</c:otherwise>
-							</c:choose>	
+								<%-- </c:otherwise>
+							</c:choose>	 --%>
 						</div>
 					</div>
 				</div> <!--안심거래 배송리스트 row-sub-content  -->
@@ -504,16 +540,17 @@
 	$(function(){	
 		
 		// 모달 
-	    $(".msgimg").click(function(){
-	    	console.log($(this).attr("data-rno"));
+	    $(".dtable").on('click','a',(function(){
+	    	//alert($(this).find('img').attr("data-rno"));
+	    	//console.log($(this).find('img').attr("data-rno"));
 	    	$('#place').text("");
-	    	$('#place').append($(this).attr("data-rno"));
+	    	$('#place').append($(this).find('img').attr("data-rno"));
 	        $('#delModal').modal();
 	
-	     });
+	     }));
 		
 		
-		$('#searchBtn').on("click", function(event) {
+/* 		$('#searchBtn').on("click", function(event) {
 
 					self.location = "delivery"
 							+ '${pageMaker.makeQuery(1)}'
@@ -521,7 +558,7 @@
 							+ $("select option:selected").val()
 							+ "&keyword="
 							+ $('#keywordInput').val();
-		});
+		}); */
 		
 	});
 
@@ -591,25 +628,45 @@
 	 function getList(deliveryInfo){
 		$.getJSON(deliveryInfo, function(data){		// "/chat/{person_id}" 로부터 나오는 전체 데이터 (array)
 			
-			 alert(data);
+			alert(data);
 			console.log("넘어온 데이터: "+data);
 			console.log("dataArray: " + data.length);
 			$.each(data,function(index,result){
-				 	alert(result.person_name);
-				
+				 //	alert(result.person_name);
 				 
+				 		
+
 						$('.srow').remove();
-						$(".datelist").append(
-						'<tr class="srow"><td>'+result.delivery_id+'</td>'
-						+'<td>'+result.book_name+'</td>'
-						+'<td>'+result.person_name+'</td>'
-						+'<td>'+result.pay_amount+'</td>'
-						+'<td>'+result.delivery_address+'</td>'
-						+'<td>'+result.pay_date+'</td></tr>'
+						$(".dtable").append(
+						'<tr><td align="center" id="d_id" data-rno='+result.delivery_id+'>'+result.delivery_id+'</td>'
+						+'<td align="center">'+result.book_name+'</td>'
+						+'<td align="center">'+result.person_name+'</td>'
+						+'<td align="center">'+result.pay_amount+'</td>'
+						+'<td align="center">'+result.delivery_address+'</td>'
+						+'<td align="center">'+result.pay_date+'</td>'
+						+'<td align="center" class="state">'+result.delivery_state+'</td>'
+						+'<td align="center" class="msg">'+result.delivery_msg+'</td>'
 						)
+						
+						var setImg = '<a href="#"><img alt="" src="/resources/img/msg.png" data-rno="'+result.delivery_msg+'" class="msgimg" width="22px" height="15px"></a>';
+						
 					
-				 })
+						
+
+				/* 		$('.state').text("");
+						$('.state').append(state); */
+					
+						
+						if($('.msg').text() != null){
+							alert("setImg"+setImg);
+						 $('.msg').text("");
+						 $('.msg').append(setImg);
+						}
+
+			})
 		});
+		
+		 
 	}  
 	
     google.charts.load('current', {packages: ['corechart', 'line']});

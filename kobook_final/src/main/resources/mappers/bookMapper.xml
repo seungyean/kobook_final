@@ -28,6 +28,9 @@
       ]]>
 		<include refid="search"></include>
 		<include refid="sort"></include>
+		<![CDATA[
+		order by book_id desc
+		 ]]>
 	</select>
 	
 
