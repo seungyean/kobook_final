@@ -11,10 +11,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import com.kobook.alarm.persistence.AlarmDAO;
+import com.kobook.board.domain.BoardVO;
+import com.kobook.board.persistence.BoardDAO;
 import com.kobook.book.domain.BookVO;
+import com.kobook.book.domain.SearchCriteria;
 import com.kobook.book.persistence.BookDAO;
 import com.kobook.chatbot.domain.ChatlogVO;
 import com.kobook.chatbot.persistence.ChatbotDAO;
+import com.kobook.community.domain.BlackVO;
+import com.kobook.community.domain.DonateVO;
+import com.kobook.community.domain.PhotoVO;
+import com.kobook.community.persistence.BlackDAO;
+import com.kobook.community.persistence.DonateDAO;
+import com.kobook.community.persistence.PhotoReviewDAO;
 import com.kobook.message.domain.MessageVO;
 import com.kobook.message.persistence.MessageDAO;
 import com.kobook.mypage.persistence.MyPageDAO;
@@ -26,7 +35,28 @@ import com.sun.media.jfxmedia.logging.Logger;
 public class ChatbotServiceImpl implements ChatbotService {
 
 	@Inject
+	private AlarmDAO alarmDao;
+	
+	@Inject
+	private BlackDAO blackDao;
+	
+	@Inject
+	private BoardDAO boardDao;
+	
+	@Inject
+	private BookDAO bookDao;
+	
+	@Inject
 	private ChatbotDAO chatbotDao;
+
+	@Inject
+	private DonateDAO donateDao;
+	
+	@Inject
+	private FavoriteDAO favDao;
+	
+	@Inject
+	private MyPageDAO mypageDao;
 	
 	@Inject
 	private MessageDAO messageDao;
@@ -35,16 +65,8 @@ public class ChatbotServiceImpl implements ChatbotService {
 	private PersonDAO personDao;
 	
 	@Inject
-	private AlarmDAO alarmDao;
+	private PhotoReviewDAO photoDao;
 	
-	@Inject
-	private BookDAO bookDao;
-	
-	@Inject
-	private FavoriteDAO favDao;
-	
-	@Inject
-	private MyPageDAO mypageDao;
 
 	@Override
 	public void chatRegister(ChatlogVO vo) throws Exception {
@@ -96,7 +118,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 		
 			
 			// 게시판 파트
-		} else if(text.contains("공지사항") || text.contains("블랙") || text.contains("포토") || text.contains("무료나눔")){
+		} else if(text.contains("공지") || text.contains("블랙") || text.contains("포토") || text.contains("무료나눔")){
 			
 //			newText = "게시판 관련 ㄱㄱ";
 			newText = manageBoard(text, person_id);
@@ -176,7 +198,9 @@ public class ChatbotServiceImpl implements ChatbotService {
 	// 게시판 관련 사항
 	@Override
 	public String manageBoard(String text, int person_id) throws Exception {
-		String newText = "";
+		String newText = "검색 결과는 제목+내용에서 검색된 결과이며 최대 5개까지 보여드립니다. \n";
+		List<?> list = null;
+		SearchCriteria cri = new SearchCriteria();
 		
 		Pattern bPattern = Pattern.compile("^공지|^포토|^블랙|^무료나눔");
 		Matcher bMatcher = bPattern.matcher(text);
@@ -198,23 +222,123 @@ public class ChatbotServiceImpl implements ChatbotService {
 		
 		System.out.println("keyword 추출 ::" + keyword);
 		
-		if(boardName.equals("공지사항") && (text.contains("검색")||(text.contains("보여줘"))||(text.contains("알려줘")))){
-		
-			newText += boardName;
+		if(boardName.contains("공지")){
+			System.out.println("공지사항 진입");
+	
+			cri.setSearchType("tc");
+			cri.setKeyword(keyword);
+			list = boardDao.boardListCri(cri);
+			System.out.println("photolist 크기: "+list.size());
 			
-		} else if(boardName.equals("포토리뷰") && (text.contains("검색")||(text.contains("보여줘"))||(text.contains("알려줘")))){
-			
-			newText += boardName;
-			
-		} else if(boardName.equals("블랙") && (text.contains("검색")||(text.contains("보여줘"))||(text.contains("알려줘")))){
-		
-			newText += boardName;
+			if(list.size() < 1){
+				newText += "찿으시는 결과가 없습니다. 다시 검색해주세요";
+			}
+			else {
+				newText += "<b>"+list.size() + "</b>" + "개의 결과가 검색되었습니다.<hr>";
+				newText += "<공지사항 게시판 글제목>";
 				
-		} else if(boardName.equals("무료나눔") && (text.contains("검색")||(text.contains("보여줘"))||(text.contains("알려줘")))){
+				if(list.size() > 5){
+					for(int i=0; i<5; i++){
+						newText += "\n * " + ((BoardVO)list.get(i)).getBoard_title();
+					}
+					
+					newText += "\n &nbsp;";
+					newText += "\n <a href='#'>더보기</a>";
+				} else {
+					for(int i=0; i<list.size(); i++){
+						newText += "\n * " + ((BoardVO)list.get(i)).getBoard_title();
+					}
+				}
+			}
 			
-			newText += boardName;
+		} else if(boardName.contains("포토")){
+			System.out.println("포토리뷰 진입");
 			
-		}	
+			cri.setSearchType("tc");
+			cri.setKeyword(keyword);
+			list = photoDao.photoList(cri);
+			System.out.println("photolist 크기: "+list.size());
+			
+			if(list.size() < 1){
+				newText += "찿으시는 결과가 없습니다. 다시 검색해주세요";
+			} else{
+				newText += "<b>"+list.size() + "</b>" + "개의 결과가 검색되었습니다.<hr>";
+				newText += "<포토리뷰리스트 게시판 글제목>";
+
+				if(list.size() > 5){
+					for(int i=0; i<5; i++){
+						newText += "\n * " + ((PhotoVO)list.get(i)).getPhoto_title();
+					}
+					
+					newText += "\n &nbsp;";
+					newText += "\n <a href='#'>더보기</a>";
+				} else {
+					for(int i=0; i<list.size(); i++){
+						newText += "\n * " + ((PhotoVO)list.get(i)).getPhoto_title();
+					}
+				}
+			}
+				
+			
+		} else if(boardName.contains("블랙")){
+			System.out.println("블랙 진입");
+			
+			cri.setSearchType("tc");
+			cri.setKeyword(keyword);
+			list = blackDao.blackList(cri);
+			System.out.println("blacklist 크기: "+list.size());
+			
+			if(list.size() < 1){
+				newText += "찿으시는 결과가 없습니다. 다시 검색해주세요";
+			} else {
+				newText += "<b>"+list.size() + "</b>" + "개의 결과가 검색되었습니다.<hr>";
+				newText += "<블랙리스트 게시판 글제목>";
+				
+				if(list.size() > 5){
+					for(int i=0; i<5; i++){
+						newText += "\n * " + ((BlackVO)list.get(i)).getBlack_title();
+					}
+					
+					newText += "\n &nbsp;";
+					newText += "\n <a href='#'>더보기</a>";
+				} else {
+					for(int i=0; i<list.size(); i++){
+						newText += "\n * " + ((BlackVO)list.get(i)).getBlack_title();
+					}
+				}
+				
+			}
+				
+		} else if(boardName.equals("무료나눔")){
+			System.out.println("무료나눔 진입");
+			
+			cri.setSearchType("tc");
+			cri.setKeyword(keyword);
+			list = donateDao.donateList(cri);
+			System.out.println("donatelist 크기: "+list.size());
+			
+			if(list.size() < 1){
+				newText += "찿으시는 결과가 없습니다. 다시 검색해주세요";
+			} else { 
+				newText += "<b>"+list.size() + "</b>" + "개의 결과가 검색되었습니다.<hr/>";
+				newText += "<무료나눔 게시판 글제목>";
+				if(list.size() > 5){
+					for(int i=0; i<5; i++){
+						newText += "\n * " + ((DonateVO)list.get(i)).getDonate_title();
+					}
+					
+					newText += "\n &nbsp;";
+					newText += "\n <a href='#'>더보기</a>";
+				} else {
+					for(int i=0; i<list.size(); i++){
+						newText += "\n * " + ((DonateVO)list.get(i)).getDonate_title();
+					}
+				}
+			}
+
+		} else {
+			newText += "우리 코북은 공지사항, 포토리뷰, 블랙리스트, 무료나눔 게시판이 있어요";
+		}
 		
 		return newText;
 	}
@@ -320,24 +444,22 @@ public class ChatbotServiceImpl implements ChatbotService {
 	@Override
 	public String keyWordReplace(String text) {
 		String keyword = "";
-//		keyword = StringUtils.replace(text, " {0,1}검색$|보여줘$|알려줘$", "");
 		
 		if(text.length() < 1){
 			return null;
 		}
-		
-		if(text.contains(" ")){
-			keyword = StringUtils.replace(text, " ", "");
-		}
-		
-		
+
 		if(text.contains("검색")){
 			keyword = StringUtils.replace(text, "검색", "");
 		} else if(text.contains("보여줘")){
 			keyword = StringUtils.replace(text, "보여줘", "");
 		} else if(text.contains("알려줘")){
 			keyword = StringUtils.replace(text, "알려줘", "");
+		} else if(text.contains("찾아줘")){
+			keyword = StringUtils.replace(text, "찾아줘", "");
 		}
+
+		keyword = keyword.replaceAll("\\s+$", "");
 		
 		return keyword;
 	}
