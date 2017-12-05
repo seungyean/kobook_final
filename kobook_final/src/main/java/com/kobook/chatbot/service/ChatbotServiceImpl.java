@@ -170,20 +170,16 @@ public class ChatbotServiceImpl implements ChatbotService {
 			} else if(list.size() > 3){
 				
 				for(int i=0; i<3; i++){
-					newText += "\n * " + list.get(i).getBook_name();
+					newText += "\n ■ &nbsp;" + list.get(i).getBook_name();
 				}
 				
 				newText += "\n &nbsp; \n <a href='#'>더보기</a>";
 			} else {
 				
 				for(int i=0; i<list.size(); i++){
-					newText += "\n * " + list.get(i).getBook_name();
+					newText += "\n ■ &nbsp;" + list.get(i).getBook_name();
 				}
 			}
-			
-		} else if(text.contains("모든")){
-			
-			// select book_name 
 			
 		} else if(text.contains("관련") || text.contains("관한")){	 //종류 관한 책보여줘
 			
@@ -234,19 +230,19 @@ public class ChatbotServiceImpl implements ChatbotService {
 				newText += "찿으시는 결과가 없습니다. 다시 검색해주세요";
 			}
 			else {
-				newText += "<b>"+list.size() + "</b>" + "개의 결과가 검색되었습니다.<hr>";
+				newText += "&nbsp; \n <b>"+list.size() + "</b>" + "개의 결과가 검색되었습니다.<hr>";
 				newText += "<공지사항 게시판 글제목>";
 				
 				if(list.size() > 5){
 					for(int i=0; i<5; i++){
-						newText += "\n * " + ((BoardVO)list.get(i)).getBoard_title();
+						newText += "\n ■ &nbsp;" + ((BoardVO)list.get(i)).getBoard_title();
 					}
 					
 					newText += "\n &nbsp;";
 					newText += "\n <a href='#'>더보기</a>";
 				} else {
 					for(int i=0; i<list.size(); i++){
-						newText += "\n * " + ((BoardVO)list.get(i)).getBoard_title();
+						newText += "\n ■ &nbsp;" + ((BoardVO)list.get(i)).getBoard_title();
 					}
 				}
 			}
@@ -262,19 +258,19 @@ public class ChatbotServiceImpl implements ChatbotService {
 			if(list.size() < 1){
 				newText += "찿으시는 결과가 없습니다. 다시 검색해주세요";
 			} else{
-				newText += "<b>"+list.size() + "</b>" + "개의 결과가 검색되었습니다.<hr>";
+				newText += "&nbsp; \n <b>"+list.size() + "</b>" + "개의 결과가 검색되었습니다.<hr>";
 				newText += "<포토리뷰리스트 게시판 글제목>";
 
 				if(list.size() > 5){
 					for(int i=0; i<5; i++){
-						newText += "\n * " + ((PhotoVO)list.get(i)).getPhoto_title();
+						newText += "\n ■ &nbsp;" + ((PhotoVO)list.get(i)).getPhoto_title();
 					}
 					
 					newText += "\n &nbsp;";
 					newText += "\n <a href='#'>더보기</a>";
 				} else {
 					for(int i=0; i<list.size(); i++){
-						newText += "\n * " + ((PhotoVO)list.get(i)).getPhoto_title();
+						newText += "\n ■ &nbsp;" + ((PhotoVO)list.get(i)).getPhoto_title();
 					}
 				}
 			}
@@ -291,19 +287,19 @@ public class ChatbotServiceImpl implements ChatbotService {
 			if(list.size() < 1){
 				newText += "찿으시는 결과가 없습니다. 다시 검색해주세요";
 			} else {
-				newText += "<b>"+list.size() + "</b>" + "개의 결과가 검색되었습니다.<hr>";
+				newText += "&nbsp; \n <b>"+list.size() + "</b>" + "개의 결과가 검색되었습니다.<hr>";
 				newText += "<블랙리스트 게시판 글제목>";
 				
 				if(list.size() > 5){
 					for(int i=0; i<5; i++){
-						newText += "\n * " + ((BlackVO)list.get(i)).getBlack_title();
+						newText += "\n ■ &nbsp;" + ((BlackVO)list.get(i)).getBlack_title();
 					}
 					
 					newText += "\n &nbsp;";
 					newText += "\n <a href='#'>더보기</a>";
 				} else {
 					for(int i=0; i<list.size(); i++){
-						newText += "\n * " + ((BlackVO)list.get(i)).getBlack_title();
+						newText += "\n ■ &nbsp;" + ((BlackVO)list.get(i)).getBlack_title();
 					}
 				}
 				
@@ -320,18 +316,18 @@ public class ChatbotServiceImpl implements ChatbotService {
 			if(list.size() < 1){
 				newText += "찿으시는 결과가 없습니다. 다시 검색해주세요";
 			} else { 
-				newText += "<b>"+list.size() + "</b>" + "개의 결과가 검색되었습니다.<hr/>";
+				newText += "&nbsp; \n <b>"+list.size() + "</b>" + "개의 결과가 검색되었습니다.<hr/>";
 				newText += "<무료나눔 게시판 글제목>";
 				if(list.size() > 5){
 					for(int i=0; i<5; i++){
-						newText += "\n * " + ((DonateVO)list.get(i)).getDonate_title();
+						newText += "\n ■ &nbsp;" + ((DonateVO)list.get(i)).getDonate_title();
 					}
 					
 					newText += "\n &nbsp;";
 					newText += "\n <a href='#'>더보기</a>";
 				} else {
 					for(int i=0; i<list.size(); i++){
-						newText += "\n * " + ((DonateVO)list.get(i)).getDonate_title();
+						newText += "\n ■ &nbsp;" + ((DonateVO)list.get(i)).getDonate_title();
 					}
 				}
 			}
