@@ -4,6 +4,7 @@ import java.io.File;
 
 import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Component;
 
 import com.kobook.person.persistence.PersonDAO;
 import com.kobook.person.service.PersonService;
+
+import sun.swing.ImageIconUIResource;
 
 @Component
 public class AlarmMailVO {
@@ -51,7 +54,7 @@ public class AlarmMailVO {
 	}
 	
 	
-	public void sendMail(AlarmVO alarmVO,JavaMailSender mailSender,PersonService service) throws Exception {
+	public void sendMail(AlarmVO alarmVO,JavaMailSender mailSender,PersonService service, HttpServletRequest request) throws Exception {
 		
 		
 		
@@ -69,12 +72,13 @@ public class AlarmMailVO {
 	    		+ "</h3>"
 	    		+ "<p><img src='cid:line' /></p>"
 	    		+ "<br>"
-	    		+ "<a href='https://www.naver.com' style='font-size: 15px;'> 확인하러 가기  >> </a>"
+	    		+ "<a href='localhost:8081/recom' style='font-size: 15px;'> 확인하러 가기  >> </a>"
 	    		+ "<br>"
 	    		+ "<br>"
 	    		+ "<br>";
 	   		
-	    
+	    String path = request.getSession().getServletContext().getRealPath("/");
+	    System.out.println("pppppppppppppatttttthhhhhhh"+path);
 	    
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper messageHelper 
@@ -83,10 +87,11 @@ public class AlarmMailVO {
         messageHelper.setText(alarmVO.getAlarm_content(), true);
         messageHelper.setText(alarmVO.getAlarm_content(), htmlText);
         
-        FileSystemResource file = new FileSystemResource(new File("/kobook_final//resources/img/logo.PNG"));
-        //messageHelper.addInline("logo", file);	
+        FileSystemResource file = new FileSystemResource(new File(path + "/resources/img/logo.PNG"));
+        messageHelper.addInline("logo", file);	
+
         
-        FileSystemResource file2 = new FileSystemResource(new File("/resources/img//line.PNG"));
+        FileSystemResource file2 = new FileSystemResource(new File("C:/line.PNG"));
         //messageHelper.addInline("line", file2);	
         
  

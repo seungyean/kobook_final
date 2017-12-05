@@ -1,6 +1,7 @@
 package com.kobook.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -47,7 +48,7 @@ public class MessageController {
 	
 	// 메시지 전송
 	@RequestMapping(value="/send", method=RequestMethod.POST)
-	public String sendPOST(MessageDTO dto, HttpSession session) throws Exception {
+	public String sendPOST(MessageDTO dto, HttpSession session, HttpServletRequest request) throws Exception {
 		
 		System.out.println(dto.toString());
 		System.out.println("보낼 사람 id:" + pService.findPersonId(dto.getReceiver_email()));
@@ -79,7 +80,7 @@ public class MessageController {
 			alarmVO.setPerson_id(receiver_id);
 
 			alarmService.alarmMessage(alarmVO);
-			mailVO.sendMail(alarmVO,mailSender,pService);
+			mailVO.sendMail(alarmVO,mailSender,pService,request);
 			
 			return "/message/sendOk";
 		}
