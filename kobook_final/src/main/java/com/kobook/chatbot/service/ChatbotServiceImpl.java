@@ -177,8 +177,6 @@ public class ChatbotServiceImpl implements ChatbotService {
 	@Override
 	public String manageBoard(String text, int person_id) throws Exception {
 		String newText = "";
-	//	String[] strArr = text.split(" ");
-	//	String boardName = strArr[0];
 		
 		Pattern bPattern = Pattern.compile("^공지|^포토|^블랙|^무료나눔");
 		Matcher bMatcher = bPattern.matcher(text);
@@ -193,31 +191,26 @@ public class ChatbotServiceImpl implements ChatbotService {
 		}
 		
 		String rawKeyword = text.substring(text.indexOf(" ")+1);
-		
-		Pattern kPattern = Pattern.compile(" {0,1}검색$|보여줘$|알려줘$");
-		Matcher kMatcher = kPattern.matcher(rawKeyword);
-		String keyword = "";
-	
-		while(kMatcher.find()){
-			keyword = keyWordReplace(rawKeyword);
-		}
-		
+		String keyword = null;
 		System.out.println("rawkeyword 추출 ::" + rawKeyword);
+		
+		keyword = keyWordReplace(rawKeyword);
+		
 		System.out.println("keyword 추출 ::" + keyword);
 		
 		if(boardName.equals("공지사항") && (text.contains("검색")||(text.contains("보여줘"))||(text.contains("알려줘")))){
 		
 			newText += boardName;
 			
-		} else if(boardName.equals("포토리뷰")){
+		} else if(boardName.equals("포토리뷰") && (text.contains("검색")||(text.contains("보여줘"))||(text.contains("알려줘")))){
 			
 			newText += boardName;
 			
-		} else if(boardName.equals("블랙")){
+		} else if(boardName.equals("블랙") && (text.contains("검색")||(text.contains("보여줘"))||(text.contains("알려줘")))){
 		
 			newText += boardName;
 				
-		} else if(boardName.equals("무료나눔")){
+		} else if(boardName.equals("무료나눔") && (text.contains("검색")||(text.contains("보여줘"))||(text.contains("알려줘")))){
 			
 			newText += boardName;
 			
@@ -317,26 +310,33 @@ public class ChatbotServiceImpl implements ChatbotService {
 			boardName = StringUtils.replace(text, "에서", "");
 		}
 		boardName = StringUtils.replace(text, " ", "");
+		
+		if(text.length() < 1){
+			return null;
+		}
 		return boardName;
 	}
 
 	@Override
 	public String keyWordReplace(String text) {
 		String keyword = "";
+//		keyword = StringUtils.replace(text, " {0,1}검색$|보여줘$|알려줘$", "");
 		
-		Pattern p = Pattern.compile(" {0,1}검색$|보여줘$|알려줘$");
-		Matcher m = p.matcher(text);
+		if(text.length() < 1){
+			return null;
+		}
 		
 		if(text.contains(" ")){
 			keyword = StringUtils.replace(text, " ", "");
-			
-			if(text.contains("검색")){
-				keyword = StringUtils.replace(text, "검색", "");
-			} else if(text.contains("보여줘")){
-				keyword = StringUtils.replace(text, "보여줘", "");
-			} else if(text.contains("알려줘")){
-				keyword = StringUtils.replace(text, "알려줘", "");
-			}
+		}
+		
+		
+		if(text.contains("검색")){
+			keyword = StringUtils.replace(text, "검색", "");
+		} else if(text.contains("보여줘")){
+			keyword = StringUtils.replace(text, "보여줘", "");
+		} else if(text.contains("알려줘")){
+			keyword = StringUtils.replace(text, "알려줘", "");
 		}
 		
 		return keyword;
