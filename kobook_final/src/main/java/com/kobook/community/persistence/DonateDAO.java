@@ -52,4 +52,11 @@ public interface DonateDAO {
 	public Integer getDonateId(Integer reply_id) throws Exception;
 	//replyCount
 	public int replyCount(Integer donate_id) throws Exception;
+	//getPersonId	
+	public Integer getPersonId(Integer donate_id) throws Exception;
+	//getPersonName
+	public String getPersonName(Integer person_id) throws Exception;
+	//getDonateTitle
+	public String getDonateTitle(Integer donate_id) throws Exception;
+	
 }

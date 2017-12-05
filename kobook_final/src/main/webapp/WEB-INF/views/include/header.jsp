@@ -247,7 +247,7 @@
 								<c:if test="${person_email != null }">
 									
 									<span>
-									${person_email }님 로그인중 
+									${person_name }님 로그인중 
 										<a href="#" onclick="fn_newAlarm()">새로온 알림  [ </a> 
 										<a href="#" id="alarm_new"></a> 
 										<a href="#"> ]</a> 

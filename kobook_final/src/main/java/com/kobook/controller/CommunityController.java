@@ -29,6 +29,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kobook.alarm.domain.AlarmVO;
+import com.kobook.alarm.service.AlarmService;
 import com.kobook.book.domain.PageMaker;
 import com.kobook.book.domain.SearchCriteria;
 import com.kobook.community.domain.BlackVO;
@@ -40,6 +42,8 @@ import com.kobook.community.domain.ReplyVO;
 import com.kobook.community.service.BlackService;
 import com.kobook.community.service.DonateService;
 import com.kobook.community.service.PhotoReviewService;
+import com.kobook.message.domain.MessageVO;
+import com.kobook.message.service.MessageService;
 import com.kobook.today.domain.TodayVO;
 import com.kobook.today.service.TodayService;
 import com.kobook.util.MediaUtils;
@@ -60,6 +64,12 @@ public class CommunityController {
 	
 	@Inject
 	private TodayService todayService;
+	
+	@Inject
+	private MessageService mService;
+	
+	@Inject
+	private AlarmService alarmService;
 	
 	@Resource(name = "uploadPath")
 	private String uploadPath;
@@ -184,7 +194,25 @@ public class CommunityController {
 		if(errors.hasErrors()) {
 			return "/community/blackRegist";
 		}
+		
+		MessageVO message = new MessageVO();
+			
+		message.setPerson_id(vo.getPerson_id());
+		message.setReceiver_id(1);
+		message.setMessage_content(" '"+vo.getBlack_title()+"' 이(가) 신고게시판에 새로 등록 되었습니다.");
+			
+		mService.messageSend(message);			
+		
+		AlarmVO alarmVO = new AlarmVO();
+			
+		alarmVO.setAlarm_kind("Message");
+		alarmVO.setAlarm_content("새 쪽지가 도착하였습니다.(신고게시판 새 글 등록 알림)");
+		alarmVO.setPerson_id(1);
+
+		alarmService.alarmMessage(alarmVO);
+		
 		blackService.blackRegist(vo);
+		
 		return "redirect:/community/blackList";
 	}
 	
@@ -389,6 +417,25 @@ public class CommunityController {
 		model.addAttribute(donateService.donateRead(donate_id, false));
 		model.addAttribute("writer",donateService.donateWriter(donate_id));
 		model.addAttribute("replyList",donateService.donateReplyList(donate_id));
+
+		MessageVO message = new MessageVO();
+			
+		message.setPerson_id(vo.getPerson_id()); //댓글 작성자의 person_id
+		message.setReceiver_id(donateService.getPersonId(donate_id)); //donate 원본 글 작성자의 person_id
+		message.setMessage_content(" '"+donateService.getPersonName(vo.getPerson_id())
+			+"'님께서 회원님의 '"+donateService.getDonateTitle(donate_id)
+			+"' 글에 댓글을 남겼습니다.");//댓글 작성자의 person_name, 원본 donate글의 제목
+			
+		mService.messageSend(message);
+		
+		AlarmVO alarmVO = new AlarmVO();
+			
+		alarmVO.setAlarm_kind("Message");
+		alarmVO.setAlarm_content("새 쪽지가 도착하였습니다.(댓글 등록 알림)");
+		alarmVO.setPerson_id(donateService.getPersonId(donate_id));
+
+		alarmService.alarmMessage(alarmVO);
+		
 		return "/community/donateRead";
 	}
 	

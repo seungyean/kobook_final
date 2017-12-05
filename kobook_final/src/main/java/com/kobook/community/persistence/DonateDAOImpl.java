@@ -141,4 +141,19 @@ public class DonateDAOImpl implements DonateDAO {
 		return session.selectOne(namespace+".replyCount", donate_id);
 	}
 
+	@Override
+	public Integer getPersonId(Integer donate_id) throws Exception {
+		return session.selectOne(namespace+".getPersonId", donate_id);
+	}
+
+	@Override
+	public String getPersonName(Integer person_id) throws Exception {
+		return session.selectOne(namespace+".getPersonName", person_id);
+	}
+
+	@Override
+	public String getDonateTitle(Integer donate_id) throws Exception {
+		return session.selectOne(namespace+".getDonateTitle", donate_id);
+	}
+
 }

@@ -140,6 +140,19 @@ public class DonateServiceImpl implements DonateService {
 		dao.replyDeleteAll(donate_id);
 	}
 
+	@Override
+	public Integer getPersonId(Integer donate_id) throws Exception {
+		return dao.getPersonId(donate_id);
+	}
 
+	@Override
+	public String getPersonName(Integer person_id) throws Exception {
+		return dao.getPersonName(person_id);
+	}
+
+	@Override
+	public String getDonateTitle(Integer donate_id) throws Exception {
+		return dao.getDonateTitle(donate_id);
+	}
 
 }

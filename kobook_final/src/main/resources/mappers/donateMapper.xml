@@ -125,11 +125,7 @@
 		select * from reply where donate_id = #{donate_id} order by reply_date
 		DESC
 	</select>
-	<select id="getPersonId" resultType="Integer">
-		select person_id
-		from reply
-		where reply_id = #{reply_id}
-	</select>
+
 	<select id="selectPersonName" resultType="string">
 		select P.PERSON_NAME
 		from person P, reply R, donate D
@@ -159,6 +155,19 @@
 		SELECT count(*) FROM reply WHERE donate_id=#{donate_id}
 	</select>
 
+	<select id="getPersonId" resultType="Integer">
+		select person_id
+		from donate
+		where donate_id = #{donate_id}
+	</select>
+	
+	<select id="getPersonName" resultType="string">
+		select person_name from person where person_id = #{person_id}
+	</select>
+	
+	<select id="getDonateTitle" resultType="string">
+		select donate_title from donate where donate_id = #{donate_id}
+	</select>
 	<!-- 
 
 	<update id="updateDonate_id" parameterType="int">
