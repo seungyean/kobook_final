@@ -80,9 +80,8 @@
 				dataType:"json",
 				success:function(list){
 					$.each(list, function() {
-						
 						$("#today-list").append(
-								"<li><a href='/community/donateRead?donate_id="+this.DONATE_ID+"'>"
+								"<li class='viewList'><a href='/community/donateRead?donate_id="+this.DONATE_ID+"'>"
 										+"<small><img alt='NO IMAGE' src='/community/displayFile?fileName="+this.DONATE_THUMBNAIL
 										+"' width='80px' height='50px'></small><br>"
 										+"<b>" +this.DONATE_TITLE+"</b><br>"+"</a><small>무료 나눔 게시판</small></li>")
@@ -96,19 +95,20 @@
 				success:function(list){
 					$.each(list, function() {
 						$("#today-list").append(
-								"<li><a href='/book/bookRead?book_id="+this.BOOK_ID+"'>"
+								"<li class='viewList'><a href='/book/bookRead?book_id="+this.BOOK_ID+"'>"
 										+"<small><img alt='NO IMAGE' src='/book/displayFile?fileName="+this.BOOK_IMG
 										+"' width='80px' height='50px'></small><br>"
 										+"<b>" +this.BOOK_NAME+"</b><br>"+"</a><small>도서</small></li>")
 					});
 				}
-			});	
-			//function viewList(a) {
-			//		
-			//		alert($(this));
-			//		$(this).after("<button type='button' class='button'>x</button>");
-			//
-			//}
+			});
+			
+/* 			$("#today-list").find(".viewList").each(function(index,e){
+ 				$(this).mouseenter(function(event){
+ 					event.preventDefault();
+ 					alert($(this).html());
+				}); 
+			}); */
 	});
  var stmnLEFT = 6; // 오른쪽 여백 
  var stmnGAP1 = 0; // 위쪽 여백 
