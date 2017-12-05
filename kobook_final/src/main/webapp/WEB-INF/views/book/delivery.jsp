@@ -702,9 +702,9 @@
 	  data.addColumn('string', 'state');
 	  data.addColumn('number', 'p');
 	  data.addRows([
-	    ['배송중',  eval(w)],
-	    ['배송완료', eval(i)],
-	    ['배송준비중', eval(c)],
+	    ['배송준비중',  eval(w)],
+	    ['배송완료', eval(c)],
+	    ['배송중', eval(i)],
 	  //  ['Sausage', 10], // Below limit.
 	  //  ['Anchovies', 9] // Below limit.
 	  ]);
