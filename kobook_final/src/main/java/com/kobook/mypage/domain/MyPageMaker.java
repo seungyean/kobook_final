@@ -105,8 +105,8 @@ public String makeSearch(int page){
               UriComponentsBuilder.newInstance()
               .queryParam("page", page)
               .queryParam("perPageNum", cri.getPerPageNum())
-              .queryParam("start_date", ((SearchDate)cri).getStart_date())
-              .queryParam("end_date", ((SearchDate)cri).getEnd_date())
+              .queryParam("start_date", ((SearchDateCriteria)cri).getStart_date())
+              .queryParam("end_date", ((SearchDateCriteria)cri).getEnd_date())
               .build();             
     
     return uriComponents.toUriString();

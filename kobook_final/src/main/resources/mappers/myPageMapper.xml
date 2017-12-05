@@ -42,8 +42,10 @@
 		AND
 		o.book_id = b.book_id
 		AND o.person_id = #{person_id}
-		ORDER BY p.pay_id
-		DESC
+    <if test="start_date != null">
+		and o.order_date between #{start_date} and #{end_date}
+		</if>
+		ORDER BY p.pay_id DESC
 	</select>
 	
 	<!-- 구매내역 리스트 카운팅-->
@@ -75,8 +77,10 @@
 		WHERE o.order_id = p.order_id
 		AND
 		o.book_id = b.book_id
-		AND o.person_id = #{person_id
-    and o.order_date between #{start_date} and #{end_date}
+		AND o.person_id = #{person_id}
+    <if test="start_date != null">
+		and o.order_date between #{start_date} and #{end_date}
+		</if>
 		ORDER BY p.pay_id DESC
 	</select>
 
@@ -206,13 +210,18 @@
 
 	<!-- 회원이 받은 쪽지 -->
 	<select id="receivedMsgTotal" resultType="hashMap" parameterType="int">
-		select m.message_id,m.person_id,m.message_content,m.message_hit, p.person_email, p.person_name as p_name
+		select m.message_id,m.person_id,m.message_date, m.message_content,m.message_hit, p.person_email, p.person_name as p_name
     from message m , person p 
     where m.person_id = p.person_id
     and m.RECEIVER_ID = #{person_id}
     ORDER BY message_id DESC
 	</select>
 	
+	<!-- 회원이 받은 쪽지 삭제 -->
+	<delete id="msgDelete" parameterType="int">
+		DELETE FROM message
+     WHERE message_id = #{message_id}
+	</delete>
 	
 	<!-- 찜 상태 변경 -->
 	<update id="msgUpdate" parameterType="int">

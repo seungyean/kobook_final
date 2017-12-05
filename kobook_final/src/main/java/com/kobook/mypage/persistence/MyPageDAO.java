@@ -56,6 +56,8 @@ public interface MyPageDAO {
 	public void mileageMinus(MileageVO vo) throws Exception;
 	/* 회원이 받은 쪽지 조회 */
 	public List<HashMap<String, String>> receivedMsgTotal (int receiver_id) throws Exception;
+	/* 쪽지 삭제 */ 
+	public void msgDelete(int message_id)throws Exception;
 	/* 받은쪽지 읽기 */
 	public void msgUpdate(int message_id) throws Exception;
 	

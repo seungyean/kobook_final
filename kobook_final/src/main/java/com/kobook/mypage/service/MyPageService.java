@@ -47,5 +47,7 @@ public interface MyPageService {
 	public List<HashMap<String, String>> receivedMsgTotal (int receiver_id)throws Exception;
 	/* 받은쪽지 읽기 */
 	public void msgModify(int message_id)throws Exception;
+	/* 쪽지 삭제 */ 
+	public void msgDelete(int message_id)throws Exception;
 	
 }

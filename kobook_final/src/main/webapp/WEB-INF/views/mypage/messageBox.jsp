@@ -125,6 +125,7 @@ fieldset {
 											<tr>
 												<td align="center">No</td>
 												<td align="center">보낸이</td>
+												<td align="center">받은 날짜</td>
 												<td align="center">내용</td>
 												<td align="center">상태</td>
 												<td align="center"></td>
@@ -137,6 +138,7 @@ fieldset {
 												<tr>
 												<td align="center" id="msg_id" class="msg_id">${element.MESSAGE_ID}</td>
 												<td align="center" id="msg_person" class="msg_person">${element.P_NAME}/${element.PERSON_EMAIL}</td>
+												<td align="center" id="msg_person" class="msg_person">${element.MESSAGE_DATE}</td>
 												<td align="center" ><a id="msg_content" class="msg_content">${element.MESSAGE_CONTENT}</a></td>
 												<td align="center">
 												<c:set var="name" value="${element.MESSAGE_HIT}" />
@@ -149,7 +151,10 @@ fieldset {
   															</c:when>
   														</c:choose>
 												</td>
-												<td align="center"><input  type="button" value="답장보내기"  class="btn-default" style="color: white;" id="send"></td>
+												<td align="center">
+													<input  type="button" value="답장보내기"  class="btn btn-default" style="color: white;" id="send">
+													<input type="button" value="삭제" class="btn btn-danger" id="del" style="color: white;" >
+												</td>
 												</tr>
 									</c:forEach>
 										</tbody>
@@ -193,10 +198,6 @@ fieldset {
 										<div class="modal-footer">
 											<div class="btn-group btn-group-justified" role="group"
 												aria-label="group button">
-												<div class="btn-group" role="group">
-													<button type="button" class="btn btn-default"
-														data-dismiss="modal" role="button">답장</button>
-												</div>
 												<div class="btn-group" role="group">
 													<button type="button" class="btn btn-primary"
 														data-dismiss="modal" role="button " id="modal_close">닫기</button>
@@ -316,6 +317,16 @@ fieldset {
 			location.href = "/mypage/msgUpdate?message_id="+ id.val();
 			
 		});
+		
+		// 쪽지 삭제 버튼 
+		$(".btn-danger").click(
+				function() {
+					var message_id = $(this).parent().parent().find('td:first')
+							.text().trim();
+					location.href = "/mypage/msgDelete?message_id="
+							+ message_id;
+				});
+
 		
 		
 		

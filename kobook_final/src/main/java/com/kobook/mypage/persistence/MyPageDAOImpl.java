@@ -144,6 +144,12 @@ public class MyPageDAOImpl implements MyPageDAO {
 		return session.selectOne(namespace + ".countPagingPick", cri);
 	}
 
+	@Override
+	public void msgDelete(int message_id) throws Exception {
+		session.delete(namespace + ".msgDelete", message_id);
+		
+	}
+
 	
 
 	

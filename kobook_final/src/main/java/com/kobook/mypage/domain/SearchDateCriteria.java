@@ -1,6 +1,6 @@
 package com.kobook.mypage.domain;
 
-public class SearchDate extends MyPageCriteria{
+public class SearchDateCriteria extends MyPageCriteria{
 	
 	
 	private String start_date;
@@ -20,7 +20,7 @@ public class SearchDate extends MyPageCriteria{
 	}
 	@Override
 	public String toString() {
-		return "SearchDate [start_date=" + start_date + ", end_date=" + end_date + "]";
+		return "SearchDateCriteria [start_date=" + start_date + ", end_date=" + end_date + "]";
 	}
 	
 	

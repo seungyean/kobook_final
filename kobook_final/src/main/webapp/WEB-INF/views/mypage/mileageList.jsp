@@ -34,6 +34,14 @@ fieldset {
     border-image: initial;
 }
 </style>
+<script type="text/javascript">
+
+
+
+	
+	
+
+</script>
 </head>
 <body>
 	<!-- 헤더 -->
@@ -76,15 +84,15 @@ fieldset {
 								<table>
 									<tr>
 										<td class="col-sm-3" style="text-align: right;">총 적립금 :</td>
-										<td class="col-sm-2">5160원</td>
+										<td class="col-sm-2">${mileageTotal}&nbsp;원</td>
 									</tr>
 									<tr>
-										<td class="col-sm-3" style="text-align: right;">사용 가능 적립금 :</td>
-										<td class="col-sm-2">5160원</td>
+										<td class="col-sm-4" style="text-align: right;">사용 가능 적립금 :</td>
+										<td class="col-sm-2">${mileageTotal - mileageUse}&nbsp;원</td>
 									</tr>
 									<tr>
 										<td class="col-sm-3" style="text-align: right;">사용 적립금 :</td>
-										<td class="col-sm-2">5160원</td>
+										<td class="col-sm-2">${mileageUse}&nbsp;원</td>
 									</tr>
 								</table>
 							</div> 

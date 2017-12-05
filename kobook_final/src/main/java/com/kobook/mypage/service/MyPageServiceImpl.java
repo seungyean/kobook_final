@@ -127,6 +127,11 @@ public class MyPageServiceImpl implements MyPageService {
 		return dao.countPagingPick(cri);
 	}
 
+	@Override
+	public void msgDelete(int message_id) throws Exception {
+		dao.msgDelete(message_id);
+	}
+
 	
 
 

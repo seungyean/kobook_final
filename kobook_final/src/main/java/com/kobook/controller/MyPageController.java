@@ -38,6 +38,7 @@ import com.kobook.mypage.domain.MyPageCriteria;
 import com.kobook.mypage.domain.MyPageMaker;
 import com.kobook.mypage.domain.OrderVO;
 import com.kobook.mypage.domain.PayVO;
+import com.kobook.mypage.domain.SearchDateCriteria;
 import com.kobook.mypage.service.MyPageService;
 import com.kobook.person.domain.PersonVO;
 import com.kobook.person.service.PersonService;
@@ -146,7 +147,7 @@ public class MyPageController {
 					alarmVO.setAlarm_kind("SellBook");
 					alarmVO.setAlarm_content("판매가 완료되었습니다.");
 					alarmVO.setPerson_id(person_id);
-					mailVO.sendMail(alarmVO,mailSender,pService);
+//					mailVO.sendMail(alarmVO,mailSender,pService);
 					
 					alarmService.alarmMessage(alarmVO);
 				}
@@ -161,7 +162,7 @@ public class MyPageController {
 
 	/* 구매내역 */
 	@RequestMapping(value = "/buyList", method = RequestMethod.GET)
-	public void buyList(HttpServletRequest request, Model model, @ModelAttribute("cri") MyPageCriteria cri )throws Exception {
+	public void buyList(HttpServletRequest request, Model model, @ModelAttribute("cri") SearchDateCriteria cri )throws Exception {
 		System.out.println("----------------Controller : 구매내역 출력-----------------");
 		
 		HttpSession session = request.getSession();
@@ -174,11 +175,6 @@ public class MyPageController {
 		MyPageMaker pageMaker = new MyPageMaker();
 		pageMaker.setCri(cri);
 
-//		if(start_date != null && end_date !=null){
-//			System.out.println("날짜조회 들어옴");
-//			service.buyListDate(cri);
-//		}
-		
 		pageMaker.setTotalCount(service.countPaging(cri));
 		model.addAttribute("pageMaker", pageMaker);
 	}
@@ -222,6 +218,23 @@ public class MyPageController {
 		HttpSession session = request.getSession();
 		int person_id = Integer.parseInt((String)session.getAttribute("person_id"));
 		
+		Integer mileageTotal = service.mileageTotal(person_id);
+		Integer mileageUse = service.mileageUse(person_id);
+		
+		if(mileageTotal == null && mileageUse == null){
+			System.out.println("널값이라 들어왔다!!!");
+			mileageTotal = 0;
+			mileageUse = 0;
+			model.addAttribute("mileageTotal", mileageTotal );
+			model.addAttribute("mileageUse", mileageUse );
+			
+		}else{
+			System.out.println("널값아니라 안 들어왔다!!!");
+			model.addAttribute("mileageTotal", mileageTotal );
+			model.addAttribute("mileageUse", mileageUse );
+		}
+		
+	
 		model.addAttribute("mileageList", service.mileageList(person_id));
 	}
 	
@@ -322,7 +335,7 @@ public class MyPageController {
 			alarmVO.setAlarm_kind("SellBook");
 			alarmVO.setAlarm_content("판매가 완료되었습니다.");
 			alarmVO.setPerson_id(person_id);
-			mailVO.sendMail(alarmVO,mailSender,pService);
+//			mailVO.sendMail(alarmVO,mailSender,pService);
 			
 			alarmService.alarmMessage(alarmVO);
 		}
@@ -378,6 +391,16 @@ public class MyPageController {
 		System.out.println("----------------Controller :쪽지읽음 상태 변경-----------------");
 		System.out.println("컨트롤러에 쪽지번호 들어옴  : " +message_id);
 		service.msgModify(message_id);
+		
+		return "redirect:/mypage/messageBox";
+	}
+	/* 쪽지보관함 쪽지 삭제 */
+	@RequestMapping(value = "/msgDelete")
+	public String msgDelete(HttpServletRequest request, @RequestParam("message_id")int message_id, RedirectAttributes rttr) throws Exception {
+		System.out.println("----------------Controller : 쪽지 삭제-----------------");
+		
+		service.msgDelete(message_id);
+		
 		
 		return "redirect:/mypage/messageBox";
 

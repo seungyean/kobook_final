@@ -32,6 +32,22 @@
 		var book_m_price = "";
 		var pay_amount = "";
 		var total_pick_id = "";
+		
+		/* 체크박스 전체선택, 전체해제 */
+		$("#checkAll").click(function(){
+        //클릭되었으면
+        if($("#checkAll").prop("checked")){
+            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
+            $("input[name=checkRow]").prop("checked",true);
+            //클릭이 안되있으면
+        }else{
+            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
+            $("input[name=checkRow]").prop("checked",false);
+        }
+    })
+
+
+
 
 		// 찜 삭제 버튼 
 		$(".btn-danger").click(
@@ -108,7 +124,7 @@
 									<table class="table table-hover">
 										<thead>
 											<tr>
-												<td align="center"><input type="checkbox"></td>
+												<td align="center"><input type="checkbox"name="checkAll" id="checkAll" ></td>
 												<td align="center">썸네일</td>
 												<td>책 제목</td>
 												<td align="center">가격</td>
@@ -122,7 +138,7 @@
 												<tr>
 													<td align="center" hidden="">${element.PICK_ID }</td>
 													<td align="center" hidden="" id="bookId" class="bookId">${element.BOOK_ID }</td>
-													<td align="center"><input type="checkbox"></td>
+													<td align="center"><input type="checkbox" name="checkRow"></td>
 													<td align="center">	
 													<img class="thumbnail" alt="NO IMAGE"
 												 src="/mypage/displayFile?fileName=${element.BOOK_IMG  }" style="width: 72px; height: 72px;">
