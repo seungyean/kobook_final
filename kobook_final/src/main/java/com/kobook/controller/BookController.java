@@ -35,6 +35,7 @@ import com.kobook.book.domain.RankingVO;
 import com.kobook.book.domain.ReviewVO;
 import com.kobook.book.domain.BookVO;
 import com.kobook.book.domain.DateDTO;
+import com.kobook.book.domain.DeliveryDTO;
 import com.kobook.book.domain.PageMaker;
 import com.kobook.book.domain.PersonDTO;
 import com.kobook.book.domain.SearchCriteria;
@@ -66,8 +67,8 @@ public class BookController {
 	public void deliveryList(@ModelAttribute("cri") SearchCriteria cri, Model model, DateDTO dto)throws Exception{
 		System.out.println("----------------Controller : delivery컨트롤러-----------------");
 		
-		model.addAttribute("dlist",service.deliveryList(cri));
-		System.out.println(service.deliveryList(cri).toString());
+		//model.addAttribute("dlist",service.deliveryList(cri));
+		//System.out.println(service.deliveryList(cri).toString());
 		System.out.println("----");	
 		
 		model.addAttribute("wpercent", service.wpercent());
@@ -141,7 +142,7 @@ public class BookController {
 	
 	@ResponseBody
 	@RequestMapping(value="/deliverydate/{startday}/{endday}", method=RequestMethod.GET)
-	public ResponseEntity<List<HashMap<String, String>>> deliverydate(@PathVariable("startday") String startday, @PathVariable("endday") String endday)throws Exception{
+	public ResponseEntity<List<DeliveryDTO>> deliverydate(@PathVariable("startday") String startday, @PathVariable("endday") String endday)throws Exception{
 
 		System.out.println("deliverydate  컨트롤러진입--------------");
 		
@@ -150,12 +151,13 @@ public class BookController {
 		dto.setEndday(endday);
 		System.out.println(dto.toString());
 	
-		ResponseEntity<List<HashMap<String, String>>> entity =null;
+		ResponseEntity<List<DeliveryDTO>> entity =null;
 		
 		try {
 			//service.selectDateList(dto);
-			entity = new ResponseEntity<List<HashMap<String, String>>>(service.selectDateList(dto), HttpStatus.OK);
-			System.out.println(service.selectDateList(dto));
+			entity=new ResponseEntity<List<DeliveryDTO>>(service.selectDateList(dto),HttpStatus.OK);
+			//entity = new ResponseEntity<List<DeliveryDTO>>(service.selectDateList(dto), HttpStatus.OK);
+			System.out.println("success : " + service.selectDateList(dto));
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -230,10 +232,7 @@ public class BookController {
 		
 		System.out.println(service.deliveryList(cri));
 		
-	
-		
-		
-		
+
 		return entity;
 	}
 	

@@ -583,7 +583,8 @@
 	        }  
 		}); */
 		
-	    getList("/book/deliverydate/"+startday+"/"+endday);
+    getList("/book/deliverydate/"+startday+"/"+endday);
+	//    getList("???");
 
 	});
 
@@ -593,18 +594,18 @@
 			 alert(data);
 			console.log("넘어온 데이터: "+data);
 			console.log("dataArray: " + data.length);
-			$.each(data,function(){
-				 
-				 alert(data);
+			$.each(data,function(index,result){
+				 	alert(result.person_name);
+				
 				 
 						$('.srow').remove();
 						$(".datelist").append(
-						'<tr class="srow"><td>'+this.DELIVERY_ID+'</td>'
-						+'<td>'+this.BOOK_NAME+'</td>'
-						+'<td>'+this.PERSON_NAME+'</td>'
-						+'<td>'+this.PAY_AMOUNT+'</td>'
-						+'<td>'+this.DELIVERY_ADDRESS+'</td>'
-						+'<td>'+this.PAY_DATE+'</td></tr>'
+						'<tr class="srow"><td>'+result.delivery_id+'</td>'
+						+'<td>'+result.book_name+'</td>'
+						+'<td>'+result.person_name+'</td>'
+						+'<td>'+result.pay_amount+'</td>'
+						+'<td>'+result.delivery_address+'</td>'
+						+'<td>'+result.pay_date+'</td></tr>'
 						)
 					
 				 })
@@ -720,13 +721,42 @@
 	  chart.draw(data, options);
 	}
 
-	$("#startday").datepicker({
-	    showButtonPanel : false,
+/* 	$("#startday").datepicker({
+		 showButtonPanel : false,
 	    dateFormat : "yymmdd",
 	    altField : '#startday'
 	    //altField: ".selecter"
+
+	   
 	    
-	 });
+	 }); */
+	 
+/* 	 $('#datepicker_expense').datepicker({
+         onSelect : function(StartDate) {
+            $('#datepicker_expense').empty(); //출발역 목록 비우기
+            $('#endDate').empty(); //도착역 목록 비우기
+
+            tripDateStart = new Date(StartDate);
+            $('input[name="tripLong"]').removeAttr('disabled');
+            $('input[name="tripLong"]').prop('checked', false);
+
+         },
+         autoclose: true,
+         format: "yyyy-mm-dd",
+      //   startDate: "now"
+      }); 
+	 liverydate
+	 */
+	 
+ 	$("#startday").datepicker({
+ 		onselect : function(data){
+ 			$("#startday").empty;
+ 			$("#endday").empty;
+ 			},
+ 			autoclose: true,
+	    dateFormat : "yymmdd"
+	    
+	 }); 
 	 
 	 $("#endday").datepicker({
 	    dateFormat : "yymmdd",

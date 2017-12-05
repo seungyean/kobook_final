@@ -209,7 +209,7 @@
 	
 	
 	<!--관리자 안심거래배송리스트  -->
-	<select id="deliveryList" resultType="HashMap" parameterType="SearchCriteria">
+	 <select id="deliveryList" resultType="HashMap" parameterType="SearchCriteria">
 	<![CDATA[
  	 select d.delivery_id, b.book_name, per.person_name, p.pay_amount, p.pay_date ,d.delivery_state,d.delivery_msg,d.delivery_address
 	from pay p, book b, book_order o, delivery d,person per
@@ -391,7 +391,7 @@
 	</select>
 	
 	<!--기간별 날짜 조회  -->
-	<select id="selectDateList" resultType="HashMap" parameterType="DateDTO">
+	<select id="selectDateList" resultType="DeliveryDTO" parameterType="DateDTO">
 	<![CDATA[     
  	select d.delivery_id, b.book_name, per.person_name, p.pay_amount, p.pay_date ,d.delivery_state,d.delivery_msg,d.delivery_address
 	from pay p, book b, book_order o, delivery d,person per

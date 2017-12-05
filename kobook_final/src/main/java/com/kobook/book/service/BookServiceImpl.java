@@ -13,6 +13,7 @@ import com.kobook.book.domain.RankingVO;
 import com.kobook.book.domain.ReviewVO;
 import com.kobook.book.domain.BookVO;
 import com.kobook.book.domain.DateDTO;
+import com.kobook.book.domain.DeliveryDTO;
 import com.kobook.book.domain.PersonDTO;
 import com.kobook.book.domain.SearchCriteria;
 import com.kobook.book.persistence.BookDAO;
@@ -218,7 +219,7 @@ public class BookServiceImpl implements BookService {
 
 
 	@Override
-	public List<HashMap<String, String>> selectDateList(DateDTO dto) throws Exception {
+	public List<DeliveryDTO> selectDateList(DateDTO dto) throws Exception {
 		return dao.selectDateList(dto);
 	}
 
