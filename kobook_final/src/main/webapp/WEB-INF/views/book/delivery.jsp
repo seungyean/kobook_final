@@ -429,7 +429,7 @@
                <!-- content goes here -->
                <form>
                   <div class="form-group">
-                     <label id="place">   </label>
+                     <label class="place">   </label>
                   </div>
                </form>
             </div>
@@ -541,10 +541,10 @@
 		
 		// 모달 
 	    $(".dtable").on('click','a',(function(){
-	    	//alert($(this).find('img').attr("data-rno"));
+	    	alert($(this).find('img').attr("data-rno"));
 	    	//console.log($(this).find('img').attr("data-rno"));
-	    	$('#place').text("");
-	    	$('#place').append($(this).find('img').attr("data-rno"));
+	    	$('.place').text("");
+	    	$('.place').append($(this).find('img').attr("data-rno"));
 	        $('#delModal').modal();
 	
 	     }));
@@ -632,10 +632,31 @@
 			console.log("넘어온 데이터: "+data);
 			console.log("dataArray: " + data.length);
 			$.each(data,function(index,result){
-				 //	alert(result.person_name);
-				 
-				 		
 
+				var state="";
+				
+				if(result.delivery_state=='W'){
+					state+='<input type="radio" class="status" name="delState'+result.delivery_id+'" etc="W" value="W" checked="checked">배송준비중 &nbsp;&nbsp;'
+					+'<input type="radio" class="status" name="delState'+result.delivery_id+'" etc="I" value="I" >배송중 &nbsp;&nbsp;'
+					+'<input type="radio" class="status" name="delState'+result.delivery_id+'" etc="C" value="C" >배송완료 &nbsp;&nbsp;';
+					
+				}else if(result.delivery_state=='I'){
+					state+='<input type="radio" class="status" name="delState'+result.delivery_id+'" etc="W" value="W" >배송준비중 &nbsp;&nbsp;'
+					+'<input type="radio" class="status" name="delState'+result.delivery_id+'" etc="I" value="I" checked="checked">배송중 &nbsp;&nbsp;'
+					+'<input type="radio" class="status" name="delState'+result.delivery_id+'" etc="C" value="C" >배송완료 &nbsp;&nbsp;';
+
+				}else if(result.delivery_state=='C'){
+					state+='<input type="radio" class="status" name="delState'+result.delivery_id+'" etc="W" value="W">배송준비중 &nbsp;&nbsp;'
+					+'<input type="radio" class="status" name="delState'+result.delivery_id+'" etc="I" value="I" >배송중 &nbsp;&nbsp;'
+					+'<input type="radio" class="status" name="delState'+result.delivery_id+'" etc="C" value="C" checked="checked">배송완료 &nbsp;&nbsp;';
+				}
+				
+				
+				var img="";
+				if(result.delivery_msg!=null){
+					img+='<a href="#"><img alt="" src="/resources/img/msg.png" data-rno="'+result.delivery_msg+'" class="msgimg" width="22px" height="15px"></a>';
+				}
+				
 						$('.srow').remove();
 						$(".dtable").append(
 						'<tr><td align="center" id="d_id" data-rno='+result.delivery_id+'>'+result.delivery_id+'</td>'
@@ -644,26 +665,15 @@
 						+'<td align="center">'+result.pay_amount+'</td>'
 						+'<td align="center">'+result.delivery_address+'</td>'
 						+'<td align="center">'+result.pay_date+'</td>'
-						+'<td align="center" class="state">'+result.delivery_state+'</td>'
-						+'<td align="center" class="msg">'+result.delivery_msg+'</td>'
-						)
-						
-						var setImg = '<a href="#"><img alt="" src="/resources/img/msg.png" data-rno="'+result.delivery_msg+'" class="msgimg" width="22px" height="15px"></a>';
-						
-					
+						+'<td align="center" class="state">'+state+'</td>'
+						+'<td align="center" class="msg">'+img+'</td>'
+						);
 						
 
-				/* 		$('.state').text("");
-						$('.state').append(state); */
-					
 						
-						if($('.msg').text() != null){
-							alert("setImg"+setImg);
-						 $('.msg').text("");
-						 $('.msg').append(setImg);
-						}
-
-			})
+						
+						
+			});
 		});
 		
 		 

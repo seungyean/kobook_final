@@ -64,7 +64,7 @@ public class BookController {
 	
 	//愿�由ъ�� ���댁�
 	@RequestMapping("/delivery")
-	public void deliveryList(@ModelAttribute("cri") SearchCriteria cri, Model model, DateDTO dto)throws Exception{
+	public String deliveryList(@ModelAttribute("cri") SearchCriteria cri, Model model, DateDTO dto)throws Exception{
 		System.out.println("----------------Controller : delivery컨트롤러-----------------");
 		
 		//model.addAttribute("dlist",service.deliveryList(cri));
@@ -97,6 +97,7 @@ public class BookController {
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(service.countdelList());
 		model.addAttribute("pageMaker",pageMaker);
+		return "/book/delivery";
 	}
 	
 /*	@RequestMapping(value="/delivery" , method=RequestMethod.POST)
