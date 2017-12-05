@@ -53,7 +53,7 @@ public class AdminAjaxController {
 	private ArrayList<?> listt;
 
 	
-	
+	//매출금액 리스트
 	@RequestMapping(value="/payList", method=RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<HashMap<String, List<Integer>>> payMonthListPOST(@RequestParam("pay_date") String pay_date)throws Exception {
@@ -87,6 +87,7 @@ public class AdminAjaxController {
 		return entity;
 	}
 
+	//게시판관리 list
 	@RequestMapping(value="/notiList", method=RequestMethod.POST)
 	@ResponseBody	
 	public ResponseEntity<List<?>> notiListPOST(@RequestParam("noti_select") String noti_select, SearchCriteria cri) throws Exception {
@@ -108,7 +109,7 @@ public class AdminAjaxController {
 			} else if (noti_select.equals("gong")){
 				list = boardservice.boardListCri(cri);
 				System.out.println(list);
-			}
+			} 
 			entity = new ResponseEntity<List<?>>(list, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -116,5 +117,13 @@ public class AdminAjaxController {
 		}
 		return entity;
 	}
+	
+/*	@RequestMapping(value="chart", method=RequestMethod.POST)
+	@ResponseBody
+	public List<GoogleChartDto> chartData()throws Exception {
+		List<googleChartDto> lists = new ArrayList<googleChartDto>();
+		
+		return list;
+	}*/
 	
 }

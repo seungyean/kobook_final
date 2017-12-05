@@ -130,17 +130,22 @@
 		</section>
 
 		<section class="content faq">
+		<form action="">
+
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-8"></div>
 				</div>
 
-				<div id="container">
-
-					<div id="tab1">
-
-
+			<div id="container">
+				<div>
+				<h2 class="title">게시물 관리</h2>
+				</div>
+					<div id="tab1" >
 						<select name="searchType" id="search">
+							<option value="n"
+								<c:out value="${cri.searchType == null?'selected':''}"/>>
+								---</option>
 							<option value="sin"
 								<c:out value="${cri.searchType eq 'sin'?'selected':''}"/>>
 								신고합니다.</option>
@@ -153,9 +158,9 @@
 							<option value="gong"
 								<c:out value="${cri.searchType eq 'gong'?'selected':''}"/>>
 								공지사항</option>
-							<option value="ja"
+<%-- 							<option value="ja"
 								<c:out value="${cri.searchType eq 'ja'?'selected':''}"/>>
-								자주묻는질문</option>
+								자주묻는질문</option> --%>
 						</select> <input type="text" name='keyword' id="keywordInput"
 							value='${cri.keyword }'> <input type="button" value="검색"
 							id="search" onclick="selectButton()" />
@@ -195,8 +200,7 @@
 					</div>
 				</div>
 			</div>
-
-
+		</form>
 
 
 
@@ -261,9 +265,9 @@
     <script src="/resources/js/main.js"></script>
 	
 	<script type="text/javascript">
-	
+
 	function GetDateString(jsonDate) {
-        var year, month, day, hour, minute, second , returnValue  , date , replaceStr
+        var year, month, day, hour, minute, second , returnValue  , date ,replaceStr
 
         replaceStr = jsonDate.replace(/\D/g, "");
         date = new Date(parseInt(replaceStr));
@@ -278,76 +282,96 @@
         returnValue = year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
         return returnValue;
     }
-	
+
     function Pad(num) {
         num = "0" + num;
         return num.slice(-2);
     }
 
-
+    
+	
 	function selectButton(){
 		
-      	var html = "";		
-		var noti_select = $("#search option:selected").val();
-		
-		console.log(noti_select);
-		
-		$.ajax({
-            type:"POST",
-            url:"/pay/notiList",
-            dataType:"json",
-            data: {
-            	noti_select : noti_select
-            	},
-            success: function(data){
+			var html = "";
+			var noti_select = $("#search option:selected").val();
+			
+/* 			var option_select = $("input[name=sub_check]").val();
+			console.log(option_select); */
 
-            	 if(noti_select=="sin"){
-            		 
-  					$("#noti").empty();
-            		html += "<table class='table table-bordered' style='text-align:center'><tr><td style='width: 10px'></td><td style='width: 5px'>BNO</td><td style='width: 320px'>TITLE</td><td style='width: 20px'>DATE</td><td style='width: 20px'>WRITER</td></tr>";
+			$.ajax({
+						type : "POST",
+						url : "/pay/notiList",
+						dataType : "json",
+						data : {
+							noti_select : noti_select
+						},
+						success : function(data) {
 
-            		$.each(data, function(index, result){ 
-            	        html += "<tr><td>"+ "<input type='checkbox'>" + "</td>"
-            	        html += "<td>"+ result.black_id +"</td>"
-    	            	html += "<td>"+ result.black_title +"</td>"
-    	            	html += "<td>"+ GetDateString("/Date(result.black_date)/") +"</td>"
-    	            	html += "<td>"+ result.black_email +"</td></tr>"
-                	 });   
-        			 html += "</table>";
-            		 $('#noti').append(html);        			
-         			 
-        		} else if (noti_select=="gong") {
+							if (noti_select == "sin") {
 
-  					$("#noti").empty();
-            		html += "<table class='table table-bordered' style='text-align:center'><tr><td></td><td>BNO</td><td>TITLE</td><td>DATE</td><td>WRITER</td></tr>";
-            		$.each(data, function(index, result){
-    	            	html += "<tr><td>"+ "<input type='checkbox'>" + "</td>"
-        				html += "<td>"+ result.board_id +"</td>"
-            			html += "<td>"+ result.board_title +"</td>"
-            			html += "<td>"+ result.board_date +"</td>"
-            			html += "<td>"+ result.board_writer +"</td></tr>"
-                	});
-            		html += "</table>";
-					$('#noti').append(html);
-					
-        		} else if (noti_select=="mu"){
-        			
-        			$("#noti").empty();
-            		html += "<table class='table table-bordered' style='text-align:center'><tr><td></td><td>BNO</td><td>TITLE</td><td>DATE</td><td>WRITER</td></tr>";
-            		$.each(data, function(index, result){
-    	            	html += "<tr><td>"+ "<input type='checkbox'>" + "</td>"
-        				html += "<td>"+ result.board_id +"</td>"
-            			html += "<td>"+ result.board_title +"</td>"
-            			html += "<td>"+ result.board_date +"</td>"
-            			html += "<td>"+ result.board_writer +"</td></tr>"
-                		});
-            		html += "</table>";
-					$('#noti').append(html);
-        		}
-            }
-         });
-		
-	}
+								$("#noti").empty();
+								html += "<table class='table table-bordered' style='text-align:center'><tr><td style='width: 10px'><input type='checkbox' id='top_check'></td><td style='width: 5px'>BNO</td><td style='width: 320px'>TITLE</td><td style='width: 20px'>DATE</td><td style='width: 20px'>WRITER</td></tr>";
+
+								$.each(data, function(index, result) {
+											html += "<tr><td>" + "<input type='checkbox' name='sub_check'>" + "</td>"
+											html += "<td>" + result.black_id + "</td>"
+											html += "<td><a href='/community/blackRead${pageMaker.makeSearch(pageMaker.cri.page) }&result.black_id=${result.black_id }'>" + result.black_title + "</a>" + "</td>"
+											html += "<td>" + GetDateString('/Date(result.black_date)/') + "</td>"
+											html += "<td>" + result.black_email	+ "</td></tr>"
+								});
+								html += "</table>";
+								$('#noti').append(html);
+								
+						        //최상단 체크박스 클릭
+						        //클릭되었으면
+						        $("#top_check").click(function(){
+								var check = $("#top_check").prop("checked");
+											$("input[name=sub_check]").prop("checked", check);
+						        })
+								
+							} else if (noti_select == "gong") {
+
+								$("#noti").empty();
+								html += "<table class='table table-bordered' style='text-align:center'><tr><td style='width: 10px'><input type='checkbox' id='top_check'><td>BNO</td><td>TITLE</td><td>DATE</td><td>WRITER</td></tr>";
+								$.each(data, function(index, result) {
+									html += "<tr><td>" + "<input type='checkbox' name='sub_check'>" + "</td>"
+									html += "<td>" + result.board_id + "</td>"
+									html += "<td>" + result.board_title	+ "</td>"
+									html += "<td>" + result.board_date	+ "</td>"
+									html += "<td>" + result.board_writer + "</td></tr>"
+								});
+								html += "</table>";
+								$('#noti').append(html);
+								
+						        $("#top_check").click(function(){
+									var check = $("#top_check").prop("checked");
+												$("input[name=sub_check]").prop("checked", check);
+							        })
+
+							} else if (noti_select == "mu") {
+
+								$("#noti").empty();
+								html += "<table class='table table-bordered' style='text-align:center'><tr><td style='width: 10px'><input type='checkbox' id='top_check'><td>BNO</td><td>TITLE</td><td>DATE</td><td>WRITER</td></tr>";
+								$.each(data, function(index, result) {
+									html += "<tr><td>" + "<input type='checkbox' name='sub_check'>" + "</td>"
+									html += "<td>" + result.board_id + "</td>"
+									html += "<td>" + result.board_title	+ "</td>"
+									html += "<td>" + result.board_date + "</td>"
+									html += "<td>" + result.board_writer + "</td></tr>"
+								});
+								html += "</table>";
+								$('#noti').append(html);
+								
+						        $("#top_check").click(function(){
+									var check = $("#top_check").prop("checked");
+												$("input[name=sub_check]").prop("checked", check);
+
+							        })
+							}
+						}
+					});
+
+		}
 	</script>
 </body>
 </html>

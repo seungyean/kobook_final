@@ -212,9 +212,17 @@ ul.tabs li.active {
 							</div>
 						
 							<div id="month">
+								<table id='month_deal' class='table table-bordered' style='text-align: center'>
+									<tr height='20'>
+										<td>월</td>
+										<td>매출(원)</td>
+										<td>전월대비</td>
+									</tr>
+								</table>
 							</div>
-			 										
 						</div>
+						
+						<div id="chart_a"></div>
 						
 <!-- 						#tab2
 						<div id="tab2" class="tab_content">
@@ -301,7 +309,7 @@ ul.tabs li.active {
     <script type="text/javascript" src="/resources/js/jquery.isotope.min.js"></script>
     <script type="text/javascript" src="/resources/js/swipe.js"></script>
     <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
-
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <script src="/resources/js/main.js"></script>
 	<script>
@@ -312,6 +320,28 @@ ul.tabs li.active {
 			location.replace(self.location);
 		}
 	</script>
+	
+	
+<!-- 	<script type="text/javascript">
+ 	google.charts.load('current', {packages: ['corechart', 'line']});
+    google.charts.setOnLoadCallback(drawBasic);
+    function drawBasic() {
+          
+    	  var data = new google.visualization.DataTable();
+          data.addColumn('number', 'X');
+          data.addColumn('number', '접속자');
+          data.addRows([
+          
+          var options = {           
+        	title : '접속자 현황',	  
+        	width :'500',
+            height : '500'
+          };
+          var chart = new google.visualization.LineChart(document.getElementById('chart_a'));
+          chart.draw(data, options);
+        } 
+	</script> -->
+	
 	
 	<script type="text/javascript">
 	function payDayButton() {
@@ -332,9 +362,9 @@ ul.tabs li.active {
 			}
 		})
 	}
-		
 
-		function selectButton() {
+	
+	function selectButton() {
 			
 			var pay_date = $("#pay_date option:selected").val();
 			var obj = new Object();
@@ -364,7 +394,6 @@ ul.tabs li.active {
 						} else {
 							html += "<td> \ </td></tr>"
 						}
-						
 					}
 				
 					html +="</table>";

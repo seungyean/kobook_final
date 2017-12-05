@@ -18,6 +18,7 @@
 	<select id="payDaySum" resultType="Integer">
 		select sum(pay_amount) from	pay
 		where pay_date like #{pay_date} 
+		order by pay_date desc
 	</select>
 
 	
