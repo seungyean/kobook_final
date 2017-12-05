@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kobook.login.DTO.LoginDTO;
 import com.kobook.person.service.PersonService;
+import com.kobook.today.service.TodayService;
 import com.kobook.person.domain.PersonVO;
 
 @Controller
@@ -20,6 +21,9 @@ public class PersonController {
 
 	@Inject
 	private PersonService service;
+	
+	@Inject
+	private TodayService todayService;
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public void loginGET(@ModelAttribute("dto") LoginDTO dto) throws Exception {
@@ -45,13 +49,16 @@ public class PersonController {
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logOut(HttpServletRequest request, HttpSession session) throws Exception {
 		System.out.println("logout");
+		int person_id = Integer.parseInt((String)session.getAttribute("person_id"));
+		todayService.todayAllRemoveByPersonId(person_id);
 		
 		session.removeAttribute("person_id");
 		session.removeAttribute("person_email");
 		session.removeAttribute("person_pwd");
-		
+		 
 		session.invalidate();
 		
+
 		return "redirect:/";
 	}
 	

@@ -2,14 +2,15 @@ package com.kobook.controller;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kobook.today.service.TodayService;
@@ -39,6 +40,13 @@ public class TodayController {
 		List<HashMap<String, Object>> list = todayService.todayBookViewList(person_id);
 		System.out.println(list);
 		return list;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="todayRemove/{today_id}", method=RequestMethod.GET)
+	public String todayRemove(@PathVariable("today_id") int today_id) throws Exception {
+		todayService.todayRemove(today_id);		
+		return "success"; 
 	}
 	
 }

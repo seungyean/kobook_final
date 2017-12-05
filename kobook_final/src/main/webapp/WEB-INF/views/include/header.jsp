@@ -79,12 +79,12 @@
 				url:'/include/todayDonateViewList',
 				dataType:"json",
 				success:function(list){
-					$.each(list, function() {
+					$.each(list, function(index) {
 						$("#today-list").append(
-								"<li class='viewList'><a href='/community/donateRead?donate_id="+this.DONATE_ID+"'>"
-										+"<small><img alt='NO IMAGE' src='/community/displayFile?fileName="+this.DONATE_THUMBNAIL
-										+"' width='80px' height='50px'></small><br>"
-										+"<b>" +this.DONATE_TITLE+"</b><br>"+"</a><small>무료 나눔 게시판</small></li>")
+								"<li class='viewList' data-rno='"+this.TODAY_ID+"'><img alt='NO IMAGE' src='/community/displayFile?fileName="+this.DONATE_THUMBNAIL
+										+"' width='80px' height='50px'><br>"
+										+"<a href='/community/donateRead?donate_id="+this.DONATE_ID+"'>"
+										+"<b>"+this.DONATE_TITLE+"</b><br>"+"</a><small>무료 나눔 게시판</small></li>")
 					});
 				}
 			});
@@ -93,23 +93,43 @@
 				url:'/include/todayBookViewList',
 				dataType:"json",
 				success:function(list){
-					$.each(list, function() {
+					$.each(list, function(index) {
 						$("#today-list").append(
-								"<li class='viewList'><a href='/book/bookRead?book_id="+this.BOOK_ID+"'>"
-										+"<small><img alt='NO IMAGE' src='/book/displayFile?fileName="+this.BOOK_IMG
-										+"' width='80px' height='50px'></small><br>"
+								"<li class='viewList' data-rno='"+this.TODAY_ID+"'><img alt='NO IMAGE' src='/book/displayFile?fileName="+this.BOOK_IMG
+										+"' width='80px' height='50px'><br>"
+										+"<a href='/book/bookRead?book_id="+this.BOOK_ID+"'>"
 										+"<b>" +this.BOOK_NAME+"</b><br>"+"</a><small>도서</small></li>")
 					});
 				}
 			});
 			
-/* 			$("#today-list").find(".viewList").each(function(index,e){
- 				$(this).mouseenter(function(event){
- 					event.preventDefault();
- 					alert($(this).html());
-				}); 
-			}); */
+			$("#today-list").on("mouseenter",".viewList",function(event){
+				event.preventDefault();
+				$(this).find("img").before("<button type='button' class='today-btn'>x</button>");
+			});
+			
+			$("#today-list").on("mouseleave",".viewList",function(event){
+				event.preventDefault();
+				$(this).parent().find("button").remove();
+			});
+			
+			$(document).on("click", ".today-btn", function(event) {
+				event.preventDefault();
+				var that = $(this).parent();
+				var today_id = $(this).parent().attr("data-rno");
+ 				
+				$.ajax({
+					url:'/include/todayRemove/'+today_id,
+					dataType: 'text',
+					success : function(data) {
+						if( data == "success"){
+							that.remove();
+						}						
+					}
+				});
+			});
 	});
+
  var stmnLEFT = 6; // 오른쪽 여백 
  var stmnGAP1 = 0; // 위쪽 여백 
  var stmnGAP2 = 270; // 스크롤시 브라우저 위쪽과 떨어지는 거리 
@@ -143,7 +163,7 @@
  }
  
  function InitializeStaticMenu() {
-	 document.getElementById('STATICMENU').style.right = stmnLEFT + 'px';  //처음에 오른쪽에 위치. left로 바꿔도.
+	 document.getElementById('STATICMENU').style.right = stmnLEFT + 'px';  //처음에 오른쪽에 위치
 	 document.getElementById('STATICMENU').style.top = document.body.scrollTop + stmnBASE + 'px';
 	 
 	 RefreshStaticMenu();
@@ -181,16 +201,17 @@
     					<ul class="nav nav-tabs">
                         	<li class="active"><a href="#Recent"> 오늘 본 상품 </a></li>
                         </ul>
-	                        <div class="tab-pane fade active in" id="Recent">
-		    					<ul class="recent_tab_list" id="today-list">
-		    					</ul>
-	    					</div>
+                        <div class="tab-pane fade active in" id="Recent">
+                        	<ul class="recent_tab_list" id="today-list">
+		    				</ul>
+		    			</div>
     				</div>
     			</div>
     		</div>
     	</div>
     </c:if>
-<header id="header">
+
+	<header id="header">
 		
 		<!-- 팝업창으로 session값을 post로 보내는 과정 -->
 		<form method="post" name="session_id">
@@ -245,15 +266,13 @@
 							
 							<div style="margin-left: 80px;">
 								<c:if test="${person_email != null }">
-									
-									<span>
-									${person_name }님 로그인중 
+									<span> ${person_name }님 로그인중 
 										<a href="#" onclick="fn_newAlarm()">새로온 알림  [ </a> 
 										<a href="#" id="alarm_new"></a> 
 										<a href="#"> ]</a> 
 										<a href="#" onclick="fn_logout()"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 로그아웃</a>
-  											<form action="/alarmUpdate" method="post" name="alarmUpdate"></form>
 									</span> 
+									<form action="/alarmUpdate" method="post" name="alarmUpdate"></form>
 								</c:if>
 							</div>
 

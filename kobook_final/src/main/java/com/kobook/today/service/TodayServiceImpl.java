@@ -2,13 +2,11 @@ package com.kobook.today.service;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.kobook.community.domain.DonateVO;
 import com.kobook.today.domain.TodayVO;
 import com.kobook.today.persistence.TodayDAO;
 
@@ -41,5 +39,15 @@ public class TodayServiceImpl implements TodayService {
 	@Override
 	public List<HashMap<String, Object>> todayBookViewList(int person_id) throws Exception {
 		return dao.todayBookViewList(person_id);
+	}
+
+	@Override
+	public void todayRemove(int today_id) throws Exception {
+		dao.todayDelete(today_id);
+	}
+
+	@Override
+	public void todayAllRemoveByPersonId(int person_id) throws Exception {
+		dao.todayAllDeleteByPersonId(person_id);
 	}
 }

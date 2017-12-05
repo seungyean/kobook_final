@@ -21,7 +21,7 @@
 	</select>
 	
 	<select id="todayDonateViewList" resultType="HashMap">
-		select D.* from today T, donate D where T.donate_id = D.donate_id AND T.person_id = #{person_id}
+		select * from today T, donate D where T.donate_id = D.donate_id AND T.person_id = #{person_id}
 	</select>
 	
 	<select id="checkPersonIdByBookID" resultType="int">
@@ -29,8 +29,16 @@
 	</select>
 	
 	<select id="todayBookViewList" resultType="HashMap">
-		select B.* from today T, book B where T.book_id = B.book_id AND T.person_id = #{person_id}
+		select * from today T, book B where T.book_id = B.book_id AND T.person_id = #{person_id}
 	</select>
+	
+	<delete id="todayDelete" parameterType="int">
+		DELETE FROM today WHERE today_id = #{today_id}
+	</delete>
+	
+	<delete id="todayAllDeleteByPersonId">
+		DELETE FROM today WHERE person_id = #{person_id}
+	</delete>
 	
 </mapper>
 
