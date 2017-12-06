@@ -427,14 +427,17 @@ public class BookController {
 		pageMaker.setTotalCount(service.countReview(service.getPersonIdByBookId(book_id)));
 		model.addAttribute("pageMaker",pageMaker);
 		
-		TodayVO todayVO = new TodayVO();
-		HttpSession session = request.getSession();
-		int person_id = Integer.parseInt((String)session.getAttribute("person_id"));
+		HttpSession session = request.getSession(false);
+		if(session.getAttribute("person_id") != null) {
+			Integer person_id = Integer.parseInt((String)session.getAttribute("person_id"));
 		
-		if(todayService.checkPersonIdByBookID(book_id, person_id) == 0) {
-			todayVO.setBook_id(book_id);
-			todayVO.setPerson_id(person_id);
-			todayService.todayRegist(todayVO);
+			TodayVO todayVO = new TodayVO();
+
+			if(todayService.checkPersonIdByBookID(book_id, person_id) == 0) {
+				todayVO.setBook_id(book_id);
+				todayVO.setPerson_id(person_id);
+				todayService.todayRegist(todayVO);
+			}
 		}
 	}
 	

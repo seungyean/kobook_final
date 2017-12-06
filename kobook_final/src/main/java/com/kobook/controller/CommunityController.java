@@ -352,15 +352,18 @@ public class CommunityController {
 		model.addAttribute("writer",donateService.donateWriter(donate_id));
 		model.addAttribute("replyList",donateService.donateReplyList(donate_id));
 		//model.addAttribute("reply_person", donateService.selectPersonName(person_id,donate_id));
-		
-		TodayVO todayVO = new TodayVO();
-		HttpSession session = request.getSession();
-		int person_id = Integer.parseInt((String)session.getAttribute("person_id"));
-		
-		if(todayService.checkPersonIdByDonateID(donate_id, person_id) == 0){
-			todayVO.setPerson_id(person_id);
-			todayVO.setDonate_id(donate_id);
-			todayService.todayRegist(todayVO);
+
+		HttpSession session = request.getSession(false);
+		if(session.getAttribute("person_id") != null) {
+			TodayVO todayVO = new TodayVO();
+			
+			int person_id = Integer.parseInt((String)session.getAttribute("person_id"));
+			
+			if(todayService.checkPersonIdByDonateID(donate_id, person_id) == 0){
+				todayVO.setPerson_id(person_id);
+				todayVO.setDonate_id(donate_id);
+				todayService.todayRegist(todayVO);
+			}
 		}
 	}
 	
