@@ -1,6 +1,5 @@
 package com.kobook.chatbot.service;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -136,6 +135,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 		return vo;
 	}
 
+	
 	// 책 관련 사항
 	@Override
 	public String manageBook(String text, int person_id) throws Exception {
@@ -212,12 +212,14 @@ public class ChatbotServiceImpl implements ChatbotService {
 		
 		String rawKeyword = text.substring(text.indexOf(" ")+1);
 		String keyword = null;
+		String contentUrl = "";
 		System.out.println("rawkeyword 추출 ::" + rawKeyword);
 		
 		keyword = keyWordReplace(rawKeyword);
 		
 		System.out.println("keyword 추출 ::" + keyword);
 		
+		// 공지사항파트
 		if(boardName.contains("공지")){
 			System.out.println("공지사항 진입");
 	
@@ -235,18 +237,27 @@ public class ChatbotServiceImpl implements ChatbotService {
 				
 				if(list.size() > 5){
 					for(int i=0; i<5; i++){
-						newText += "\n ■ &nbsp;" + ((BoardVO)list.get(i)).getBoard_title();
+						contentUrl = "/board/boardDetail?board_id="
+								+ ((BoardVO)list.get(i)).getBoard_id();
+						newText += "\n ■ &nbsp;"
+								+ "<a href=\"javascript:;\" onClick=\"opener.parent.location='"+ contentUrl +"'; return false;\">"
+								+((BoardVO)list.get(i)).getBoard_title() + "</a>";
 					}
 					
 					newText += "\n &nbsp;";
 					newText += "\n <a href='#'>더보기</a>";
 				} else {
 					for(int i=0; i<list.size(); i++){
-						newText += "\n ■ &nbsp;" + ((BoardVO)list.get(i)).getBoard_title();
+						contentUrl = "/board/boardDetail?board_id="
+								+ ((BoardVO)list.get(i)).getBoard_id();
+						newText += "\n ■ &nbsp;"
+								+ "<a href=\"javascript:;\" onClick=\"opener.parent.location='"+ contentUrl +"'; return false;\">"
+								+((BoardVO)list.get(i)).getBoard_title() + "</a>";
 					}
 				}
 			}
 			
+		// 포토리뷰 파트
 		} else if(boardName.contains("포토")){
 			System.out.println("포토리뷰 진입");
 			
@@ -263,19 +274,27 @@ public class ChatbotServiceImpl implements ChatbotService {
 
 				if(list.size() > 5){
 					for(int i=0; i<5; i++){
-						newText += "\n ■ &nbsp;" + ((PhotoVO)list.get(i)).getPhoto_title();
+						contentUrl = "/community/photoReviewRead?page=1&perPageNum=9&searchType&keyword&photo_id="
+									+ ((PhotoVO)list.get(i)).getPhoto_id();
+						newText += "\n ■ &nbsp;"
+								+ "<a href=\"javascript:;\" onClick=\"opener.parent.location='"+ contentUrl +"'; return false;\">"
+								+ ((PhotoVO)list.get(i)).getPhoto_title()+"</a>";
 					}
 					
 					newText += "\n &nbsp;";
 					newText += "\n <a href='#'>더보기</a>";
 				} else {
 					for(int i=0; i<list.size(); i++){
-						newText += "\n ■ &nbsp;" + ((PhotoVO)list.get(i)).getPhoto_title();
+						contentUrl = "/community/photoReviewRead?page=1&perPageNum=9&searchType&keyword&photo_id="
+								+ ((PhotoVO)list.get(i)).getPhoto_id();
+					newText += "\n ■ &nbsp;"
+							+ "<a href=\"javascript:;\" onClick=\"opener.parent.location='"+ contentUrl +"'; return false;\">"
+							+ ((PhotoVO)list.get(i)).getPhoto_title()+"</a>";
 					}
 				}
 			}
 				
-			
+		// 블랙리스트 파트
 		} else if(boardName.contains("블랙")){
 			System.out.println("블랙 진입");
 			
@@ -292,19 +311,28 @@ public class ChatbotServiceImpl implements ChatbotService {
 				
 				if(list.size() > 5){
 					for(int i=0; i<5; i++){
-						newText += "\n ■ &nbsp;" + ((BlackVO)list.get(i)).getBlack_title();
+						contentUrl = "/community/blackRead?page=1&perPageNum=9&searchType&keyword&black_id="
+								+ ((BlackVO)list.get(i)).getBlack_id();
+						newText += "\n ■ &nbsp;"
+								+ "<a href=\"javascript:;\" onClick=\"opener.parent.location='"+ contentUrl +"'; return false;\">"
+								+ ((BlackVO)list.get(i)).getBlack_title() + "</a>";
 					}
 					
 					newText += "\n &nbsp;";
 					newText += "\n <a href='#'>더보기</a>";
 				} else {
 					for(int i=0; i<list.size(); i++){
-						newText += "\n ■ &nbsp;" + ((BlackVO)list.get(i)).getBlack_title();
+						contentUrl = "/community/blackRead?page=1&perPageNum=9&searchType&keyword&black_id="
+								+ ((BlackVO)list.get(i)).getBlack_id();
+						newText += "\n ■ &nbsp;"
+								+ "<a href=\"javascript:;\" onClick=\"opener.parent.location='"+ contentUrl +"'; return false;\">" 
+								+ ((BlackVO)list.get(i)).getBlack_title() + "</a>";
 					}
 				}
 				
 			}
 				
+		// 무료나눔 파트
 		} else if(boardName.equals("무료나눔")){
 			System.out.println("무료나눔 진입");
 			
@@ -320,14 +348,22 @@ public class ChatbotServiceImpl implements ChatbotService {
 				newText += "<무료나눔 게시판 글제목>";
 				if(list.size() > 5){
 					for(int i=0; i<5; i++){
-						newText += "\n ■ &nbsp;" + ((DonateVO)list.get(i)).getDonate_title();
+						contentUrl = "/community/donateRead?page=1&perPageNum=9&searchType&keyword&donate_id="
+								+ ((DonateVO)list.get(i)).getDonate_id();
+						newText += "\n ■ &nbsp;"
+								+ "<a href=\"javascript:;\" onClick=\"opener.parent.location='"+ contentUrl +"'; return false;\">" 
+								+ ((DonateVO)list.get(i)).getDonate_title() + "</a>";
 					}
 					
 					newText += "\n &nbsp;";
 					newText += "\n <a href='#'>더보기</a>";
 				} else {
 					for(int i=0; i<list.size(); i++){
-						newText += "\n ■ &nbsp;" + ((DonateVO)list.get(i)).getDonate_title();
+						contentUrl = "/community/donateRead?page=1&perPageNum=9&searchType&keyword&donate_id="
+								+ ((DonateVO)list.get(i)).getDonate_id();
+						newText += "\n ■ &nbsp;"
+								+ "<a href=\"javascript:;\" onClick=\"opener.parent.location='"+ contentUrl +"'; return false;\">" 
+								+ ((DonateVO)list.get(i)).getDonate_title() + "</a>";
 					}
 				}
 			}
@@ -339,6 +375,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 		return newText;
 	}
 
+	
 	// 마이페이지 관련 사항
 	@Override
 	public String manageMypage(String text, int person_id) throws Exception {
@@ -365,6 +402,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 		return newText;
 	}
 
+	
 	// 메세지 관련 사항
 	@Override
 	public String manageMessage(String text, int person_id) throws Exception {
@@ -422,6 +460,10 @@ public class ChatbotServiceImpl implements ChatbotService {
 		return newText;
 	}
 
+	
+	
+	/*해당 문자열 치환 메소드*/
+	
 	@Override
 	public String boardNameReplace(String text) {
 		String boardName = "";
