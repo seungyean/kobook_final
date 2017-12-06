@@ -204,7 +204,7 @@ public class CommunityController {
 		AlarmVO alarmVO = new AlarmVO();
 			
 		alarmVO.setAlarm_kind("Message");
-		alarmVO.setAlarm_content("새 쪽지가 도착하였습니다.(신고게시판 새 글 등록 알림)");
+		alarmVO.setAlarm_content("신고게시판 새 글 등록 알림쪽지");
 		alarmVO.setPerson_id(1);
 
 		alarmService.alarmMessage(alarmVO);
@@ -440,7 +440,7 @@ public class CommunityController {
 		AlarmVO alarmVO = new AlarmVO();
 			
 		alarmVO.setAlarm_kind("Message");
-		alarmVO.setAlarm_content("새 쪽지가 도착하였습니다.(댓글 등록 알림)");
+		alarmVO.setAlarm_content("댓글 등록 알림 쪽지");
 		alarmVO.setPerson_id(donateService.getPersonId(donate_id));
 
 		alarmService.alarmMessage(alarmVO);
