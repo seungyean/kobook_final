@@ -360,7 +360,7 @@
 								</c:when>
 								<c:otherwise>
 								 --%>
-									<input type="button" value="변경" class="btn-default" id="update" onclick="change()">
+									<input type="button" value="변경" class="btn-default" id="update" >
 									
 										<!-- <form> -->
 									<table class="table table-hover">
@@ -562,38 +562,59 @@
 		
 	});
 
-	function change() {
-		var statusObject = new Object();
+	var updateObject= new Object();
 	
+	$('#update').on("click",function(event){
+		event.preventDefault();
+		//var statusObject = new Object();
+		
+		
+		
 	 	$("input:radio[class='status']:checked").each(function (index) {
-	 		statusObject.check = $(this).attr('etc');
-	 		statusObject.d_id = $(this).parent().parent().find("td:eq(0)").attr("data-rno");
-	 		
+	 		updateObject.delivery_state=$(this).attr('etc');
+	 		updateObject.delivery_id=$(this).parent().parent().find("td:eq(0)").attr("data-rno");
+	 		 console.log(updateObject.delivery_state);
+	 		 console.log(updateObject.delivery_id);
+	 		 
 	 		$.ajax({
 	 			url:"/book/deliveryAjax",
-	 			type: "POST",
-	 			data: statusObject,
-	 			dataType:"json",
-	 			
-	 			success: function(data){
-	 				//$('#dtable').empty();
+	 			type: "GET",
+	 			headers: { 
+				      "Content-Type": "application/json",
+				      "X-HTTP-Method-Override": "GET" },
+	 			dataType:'json',
+	 			data: updateObject,
+	 			success: function(data){	 		
+	 				
+	 				var list = [w,i,c];	
+	 				
+	 				
+	 				$.each(data,function(index,result){
+						list[index] = result;	 
+						console.log(index);
+	 				});
+	 				console.log("list[0] : " + list[0] + " list[1] : " +list[1]+ " list[2] : " + list[2]);
+	 				/* console.log("data:"+data);
+	 				if(data == 'SUCCESS'){
+	 				drawChart();
 	 				alert('gggg');
-		 			},
+		 			} */
+		 			w = list[0];
+		 			i = list[1];
+		 			c = list[2];
+	 				google.charts.setOnLoadCallback(drawChart);
+	 			},
 	 			error:function(request,status,error){
 	 				alert('error');
 	 				}
 	 		});
+
 	 	})
-	}
+	});
 
 	$('#datePick').on("click",function(event){
 		event.preventDefault();
-	
-		/*   var jsonData=new Object();
-		jsonData.startday=$('#startday').val();
-		jsonData.endday=$('#endday').val();   */
-		
-		
+
 		var startday = $('#startday').val();
 		var endday = $('#endday').val(); 
 		

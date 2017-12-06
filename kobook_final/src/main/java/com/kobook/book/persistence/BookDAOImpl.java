@@ -222,9 +222,15 @@ public class BookDAOImpl implements BookDAO {
 
 
 
+
+
+
+
+
 	@Override
-	public void delstateUpdate(DeliveryVO delivery) {
-		session.update(namespace+".delstateUpdate",delivery);
+	public void delstateUpdate(DeliveryDTO dto) throws Exception {
+		session.update(namespace+".delstateUpdate",dto);
+		
 	}
 
 

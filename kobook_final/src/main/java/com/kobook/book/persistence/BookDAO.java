@@ -71,7 +71,7 @@ public interface BookDAO {
 	public int countdelList()throws Exception;
 	
 	//諛곗�≪���� ���곗�댄��
-	public void delstateUpdate(DeliveryVO delivery)throws Exception;
+	public void delstateUpdate(DeliveryDTO dto)throws Exception;
 	
 	public void registerkeyword(SearchCriteria cri)throws Exception;
 	

@@ -34,9 +34,9 @@
 	content="width=device-width, initial-scale=1, maximum-scale=1" />
 
 <style type="text/css">
-body {
+/* body {
   padding-top: 70px;
-}
+} */
 .btn-grey{
     background-color:#D8D8D8;
 	color:#FFF;

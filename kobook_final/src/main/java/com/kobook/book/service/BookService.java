@@ -44,18 +44,17 @@ public interface BookService {
 	
 	public int getPersonIdByBookId(int book_id) throws Exception;
 	
-	//由щ럭 ���깆��
 	public String writeName(int person_id) throws Exception;
 	
 	public void reviewregist(ReviewVO review)throws Exception;
 	
-	//������ ���� 由щ럭媛���
+
 	public int countReview(int person_id)throws Exception;
 	
-	//������ ���� 珥�蹂���
+
 	public int countStar(int person_id)throws Exception;
 	
-	//5��,4,3,2,1,
+	//5,4,3,2,1,
 	public int fivestar(int person_id)throws Exception;
 	public int fourstar(int person_id)throws Exception;
 	public int threestar(int person_id)throws Exception;
@@ -69,8 +68,7 @@ public interface BookService {
 	
 	public int countdelList() throws Exception;
 	
-	//諛곗�≪���� ���곗�댄��
-		public void delstateUpdate(DeliveryVO delivery)throws Exception;
+		public void delstateUpdate(DeliveryDTO dto)throws Exception;
 		
 		public void registerkeyword(SearchCriteria cri)throws Exception;
 		

@@ -256,7 +256,7 @@
 	</select>
 	
 	<!--배송상태변경  -->
- 	<update id="delstateUpdate" parameterType="DeliveryVO">
+ 	<update id="delstateUpdate" parameterType="DeliveryDTO">
 	  UPDATE delivery
       SET delivery_state = #{delivery_state}
       WHERE delivery_id = #{delivery_id}

@@ -235,8 +235,8 @@ public class BookServiceImpl implements BookService {
 
 
 	@Override
-	public void delstateUpdate(DeliveryVO delivery)throws Exception {
-		dao.delstateUpdate(delivery);
+	public void delstateUpdate(DeliveryDTO dto)throws Exception {
+		dao.delstateUpdate(dto);
 	}
 
 
