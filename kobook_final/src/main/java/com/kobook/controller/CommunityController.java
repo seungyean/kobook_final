@@ -303,7 +303,9 @@ public class CommunityController {
 		String[] donate_thumbnail1 =donate_thumbnail.split("_");
 		
 		if(donate_thumbnail1.length>2) {
-			vo.setDonate_thumbnail(donate_thumbnail);
+			String donate_img = donate_thumbnail.substring(0,12);
+			String donate_img2 = donate_thumbnail.substring(14);
+			vo.setDonate_thumbnail((donate_img+donate_img2));
 		}
 		donateService.donateRegist(vo);
 		
@@ -357,12 +359,13 @@ public class CommunityController {
 		if(session.getAttribute("person_id") != null) {
 			TodayVO todayVO = new TodayVO();
 			
-			int person_id = Integer.parseInt((String)session.getAttribute("person_id"));
-			
-			if(todayService.checkPersonIdByDonateID(donate_id, person_id) == 0){
-				todayVO.setPerson_id(person_id);
-				todayVO.setDonate_id(donate_id);
-				todayService.todayRegist(todayVO);
+			Integer person_id = Integer.parseInt((String)session.getAttribute("person_id"));
+			if(donateService.getPersonId(donate_id) != person_id) {
+				if(todayService.checkPersonIdByDonateID(donate_id, person_id) == 0){
+					todayVO.setPerson_id(person_id);
+					todayVO.setDonate_id(donate_id);
+					todayService.todayRegist(todayVO);
+				}
 			}
 		}
 	}
@@ -383,7 +386,9 @@ public class CommunityController {
 		String[] donate_thumbnail1 =donate_thumbnail.split("_");
 		
 		if(donate_thumbnail1.length>2) {
-			vo.setDonate_thumbnail(donate_thumbnail);
+			String donate_img = donate_thumbnail.substring(0,12);
+			String donate_img2 = donate_thumbnail.substring(14);
+			vo.setDonate_thumbnail((donate_img+donate_img2));
 		}
 		donateService.donateModify(vo);
 		
@@ -399,6 +404,9 @@ public class CommunityController {
 	@RequestMapping("donateRemove")
 	public String donateRemove(RedirectAttributes rtts, SearchCriteria cri
 			, @RequestParam("donate_id") Integer donate_id) throws Exception {
+		if(todayService.todayCountByDonateId(donate_id) > 0) {
+			todayService.todayAllRemoveByDonateId(donate_id);
+		}
 		donateService.donateRemove(donate_id);
 		
 		rtts.addAttribute("page", cri.getPage());

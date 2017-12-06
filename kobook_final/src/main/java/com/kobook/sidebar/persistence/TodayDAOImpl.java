@@ -64,4 +64,24 @@ public class TodayDAOImpl implements TodayDAO {
 		session.delete(namespace+".todayAllDeleteByPersonId", person_id);
 	}
 
+	@Override
+	public void todayAllDeleteByDonateId(int donate_id) throws Exception {
+		session.delete(namespace+".todayAllDeleteByDonateId", donate_id);
+	}
+
+	@Override
+	public void todayAllDeleteByBookId(int book_id) throws Exception {
+		session.delete(namespace+".todayAllDeleteByBookId", book_id);
+	}
+
+	@Override
+	public int todayCountByDonateId(int donate_id) throws Exception {
+		return session.selectOne(namespace+".todayCountByDonateId", donate_id);
+	}
+
+	@Override
+	public int todayCountByBookId(int book_id) throws Exception {
+		return session.selectOne(namespace+".todayCountByBookId", book_id);
+	}
+
 }

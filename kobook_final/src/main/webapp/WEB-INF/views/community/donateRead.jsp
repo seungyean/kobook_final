@@ -109,16 +109,16 @@
 										<blockquote class="default">
 											${donateVO.donate_content }</blockquote>
 									</div>
+									<div class='popup back' style="display:none;"></div>
+									<div id="popup_front" class='popup front' style="display:none;">
+									    <img id="popup_img">
+									</div>
 									<figure class="post_img">
-									<img class="thumbnail" alt="NO Thumbnail"
-												 src="/community/displayFile?fileName=${donateVO.donate_thumbnail }" height="300" width="200">
+										<img class="thumbnail" alt="NO Thumbnail"
+														 src="/community/displayFile?fileName=${donateVO.donate_thumbnail }" height="300" width="200">
+										<ul class="mailbox-attachments clearfix uploadedList"></ul>
 									</figure>
-							    <div class='popup back' style="display:none;"></div>
-							    <div id="popup_front" class='popup front' style="display:none;">
-							    	<img id="popup_img">
-							    </div>
-								<ul class="mailbox-attachments clearfix uploadedList">
-								</ul>
+
 							</article>
 						</div>
  
@@ -310,7 +310,12 @@ $(function(){
 		var str2 = str.split("s_");
 		var str3 = str2[0]+str2[1];
   		var imgTag = $("#popup_img");
-		imgTag.attr("src", str3);
+  		
+  		if(str2.length > 1) {
+  			imgTag.attr("src", str3);
+  		}else {
+			imgTag.attr("src", str);
+		}
 					
 		$(".popup").show('slow');
 		imgTag.addClass("show");

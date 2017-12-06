@@ -88,7 +88,7 @@
 										<tr>
 											<td align="center">No</td>
 											<td align="center">이미지
-												<div class='popup back' style="display:none;"></div>
+												<!-- <div class='popup back' style="display:none;"></div> -->
 											    <div id="popup_front" class='popup front' style="display:none;">
 											    	<img id="popup_img">
 											    </div>
@@ -209,7 +209,12 @@
 			var str2 = str.split("s_");
 			var str3 = str2[0]+str2[1];
 	  		var imgTag = $("#popup_img");
-			imgTag.attr("src", str3);
+	  		
+	  		if(str2.length > 1) {
+	  			imgTag.attr("src", str3);
+	  		}else {
+				imgTag.attr("src", str);
+			}
 			
 			$(".popup").show('slow');
 			imgTag.addClass("show");

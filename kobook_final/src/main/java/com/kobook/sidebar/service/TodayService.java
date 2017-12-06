@@ -13,4 +13,8 @@ public interface TodayService {
 	public List<HashMap<String, Object>> todayBookViewList(int person_id) throws Exception;
 	public void todayRemove(int today_id) throws Exception;
 	public void todayAllRemoveByPersonId(int person_id) throws Exception;
+	public void todayAllRemoveByDonateId(int donate_id) throws Exception;
+	public void todayAllRemoveByBookId(int book_id) throws Exception;
+	public int todayCountByDonateId(int donate_id) throws Exception;
+	public int todayCountByBookId(int book_id) throws Exception;
 }

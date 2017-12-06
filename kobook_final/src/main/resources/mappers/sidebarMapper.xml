@@ -40,6 +40,22 @@
 	<delete id="todayAllDeleteByPersonId">
 		DELETE FROM today WHERE person_id = #{person_id}
 	</delete>
+
+	<select id="todayCountByDonateId" resultType="int">
+		SELECT count(*) FROM today WHERE donate_id=#{donate_id}
+	</select>
+
+	<delete id="todayAllDeleteByDonateId">
+		DELETE FROM today WHERE donate_id = #{donate_id}
+	</delete>
+
+	<select id="todayCountByBookId" resultType="int">
+		SELECT count(*) FROM today WHERE book_id=#{book_id}
+	</select>
+		
+	<delete id="todayAllDeleteByBookId">
+		DELETE FROM today WHERE book_id = #{book_id}
+	</delete>
 	
 </mapper>
 
