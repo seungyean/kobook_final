@@ -44,9 +44,35 @@
             //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
             $("input[name=checkRow]").prop("checked",false);
         }
+        
+    
+        
     })
 
+		
+		//체크박스 선택 삭제 버튼 
+		$(".btn-warning").click(
+				function() {
+					
+					var checkRow = "";
+					  $( "input[name='checkRow']:checked" ).each (function (){
+						  checkRow = checkRow + $(this).parent().parent().find('td:first').text().trim()+"," ;
+					  });
+					  checkRow = checkRow.substring(0,checkRow.lastIndexOf( ",")); //맨끝 콤마 지우기
 
+					  console.log("체크된 픽아이디 들 : " + checkRow);
+					  
+					  if(checkRow == ''){
+						    alert("삭제할 대상을 선택하세요.");
+						    return false;
+						  }
+
+					  location.href = "/mypage/pickStateUpdate?pick_id="+ checkRow;
+					
+					
+				});
+		
+		
 
 
 		// 찜 삭제 버튼 
@@ -164,33 +190,15 @@
 											</c:forEach>
 										</tbody>
 										</table>
+										<span>
+											선택 상품을&nbsp;<input type="button" value="삭제" class="btn btn-warning" id="del" style="color: white;" >
+										</span>
 									</form>
 									</c:otherwise>
 								</c:choose>
 								
 						</div>
 						<div class="text-center">
-							<%-- <ul class="pagination">
-
-								<c:if test="${pageMaker.prev}">
-									<li><a
-										href="buyList${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
-								</c:if>
-
-								<c:forEach begin="${pageMaker.startPage }"
-									end="${pageMaker.endPage }" var="idx">
-									<li
-										<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-										<a href="buyList${pageMaker.makeSearch(idx)}">${idx}</a>
-									</li>
-								</c:forEach>
-
-								<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-									<li><a
-										href="buyList${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
-								</c:if>
-
-							</ul> --%>
 							<ul class="pagination">
 
 								<c:if test="${pageMaker.prev}">
@@ -208,7 +216,6 @@
 								<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 									<li><a href="pickList?page=${pageMaker.endPage + 1 }">&raquo;</a></li>
 								</c:if>
-
 							</ul>
 						</div>
 					</div>

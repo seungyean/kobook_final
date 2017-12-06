@@ -138,7 +138,7 @@ fieldset {
 												<tr>
 												<td align="center" id="msg_id" class="msg_id">${element.MESSAGE_ID}</td>
 												<td align="center" id="msg_person" class="msg_person">${element.P_NAME}/${element.PERSON_EMAIL}</td>
-												<td align="center" id="msg_person" class="msg_person">${element.MESSAGE_DATE}</td>
+												<td align="center" id="msg_date" class="msg_date">${element.MESSAGE_DATE}</td>
 												<td align="center" ><a id="msg_content" class="msg_content">${element.MESSAGE_CONTENT}</a></td>
 												<td align="center">
 												<c:set var="name" value="${element.MESSAGE_HIT}" />
