@@ -22,6 +22,7 @@ public class TodayController {
 	@Inject
 	private TodayService todayService;
 	
+	//무료나눔 오늘 본 상품 리스트 출력
 	@ResponseBody
 	@RequestMapping(value="todayDonateViewList")
 	public List<HashMap<String, Object>> todayDonateViewList(HttpServletRequest request) throws Exception {
@@ -31,6 +32,7 @@ public class TodayController {
 		return list;
 	}
 	
+	//도서관련 오늘 본 상품 리스트 출력
 	@ResponseBody
 	@RequestMapping("todayBookViewList")
 	public List<HashMap<String, Object>> todayBookViewList(HttpServletRequest request) throws Exception {
@@ -42,6 +44,7 @@ public class TodayController {
 		return list;
 	}
 	
+	//오늘 본 상품 삭제
 	@ResponseBody
 	@RequestMapping(value="todayRemove/{today_id}", method=RequestMethod.GET)
 	public String todayRemove(@PathVariable("today_id") int today_id) throws Exception {
