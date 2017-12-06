@@ -1,4 +1,4 @@
-package com.kobook.today.service;
+package com.kobook.sidebar.service;
 
 import java.util.HashMap;
 import java.util.List;
@@ -7,8 +7,8 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.kobook.today.domain.TodayVO;
-import com.kobook.today.persistence.TodayDAO;
+import com.kobook.sidebar.domain.TodayVO;
+import com.kobook.sidebar.persistence.TodayDAO;
 
 @Service
 public class TodayServiceImpl implements TodayService {

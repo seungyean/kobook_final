@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kobook.login.DTO.LoginDTO;
 import com.kobook.person.service.PersonService;
-import com.kobook.today.service.TodayService;
+import com.kobook.sidebar.service.TodayService;
 import com.kobook.person.domain.PersonVO;
 
 @Controller

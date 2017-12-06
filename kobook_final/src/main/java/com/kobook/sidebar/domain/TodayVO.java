@@ -1,4 +1,4 @@
-package com.kobook.today.domain;
+package com.kobook.sidebar.domain;
 
 import java.io.Serializable;
 

@@ -1,9 +1,9 @@
-package com.kobook.today.persistence;
+package com.kobook.sidebar.persistence;
 
 import java.util.HashMap;
 import java.util.List;
 
-import com.kobook.today.domain.TodayVO;
+import com.kobook.sidebar.domain.TodayVO;
 
 public interface TodayDAO {
 	//todayInsert

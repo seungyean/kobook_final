@@ -1,4 +1,4 @@
-package com.kobook.today.persistence;
+package com.kobook.sidebar.persistence;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.kobook.today.domain.TodayVO;
+import com.kobook.sidebar.domain.TodayVO;
 
 @Repository
 public class TodayDAOImpl implements TodayDAO {
@@ -17,7 +17,7 @@ public class TodayDAOImpl implements TodayDAO {
 	@Inject
 	private SqlSession session;
 	
-	private static String namespace = "com.kobook.mappers.todayMapper";
+	private static String namespace = "com.kobook.mappers.sidebarMapper";
 
 	@Override
 	public void todayInsert(TodayVO vo) throws Exception {

@@ -44,8 +44,8 @@ import com.kobook.chatbot.domain.ChatlogVO;
 import com.kobook.mypage.domain.DeliveryVO;
 import com.kobook.mypage.domain.MileageVO;
 import com.kobook.person.domain.PersonVO;
-import com.kobook.today.domain.TodayVO;
-import com.kobook.today.service.TodayService;
+import com.kobook.sidebar.domain.TodayVO;
+import com.kobook.sidebar.service.TodayService;
 import com.kobook.util.MediaUtils;
 import com.kobook.util.UploadFileUtils;
 

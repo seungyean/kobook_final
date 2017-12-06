@@ -1,9 +1,9 @@
-package com.kobook.today.service;
+package com.kobook.sidebar.service;
 
 import java.util.HashMap;
 import java.util.List;
 
-import com.kobook.today.domain.TodayVO;
+import com.kobook.sidebar.domain.TodayVO;
 
 public interface TodayService {
 	public void todayRegist(TodayVO vo) throws Exception;
