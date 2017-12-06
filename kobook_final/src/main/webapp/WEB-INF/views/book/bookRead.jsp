@@ -133,9 +133,9 @@
 					<div class="col-lg-8 col-md-8 col-sm-8">
 						<!--Project Details Page-->
 						<div class="porDetCarousel">
-							<!-- <div class="carousel-content"> -->
-							  <img alt="aa" class="carousel-item" src="displayFile?fileName=${bookVO.book_img}" width="10px" height="800px">	
-							<!-- </div> -->
+							 <div class="carousel-content">
+							  <img alt="aa"  src="/book/displayFile?fileName=${bookVO.book_img}" width="700px" height="700px">	
+							 </div>
 						</div>
 					</div>
 
@@ -606,7 +606,7 @@
     <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
 
 	<script type="text/javascript">
-    $(document).ready(function() {
+	<!--    $(document).ready(function() {
        $.fn.carousel = function(op) {
           var op, ui = {};
           op = $.extend({
@@ -638,7 +638,7 @@
           ui.carousel.find('.carousel-item').eq(0).show().addClass('active');
           
           
-          // CHANGE ITEM
+              // CHANGE ITEM
           var changeImage = function(direction, context) {
              var current = ui.carousel.find('.carousel-item.active');
 
@@ -716,8 +716,8 @@
             // autoChange: true
           });
        });
-    });
-		
+    });  -->
+
 	</script>
 	
 <script type="text/javascript">

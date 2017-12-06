@@ -177,7 +177,7 @@ $(function()
 										<figure class="touching ">
 
 								
-											<img src="displayFile?fileName=${b.book_img}" alt="aa" height="280"></img>
+											<img src="/book/displayFile?fileName=${b.book_img}" alt="aa" height="280"></img>
 											<a href="/book/bookRead?book_id=${b.book_id}"></a>
 
 											<div class="option inner">

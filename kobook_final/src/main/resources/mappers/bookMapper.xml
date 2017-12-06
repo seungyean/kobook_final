@@ -56,6 +56,14 @@
       and b.book_safe_yn='N'
 	</select>
 	
+		<select id="safeListCount" resultType="Integer">
+	  select count(b.book_id)
+      from book b, person p
+      where b.person_id=p.person_id
+      and b.book_safe_yn='Y'
+	</select>
+	
+	
 		<select id="safeListCriteria" resultType="BookVO" parameterType="SearchCriteria">
 	<![CDATA[
      select b.book_id, b.book_name, b.book_o_price,b.book_m_price,b.book_kind,b.book_edition, b.book_publish, 
@@ -69,12 +77,7 @@
 	</select>
 
 
-	<select id="safeListCount" resultType="Integer">
-	  select count(b.book_id)
-      from book b, person p
-      where b.person_id=p.person_id
-      and b.book_safe_yn='Y'
-	</select>
+
 	
 	
 

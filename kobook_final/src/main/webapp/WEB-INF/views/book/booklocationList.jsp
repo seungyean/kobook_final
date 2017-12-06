@@ -25,7 +25,7 @@ body{
          line-height: 1.6
       }
       .container1{
-         width: 1200px;
+         width: 1100px;
          margin: 0 auto;
       }
 
@@ -157,6 +157,30 @@ body{
                         </c:forEach>
                       </table>
                       
+                      <div class="col-sm-12 text-center">
+         <ul class="pagination">
+
+            <c:if test="${pageMaker.prev}">
+               <li><a
+                  href="booklocationList${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
+            </c:if>
+
+            <c:forEach begin="${pageMaker.startPage }"
+               end="${pageMaker.endPage }" var="idx">
+               <li
+                  <c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+                  <a href="booklocationList${pageMaker.makeSearch(idx)}">${idx}</a>
+               </li>
+            </c:forEach>
+
+            <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+               <li><a
+                  href="booklocationList${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
+            </c:if>
+
+         </ul>
+      </div><!--/col-sm-12 text-center  -->
+            
     
                       
                   </div> <!--/tab-1  -->
@@ -201,7 +225,33 @@ body{
                            <td><fmt:formatDate value="${b2.book_date}" pattern='yyyy-MM-dd' /></td>
                            </tr>
                         </c:forEach>   
-                        </table>         
+                        </table>       
+                        
+                        <div class="col-sm-12 text-center">
+         <ul class="pagination">
+
+            <c:if test="${pageMaker2.prev}">
+               <li><a
+                  href="booklocationList${pageMaker2.makeSearch(pageMaker2.startPage - 1) }">&laquo;</a></li>
+            </c:if>
+
+            <c:forEach begin="${pageMaker2.startPage }"
+               end="${pageMaker2.endPage }" var="idx">
+               <li
+                  <c:out value="${pageMaker2.cri.page == idx?'class =active':''}"/>>
+                  <a href="booklocationList${pageMaker2.makeSearch(idx)}">${idx}</a>
+               </li>
+            </c:forEach>
+
+            <c:if test="${pageMaker2.next && pageMaker2.endPage > 0}">
+               <li><a
+                  href="booklocationList${pageMaker2.makeSearch(pageMaker2.endPage +1) }">&raquo;</a></li>
+            </c:if>
+
+         </ul>
+      </div><!--/col-sm-12 text-center  -->
+            
+                          
                       </div> <!--/tab-2  -->
                
                 </div><!--/container1  -->   
@@ -214,30 +264,7 @@ body{
       
                         
                
-      <div class="col-sm-12 text-center">
-         <ul class="pagination">
-
-            <c:if test="${pageMaker.prev}">
-               <li><a
-                  href="booklocationList${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
-            </c:if>
-
-            <c:forEach begin="${pageMaker.startPage }"
-               end="${pageMaker.endPage }" var="idx">
-               <li
-                  <c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-                  <a href="booklocationList${pageMaker.makeSearch(idx)}">${idx}</a>
-               </li>
-            </c:forEach>
-
-            <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-               <li><a
-                  href="booklocationList${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
-            </c:if>
-
-         </ul>
-      </div><!--/col-sm-12 text-center  -->
-            
+      
             
             
             

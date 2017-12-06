@@ -373,8 +373,13 @@ public class BookController {
 		
 		PageMaker pageMaker=new PageMaker();
 		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(service.countPaging(cri));
+		pageMaker.setTotalCount(service.directListCount());
 		model.addAttribute("pageMaker",pageMaker);
+		
+		PageMaker pageMaker2=new PageMaker();
+		pageMaker2.setCri(cri);
+		pageMaker2.setTotalCount(service.safeListCount());
+		model.addAttribute("pageMaker2",pageMaker2);
 	}
 	
 	
