@@ -411,7 +411,7 @@
 	and o.person_id=per.person_id
  	and p.pay_date between to_date(#{startday},'YYYYMMDD') and to_date (#{endday},'YYYYMMDD')+0.99999
 	 ]]>
-	 
+	 order by d.delivery_id desc
 	 <!-- and p.pay_date >= to_date(#{startday},'YYYYMMDD') and p.pay_date < to_date(#{endday},'YYYYMMDD') + 1 -->
 	</select>
 	

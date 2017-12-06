@@ -473,7 +473,7 @@ public class BookController {
 		System.out.println("PICK컨트롤러 진입");
 		service.pick(pick);
 		System.out.println("pick 상태");
-		return "redirect:/book/bookList";
+		return "redirect:/mypage/pickList";
 	}
 	
 	

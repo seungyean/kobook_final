@@ -157,7 +157,7 @@
 								<li><span>해시태그 :</span>${bookVO.book_hash}</li>
 								<li><span> 원가:</span> ${bookVO.book_o_price}</li>
 								<li><span> 판매가:</span> ${bookVO.book_m_price}</li>
-								<li><span> 할인율 :</span>${(bookVO.book_o_price-bookVO.book_m_price)/100}%</li>
+								<li><span> 할인율 :</span><fmt:formatNumber value="${(bookVO.book_o_price-bookVO.book_m_price)/bookVO.book_o_price*100}" pattern=".0"/>%</li> 
 								<li><span> 판 :</span>${bookVO.book_edition}</li>
 								<li><span>출판사 :</span>${bookVO.book_publish}</li>
 								<li><span>안심여부사용 :</span>${bookVO.book_safe_yn}</li>
@@ -359,7 +359,7 @@
       
       
       <div class="row sub_content">
-                    <div class="col-md-12">
+                    <div class="col-md-11">
                         <div class="dividerHeading">
                             <h4><span>판매자 후기</span></h4>
                         </div>
@@ -387,16 +387,11 @@
 													<td align="center" >${rlist.review_id}</td>
 													<td align="center"colspan="4" class="flip">${rlist.review_title}</td>
 													<td align="center">${rlist.review_star}</td>
-													
-													
 													<td align="center">${reviewer}</td>
 													<td align="center"><fmt:formatDate value="${rlist.review_date}" pattern='yyyy-MM-dd' /></td>
 													
 												</tr>
-												
-										
-												
-										
+
 										<tbody class="section">	
 										
 												<tr align="center">
@@ -410,10 +405,8 @@
 										</c:forEach>
 									</table>
 									<!-- </form> --> 
-
-                    </div>
-
-           <div class="text-center">
+				
+				<div class="text-center">
 			<ul class="pagination">
 
 				<c:if test="${pageMaker.prev}">
@@ -437,6 +430,11 @@
 			</ul>
 		</div>
                </div>
+
+
+                    </div>
+
+           
                
          
                
@@ -604,122 +602,6 @@
     <script type="text/javascript" src="/resources/js/jquery-hoverdirection.min.js"></script>
     <script type="text/javascript" src="/resources/js/jquery.matchHeight-min.js"></script>
     <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
-
-	<script type="text/javascript">
-	<!--    $(document).ready(function() {
-       $.fn.carousel = function(op) {
-          var op, ui = {};
-          op = $.extend({
-             speed: 500,
-             autoChange: false,
-             interval: 5000
-          }, op);
-          ui.carousel = this;
-          ui.items    = ui.carousel.find('.carousel-item');
-          ui.itemsLen = ui.items.length;
-
-          // CREATE CONTROLS
-          ui.ctrl    = $('<div />', {'class': 'carousel-control'});
-          ui.prev    = $('<div />', {'class': 'carousel-prev'});
-          ui.next    = $('<div />', {'class': 'carousel-next'});
-          ui.pagList  = $('<ul />', {'class': 'carousel-pagination'});
-          ui.pagItem  = $('<li></li>');
-          for (var i = 0; i < ui.itemsLen; i++) {
-             ui.pagItem.clone().appendTo(ui.pagList);
-          }
-          ui.prev.appendTo(ui.ctrl);
-          ui.next.appendTo(ui.ctrl);
-          ui.pagList.appendTo(ui.ctrl);
-          ui.ctrl.appendTo(ui.carousel);
-          ui.carousel.find('.carousel-pagination li').eq(0).addClass('active');
-          ui.carousel.find('.carousel-item').each(function() {
-             $(this).hide();
-          });
-          ui.carousel.find('.carousel-item').eq(0).show().addClass('active');
-          
-          
-              // CHANGE ITEM
-          var changeImage = function(direction, context) {
-             var current = ui.carousel.find('.carousel-item.active');
-
-             if (direction == 'index') {
-                if(current.index() === context.index())
-                   return false;
-
-                context.addClass('active').siblings().removeClass('active');
-
-                ui.items.eq(context.index()).addClass('current').fadeIn(op.speed, function() {
-                   current.removeClass('active').hide();
-                   $(this).addClass('active').removeClass('current');
-                });
-             } 
-
-             if (direction == 'prev') {
-                if (current.index() == 0) {
-                   ui.carousel.find('.carousel-item:last').addClass('current').fadeIn(op.speed, function() {
-                      current.removeClass('active').hide();
-                      $(this).addClass('active').removeClass('current');
-                   });
-                }
-                else {
-                   current.prev().addClass('current').fadeIn(op.speed, function() {
-                      current.removeClass('active').hide();
-                      $(this).addClass('active').removeClass('current');
-                   });
-                }
-             }
-
-             if (direction == undefined) {
-                if (current.index() == ui.itemsLen - 1) {
-                   ui.carousel.find('.carousel-item:first').addClass('current').fadeIn(300, function() {
-                      current.removeClass('active').hide();
-                      $(this).addClass('active').removeClass('current');
-                   });
-                }
-                else {
-                   current.next().addClass('current').fadeIn(300, function() {
-                      current.removeClass('active').hide();
-                      $(this).addClass('active').removeClass('current');
-                   });
-                }
-             }
-             ui.carousel.find('.carousel-pagination li').eq( ui.carousel.find('.carousel-item.current').index() ).addClass('active').siblings().removeClass('active');
-          };
-
-          ui.carousel
-             .on('click', 'li', function() {
-                changeImage('index', $(this));
-             })
-             .on('click', '.carousel-prev', function() {
-                changeImage('prev');
-             })
-             .on('click', '.carousel-next', function() {
-                changeImage();
-             });
-          
-          // AUTO CHANGE
-          if (op.autoChange) {
-             var changeInterval = setInterval(changeImage, op.interval);
-             ui.carousel
-                .on('mouseenter', function() {
-                   clearInterval(changeInterval);
-                })
-                .on('mouseleave', function() {
-                   changeInterval = setInterval(changeImage, op.interval);
-                });
-          }
-          return this;
-       };
-       
-       $('.porDetCarousel').each(function() {
-          $(this).carousel({
-            // autoChange: true
-          });
-       });
-    });  -->
-
-	</script>
-	
 <script type="text/javascript">
 $(function(){
 	$('.section').hide();	

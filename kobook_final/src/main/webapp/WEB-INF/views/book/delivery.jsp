@@ -378,30 +378,7 @@
 											</tr>
 										</thead>
 										<tbody class="dtable">
-											<%-- <c:forEach var="d" items="${dlist}">
-												<tr>
-													<td align="center" id="d_id" data-rno="${d.DELIVERY_ID}" >${d.DELIVERY_ID}</td>
-													<td align="center">${d.BOOK_NAME}</td>
-													<td align="center">${d.PERSON_NAME}</td>
-													<td align="center">${d.PAY_AMOUNT}</td>
-													<td align="center">${d.DELIVERY_ADDRESS}</td>
-													<td align="center"><fmt:formatDate value="${d.PAY_DATE}" pattern='yyyy-MM-dd' /></td>
-													<td align="center" >
-														<input type="radio" class="status" name="delState${d.DELIVERY_ID}" etc="W" value="W" <c:if test="${d.DELIVERY_STATE eq 'W'}">checked="checked"</c:if>>배송준비중 &nbsp;&nbsp;
-														<input type="radio"  class="status" name="delState${d.DELIVERY_ID}" etc="I" value="I" <c:if test="${d.DELIVERY_STATE eq 'I'}">checked="checked"</c:if>>배송중 &nbsp;&nbsp;
-														<input type="radio"class="status"  name="delState${d.DELIVERY_ID}" etc="C" value="C" <c:if test="${d.DELIVERY_STATE eq 'C'}">checked="checked"</c:if>>배송완료 &nbsp;&nbsp;
-													</td>
-													<td align="center">
-														<c:choose>
-															<c:when test="${empty d.DELIVERY_MSG}">
-															</c:when>
-															<c:otherwise>
-																<img alt="" src="/resources/img/msg.png" data-rno="${d.DELIVERY_MSG}" class="msgimg" width="22px" height="15px">
-															</c:otherwise>
-														</c:choose>
-													</td>
-												</tr>
-											</c:forEach> --%>
+								
 										</tbody>
 									</table>
 								<!-- </form> -->
@@ -441,9 +418,6 @@
 		            <div class="btn-group btn-delete hidden" role="group">
 		               <button type="button" id="delImage" class="btn btn-default btn-hover-red" data-dismiss="modal"  role="button">취소</button>
 		            </div>
-	          <!--   <div class="btn-group" role="group">
-	               <button type="button" id="pay_success" class="btn btn-default btn-hover-green" data-action="save" role="button">결제</button>
-	            </div> -->
 	            </div>
 			</div>
          </div>
@@ -649,9 +623,11 @@
 	 function getList(deliveryInfo){
 		$.getJSON(deliveryInfo, function(data){		// "/chat/{person_id}" 로부터 나오는 전체 데이터 (array)
 			
-			alert(data);
+			//alert(data);
 			console.log("넘어온 데이터: "+data);
 			console.log("dataArray: " + data.length);
+			
+			$('.trow').remove();
 			$.each(data,function(index,result){
 
 				var state="";
@@ -678,9 +654,9 @@
 					img+='<a href="#"><img alt="" src="/resources/img/msg.png" data-rno="'+result.delivery_msg+'" class="msgimg" width="22px" height="15px"></a>';
 				}
 				
-						$('.srow').remove();
+						
 						$(".dtable").append(
-						'<tr><td align="center" id="d_id" data-rno='+result.delivery_id+'>'+result.delivery_id+'</td>'
+						'<tr class="trow"><td align="center" id="d_id" data-rno='+result.delivery_id+'>'+result.delivery_id+'</td>'
 						+'<td align="center">'+result.book_name+'</td>'
 						+'<td align="center">'+result.person_name+'</td>'
 						+'<td align="center">'+result.pay_amount+'</td>'
@@ -689,6 +665,8 @@
 						+'<td align="center" class="state">'+state+'</td>'
 						+'<td align="center" class="msg">'+img+'</td>'
 						);
+						
+					
 						
 
 						

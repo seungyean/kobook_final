@@ -82,7 +82,7 @@ public class BookDAOImpl implements BookDAO {
 		Map<String, Object>hmap=new HashMap<String,Object>();
 		hmap.put("person_id", person_id);
 		hmap.put("cri", cri);
-		return session.selectList(namespace+".reviewList",hmap,new RowBounds(cri.getPageStart(),cri.getPerPageNum()));
+		return session.selectList(namespace+".reviewList",hmap,new RowBounds(cri.getPageStart(),5));
 	}
 
 
