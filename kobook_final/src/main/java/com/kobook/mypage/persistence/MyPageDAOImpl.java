@@ -17,6 +17,7 @@ import com.kobook.mypage.domain.MileageVO;
 import com.kobook.mypage.domain.MyPageCriteria;
 import com.kobook.mypage.domain.OrderVO;
 import com.kobook.mypage.domain.PayVO;
+import com.kobook.mypage.domain.SearchDateCriteria;
 import com.kobook.person.domain.PersonVO;
 
 
@@ -40,7 +41,7 @@ public class MyPageDAOImpl implements MyPageDAO {
 	}
 
 	@Override
-	public List<HashMap<String, String>> buyList(MyPageCriteria cri) throws Exception {
+	public List<HashMap<String, String>> buyList(SearchDateCriteria cri) throws Exception {
 		return session.selectList(namespace + ".buyList",  cri, new RowBounds(cri.getPageStart(), cri.getPerPageNum()));
 	}
 
@@ -130,7 +131,7 @@ public class MyPageDAOImpl implements MyPageDAO {
 	}
 
 	@Override
-	public Integer countPaging(MyPageCriteria cri) throws Exception {
+	public Integer countPaging(SearchDateCriteria cri) throws Exception {
 		return session.selectOne(namespace+".countPaging", cri);
 	}
 

@@ -11,6 +11,7 @@ import com.kobook.mypage.domain.MileageVO;
 import com.kobook.mypage.domain.MyPageCriteria;
 import com.kobook.mypage.domain.OrderVO;
 import com.kobook.mypage.domain.PayVO;
+import com.kobook.mypage.domain.SearchDateCriteria;
 import com.kobook.person.domain.PersonVO;
 
 
@@ -21,11 +22,11 @@ public interface MyPageService {
 	/* 판매 상태 변경 */
 	public void sellStateModify(BookVO vo)throws Exception;
 	/* 구매내역 */
-	public List<HashMap<String, String>> buyList(MyPageCriteria cri)throws Exception;
+	public List<HashMap<String, String>> buyList(SearchDateCriteria cri)throws Exception;
 	/* 구매내역 날짜별 조회 */
 	public List<HashMap<String, String>> buyListDate(MyPageCriteria cri) throws Exception;
 	/* 구매내역 리스트 카운팅 */
-	public Integer countPaging(MyPageCriteria cri)throws Exception;
+	public Integer countPaging(SearchDateCriteria cri)throws Exception;
 	public Integer countPagingPick(MyPageCriteria cri)throws Exception;
 	/* 찜 내역 */
 	public List<HashMap<String, String>> pickList(MyPageCriteria cri)throws Exception;

@@ -66,15 +66,15 @@ public class MyPageTest {
 	
 	
 //	 주문 인서트
-	@Test
-	public void Test() throws Exception{
-		MyPageCriteria cri = new MyPageCriteria();
-		cri.setPerson_id(7);
-		cri.setPage(1);
-		cri.setPerPageNum(10);
-		
-		 dao.buyList(cri);
-		 
-		 System.out.println( dao.buyList(cri).toString());
-	}
+//	@Test
+//	public void Test() throws Exception{
+//		MyPageCriteria cri = new MyPageCriteria();
+//		cri.setPerson_id(7);
+//		cri.setPage(1);
+//		cri.setPerPageNum(10);
+//		
+//		 dao.buyList(cri);
+//		 
+//		 System.out.println( dao.buyList(cri).toString());
+//	}
 }

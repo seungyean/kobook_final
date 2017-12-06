@@ -172,6 +172,8 @@ public class MyPageController {
 		
 		model.addAttribute("buyList", service.buyList(cri));
 		
+		
+		
 		MyPageMaker pageMaker = new MyPageMaker();
 		pageMaker.setCri(cri);
 

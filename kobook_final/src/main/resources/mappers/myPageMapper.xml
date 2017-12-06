@@ -27,7 +27,7 @@
 	</update>
 
 	<!-- 구매내역 리스트 -->
-	<select id="buyList" resultType="hashMap" parameterType="int">
+	<select id="buyList" resultType="hashMap" parameterType="SearchDateCriteria">
 		SELECT
 		p.pay_id,
 		b.book_img,
@@ -42,14 +42,16 @@
 		AND
 		o.book_id = b.book_id
 		AND o.person_id = #{person_id}
-    <if test="start_date != null">
+		<if test="null != start_date">
+		 <if test="start_date != ''.toString()">
 		and o.order_date between #{start_date} and #{end_date}
+		</if>
 		</if>
 		ORDER BY p.pay_id DESC
 	</select>
 	
 	<!-- 구매내역 리스트 카운팅-->
-	<select id="countPaging" resultType="Integer" parameterType="int">
+	<select id="countPaging" resultType="Integer" parameterType="SearchDateCriteria">
 		SELECT
 		count(p.pay_id) as pay_cnt
 		FROM
@@ -59,7 +61,13 @@
 		WHERE o.order_id = p.order_id
 		AND
 		o.book_id = b.book_id
-		AND o.person_id =#{person_id}
+		   <if test="null != start_date">
+		 <if test="start_date != ''.toString()">
+		and o.order_date between #{start_date} and #{end_date}
+		</if>
+		</if>
+		
+		AND o.person_id = #{person_id}
 	</select>
 	
 	<!-- 구매내역 리스트 날짜별 조회 -->
@@ -78,9 +86,7 @@
 		AND
 		o.book_id = b.book_id
 		AND o.person_id = #{person_id}
-    <if test="start_date != null">
 		and o.order_date between #{start_date} and #{end_date}
-		</if>
 		ORDER BY p.pay_id DESC
 	</select>
 

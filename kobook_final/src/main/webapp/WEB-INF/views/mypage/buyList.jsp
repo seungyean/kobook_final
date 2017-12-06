@@ -95,8 +95,8 @@ fieldset {
 										<img src="http://img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date5.gif" alt="6개월" />
 										</a>
 										</span> 
-										<input type="date" id="start_date" name="start_date" value=""> 
-										~ <input type="date" id="end_date" name="end_date" value=""> 
+										<input type="date" id="start_date" name="start_date" value="${cri.start_date }"> 
+										~ <input type="date" id="end_date" name="end_date" value="${cri.end_date }"> 
 <!-- 										<input alt="조회" id="order_search_btn" type="button" class="btn-warning" value="조회"/> -->
 												<button id="searchBtn">조회</button>
 									</fieldset>
@@ -166,10 +166,8 @@ fieldset {
 										href="buyList${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
 								</c:if>
 
-								<c:forEach begin="${pageMaker.startPage }"
-									end="${pageMaker.endPage }" var="idx">
-									<li
-										<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+								<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
+									<li <c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
 										<a href="buyList${pageMaker.makeSearch(idx)}">${idx}</a>
 									</li>
 								</c:forEach>
@@ -241,19 +239,6 @@ fieldset {
 	
 	$(function(){
 
-		$('#searchBtn').on("click",	function(event) {
-			console.log("버튼클릭");
-					self.location = "buyList"
-							+ '${pageMaker.makeQuery(1)}'
-							+ "&start_date="
-							+ $("#start_date").val() 
-							+ "&end_date=" 
-							+ $("#end_date").val();
-				});
-		
-	
-		
-		
 		$(".btn-default").on("click",function(event){
 			event.preventDefault();
 			console.log($(this).val());
@@ -262,10 +247,7 @@ fieldset {
 		});
 	});
 	
-	
-		function fn_review(){
-	 				window.open("/book/bookreviewRegist?pay_id="+i,"","width=400,height=300,left=550,top=200");
-		}
+		
 </script>
     <!-- Start Style Switcher -->
     <div class="switcher"></div>
