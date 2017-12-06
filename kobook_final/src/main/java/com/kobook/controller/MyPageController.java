@@ -108,26 +108,34 @@ public class MyPageController {
 
 	/* 판매내역 */
 	@RequestMapping(value = "/sellList", method = RequestMethod.GET)
-	public void sellList(HttpServletRequest request, Model model) throws Exception{
+	public void sellList(HttpServletRequest request, Model model,@ModelAttribute("cri") SearchDateCriteria cri) throws Exception{
 		System.out.println("----------------Controller : 판매내역 출력-----------------");
 		
 		HttpSession session = request.getSession();
 		int person_id = Integer.parseInt((String)session.getAttribute("person_id"));
+		System.out.println(person_id);
+		cri.setPerson_id(person_id);
 		
+		model.addAttribute("sellList", service.sellList(cri));
 		
-		model.addAttribute("sellList", service.sellList(person_id));
+		MyPageMaker pageMaker = new MyPageMaker();
+		pageMaker.setCri(cri);
+		
+		pageMaker.setTotalCount(service.sellCountPaging(cri));
+		model.addAttribute("pageMaker", pageMaker);
 		
 	}
 	
 	/* 판매상태 변경 */
 	@RequestMapping(value = "/sellStateUpdate", method = RequestMethod.POST)
-	public String sellStateUpdate(HttpServletRequest request, BookVO book, RedirectAttributes rttr) throws Exception {
+	public String sellStateUpdate(HttpServletRequest request, BookVO book, RedirectAttributes rttr, @ModelAttribute("cri") SearchDateCriteria cri) throws Exception {
 		System.out.println("----------------Controller : 판매상태 변경-----------------");
 		
 		HttpSession session = request.getSession();
 		int person_id = Integer.parseInt((String)session.getAttribute("person_id"));
+		cri.setPerson_id(person_id);
 		
-		List<BookVO> booksellList = service.sellList(person_id);
+		List<BookVO> booksellList = service.sellList(cri);
 		
 		for (BookVO bookVO : booksellList) {
 			int book_id = bookVO.getBook_id();
@@ -154,7 +162,7 @@ public class MyPageController {
 			}
 		}
 		
-		booksellList = service.sellList(person_id);
+		booksellList = service.sellList(cri);
 		request.setAttribute("sellList", booksellList);
 		return "redirect:/mypage/sellList";
 
@@ -171,8 +179,6 @@ public class MyPageController {
 		cri.setPerson_id(person_id);
 		
 		model.addAttribute("buyList", service.buyList(cri));
-		
-		
 		
 		MyPageMaker pageMaker = new MyPageMaker();
 		pageMaker.setCri(cri);

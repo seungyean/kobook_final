@@ -30,8 +30,8 @@ public class MyPageDAOImpl implements MyPageDAO {
 	private static String namespace = "com.kobook.mappers.myPageMapper";
 
 	@Override
-	public List<BookVO> sellList(int person_id) throws Exception {
-		return session.selectList(namespace + ".sellList", person_id);
+	public List<BookVO> sellList(SearchDateCriteria cri) throws Exception {
+		return session.selectList(namespace + ".sellList", cri, new RowBounds(cri.getPageStart(), cri.getPerPageNum()));
 	}
 
 	@Override
@@ -136,11 +136,6 @@ public class MyPageDAOImpl implements MyPageDAO {
 	}
 
 	@Override
-	public List<HashMap<String, String>> buyListDate(MyPageCriteria cri) throws Exception {
-		return session.selectList(namespace + "buyListDate", cri);
-	}
-
-	@Override
 	public Integer countPagingPick(MyPageCriteria cri) throws Exception {
 		return session.selectOne(namespace + ".countPagingPick", cri);
 	}
@@ -149,6 +144,11 @@ public class MyPageDAOImpl implements MyPageDAO {
 	public void msgDelete(int message_id) throws Exception {
 		session.delete(namespace + ".msgDelete", message_id);
 		
+	}
+
+	@Override
+	public Integer sellCountPaging(MyPageCriteria cri) throws Exception {
+		return session.selectOne(namespace + ".sellCountPaging", cri);
 	}
 
 	

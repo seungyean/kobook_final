@@ -18,16 +18,17 @@ import com.kobook.person.domain.PersonVO;
 public interface MyPageService {
 	
 	/* 판매내역 */
-	public List<BookVO> sellList(int person_id)throws Exception;
+	public List<BookVO> sellList(SearchDateCriteria cri)throws Exception;
 	/* 판매 상태 변경 */
 	public void sellStateModify(BookVO vo)throws Exception;
 	/* 구매내역 */
 	public List<HashMap<String, String>> buyList(SearchDateCriteria cri)throws Exception;
-	/* 구매내역 날짜별 조회 */
-	public List<HashMap<String, String>> buyListDate(MyPageCriteria cri) throws Exception;
 	/* 구매내역 리스트 카운팅 */
 	public Integer countPaging(SearchDateCriteria cri)throws Exception;
+	/* 찜리스트 카운팅 */
 	public Integer countPagingPick(MyPageCriteria cri)throws Exception;
+	/* 판매내역 카운팅 */
+	public Integer sellCountPaging(MyPageCriteria cri)throws Exception;
 	/* 찜 내역 */
 	public List<HashMap<String, String>> pickList(MyPageCriteria cri)throws Exception;
 	/* 찜 상태 변경 */

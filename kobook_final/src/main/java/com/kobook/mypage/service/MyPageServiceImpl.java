@@ -28,8 +28,8 @@ public class MyPageServiceImpl implements MyPageService {
 	private MyPageDAO dao;
 
 	@Override
-	public List<BookVO> sellList(int person_id)throws Exception {
-		return dao.sellList(person_id);
+	public List<BookVO> sellList(SearchDateCriteria cri)throws Exception {
+		return dao.sellList(cri);
 	}
 
 	@Override
@@ -119,11 +119,6 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	@Override
-	public List<HashMap<String, String>> buyListDate(MyPageCriteria cri) throws Exception {
-		return dao.buyListDate(cri);
-	}
-
-	@Override
 	public Integer countPagingPick(MyPageCriteria cri) throws Exception {
 		return dao.countPagingPick(cri);
 	}
@@ -131,6 +126,11 @@ public class MyPageServiceImpl implements MyPageService {
 	@Override
 	public void msgDelete(int message_id) throws Exception {
 		dao.msgDelete(message_id);
+	}
+
+	@Override
+	public Integer sellCountPaging(MyPageCriteria cri) throws Exception {
+		return dao.sellCountPaging(cri);
 	}
 
 	

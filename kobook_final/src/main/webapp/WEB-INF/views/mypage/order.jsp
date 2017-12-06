@@ -6,132 +6,132 @@
 <html class="no-js" lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>주문</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-    <!-- CSS FILES -->
-    <link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/resources/css/style.css">
-    <link rel="stylesheet" type="text/css" href="/resources/css/style.css" media="screen" data-name="skins">
-    <link rel="stylesheet" href="/resources/css/layout/wide.css" data-name="layout">
-    <link rel="stylesheet" type="text/css" href="/resources/css/switcher.css" media="screen" />
+ 	<!-- CSS FILES -->
+  <link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="/resources/css/style.css">
+  <link rel="stylesheet" type="text/css" href="/resources/css/style.css" media="screen" data-name="skins">
+  <link rel="stylesheet" href="/resources/css/layout/wide.css" data-name="layout">
+  <link rel="stylesheet" type="text/css" href="/resources/css/switcher.css" media="screen" />
 
-    <script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
-    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-    <script id="template" type="text/x-handlebars-template">
-<div class="alert alert-danger alert-dismissable">
-            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-            <strong>Oh snap! </strong> You message goes here.
-       		 </div>               
-</script> 
-   	<script>
-   
-   $(function(){
+  <script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
+  <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+	<script id="template" type="text/x-handlebars-template">
+		<div class="alert alert-danger alert-dismissable">
+      <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+      <strong>Oh snap! </strong> You message goes here.
+    </div>               
+	</script>
+	<script>
 	   
-	   var del_price = 2000;
-	   $('#total_price').html(parseInt($('#book_price').text()) + del_price);
-	   
-	   // 마일리지 사용
-	   $("#input_mile").keyup(function() {
-		var book_price = parseInt($('#book_price').text());
-   		var input_mile = parseInt($('#input_mile').val());
-   		$('#total_price').html($('#book_price').text() - input_mile + del_price );
-   		$('#sale_price').html($('#input_mile').val());
-   		var total_mile = $('#totalMileage').html();
-   		
-   		if(input_mile > total_mile ){
-   			$('#mileModal').modal();
-   			$('#input_mile').val(0);
-   			$('#sale_price').html(0);
-   		}
-   		
-		});
-	   
-	   //결제버튼 클릭 
- 	   $("#orderSuccess").click(function() {
-		   var data = $('#bookID').html();
-		   var data2 = $('#total_price').html();
-		   var data3 = $('#dpostcode').attr("placeholder")+', ' + $('#daddr1').attr("placeholder")+', ' + $('#daddr2').attr("placeholder"); 
-		   var data4 = $('#omessage').val();
-		   var data5 = $('#mileageAvg').html();
-		   var data6 = $('#input_mile').val();
+	   $(function(){
 		   
-		   $('#total_price2').val(data2);
-		   $('#addr').val(data3);
-		   $('#msg').val(data4);
-		   $('#mileageAvg2').val(data5);
-		   $('#input_mile2').val(data6);
-		   $("#form1").attr("action", "/mypage/order");
-		   $("#form1").attr("method", "post");
-		   $("#form1").submit();
-		});
-	   
-	   // 우편번호 api
-  	  $("#btn_post").on("click",function(){
-	   new daum.Postcode({
-		   oncomplete: function(data) {
-               // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-               // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-               var fullAddr = ''; // 최종 주소 변수
-               var extraAddr = ''; // 조합형 주소 변수
-
-               // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-               if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                   fullAddr = data.roadAddress;
-               } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                   fullAddr = data.jibunAddress;
-               }
-
-               // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
-               if(data.userSelectedType === 'R'){
-                   //법정동명이 있을 경우 추가한다.
-                   if(data.bname !== ''){
-                       extraAddr += data.bname;
-                   }
-                   // 건물명이 있을 경우 추가한다.
-                   if(data.buildingName !== ''){
-                       extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                   }
-                   // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
-                   fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
-               }
-
-               // 우편번호와 주소 정보를 해당 필드에 넣는다.
-               document.getElementById('dpostcode').value = data.zonecode; //5자리 새우편번호 사용
-               document.getElementById('daddr1').value = fullAddr;
-
-               // 커서를 상세주소 필드로 이동한다.
-               document.getElementById('daddr2').focus();
-           }
-	    }).open();
-	   }); 
-	   
-	 //배송지 정보 : 새로운배송지 라디오 버튼 클릭시
-	   $("#newDel").on("click",function(){
-			   $('#dname').attr("placeholder", " ");
-			   $('#dpostcode').attr("placeholder", " ");
-			   $('#daddr1').attr("placeholder", " ");
-			   $('#daddr2').attr("placeholder", " ");
-			   $('#dphone1_1').attr("placeholder", " ");
-			   $('#dphone1_2').attr("placeholder", " ");
-			   $('#dphone1_3').attr("placeholder", " ");
+		   var del_price = 2000;
+		   $('#total_price').html(parseInt($('#book_price').text()) + del_price);
+		   
+		   // 마일리지 사용
+		   $("#input_mile").keyup(function() {
+			var book_price = parseInt($('#book_price').text());
+	   		var input_mile = parseInt($('#input_mile').val());
+	   		$('#total_price').html($('#book_price').text() - input_mile + del_price );
+	   		$('#sale_price').html($('#input_mile').val());
+	   		var total_mile = $('#totalMileage').html();
+	   		
+	   		if(input_mile > total_mile ){
+	   			$('#mileModal').modal();
+	   			$('#input_mile').val(0);
+	   			$('#sale_price').html(0);
+	   		}
+	   		
+			});
+		   
+		   //결제버튼 클릭 
+	 	   $("#orderSuccess").click(function() {
+			   var data = $('#bookID').html();
+			   var data2 = $('#total_price').html();
+			   var data3 = $('#dpostcode').attr("placeholder")+', ' + $('#daddr1').attr("placeholder")+', ' + $('#daddr2').attr("placeholder"); 
+			   var data4 = $('#omessage').val();
+			   var data5 = $('#mileageAvg').html();
+			   var data6 = $('#input_mile').val();
+			   
+			   $('#total_price2').val(data2);
+			   $('#addr').val(data3);
+			   $('#msg').val(data4);
+			   $('#mileageAvg2').val(data5);
+			   $('#input_mile2').val(data6);
+			   $("#form1").attr("action", "/mypage/order");
+			   $("#form1").attr("method", "post");
+			   $("#form1").submit();
+			});
+		   
+		   // 우편번호 api
+	  	  $("#btn_post").on("click",function(){
+		   new daum.Postcode({
+			   oncomplete: function(data) {
+	               // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+	               // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	               var fullAddr = ''; // 최종 주소 변수
+	               var extraAddr = ''; // 조합형 주소 변수
+	
+	               // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+	               if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+	                   fullAddr = data.roadAddress;
+	               } else { // 사용자가 지번 주소를 선택했을 경우(J)
+	                   fullAddr = data.jibunAddress;
+	               }
+	
+	               // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+	               if(data.userSelectedType === 'R'){
+	                   //법정동명이 있을 경우 추가한다.
+	                   if(data.bname !== ''){
+	                       extraAddr += data.bname;
+	                   }
+	                   // 건물명이 있을 경우 추가한다.
+	                   if(data.buildingName !== ''){
+	                       extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                   }
+	                   // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+	                   fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+	               }
+	
+	               // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	               document.getElementById('dpostcode').value = data.zonecode; //5자리 새우편번호 사용
+	               document.getElementById('daddr1').value = fullAddr;
+	
+	               // 커서를 상세주소 필드로 이동한다.
+	               document.getElementById('daddr2').focus();
+	           }
+		    }).open();
 		   }); 
-   
- 	//배송지 정보 : 주문자 동일 라디오 버튼 클릭시
-	   $("#orderDel").on("click",function(){
-		   $('#dname').attr("placeholder", $('#oname').attr("placeholder"));
-		   $('#dpostcode').attr("placeholder", $('#opostcode').attr("placeholder"));
-		   $('#daddr1').attr("placeholder", $('#oaddr1').attr("placeholder"));
-		   $('#daddr2').attr("placeholder", $('#oaddr2').attr("placeholder"));
-		   $('#dphone1_1').attr("placeholder", $('#ophone1_1').attr("placeholder"));
-		   $('#dphone1_2').attr("placeholder", $('#ophone1_2').attr("placeholder"));
-		   $('#dphone1_3').attr("placeholder", $('#ophone1_3').attr("placeholder"));
 		   
-	   }); 
-	});
-   </script>
+		 //배송지 정보 : 새로운배송지 라디오 버튼 클릭시
+		   $("#newDel").on("click",function(){
+				   $('#dname').attr("placeholder", " ");
+				   $('#dpostcode').attr("placeholder", " ");
+				   $('#daddr1').attr("placeholder", " ");
+				   $('#daddr2').attr("placeholder", " ");
+				   $('#dphone1_1').attr("placeholder", " ");
+				   $('#dphone1_2').attr("placeholder", " ");
+				   $('#dphone1_3').attr("placeholder", " ");
+			   }); 
+	   
+	 	//배송지 정보 : 주문자 동일 라디오 버튼 클릭시
+		   $("#orderDel").on("click",function(){
+			   $('#dname').attr("placeholder", $('#oname').attr("placeholder"));
+			   $('#dpostcode').attr("placeholder", $('#opostcode').attr("placeholder"));
+			   $('#daddr1').attr("placeholder", $('#oaddr1').attr("placeholder"));
+			   $('#daddr2').attr("placeholder", $('#oaddr2').attr("placeholder"));
+			   $('#dphone1_1').attr("placeholder", $('#ophone1_1').attr("placeholder"));
+			   $('#dphone1_2').attr("placeholder", $('#ophone1_2').attr("placeholder"));
+			   $('#dphone1_3').attr("placeholder", $('#ophone1_3').attr("placeholder"));
+			   
+		   }); 
+		});
+	 </script>
 </head>
 <body>
 	<!-- 헤더 -->
@@ -140,23 +140,23 @@
 	
 	<!--start wrapper-->
 	<section class="wrapper">
-        <section class="page_head">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                        <div class="page_title">
-                            <h2>주문</h2>
-                        </div>
-                        <nav id="breadcrumbs">
-                            <ul>
-                                <li><a href="index.html">홈</a>/</li>
-                                <li>주문 </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <section class="page_head">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12">
+						<div class="page_title">
+							<h2>주문</h2>
+						</div>
+						<nav id="breadcrumbs">
+							<ul>
+								<li><a href="index.html">홈</a>/</li>
+								<li>주문</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</section><!-- /page_head -->
 		<section class="content typography">
 			<div class="container">
 				<div class="row sub_content">
@@ -187,34 +187,35 @@
 								                    </tr>
 								                </thead>
 								                <tbody>
-													<tr>
-								                        <td class="col-sm-8 col-md-6">
-									                        <div class="media">
-									                            <a class="thumbnail pull-left" href="#" style="border: none;"> 
-									                            	<img class="thumbnail" alt="NO IMAGE" src="/mypage/displayFile?fileName=${oneBook.book_img}" style="width: 72px; height: 72px;">
-									                            </a>
-									                            <div class="media-body">
-									                                <h4 class="media-heading"><a href="#">&nbsp;&nbsp;${oneBook.book_name }</a></h4>
-									                                <h5 class="media-heading"><a href="#">&nbsp;&nbsp;&nbsp;${oneBook.book_publish }</a></h5>
-									                            </div>
-									                        </div>
-								                        </td>
-								                        <td class="col-sm-1 col-md-1 text-center" id="m_price" ><strong>${oneBook.book_m_price }</strong><strong>원</strong></td>
-								                        <td class="col-sm-1 col-md-1 text-center" id="bookID" style="display:none;" >${oneBook.book_id }</td>
-								                        <td class="col-sm-1 col-md-1 text-center"><strong>1</strong></td>
-								                        <td class="col-sm-1 col-md-1 text-center">
-								                       <fmt:parseNumber var="avg" value="${oneBook.book_m_price /100}" integerOnly="true" />
-								                        	<strong id="mileageAvg">${avg}</strong>
-								                        	<strong>P</strong>
-								                        </td>
-								                        <td class="col-sm-1 col-md-1 text-center"><strong>2000원</strong></td>
-								                    </tr>
-								                </tbody>
-							            </table>
-							        </div>
-							    </div>
-							</div>
-							<!-- /주문정보 -->
+																	<tr>
+																		<td class="col-sm-8 col-md-6">
+																			<div class="media">
+																				<a class="thumbnail pull-left" href="#"style="border: none;"> 
+																					<img class="thumbnail" alt="NO IMAGE" src="/mypage/displayFile?fileName=${oneBook.book_img}" style="width: 72px; height: 72px;">
+																				</a>
+																				<div class="media-body">
+																					<h4 class="media-heading">
+																						<a href="#">&nbsp;&nbsp;${oneBook.book_name }</a>
+																					</h4>
+																					<h5 class="media-heading">
+																						<a href="#">&nbsp;&nbsp;&nbsp;${oneBook.book_publish }</a>
+																					</h5>
+																				</div>
+																			</div>
+																		</td>
+																		<td class="col-sm-1 col-md-1 text-center" id="m_price"><strong>${oneBook.book_m_price }</strong><strong>원</strong></td>
+																		<td class="col-sm-1 col-md-1 text-center" id="bookID" style="display: none;">${oneBook.book_id }</td>
+																		<td class="col-sm-1 col-md-1 text-center"><strong>1</strong></td>
+																		<td class="col-sm-1 col-md-1 text-center"><fmt:parseNumber var="avg" value="${oneBook.book_m_price /100}" integerOnly="true" /> 
+																		<strong id="mileageAvg">${avg}</strong>
+																		<strong>P</strong></td>
+																		<td class="col-sm-1 col-md-1 text-center"><strong>2000원</strong></td>
+																	</tr>
+																</tbody>
+							            	</table>
+							       		 </div>
+							    		</div>
+									</div><!-- /주문정보 -->
 							
 							<!-- 주문자 정보 -->
 							<div class="container">
@@ -321,11 +322,10 @@
 																<input type="radio" value="N" name="sameAddr" id="newDel">&nbsp;새로운 배송지
 															</td>
 														</tr>
-      														    <tr>
+      											<tr>
 															<th scope="row">받으시는 분 <img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif"alt="필수"></th>
 															<td><input id="dname" name="dname" class="inputTypeText" size="15" value=""type="text"placeholder="${personVO.person_name}" ></td>
 														</tr>
-														
 														<tr>
 															<th scope="row">주소 <img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수"></th>
 															<td><input id="dpostcode" name="dpostcode" class="inputTypeText" placeholder="${personVO.person_postcode}" size="6" maxlength="6" readonly="readonly" value="" type="text">
@@ -337,7 +337,6 @@
 																<input id="daddr2" name="daddr2" class="inputTypeText" placeholder="${personVO.person_address2}" size="40" value="" type="text" > <span class="grid">나머지주소</span>
 															</td>
 														</tr>
-														
 														<tr>
 															<th scope="row">휴대전화 <img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수"></th>
 															<td>
@@ -421,8 +420,8 @@
 												</table>
 											</div>
 										</div>
-							        </div>
-							    </div>
+							     </div>
+							   </div>
 							</div>
 							<!-- /배송자 정보 -->
 							
@@ -582,27 +581,6 @@
 				</div>
 			</div>
 		</section>
-	
-		<section class="promo_box">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-9 col-md-9 col-lg-9">
-                        <div class="promo_content">
-                            <h3>Electrify is awesome responsive template, with clean design.</h3>
-                            <p>Lorem ipsum dolor sit amet, cons adipiscing elit. Aenean commodo ligula eget dolor. </p>
-                        </div>
-                    </div>
-                    <div class="col-sm-3 col-md-3 col-lg-3">
-                        <div class="pb_action">
-                            <a class="btn btn-lg btn-default" href="#fakelink">
-                                <i class="fa fa-shopping-cart"></i>
-                                Download Now
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 	</section><!--end wrapper-->
 
 	<!-- 푸터 -->

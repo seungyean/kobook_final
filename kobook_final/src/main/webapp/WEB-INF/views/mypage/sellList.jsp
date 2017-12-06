@@ -93,9 +93,10 @@ fieldset {
 										<img src="http://img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date5.gif" alt="6개월" />
 										</a>
 										</span> 
-										<input type="date" id="start_date" name="start_date" value=""> 
-										~ <input type="date" id="end_date" name="end_date" value=""> 
-										<input alt="조회" id="order_search_btn" type="submit" class="btn-warning" value="조회"/>
+										<input type="date" id="start_date" name="start_date" value="${cri.start_date }"> 
+										~ <input type="date" id="end_date" name="end_date" value="${cri.end_date }"> 
+<!-- 										<input alt="조회" id="order_search_btn" type="button" class="btn-warning" value="조회"/> -->
+												<button id="searchBtn">조회</button>
 									</fieldset>
 									<br>
 									<ul>
@@ -177,32 +178,32 @@ fieldset {
 									</c:otherwise>
 								</c:choose>
 						</div>
+						<div class="text-center">
+						 <ul class="pagination">
+
+								<c:if test="${pageMaker.prev}">
+									<li><a
+										href="sellList${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
+								</c:if>
+
+								<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
+									<li <c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+										<a href="sellList${pageMaker.makeSearch(idx)}">${idx}</a>
+									</li>
+								</c:forEach>
+
+								<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+									<li><a
+										href="sellList${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
+								</c:if>
+
+							</ul> 
+							
+						</div>
 					</div>
 				</div>
 			</div>
 		</section>
-        
-        
-        <section class="promo_box">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-9 col-md-9 col-lg-9">
-                        <div class="promo_content">
-                            <h3>Electrify is awesome responsive template, with clean design.</h3>
-                            <p>Lorem ipsum dolor sit amet, cons adipiscing elit. Aenean commodo ligula eget dolor. </p>
-                        </div>
-                    </div>
-                    <div class="col-sm-3 col-md-3 col-lg-3">
-                        <div class="pb_action">
-                            <a class="btn btn-lg btn-default" href="#fakelink">
-                                <i class="fa fa-shopping-cart"></i>
-                                Download Now
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 	</section><!--end wrapper-->
 
 	<!-- 푸터 -->
