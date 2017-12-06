@@ -43,9 +43,9 @@ public class HomeController {
 		
 		
 		SearchCriteria cri2 = new SearchCriteria();
+		cri2.setPerPageNum(10);
 		List<BookVO> bookList = bookService.listCriteria(cri2);
-		System.out.println("북 사이즈 : "+bookList.size());
-		
+
 		request.setAttribute("bookList", bookList);
 		
 		return "main";

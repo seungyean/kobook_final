@@ -36,7 +36,7 @@ public class RecomController {
 	private FavoriteService service;
 	
 	
-	//로그인 했을 때 메인 화면에 공지사항 띄우기 위해 보드 사용함. (다른 조원것)
+	//로그인 했을 때 메인 화면에 공지사항 띄우기 위해 보드 사용함.
 	@Inject 
 	private BoardService boardService;
 	
@@ -55,9 +55,10 @@ public class RecomController {
 		
 		if(p.equals("null")) {
 			SearchCriteria cri2 = new SearchCriteria();
+			cri2.setPerPageNum(10);
 			List<BookVO> bookList = bookService.listCriteria(cri2);
 			request.setAttribute("bookList", bookList);
-			
+
 			return "/main";
 
 			
@@ -65,7 +66,6 @@ public class RecomController {
 			return "redirect:/recom";	
 		}
 		
-
 	}
 	
 	//메인으로 가기 전 로그인한 사용자의 추천도서 목록을 추출하는 메소드. 모든 메인은 이 메소드를 거친다.

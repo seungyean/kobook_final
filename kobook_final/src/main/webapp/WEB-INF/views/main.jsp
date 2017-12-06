@@ -112,37 +112,34 @@
 			</tr>
 			</c:forEach>
 		</table> --%>
-		
-		
-<%-- 		<br>
-       --%>
-<%-- 		<h2>추천도서</h2>
+
+<%-- 		
+<h2>추천도서</h2>
 		<table border="1">
 			<tr>
 				<td>책이름</td>
-				<td>책종류</td>
 				<td>책ID</td>
-				<td>분야ID</td>
 				<td>분야이름</td>
 				<td>회원ID</td>
 				<td>회원전공여부</td>
 				<td>우선순위</td>
+				<td>이미지</td>
 			</tr>	
 			<c:forEach var="f" items="${list }">
 			<tr>
 				<td>${f.book_name }</td>
-				<td>${f.book_kind }</td>
 				<td>${f.book_id }</td>
-				<td>${f.favorite_id }</td>
 				<td>${f.favorite_name }</td>
 				<td>${f.person_id }</td>
 				<td>${f.favorite_major }</td>
 				<td>${f.favorite_rank }</td>
+				<td>${f.book_img }</td>
 
 			</tr>
 			</c:forEach>
 		</table>
-		<h2>책의 정보</h2>
+		
+				<h2>책의 정보</h2>
 		<table border="1">
 			<tr>
 				<td>책이름</td>
@@ -158,8 +155,8 @@
 
 			</tr>
 			</c:forEach>
-		</table> --%>
-		
+		</table>
+		 --%>
 		
 		<section class="super_sub_content">
             <div class="dividerHeading text-center">
@@ -169,15 +166,15 @@
             			
 			            <div class="portfolio-centered">
 				            <div class="recentitems portfolio">
-									<c:forEach var="i" items="${bookList }" begin="0" end="9">
+									<c:forEach var="i" items="${bookList }">
 										<div class="portfolio-item mockups">
 										  <div class="box">
-										    	<img src="/book/displayFile?fileName=${i.book_img }" alt="">
+										    	<img src="/book/displayFile?fileName=${i.book_img }" alt="" style="width: 300px; height: 300px;">
 										              <div class="option inner">
 										                  <div>
 										                     <h5>상세보기</h5>
-										                     <a href="/kobook/img/bookImg/${i.book_img }" class="fa fa-search mfp-image"></a>
-										                     <a href="/kobook/book/detailAction.do?book_id=${i.book_id}" class="fa fa-link"></a>	                  </div>
+										                     <a href="/book/displayFile?fileName=${i.book_img }" class="fa fa-search mfp-image"></a>
+										                     <a href="/book/bookRead?book_id=${i.book_id}" class="fa fa-link"></a>	                  </div>
 										               </div>
 								     	  </div>
 										</div>
@@ -204,13 +201,13 @@
 					                <c:if test="${f.favorite_major == 'M' }">
 						                	<div class="portfolio-item mockups">
 						                        <div class="box">
-						                            <img src="/kobook/img/bookImg/${f.book_id }.PNG" alt="">
+						                            <img src="/book/displayFile?fileName=${f.book_img }" alt="" style="width: 300px; height: 300px;">
 						                            <div class="option inner">
 						                                <div>
 						                                    <h5>전공 상세보기</h5>
-						                                    <a href="/kobook/img/bookImg/${f.book_id }.PNG" class="fa fa-search mfp-image"></a>
-						                                    <a href="/kobook/book/detailAction.do?book_id=${f.book_id}" class="fa fa-link"></a>
-						                                    <a href="/kobook/recom/recomDeleteAction.do?book_id=${f.book_id }&favorite_id=${f.favorite_id}&favorite_major=${f.favorite_major}&favorite_name=${f.favorite_name}" class="fa fa-times"></a>
+						                                    <a href="/book/displayFile?fileName=${f.book_img }" class="fa fa-search mfp-image"></a>
+						                                    <a href="/book/bookRead?book_id=${f.book_id}" class="fa fa-link"></a>
+						                                    <a href="/recom/deleteRecom?book_id=${f.book_id }&favorite_major=${f.favorite_major}&favorite_name=${f.favorite_name}" class="fa fa-times"></a>
 						                                </div>
 						                            </div>
 						                        </div>
@@ -225,13 +222,13 @@
 									
 					                	<div class="portfolio-item graphic-design">
 					                        <div class="box">
-					                            <img src="resources/img/7.png" alt="">
+					                            <img src="/book/displayFile?fileName=${f.book_img }" alt="" style="width: 300px; height: 300px;">
 					                            <div class="option inner">
 					                                <div>
 					                                    <h5>기타 상세보기</h5>
-					                                    <a href="/kobook/img/bookImg/${f.book_id }.PNG" class="fa fa-search mfp-image"></a>
-					                                    <a href="/kobook/search/book_detail.jsp" class="fa fa-link"></a>
-					                                    <a href="/deleteRecom?book_id=${f.book_id }&favorite_id=${f.favorite_id}&favorite_major=${f.favorite_major}&favorite_name=${f.favorite_name}" class="fa fa-times"></a>
+					                                    <a href="/book/displayFile?fileName=${f.book_img }" class="fa fa-search mfp-image"></a>
+					                                    <a href="/book/bookRead?book_id=${f.book_id}" class="fa fa-link"></a>
+					                                    <a href="/recom/deleteRecom?book_id=${f.book_id }&favorite_major=${f.favorite_major}&favorite_name=${f.favorite_name}" class="fa fa-times"></a>
 					                                </div>
 					                            </div>
 					                        </div>
