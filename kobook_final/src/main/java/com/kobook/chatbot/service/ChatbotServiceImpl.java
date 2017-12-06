@@ -107,8 +107,8 @@ public class ChatbotServiceImpl implements ChatbotService {
 			// 쪽지 파트
 		} else if(text.contains("책") || text.contains("도서") || text.contains("상품")){
 			
-//			newText = manageBook(text, person_id);
-			newText = "책은 좀 나중에 준비해드릴게요";
+			newText = manageBook(text, person_id);
+//			newText = "책은 좀 나중에 준비해드릴게요";
 			
 			// 책 파트
 		} else if(text.contains("마일리지") || text.contains("관심")){	//	마이페이지 파트
@@ -410,6 +410,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 		dateFormat.format(m.getMessage_date();*/
 		
 		String newText = "";
+		String contentUrl = "";
 		List<MessageVO> list = null;
 		
 		if(text.contains("새") || text.contains("새로운") || text.contains("새로온") || text.contains("새로 온")){		// 새 쪽지 보여줘
@@ -419,7 +420,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 				newText += "<b>&nbsp;보낸 사람 &nbsp;&nbsp;&nbsp; 내용 </b>";
 				
 				for(MessageVO m : list){
-					newText += "\n * " + personDao.findPersonName(m.getPerson_id()) + "&nbsp; &nbsp; &nbsp;" + m.getMessage_content();
+					newText += "\n ■  " + personDao.findPersonName(m.getPerson_id()) + "&nbsp; &nbsp; &nbsp;" + m.getMessage_content();
 				}
 				
 				// 쪽지를 조회함과 동시에 쪽지 알림도 0으로 됨 
@@ -429,7 +430,11 @@ public class ChatbotServiceImpl implements ChatbotService {
 				newText += "\n새로운 쪽지가 없습니다.";
 			}
 			
-		} else if(text.contains("보관함") || text.contains("쪽지함")){	// 내 쪽지함 보여줘
+			contentUrl = "/mypage/messageBox";
+			newText +="<hr/> &nbsp; \n"
+					+ "<a href=\"javascript:;\" onClick=\"opener.parent.location='"+ contentUrl +"'; return false;\"> 쪽지보관함으로 이동 </a>";
+			
+		} else if(text.contains("보여줘") || text.contains("쪽지함")){	// 내 쪽지함 보여줘
 			if(messageDao.messageList(person_id).size() != 0){	// 리스트의 크기가 0이라는 것은 검색된 메시지가 없다는 뜻
 				list = messageDao.messageList(person_id);
 				newText += "(최신의 쪽지가 상단에 표시됩니다) \n 쪽지는 최대 5개만 보여드립니다.<hr>";
@@ -438,15 +443,18 @@ public class ChatbotServiceImpl implements ChatbotService {
 				// 쪽지 보관함에 5개 이상 있다면 최대 5개까지만 보여주고 링크를 걸어준다
 				if(list.size() > 5){
 					for(int i=0; i<5; i++){
-						newText += "\n * " + personDao.findPersonName(list.get(i).getPerson_id()) + "&nbsp; &nbsp; &nbsp;" + list.get(i).getMessage_content();
+						newText += "\n ■  " + personDao.findPersonName(list.get(i).getPerson_id()) + "&nbsp; &nbsp; &nbsp;" + list.get(i).getMessage_content();
 					}
-					newText +="<hr/> &nbsp; 쪽지를 더보고 싶으면 \n <a href='#'>쪽지보관함으로 이동 </a>";
+					
 				} else {
 					for(MessageVO m : list){
-						newText += "\n * " + personDao.findPersonName(m.getPerson_id()) + "&nbsp; &nbsp; &nbsp;" + m.getMessage_content();
+						newText += "\n ■  " + personDao.findPersonName(m.getPerson_id()) + "&nbsp; &nbsp; &nbsp;" + m.getMessage_content();
 					}
 				}	
 				
+				contentUrl = "/mypage/messageBox";
+				newText +="<hr/> &nbsp; \n"
+						+ "<a href=\"javascript:;\" onClick=\"opener.parent.location='"+ contentUrl +"'; return false;\"> 쪽지보관함으로 이동 </a>";
 				// 쪽지를 조회함과 동시에 쪽지 알림도 0으로 됨 
 				alarmDao.alarmUpdateByMessage(person_id);
 				
