@@ -195,6 +195,7 @@
  	 and o.person_id=per.person_id
  	 and o.book_id=b.book_id
  	 and b.person_id=#{person_id}
+ 	  group by per.person_name
 	</select>
 	
 	
