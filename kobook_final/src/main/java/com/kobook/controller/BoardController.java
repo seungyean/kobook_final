@@ -101,7 +101,7 @@ public class BoardController {
 		return "redirect:/board/boardList";
 	}
 	
-	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 공지사항 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 관리자용 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	//회원리스트
 	@RequestMapping(value="/personList", method = RequestMethod.GET)
 	public void personList(@ModelAttribute("cri") SearchCriteria cri, Model model)throws Exception {
@@ -121,21 +121,24 @@ public class BoardController {
 	
 	//회원 수정
 	@RequestMapping(value="/personModify", method = RequestMethod.POST)
-	public String personModifyPOST(RedirectAttributes rttr, PersonVO vo, SearchCriteria cri, Model model, @RequestParam("person_id") Integer person_id
-			) throws Exception {
+	public String personModifyPOST(RedirectAttributes rttr,@ModelAttribute PersonVO vo, SearchCriteria cri, Model model, @RequestParam("person_id") Integer person_id,
+			@RequestParam("person_kind") String person_kind, @RequestParam("person_sell_grade") String perseon_sell_grade) throws Exception {
 	
-		service.personModify(vo);
-	
-		System.out.println(vo.toString());
+		
+		System.out.println("컨트롤 sell_grade" +perseon_sell_grade);
+		System.out.println("컨트롤 kind" +person_kind);
+		
+		
+		
 		rttr.addAttribute("page", cri.getPage());
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());
 		rttr.addAttribute("searchType", cri.getSearchType());
 		rttr.addAttribute("keyword", cri.getKeyword());
 		rttr.addFlashAttribute("msg", "SUCCESS");
+	
 		
 		return "redirect:/board/personList";
 	}
-	
 	
 	//회원 제거
 	@RequestMapping("/personRemove")

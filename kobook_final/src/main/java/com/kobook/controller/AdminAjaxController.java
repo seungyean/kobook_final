@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,6 +31,8 @@ import com.kobook.community.domain.DonateVO;
 import com.kobook.community.service.BlackService;
 import com.kobook.community.service.DonateService;
 import com.kobook.community.service.PhotoReviewService;
+import com.kobook.person.domain.PersonVO;
+import com.kobook.person.service.PersonService;
 
 @RestController
 @RequestMapping("/pay/*")
@@ -50,6 +53,7 @@ public class AdminAjaxController {
 	@Inject
 	private PhotoReviewService photoservice;
 
+	
 	private ArrayList<?> listt;
 
 	
@@ -95,17 +99,20 @@ public class AdminAjaxController {
 		ResponseEntity<List<?>> entity = null;
 		List<?> list = null ;
 		
-		System.out.println("선택한 게시판: "+ noti_select);
 		try {
+			//블랙리스트
 			if(noti_select.equals("sin")){
 				list = blackservice.blackList(cri);
 				System.out.println(list);
+			//무료나눔	
 			} else if (noti_select.equals("mu")){
 				list = donateservice.donateList(cri);
 				System.out.println(list);
+			//포토리뷰	
 			} else if (noti_select.equals("pho")){
 				list = photoservice.photoList(cri);
 				System.out.println(list);
+			//공지사항
 			} else if (noti_select.equals("gong")){
 				list = boardservice.boardListCri(cri);
 				System.out.println(list);
@@ -118,12 +125,30 @@ public class AdminAjaxController {
 		return entity;
 	}
 	
-/*	@RequestMapping(value="chart", method=RequestMethod.POST)
+	@RequestMapping(value="/notiRemove", method=RequestMethod.POST)
 	@ResponseBody
-	public List<GoogleChartDto> chartData()throws Exception {
-		List<googleChartDto> lists = new ArrayList<googleChartDto>();
+	public ResponseEntity<String> notiRemovePOST(SearchCriteria cri, @RequestParam("kind") String kind, @RequestParam("num") Integer num)throws Exception {
 		
-		return list;
-	}*/
-	
+		ResponseEntity<String> entity = null;
+		System.out.println("선택한" + kind);
+		
+		try {
+			if(kind.equals("sin")){
+				blackservice.blackRemove(num);
+			}else if(kind.equals("mu")){
+				
+			}else if(kind.equals("pho")){
+				
+			}else if(kind.equals("gong")){
+				
+			}
+			
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		}
+
+		return entity;
+	}
 }

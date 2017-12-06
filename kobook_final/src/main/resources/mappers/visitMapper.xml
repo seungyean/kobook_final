@@ -20,6 +20,10 @@
 		where pay_date like #{pay_date} 
 		order by pay_date desc
 	</select>
+	
+	<delete id="blackNotiRemove" parameterType="Integer">
+		delete from black where black_id = #{blakc_id}
+	</delete>
 
 	
 </mapper>

@@ -22,8 +22,4 @@ public class VisitDAOImpl implements VisitDAO{
 		return session.selectOne(namespace+".visitCount");
 	}
 	
-	/*@Override
-	public List<VisitVO> visitList() throws Exception {
-		return session.selectList(namespace+".visitList");
-	}*/
 }

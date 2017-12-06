@@ -130,7 +130,7 @@
 		</section>
 
 		<section class="content faq">
-		<form action="">
+		<form action="modify">
 
 			<div class="container">
 				<div class="row">
@@ -158,12 +158,9 @@
 							<option value="gong"
 								<c:out value="${cri.searchType eq 'gong'?'selected':''}"/>>
 								공지사항</option>
-<%-- 							<option value="ja"
-								<c:out value="${cri.searchType eq 'ja'?'selected':''}"/>>
-								자주묻는질문</option> --%>
-						</select> <input type="text" name='keyword' id="keywordInput"
-							value='${cri.keyword }'> <input type="button" value="검색"
-							id="search" onclick="selectButton()" />
+						</select> 
+						<input type="text" name='keyword' id="keywordInput" value='${cri.keyword }'> 
+						<input type="button" value="검색" id="search" onclick="selectButton()" />
 					</div>
 
 
@@ -172,7 +169,7 @@
 						<div id="noti"></div>
 					</div>
 
-
+					<button type="button" value="삭제" id="removeBtn" onclick="deleteAction()">삭제</button>
 
 					<div class="box-footer" align="center">
 						<div class="text-center">
@@ -180,20 +177,20 @@
 
 								<c:if test="${pageMaker.prev}">
 									<li><a
-										href="searchList${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
+										href="result${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
 								</c:if>
 
 								<c:forEach begin="${pageMaker.startPage }"
 									end="${pageMaker.endPage }" var="idx">
 									<li
 										<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-										<a href="searchList${pageMaker.makeSearch(idx)}">${idx}</a>
+										<a href="result${pageMaker.makeSearch(idx)}">${idx}</a>
 									</li>
 								</c:forEach>
 
 								<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 									<li><a
-										href="searchList${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
+										href="result${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
 								</c:if>
 							</ul>
 						</div>
@@ -266,37 +263,12 @@
 	
 	<script type="text/javascript">
 
-	function GetDateString(jsonDate) {
-        var year, month, day, hour, minute, second , returnValue  , date ,replaceStr
-
-        replaceStr = jsonDate.replace(/\D/g, "");
-        date = new Date(parseInt(replaceStr));
-
-        year = date.getFullYear();
-        month = Pad(date.getMonth());
-        day = Pad(date.getDate());
-        hour = Pad(date.getHours());
-        minute = Pad(date.getMinutes());
-        second = Pad(date.getSeconds());
-
-        returnValue = year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
-        return returnValue;
-    }
-
-    function Pad(num) {
-        num = "0" + num;
-        return num.slice(-2);
-    }
-
-    
-	
 	function selectButton(){
 		
 			var html = "";
 			var noti_select = $("#search option:selected").val();
-			
-/* 			var option_select = $("input[name=sub_check]").val();
-			console.log(option_select); */
+			var all_check = "";
+			var checked = "";
 
 			$.ajax({
 						type : "POST",
@@ -307,34 +279,47 @@
 						},
 						success : function(data) {
 
+							//선택한것이 신고합니다 일경우 List출력
 							if (noti_select == "sin") {
 
 								$("#noti").empty();
 								html += "<table class='table table-bordered' style='text-align:center'><tr><td style='width: 10px'><input type='checkbox' id='top_check'></td><td style='width: 5px'>BNO</td><td style='width: 320px'>TITLE</td><td style='width: 20px'>DATE</td><td style='width: 20px'>WRITER</td></tr>";
 
 								$.each(data, function(index, result) {
-											html += "<tr><td>" + "<input type='checkbox' name='sub_check'>" + "</td>"
+											html += "<tr><td>" + "<input type='checkbox' id='sub_check' name='sub_check' class='sub_check' value='" + result.black_id + "'>" + "</td>"
 											html += "<td>" + result.black_id + "</td>"
 											html += "<td><a href='/community/blackRead${pageMaker.makeSearch(pageMaker.cri.page) }&result.black_id=${result.black_id }'>" + result.black_title + "</a>" + "</td>"
-											html += "<td>" + GetDateString('/Date(result.black_date)/') + "</td>"
+											html += "<td>" + result.black_date + "</td>"
 											html += "<td>" + result.black_email	+ "</td></tr>"
 								});
 								html += "</table>";
 								$('#noti').append(html);
 								
 						        //최상단 체크박스 클릭
-						        //클릭되었으면
-						        $("#top_check").click(function(){
-								var check = $("#top_check").prop("checked");
-											$("input[name=sub_check]").prop("checked", check);
+						        //모든 체크박스 체크
+						         $("#top_check").click(function(){
+						        	 all_check = $("#top_check").prop("checked");
+											$("input[name=sub_check]").prop("checked", all_check);
+											
+								//최상단 체크박스 클릭시 각 리스트 BNO값			
+								$("input[name=sub_check]:checked").each(function(){
+									checked = $(this).parent().next().text();
+									})
 						        })
-								
+						        
+						        //선택한 체크박스 BNO값 불러오기
+						        $("input[name=sub_check]").click(function(){
+						        	 $(this).each(function(){
+						        		 checked = $(this).parent().next().text();
+						        	}) 
+						        })    
+						        
 							} else if (noti_select == "gong") {
 
 								$("#noti").empty();
-								html += "<table class='table table-bordered' style='text-align:center'><tr><td style='width: 10px'><input type='checkbox' id='top_check'><td>BNO</td><td>TITLE</td><td>DATE</td><td>WRITER</td></tr>";
+								html += "<table class='table table-bordered' style='text-align:center'><tr><td style='width: 10px'><input type='checkbox' id='top_check'></td><td style='width: 5px'>BNO</td><td style='width: 320px'>TITLE</td><td style='width: 20px'>DATE</td><td style='width: 20px'>WRITER</td></tr>";
 								$.each(data, function(index, result) {
-									html += "<tr><td>" + "<input type='checkbox' name='sub_check'>" + "</td>"
+									html += "<tr><td>" + "<input type='checkbox' name='sub_check' class='sub_check' value='" + result.board_id + "'>" + "</td>"
 									html += "<td>" + result.board_id + "</td>"
 									html += "<td>" + result.board_title	+ "</td>"
 									html += "<td>" + result.board_date	+ "</td>"
@@ -351,13 +336,14 @@
 							} else if (noti_select == "mu") {
 
 								$("#noti").empty();
-								html += "<table class='table table-bordered' style='text-align:center'><tr><td style='width: 10px'><input type='checkbox' id='top_check'><td>BNO</td><td>TITLE</td><td>DATE</td><td>WRITER</td></tr>";
+								html += "<table class='table table-bordered' style='text-align:center'><tr><td style='width: 10px'><input type='checkbox' id='top_check'></td><td style='width: 5px'>BNO</td><td style='width: 320px'>TITLE</td><td style='width: 20px'>DATE</td><td style='width: 20px'>WRITER</td></tr>";
 								$.each(data, function(index, result) {
-									html += "<tr><td>" + "<input type='checkbox' name='sub_check'>" + "</td>"
-									html += "<td>" + result.board_id + "</td>"
-									html += "<td>" + result.board_title	+ "</td>"
-									html += "<td>" + result.board_date + "</td>"
-									html += "<td>" + result.board_writer + "</td></tr>"
+									html += "<tr><td>" + "<input type='checkbox' name='sub_check' class='sub_check' value='" + result.donate_id + "'>" + "</td>"
+									html += "<td>" + result.donate_id + "</td>"
+									html += "<td>" + result.donate_title	+ "</td>"
+									html += "<td>" + result.donate_date + "</td>"
+									html += "<td>" + result.person_id + "</td></tr>"
+									
 								});
 								html += "</table>";
 								$('#noti').append(html);
@@ -372,6 +358,39 @@
 					});
 
 		}
+
+	//삭제 버튼을 누를경우 	
+	function deleteAction(){
+		var myArray = [];
+		var noti_select = $("#search option:selected").val();
+		var count = 0;
+		
+		checkList = document.getElementsByName("sub_check");
+		
+		for(var i=0; i<checkList.length; i++){ 
+			if(checkList[i].checked){
+				var val = checkList[i].value;
+				console.log("val: " + val);
+				
+				$.ajax({
+					type : "POST",
+					url : "/pay/notiRemove",
+					dataType : "json",
+					data : {kind:noti_select, num:val},
+					success : function(data){
+							if(data == 'SUCCESS'){
+								alert("씨발");
+								
+							}
+						}
+					});
+				}
+			}	
+			
+			selectButton();
+		 
+		}
 	</script>
+	
 </body>
 </html>

@@ -321,7 +321,6 @@ ul.tabs li.active {
 		}
 	</script>
 	
-	
 <!-- 	<script type="text/javascript">
  	google.charts.load('current', {packages: ['corechart', 'line']});
     google.charts.setOnLoadCallback(drawBasic);
@@ -341,7 +340,6 @@ ul.tabs li.active {
           chart.draw(data, options);
         } 
 	</script> -->
-	
 	
 	<script type="text/javascript">
 	function payDayButton() {

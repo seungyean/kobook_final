@@ -7,6 +7,6 @@ import com.kobook.admin.domain.VisitVO;
 public interface VisitDAO {
 
 	public int visitCount() throws Exception;
-	
-	
+/*	
+	public Integer blackNotiRemove() throws Exception;*/
 }

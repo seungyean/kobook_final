@@ -245,62 +245,40 @@
 			var person_sell_grade = $("#person_sell_grade option:selected").val();
 			var person_kind = $("#person_kind option:selected").val();
  
-			
-		 	var data = {
+ 		 	var data = {
 					person_sell_grade :  person_sell_grade,
 					person_kind : person_kind
 			};  
- 			 
- 			alert(data.person_sell_grade);
-			alert(data.person_kind);   
+ 			  
+ 		    alert(data.person_sell_grade);
+			alert(data.person_kind);    
 			
-			
-		 	formObj.attr("data", "data");
- 			formObj.attr("method", "post");
+			formObj.attr("data", data); 
+			formObj.attr("method", "post");
 			formObj.attr("action", "/board/personModify");  
 			formObj.submit();
 			
 			
-			/* $.ajax({
-				type : "POST",
-				url : "/board/personModify",
-				dataType : "json",
-				data : data,
-				headers : {
-	                     "Content-Type": "application/json",
-	                     "X-HTTP-Method-Override": "POST"
-				},
-				success : function(data) {
-					console.log(data);
-					if(data == success){
-						alert("성공");
-					}
-				}
-			}) */
-			
-			
-			
- 			/*  $.ajax({
+			 /*  $.ajax({
  				type : "POST",
- 				url : "/board/personModify",
- 				dataType : "text",
- 				data: JSON.stringify({
+ 				url : "/pay/personModify",
+ 				dataType : "json",
+ 				data : JSON.stringify({
 					person_sell_grade : person_sell_grade,
 					person_kind : person_kind
 			}),
- 				success : function(result){
- 					console.log(result);
- 					if(result == 'SUCCESS'){
+ 				success : function(map){
+ 					if(map == 'SUCCESS'){
  						alert("등록");
  					}
  				}
- 			})  */
+ 			})   */
  			
-		/* 	
+/* 		 	
 		    formObj.attr("data", data);
 			formObj.attr("method", "post");
 			formObj.attr("action", "/board/personModify");  
-			formObj.submit();	 */		
+			formObj.submit(); */
 			
 		}); 
 	  
