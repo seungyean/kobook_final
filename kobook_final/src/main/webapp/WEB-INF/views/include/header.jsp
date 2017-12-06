@@ -10,6 +10,7 @@
 	}
 	
 	int person_id = Integer.parseInt(cur_id);
+	request.setAttribute("person_id", person_id);
 			
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -246,7 +247,15 @@
                     <!-- Logo / Mobile Menu -->
                     <div  class="col-lg-3 col-sm-3 ">
                         <div id="logo">
-                            <h1><a href="/main">KOBOOK</a></h1>
+	                        <c:choose>
+	                        	<c:when test="${(person_id == 1) || (person_id == -1)}">
+                        			<h1><a href="/main">KOBOOK</a></h1>
+                        		</c:when>
+                        		<c:otherwise>
+                        		 <h1><a href="/recom">KOBOOK</a></h1>
+                        		</c:otherwise>
+	                        </c:choose>
+
                         </div>
                     </div>
                     <!-- Navigation
@@ -286,8 +295,15 @@
                             </div>
                             <div class="navbar-collapse collapse">
                                 <ul class="nav navbar-nav">
-                                    <li><a href="/main">Home</a></li>
-
+                                	<c:choose>
+                                		<c:when test="${(person_id == 1) || (person_id == '-1')}">
+	                        		 		<li><a href="/main">Home</a></li>
+	                        			</c:when>
+			                        	<c:otherwise>
+			                        		 <li><a href="/recom">Home</a></li>
+			                        	</c:otherwise>
+                                	</c:choose>
+	                                	
                                     <li><a href="/book/bookList">전체검색</a></li>
                                     <li><a href="/book/booklocationList">지역검색</a></li>
 

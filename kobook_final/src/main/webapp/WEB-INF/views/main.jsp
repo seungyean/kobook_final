@@ -142,25 +142,42 @@
 			</tr>
 			</c:forEach>
 		</table>
+		<h2>책의 정보</h2>
+		<table border="1">
+			<tr>
+				<td>책이름</td>
+				<td>책ID</td>
+				<td>이미지</td>
+
+			</tr>	
+			<c:forEach var="p" items="${bookList }">
+			<tr>
+				<td>${p.book_name }</td>
+				<td>${p.book_id }</td>
+				<td>${p.book_img }</td>
+
+			</tr>
+			</c:forEach>
+		</table>
 		
 		
 		<section class="super_sub_content">
             <div class="dividerHeading text-center">
             	<c:choose>
-            		<c:when test="${(person_id == 1) || (person_id == null)}">
+            		<c:when test="${(person_id == 1) || (person_id == -1)}">
             			<h4><span>새로 등록된 도서</span></h4>
             			
 			            <div class="portfolio-centered">
 				            <div class="recentitems portfolio">
-									<c:forEach var="i" begin="0" end="9">
+									<c:forEach var="i" items="${bookList }" begin="0" end="9">
 										<div class="portfolio-item mockups">
 										  <div class="box">
-										    	<img src="resources/img/7.png" alt="">
+										    	<img src="${i.book_img }" alt="">
 										              <div class="option inner">
 										                  <div>
 										                     <h5>상세보기</h5>
-										                     <a href="/kobook/img/bookImg/${f.book_id }.PNG" class="fa fa-search mfp-image"></a>
-										                     <a href="/kobook/book/detailAction.do?book_id=${f.book_id}" class="fa fa-link"></a>	                  </div>
+										                     <a href="/kobook/img/bookImg/${i.book_img }" class="fa fa-search mfp-image"></a>
+										                     <a href="/kobook/book/detailAction.do?book_id=${i.book_id}" class="fa fa-link"></a>	                  </div>
 										               </div>
 								     	  </div>
 										</div>
@@ -168,6 +185,7 @@
 							</div>
 				        </div>  
             		</c:when>
+            		
             		<c:otherwise>
             			<h4>${person_name }님을 위한 추천도서</h4>
             			

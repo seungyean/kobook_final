@@ -78,7 +78,6 @@ public class AlarmMailVO {
 	    		+ "<br>";
 	   		
 	    String path = request.getSession().getServletContext().getRealPath("/");
-	    System.out.println("pppppppppppppatttttthhhhhhh"+path);
 	    
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper messageHelper 
@@ -91,8 +90,8 @@ public class AlarmMailVO {
         messageHelper.addInline("logo", file);	
 
         
-        FileSystemResource file2 = new FileSystemResource(new File("C:/line.PNG"));
-        //messageHelper.addInline("line", file2);	
+        FileSystemResource file2 = new FileSystemResource(new File(path + "/resources/img/logo.PNG"));
+        messageHelper.addInline("line", file2);	
         
  
         messageHelper.setFrom(setfrom);  // 보내는사람 생략하거나 하면 정상작동을 안함
@@ -100,30 +99,6 @@ public class AlarmMailVO {
         messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
         
         mailSender.send(message);
-	    
-/*	    try {
-	        MimeMessage message = mailSender.createMimeMessage();
-	        MimeMessageHelper messageHelper 
-	                          = new MimeMessageHelper(message, true, "UTF-8");
-	        
-	        messageHelper.setText(alarmVO.getAlarm_content(), true);
-	        messageHelper.setText(alarmVO.getAlarm_content(), htmlText);
-	        
-	        FileSystemResource file = new FileSystemResource(new File("C:/Users/Areum Jung/Documents/logo.PNG"));
-	        messageHelper.addInline("logo", file);	
-	        
-	        FileSystemResource file2 = new FileSystemResource(new File("C:/Users/Areum Jung/Documents/line.PNG"));
-	        messageHelper.addInline("line", file2);	
-	        
-	 
-	        messageHelper.setFrom(setfrom);  // 보내는사람 생략하거나 하면 정상작동을 안함
-	        messageHelper.setTo(tomail);     // 받는사람 이메일
-	        messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
-
-	      mailSender.send(message);
-	    } catch(Exception e){
-	      System.out.println(e);
-	    }*/
 	}
 	
 }
