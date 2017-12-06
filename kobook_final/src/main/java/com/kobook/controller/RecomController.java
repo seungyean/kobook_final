@@ -56,16 +56,13 @@ public class RecomController {
 		if(p.equals("null")) {
 			SearchCriteria cri2 = new SearchCriteria();
 			List<BookVO> bookList = bookService.listCriteria(cri2);
-			
 			request.setAttribute("bookList", bookList);
-			System.out.println("로그인 안함..");
+			
 			return "/main";
 
 			
 		}else {
-			System.out.println("로그인했음!!!!!!!!!!");
-			return "redirect:/recom";
-			
+			return "redirect:/recom";	
 		}
 		
 
@@ -144,7 +141,7 @@ public class RecomController {
 		
 		service.deleteFavorite(vo);
 		
-		return "redirect:/alarmList";
+		return "redirect:/recom";
 	}
 
 }

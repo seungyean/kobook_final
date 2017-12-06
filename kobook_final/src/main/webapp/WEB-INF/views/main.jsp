@@ -116,7 +116,7 @@
 		
 <%-- 		<br>
        --%>
-		<h2>추천도서</h2>
+<%-- 		<h2>추천도서</h2>
 		<table border="1">
 			<tr>
 				<td>책이름</td>
@@ -158,7 +158,7 @@
 
 			</tr>
 			</c:forEach>
-		</table>
+		</table> --%>
 		
 		
 		<section class="super_sub_content">
@@ -172,7 +172,7 @@
 									<c:forEach var="i" items="${bookList }" begin="0" end="9">
 										<div class="portfolio-item mockups">
 										  <div class="box">
-										    	<img src="${i.book_img }" alt="">
+										    	<img src="/book/displayFile?fileName=${i.book_img }" alt="">
 										              <div class="option inner">
 										                  <div>
 										                     <h5>상세보기</h5>
