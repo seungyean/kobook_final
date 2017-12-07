@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
@@ -92,7 +93,7 @@
                                         
                                     </li>
 
-                                    <li><a href="#">접속통계 관리</a>
+                                    <li><a href="/admin/analyze">접속통계 관리</a>
                                         
                                     </li>
                                    
@@ -163,8 +164,7 @@
                             </div>
                             <div class="service-content">
                                 <h3>오늘 총 접속자</h3>
-                                	<p>${visit} 명</p>
-                                <%-- <p>${visit} 명</p> --%>
+                                	<p>${CountManager.getCount()} 명</p>
                             </div>
                         </div>
                     </div>
@@ -308,28 +308,9 @@
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
    
-     <!--   <script type="text/javascript">
-    google.charts.load('current', {packages: ['corechart', 'line']});
-    google.charts.setOnLoadCallback(drawBasic);
-    function drawBasic() {
-          var data = new google.visualization.DataTable();
-          data.addColumn('number', 'X');
-          data.addColumn('number', '접속자');
-          data.addRows([
-            /* for(int i=0; i<list.size(); i++){
-            	htmlString += "[" + list.get(i).getvisit_date() + "', " + list.get(i).getcount() + "]" ,'; 
-            }
-            htmlString += "]);" */
-            ])
-          var options = {           
-        	title : '접속자 현황',	  
-        	width :'1100',
-            height : '500'
-          };
-          var chart = new google.visualization.LineChart(document.getElementById('chart_a'));
-          chart.draw(data, options);
-        }
-  </script> --> 
+<script type="text/javascript">
+	
+</script>   
 
 <script type="text/javascript">
 google.charts.load('current', {'packages':['corechart']});

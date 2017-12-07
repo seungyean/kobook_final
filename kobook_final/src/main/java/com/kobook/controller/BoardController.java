@@ -1,21 +1,18 @@
 package com.kobook.controller;
 
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -120,15 +117,14 @@ public class BoardController {
 	}
 	
 	//회원 수정
-	@RequestMapping(value="/personModify", method = RequestMethod.POST)
-	public String personModifyPOST(RedirectAttributes rttr,@ModelAttribute PersonVO vo, SearchCriteria cri, Model model, @RequestParam("person_id") Integer person_id,
-			@RequestParam("person_kind") String person_kind, @RequestParam("person_sell_grade") String perseon_sell_grade) throws Exception {
+	@RequestMapping(value="/personModify", method=RequestMethod.POST)
+	public String personModifyPOST(RedirectAttributes rttr, SearchCriteria cri, PersonVO vo,
+			@RequestParam("person_kind")String person_kind, @RequestParam("person_sell_grade")String person_sell_grade) throws Exception {
 	
+		System.out.println(vo.getPerson_id());
+		System.out.println(vo.toString());
 		
-		System.out.println("컨트롤 sell_grade" +perseon_sell_grade);
-		System.out.println("컨트롤 kind" +person_kind);
-		
-		
+		service.personModify(vo);
 		
 		rttr.addAttribute("page", cri.getPage());
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());

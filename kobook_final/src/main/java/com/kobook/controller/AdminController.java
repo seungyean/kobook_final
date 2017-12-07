@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.Random;
 
 import javax.inject.Inject;
-
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionEvent;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,15 +42,19 @@ public class AdminController {
 	@Inject
 	private PayService payservice;
 	
+
+	private static int count;
+	
+	public static int getCount(){
+		return count;
+	}
+
 	 
 	@RequestMapping("/adminMain")
 	public String visitCount(Model model) throws Exception {
 		
 		//총 접속자
 /*		model.addAttribute("visit",visitservice.visitCount());*/
-		
-		
-		System.out.println("접속자"+model.toString());
 		return "admin/adminMain";
 	}
 	
@@ -65,8 +70,6 @@ public class AdminController {
 	@RequestMapping(value="/notiList", method=RequestMethod.POST)
 	public String notiListPOST(Model model)throws Exception {
 		
-		System.out.println();
-		
 		return "admin/notiList";
 	}
 	
@@ -77,9 +80,43 @@ public class AdminController {
 	@RequestMapping(value="/payList", method=RequestMethod.POST)
 	public String payListPOST(Model model)throws Exception {
 		
-		System.out.println();
 		
 		return "admin/payList";
+	}
+	
+	@RequestMapping(value="/analyze", method=RequestMethod.GET)
+	public void analyzeGET(Model model)throws Exception{
+	}
+	
+	@RequestMapping(value="/analyze", method=RequestMethod.POST)
+	public String analyzePOST(Model model)throws Exception {
+		
+		System.out.println();
+		
+		return "admin/analyze";
+	}
+	
+	//세션 증가카운트
+	@RequestMapping(value="/countManager", method=RequestMethod.POST)
+	public void sessionCreated(HttpSessionEvent event)throws Exception{
+		HttpSession session = event.getSession(); //request에서 얻는 session과 동일한 객체
+		session.setMaxInactiveInterval(60*20);
+		
+		count++;
+		session.getServletContext().log(session.getId() + " 세션생성 " + ", 접속자수 : " + count);
+		
+	}
+
+	//세션 감소카운트
+	@RequestMapping(value="/destroyManager", method=RequestMethod.POST)
+	public void sessionDestroy(HttpSessionEvent event)throws Exception {
+		
+		count--;
+		if(count<0)
+		   count=0;
+		
+		HttpSession session = event.getSession();
+		session.getServletContext().log(session.getId() + " 세션소멸 " + ", 접속자수 : " + count);
 	}
 }
 

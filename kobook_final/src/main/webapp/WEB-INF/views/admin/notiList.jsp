@@ -95,7 +95,7 @@
                                         
                                     </li>
 
-                                    <li><a href="#">접속통계 관리</a>
+                                    <li><a href="/admin/analyze">접속통계 관리</a>
                                         
                                     </li>
                                    
@@ -274,14 +274,12 @@
 						type : "POST",
 						url : "/pay/notiList",
 						dataType : "json",
-						data : {
-							noti_select : noti_select
-						},
+						data : {noti_select : noti_select},
 						success : function(data) {
 
 							//선택한것이 신고합니다 일경우 List출력
 							if (noti_select == "sin") {
-
+								
 								$("#noti").empty();
 								html += "<table class='table table-bordered' style='text-align:center'><tr><td style='width: 10px'><input type='checkbox' id='top_check'></td><td style='width: 5px'>BNO</td><td style='width: 320px'>TITLE</td><td style='width: 20px'>DATE</td><td style='width: 20px'>WRITER</td></tr>";
 
@@ -376,18 +374,17 @@
 					type : "POST",
 					url : "/pay/notiRemove",
 					dataType : "json",
-					data : {kind:noti_select, num:val},
+					data : JSON.stringify({kind:noti_select, num:val}),
 					success : function(data){
-							if(data == 'SUCCESS'){
+							if(data == "SUCCESS"){
 								alert("씨발");
-								
 							}
 						}
 					});
 				}
 			}	
 			
-			selectButton();
+		selectButton();
 		 
 		}
 	</script>

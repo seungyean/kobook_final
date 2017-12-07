@@ -125,6 +125,7 @@ public class AdminAjaxController {
 		return entity;
 	}
 	
+	//선택한 게시물 삭제
 	@RequestMapping(value="/notiRemove", method=RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<String> notiRemovePOST(SearchCriteria cri, @RequestParam("kind") String kind, @RequestParam("num") Integer num)throws Exception {
@@ -136,11 +137,11 @@ public class AdminAjaxController {
 			if(kind.equals("sin")){
 				blackservice.blackRemove(num);
 			}else if(kind.equals("mu")){
-				
+				donateservice.donateRemove(num);
 			}else if(kind.equals("pho")){
-				
+				photoservice.photoReviewRemove(num);
 			}else if(kind.equals("gong")){
-				
+				boardservice.boardRemove(num);
 			}
 			
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);

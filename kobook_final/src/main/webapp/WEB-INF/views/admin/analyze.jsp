@@ -31,64 +31,8 @@
 <link rel="stylesheet" type="text/css"
 	href="/resources/css/switcher.css" media="screen" />
 <style type="text/css">
-ul.tabs {
-    margin: 0;
-    padding: 0;
-    float: left;
-    list-style: none;
-    height: 32px;
-    border-bottom: 1px solid #eee;
-    border-left: 1px solid #eee;
-    width: 100%;
-    font-family:"dotum";
-    font-size:12px;
-}
-ul.tabs li {
-    float: left;
-    text-align:center;
-    cursor: pointer;
-    width:82px;
-    height: 31px;
-    line-height: 31px;
-    border: 1px solid #eee;
-    border-left: none;
-    font-weight: bold;
-    background: #fafafa;
-    overflow: hidden;
-    position: relative;
-}
-ul.tabs li.active {
-    background: #FFFFFF;
-    border-bottom: 1px solid #FFFFFF;
-}
-.tab_container {
-    border: 1px solid #eee;
-    border-top: none;
-    clear: both;
-    float: left;
-    width: 1150px;
-    background: #FFFFFF;
-}
-.tab_content {
-	width: 600px;
-    padding: 5px;
-    font-size: 12px;
-    display: none;
-}
-.tab_container .tab_content ul {
-    width:100%;
-    margin:0px;
-    padding:0px;
-}
-.tab_container .tab_content ul li {
-    padding:5px;
-    list-style:none
-}
-;
- #container {
-    width: 500px;
-    margin: 0 auto;
-}
+
+
 </style>	
 </head>
 <body>
@@ -189,68 +133,39 @@ ul.tabs li.active {
         </section>
 
 	<section class="content faq">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8"></div>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8"></div>
+				</div>
+
+				<div id="containers">
+					<ul class="tabs">
+						<li class="active" rel="tab1">접속통계</li>
+					</ul>
+				
+				</div>
 			</div>
 
-				<div id="container">
-					<ul class="tabs">
-						<li class="active" rel="tab1">월별매출</li>
-			<!-- 			<li rel="tab2">일별매출</li> -->
-					</ul>
-					<div class="tab_container">
-					<!-- #tab1 -->
-						<div id="tab1" class="tab_content">
-							
+		<section class="content faq">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-8"></div>
+
+						<div class="tab_container">
 							<div>
-								<select id="pay_date">
-									<option value="2017">2017</option>
-									<option value="2016">2016</option>
-								</select>
-			 					<input type="button" value="검색" id="year" onclick="selectButton()" />
-							</div>
-						
-							<div id="month">
-								<table id='month_deal' class='table table-bordered' style='text-align: center'>
-									<tr height='20'>
-										<td>월</td>
-										<td>매출(원)</td>
-										<td>전월대비</td>
-									</tr>
-								</table>
+								<div>
+									<select id="pay_date">
+										<option value="2017">2017</option>
+										<option value="2016">2016</option>
+									</select> <input type="button" value="검색" id="year"
+										onclick="selectButton()" />
+								</div>
 							</div>
 						</div>
-						
-						<div id="chart_a"></div>
-						
-<!-- 						#tab2
-						<div id="tab2" class="tab_content">
-							<div>
-								<select id="pay_day">
-									<option value="01">1월</option>
-									<option value="02">2월</option>
-									<option value="03">3월</option>
-									<option value="04">4월</option>
-									<option value="05">5월</option>
-									<option value="06">6월</option>
-									<option value="07">7월</option>
-									<option value="08">8월</option>
-									<option value="09">9월</option>
-									<option value="10">10월</option>
-									<option value="11">11월</option>
-									<option value="12">12월</option>
-								</select>
-			 					<input type="submit" value="검색" id="day" onclick="payDayButton()" />
-							</div>	
-						</div> -->
-						
 					</div>
-			</div>
-		</div>
-		
+				</div>
 
-			<!--Sidebar Widget-->
+				<!--Sidebar Widget-->
 					<div class="col-lg-4">
 						<div class="sidebar">
 							<div class="widget widget_search">
@@ -264,10 +179,9 @@ ul.tabs li.active {
 								</div>
 								<!-- end site search -->
 							</div>
-
-
 						</div>
-					</div></section>
+					</div>
+			</section>
 
 <!--Sidebar Widget-->
 			<div class="col-lg-4">
@@ -293,7 +207,6 @@ ul.tabs li.active {
 	<!-- 푸터 -->
  		 <jsp:include page="/WEB-INF/views/include/footer.jsp" />
   	<!-- /푸터 -->
-
 	
 
 	<script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
@@ -320,113 +233,7 @@ ul.tabs li.active {
 			location.replace(self.location);
 		}
 	</script>
-	
-<!-- 	<script type="text/javascript">
- 	google.charts.load('current', {packages: ['corechart', 'line']});
-    google.charts.setOnLoadCallback(drawBasic);
-    function drawBasic() {
-          
-    	  var data = new google.visualization.DataTable();
-          data.addColumn('number', 'X');
-          data.addColumn('number', '접속자');
-          data.addRows([
-          
-          var options = {           
-        	title : '접속자 현황',	  
-        	width :'500',
-            height : '500'
-          };
-          var chart = new google.visualization.LineChart(document.getElementById('chart_a'));
-          chart.draw(data, options);
-        } 
-	</script> -->
-	
-	<script type="text/javascript">
-	function payDayButton() {
-		
-		var pay_date = $("#pay_day option:selected").val();
-		var ob = new Object();
-		ob.pay_date = pay_date;
-		console.log(ob);
-		$.ajax({
-			type : "POST",
-			url : "/pay/payDay",
-			dataType : "json",
-			data : ob,		
-			success : function(data) {
-				if(data == success){
-					alert("성공");
-				}
-			}
-		})
-	}
 
-	
-	function selectButton() {
-			
-			var pay_date = $("#pay_date option:selected").val();
-			var obj = new Object();
-			obj.pay_date = pay_date;
-		
-			var html = "";
 
-			$.ajax({
-				type : "POST",
-				url : "/pay/payList",
-				dataType : "json",
-				data : obj,			
-				success : function(data) {
-					
-        			$("#month").empty();
-					html += "<table id='month_deal' class='table table-bordered' style='text-align: center'><tr height='20'><td>월</td><td>매출(원)</td><td>전월대비</td></tr>";
-					for(var i=1; i<=12; i++){
-						
-						html += "<tr><td>"+(i)+"</td>"
-						html += "<td>"+data.month[i]+"</td>"
-						if(i > 0){
-							if(eval((data.month[i] - data.month[i-1]))>0){
-								html += "<td>"+"+"+(data.month[i] - data.month[i-1])+"</td></tr>"
-							}else {
-								html += "<td>"+(data.month[i] - data.month[i-1])+"</td></tr>"
-							}
-						} else {
-							html += "<td> \ </td></tr>"
-						}
-					}
-				
-					html +="</table>";
-					$('#month').append(html);
-					
-					 $("td").each(function(){
-							if ($(this).text().indexOf('-') > -1) {
-								$(this).text($(this).text().replace('-','▼'));
-								$(this).css("color", "red");
-							} else if($(this).text().indexOf('+') > -1) {
-								$(this).text($(this).text().replace('+','▲'));
-								$(this).css("color", "blue");
-							}
-						})
-					}
-				})
-			}		
-	
-	</script>
-	<script> 
-		
-		$(function () {
-
-		    $(".tab_content").hide();
-		    $(".tab_content:first").show();
-
-		    $("ul.tabs li").click(function () {
-		        $("ul.tabs li").removeClass("active").css("color", "#333");
-		        //$(this).addClass("active").css({"color": "darkred","font-weight": "bolder"});
-		        $(this).addClass("active").css("color", "darkred");
-		        $(".tab_content").hide()
-		        var activeTab = $(this).attr("rel");
-		        $("#" + activeTab).fadeIn()
-		    });
-		});
-</script>
 </body>
 </html>

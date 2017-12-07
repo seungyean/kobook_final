@@ -98,7 +98,7 @@
                                         
                                     </li>
 
-                                    <li><a href="#">접속통계 관리</a>
+                                    <li><a href="/admin/analyze">접속통계 관리</a>
                                         
                                     </li>
                                    

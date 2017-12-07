@@ -82,7 +82,7 @@
                                     <li><a href="/board/personList">회원관리</a>
                                     </li>
 
-                                    <li><a href="#">주문배송 관리</a>
+                                    <li><a href="/board/delivery">주문배송 관리</a>
 
                                     </li>
 
@@ -90,11 +90,11 @@
                                          
                                     </li>
 
-                                    <li><a href="#">매출정산 관리</a>
+                                    <li><a href="/admin/payList">매출정산 관리</a>
                                         
                                     </li>
 
-                                    <li><a href="#">접속통계 관리</a>
+                                    <li><a href="/admin/analyze">접속통계 관리</a>
                                         
                                     </li>
                                    
@@ -108,97 +108,88 @@
     </header>
 <!--End Header-->
 	
-	<!--start wrapper-->
-	<section class="wrapper">
-		<section class="page_head">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12 col-md-12 col-sm-12">
-						<div class="page_title">
-							<h2>회원등급</h2>
-						</div>
-						<nav id="breadcrumbs">
-							<ul>
-								<li><a href="/resources/admin/blackUser.do">블랙회원</a>/</li>
-							</ul>
-						</nav>
-					</div>
-				</div>
-			</div>
-		</section>
-	</section>
-
-	<section class="content faq">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8">
-					<div class="panel-group accordion" id="accordion">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h4 class="panel-title"></h4>
+			<!--start wrapper-->
+			<section class="wrapper">
+				<section class="page_head">
+					<div class="container">
+						<div class="row">
+							<div class="col-lg-12 col-md-12 col-sm-12">
+								<div class="page_title">
+									<h2>회원등급</h2>
+								</div>
+								<nav id="breadcrumbs">
+									<ul>
+										<li><a href="/resources/admin/blackUser.do">블랙회원</a>/</li>
+									</ul>
+								</nav>
 							</div>
 						</div>
 					</div>
-				</div>
-			</div>
-
-	<!-- 	<form action="/board/personDetail" method="post"> -->
-
-
-			<form role="form" action="personModify" method="post">		
-		<table border="1" cellpadding ="0" cellspacing ="0" >
-			<tr height="50">
-				<td width="70" align="center" height="30">회원번호</td>
-				<td width="200" align="center" height="30">이메일</td>
-				<td width="80" align="center" height="30">이름</td>
-				<td width="400" align="center" height="30">주소</td>
-				<td width="100" align="center" height="30">번호</td>
-				<td width="80" align="center" height="30">마일리지</td>
-				<td width="60" align="center" height="30">회원등급</td>
-				<td width="60" align="center" height="30">회원분류</td>
-			<tr>
-		<tr>
- 			<td align="center" height="30">${personVO.person_id }</td>
-			<td align="center" height="30">${personVO.person_email }</td>
-			<td align="center" height="30">${personVO.person_name }</td>
-			<td align="center" height="30">${personVO.person_address }</td>
-			<td align="center" height="30">${personVO.person_phone }</td>
-			<td align="center" height="30">${personVO.person_mileage }</td>
-			<td align="center" height="30">
-				<select id="person_sell_grade" >
-					<option value="U">U</option>	
-					<option value="M">M</option>	
-					<option value="D">D</option>	
-               </select>
-               
-   															
-               	<br>
-               </td>
-			<td align="center">
-				<select id="person_kind" >
-                       <option value="A">A</option>
-<%--                        <option value="A"<c:out value="${person_kind eq 'A'?'selected':'' }" />>A</option> --%>
-                       <option value="N">N</option>
-<%--                        <option value="N"<c:out value="${person_kind eq 'N'?'selected':'' }" />>N</option> --%>
-                       <option value="B">B</option>
-                      <%--  <option value="B"<c:out value="${person_kind eq 'B'?'selected':'' }" />>B</option> --%>
-                       <option value="R">R</option>
-                      <%--  <option value="R"<c:out value="${person_kind eq 'R'?'selected':'' }" />>R</option> --%>
-               </select>
-            </td>
-	</table>
+				</section>
+			</section>
+		
+			<section class="content faq">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-8">
+							<div class="panel-group accordion" id="accordion">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title"></h4>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 
 
- 					<input type='hidden' name='person_id' value="${personVO.person_id }">
-  					<input type='hidden' name='person_kind' value="${personVO.person_kind }">
- 					<input type='hidden' name='person_sell_grade' value="${personVO.person_sell_grade }"> 
- 					<input type='hidden' name='page' value="${cri.page}">
-					<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
-					<input type='hidden' name='searchType' value="${cri.searchType}">
-					<input type='hidden' name='keyword' value="${cri.keyword}"> 
-					<button type="submit" value="정보수정" id="modifyBtn">수정</button>		
-					<button type="submit" value="회원삭제" id="removeBtn">삭제</button>	
-			</form>
+				<form role="form" action="personModify" method="post">					
+				<table border="1" >
+					<tr height="50">
+						<td width="70" align="center" height="30">회원번호</td>
+						<td width="200" align="center" height="30">이메일</td>
+						<td width="80" align="center" height="30">이름</td>
+						<td width="400" align="center" height="30">주소</td>
+						<td width="100" align="center" height="30">번호</td>
+						<td width="80" align="center" height="30">마일리지</td>
+						<td width="60" align="center" height="30">회원등급</td>
+						<td width="60" align="center" height="30">회원분류</td>
+					<tr>
+				<tr>
+		 			<td align="center" height="30">${personVO.person_id }</td>
+					<td align="center" height="30">${personVO.person_email }</td>
+					<td align="center" height="30">${personVO.person_name }</td>
+					<td align="center" height="30">${personVO.person_address }</td>
+					<td align="center" height="30">${personVO.person_phone }</td>
+					<td align="center" height="30">${personVO.person_mileage }</td>
+					<td align="center" height="30">
+						<select id="person_sell_grade" onchange=change(this.value)>
+							<option value="U">U</option>	
+							<option value="M">M</option>	
+							<option value="D">D</option>	
+		               </select>
+		               	<br>
+		               </td>
+					<td align="center">
+						<select id="person_kind" onchange=change(this.value)>
+		                       <option value="A">A</option>
+		                       <option value="N">N</option>
+		                       <option value="B">B</option>
+		                       <option value="R">R</option>
+		               </select>
+		            </td>
+				</table>
+				
+	 					<input type='hidden' name='person_id' value="${personVO.person_id }">
+	  					<input type='hidden' name='person_kind' value="${personVO.person_kind }">
+	 					<input type='hidden' name='person_sell_grade' value="${personVO.person_sell_grade }"> 
+	 					<input type='hidden' name='page' value="${cri.page}">
+						<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
+						<input type='hidden' name='searchType' value="${cri.searchType}">
+						<input type='hidden' name='keyword' value="${cri.keyword}"> 
+						<button type="submit" value="정보수정" id="modifyBtn">수정</button>		
+						<button type="submit" value="회원삭제" id="removeBtn">삭제</button>	
+					</form>
 		
 			<div align="center">
 				<button type="submit" value="목록" onclick='history.back(-1); return false;'>목록</button> 
@@ -239,46 +230,18 @@
 	
 	$(document).ready(function(){
 
-  	
  		$("#modifyBtn").on("click", function(){
  			var formObj = $("form[role=form]").serialize();
 			var person_sell_grade = $("#person_sell_grade option:selected").val();
 			var person_kind = $("#person_kind option:selected").val();
  
- 		 	var data = {
-					person_sell_grade :  person_sell_grade,
-					person_kind : person_kind
-			};  
- 			  
- 		    alert(data.person_sell_grade);
-			alert(data.person_kind);    
+			alert("수정된"+person_sell_grade);
+			alert("수정된"+person_kind);
 			
-			formObj.attr("data", data); 
-			formObj.attr("method", "post");
-			formObj.attr("action", "/board/personModify");  
+			var data = {person_sell_grade : person_sell_grade, person_kind : person_kind}
+			formObj.attr("data", data);
+			formObj.attr("action", "/board/personModify");
 			formObj.submit();
-			
-			
-			 /*  $.ajax({
- 				type : "POST",
- 				url : "/pay/personModify",
- 				dataType : "json",
- 				data : JSON.stringify({
-					person_sell_grade : person_sell_grade,
-					person_kind : person_kind
-			}),
- 				success : function(map){
- 					if(map == 'SUCCESS'){
- 						alert("등록");
- 					}
- 				}
- 			})   */
- 			
-/* 		 	
-		    formObj.attr("data", data);
-			formObj.attr("method", "post");
-			formObj.attr("action", "/board/personModify");  
-			formObj.submit(); */
 			
 		}); 
 	  
@@ -286,8 +249,9 @@
 			formObj.attr("method", "post");
 			formObj.attr("action", "/board/personRemove");
 			formObj.submit();
-	}); 
-});
+		}); 
+		 
+	});
 
 </script>
 
