@@ -143,7 +143,7 @@ fieldset {
 												<td align="center">
 													<img class="thumbnail" alt="NO IMAGE"
 												 src="/mypage/displayFile?fileName=${bookSellList.book_img}" style="width: 72px; height: 72px;"></td>
-												<td>${bookSellList.book_name  }</td>
+												<td>${bookSellList.book_name}</td>
 												<td align="center">${bookSellList.book_date  }</td>
 												<td align="center">${bookSellList.book_m_price }</td>
 												<td align="center">

@@ -209,10 +209,23 @@ public class MyPageController {
 	
 	/* 찜리스트 상태 변경 */
 	@RequestMapping(value = "/pickStateUpdate", method = RequestMethod.GET)
-	public String pickStateUpdate(@RequestParam("pick_id") int pick_id, RedirectAttributes rttr)throws Exception {
+	public String pickStateUpdate(@RequestParam("pick_id") String pick_id, RedirectAttributes rttr)throws Exception {
 		System.out.println("----------------Controller :찜리스트 상태 변경-----------------");
 		System.out.println(pick_id);
-		service.pickModify(pick_id);
+		
+		
+		String[] pick_id2 = pick_id.split(",");
+		
+		System.out.println("찜리 : " + pick_id2);
+		
+		for (int i=0; i<pick_id2.length; i++) {
+			service.pickModify(Integer.parseInt(pick_id2[i]));
+		}
+
+
+		
+		
+		
 		
 		return "redirect:/mypage/pickList";
 

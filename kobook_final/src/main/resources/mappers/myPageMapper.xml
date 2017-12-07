@@ -13,7 +13,7 @@
 
 	<!-- 판매내역 리스트 -->
 	<select id="sellList" resultType="BookVO" parameterType="SearchDateCriteria">
-		SELECT person_id, book_id, book_m_price,book_sell_state,book_img,to_date(TO_CHAR(book_date,'YYYY-MM-DD'),'YYYY-MM-DD') as book_date
+		SELECT person_id, book_id, book_m_price,book_sell_state,book_img,to_date(TO_CHAR(book_date,'YYYY-MM-DD'),'YYYY-MM-DD') as book_date,book_name
 		FROM book
 		WHERE person_id = #{person_id}
 		<if test="null != start_date">

@@ -34,6 +34,21 @@
 			border-image: initial;
 		}
 	</style>
+	<script type="text/javascript">
+	
+
+		$(function() {
+
+			$(".btn-default").on(
+					"click",
+					function(event) {
+						event.preventDefault();
+						console.log($(this).val());
+						var i = $(this).parent().parent().find("td:eq(0)").attr("data-rno");
+						window.open("/book/bookreviewRegist?pay_id=" + i, "","width=400,height=300,left=550,top=200");
+					});
+		});
+	</script>
 </head>
 <body>
 	<!-- 헤더 -->
@@ -149,26 +164,28 @@
 						
 						<!-- 페이지네이션 -->
 						<div class="text-center">
-							<ul class="pagination">
+						 <ul class="pagination">
+
 								<c:if test="${pageMaker.prev}">
-									<li>
-										<a href="buyList${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a>
-									</li>
+									<li><a
+										href="buyList${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
 								</c:if>
 
 								<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
-									<li<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+									<li <c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
 										<a href="buyList${pageMaker.makeSearch(idx)}">${idx}</a>
 									</li>
 								</c:forEach>
 
 								<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-									<li>
-										<a href="buyList${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a>
-									</li>
+									<li><a
+										href="buyList${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
 								</c:if>
-							</ul>
-						</div> <!-- /페이지네이션 -->
+
+							</ul> 
+							
+						</div>
+						 <!-- /페이지네이션 -->
 					</div>
 				</div>
 			</div>
@@ -200,22 +217,6 @@
     <script type="text/javascript" src="/resources/js/jquery.matchHeight-min.js"></script>
     <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
     <script src="/resources/js/main.js"></script>
-    
-	<script type="text/javascript">
-	
-
-		$(function() {
-
-			$(".btn-default").on(
-					"click",
-					function(event) {
-						event.preventDefault();
-						console.log($(this).val());
-						var i = $(this).parent().parent().find("td:eq(0)").attr("data-rno");
-						window.open("/book/bookreviewRegist?pay_id=" + i, "","width=400,height=300,left=550,top=200");
-					});
-		});
-	</script>
 	
     <!-- Start Style Switcher -->
     <div class="switcher"></div>
