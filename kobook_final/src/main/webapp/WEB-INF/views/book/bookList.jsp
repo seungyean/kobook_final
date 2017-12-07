@@ -103,8 +103,8 @@ $(function()
 				<option value="tc"
 					<c:out value="${cri.searchType eq 'tc'?'selected':''}"/>>
 					제목 + 내용</option>
-				<option value="cw"
-					<c:out value="${cri.searchType eq 'cw'?'selected':''}"/>>
+				<option value="tw"
+					<c:out value="${cri.searchType eq 'tw'?'selected':''}"/>>
 					제목 + 해시태그</option>
 				<option value="tcw"
 					<c:out value="${cri.searchType eq 'tcw'?'selected':''}"/>>

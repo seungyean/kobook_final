@@ -295,7 +295,7 @@
 				'%'||
 				#{keyword}||'%')
 			</if>
-			<if test="searchType == 'cw'.toString()">
+			<if test="searchType == 'tw'.toString()">
 				and ( book_name like '%'|| #{keyword}||'%' OR book_hash
 				like
 				'%'||

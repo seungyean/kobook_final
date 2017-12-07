@@ -99,31 +99,31 @@ public class ChatbotServiceImpl implements ChatbotService {
 					+ "\n 로 구성되어있습니다."
 					+ "\n 카테고리명 + 도움말을 입력하시면 가능한 질문들을 보실 수 있습니다.";
 		
-			// 쪽지 파트
+		// 쪽지 파트
 		} else if(text.contains("쪽지")){	
 			
 			newText = manageMessage(text, person_id);
 			
 			
-			// 책 파트
-		} else if(text.contains("책") || text.contains("도서") || text.contains("상품")){
-			
-			newText = manageBook(text, person_id);
-			
-			
-			// 마일리지 파트
-		} else if(text.contains("마일리지") || text.contains("관심")){	//	마이페이지 파트
+		// 마일리지 파트
+		} else if(text.contains("마일리지") || text.contains("관심")){	
 
 			newText = manageMypage(text, person_id);
 		
 			
-			// 게시판 파트
+		// 게시판 파트
 		} else if(text.contains("공지") || text.contains("블랙") || text.contains("포토") || text.contains("무료나눔")){
 			
 			newText = manageBoard(text, person_id);
 			
 			
-			// 카테고리에 벗어난 키워드 입력
+		// 책 검색
+		} else if(text.contains("찾아줘") || text.contains("보여줘") || text.contains("알려줘") || text.contains("검색")){
+			
+			newText = manageBook(text, person_id);
+			
+			
+		// 카테고리를 벗어났을 때
 		} else {
 			
 			newText = "카테고리 내에서 질문해 주시겠어요??";
@@ -140,14 +140,21 @@ public class ChatbotServiceImpl implements ChatbotService {
 	// 책 관련 사항
 	@Override
 	public String manageBook(String text, int person_id) throws Exception {
-		String newText = "";
-		List<BookVO> list = null;
+		
 		SearchCriteria cri = new SearchCriteria();
+		List<BookVO> list = null;
+		String newText = "";
+		String keyword = null;
+		String contentUrl = "";
+		
 		
 		// 제목 혹은 해시태그로 검색
-		if(text.contains("책") && (text.contains("알려줘") || text.contains("보여줘") || text.contains("검색"))){	
-			// xxx 책 보여줘
+		if(text.contains("알려줘") || text.contains("보여줘") || text.contains("찾아줘") || text.contains("검색")){	
+			// xxx 보여줘
 			
+			keyword = keyWordReplace(text);
+			System.out.println("책 키워드 추출: " + keyword);
+			cri.setSearchType("");
 			
 			
 		//내가 등록한 책 보여줘
@@ -181,13 +188,16 @@ public class ChatbotServiceImpl implements ChatbotService {
 	// 게시판 관련 사항
 	@Override
 	public String manageBoard(String text, int person_id) throws Exception {
-		String newText = "검색 결과는 제목+내용에서 검색된 결과이며 최대 5개까지 보여드립니다. \n";
-		List<?> list = null;
+		
 		SearchCriteria cri = new SearchCriteria();
+		List<?> list = null;
+		String newText = "검색 결과는 제목+내용에서 검색된 결과이며 최대 5개까지 보여드립니다. \n";
+		String boardName = null;
+		String rawKeyword = text.substring(text.indexOf(" ")+1);
+		String keyword = null;
 		
 		Pattern bPattern = Pattern.compile("^공지|^포토|^블랙|^무료나눔");
 		Matcher bMatcher = bPattern.matcher(text);
-		String boardName = null;
 		
 		while(bMatcher.find()){
 			boardName = boardNameReplace(bMatcher.group());
@@ -197,8 +207,6 @@ public class ChatbotServiceImpl implements ChatbotService {
 			}
 		}
 		
-		String rawKeyword = text.substring(text.indexOf(" ")+1);
-		String keyword = null;
 		String contentUrl = "";
 		System.out.println("rawkeyword 추출 ::" + rawKeyword);
 		
