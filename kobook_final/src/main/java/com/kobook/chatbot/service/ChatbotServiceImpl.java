@@ -81,9 +81,8 @@ public class ChatbotServiceImpl implements ChatbotService {
 	@Override
 	public ChatlogVO chatResponse(ChatlogVO vo) throws Exception {
 		
-		String text = vo.getChatlog_content();
 		int person_id = vo.getPerson_id();
-		
+		String text = vo.getChatlog_content();
 		String newText = "";
 		
 		// user_text 판별
@@ -143,9 +142,10 @@ public class ChatbotServiceImpl implements ChatbotService {
 		
 		SearchCriteria cri = new SearchCriteria();
 		List<BookVO> list = null;
-		String newText = "";
+		String newText = "검색 결과는 제목+내용에서 검색된 결과이며 최대 5개까지 보여드립니다. \n";
 		String keyword = null;
 		String contentUrl = "";
+		String more = "";
 		
 		
 		// 제목 혹은 해시태그로 검색
@@ -154,18 +154,50 @@ public class ChatbotServiceImpl implements ChatbotService {
 			
 			keyword = keyWordReplace(text);
 			System.out.println("책 키워드 추출: " + keyword);
-			cri.setSearchType("");
+			cri.setSearchType("tw");
+			cri.setKeyword(keyword);
+			list = bookDao.listCriteria(cri);
+			
+			
+			if(list.size() < 1){
+				newText += "해당 키워드에 맞는 책이 없습니다.";
+				
+			} else {
+				newText += "&nbsp; \n <b>"+list.size() + "</b>" + "개의 결과가 검색되었습니다.<hr>";
+				newText += "<찾으시는 책 제목>";
+				
+				if(list.size() > 5){
+					for(int i=0; i<5; i++){
+						contentUrl = "/book/bookRead?book_id=" + list.get(i).getBook_id();
+						newText += "\n ■ &nbsp;"
+								+ "<a href=\"javascript:;\" onClick=\"opener.parent.location='"+ contentUrl +"'; return false;\">"
+								+ list.get(i).getBook_name()+"</a>";
+					}
+					more = "/book/bookList?page=1&perPageNum=9&searchType=tw&keyword=" + keyword;
+					newText += "<hr>"
+							+ "<a href=\"javascript:;\" onClick=\"opener.parent.location='"+ more +"'; return false;\"> 더보러가기 </a>"; 
+				} else {
+					for(int i=0; i<list.size(); i++){
+						contentUrl = "/book/bookRead?book_id=" + list.get(i).getBook_id();
+						newText += "\n ■ &nbsp;"
+								+ "<a href=\"javascript:;\" onClick=\"opener.parent.location='"+ contentUrl +"'; return false;\">"
+								+ list.get(i).getBook_name()+"</a>";
+					}
+				}
+			}
+			
 			
 			
 		//내가 등록한 책 보여줘
 		} else if(text.contains("내가") && text.contains("등록")){ 
 			list = bookDao.getMyBookList(person_id);
 			System.out.println("내가 등록한책 리스트 크기: " + list.size());
+			
 			if(list.size() == 0){
 				newText += personDao.findPersonName(person_id) + "님이 등록한 책이 없습니다.";
-			} else if(list.size() > 3){
+			} else if(list.size() > 5){
 				
-				for(int i=0; i<3; i++){
+				for(int i=0; i<5; i++){
 					newText += "\n ■ &nbsp;" + list.get(i).getBook_name();
 				}
 				
