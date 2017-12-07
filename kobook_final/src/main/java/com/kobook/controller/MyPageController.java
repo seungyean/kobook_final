@@ -379,18 +379,28 @@ public class MyPageController {
 	
 	/* 쪽지보관함 */
 	@RequestMapping(value = "/messageBox", method = RequestMethod.GET)
-	public void messageBox(HttpServletRequest request, Model model) throws Exception{
+	public void messageBox(HttpServletRequest request, Model model, @ModelAttribute("cri") SearchDateCriteria cri) throws Exception{
 		System.out.println("----------------Controller : 쪽지보관함 -----------------");
 		HttpSession session = request.getSession();
 		int person_id = Integer.parseInt((String)session.getAttribute("person_id"));
 		System.out.println(person_id);
+		cri.setPerson_id(person_id);
 		
-		List<HashMap<String, String>> list = service.receivedMsgTotal(person_id);
+		List<HashMap<String, String>> list = service.receivedMsgTotal(cri);
 		
 		for (HashMap<String, String> hashMap : list) {
 			System.out.println(hashMap.toString());
 		}
-		model.addAttribute("receivedMsgTotal", service.receivedMsgTotal(person_id));
+		model.addAttribute("receivedMsgTotal", service.receivedMsgTotal(cri));
+		
+		
+		MyPageMaker pageMaker = new MyPageMaker();
+		pageMaker.setCri(cri);
+
+		pageMaker.setTotalCount(service.countPaging(cri));
+		model.addAttribute("pageMaker", pageMaker);
+		
+		
 	}
 	
 	/* 쪽지보관함 쪽지읽음 상태변경 */

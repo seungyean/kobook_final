@@ -320,16 +320,33 @@
                                         </ul>
                                     </li>
                                     
-                                    <li><a href="/mypage/userUpdate" >마이페이지</a>
-                                        <ul class="dropdown-menu">
-                                        	<li><a href="/mypage/userUpdate">회원정보수정</a></li>
-                                        	<li><a href="/mypage/mileageList">마일리지</a></li>
-                                        	<li><a href="/mypage/pickList">찜 리스트</a></li>
-                                        	<li><a href="/mypage/buyList">구매내역</a></li>
-                                        	<li><a href="/mypage/sellList">판매내역</a></li>
-                                        	<li><a href="/mypage/messageBox">쪽지보관함</a></li>
-                                        </ul>
-                                    </li>
+                                    <c:if test="${person_email == null }">
+	                                    <li class="hidden"><a href="/mypage/userUpdate" >마이페이지</a>
+	                                        <ul class="dropdown-menu">
+	                                        	<li><a href="/mypage/userUpdate">회원정보수정</a></li>
+	                                        	<li><a href="/mypage/mileageList">마일리지</a></li>
+	                                        	<li><a href="/mypage/pickList">찜 리스트</a></li>
+	                                        	<li><a href="/mypage/buyList">구매내역</a></li>
+	                                        	<li><a href="/mypage/sellList">판매내역</a></li>
+	                                        	<li><a href="/mypage/messageBox">쪽지보관함</a></li>
+	                                        </ul>
+	                                    </li>
+                                    </c:if>
+                                    <c:if test="${person_email != null }">
+	                                    <li><a href="/mypage/userUpdate" >마이페이지</a>
+	                                        <ul class="dropdown-menu">
+	                                        	<li><a href="/mypage/userUpdate">회원정보수정</a></li>
+	                                        	<li><a href="/mypage/mileageList">마일리지</a></li>
+	                                        	<li><a href="/mypage/pickList">찜 리스트</a></li>
+	                                        	<li><a href="/mypage/buyList">구매내역</a></li>
+	                                        	<li><a href="/mypage/sellList">판매내역</a></li>
+	                                        	<li><a href="/mypage/messageBox">쪽지보관함</a></li>
+	                                        </ul>
+	                                    </li>
+                                    </c:if>
+                                    
+                                    
+                                    
                                 </ul>
                             </div>
                         </div>

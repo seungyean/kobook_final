@@ -103,8 +103,8 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	@Override
-	public List<HashMap<String, String>> receivedMsgTotal(int receiver_id) throws Exception{
-		return dao.receivedMsgTotal(receiver_id);
+	public List<HashMap<String, String>> receivedMsgTotal(SearchDateCriteria cri) throws Exception{
+		return dao.receivedMsgTotal(cri);
 	}
 
 	@Override

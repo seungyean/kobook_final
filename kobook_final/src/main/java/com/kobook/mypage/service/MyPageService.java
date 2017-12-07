@@ -46,7 +46,7 @@ public interface MyPageService {
 	/* 회원의 사용가능 마일리지  조회*/
 	public Integer mileageUse(Integer person_id)throws Exception;
 	/* 회원이 받은 쪽지 조회 */
-	public List<HashMap<String, String>> receivedMsgTotal (int receiver_id)throws Exception;
+	public List<HashMap<String, String>> receivedMsgTotal (SearchDateCriteria cri)throws Exception;
 	/* 받은쪽지 읽기 */
 	public void msgModify(int message_id)throws Exception;
 	/* 쪽지 삭제 */ 

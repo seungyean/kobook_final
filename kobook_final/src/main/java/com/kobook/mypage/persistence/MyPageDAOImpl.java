@@ -120,8 +120,8 @@ public class MyPageDAOImpl implements MyPageDAO {
 	}
 
 	@Override
-	public List<HashMap<String, String>> receivedMsgTotal(int receiver_id) throws Exception{
-		return  session.selectList(namespace + ".receivedMsgTotal", receiver_id);
+	public List<HashMap<String, String>> receivedMsgTotal(SearchDateCriteria cri) throws Exception{
+		return  session.selectList(namespace + ".receivedMsgTotal", cri);
 	}
 
 	@Override
