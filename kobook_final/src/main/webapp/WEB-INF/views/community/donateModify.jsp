@@ -66,17 +66,15 @@
 					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
 						<div class="blog_single">
 							<article class="post">
-								<form role="form"
-									enctype="multipart/form-data">
-									<input type='hidden' name='page' value="${cri.page}"> 
-							<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
-							<input type='hidden' name='searchType' value="${cri.searchType}">
-							<input type='hidden' name='keyword' value="${cri.keyword}">
-							<input type="hidden" name="donate_thumbnail" value="${donateVO.donate_thumbnail }">
-									<input type="hidden" name="donate_id"
-										value="${donateVO.donate_id}">
+								<form role="form" enctype="multipart/form-data" method="post">
+									<input type='hidden' name='page' value="${cri.page}">
+									<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
+									<input type='hidden' name='searchType' value="${cri.searchType}">
+									<input type='hidden' name='keyword' value="${cri.keyword}">
+									<input type="hidden" name="donate_thumbnail" value="${donateVO.donate_thumbnail }">
+									<input type="hidden" name="donate_id" value="${donateVO.donate_id}">
 									<div class="post_date">
-										<span class="day">${donateVO.donate_id}</span>
+										<span class="day">${rn}</span>
 									</div>
 									<div class="post_content">
 										<div class="post_meta">

@@ -372,8 +372,9 @@ public class CommunityController {
 	
 	//무료나눔 글 수정 폼 이동
 	@RequestMapping(value = "donateModify", method = RequestMethod.GET)
-	public void donateModifyGet(@RequestParam("donate_id") int donate_id, Model model,
+	public void donateModifyGet(@RequestParam("donate_id") int donate_id, @RequestParam("rn") int rn, Model model,
 			@ModelAttribute("cri") SearchCriteria cri) throws Exception {
+		model.addAttribute("rn", rn);
 		model.addAttribute(donateService.donateRead(donate_id, false));
 		model.addAttribute("writer",donateService.donateWriter(donate_id));
 	}
@@ -382,6 +383,7 @@ public class CommunityController {
 	@RequestMapping(value = "donateModify", method = RequestMethod.POST)
 	public String donateModifyPost(RedirectAttributes rtts, DonateVO vo, SearchCriteria cri
 			, @RequestParam("file") MultipartFile file ) throws Exception {
+		System.out.println("Modify Post 컨트롤러 진입");
 		String donate_thumbnail = UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes());
 		String[] donate_thumbnail1 =donate_thumbnail.split("_");
 		

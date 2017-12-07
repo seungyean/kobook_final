@@ -79,6 +79,7 @@
 
     			<form role="form" action="donateModify" method="post">
 					<input type='hidden' name='donate_id' value="${donateVO.donate_id}">
+					<input type='hidden' name='rn' value="${rn}">
 					<input type='hidden' name='page' value="${cri.page}">
 					<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
 					<input type='hidden' name='searchType' value="${cri.searchType}">
