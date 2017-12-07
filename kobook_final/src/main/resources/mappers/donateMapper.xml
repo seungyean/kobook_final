@@ -30,11 +30,11 @@
 
 	<select id="donateList" resultType="DonateVO" parameterType="SearchCriteria">
 		<![CDATA[
-			 select * from donate where donate_id > 0
+			 select rownum as rn, donate.* from donate where donate_id > 0
 		]]>
 		<include refid="search" />
 		<![CDATA[	  
-			 order by donate_id DESC
+			 order by donate_id DESC, rn DESC
  		]]>
 	</select>
 

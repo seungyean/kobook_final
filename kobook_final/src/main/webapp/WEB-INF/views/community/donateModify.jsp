@@ -66,7 +66,7 @@
 					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
 						<div class="blog_single">
 							<article class="post">
-								<form role="form" action="donateModify" method="post"
+								<form role="form"
 									enctype="multipart/form-data">
 									<input type='hidden' name='page' value="${cri.page}"> 
 							<input type='hidden' name='perPageNum' value="${cri.perPageNum}">

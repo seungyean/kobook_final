@@ -82,9 +82,10 @@
 				success:function(list){
 					$.each(list, function(index) {
 						$("#today-list").append(
-								"<li class='viewList' data-rno='"+this.TODAY_ID+"'><img alt='NO IMAGE' src='/community/displayFile?fileName="+this.DONATE_THUMBNAIL
-										+"' width='80px' height='50px'><br>"
+								"<li class='viewList' data-rno='"+this.TODAY_ID+"'>"
 										+"<a href='/community/donateRead?donate_id="+this.DONATE_ID+"'>"
+										+"<img alt='NO IMAGE' src='/community/displayFile?fileName="
+										+this.DONATE_THUMBNAIL+"' width='80px' height='50px'><br>"
 										+"<b>"+this.DONATE_TITLE+"</b><br>"+"</a><small>무료 나눔 게시판</small></li>")
 					});
 				}
@@ -96,9 +97,10 @@
 				success:function(list){
 					$.each(list, function(index) {
 						$("#today-list").append(
-								"<li class='viewList' data-rno='"+this.TODAY_ID+"'><img alt='NO IMAGE' src='/book/displayFile?fileName="+this.BOOK_IMG
-										+"' width='80px' height='50px'><br>"
+								"<li class='viewList' data-rno='"+this.TODAY_ID+"'>"
 										+"<a href='/book/bookRead?book_id="+this.BOOK_ID+"'>"
+										+"<img alt='NO IMAGE' src='/book/displayFile?fileName="
+										+this.BOOK_IMG+"' width='80px' height='50px'><br>"
 										+"<b>" +this.BOOK_NAME+"</b><br>"+"</a><small>도서</small></li>");
 					});
 				}
@@ -106,7 +108,7 @@
 			
 			$("#today-list").on("mouseenter",".viewList",function(event){
 				event.preventDefault();
-				$(this).before("<button type='button' class='today-btn'>x</button>");
+				$(this).find("small").after("<button type='button' class='today-btn'>x</button>");
 			});
 			
 			$("#today-list").on("mouseleave",".viewList",function(event){
@@ -135,8 +137,8 @@
  var stmnGAP1 = 0; // 위쪽 여백 
  var stmnGAP2 = 270; // 스크롤시 브라우저 위쪽과 떨어지는 거리 
  var stmnBASE = 270; // 스크롤 시작위치 
- var stmnActivateSpeed = 5; //스크롤을 인식하는 딜레이 (숫자가 클수록 느리게 인식)
- var stmnScrollSpeed = 5; //스크롤 속도 (클수록 느림)
+ var stmnActivateSpeed = 25; //스크롤을 인식하는 딜레이 (숫자가 클수록 느리게 인식)
+ var stmnScrollSpeed = 25; //스크롤 속도 (클수록 느림)
  var stmnTimer; 
  
  function RefreshStaticMenu() {
@@ -190,7 +192,11 @@
 	
 	.viewList {
 		background-color:white;
-		z-index: 2900;
+		padding-bottom : 0px;
+		margin-bottom: 0px;
+	}
+	.sidebar{
+		background-color:white;
 	}
 	
 </style>
@@ -199,7 +205,7 @@
 </head>
 <body onload="InitializeStaticMenu();">
 	<c:if test="${person_email != null }">
-    	<div id="STATICMENU" class="col-sm-1 col-md-1 col-lg-1">
+    	<div id="STATICMENU" class="col-sm-1">
     		<div class="sidebar">
 				<div class="widget widget_tab">
 					<div class="velocity-tab sidebar-tab">

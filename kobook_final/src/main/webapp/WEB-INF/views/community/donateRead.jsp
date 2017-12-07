@@ -87,7 +87,7 @@
    
 							<article class="post">
 									<div class="post_date">
-										<span class="day">${donateVO.donate_id }</span>
+										<span class="day">${rn}</span>
 									</div>
 									<div class="post_content">
 										<div class="post_meta">

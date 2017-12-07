@@ -344,9 +344,9 @@ public class CommunityController {
 	
 	//무료나눔 게시판 상세보기
 	@RequestMapping("donateRead")
-	public void donateRead(@RequestParam("donate_id") Integer donate_id, Model model,
-			@ModelAttribute("cri") SearchCriteria cri, ReplyVO vo, HttpServletRequest request)throws Exception{
-		
+	public void donateRead(@RequestParam("donate_id") Integer donate_id, @RequestParam("rn") int rn, Model model,
+			@ModelAttribute("cri") SearchCriteria cri, DonateVO donateVO,ReplyVO vo, HttpServletRequest request)throws Exception{
+		model.addAttribute("rn", rn);
 		//Integer person_id = vo.getPerson_id();
 		//System.out.println("person_id"+person_id);
 		//System.out.println("reply_id : "+vo.getReply_id());

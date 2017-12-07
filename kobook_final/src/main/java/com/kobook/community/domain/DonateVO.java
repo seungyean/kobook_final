@@ -7,7 +7,7 @@ import java.util.Arrays;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class DonateVO implements Serializable {
-
+	private int rn;
 	private int donate_id;
 	@NotEmpty(message="제목을 입력하셔야 합니다.")
 	private String donate_title;
@@ -23,9 +23,10 @@ public class DonateVO implements Serializable {
 
 	public DonateVO() {}
 
-	public DonateVO(int donate_id, String donate_title, Timestamp donate_date, int donate_hit, String donate_content,
+	public DonateVO(int rn,int donate_id, String donate_title, Timestamp donate_date, int donate_hit, String donate_content,
 			int person_id, String donate_thumbnail, int reply_count, String[] files) {
 		super();
+		this.rn = rn;
 		this.donate_id = donate_id;
 		this.donate_title = donate_title;
 		this.donate_date = donate_date;
@@ -109,9 +110,17 @@ public class DonateVO implements Serializable {
 		this.files = files;
 	}
 
+	public int getRn() {
+		return rn;
+	}
+
+	public void setRn(int rn) {
+		this.rn = rn;
+	}
+
 	@Override
 	public String toString() {
-		return "DonateVO [donate_id=" + donate_id + ", donate_title=" + donate_title + ", donate_date=" + donate_date
+		return "DonateVO [rn= "+rn+", donate_id= " + donate_id + ", donate_title=" + donate_title + ", donate_date=" + donate_date
 				+ ", donate_hit=" + donate_hit + ", donate_content=" + donate_content + ", person_id=" + person_id
 				+ ", donate_thumbnail=" + donate_thumbnail + ", reply_count=" + reply_count + ", files="
 				+ Arrays.toString(files) + "]";

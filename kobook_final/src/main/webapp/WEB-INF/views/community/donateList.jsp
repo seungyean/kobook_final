@@ -103,13 +103,13 @@
 									<tbody>									
 										<c:forEach var="donate" items="${list}" varStatus="st">
 											<tr>
-												<td align="center">${donate.donate_id}</td>
+												<td align="center">${donate.rn}</td>
 												<td align="center" >
 												<img class="thumbnail" alt="NO IMAGE"
 												 src="/community/displayFile?fileName=${donate.donate_thumbnail }" height="100" width="200">
 												</td>
 												<td>
-													<a class="readMove" href="/community/donateRead${pageMaker.makeSearch(pageMaker.cri.page) }&donate_id=${donate.donate_id }">${donate.donate_title }
+													<a class="readMove" href="/community/donateRead${pageMaker.makeSearch(pageMaker.cri.page) }&rn=${donate.rn }&donate_id=${donate.donate_id }">${donate.donate_title }
 													<strong>[ ${donate.reply_count} ]</strong>
 													</a>
 												</td>
