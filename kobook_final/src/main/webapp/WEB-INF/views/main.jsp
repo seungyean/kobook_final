@@ -38,7 +38,7 @@
                 
                 <c:forEach var="x" begin="1" end="6">
 	                <div class="slide">
-	                    <img src="/resources/img/main/main${x }.jpg" width="1920" height="auto" data-in="fade" data-out="fade" />
+	                    <img src="/resources/img/main/main${x }.png" width="1920" height="auto" data-in="fade" data-out="fade" />
 	                </div>
                 </c:forEach>
                 
@@ -174,7 +174,7 @@
 						                                    <h5>전공 상세보기</h5>
 						                                    <a href="/book/displayFile?fileName=${f.book_img }" class="fa fa-search mfp-image"></a>
 						                                    <a href="/book/bookRead?book_id=${f.book_id}" class="fa fa-link"></a>
-						                                    <a href="/recom/deleteRecom?book_id=${f.book_id }&favorite_major=${f.favorite_major}&favorite_name=${f.favorite_name}" class="fa fa-times"></a>
+						                                    <a href="/deleteRecom?book_id=${f.book_id }&favorite_major=${f.favorite_major}&favorite_name=${f.favorite_name}" class="fa fa-times"></a>
 						                                </div>
 						                            </div>
 						                        </div>
@@ -195,7 +195,7 @@
 					                                    <h5>기타 상세보기</h5>
 					                                    <a href="/book/displayFile?fileName=${f.book_img }" class="fa fa-search mfp-image"></a>
 					                                    <a href="/book/bookRead?book_id=${f.book_id}" class="fa fa-link"></a>
-					                                    <a href="/recom/deleteRecom?book_id=${f.book_id }&favorite_major=${f.favorite_major}&favorite_name=${f.favorite_name}" class="fa fa-times"></a>
+					                                    <a href="/deleteRecom?book_id=${f.book_id }&favorite_major=${f.favorite_major}&favorite_name=${f.favorite_name}" class="fa fa-times"></a>
 					                                </div>
 					                            </div>
 					                        </div>
@@ -219,9 +219,6 @@
 						<div id="post-slider" class="owl-carousel">
 							<c:forEach var="b" items="${boardList }">
 		                        <div class="post-slide">	
-		                            <div class="post-img">
-		                                <img src="images/blog/blog_1.png">
-		                            </div>
 		                            <h5 class="post-title"><a href="blog-post.html">${b.board_title }</a></h5>
 		                            <div class="post-date">
 		                                <i class="fa fa-calendar"></i> ${b.board_date }

@@ -155,7 +155,7 @@ public class MyPageController {
 					alarmVO.setAlarm_kind("SellBook");
 					alarmVO.setAlarm_content("판매가 완료되었습니다.");
 					alarmVO.setPerson_id(person_id);
-//					mailVO.sendMail(alarmVO,mailSender,pService);
+					mailVO.sendMail(alarmVO,mailSender,pService,request);
 					
 					alarmService.alarmMessage(alarmVO);
 				}
@@ -343,25 +343,20 @@ public class MyPageController {
 		mileageVO.setMileage_point(mileageAvg);
 		mileageVO.setPerson_id(person_id);
 		
+		//마일리지 적립된 금액 알림서비스(아름)
+		AlarmVO alarmVO = new AlarmVO();
+		AlarmMailVO mailVO = new AlarmMailVO();
+		
+		alarmVO.setAlarm_kind("Mileage+");
+		alarmVO.setAlarm_content("적립금이"+mileageAvg+"원 적립되었습니다.");
+		alarmVO.setPerson_id(person_id);
+		mailVO.sendMail(alarmVO, mailSender, pService, request);
+		alarmService.alarmMessage(alarmVO);
+		
 		// 결제 후 책 판매상태 변경
 		BookVO bookVO = new BookVO();
 		bookVO.setBook_id(book_id);
 		bookVO.setBook_sell_state("C");
-		
-		//"판매가 완료되었습니다." 알림 주는 부분 (아름)
-		if(bookVO.getBook_sell_state().equals("C")) {
-			AlarmVO alarmVO = new AlarmVO();
-			AlarmMailVO mailVO = new AlarmMailVO();
-
-			alarmVO.setAlarm_kind("SellBook");
-			alarmVO.setAlarm_content("판매가 완료되었습니다.");
-			alarmVO.setPerson_id(person_id);
-//			mailVO.sendMail(alarmVO,mailSender,pService);
-			
-			alarmService.alarmMessage(alarmVO);
-		}
-		
-		
 		
 		if (input_mile != 0) {
 			MileageVO mileageVO2 = new MileageVO();
@@ -369,11 +364,20 @@ public class MyPageController {
 			mileageVO2.setMileage_point(input_mile);
 			mileageVO2.setPerson_id(person_id);
 			service.orderRegist(temp, pay, deliveryVO, mileageVO2,bookVO);
+			
+			//마일리지 차감된 금액 알림서비스(아름)
+			alarmVO.setAlarm_kind("Mileage-");
+			alarmVO.setAlarm_content("적립금이"+input_mile+"원 차감되었습니다.");
+			alarmVO.setPerson_id(person_id);
+			mailVO.sendMail(alarmVO, mailSender, pService, request);
+			alarmService.alarmMessage(alarmVO);
+			
+			
 		} else{
 			service.orderRegist(temp, pay, deliveryVO, mileageVO,bookVO);
 		}
 		
-		
+
 		
 		
 		return  "redirect:/mypage/orderSuccess";

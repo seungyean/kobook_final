@@ -134,7 +134,6 @@ public class RecomController {
 		FavoriteVO vo = new FavoriteVO();
 		
 		vo.setBook_id(book_id);
-		vo.setFavorite_id(Integer.parseInt(request.getParameter("favorite_id")));
 		vo.setFavorite_major(request.getParameter("favorite_major"));
 		vo.setFavorite_name(request.getParameter("favorite_name"));
 		vo.setPerson_id(Integer.parseInt((String)request.getSession().getAttribute("person_id")));

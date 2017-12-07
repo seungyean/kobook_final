@@ -72,7 +72,7 @@ public class AlarmMailVO {
 	    		+ "</h3>"
 	    		+ "<p><img src='cid:line' /></p>"
 	    		+ "<br>"
-	    		+ "<a href='localhost:8081/recom' style='font-size: 15px;'> 확인하러 가기  >> </a>"
+	    		+ "<a href='localhost:8081' style='font-size: 15px;'> 확인하러 가기  >> </a>"
 	    		+ "<br>"
 	    		+ "<br>"
 	    		+ "<br>";
@@ -90,7 +90,7 @@ public class AlarmMailVO {
         messageHelper.addInline("logo", file);	
 
         
-        FileSystemResource file2 = new FileSystemResource(new File(path + "/resources/img/logo.PNG"));
+        FileSystemResource file2 = new FileSystemResource(new File(path + "/resources/img/line.PNG"));
         messageHelper.addInline("line", file2);	
         
  
