@@ -192,25 +192,25 @@ public class CommunityController {
 		if(errors.hasErrors()) {
 			return "/community/blackRegist";
 		}
-		
+
 		MessageVO message = new MessageVO();
-			
+
 		message.setPerson_id(vo.getPerson_id());
 		message.setReceiver_id(1);
 		message.setMessage_content(" '"+vo.getBlack_title()+"' 이(가) 신고게시판에 새로 등록 되었습니다.");
-			
+
 		mService.messageSend(message);			
-		
+
 		AlarmVO alarmVO = new AlarmVO();
-			
+
 		alarmVO.setAlarm_kind("Message");
 		alarmVO.setAlarm_content("신고게시판 새 글 등록 알림쪽지");
 		alarmVO.setPerson_id(1);
 
 		alarmService.alarmMessage(alarmVO);
-		
+
 		blackService.blackRegist(vo);
-		
+
 		return "redirect:/community/blackList";
 	}
 	
@@ -219,23 +219,23 @@ public class CommunityController {
 	public void blackList(@ModelAttribute("cri") SearchCriteria cri, Model model)throws Exception{
 		List<BlackVO> list = blackService.blackList(cri);
 		HashMap<Integer, String> userMap = new HashMap<Integer,String>();
-		
+
 		int black_id;
-		
+
 		for(int index = 0; index<list.size(); index++){
 			black_id = list.get(index).getBlack_id();		
 			userMap.put(black_id, blackService.blackWriter(black_id));
 		}
 		model.addAttribute("list", list);
 		model.addAttribute("userMap", userMap);
-		
+
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(blackService.blackCount(cri));
-		
+
 		model.addAttribute("pageMaker", pageMaker);
 	}
-	
+
 	//신고게시판 상세보기
 	@RequestMapping("blackRead")
 	public void blackRead(@RequestParam("black_id") int black_id, Model model,
@@ -243,7 +243,7 @@ public class CommunityController {
 		model.addAttribute(blackService.blackRead(black_id));
 		model.addAttribute("writer", blackService.blackWriter(black_id));
 	}
-	
+
 	//신고게시판 수정 폼 이동
 	@RequestMapping(value = "blackModify", method = RequestMethod.GET)
 	public void blackModifyGet(@RequestParam("black_id") int black_id, Model model,
@@ -251,17 +251,17 @@ public class CommunityController {
 		model.addAttribute(blackService.blackRead(black_id));
 		model.addAttribute("writer", blackService.blackWriter(black_id));
 	}
-	
+
 	//신고게시판 글 수정(DB)
 	@RequestMapping(value = "blackModify", method = RequestMethod.POST)
 	public String blackModifyPost(RedirectAttributes rtts, BlackVO vo, SearchCriteria cri) throws Exception {
 		blackService.blackModify(vo);
-		
+
 		rtts.addAttribute("page", cri.getPage());
 		rtts.addAttribute("perPageNum", cri.getPerPageNum());
 		rtts.addAttribute("searchType", cri.getSearchType());
 		rtts.addAttribute("keyword", cri.getKeyword());
-		
+
 		return "redirect:/community/blackList";
 	}
 	
@@ -555,6 +555,7 @@ public class CommunityController {
 		model.addAttribute(photoService.photoReviewRead(photo_id, false));
 		model.addAttribute("writer", photoService.photoWriter(photo_id));		
 	}
+	
 	//포토리뷰 수정(DB)
 	@RequestMapping(value="photoReviewModify", method=RequestMethod.POST)
 	public String photoReviewModifyPost(RedirectAttributes rtts, PhotoVO vo, SearchCriteria cri
@@ -577,6 +578,7 @@ public class CommunityController {
 		
 		return "redirect:/community/photoReviewList";
 	}
+	
 	//포토리뷰 삭제
 	@RequestMapping("photoReviewRemove")
 	public String photoReviewRemove(RedirectAttributes rtts, SearchCriteria cri

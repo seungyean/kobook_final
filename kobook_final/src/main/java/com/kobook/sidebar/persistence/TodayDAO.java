@@ -22,10 +22,6 @@ public interface TodayDAO {
 	public void todayAllDeleteByPersonId(int person_id) throws Exception;
 	//todayAllDeleteByDonateId
 	public void todayAllDeleteByDonateId(int donate_id) throws Exception;
-	//todayAllDeleteByBookId
-	public void todayAllDeleteByBookId(int book_id) throws Exception;
 	//todayCountByDonateId
 	public int todayCountByDonateId(int donate_id) throws Exception;
-	//todayCountByBookId
-	public int todayCountByBookId(int book_id) throws Exception;
 }

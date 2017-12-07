@@ -57,17 +57,8 @@ public class TodayServiceImpl implements TodayService {
 	}
 
 	@Override
-	public void todayAllRemoveByBookId(int book_id) throws Exception {
-		dao.todayAllDeleteByBookId(book_id);
-	}
-
-	@Override
 	public int todayCountByDonateId(int donate_id) throws Exception {
 		return dao.todayCountByDonateId(donate_id);
 	}
-
-	@Override
-	public int todayCountByBookId(int book_id) throws Exception {
-		return dao.todayCountByBookId(book_id);
-	}
+	
 }

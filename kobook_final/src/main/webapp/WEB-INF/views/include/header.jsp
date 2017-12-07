@@ -99,14 +99,14 @@
 								"<li class='viewList' data-rno='"+this.TODAY_ID+"'><img alt='NO IMAGE' src='/book/displayFile?fileName="+this.BOOK_IMG
 										+"' width='80px' height='50px'><br>"
 										+"<a href='/book/bookRead?book_id="+this.BOOK_ID+"'>"
-										+"<b>" +this.BOOK_NAME+"</b><br>"+"</a><small>도서</small></li>")
+										+"<b>" +this.BOOK_NAME+"</b><br>"+"</a><small>도서</small></li>");
 					});
 				}
 			});
 			
 			$("#today-list").on("mouseenter",".viewList",function(event){
 				event.preventDefault();
-				$(this).find("img").before("<button type='button' class='today-btn'>x</button>");
+				$(this).before("<button type='button' class='today-btn'>x</button>");
 			});
 			
 			$("#today-list").on("mouseleave",".viewList",function(event){
@@ -170,8 +170,6 @@
 	 RefreshStaticMenu();
 	
  }
- 
- 
 
 </script>
 
@@ -185,10 +183,16 @@
 		z-index: 3000;
 	}
 	
-	#today-list{
+	#today-list {
 		background-color:white;
 		z-index: 2900;
 	}
+	
+	.viewList {
+		background-color:white;
+		z-index: 2900;
+	}
+	
 </style>
 
 
@@ -202,7 +206,7 @@
     					<ul class="nav nav-tabs">
                         	<li class="active"><a href="#Recent"> 오늘 본 상품 </a></li>
                         </ul>
-                        <div class="tab-pane fade active in" id="Recent">
+                        <div class="tab-pane active in" id="Recent">
                         	<ul class="recent_tab_list" id="today-list">
 		    				</ul>
 		    			</div>
@@ -255,7 +259,6 @@
                         		 <h1><a href="/recom">KOBOOK</a></h1>
                         		</c:otherwise>
 	                        </c:choose>
-
                         </div>
                     </div>
                     <!-- Navigation
@@ -319,12 +322,12 @@
                                     
                                     <li><a href="/mypage/userUpdate" >마이페이지</a>
                                         <ul class="dropdown-menu">
-                                            		<li><a href="/mypage/userUpdate">회원정보수정</a></li>
-                                                    <li><a href="/mypage/mileageList">마일리지</a></li>
-                                                    <li><a href="/mypage/pickList">찜 리스트</a></li>
-                                                    <li><a href="/mypage/buyList">구매내역</a></li>
-                                                    <li><a href="/mypage/sellList">판매내역</a></li>
-                                                    <li><a href="/mypage/messageBox">쪽지보관함</a></li>
+                                        	<li><a href="/mypage/userUpdate">회원정보수정</a></li>
+                                        	<li><a href="/mypage/mileageList">마일리지</a></li>
+                                        	<li><a href="/mypage/pickList">찜 리스트</a></li>
+                                        	<li><a href="/mypage/buyList">구매내역</a></li>
+                                        	<li><a href="/mypage/sellList">판매내역</a></li>
+                                        	<li><a href="/mypage/messageBox">쪽지보관함</a></li>
                                         </ul>
                                     </li>
                                 </ul>
