@@ -219,7 +219,7 @@
 	 <select id="deliveryList" resultType="HashMap" parameterType="SearchCriteria">
 	<![CDATA[
  	 select d.delivery_id, b.book_name, per.person_name, p.pay_amount, p.pay_date ,d.delivery_state,d.delivery_msg,d.delivery_address
-	from pay p, book b, book_order o, delivery d,person per
+	from pay p, book b, book_order o, delivery d, person per
 	where 
 	p.order_id=o.order_id
   	and o.ORDER_ID=d.ORDER_ID
@@ -271,11 +271,11 @@
 	
 	
 
-<sql id="locationsearch">
-	<if test="keyword !=null">
-	and p.person_address like '%'|| #{keyword}||'%'
-	</if>
-</sql>
+	<sql id="locationsearch">
+		<if test="keyword !=null">
+		and p.person_address like '%'|| #{keyword}||'%'
+		</if>
+	</sql>
 
 
 	<sql id="search">
@@ -462,18 +462,7 @@
 	from pay
 	where to_char(pay_date,'YY/MM/DD')=(select TO_CHAR(SYSDATE,'YY/MM/DD')from dual)
 	</select>
-	
-	<!-- 최근 등록된 책 -->
-	<!-- <select id="getRecentList" resultType="BookVOs">
-		select *
-		from book
-		<![CDATA[
-			where to_date(book_date,'YYYYMMDD') >= to_date(sysdate,'YYYYMMDD')-3
-			and to_date(book_date,'YYYYMMDD') <= to_date(sysdate,'YYYYMMDD')
-		]]>
-		
-		order by book_date DESC;
-	</select> -->
+
 	
 	<!-- 아이디로 책이름 찾기 -->
 	<select id="getNameById" resultType="String" parameterType="Integer">
@@ -487,6 +476,7 @@
 		select *
 		from book
 		where person_id = #{person_id}
+		order by book_date
 	</select>
 	
 	

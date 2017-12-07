@@ -99,18 +99,19 @@ public class ChatbotServiceImpl implements ChatbotService {
 					+ "\n 로 구성되어있습니다."
 					+ "\n 카테고리명 + 도움말을 입력하시면 가능한 질문들을 보실 수 있습니다.";
 		
+			// 쪽지 파트
 		} else if(text.contains("쪽지")){	
 			
 			newText = manageMessage(text, person_id);
 			
 			
-			// 쪽지 파트
+			// 책 파트
 		} else if(text.contains("책") || text.contains("도서") || text.contains("상품")){
 			
 			newText = manageBook(text, person_id);
-//			newText = "책은 좀 나중에 준비해드릴게요";
 			
-			// 책 파트
+			
+			// 마일리지 파트
 		} else if(text.contains("마일리지") || text.contains("관심")){	//	마이페이지 파트
 
 			newText = manageMypage(text, person_id);
@@ -119,8 +120,8 @@ public class ChatbotServiceImpl implements ChatbotService {
 			// 게시판 파트
 		} else if(text.contains("공지") || text.contains("블랙") || text.contains("포토") || text.contains("무료나눔")){
 			
-//			newText = "게시판 관련 ㄱㄱ";
 			newText = manageBoard(text, person_id);
+			
 			
 			// 카테고리에 벗어난 키워드 입력
 		} else {
@@ -141,28 +142,16 @@ public class ChatbotServiceImpl implements ChatbotService {
 	public String manageBook(String text, int person_id) throws Exception {
 		String newText = "";
 		List<BookVO> list = null;
+		SearchCriteria cri = new SearchCriteria();
 		
-		if(text.contains("최근") && text.contains("등록")){	//최근 등록된 책 보여줘
-			
-			// 좀 나중에....
-			
-			/*list = bookDao.getRecentList();
-			
-			if(list.size() == 0){
-				newText += "최근 3일간 등록된 책이 없습니다.";
-			} else if(list.size() > 3){
-				for(int i=0; i<3; i++){
-					newText += "\n * " + list.get(i).getBook_name();
-				}
-				newText += "\n &nbsp; \n <a href='#'>더보기</a>";
-			} else {
-				for(int i=0; i<list.size(); i++){
-					newText += "\n * " + list.get(i).getBook_name();
-				}
-			}*/
+		// 제목 혹은 해시태그로 검색
+		if(text.contains("책") && (text.contains("알려줘") || text.contains("보여줘") || text.contains("검색"))){	
+			// xxx 책 보여줘
 			
 			
-		} else if(text.contains("내가") && text.contains("등록")){ //내가 등록한 책 보여줘
+			
+		//내가 등록한 책 보여줘
+		} else if(text.contains("내가") && text.contains("등록")){ 
 			list = bookDao.getMyBookList(person_id);
 			System.out.println("내가 등록한책 리스트 크기: " + list.size());
 			if(list.size() == 0){
@@ -180,8 +169,6 @@ public class ChatbotServiceImpl implements ChatbotService {
 					newText += "\n ■ &nbsp;" + list.get(i).getBook_name();
 				}
 			}
-			
-		} else if(text.contains("관련") || text.contains("관한")){	 //종류 관한 책보여줘
 			
 		} else {
 			newText += "책에 대해서 다시 질문해주시겠어요?";
@@ -455,6 +442,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 				contentUrl = "/mypage/messageBox";
 				newText +="<hr/> &nbsp; \n"
 						+ "<a href=\"javascript:;\" onClick=\"opener.parent.location='"+ contentUrl +"'; return false;\"> 쪽지보관함으로 이동 </a>";
+				
 				// 쪽지를 조회함과 동시에 쪽지 알림도 0으로 됨 
 				alarmDao.alarmUpdateByMessage(person_id);
 				
