@@ -27,19 +27,18 @@
     </div>               
 	</script>
 	<script>
-	   
 	   $(function(){
 		   
+			// 마일리지 사용
 		   var del_price = 2000;
 		   $('#total_price').html(parseInt($('#book_price').text()) + del_price);
-		   
-		   // 마일리지 사용
 		   $("#input_mile").keyup(function() {
-			var book_price = parseInt($('#book_price').text());
+				var book_price = parseInt($('#book_price').text());
 	   		var input_mile = parseInt($('#input_mile').val());
+	   		var total_mile = $('#totalMileage').html();
+	   		
 	   		$('#total_price').html($('#book_price').text() - input_mile + del_price );
 	   		$('#sale_price').html($('#input_mile').val());
-	   		var total_mile = $('#totalMileage').html();
 	   		
 	   		if(input_mile > total_mile ){
 	   			$('#mileModal').modal();
@@ -101,7 +100,6 @@
 	               // 우편번호와 주소 정보를 해당 필드에 넣는다.
 	               document.getElementById('dpostcode').value = data.zonecode; //5자리 새우편번호 사용
 	               document.getElementById('daddr1').value = fullAddr;
-	
 	               // 커서를 상세주소 필드로 이동한다.
 	               document.getElementById('daddr2').focus();
 	           }
