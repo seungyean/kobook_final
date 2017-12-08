@@ -28,4 +28,5 @@ public class PayDAOImpl implements PayDAO{
 	public Integer payDaySum(String pay_date)throws Exception {
 		return session.selectOne(namespace+".payDaySum", pay_date);
 	}
+	
 }

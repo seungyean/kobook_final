@@ -53,8 +53,6 @@ public class AdminController {
 	@RequestMapping("/adminMain")
 	public String visitCount(Model model) throws Exception {
 		
-		//총 접속자
-/*		model.addAttribute("visit",visitservice.visitCount());*/
 		return "admin/adminMain";
 	}
 	
@@ -80,7 +78,6 @@ public class AdminController {
 	@RequestMapping(value="/payList", method=RequestMethod.POST)
 	public String payListPOST(Model model)throws Exception {
 		
-		
 		return "admin/payList";
 	}
 	
@@ -90,8 +87,6 @@ public class AdminController {
 	
 	@RequestMapping(value="/analyze", method=RequestMethod.POST)
 	public String analyzePOST(Model model)throws Exception {
-		
-		System.out.println();
 		
 		return "admin/analyze";
 	}

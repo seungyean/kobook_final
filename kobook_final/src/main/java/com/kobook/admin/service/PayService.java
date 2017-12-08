@@ -9,4 +9,5 @@ public interface PayService {
 	public int paySum(String pay_date)throws Exception;
 	
 	public int payDaySum(String pay_date)throws Exception;
+	
 }

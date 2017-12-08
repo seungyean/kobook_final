@@ -4,36 +4,32 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
+
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpSession;
+
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.kobook.admin.domain.MonthPayVO;
+
+
 import com.kobook.admin.service.PayService;
 import com.kobook.admin.service.VisitService;
-import com.kobook.board.domain.BoardVO;
+
 import com.kobook.board.service.BoardService;
 import com.kobook.book.domain.SearchCriteria;
-import com.kobook.community.domain.BlackVO;
-import com.kobook.community.domain.DonateVO;
+
 import com.kobook.community.service.BlackService;
 import com.kobook.community.service.DonateService;
 import com.kobook.community.service.PhotoReviewService;
-import com.kobook.person.domain.PersonVO;
-import com.kobook.person.service.PersonService;
+
 
 @RestController
 @RequestMapping("/pay/*")
@@ -132,10 +128,9 @@ public class AdminAjaxController {
 	//선택한 게시물 삭제
 	@RequestMapping(value="/notiRemove", method=RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<String> notiRemovePOST(SearchCriteria cri, @RequestParam("kind") String kind, @RequestParam("num") Integer num)throws Exception {
+	public ResponseEntity<String> notiRemovePOST(@RequestParam("kind")String kind, @RequestParam("num") Integer num)throws Exception {
 		
 		ResponseEntity<String> entity = null;
-		System.out.println("선택한" + kind);
 		
 		try {
 			if(kind.equals("sin")){
@@ -147,7 +142,6 @@ public class AdminAjaxController {
 			}else if(kind.equals("gong")){
 				boardservice.boardRemove(num);
 			}
-			
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -162,7 +156,6 @@ public class AdminAjaxController {
 	public ResponseEntity<Integer> visitCountPOST() throws Exception {
 		
 		ResponseEntity<Integer> entity = null;
-		System.out.println("실험테스트!!!!!!!!");
 		
 		int count ;
 		try {

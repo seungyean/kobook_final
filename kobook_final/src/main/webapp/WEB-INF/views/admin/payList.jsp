@@ -321,26 +321,6 @@ ul.tabs li.active {
 		}
 	</script>
 	
-<!-- 	<script type="text/javascript">
- 	google.charts.load('current', {packages: ['corechart', 'line']});
-    google.charts.setOnLoadCallback(drawBasic);
-    function drawBasic() {
-          
-    	  var data = new google.visualization.DataTable();
-          data.addColumn('number', 'X');
-          data.addColumn('number', '접속자');
-          data.addRows([
-          
-          var options = {           
-        	title : '접속자 현황',	  
-        	width :'500',
-            height : '500'
-          };
-          var chart = new google.visualization.LineChart(document.getElementById('chart_a'));
-          chart.draw(data, options);
-        } 
-	</script> -->
-	
 	<script type="text/javascript">
 	function payDayButton() {
 		

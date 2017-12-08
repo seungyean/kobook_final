@@ -354,14 +354,11 @@
 							}
 						}
 					});
-
 		}
 
 	//삭제 버튼을 누를경우 	
 	function deleteAction(){
-		var myArray = [];
 		var noti_select = $("#search option:selected").val();
-		var count = 0;
 		
 		checkList = document.getElementsByName("sub_check");
 		
@@ -374,18 +371,16 @@
 					type : "POST",
 					url : "/pay/notiRemove",
 					dataType : "json",
-					data : JSON.stringify({kind:noti_select, num:val}),
+					data : {kind:noti_select, num:val},
 					success : function(data){
-							if(data == "SUCCESS"){
-								alert("씨발");
-							}
+						if(data=="SUCCESS"){
+							alert("성공");
 						}
+							}
 					});
 				}
 			}	
-			
 		selectButton();
-		 
 		}
 	</script>
 	

@@ -153,7 +153,7 @@
                             </div>
                             <div class="service-content">
                                 <h3>오늘 가입자</h3>
-                                <p>2명쯤 될라나?? 미구현${personVO.person_id }</p>
+                                <p>1명</p>
                             </div>
                         </div>
                     </div>
@@ -372,7 +372,6 @@ function drawChart() {
 	}
 	
 	$(window).load(function(){
-		console.log("씨빨");
 		var html ="";
 		
 		$.ajax({
@@ -381,7 +380,6 @@ function drawChart() {
 			dataType : "json",
 			timeout : 10000,
 			success : function(data){
-				console.log("씨빨 :"+data);
 					$('#visitCount').empty();
 					html += "<div>"+ data + "명"+"</div>"
 					$('#visitCount').append(html);

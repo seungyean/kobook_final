@@ -5,22 +5,16 @@
 
 <mapper namespace="com.kobook.mappers.visitMapper">
 
-
 	<select id="paySum" resultType="Integer">
 		select sum(pay_amount) from pay
 		where pay_date like #{pay_date}
 	</select>
-
 
 	<select id="payDaySum" resultType="Integer">
 		select sum(pay_amount) from	pay
 		where pay_date like #{pay_date} 
 		order by pay_date desc
 	</select>
-	
-	<delete id="blackNotiRemove" parameterType="Integer">
-		delete from black where black_id = #{blakc_id}
-	</delete>
 
 	<insert id="visitRegist" parameterType="Integer">
 		insert into visit(visit_id, visit_date, person_id) 
@@ -28,7 +22,7 @@
 	</insert>
 	
 	<select id="visitCount" resultType="Integer">
-		select count(*) from visit where visit_date like sysdate
+		select count(distinct(person_id)) from visit where visit_date like sysdate
 	</select>
 	
 	

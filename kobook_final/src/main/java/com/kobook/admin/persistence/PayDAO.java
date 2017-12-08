@@ -9,4 +9,5 @@ public interface PayDAO {
 	public Integer paySum(String pay_date)throws Exception;
 	
 	public Integer payDaySum(String pay_date)throws Exception;
+	
 }
