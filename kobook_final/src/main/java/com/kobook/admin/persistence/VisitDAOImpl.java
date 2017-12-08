@@ -16,10 +16,17 @@ public class VisitDAOImpl implements VisitDAO{
 	private SqlSession session;
 	
 	private static String namespace="com.kobook.mappers.visitMapper";
-	
+
 	@Override
 	public int visitCount() throws Exception {
 		return session.selectOne(namespace+".visitCount");
 	}
+
+	@Override
+	public void visitRegist(int person_id) throws Exception {
+		session.insert(namespace+".visitRegist", person_id);
+	}
+	
+	
 	
 }

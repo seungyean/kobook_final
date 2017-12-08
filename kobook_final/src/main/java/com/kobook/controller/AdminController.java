@@ -96,27 +96,6 @@ public class AdminController {
 		return "admin/analyze";
 	}
 	
-	//세션 증가카운트
-	@RequestMapping(value="/countManager", method=RequestMethod.POST)
-	public void sessionCreated(HttpSessionEvent event)throws Exception{
-		HttpSession session = event.getSession(); //request에서 얻는 session과 동일한 객체
-		session.setMaxInactiveInterval(60*20);
-		
-		count++;
-		session.getServletContext().log(session.getId() + " 세션생성 " + ", 접속자수 : " + count);
-		
-	}
 
-	//세션 감소카운트
-	@RequestMapping(value="/destroyManager", method=RequestMethod.POST)
-	public void sessionDestroy(HttpSessionEvent event)throws Exception {
-		
-		count--;
-		if(count<0)
-		   count=0;
-		
-		HttpSession session = event.getSession();
-		session.getServletContext().log(session.getId() + " 세션소멸 " + ", 접속자수 : " + count);
-	}
 }
 

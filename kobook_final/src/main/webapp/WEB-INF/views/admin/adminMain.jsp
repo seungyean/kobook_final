@@ -164,7 +164,9 @@
                             </div>
                             <div class="service-content">
                                 <h3>오늘 총 접속자</h3>
-                                	<p>${CountManager.getCount()} 명</p>
+                                	<div id="visitCount">
+                                	
+                                	</div>
                             </div>
                         </div>
                     </div>
@@ -307,17 +309,14 @@
     <script src="/resources/js/main.js"></script>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
    
 <script type="text/javascript">
-	
-</script>   
 
-<script type="text/javascript">
 google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(drawChart);
 
 function drawChart() {
-
   var data = new google.visualization.DataTable();
   data.addColumn('string', 'Pizza');
   data.addColumn('number', 'Populartiy');
@@ -339,14 +338,9 @@ function drawChart() {
   var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
   chart.draw(data, options);
 }
-
 </script>
 
-
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">
-</script>
-
-<script>
+<script type="text/javascript">
 	google.charts.load('current', {packages:['corechart']});
 	google.charts.setOnLoadCallback(drawChart);
 
@@ -376,8 +370,28 @@ function drawChart() {
 		var chart = new google.visualization.ColumnChart(document.getElementById('chart_divv'));
 		chart.draw(data, chart_options);
 	}
+	
+	$(window).load(function(){
+		console.log("씨빨");
+		var html ="";
+		
+		$.ajax({
+			type : "POST",
+			url : "/pay/visitCount",
+			dataType : "json",
+			timeout : 10000,
+			success : function(data){
+				console.log("씨빨 :"+data);
+					$('#visitCount').empty();
+					html += "<div>"+ data + "명"+"</div>"
+					$('#visitCount').append(html);
+				
+			}
+		
+	})
+})
+	
 </script>
-
 
 </body>
 </html>

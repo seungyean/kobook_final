@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.kobook.admin.persistence.VisitDAO;
 import com.kobook.board.domain.BoardVO;
 import com.kobook.board.persistence.BoardDAO;
 import com.kobook.book.domain.Criteria;
@@ -27,14 +28,16 @@ public class BoardDAOTest {
 	@Inject
 	private BoardDAO dao;
 	
+	@Inject
+	private VisitDAO daoo;
 /*	@Test
 	public void test()throws Exception {
 		
 		BoardVO vo = new BoardVO();
 		
-		vo.setBoard_content("»õ·Î¿î ±Û³»¿ë");
-		vo.setBoard_title("»õ·Î¿î Á¦¸ñ");
-		vo.setBoard_writer("»õ·Î¿î ÀÛ¼ºÀÚ");
+		vo.setBoard_content("ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½Û³ï¿½ï¿½ï¿½");
+		vo.setBoard_title("ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½ï¿½");
+		vo.setBoard_writer("ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½Û¼ï¿½ï¿½ï¿½");
 		
 		dao.insertBoard(vo);
 		
@@ -54,6 +57,11 @@ public class BoardDAOTest {
 		}
 	}*/
 	
+/*	@Test
+	public void test() throws Exception {
+		
+		daoo.visitCount();
+	}*/
 	
 	
 }

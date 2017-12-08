@@ -13,24 +13,28 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.kobook.admin.service.VisitService;
 import com.kobook.person.service.PersonService;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 
 	@Inject
 	private PersonService service;
+	
+	@Inject
+	private VisitService visitservice;
 
 	private static Hashtable loginPersons = new Hashtable();
 		
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		System.out.println("===================postΩ√¿€");
+		System.out.println("===================postÔøΩÔøΩÔøΩÔøΩ");
 		
 		String parentURI = request.getParameter("parentURI");
 		
 		HttpSession session = request.getSession();
-
+		
 		String person_email = request.getParameter("person_email");
 		String person_pwd = request.getParameter("person_pwd");
 
@@ -56,24 +60,24 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			else if(person_email.equals(person_emailCheck) && person_pwd.equals(person_pwdCheck)){
 				session.setAttribute("person_id", person_id);
 				
+				visitservice.visitRegist(Integer.parseInt(person_id));
+				System.out.println("Î°úÍ∑∏Ïù∏Ìïú ÌöåÏõêÎ≤àÌò∏: "+person_id);
+				
 				if(!parentURI.equals("http://localhost:8081/#")){
 					response.sendRedirect(parentURI != null ? parentURI:"/");
 				}
-				
 
 			}else{
 				response.sendRedirect("/person/loginFail");
 			}
 		}
 		
-
-		
 	}
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		System.out.println("==================preΩ√¿€");
+		System.out.println("==================preÔøΩÔøΩÔøΩÔøΩ");
 		HttpSession session = request.getSession();
 		
 		if(session.getAttribute("login") != null){

@@ -21,14 +21,15 @@ public class VisitServiceImpl implements VisitService {
 
 	@Inject
 	private VisitDAO dao;
-	
+
 	@Override
 	public int visitCount() throws Exception {
 		return dao.visitCount();
 	}
+
+	@Override
+	public void visitRegist(int person_id) throws Exception {
+		dao.visitRegist(person_id);
+	}
 	
-	/*@Override
-	public List<VisitVO> visitList() throws Exception {
-		return dao.visitList();
-	}*/
 }

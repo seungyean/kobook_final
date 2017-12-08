@@ -7,6 +7,6 @@ import com.kobook.admin.domain.VisitVO;
 public interface VisitService {
 	
 	public int visitCount() throws Exception;
-	
-	/*public List<VisitVO> visitList() throws Exception;*/
+
+	public void visitRegist(int person_id) throws Exception;
 }

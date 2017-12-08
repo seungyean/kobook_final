@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kobook.admin.domain.MonthPayVO;
 import com.kobook.admin.service.PayService;
+import com.kobook.admin.service.VisitService;
 import com.kobook.board.domain.BoardVO;
 import com.kobook.board.service.BoardService;
 import com.kobook.book.domain.SearchCriteria;
@@ -52,6 +53,9 @@ public class AdminAjaxController {
 
 	@Inject
 	private PhotoReviewService photoservice;
+	
+	@Inject
+	private VisitService visitservice;
 
 	
 	private ArrayList<?> listt;
@@ -150,6 +154,25 @@ public class AdminAjaxController {
 			entity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 		}
 
+		return entity;
+	}
+	
+	@RequestMapping(value="/visitCount", method=RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<Integer> visitCountPOST() throws Exception {
+		
+		ResponseEntity<Integer> entity = null;
+		System.out.println("실험테스트!!!!!!!!");
+		
+		int count ;
+		try {
+			count = visitservice.visitCount();
+			entity = new ResponseEntity<Integer>(count ,HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<Integer>(HttpStatus.BAD_REQUEST);
+		}
+		
 		return entity;
 	}
 }
