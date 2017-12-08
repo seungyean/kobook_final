@@ -60,5 +60,25 @@ public class TodayServiceImpl implements TodayService {
 	public int todayCountByDonateId(int donate_id) throws Exception {
 		return dao.todayCountByDonateId(donate_id);
 	}
+
+	@Override
+	public int bookTotalCount() throws Exception {
+		return dao.bookTotalCount();
+	}
+
+	@Override
+	public int bookDirectCount() throws Exception {
+		return dao.bookDirectCount();
+	}
+
+	@Override
+	public int bookSafeCount() throws Exception {
+		return dao.bookSafeCount();
+	}
+
+	@Override
+	public int donateTotalCount() throws Exception {
+		return dao.donateTotalCount();
+	}
 	
 }

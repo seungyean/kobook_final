@@ -74,4 +74,24 @@ public class TodayDAOImpl implements TodayDAO {
 		return session.selectOne(namespace+".todayCountByDonateId", donate_id);
 	}
 
+	@Override
+	public int bookTotalCount() throws Exception {
+		return session.selectOne(namespace+".bookTotalCount");
+	}
+
+	@Override
+	public int bookDirectCount() throws Exception {
+		return session.selectOne(namespace+".bookDirectCount");
+	}
+
+	@Override
+	public int bookSafeCount() throws Exception {
+		return session.selectOne(namespace+".bookSafeCount");
+	}
+
+	@Override
+	public int donateTotalCount() throws Exception {
+		return session.selectOne(namespace+".donateTotalCount");
+	}
+
 }

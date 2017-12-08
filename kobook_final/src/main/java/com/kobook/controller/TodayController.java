@@ -52,4 +52,7 @@ public class TodayController {
 		return "success"; 
 	}
 	
+	//거래가능물품 수량 확인(itemCnt)
+	
+	
 }

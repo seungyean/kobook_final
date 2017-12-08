@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kobook.book.domain.SearchCriteria;
 import com.kobook.community.domain.PhotoFileVO;
+import com.kobook.community.domain.PhotoHeartVO;
 import com.kobook.community.domain.PhotoVO;
 
 public interface PhotoReviewDAO {
@@ -33,5 +34,17 @@ public interface PhotoReviewDAO {
 	public void photoUpdate(PhotoVO vo) throws Exception;
 	//photoDelete
 	public void photoDelete(Integer photo_id) throws Exception;
+	//photoHeartUp
+	public void photoHeartUp(Integer photo_id) throws Exception;
+	//photoHeartDown
+	public void photoHeartDown(Integer photo_id) throws Exception;
+	//heartInsert
+	public void heartInsert(PhotoHeartVO heartVO) throws Exception;
+	//heartDelete
+	public void heartDelete(Integer heart_id) throws Exception;
+	//getPhotoId
+	public int getPhotoId(Integer heart_id) throws Exception;
+	//getHeartId
+	public int getHeartId(int person_id, int photo_id) throws Exception;
 	
 }

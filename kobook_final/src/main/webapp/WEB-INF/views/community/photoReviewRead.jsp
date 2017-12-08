@@ -43,14 +43,6 @@
      	display: inline-block;
      }
     </style>
-<!-- <script type="text/javascript">
-	function fn_update() {
-		location.href="photoReviewModify?photo_id=${photoVO.photo_id}";
-	}
-	function fn_delete() {
-		location.href="photoReviewRemove?photo_id=${photoVO.photo_id}";
-	}
-</script> -->
 </head>
 <body class="home">
 	<!-- 헤더 -->
@@ -126,15 +118,22 @@
 								<li><span><i class="fa fa-eye"></i>조회수 :</span>${photoVO.photo_hit }</li>
 							</ul>
 							<c:if test="${photoVO.photo_heart==0 }">
+							<button type="submit" id="heartUp"><i class="fa fa-thumbs-o-up">추천</i></button>
+							</c:if>
+							<c:if test="${photoVO.photo_heart>0 }">
+							<button type="submit" id="heartDown"><i class="fa fa-thumbs-o-down">추천해제</i></button>
+							</c:if>
+
+<%-- 							
+							<c:if test="${photoVO.photo_heart==0 }">
 								<a href="photoHeartUp?photo_id=${photoVO.photo_id}"><i class="fa fa-thumbs-o-up">추천하기</i></a>
 							</c:if>
 							<c:if test="${photoVO.photo_heart>0 }">
 								<a href="photoHeartUp?photo_id=${photoVO.photo_id}"><i class="fa fa-thumbs-o-up">추천하기</i></a>
 								<a href="photoHeartDown?photo_id=${photoVO.photo_id}"><i class="fa fa-thumbs-o-down">추천해제</i></a>
 							</c:if><br>
+							 --%>
 							<c:if test="${photoVO.person_id == person_id }">
-								<!-- <input type="button" class="btn btn-lg btn-default" value="수정" onclick="fn_update()">
-								<input type="button" class="btn btn-lg btn-default" value="삭제" onclick="fn_delete()"> -->
 								<button type="submit" class="btn btn-warning" id="modifyBtn">수정</button>
 								<button type="submit" class="btn btn-danger" id="removeBtn">삭제</button>
 							</c:if>
@@ -338,6 +337,49 @@ $(function(){
 
 	var photo_id = ${photoVO.photo_id};
 	var template = Handlebars.compile($("#templateAttach").html());
+	
+	$("#heartUp").on("click", function(){
+		event.preventDefault();
+		if(confirm("추천하시겠습니까?")){
+			$.ajax({
+				url:'/community/photoHeartUp/'+photo_id,
+				type : 'POST',
+				dataType: 'text',
+				success : function(result) {
+					if(result=='success'){
+						formObj.attr("action", "/community/photoReviewRead?photo_id="+photo_id);
+						formObj.attr("method", "get");		
+						formObj.submit();
+					}
+				}
+			});
+		}else{
+			alert('추천하기 취소하셨습니다');
+		}
+
+	});
+	
+	$("#heartDown").on("click", function(){
+		event.preventDefault();
+		if(confirm("추천 해제하시겠습니까?")){
+			$.ajax({
+				url:'/community/photoHeartDown/'+photo_id,
+				type : 'POST',
+				dataType: 'text',
+				success : function(result) {
+					if(result=='success'){
+						alert("추천 해제 성공");
+						formObj.attr("action", "/community/photoReviewRead?photo_id="+photo_id);
+						formObj.attr("method", "get");		
+						formObj.submit();
+					}
+				}
+			});
+		}else{
+			alert('추천상태가 유지됩니다');
+		}
+
+	});
 	
 	$.getJSON("/community/photoGetAttach/"+photo_id,function(list){
 		$(list).each(function(){

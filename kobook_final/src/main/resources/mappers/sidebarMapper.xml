@@ -57,6 +57,22 @@
 		DELETE FROM today WHERE book_id = #{book_id}
 	</delete>
 	
+	<select id="bookTotalCount" resultType="int">
+		select count(book_id) from book where book_sell_state='I'
+	</select>
+	
+	<select id="bookDirectCount" resultType="int">
+		select count(book_id) from book where book_safe_yn = 'N' and book_sell_state='I'
+	</select>
+
+	<select id="bookSafeCount" resultType="int">
+		select count(book_id) from book where book_safe_yn = 'Y' and book_sell_state='I'
+	</select>
+	
+	<select id="donateTotalCount" resultType="int">
+		select count(donate_id) from donate
+	</select>
+	
 </mapper>
 
 

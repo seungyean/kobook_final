@@ -35,6 +35,7 @@ import com.kobook.book.domain.PageMaker;
 import com.kobook.book.domain.SearchCriteria;
 import com.kobook.community.domain.BlackVO;
 import com.kobook.community.domain.DonateVO;
+import com.kobook.community.domain.PhotoHeartVO;
 import com.kobook.community.domain.PhotoVO;
 import com.kobook.community.domain.ReplyVO;
 import com.kobook.community.service.BlackService;
@@ -598,5 +599,35 @@ public class CommunityController {
 		
 		return "redirect:/community/photoReviewList";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="photoHeartUp/{photo_id}", method = RequestMethod.POST)
+	public String photoHeartUp(@PathVariable("photo_id")Integer photo_id,HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		Integer person_id = Integer.parseInt((String)session.getAttribute("person_id"));
+		
+		PhotoHeartVO heartVO = new PhotoHeartVO();
+		
+		heartVO.setPhoto_id(photo_id);
+		heartVO.setPerson_id(person_id);
+		
+		photoService.heartInsert(heartVO);
+		return "success";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="photoHeartDown/{photo_id}", method = RequestMethod.POST)
+	public String photoHeartDown(@PathVariable("photo_id")Integer photo_id, HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		if(session.getAttribute("person_id") != null) {
+			Integer person_id = Integer.parseInt((String)session.getAttribute("person_id"));
+			Integer heart_id = photoService.getHeartId(person_id, photo_id);
+			photoService.heartDelete(heart_id);
+		}
+		
+		return "success";
+	}
+	
+	
 	
 }

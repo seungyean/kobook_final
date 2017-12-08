@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kobook.book.domain.SearchCriteria;
 import com.kobook.community.domain.PhotoFileVO;
+import com.kobook.community.domain.PhotoHeartVO;
 import com.kobook.community.domain.PhotoVO;
 import com.kobook.community.persistence.PhotoReviewDAO;
 
@@ -92,5 +93,25 @@ public class PhotoReviewServiceImpl implements PhotoReviewService {
 	public void photoReviewRemove(Integer photo_id) throws Exception {
 		dao.photoDeleteAttach(photo_id);
 		dao.photoDelete(photo_id);
+	}
+
+	@Transactional
+	@Override
+	public void heartInsert(PhotoHeartVO heartVO) throws Exception {
+		dao.heartInsert(heartVO);
+		dao.photoHeartUp(heartVO.getPhoto_id());
+	}
+
+	@Transactional
+	@Override
+	public void heartDelete(Integer heart_id) throws Exception {
+		Integer photo_id = dao.getPhotoId(heart_id);
+		dao.heartDelete(heart_id);
+		dao.photoHeartDown(photo_id);
+	}
+
+	@Override
+	public int getHeartId(int person_id, int photo_id) throws Exception {
+		return dao.getHeartId(person_id, photo_id);
 	}
 }

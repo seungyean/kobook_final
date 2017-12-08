@@ -15,4 +15,8 @@ public interface TodayService {
 	public void todayAllRemoveByPersonId(int person_id) throws Exception;
 	public void todayAllRemoveByDonateId(int donate_id) throws Exception;
 	public int todayCountByDonateId(int donate_id) throws Exception;
+	public int bookTotalCount() throws Exception;
+	public int bookDirectCount() throws Exception;
+	public int bookSafeCount() throws Exception;
+	public int donateTotalCount() throws Exception;
 }

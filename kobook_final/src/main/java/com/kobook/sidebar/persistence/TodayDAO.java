@@ -24,4 +24,13 @@ public interface TodayDAO {
 	public void todayAllDeleteByDonateId(int donate_id) throws Exception;
 	//todayCountByDonateId
 	public int todayCountByDonateId(int donate_id) throws Exception;
+	//bookTotalCount
+	public int bookTotalCount() throws Exception;
+	//bookDirectCount
+	public int bookDirectCount() throws Exception;
+	//bookSafeCount
+	public int bookSafeCount() throws Exception;
+	//donateTotalCount
+	public int donateTotalCount() throws Exception;
+	
 }

@@ -1,6 +1,8 @@
 package com.kobook.community.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kobook.book.domain.SearchCriteria;
 import com.kobook.community.domain.PhotoFileVO;
+import com.kobook.community.domain.PhotoHeartVO;
 import com.kobook.community.domain.PhotoVO;
 
 @Repository
@@ -84,5 +87,41 @@ public class PhotoReviewDAOImpl implements PhotoReviewDAO {
 	@Override
 	public void photoDelete(Integer photo_id) throws Exception {
 		session.delete(namespace+".photoDelete", photo_id);
+	}
+
+	@Override
+	public void photoHeartUp(Integer photo_id) throws Exception {
+		session.update(namespace+".photoHeartUp", photo_id);
+	}
+
+	@Override
+	public void photoHeartDown(Integer photo_id) throws Exception {
+		session.update(namespace+".photoHeartDown", photo_id);
+	}
+
+	@Override
+	public void heartInsert(PhotoHeartVO heartVO) throws Exception {
+		session.insert(namespace+".heartInsert", heartVO);
+	}
+
+	@Override
+	public void heartDelete(Integer heart_id) throws Exception {
+		session.delete(namespace+".heartDelete", heart_id);
+	}
+
+	@Override
+	public int getPhotoId(Integer heart_id) throws Exception {
+		return session.selectOne(namespace+".getPhotoId", heart_id);
+	}
+
+	@Override
+	public int getHeartId(int person_id, int photo_id) throws Exception {
+		
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		
+		paramMap.put("person_id", person_id);
+		paramMap.put("photo_id", photo_id);
+		
+		return session.selectOne(namespace+".getHeartId", paramMap);
 	}
 }
