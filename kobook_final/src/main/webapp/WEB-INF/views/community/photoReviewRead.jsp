@@ -117,12 +117,12 @@
 								<li><span><i class="fa fa-heart"></i>좋아요 :</span> ${photoVO.photo_heart }</li>
 								<li><span><i class="fa fa-eye"></i>조회수 :</span>${photoVO.photo_hit }</li>
 							</ul>
-							<c:if test="${photoVO.photo_heart==0 }">
+						
 							<button type="submit" id="heartUp"><i class="fa fa-thumbs-o-up">추천</i></button>
-							</c:if>
-							<c:if test="${photoVO.photo_heart>0 }">
+							
+							
 							<button type="submit" id="heartDown"><i class="fa fa-thumbs-o-down">추천해제</i></button>
-							</c:if>
+						
 
 <%-- 							
 							<c:if test="${photoVO.photo_heart==0 }">

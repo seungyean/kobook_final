@@ -34,21 +34,7 @@
 			border-image: initial;
 		}
 	</style>
-	<script type="text/javascript">
 	
-
-		$(function() {
-
-			$(".btn-default").on(
-					"click",
-					function(event) {
-						event.preventDefault();
-						console.log($(this).val());
-						var i = $(this).parent().parent().find("td:eq(0)").attr("data-rno");
-						window.open("/book/bookreviewRegist?pay_id=" + i, "","width=400,height=300,left=550,top=200");
-					});
-		});
-	</script>
 </head>
 <body>
 	<!-- 헤더 -->
@@ -217,6 +203,22 @@
     <script type="text/javascript" src="/resources/js/jquery.matchHeight-min.js"></script>
     <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
     <script src="/resources/js/main.js"></script>
+	
+	<script type="text/javascript">
+	
+
+		$(function() {
+
+			$(".btn-default").on(
+					"click",
+					function(event) {
+						event.preventDefault();
+						console.log($(this).val());
+						var i = $(this).parent().parent().find("td:eq(0)").attr("data-rno");
+						window.open("/book/bookreviewRegist?pay_id=" + i, "","width=400,height=300,left=550,top=200");
+					});
+		});
+	</script>
 	
     <!-- Start Style Switcher -->
     <div class="switcher"></div>
