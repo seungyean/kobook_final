@@ -117,7 +117,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 			
 			
 		// 책 검색
-		} else if(text.contains("찾아줘") || text.contains("보여줘") || text.contains("알려줘") || text.contains("검색")){
+		} else if(text.contains("찾아줘") || text.contains("보여줘") || text.contains("알려줘") || text.contains("검색") ||  text.contains("책")){
 			
 			newText = manageBook(text, person_id);
 			
@@ -142,7 +142,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 		
 		SearchCriteria cri = new SearchCriteria();
 		List<BookVO> list = null;
-		String newText = "검색 결과는 제목+내용에서 검색된 결과이며 최대 5개까지 보여드립니다. \n";
+		String newText = "";
 		String keyword = null;
 		String contentUrl = "";
 		String more = "";
@@ -151,7 +151,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 		// 제목 혹은 해시태그로 검색
 		if(text.contains("알려줘") || text.contains("보여줘") || text.contains("찾아줘") || text.contains("검색")){	
 			// xxx 보여줘
-			
+			newText = "검색 결과는 제목+내용에서 검색된 결과이며 최대 5개까지 보여드립니다. \n";
 			keyword = keyWordReplace(text);
 			System.out.println("책 키워드 추출: " + keyword);
 			cri.setSearchType("tw");
@@ -193,21 +193,18 @@ public class ChatbotServiceImpl implements ChatbotService {
 			list = bookDao.getMyBookList(person_id);
 			System.out.println("내가 등록한책 리스트 크기: " + list.size());
 			
-			if(list.size() == 0){
+			if(list.size() < 1){
 				newText += personDao.findPersonName(person_id) + "님이 등록한 책이 없습니다.";
-			} else if(list.size() > 5){
-				
-				for(int i=0; i<5; i++){
-					newText += "\n ■ &nbsp;" + list.get(i).getBook_name();
-				}
-				
-				newText += "\n &nbsp; \n <a href='#'>더보기</a>";
 			} else {
-				
+				newText += "\n <내가 등록한 책 제목>";
 				for(int i=0; i<list.size(); i++){
-					newText += "\n ■ &nbsp;" + list.get(i).getBook_name();
+					contentUrl = "/book/bookRead?book_id=" + list.get(i).getBook_id();
+					newText += "\n ■ &nbsp;"
+							+ "<a href=\"javascript:;\" onClick=\"opener.parent.location='"+ contentUrl +"'; return false;\">"
+							+ list.get(i).getBook_name()+"</a>";
 				}
 			}
+			
 			
 		} else {
 			newText += "책에 대해서 다시 질문해주시겠어요?";
@@ -270,9 +267,9 @@ public class ChatbotServiceImpl implements ChatbotService {
 								+ "<a href=\"javascript:;\" onClick=\"opener.parent.location='"+ contentUrl +"'; return false;\">"
 								+((BoardVO)list.get(i)).getBoard_title() + "</a>";
 					}
-					
-					newText += "\n &nbsp;";
-					newText += "\n <a href='#'>더보기</a>";
+					contentUrl = "/board/boardList?page=1&perPageNum=9&searchType=tc&keyword=" + keyword;
+					newText += "\n ■ &nbsp;"
+							+ "<a href=\"javascript:;\" onClick=\"opener.parent.location='"+ contentUrl +"'; return false;\">더보기</a>";
 				} else {
 					for(int i=0; i<list.size(); i++){
 						contentUrl = "/board/boardDetail?board_id="
@@ -307,9 +304,9 @@ public class ChatbotServiceImpl implements ChatbotService {
 								+ "<a href=\"javascript:;\" onClick=\"opener.parent.location='"+ contentUrl +"'; return false;\">"
 								+ ((PhotoVO)list.get(i)).getPhoto_title()+"</a>";
 					}
-					
-					newText += "\n &nbsp;";
-					newText += "\n <a href='#'>더보기</a>";
+					contentUrl = "/community/photoReviewList?page=1&perPageNum=9&searchType=tc&keyword=" + keyword;
+					newText += "\n ■ &nbsp;"
+							+ "<a href=\"javascript:;\" onClick=\"opener.parent.location='"+ contentUrl +"'; return false;\">더보기</a>";
 				} else {
 					for(int i=0; i<list.size(); i++){
 						contentUrl = "/community/photoReviewRead?page=1&perPageNum=9&searchType&keyword&photo_id="

@@ -139,7 +139,7 @@ textarea {
 				<div class="uk-card-footer uk-padding-remove">
 					<div class="uk-grid-small uk-flex-middle" id="control-container" uk-grid>
 						<div class="uk-width-auto">
-							<a href="#" class="uk-icon-link uk-margin-small-left" uk-icon="icon: happy"></a>
+							<a href="#" class="uk-icon-link uk-margin-small-left" id="question"><img src="/resources/img/question.png" width="18px" height="18px" alt="question_mark"></a>
 						</div>
 						<div class="uk-width-expand">
 							<div class="uk-padding-small uk-padding-remove-horizontal">
