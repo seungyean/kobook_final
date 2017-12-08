@@ -76,6 +76,7 @@
     </div>
     			<form role="form" action="blackModify" method="post">
 					<input type='hidden' name='black_id' value="${blackVO.black_id}">
+					<input type='hidden' name='rn' value="${rn}">
 					<input type='hidden' name='page' value="${cri.page}">
 					<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
 					<input type='hidden' name='searchType' value="${cri.searchType}">
@@ -84,7 +85,7 @@
    
 							<article class="post">
 									<div class="post_date">
-										<span class="day">${blackVO.black_id }</span>
+										<span class="day">${rn}</span>
 									</div>
 									<div class="post_content">
 										<div class="post_meta">

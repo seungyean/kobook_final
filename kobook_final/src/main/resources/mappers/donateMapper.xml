@@ -122,8 +122,8 @@
 	</update>
 
 	<select id="donateReplyList" resultType="ReplyVO" parameterType="int">
-		select * from reply where donate_id = #{donate_id} order by reply_date
-		DESC
+		select * from reply where donate_id = #{donate_id}
+			order by reply_date DESC
 	</select>
 
 	<select id="selectPersonName" resultType="string">

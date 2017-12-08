@@ -7,6 +7,7 @@ import java.util.Arrays;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class PhotoVO implements Serializable {
+	private int rn;
 	private int photo_id;
 	
 	@NotEmpty(message="제목을 입력하셔야 합니다.")
@@ -24,8 +25,9 @@ public class PhotoVO implements Serializable {
 	
 	public PhotoVO() {}
 
-	public PhotoVO(int photo_id, String photo_title, Timestamp photo_date, int photo_hit, String photo_content,
+	public PhotoVO(int rn, int photo_id, String photo_title, Timestamp photo_date, int photo_hit, String photo_content,
 			int photo_heart, String photo_thumbnail, int person_id, String[] files) {
+		this.rn = rn;
 		this.photo_id = photo_id;
 		this.photo_title = photo_title;
 		this.photo_date = photo_date;
@@ -35,6 +37,14 @@ public class PhotoVO implements Serializable {
 		this.photo_thumbnail = photo_thumbnail;
 		this.person_id = person_id;
 		this.files = files;
+	}
+
+	public int getRn() {
+		return rn;
+	}
+
+	public void setRn(int rn) {
+		this.rn = rn;
 	}
 
 	public int getPhoto_id() {
@@ -111,7 +121,7 @@ public class PhotoVO implements Serializable {
 
 	@Override
 	public String toString() {
-		return "PhotoVO [photo_id=" + photo_id + ", photo_title=" + photo_title + ", photo_date=" + photo_date
+		return "PhotoVO [rn= "+rn+", photo_id=" + photo_id + ", photo_title=" + photo_title + ", photo_date=" + photo_date
 				+ ", photo_hit=" + photo_hit + ", photo_content=" + photo_content + ", photo_heart=" + photo_heart
 				+ ", photo_thumbnail=" + photo_thumbnail + ", person_id=" + person_id + ", files="
 				+ Arrays.toString(files) + "]";

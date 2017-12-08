@@ -82,6 +82,7 @@
 			<div class="container">
     			<form role="form" action="photoReviewModify" method="post">
 					<input type='hidden' name='photo_id' value="${photoVO.photo_id}">
+					<input type='hidden' name='rn' value="${rn}">
 					<input type='hidden' name='page' value="${cri.page}">
 					<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
 					<input type='hidden' name='searchType' value="${cri.searchType}">
@@ -116,7 +117,7 @@
 								<h4><span>${photoVO.photo_title }</span></h4>
 							</div>
 							<ul class="details">
-								<li><span><i class="fa fa-pencil"></i>글번호 :</span>${photoVO.photo_id }</li>
+								<li><span><i class="fa fa-pencil"></i>글번호 :</span>${rn}</li>
 								<li><span><i class="fa fa-user"></i>작성자 :</span>${writer}</li>
 								<li><span><i class="fa fa-file-text"></i>내용 :</span> ${photoVO.photo_content }</li>
 								<li><span><i class="fa fa-calendar"></i>작성일 :</span>

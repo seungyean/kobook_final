@@ -27,11 +27,11 @@
  
 	<select id="blackList" resultType="BlackVO" parameterType="SearchCriteria">
 		<![CDATA[
-			 select * from black where black_id > 0
+			 select rownum as rn, black.* from black where black_id > 0
 		]]>
 			 <include refid="search"/>
 		<![CDATA[	  
-			 order by black_id DESC
+			 order by black_id DESC, rn DESC
  		]]>
 	</select>
 	

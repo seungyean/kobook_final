@@ -75,7 +75,7 @@
 							<input type='hidden' name='keyword' value="${cri.keyword}">
 									<input type="hidden" name="black_id" value="${blackVO.black_id}">
 									<div class="post_date">
-										<span class="day">${blackVO.black_id }</span>
+										<span class="day">${rn}</span>
 									</div>
 									<div class="post_content">
 										<div class="post_meta">

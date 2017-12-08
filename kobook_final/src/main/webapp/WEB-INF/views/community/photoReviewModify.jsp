@@ -86,7 +86,7 @@
 								</h4>
 							</div>
 							<ul class="details">
-								<li><span><i class="fa fa-pencil"></i>글번호 :</span>${photoVO.photo_id }</li>
+								<li><span><i class="fa fa-pencil"></i>글번호 :</span>${rn}</li>
 								<li><span><i class="fa fa-user"></i>작성자 :</span>${writer }</li>
 								<li><span><i class="fa fa-file-text"></i>내용 :</span>
 								<textarea cols="25" rows="2" name="photo_content"

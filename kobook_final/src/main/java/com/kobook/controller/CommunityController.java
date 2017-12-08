@@ -238,16 +238,18 @@ public class CommunityController {
 
 	//신고게시판 상세보기
 	@RequestMapping("blackRead")
-	public void blackRead(@RequestParam("black_id") int black_id, Model model,
-			@ModelAttribute("cri") SearchCriteria cri) throws Exception{
+	public void blackRead(@RequestParam("black_id") int black_id, @RequestParam("rn") int rn
+			, Model model, @ModelAttribute("cri") SearchCriteria cri) throws Exception{
+		model.addAttribute("rn", rn);
 		model.addAttribute(blackService.blackRead(black_id));
 		model.addAttribute("writer", blackService.blackWriter(black_id));
 	}
 
 	//신고게시판 수정 폼 이동
 	@RequestMapping(value = "blackModify", method = RequestMethod.GET)
-	public void blackModifyGet(@RequestParam("black_id") int black_id, Model model,
-			@ModelAttribute("cri") SearchCriteria cri) throws Exception {
+	public void blackModifyGet(@RequestParam("black_id") int black_id, @RequestParam("rn") int rn
+			, Model model, @ModelAttribute("cri") SearchCriteria cri) throws Exception {
+		model.addAttribute("rn", rn);
 		model.addAttribute(blackService.blackRead(black_id));
 		model.addAttribute("writer", blackService.blackWriter(black_id));
 	}
@@ -537,8 +539,9 @@ public class CommunityController {
 	
 	//포토리뷰 상세보기
 	@RequestMapping("photoReviewRead")
-	public void photoReviewRead(@RequestParam("photo_id") Integer photo_id, Model model,
-			@ModelAttribute("cri") SearchCriteria cri) throws Exception{
+	public void photoReviewRead(@RequestParam("photo_id") Integer photo_id, @RequestParam("rn") int rn
+			, Model model, @ModelAttribute("cri") SearchCriteria cri) throws Exception{
+		model.addAttribute("rn", rn);
 		model.addAttribute(photoService.photoReviewRead(photo_id, true));
 		model.addAttribute("writer", photoService.photoWriter(photo_id));
 	}
@@ -552,8 +555,9 @@ public class CommunityController {
 	
 	//포토리뷰 수정 폼 이동
 	@RequestMapping(value="photoReviewModify", method=RequestMethod.GET)
-	public void photoReviewModifyGet(@RequestParam("photo_id") Integer photo_id, Model model,
-			@ModelAttribute("cri") SearchCriteria cri) throws Exception {
+	public void photoReviewModifyGet(@RequestParam("photo_id") Integer photo_id, @RequestParam("rn") int rn
+			, Model model, @ModelAttribute("cri") SearchCriteria cri) throws Exception {
+		model.addAttribute("rn", rn);
 		model.addAttribute(photoService.photoReviewRead(photo_id, false));
 		model.addAttribute("writer", photoService.photoWriter(photo_id));		
 	}

@@ -75,14 +75,14 @@
 									<figure class="touching ">
 										<img src="/community/displayFile?fileName=${photo.photo_thumbnail}"
 											alt="NO IMAGE" height="280" width="500" />
-										<a href="/community/photoReviewRead${pageMaker.makeSearch(pageMaker.cri.page) }&photo_id=${photo.photo_id }">
+										<a href="/community/photoReviewRead${pageMaker.makeSearch(pageMaker.cri.page) }&rn=${photo.rn }&photo_id=${photo.photo_id }">
 										</a>
 										<div class="option inner">
 											<div>
 												<h5>${photo.photo_title }</h5>
 												<a href="/community/displayFile?fileName=${photo.photo_thumbnail}"
 													class="fa fa-search mfp-image"></a> <a
-													href="/community/photoReviewRead${pageMaker.makeSearch(pageMaker.cri.page) }&photo_id=${photo.photo_id}" class="fa fa-link"></a>
+													href="/community/photoReviewRead${pageMaker.makeSearch(pageMaker.cri.page) }&rn=${photo.rn }&photo_id=${photo.photo_id}" class="fa fa-link"></a>
 													<span>${userMap[photo.photo_id]}</span>
 											</div>
 										</div>

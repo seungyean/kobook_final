@@ -72,8 +72,8 @@
 									<tbody>
 										<c:forEach var="black" items="${list}">
 											<tr>
-												<td align="center">${black.black_id}</td>
-												<td><a href="/community/blackRead${pageMaker.makeSearch(pageMaker.cri.page) }&black_id=${black.black_id }">${black.black_title }</a></td>
+												<td align="center">${black.rn}</td>
+												<td><a href="/community/blackRead${pageMaker.makeSearch(pageMaker.cri.page) }&rn=${black.rn }&black_id=${black.black_id }">${black.black_title }</a></td>
 												<td align="center">${userMap[black.black_id] }</td>
 												<td align="center"><fmt:formatDate
 														value="${black.black_date }" pattern="yyyy-MM-dd" /></td>

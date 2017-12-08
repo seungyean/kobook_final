@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class BlackVO implements Serializable {
+	private int rn;
 	private int black_id;
 	@NotEmpty(message="제목을 입력하셔야 합니다.")
 	private String black_title;
@@ -24,9 +25,10 @@ public class BlackVO implements Serializable {
 
 	public BlackVO() {}
 
-	public BlackVO(int black_id, String black_title, Timestamp black_date, String black_content, String black_email,
+	public BlackVO(int rn, int black_id, String black_title, Timestamp black_date, String black_content, String black_email,
 			int person_id, String[] files) {
 		super();
+		this.rn = rn;
 		this.black_id = black_id;
 		this.black_title = black_title;
 		this.black_date = black_date;
@@ -34,6 +36,14 @@ public class BlackVO implements Serializable {
 		this.black_email = black_email;
 		this.person_id = person_id;
 		this.files = files;
+	}
+	
+	public int getRn() {
+		return rn;
+	}
+
+	public void setRn(int rn) {
+		this.rn = rn;
 	}
 
 	public int getBlack_id() {
@@ -94,7 +104,7 @@ public class BlackVO implements Serializable {
 
 	@Override
 	public String toString() {
-		return "BlackVO [black_id=" + black_id + ", black_title=" + black_title + ", black_date=" + black_date
+		return "BlackVO [rn= "+rn+", black_id=" + black_id + ", black_title=" + black_title + ", black_date=" + black_date
 				+ ", black_content=" + black_content + ", black_email=" + black_email + ", person_id=" + person_id
 				+ ", files=" + Arrays.toString(files) + "]";
 	}
