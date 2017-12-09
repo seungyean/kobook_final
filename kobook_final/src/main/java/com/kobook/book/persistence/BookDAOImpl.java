@@ -70,8 +70,11 @@ public class BookDAOImpl implements BookDAO {
 
 
 	@Override
-	public List<BookVO> sellPersonList(int person_id) throws Exception {
-		return session.selectList(namespace+".sellPersonList", person_id);
+	public List<BookVO> sellPersonList(int person_id,int book_id) throws Exception {
+		Map<String, Object>hmap=new HashMap<String, Object>();
+		hmap.put("person_id", person_id);
+		hmap.put("book_id", book_id);
+		return session.selectList(namespace+".sellPersonList", hmap);
 	}
 
 	
@@ -119,10 +122,10 @@ public class BookDAOImpl implements BookDAO {
 
 
 
-	@Override
+/*	@Override
 	public String writeName(int person_id) throws Exception {
 		return session.selectOne(namespace+".writeName",person_id);
-	}
+	}*/
 
 
 

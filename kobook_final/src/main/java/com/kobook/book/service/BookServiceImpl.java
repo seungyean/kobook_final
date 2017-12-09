@@ -78,8 +78,8 @@ public class BookServiceImpl implements BookService {
 
 
 	@Override
-	public List<BookVO> sellPersonList(int person_id) throws Exception {
-		return dao.sellPersonList(person_id);
+	public List<BookVO> sellPersonList(int person_id, int book_id) throws Exception {
+		return dao.sellPersonList(person_id,book_id);
 	}
 
 	
@@ -143,10 +143,10 @@ public class BookServiceImpl implements BookService {
 	
 
 
-	@Override
+/*	@Override
 	public String writeName(int person_id) throws Exception {
 		return dao.writeName(person_id);
-	}
+	}*/
 
 
 

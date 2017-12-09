@@ -8,7 +8,6 @@
 		insert into book(
 		book_id,book_name,book_o_price,book_m_price,book_kind,book_edition,book_publish,book_hash,book_safe_yn,book_content,
 		book_date,book_status,book_img,person_id
-
 		)values(
 		book_id_seq.nextval, #{book_name}, #{book_o_price},
 		#{book_m_price},#{book_kind},
@@ -82,12 +81,10 @@
 	
 
 	<select id="sellPersonList" resultType="BookVO">
-		<![CDATA[
 		select * 
 		from book
-		where person_id=#{person_id}
-		]]>
-		<!--  -->
+		where person_id=6
+    	and book_id not in(#{book_id})
 	</select>
 
 	<select id="getPersonIdByBookId" resultType="Integer">
@@ -190,7 +187,7 @@
 	</insert>
 	
 	<!--리뷰 작성자  -->
-	<select id="writeName" resultType="string" >
+<!-- 	<select id="writeName" resultType="string" >
 	 select per.person_name
 	from book_order o, pay p, person per,review r,book b
  	 where p.pay_id=r.pay_id
@@ -199,19 +196,19 @@
  	 and o.book_id=b.book_id
  	 and b.person_id=#{person_id}
  	  group by per.person_name
-	</select>
+	</select> -->
 	
 	
 	
 	<!--리뷰 리스트  -->
 	<select id="reviewList" resultType="ReviewVO">
-	select r.review_id, r.review_title, r.review_content,r.review_star, o.person_id, r.review_date, o.person_id
-	from pay p, book_order o, review r, book b
+	select r.review_id, r.review_title, r.review_content,r.review_star, o.person_id, r.review_date, o.person_id, per.person_name
+	from pay p, book_order o, review r, book b, person per
 	where p.ORDER_ID = o.ORDER_ID
 	and r.PAY_ID = p.PAY_ID
 	and o.BOOK_ID = b.BOOK_ID
+ 	 and o.person_id= per.person_id
 	and b.person_id=#{person_id}
-	
 	</select>
 	
 	

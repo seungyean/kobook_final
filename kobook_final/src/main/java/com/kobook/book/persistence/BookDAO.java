@@ -25,7 +25,7 @@ public interface BookDAO {
 	public List<BookVO> safeListCriteria(SearchCriteria cri) throws Exception;
 	
 	//��留ㅼ���� �ㅻⅨ���� 由ъ�ㅽ��
-	public List<BookVO> sellPersonList(int person_id) throws Exception;
+	public List<BookVO> sellPersonList(int person_id, int book_id) throws Exception;
 	
 	//��留ㅼ�� ��湲� 由ъ�ㅽ��
 	public List<ReviewVO> reviewList(int person_id,SearchCriteria cri)throws Exception;
@@ -47,7 +47,7 @@ public interface BookDAO {
 	public int getPersonIdByBookId(int book_id) throws Exception;
 	
 	//由щ럭 ���깆��
-	public String writeName(int person_id)throws Exception;
+	//public String writeName(int person_id)throws Exception;
 
 	public void reviewCreate(ReviewVO review)throws Exception;
 	

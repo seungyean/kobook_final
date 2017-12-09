@@ -215,7 +215,7 @@
 						event.preventDefault();
 						console.log($(this).val());
 						var i = $(this).parent().parent().find("td:eq(0)").attr("data-rno");
-						window.open("/book/bookreviewRegist?pay_id=" + i, "","width=400,height=300,left=550,top=200");
+						window.open("/book/bookreviewRegist?pay_id=" + i, "","width=430, height=620, left=550, top=100px");
 					});
 		});
 	</script>

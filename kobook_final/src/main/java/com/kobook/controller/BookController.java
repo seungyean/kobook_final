@@ -389,10 +389,6 @@ public class BookController {
 			@ModelAttribute("cri") SearchCriteria cri, HttpServletRequest request)throws Exception{
 		System.out.println("readCon: book_id: " + book_id);
 		model.addAttribute(service.read(book_id));
-	
-		PersonVO vo=new PersonVO();
-		vo.setPerson_name(service.writeName(service.getPersonIdByBookId(book_id)));
-		
 		
 		model.addAttribute("s",service.readSellPerson(service.getPersonIdByBookId(book_id)));
 		
@@ -402,15 +398,13 @@ public class BookController {
 
 		model.addAttribute("reviewList", service.reviewList(service.getPersonIdByBookId(book_id), cri));
 		
-		model.addAttribute("reviewer", vo.getPerson_name());
-		
 		model.addAttribute("fivestar",service.fivestar(service.getPersonIdByBookId(book_id)));
 		model.addAttribute("fourstar",service.fourstar(service.getPersonIdByBookId(book_id)));
 		model.addAttribute("threestar",service.threestar(service.getPersonIdByBookId(book_id)));
 		model.addAttribute("twostar",service.twostar(service.getPersonIdByBookId(book_id)));
 		model.addAttribute("onestar",service.onestar(service.getPersonIdByBookId(book_id)));
 
-		model.addAttribute("slist",service.sellPersonList(service.getPersonIdByBookId(book_id)));
+		model.addAttribute("slist",service.sellPersonList(service.getPersonIdByBookId(book_id),book_id));
 		
 		PageMaker pageMaker=new PageMaker();
 		pageMaker.setCri(cri);

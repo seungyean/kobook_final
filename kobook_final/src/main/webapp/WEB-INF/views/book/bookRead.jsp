@@ -199,7 +199,7 @@
                 
                 	
 							
-				<c:if test="${bookVO.person_id!=person_id}">
+				<c:if test="${bookVO.person_id!=person_id && bookVO.book_sell_state=='I'}">
 				<form action="/book/pick" method="post" name="pick">	
                      <input type="hidden" name="book_id" value="${bookVO.book_id}">
                      <input type="hidden" name = "person_id" value="${person_id}">
@@ -387,7 +387,7 @@
 													<td align="center" >${rlist.review_id}</td>
 													<td align="center"colspan="4" class="flip">${rlist.review_title}</td>
 													<td align="center">${rlist.review_star}</td>
-													<td align="center">${reviewer}</td>
+													<td align="center">${rlist.person_name}</td>
 													<td align="center"><fmt:formatDate value="${rlist.review_date}" pattern='yyyy-MM-dd' /></td>
 													
 												</tr>

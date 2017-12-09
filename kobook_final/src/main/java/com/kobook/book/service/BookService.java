@@ -28,7 +28,7 @@ public interface BookService {
 	
 	public List<BookVO> safeListCriteria(SearchCriteria cri)throws Exception;
 	
-	public List<BookVO> sellPersonList(int person_id) throws Exception;
+	public List<BookVO> sellPersonList(int person_id, int book_id) throws Exception;
 	
 	public List<ReviewVO> reviewList(int person_id,SearchCriteria cri)throws Exception;
 	
@@ -44,7 +44,7 @@ public interface BookService {
 	
 	public int getPersonIdByBookId(int book_id) throws Exception;
 	
-	public String writeName(int person_id) throws Exception;
+	//public String writeName(int person_id) throws Exception;
 	
 	public void reviewregist(ReviewVO review)throws Exception;
 	

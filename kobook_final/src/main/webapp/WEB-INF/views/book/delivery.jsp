@@ -78,15 +78,15 @@
 
                                     </li>
 
-                                    <li><a href="#">게시판 관리</a>
+                                    <li><a href="/admin/notiList">게시판 관리</a>
                                          
                                     </li>
 
-                                    <li><a href="#">매출정산 관리</a>
+                                    <li><a href="/admin/payList">매출정산 관리</a>
                                         
                                     </li>
 
-                                    <li><a href="#">접속통계 관리</a>
+                                    <li><a href="/admin/analyze">접속통계 관리</a>
                                         
                                     </li>
                                    

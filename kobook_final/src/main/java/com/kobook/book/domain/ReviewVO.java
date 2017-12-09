@@ -9,9 +9,23 @@ public class ReviewVO {
 	private int review_star;
 	private int pay_id;
 	private String review_title;
+	private String person_name;
 	
 	public ReviewVO(){}
 
+
+	public ReviewVO(int review_id, String review_content, Timestamp review_date, int review_star, int pay_id,
+			String review_title, String person_name) {
+		super();
+		this.review_id = review_id;
+		this.review_content = review_content;
+		this.review_date = review_date;
+		this.review_star = review_star;
+		this.pay_id = pay_id;
+		this.review_title = review_title;
+		this.person_name = person_name;
+	}
+	
 	
 	public String getReview_title() {
 		return review_title;
@@ -23,17 +37,14 @@ public class ReviewVO {
 	}
 
 
-	public ReviewVO(int review_id, String review_content, Timestamp review_date, int review_star, int pay_id,
-			String review_title) {
-		super();
-		this.review_id = review_id;
-		this.review_content = review_content;
-		this.review_date = review_date;
-		this.review_star = review_star;
-		this.pay_id = pay_id;
-		this.review_title = review_title;
+	public String getPerson_name() {
+		return person_name;
 	}
 
+
+	public void setPerson_name(String person_name) {
+		this.person_name = person_name;
+	}
 
 	public int getReview_id() {
 		return review_id;
