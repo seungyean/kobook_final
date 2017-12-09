@@ -265,6 +265,12 @@ textarea {
 		
 	});
 	
+	//페이지 로드시 도움말 보여줌
+	function showGuide(){
+		
+		$.ajax()
+	}
+	
 	function getList(chatInfo){
 		
 		$.getJSON(chatInfo, function(data){		// "/chat/{person_id}" 로부터 나오는 전체 데이터 (array)

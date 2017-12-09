@@ -125,7 +125,9 @@ public class ChatbotServiceImpl implements ChatbotService {
 		// 카테고리를 벗어났을 때
 		} else {
 			
-			newText = "카테고리 내에서 질문해 주시겠어요??";
+			newText = "저희가 준비한 카테고리는"
+					+ "\n 책 검색, 게시판 검색, 개인정보, 쪽지 입니다."
+					+ "\n 카테고리 내에서 질문해 주시겠어요??";
 		}
 		
 		vo.setChatlog_content(newText);
@@ -309,11 +311,11 @@ public class ChatbotServiceImpl implements ChatbotService {
 							+ "<a href=\"javascript:;\" onClick=\"opener.parent.location='"+ contentUrl +"'; return false;\">더보기</a>";
 				} else {
 					for(int i=0; i<list.size(); i++){
-						contentUrl = "/community/photoReviewRead?page=1&perPageNum=9&searchType&keyword&photo_id="
+						contentUrl = "/community/photoReviewRead?page=1&perPageNum=9&searchType&keyword&photo_id=" 
 								+ ((PhotoVO)list.get(i)).getPhoto_id();
-					newText += "\n ■ &nbsp;"
-							+ "<a href=\"javascript:;\" onClick=\"opener.parent.location='"+ contentUrl +"'; return false;\">"
-							+ ((PhotoVO)list.get(i)).getPhoto_title()+"</a>";
+						newText += "\n ■ &nbsp;"
+								+ "<a href=\"javascript:;\" onClick=\"opener.parent.location='"+ contentUrl +"'; return false;\">"
+								+ ((PhotoVO)list.get(i)).getPhoto_title()+"</a>";
 					}
 				}
 			}
@@ -322,13 +324,13 @@ public class ChatbotServiceImpl implements ChatbotService {
 		} else if(boardName.contains("블랙")){
 			System.out.println("블랙 진입");
 			
-			cri.setSearchType("tc");
+			cri.setSearchType("tcw");
 			cri.setKeyword(keyword);
 			list = blackDao.blackList(cri);
 			System.out.println("blacklist 크기: "+list.size());
 			
 			if(list.size() < 1){
-				newText += "찿으시는 결과가 없습니다. 다시 검색해주세요";
+				newText += "<hr>찿으시는 결과가 없습니다.\n다시 검색해주세요";
 			} else {
 				newText += "&nbsp; \n <b>"+list.size() + "</b>" + "개의 결과가 검색되었습니다.<hr>";
 				newText += "<블랙리스트 게시판 글제목>";
@@ -340,10 +342,10 @@ public class ChatbotServiceImpl implements ChatbotService {
 						newText += "\n ■ &nbsp;"
 								+ "<a href=\"javascript:;\" onClick=\"opener.parent.location='"+ contentUrl +"'; return false;\">"
 								+ ((BlackVO)list.get(i)).getBlack_title() + "</a>";
-					}
-					
-					newText += "\n &nbsp;";
-					newText += "\n <a href='#'>더보기</a>";
+					}				
+					contentUrl = "/community/blackList?page=1&perPageNum=9&searchType=tcw&keyword=" + keyword;
+					newText += "\n ■ &nbsp;"
+							+ "<a href=\"javascript:;\" onClick=\"opener.parent.location='"+ contentUrl +"'; return false;\">더보기</a>";
 				} else {
 					for(int i=0; i<list.size(); i++){
 						contentUrl = "/community/blackRead?page=1&perPageNum=9&searchType&keyword&black_id="
@@ -378,9 +380,10 @@ public class ChatbotServiceImpl implements ChatbotService {
 								+ "<a href=\"javascript:;\" onClick=\"opener.parent.location='"+ contentUrl +"'; return false;\">" 
 								+ ((DonateVO)list.get(i)).getDonate_title() + "</a>";
 					}
+					contentUrl = "/community/donateList?page=1&perPageNum=9&searchType=tc&keyword=" + keyword;
+					newText += "\n ■ &nbsp;"
+							+ "<a href=\"javascript:;\" onClick=\"opener.parent.location='"+ contentUrl +"'; return false;\">더보기</a>";
 					
-					newText += "\n &nbsp;";
-					newText += "\n <a href='#'>더보기</a>";
 				} else {
 					for(int i=0; i<list.size(); i++){
 						contentUrl = "/community/donateRead?page=1&perPageNum=9&searchType&keyword&donate_id="
@@ -407,7 +410,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 		String newText = "";
 		List<String> list;
 		
-		if(text.contains("내") || text.contains("마일리지")){	// 내 마일리지 보여줘 
+		if(text.contains("마일리지")){	// 내 마일리지 보여줘 
 			System.out.println("토탈마일리지: " + mypageDao.mileageTotal(person_id));
 			System.out.println("사용 마일리지" + mypageDao.mileageUse(person_id));
 			newText += personDao.findPersonName(person_id) + "님의 마일리지는 "
@@ -418,7 +421,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 			newText += personDao.findPersonName(person_id) + "님의 관심분야는";
 			
 			for(String s : list){
-				newText += "\n  * " + s;
+				newText += "\n  ■ " + s;
 			}
 			newText += "\n 입니다.";
 		} 
@@ -458,7 +461,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 			newText +="<hr/> &nbsp; \n"
 					+ "<a href=\"javascript:;\" onClick=\"opener.parent.location='"+ contentUrl +"'; return false;\"> 쪽지보관함으로 이동 </a>";
 			
-		} else if(text.contains("보여줘") || text.contains("쪽지함")){	// 내 쪽지함 보여줘
+		} else if(text.contains("보관함") || text.contains("쪽지함")){	// 내 쪽지함 보여줘
 			if(messageDao.messageList(person_id).size() != 0){	// 리스트의 크기가 0이라는 것은 검색된 메시지가 없다는 뜻
 				list = messageDao.messageList(person_id);
 				newText += "(최신의 쪽지가 상단에 표시됩니다) \n 쪽지는 최대 5개만 보여드립니다.<hr>";
@@ -487,7 +490,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 				newText += "\n쪽지함에 쪽지가 없습니다.";
 			}
 		} else {
-			newText += "\n 쪽지 어떤거요?";
+			newText += "\n 쪽지 어떤거요? 새쪽지? 보관함?";
 		}
 		
 		return newText;
@@ -517,20 +520,22 @@ public class ChatbotServiceImpl implements ChatbotService {
 		String keyword = "";
 		
 		if(text.length() < 1){
-			return null;
-		}
+			return "";
+			
+		} else {
+			
+			if(text.contains("검색")){
+				keyword = StringUtils.replace(text, "검색", "");
+			} else if(text.contains("보여줘")){
+				keyword = StringUtils.replace(text, "보여줘", "");
+			} else if(text.contains("알려줘")){
+				keyword = StringUtils.replace(text, "알려줘", "");
+			} else if(text.contains("찾아줘")){
+				keyword = StringUtils.replace(text, "찾아줘", "");
+			}
 
-		if(text.contains("검색")){
-			keyword = StringUtils.replace(text, "검색", "");
-		} else if(text.contains("보여줘")){
-			keyword = StringUtils.replace(text, "보여줘", "");
-		} else if(text.contains("알려줘")){
-			keyword = StringUtils.replace(text, "알려줘", "");
-		} else if(text.contains("찾아줘")){
-			keyword = StringUtils.replace(text, "찾아줘", "");
+			keyword = keyword.replaceAll("\\s+$", "");
 		}
-
-		keyword = keyword.replaceAll("\\s+$", "");
 		
 		return keyword;
 	}
