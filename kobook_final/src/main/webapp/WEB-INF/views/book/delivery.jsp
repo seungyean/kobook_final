@@ -801,32 +801,6 @@ vertical-align:middle;
 	  chart.draw(data, options);
 	}
 
-/* 	$("#startday").datepicker({
-		 showButtonPanel : false,
-	    dateFormat : "yymmdd",
-	    altField : '#startday'
-	    //altField: ".selecter"
-
-	   
-	    
-	 }); */
-	 
-/* 	 $('#datepicker_expense').datepicker({
-         onSelect : function(StartDate) {
-            $('#datepicker_expense').empty(); //출발역 목록 비우기
-            $('#endDate').empty(); //도착역 목록 비우기
-
-            tripDateStart = new Date(StartDate);
-            $('input[name="tripLong"]').removeAttr('disabled');
-            $('input[name="tripLong"]').prop('checked', false);
-
-         },
-         autoclose: true,
-         format: "yyyy-mm-dd",
-      //   startDate: "now"
-      }); 
-	 liverydate
-	 */
 	 
  	$("#startday").datepicker({
  		onselect : function(data){
