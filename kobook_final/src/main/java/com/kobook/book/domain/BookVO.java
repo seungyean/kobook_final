@@ -2,20 +2,25 @@ package com.kobook.book.domain;
 
 
 import java.sql.Timestamp;
-import java.util.Arrays;
-import java.util.Date;
+
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 public class BookVO {
 	private Integer book_id;
 	private String book_name;
-	private int book_o_price;
-	private int book_m_price;
+	@NotEmpty(message="제목을 입력하셔야 합니다.")
+	private Integer book_o_price;
+	@NotEmpty(message="제목을 입력하셔야 합니다.")
+	private Integer book_m_price;
 	private String book_kind;
 	private int book_edition;
 	private String book_publish;
 	private String book_hash;
 	private String book_safe_yn;
 	private String book_sell_state;
+	@NotEmpty(message="제목을 입력하셔야 합니다.")
 	private String book_content;
 	private Timestamp book_date;
 	private String book_status;
@@ -24,7 +29,7 @@ public class BookVO {
 
 	public BookVO(){}
 
-	public BookVO(Integer book_id, String book_name, int book_o_price, int book_m_price, String book_kind,
+	public BookVO(Integer book_id, String book_name, Integer book_o_price, Integer book_m_price, String book_kind,
 			int book_edition, String book_publish, String book_hash, String book_safe_yn, String book_sell_state,
 			String book_content, Timestamp book_date, String book_status, String book_img, int person_id) {
 		super();
@@ -61,19 +66,19 @@ public class BookVO {
 		this.book_name = book_name;
 	}
 
-	public int getBook_o_price() {
+	public Integer getBook_o_price() {
 		return book_o_price;
 	}
 
-	public void setBook_o_price(int book_o_price) {
+	public void setBook_o_price(Integer book_o_price) {
 		this.book_o_price = book_o_price;
 	}
 
-	public int getBook_m_price() {
+	public Integer getBook_m_price() {
 		return book_m_price;
 	}
 
-	public void setBook_m_price(int book_m_price) {
+	public void setBook_m_price(Integer book_m_price) {
 		this.book_m_price = book_m_price;
 	}
 
@@ -174,6 +179,8 @@ public class BookVO {
 				+ ", book_status=" + book_status + ", book_img=" + book_img + ", person_id=" + person_id + "]";
 	}
 
+
+	
 	
 
 }

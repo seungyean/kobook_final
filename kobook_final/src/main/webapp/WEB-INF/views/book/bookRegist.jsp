@@ -1,10 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%
-/* if(session.getAttribute("person_id")!=null){
-	int person_id=Integer.parseInt((String)(session.getAttribute("person_id")));
-} */
-
-%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
@@ -22,6 +17,11 @@
     <link rel="stylesheet" href="/resources/css/layout/wide.css" data-name="layout">
     <link rel="stylesheet" type="text/css" href="/resources/css/switcher.css" media="screen" />
 
+<style type="text/css">
+	.error{
+		color: #ff0000;
+	}
+</style>
 
 </head>
 
@@ -56,21 +56,23 @@
          
 	<div class="col-lg-6 col-sm-6">
                 <div class="dividerHeading">
-                    <h4><span>Book Register</span></h4>
+                    <h4><span>책등록</span></h4>
                 </div>
    
-                <form action="/book/bookRegist" id="subscribe"  name="subscribe" method="post" enctype="multipart/form-data">
-                	 <input type="hidden" class="form-control" name="person_id" value="${person_id}"> 
-             <b>책이름:</b>     <input type="text" name="book_name" id="name" class="form-control" placeholder="책이름">
-           <b>  해시태그:</b>        <input type="text" name="book_hash" id="hash" class="form-control" placeholder="ex) #공대 #공과대학">
-          <b>  원가: </b>        <input type="text" name="book_o_price" id="name" class="form-control" placeholder="원가">
-            <b>  판매가: </b>           <input type="text" name="book_m_price" id="name" class="form-control" placeholder="판매가">
-            <b>  판: </b>            <input type="text" name="book_edition" id="name" class="form-control" placeholder="판(없으면 빈칸도 좋아요)">
-             <b>  출판사: </b>            <input type="text" name="book_publish" id="name" class="form-control" placeholder="출판사">
-             <b>  내용: </b>          <textarea rows="10" cols="70" name="book_content"id="name" class="form-control" placeholder="내용을 입력하세요"></textarea>
-                    
-               <b>    안심여부:</b> <input type="radio" name="book_safe_yn" value="Y" checked="checked">Y 
-					<input type="radio" name="book_safe_yn" value="N">N &nbsp&nbsp
+                <form:form action="/book/bookRegist" id="subscribe"  method="post" enctype="multipart/form-data" commandName="bookCommand">
+                	 <input type="hidden" class="form-control" path="person_id" value="${person_id}"> 
+             <b>책이름:</b>     <input type="text" path="book_name" id="name" class="form-control" placeholder="책이름">
+           	<b>  해시태그:</b>        <input type="text" path="book_hash" id="hash" class="form-control" placeholder="ex) #공대 #공과대학">
+          	<b>  원가: </b>        <form:input type="text" path="book_o_price" id="name" class="form-control" placeholder="원가"/>
+          								<form:errors path="book_o_price" cssClass="error"/>
+            <b>  판매가: </b>     <form:input type="text" path="book_m_price" id="name" class="form-control" placeholder="판매가"/>
+							            <form:errors path="book_m_price" cssClass="error"/>
+            <b>  판: </b>            <input type="text" path="book_edition" id="name" class="form-control" placeholder="판(없으면 빈칸도 좋아요)">
+            <b>  출판사: </b>        <input type="text" path="book_publish" id="name" class="form-control" placeholder="출판사">
+            <b>  내용: </b>          <form:textarea rows="10" cols="70" path="book_content" id="name" class="form-control" placeholder="내용을 입력하세요"/>
+            								<form:errors path="book_content" cssClass="error"/>
+              <b> 안심여부:</b> <input type="radio" path="book_safe_yn" value="Y" checked="checked">Y 
+					<input type="radio" path="book_safe_yn" value="N">N &nbsp&nbsp
 					
 			<b> 	책상태: </b><select name="book_status" id="status">
 					<option value="B" selected="selected">보통</option>
@@ -99,7 +101,7 @@
                     <div class="pull-right">
                        <input type="submit" value="Subscribe" id="submit" class="btn btn-default btn-lg button">
                     </div>
-                </form>
+                </form:form>
             </div>
 </div></div></section>
 		

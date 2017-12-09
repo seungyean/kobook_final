@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.http.HttpHeaders;
@@ -21,6 +22,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,6 +44,7 @@ import com.kobook.book.domain.PersonDTO;
 import com.kobook.book.domain.SearchCriteria;
 import com.kobook.book.service.BookService;
 import com.kobook.chatbot.domain.ChatlogVO;
+import com.kobook.community.domain.BlackVO;
 import com.kobook.mypage.domain.DeliveryVO;
 import com.kobook.mypage.domain.MileageVO;
 import com.kobook.mypage.domain.MyPageMaker;
@@ -170,14 +173,16 @@ public class BookController {
 	
 	//책 등록
 	@RequestMapping(value="/bookRegist",method=RequestMethod.GET)
-	public void bookRegistGET(BookVO book, Model model)throws Exception{
+	public void bookRegistGET(@ModelAttribute("bookCommand") BookVO book, Model model)throws Exception{
 	}
 	
 	
 	//책등록(이미지등록포함)
 	@RequestMapping(value="/bookRegist",method=RequestMethod.POST)
-	public String bookRegistPOST(BookVO book,Model model,@RequestParam("file")MultipartFile file) throws Exception{
-		
+	public String bookRegistPOST(@ModelAttribute("bookCommand") @Valid BookVO book,BindingResult errors,Model model,@RequestParam("file")MultipartFile file) throws Exception{
+		if(errors.hasErrors()) {
+			return "/book/bookRegist";
+		}
 		
 		System.out.println(file.getOriginalFilename());
         System.out.println(file.getSize());
