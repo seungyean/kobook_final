@@ -44,6 +44,8 @@ import com.kobook.book.service.BookService;
 import com.kobook.chatbot.domain.ChatlogVO;
 import com.kobook.mypage.domain.DeliveryVO;
 import com.kobook.mypage.domain.MileageVO;
+import com.kobook.mypage.domain.MyPageMaker;
+import com.kobook.mypage.domain.SearchDateCriteria;
 import com.kobook.person.domain.PersonVO;
 import com.kobook.sidebar.domain.TodayVO;
 import com.kobook.sidebar.service.TodayService;
@@ -101,46 +103,7 @@ public class BookController {
 		return "/book/delivery";
 	}
 	
-/*	@RequestMapping(value="/delivery" , method=RequestMethod.POST)
-	public void deliveryListPOST(@ModelAttribute("cri") SearchCriteria cri, Model model, DateDTO dto)throws Exception{
-		
-		System.out.println("delivery post 컨트롤러 진입");
-				//기간별날짜조회
-				System.out.println("시작일"+dto.getStartday());
-				System.out.println("끝일"+dto.getEndday());
-				//dto.setStartday(startday);
-				//model.addAttribute("selectDate", service.selectDate(dto));
-				//model.addAttribute("selectDate", service.selectDateList(dto));
-	}*/
-	
 
-/*	@ResponseBody
-	@RequestMapping(value="/deliverydateAjax", method=RequestMethod.POST)
-	public ResponseEntity<List<HashMap<String, String>>> deliverydateAjaxPOST(SearchCriteria cri,@RequestBody DateDTO dto)throws Exception{
-
-		System.out.println("deliverydateAjax post 컨트롤러진입--------------");
-		
-		DateDTO dto=new DateDTO();
-		dto.setStartday(startday);
-		dto.setEndday(endday);
-		
-		System.out.println(dto.toString());
-		ResponseEntity<List<HashMap<String, String>>> entity =null;
-		
-		try {
-			//service.selectDateList(dto);
-			entity = new ResponseEntity<List<HashMap<String, String>>>(service.deliveryList(cri),HttpStatus.OK);
-			System.out.println(service.deliveryList(cri));
-		} catch (Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-		
-		return entity;
-		
-	}*/
-	
-	
 	//기간별 날짜조회(관리자 배송조회)
 	@ResponseBody
 	@RequestMapping(value="/deliverydate/{startday}/{endday}", method=RequestMethod.GET)
@@ -156,9 +119,8 @@ public class BookController {
 		ResponseEntity<List<DeliveryDTO>> entity =null;
 		
 		try {
-			//service.selectDateList(dto);
+			
 			entity=new ResponseEntity<List<DeliveryDTO>>(service.selectDateList(dto),HttpStatus.OK);
-			//entity = new ResponseEntity<List<DeliveryDTO>>(service.selectDateList(dto), HttpStatus.OK);
 			System.out.println("success : " + service.selectDateList(dto));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -168,36 +130,6 @@ public class BookController {
 		return entity;
 		
 	}
-	
-	
-		/*List<HashMap<String, String>> list = null;
-		HashMap<String, String> map = new HashMap<>();
-		list = service.deliveryList(cri);
-		
-		for(int i=0;i<list.size();i++){
-		String del_id=String.valueOf(((Map<String, String>)list.get(i)).get("d_id"));
-		}		
-		ResponseEntity<List<HashMap<String, String>>> entity =null;
-		
-		DateDTO dto=new DateDTO();
-		dto.setStartday(startday);
-		dto.setEndday(endday);
-		
-
-		
-		try {
-			service.selectDateList(dto);
-			entity=new ResponseEntity<List<HashMap<String,String>>>(service.deliveryList(cri), HttpStatus.OK);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-		
-		System.out.println(service.selectDateList(dto));
-*/
-	
-
 	
 	
 	
@@ -220,7 +152,6 @@ public class BookController {
 		List<Integer> list = new ArrayList<Integer>();
 		
 		
-
 		try {
 			service.delstateUpdate(delivery);
 			
@@ -253,8 +184,6 @@ public class BookController {
         System.out.println(file.getContentType());
         
         String savedName=uploadFile(file.getOriginalFilename(), file.getBytes());
-
-       // UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes());
        
         System.out.println(book.toString()); 
         book.setBook_img(savedName);
@@ -276,16 +205,14 @@ public class BookController {
 	public String modifyPOST(@RequestParam("book_id")int book_id,RedirectAttributes rttr, BookVO book, @ModelAttribute("cri") SearchCriteria cri, Model model,@RequestParam("file")MultipartFile file)throws Exception{
 		
 		 String savedName=uploadFile(file.getOriginalFilename(), file.getBytes());
-		 System.out.println("쩌철�짚�체:"+book.toString());
+		 System.out.println("book정보:"+book.toString());
 	       book.setBook_img(savedName);
 		
 		 
 		service.modify(book);
-		 System.out.println("쩌철�짚��:"+book.toString()); 
+		 System.out.println("책정보:"+book.toString()); 
 		rttr.addAttribute("page",cri.getPage());
 		rttr.addAttribute("perPageNum",cri.getPerPageNum());
-		//rttr.addAttribute("searchType", cri.getSearchType());
-		//rttr.addAttribute("keyword", cri.getKeyword());
 		return "redirect:/book/bookList";
 	}	
 	
@@ -312,7 +239,7 @@ public class BookController {
           if (mType != null) {
              headers.setContentType(mType);
           } else {
-
+        	  
              fileName = fileName.substring(fileName.indexOf("_") + 1);
              headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
              headers.add("Content-Disposition",
@@ -410,6 +337,10 @@ public class BookController {
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(service.countReview(service.getPersonIdByBookId(book_id)));
 		model.addAttribute("pageMaker",pageMaker);
+		
+		
+
+		
 		
 		HttpSession session = request.getSession(false);
 		if(session.getAttribute("person_id") != null) {

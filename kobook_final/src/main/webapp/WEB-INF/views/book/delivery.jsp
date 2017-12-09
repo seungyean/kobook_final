@@ -12,7 +12,23 @@
 	content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>배송조회</title>
 <meta name="description" content="">
+<style type="text/css">
+.modal{
+text-align: center;
+}
+.modal:before{
+display:inline-block;
+vertical-align:middle;
+content: "";
+height:100%;
+}
 
+.modal-dialog{
+display: inline-block;
+text-align:left;
+vertical-align:middle;
+}
+</style>
 <!-- CSS FILES -->
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css" />
 <link rel="stylesheet" href="/resources/css/style.css">
@@ -400,7 +416,7 @@
                <button type="button" class="close" data-dismiss="modal">
                   <span aria-hidden="true">×</span><span class="sr-only">취소</span>
                </button>
-               <h3 class="modal-title" id="lineModalLabel">메세지</h3>
+               <h3 class="modal-title" id="lineModalLabel">배송 메세지</h3>
             </div>
             <div class="modal-body">
                <!-- content goes here -->
@@ -515,8 +531,6 @@
 		
 		// 모달 
 	    $(".dtable").on('click','a',(function(){
-	    	alert($(this).find('img').attr("data-rno"));
-	    	//console.log($(this).find('img').attr("data-rno"));
 	    	$('.place').text("");
 	    	$('.place').append($(this).find('img').attr("data-rno"));
 	        $('#delModal').modal();

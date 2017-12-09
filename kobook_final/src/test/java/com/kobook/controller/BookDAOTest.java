@@ -16,6 +16,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.kobook.book.domain.BookVO;
+import com.kobook.book.domain.Criteria;
 import com.kobook.book.domain.DateDTO;
 import com.kobook.book.domain.PersonDTO;
 import com.kobook.book.domain.SearchCriteria;
@@ -41,7 +42,7 @@ public class BookDAOTest {
 		
 
 		//날짜관련 selectList 테스트
-		HashMap<String, String> map = new HashMap<String, String>();
+/*		HashMap<String, String> map = new HashMap<String, String>();
 		List<HashMap<String, String>> list = new ArrayList<HashMap<String,String>>();
 
 		map.put("DELIVERY_ID", "3");
@@ -59,7 +60,12 @@ public class BookDAOTest {
 		dto.setStartday("20170101");
 		dto.setEndday("20170102");
 		dao.selectDateList(dto);
-		System.out.println(dao.selectDateList(dto));
+		System.out.println(dao.selectDateList(dto));*/
+		
+		SearchCriteria cri=new SearchCriteria();
+		cri.setPage(2);
+		cri.setPerPageNum(5);
+		System.out.println(dao.reviewList(6, cri));
 
 	}
 	
