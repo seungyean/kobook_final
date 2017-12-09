@@ -7,14 +7,14 @@
 	<insert id="create" parameterType="BookVO">
 		insert into book(
 		book_id,book_name,book_o_price,book_m_price,book_kind,book_edition,book_publish,book_hash,book_safe_yn,book_content,
-		book_date,book_status,book_sell_state,book_img,person_id
+		book_date,book_status,book_img,person_id
 
 		)values(
 		book_id_seq.nextval, #{book_name}, #{book_o_price},
 		#{book_m_price},#{book_kind},
 		#{book_edition},#{book_publish},
 		#{book_hash}, #{book_safe_yn}, #{book_content},
-		SYSDATE,#{book_status},#{book_sell_state},#{book_img},#{person_id}
+		SYSDATE,#{book_status},#{book_img},#{person_id}
 		)
 	</insert>
 

@@ -62,10 +62,10 @@
                 <form action="/book/bookRegist" id="subscribe"  name="subscribe" method="post" enctype="multipart/form-data">
                 	 <input type="hidden" class="form-control" name="person_id" value="${person_id}"> 
              <b>책이름:</b>     <input type="text" name="book_name" id="name" class="form-control" placeholder="책이름">
-           <b>  해시태그:</b>        <input type="text" name="book_hash" id="hash" class="form-control" placeholder="부가설명(간단검색어를 입력하세요)">
+           <b>  해시태그:</b>        <input type="text" name="book_hash" id="hash" class="form-control" placeholder="ex) #공대 #공과대학">
           <b>  원가: </b>        <input type="text" name="book_o_price" id="name" class="form-control" placeholder="원가">
             <b>  판매가: </b>           <input type="text" name="book_m_price" id="name" class="form-control" placeholder="판매가">
-            <b>  판: </b>            <input type="text" name="book_edition" id="name" class="form-control" placeholder="판(없는경우 0으로 적어주세요)">
+            <b>  판: </b>            <input type="text" name="book_edition" id="name" class="form-control" placeholder="판(없으면 빈칸도 좋아요)">
              <b>  출판사: </b>            <input type="text" name="book_publish" id="name" class="form-control" placeholder="출판사">
              <b>  내용: </b>          <textarea rows="10" cols="70" name="book_content"id="name" class="form-control" placeholder="내용을 입력하세요"></textarea>
                     
@@ -78,10 +78,10 @@
 					<option value="C">미흡</option>
 			</select> &nbsp&nbsp
 			
-			<b> 	판매상태: </b><select name="book_sell_state" id="sell_state">
+			<!-- <b> 	판매상태: </b><select name="book_sell_state" id="sell_state">
 					<option value="I" selected="selected">판매중</option>
 					<option value="C">판매완료</option>
-					</select> &nbsp&nbsp
+					</select> &nbsp&nbsp -->
 			
 		<b> 	책종류: </b><select name="book_kind" id="kind">
 					<option value="사회과학계열" selected="selected">사회과학계열</option>
