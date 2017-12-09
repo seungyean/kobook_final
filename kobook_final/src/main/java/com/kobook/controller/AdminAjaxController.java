@@ -1,6 +1,5 @@
 package com.kobook.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -29,6 +28,7 @@ import com.kobook.book.domain.SearchCriteria;
 import com.kobook.community.service.BlackService;
 import com.kobook.community.service.DonateService;
 import com.kobook.community.service.PhotoReviewService;
+import com.kobook.person.domain.PersonVO;
 
 
 @RestController
@@ -54,7 +54,6 @@ public class AdminAjaxController {
 	private VisitService visitservice;
 
 	
-	private ArrayList<?> listt;
 
 	
 	//매출금액 리스트
@@ -100,19 +99,15 @@ public class AdminAjaxController {
 		List<?> list = null ;
 		
 		try {
-			//블랙리스트
 			if(noti_select.equals("sin")){
 				list = blackservice.blackList(cri);
 				System.out.println(list);
-			//무료나눔	
 			} else if (noti_select.equals("mu")){
 				list = donateservice.donateList(cri);
 				System.out.println(list);
-			//포토리뷰	
 			} else if (noti_select.equals("pho")){
 				list = photoservice.photoList(cri);
 				System.out.println(list);
-			//공지사항
 			} else if (noti_select.equals("gong")){
 				list = boardservice.boardListCri(cri);
 				System.out.println(list);
@@ -164,6 +159,47 @@ public class AdminAjaxController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<Integer>(HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
+	
+	@RequestMapping(value="/personModi", method=RequestMethod.POST)
+	@ResponseBody	
+	public ResponseEntity<String> personModiPOST(SearchCriteria cri, @RequestParam("person_kind") String person_kind, 
+			@RequestParam("person_sell_grade") String person_sell_grade, @RequestParam("person_id") int person_id) throws Exception {
+	
+		ResponseEntity<String> entity = null;
+		PersonVO vo = new PersonVO();
+		vo = boardservice.personRead(person_id);
+		vo.setPerson_kind(person_kind);
+		vo.setPerson_sell_grade(person_sell_grade);
+		
+		try {
+			
+			boardservice.personModify(vo);
+			entity = new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
+	
+	@RequestMapping(value="/personRemove", method=RequestMethod.POST)
+	@ResponseBody	
+	public ResponseEntity<String> personRemovePOST(SearchCriteria cri, @RequestParam("person_id") int person_id)throws Exception {
+		
+		ResponseEntity<String> entity = null;
+		System.out.println(person_id);
+		
+		try {
+			boardservice.personRemove(person_id);
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 		}
 		
 		return entity;

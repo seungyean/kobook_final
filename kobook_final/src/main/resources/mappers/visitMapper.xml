@@ -25,6 +25,11 @@
 		select count(distinct(person_id)) from visit where visit_date like sysdate
 	</select>
 	
+	<select id="blackPersonList" resultType="PersonVO">
+   		select * from person 
+   		where person_kind = 'B'
+   		order by person_id desc
+   	</select>
 	
 </mapper>
 

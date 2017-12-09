@@ -29,6 +29,12 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+	
+<style type="text/css">
+table{
+text-align: center;
+}
+</style>
 
 </head>
 <body>
@@ -143,7 +149,7 @@
 					</div>
 
 
-				<form role="form" action="personModify" method="post">					
+					
 				<table border="1" >
 					<tr height="50">
 						<td width="70" align="center" height="30">회원번호</td>
@@ -163,7 +169,7 @@
 					<td align="center" height="30">${personVO.person_phone }</td>
 					<td align="center" height="30">${personVO.person_mileage }</td>
 					<td align="center" height="30">
-						<select id="person_sell_grade" onchange=change(this.value)>
+						<select id="person_sell_grade" >
 							<option value="U">U</option>	
 							<option value="M">M</option>	
 							<option value="D">D</option>	
@@ -171,7 +177,7 @@
 		               	<br>
 		               </td>
 					<td align="center">
-						<select id="person_kind" onchange=change(this.value)>
+						<select id="person_kind" >
 		                       <option value="A">A</option>
 		                       <option value="N">N</option>
 		                       <option value="B">B</option>
@@ -179,7 +185,7 @@
 		               </select>
 		            </td>
 				</table>
-				
+		 			<form role="form" action="personModify" method="post">				
 	 					<input type='hidden' name='person_id' value="${personVO.person_id }">
 	  					<input type='hidden' name='person_kind' value="${personVO.person_kind }">
 	 					<input type='hidden' name='person_sell_grade' value="${personVO.person_sell_grade }"> 
@@ -187,13 +193,10 @@
 						<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
 						<input type='hidden' name='searchType' value="${cri.searchType}">
 						<input type='hidden' name='keyword' value="${cri.keyword}"> 
-						<button type="submit" value="정보수정" id="modifyBtn">수정</button>		
+						<button type="submit" value="정보수정" id="modifyBtn">수정</button>	
 						<button type="submit" value="회원삭제" id="removeBtn">삭제</button>	
 					</form>
-		
-			<div align="center">
-				<button type="submit" value="목록" onclick='history.back(-1); return false;'>목록</button> 
-			</div>		
+						
 		</div>
 	</section>
 	
@@ -215,11 +218,10 @@
 	<script type="text/javascript" src="/resources/js/upload.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
     <script src="/resources/js/main.js"></script>
-	
+
 		
 </body>
 <script>
- 
 	var result = '${msg}';
 
 	if (result == 'SUCCESS') {
@@ -228,31 +230,54 @@
 	}
 
 	
-	$(document).ready(function(){
+	  $(document).ready(function(){
 
  		$("#modifyBtn").on("click", function(){
- 			var formObj = $("form[role=form]").serialize();
+ 			var formObj = $("form[role=form]").serialize(); 
 			var person_sell_grade = $("#person_sell_grade option:selected").val();
 			var person_kind = $("#person_kind option:selected").val();
+			var person_id = ${personVO.person_id };
  
-			alert("수정된"+person_sell_grade);
+			/* alert("수정된"+person_sell_grade);
 			alert("수정된"+person_kind);
-			
-			var data = {person_sell_grade : person_sell_grade, person_kind : person_kind}
-			formObj.attr("data", data);
-			formObj.attr("action", "/board/personModify");
-			formObj.submit();
-			
-		}); 
-	  
+			alert("수정된 " +person_id); */
+	  /*    var data = {person_sell_grade : person_sell_grade, person_kind : person_kind}  */
+				
+			 $.ajax({
+				type : "POST",
+				url : "/pay/personModi",
+				data : {person_sell_grade : person_sell_grade, person_kind : person_kind, person_id : person_id}, 
+				dateType : "json",
+				 success : function(data){
+					 if(data=="SUCCESS"){
+						 alert("수정이 완료되었습니다.");
+						 window.location.href = "/board/personList";
+					 }
+				 }
+				 
+			 })
+			});
+		})
+		
+	$(document).ready(function(){	
 		 $("#removeBtn").on("click", function(){
-			formObj.attr("method", "post");
-			formObj.attr("action", "/board/personRemove");
-			formObj.submit();
-		}); 
-		 
-	});
-
+			var person_id = ${personVO.person_id };
+			alert(pertson_id);
+			$.ajax({
+				
+			type : "POST",
+			url : "/pay/personRemove",
+			data : {person_id : person_id},
+			dataType : "json",
+			success : function(data){
+				if(data=="SUCCESS"){
+					alert("삭제되었습니다.");
+					window.location.href = "/board/personList";
+					}
+				}
+			})
+		});
+	}) 
 </script>
 
 </html>

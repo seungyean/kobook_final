@@ -277,7 +277,6 @@
 						data : {noti_select : noti_select},
 						success : function(data) {
 
-							//선택한것이 신고합니다 일경우 List출력
 							if (noti_select == "sin") {
 								
 								$("#noti").empty();
@@ -293,19 +292,15 @@
 								html += "</table>";
 								$('#noti').append(html);
 								
-						        //최상단 체크박스 클릭
-						        //모든 체크박스 체크
 						         $("#top_check").click(function(){
 						        	 all_check = $("#top_check").prop("checked");
 											$("input[name=sub_check]").prop("checked", all_check);
 											
-								//최상단 체크박스 클릭시 각 리스트 BNO값			
 								$("input[name=sub_check]:checked").each(function(){
 									checked = $(this).parent().next().text();
 									})
 						        })
 						        
-						        //선택한 체크박스 BNO값 불러오기
 						        $("input[name=sub_check]").click(function(){
 						        	 $(this).each(function(){
 						        		 checked = $(this).parent().next().text();
@@ -356,7 +351,6 @@
 					});
 		}
 
-	//삭제 버튼을 누를경우 	
 	function deleteAction(){
 		var noti_select = $("#search option:selected").val();
 		

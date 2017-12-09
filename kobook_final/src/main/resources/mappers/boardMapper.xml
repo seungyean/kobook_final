@@ -112,19 +112,19 @@
    
    
     <update id="personModify" parameterType="PersonVO">
-   		update person set person_kind = #{person_kind}, person_sell_grade = #{person_sell_grade}
+   		update person 
+   		set person_kind = #{person_kind}, 
+   		person_sell_grade = #{person_sell_grade}
    		where person_id = #{person_id}  
    </update> 
    
-<!-- 	<update id="personModify">
-   		update person set person_sell_grade = #{person_sell_grade}
-   		where person_id = #{person_id}  
-   </update> -->
 
 	<delete id="personRemove" parameterType="Integer">
-		delete from person where person_id = #{person_id}
+		delete from person 
+		where person_id = #{person_id}
 	</delete>   
    
+   	
 </mapper>
 
 

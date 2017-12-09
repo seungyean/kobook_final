@@ -32,4 +32,8 @@ public class VisitServiceImpl implements VisitService {
 		dao.visitRegist(person_id);
 	}
 	
+	@Override
+	public List<PersonVO> blackPersonList () throws Exception {
+		return dao.blackPersonList();
+	}
 }

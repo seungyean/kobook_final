@@ -18,6 +18,7 @@ import com.kobook.board.domain.BoardVO;
 import com.kobook.board.persistence.BoardDAO;
 import com.kobook.book.domain.Criteria;
 import com.kobook.book.domain.SearchCriteria;
+import com.kobook.person.domain.PersonVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/spring/**/root-context.xml"})
@@ -63,5 +64,13 @@ public class BoardDAOTest {
 		daoo.visitCount();
 	}*/
 	
+/*	@Test
+	public void test() throws Exception {
+		PersonVO vo = new PersonVO();
+		vo.setPerson_kind("U");
+		vo.setPerson_sell_grade("N");
+		vo.set
+		dao.personModify(vo);
+	}*/
 	
 }
