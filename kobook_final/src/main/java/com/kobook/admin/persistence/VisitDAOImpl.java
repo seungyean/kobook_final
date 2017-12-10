@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kobook.admin.domain.VisitVO;
+import com.kobook.person.domain.PersonVO;
 
 @Repository
 public class VisitDAOImpl implements VisitDAO{
@@ -27,6 +28,9 @@ public class VisitDAOImpl implements VisitDAO{
 		session.insert(namespace+".visitRegist", person_id);
 	}
 	
-	
+	@Override
+	public List<PersonVO> blackPersonList () throws Exception {
+		return session.selectList(namespace+".blackPersonList");
+	}
 	
 }

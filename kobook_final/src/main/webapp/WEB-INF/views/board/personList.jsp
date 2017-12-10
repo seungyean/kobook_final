@@ -110,7 +110,7 @@
             </div>
         </div>
     </header>
-<!--End Header-->
+	<!--End Header-->
 
 
 	<!--start wrapper-->
@@ -124,7 +124,7 @@
 						</div>
 						<nav id="breadcrumbs">
 							<ul>
-								<li><a href="/resources/admin/blackUser.do">블랙회원</a>/</li>
+								<li><a href="/board/blackAdmin">블랙회원</a>/</li>
 							</ul>
 						</nav>
 					</div>
@@ -166,8 +166,6 @@
 			<button id='searchBtn'>Search</button>
 			<button id='newBtn'>New Board</button>
 			<br> <br>
-			
-			
 
 			<table border="1" cellpadding="0" cellspacing="0">
 				<tr height="50">
@@ -222,20 +220,11 @@
 							<li><a
 								href="personList${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
 						</c:if>
-
 					</ul>
 				</div>
-
 			</div>
-
-
-
-
-
-
 		</div>
 	</section>
-
 </body>
 </html>
 

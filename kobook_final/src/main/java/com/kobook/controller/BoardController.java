@@ -3,7 +3,6 @@ package com.kobook.controller;
 
 
 import java.util.List;
-
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -12,12 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kobook.admin.service.VisitService;
 import com.kobook.board.domain.BoardVO;
 import com.kobook.board.service.BoardService;
 import com.kobook.book.domain.PageMaker;
@@ -34,6 +33,9 @@ public class BoardController {
 	
 	@Inject
 	private BoardService service;
+	
+	@Inject
+	private VisitService visitservice;
 	
 	//공지사항 입력
 	@RequestMapping(value="/boardInsert", method=RequestMethod.GET)
@@ -121,9 +123,6 @@ public class BoardController {
 	public String personModifyPOST(RedirectAttributes rttr, SearchCriteria cri, PersonVO vo,
 			@RequestParam("person_kind")String person_kind, @RequestParam("person_sell_grade")String person_sell_grade) throws Exception {
 	
-		System.out.println(vo.getPerson_id());
-		System.out.println(vo.toString());
-		
 		service.personModify(vo);
 		
 		rttr.addAttribute("page", cri.getPage());
@@ -137,8 +136,8 @@ public class BoardController {
 	}
 	
 	//회원 제거
-	@RequestMapping("/personRemove")
-	public String personRemove(@RequestParam("person_id")Integer person_id, SearchCriteria cri, RedirectAttributes rttr) throws Exception {
+	@RequestMapping(value="/personRemove", method=RequestMethod.POST)
+	public String personRemove(@RequestParam("person_id") int person_id, SearchCriteria cri, RedirectAttributes rttr) throws Exception {
 
 		service.personRemove(person_id);
 		
@@ -149,5 +148,24 @@ public class BoardController {
 		rttr.addFlashAttribute("msg", "SUCCESS");
 		return "redirect:/board/personList";
 	}
+	
+	//공지사항 입력
+
+	@RequestMapping(value="/blackAdmin", method = RequestMethod.GET)
+	public void blackAdminListGET(@ModelAttribute("cri") SearchCriteria cri, Model model)throws Exception {
+		model.addAttribute("list", visitservice.blackPersonList());
+		PageMaker pageMaker=new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(service.personCountPage(cri));
+		model.addAttribute("pageMaker",pageMaker);
+	}
+	
+		
+		@RequestMapping(value="/blackAdmin", method=RequestMethod.POST)
+		public String blackAdminPOST(PersonVO vo, RedirectAttributes rttr)throws Exception {
+			
+			rttr.addFlashAttribute("result", "SUCCESS");
+			return "redirect:/board/blackAdmin";
+		}
 
 }

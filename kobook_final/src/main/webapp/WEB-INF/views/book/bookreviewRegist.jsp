@@ -167,7 +167,6 @@ pre {
 
 	<form action="/book/bookreviewRegist" method="post" id="reviewForm">
 		<input type="hidden" name="pay_id" value="${pay_id}">
-
 		<header class='header text-center'>
 			<h2>후기 등록하기</h2>
 			<p>판매자 또는 도서에 대한 후기를 남겨주세용</p>
@@ -325,7 +324,6 @@ pre {
 													msg = "Thanks! You rated this "
 															+ review_star
 															+ " stars.";
-													alert(review_star);
 													$('#reviewForm')
 															.append(
 																	'<input type="hidden" name="review_star" value="'+review_star +'">');

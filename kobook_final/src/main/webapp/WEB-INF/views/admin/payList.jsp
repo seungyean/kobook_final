@@ -197,7 +197,6 @@ ul.tabs li.active {
 				<div id="container">
 					<ul class="tabs">
 						<li class="active" rel="tab1">월별매출</li>
-			<!-- 			<li rel="tab2">일별매출</li> -->
 					</ul>
 					<div class="tab_container">
 					<!-- #tab1 -->
