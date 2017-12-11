@@ -25,7 +25,7 @@ public class ChatbotDAOTest {
 	@Inject
 	private ChatbotDAO dao;
 	
-	/*@Test
+	@Test
 	public void registerTest() throws Exception{
 		
 		ChatlogVO vo = new ChatlogVO();
@@ -34,13 +34,16 @@ public class ChatbotDAOTest {
 		vo.setPerson_id(3);
 		
 		dao.registerLog(vo);
-	}*/
+	}
 	
-	@Test
+	
+	
+	
+	/*@Test
 	public void listTest() throws Exception{
 		
 		int person_id = 3;
 		dao.listLog(person_id);
-	}
+	}*/
 
 }

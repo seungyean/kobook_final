@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.kobook.book.domain.BookVO;
 import com.kobook.mypage.domain.MyPageCriteria;
 import com.kobook.mypage.domain.OrderVO;
 import com.kobook.mypage.domain.PayVO;
@@ -28,8 +29,8 @@ public class MyPageTest {
 		System.out.println("판매내역: " + dao.sellList(2).toString());
 	}*/
 	
-/*	@Test
-	public void sellStateUpdate(){
+	/*@Test
+	public void sellStateUpdate() throws Exception{
 		BookVO vo = new BookVO();
 		vo.setBook_sell_state("C");
 		vo.setBook_id(1);
@@ -39,27 +40,27 @@ public class MyPageTest {
 	}*/
 
 	/*@Test
-	public void buyList(){
+	public void buyList()throws Exception{
 		System.out.println("구매내역 : " + dao.buyList(7).toString());
 	}*/
 	
 	/*@Test
-	public void buyList(){
+	public void buyList()throws Exception{
 		System.out.println("찜리스트 : " + dao.pickList(7).toString());
 	}*/
 	
 	/*@Test
-	public void mileageList(){
+	public void mileageList()throws Exception{
 		System.out.println("마일리지 내역 : " + dao.mileageList(7).toString());
 	}
 	*/
 	/*@Test
-	public void orderList(){
+	public void orderList()throws Exception{
 		System.out.println("주문내역 : " + dao.orderList(7).toString());
 	}
 	*/
 //	@Test
-//	public void Test(){
+//	public void Test()throws Exception{
 ////		System.out.println("주문자 정보: " + dao.orderPerson(7));
 ////		System.out.println("주문자 정보: " + dao.orderList(7));
 //	}
