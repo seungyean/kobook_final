@@ -47,15 +47,17 @@
 	}
 	
 	function popupChat(){
-		
-		window.name = "mainPage";
-		window.open("/chatbot/chatbot","chatbotPage", "width=560, height=620, menubar=yes, statebar=yes, scrollbar=yes, left=600");
  		
 		if(<%=person_id%> > 0){
+			
+			window.name = "mainPage";
+			window.open("/chatbot/chatbot","chatbotPage", "width=560, height=620, menubar=yes, statebar=yes, scrollbar=yes, left=600");
+			
 			document.session_id.action = "/chatbot/chatbot";
 			document.session_id.target = "chatbotPage";
 			document.session_id.submit;	
-		}
+			
+		} else alert("로그인이 필요합니다.");
 		
 	}
 	
