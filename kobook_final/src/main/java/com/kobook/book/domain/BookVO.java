@@ -9,19 +9,16 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class BookVO {
-	private Integer book_id;
+	private int book_id;
 	private String book_name;
-	@NotNull(message="판매가를 반드시 입력해주세요.")
-	private Integer book_o_price;
-	@NotNull(message="원가를 반드시 입력해주세요.")
-	private Integer book_m_price;
+	private int book_o_price;
+	private int book_m_price;
 	private String book_kind;
 	private int book_edition;
 	private String book_publish;
 	private String book_hash;
 	private String book_safe_yn;
 	private String book_sell_state;
-	@NotEmpty(message="내용을 반드시 입력해주세요.")
 	private String book_content;
 	private Timestamp book_date;
 	private String book_status;

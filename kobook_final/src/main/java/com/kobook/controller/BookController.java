@@ -173,16 +173,13 @@ public class BookController {
 	
 	//책 등록
 	@RequestMapping(value="/bookRegist",method=RequestMethod.GET)
-	public void bookRegistGET(@ModelAttribute("bookCommand") BookVO book, Model model)throws Exception{
+	public void bookRegistGET(BookVO book, Model model)throws Exception{
 	}
 	
 	
 	//책등록(이미지등록포함)
 	@RequestMapping(value="/bookRegist",method=RequestMethod.POST)
-	public String bookRegistPOST(@ModelAttribute("bookCommand") @Valid BookVO book,BindingResult errors,Model model,@RequestParam("file")MultipartFile file) throws Exception{
-		if(errors.hasErrors()) {
-			return "/book/bookRegist";
-		}
+	public String bookRegistPOST( BookVO book,Model model,@RequestParam("file")MultipartFile file) throws Exception{
 		
 		System.out.println(file.getOriginalFilename());
         System.out.println(file.getSize());
