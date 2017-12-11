@@ -63,14 +63,18 @@
                 	 <input type="hidden" class="form-control" path="person_id" value="${person_id}"> 
              <b>책이름:</b>     <input type="text" path="book_name" id="name" class="form-control" placeholder="책이름">
            	<b>  해시태그:</b>        <input type="text" path="book_hash" id="hash" class="form-control" placeholder="ex) #공대 #공과대학">
-          	<b>  원가: </b>        <form:input type="text" path="book_o_price" id="name" class="form-control" placeholder="원가"/>
-          								<form:errors path="book_o_price" cssClass="error"/>
-            <b>  판매가: </b>     <form:input type="text" path="book_m_price" id="name" class="form-control" placeholder="판매가"/>
-							            <form:errors path="book_m_price" cssClass="error"/>
+          	<b>  원가: </b>        	<form:errors path="book_o_price" cssClass="error"/>
+          									<form:input type="text" path="book_o_price" id="name" class="form-control" placeholder="원가"/>
+          								
+          								
+            <b>  판매가: </b>         <form:errors path="book_m_price" cssClass="error"/>
+               								<form:input type="text" path="book_m_price" id="name" class="form-control" placeholder="판매가"/>
+							           
             <b>  판: </b>            <input type="text" path="book_edition" id="name" class="form-control" placeholder="판(없으면 빈칸도 좋아요)">
             <b>  출판사: </b>        <input type="text" path="book_publish" id="name" class="form-control" placeholder="출판사">
-            <b>  내용: </b>          <form:textarea rows="10" cols="70" path="book_content" id="name" class="form-control" placeholder="내용을 입력하세요"/>
-            								<form:errors path="book_content" cssClass="error"/>
+            <b>  내용: </b>          <form:errors path="book_content" cssClass="error"/>
+            								<form:textarea rows="10" cols="70" path="book_content" id="name" class="form-control" placeholder="내용을 입력하세요"/>
+            								
               <b> 안심여부:</b> <input type="radio" path="book_safe_yn" value="Y" checked="checked">Y 
 					<input type="radio" path="book_safe_yn" value="N">N &nbsp&nbsp
 					

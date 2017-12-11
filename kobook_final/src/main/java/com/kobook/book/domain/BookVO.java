@@ -4,15 +4,16 @@ package com.kobook.book.domain;
 import java.sql.Timestamp;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class BookVO {
 	private Integer book_id;
 	private String book_name;
-	@NotEmpty(message="제목을 입력하셔야 합니다.")
+	@NotNull(message="판매가를 반드시 입력해주세요.")
 	private Integer book_o_price;
-	@NotEmpty(message="제목을 입력하셔야 합니다.")
+	@NotNull(message="원가를 반드시 입력해주세요.")
 	private Integer book_m_price;
 	private String book_kind;
 	private int book_edition;
@@ -20,7 +21,7 @@ public class BookVO {
 	private String book_hash;
 	private String book_safe_yn;
 	private String book_sell_state;
-	@NotEmpty(message="제목을 입력하셔야 합니다.")
+	@NotEmpty(message="내용을 반드시 입력해주세요.")
 	private String book_content;
 	private Timestamp book_date;
 	private String book_status;
