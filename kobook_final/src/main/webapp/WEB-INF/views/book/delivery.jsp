@@ -264,31 +264,14 @@ vertical-align:middle;
 							<form method="GET" id="OrderHistoryForm" name="OrderHistoryForm">
 								<div class="xans-element- xans-myshop xans-myshop-orderhistoryhead ">
 									<fieldset>
-									<span> 
-										<a href="#none" class="btnNormal" days="00">
-										<img src="http://img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date1.gif" alt="오늘" />
-										</a> 
-										<a href="#none" class="btnNormal" days="07">
-										<img src="http://img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date2.gif" alt="1주일" />
-										</a> 
-										<a href="#none" class="btnNormal" days="30">
-										<img src="http://img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date3.gif" alt="1개월" />
-										</a> 
-										<a href="#none" class="btnNormal" days="90">
-										<img src="http://img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date4.gif" alt="3개월" />
-										</a> 
-										<a href="#none" class="btnNormal" days="180">
-										<img src="http://img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date5.gif" alt="6개월" />
-										</a>
-										</span> 
+									
 										<input type="text" id="startday" placeholder="시작 날짜를 선택하세요">
 										~	<input type="text" id="endday" placeholder="끝 날짜를 선택하세요">
-										<input name="submit" type="submit" value="확인" id="datePick" /> 
+										<input name="submit" type="submit" value="조회" id="datePick" /> 
 									</fieldset>
 									<br>
 									<ul>
-										<li>&nbsp;&nbsp;- 기본적으로 최근 3개월간의 자료가 조회되며, 기간 검색시 지난 판매내역을 조회하실 수 있습니다.</li>
-										<li>&nbsp;&nbsp;- 주문번호를 클릭하시면 해당 주문에 대한 상세내역을 확인하실 수 있습니다.</li>
+										<li>&nbsp;&nbsp;- 기간 검색시 지난 판매내역을 조회하실 수 있습니다.</li>
 									</ul>
 								</div>
 <!-- 								<input id="mode" name="mode" value="" type="hidden" />  -->
