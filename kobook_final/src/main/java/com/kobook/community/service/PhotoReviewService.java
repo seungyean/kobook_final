@@ -18,4 +18,6 @@ public interface PhotoReviewService {
 	public void heartInsert(PhotoHeartVO heartVO) throws Exception;
 	public void heartDelete(Integer heart_id) throws Exception;
 	public int getHeartId(int person_id, int photo_id) throws Exception;
+	public Integer photoPrev(Integer photo_id) throws Exception;
+	public Integer photoNext(Integer photo_id) throws Exception;
 }

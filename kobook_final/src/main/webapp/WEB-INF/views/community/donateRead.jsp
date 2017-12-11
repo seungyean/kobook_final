@@ -139,7 +139,10 @@
 										height="300" width="200">
 									<ul class="mailbox-attachments clearfix uploadedList"></ul>
 								</figure>
-
+								<a href="javascript:donatePrev();">&lt;&nbsp;&nbsp;이전글</a>
+								<div align="right">
+									<a href="javascript:donateNext();">다음글&nbsp;&nbsp;&gt;</a>
+								</div>
 							</article>
 						</div>
 
@@ -282,98 +285,141 @@
 </li>
 </script>
 	<script>
-$(function(){
-	var formObj = $("form[role='form']");
-	 	
-	$("#modifyBtn").on("click", function(){
-		formObj.attr("action", "/community/donateModify");
-		formObj.attr("method", "get");		
-		formObj.submit();
-	});
+		$(function() {
+			var formObj = $("form[role='form']");
 
-	
-	$("#removeBtn").on("click", function(){		
-		var arr = [];
-		$(".uploadedList li").each(function(index){
-			 arr.push($(this).attr("data-src"));
+			$("#modifyBtn").on("click", function() {
+				formObj.attr("action", "/community/donateModify");
+				formObj.attr("method", "get");
+				formObj.submit();
+			});
+
+			$("#removeBtn").on("click", function() {
+				var arr = [];
+				$(".uploadedList li").each(function(index) {
+					arr.push($(this).attr("data-src"));
+				});
+
+				if (arr.length > 0) {
+					$.post("/community/deleteAllFiles", {
+						files : arr
+					}, function() {
+
+					});
+				}
+
+				formObj.attr("action", "/community/donateRemove");
+				formObj.submit();
+			});
+
+			$("#goListBtn ").on("click", function() {
+				formObj.attr("method", "get");
+				formObj.attr("action", "/community/donateList");
+				formObj.submit();
+			});
+
+			var donate_id = $
+			{
+				donateVO.donate_id
+			}
+			;
+			var template = Handlebars.compile($("#templateAttach").html());
+
+			$.getJSON("/community/donateGetAttach/" + donate_id,
+					function(list) {
+						$(list).each(function() {
+
+							var fileInfo = getFileInfo(this);
+
+							var html = template(fileInfo);
+
+							$(".uploadedList").append(html);
+
+						});
+					});
+
+			$(".uploadedList").on("click", ".mailbox-attachment-info a",
+					function(event) {
+
+						var fileLink = $(this).attr("href");
+
+						if (checkImageType(fileLink)) {
+
+							event.preventDefault();
+
+							var imgTag = $("#popup_img");
+							imgTag.attr("src", fileLink);
+
+							console.log(imgTag.attr("src"));
+
+							$(".popup").show('slow');
+							imgTag.addClass("show");
+						}
+					});
+
+			$(".thumbnail").on("click", function(event) {
+				event.preventDefault();
+				var str = $(this).attr("src");
+				var str2 = str.split("s_");
+				var str3 = str2[0] + str2[1];
+				var imgTag = $("#popup_img");
+
+				if (str2.length > 1) {
+					imgTag.attr("src", str3);
+				} else {
+					imgTag.attr("src", str);
+				}
+
+				$(".popup").show('slow');
+				imgTag.addClass("show");
+			});
+
+			$("#popup_img").on("click", function() {
+				$(".popup").hide('slow');
+			});
+
+			$(".back").on("click", function() {
+				$(".popup").hide('slow');
+			});
 		});
-		
-		if(arr.length > 0){
-			$.post("/community/deleteAllFiles",{files:arr}, function(){
-				
+
+		var donate_id = $
+		{
+			donateVO.donate_id
+		};
+
+		function donatePrev() {
+			$.ajax({
+				type : 'GET',
+				url : '/community/donatePrev/' + donate_id,
+				dataType : 'text',
+				success : function(data) {
+					if (data != -1) {
+						self.location = "/community/donateRead?donate_id="
+								+ data;
+					} else {
+						alert("이전 글이 존재하지 않습니다.");
+					}
+				}
 			});
 		}
-		
-		formObj.attr("action", "/community/donateRemove");
-		formObj.submit();
-	});	
-	
-	$("#goListBtn ").on("click", function(){
-		formObj.attr("method", "get");
-		formObj.attr("action", "/community/donateList");
-		formObj.submit();
-	});
 
-	var donate_id = ${donateVO.donate_id};
-	var template = Handlebars.compile($("#templateAttach").html());
-	
-	$.getJSON("/community/donateGetAttach/"+donate_id,function(list){
-		$(list).each(function(){
-			
-			var fileInfo = getFileInfo(this);
-			
-			var html = template(fileInfo);
-			
-			 $(".uploadedList").append(html);
-			
-		});
-	});
-
-	$(".uploadedList").on("click", ".mailbox-attachment-info a", function(event){
-		
-		var fileLink = $(this).attr("href");
-		
-		if(checkImageType(fileLink)){
-			
-			event.preventDefault();
-					
-			var imgTag = $("#popup_img");
-			imgTag.attr("src", fileLink);
-			
-			console.log(imgTag.attr("src"));
-					
-			$(".popup").show('slow');
-			imgTag.addClass("show");		
-		}	
-	});
-	
-	
-	$(".thumbnail").on("click", function(event){
-			event.preventDefault();
-		var str = $(this).attr("src");
-		var str2 = str.split("s_");
-		var str3 = str2[0]+str2[1];
-  		var imgTag = $("#popup_img");
-  		
-  		if(str2.length > 1) {
-  			imgTag.attr("src", str3);
-  		}else {
-			imgTag.attr("src", str);
+		function donateNext() {
+			$.ajax({
+				type : 'GET',
+				url : '/community/donateNext/' + donate_id,
+				dataType : 'text',
+				success : function(data) {
+					if (data != -1) {
+						self.location = "/community/donateRead?donate_id="
+								+ data;
+					} else {
+						alert("다음 글이 존재하지 않습니다.");
+					}
+				}
+			});
 		}
-					
-		$(".popup").show('slow');
-		imgTag.addClass("show");
-	}); 
-
-	$("#popup_img").on("click", function(){		
-		$(".popup").hide('slow');		
-	});
-	
-	$(".back").on("click", function(){		
-		$(".popup").hide('slow');		
-	});
-});
-</script>
+	</script>
 	<!-- Start Style Switcher -->
 	<div class="switcher"></div>
 	<!-- End Style Switcher -->

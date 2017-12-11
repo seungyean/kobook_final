@@ -119,6 +119,18 @@
 		select heart_id from heart where person_id = #{person_id} and photo_id = #{photo_id}
 	</select>
 	
+	<select id="photoPrev" resultType="Integer">
+		<![CDATA[
+			select max(photo_id) from photo where photo_id < #{photo_id}
+		]]>
+	</select>
+
+	<select id="photoNext" resultType="Integer">
+		<![CDATA[
+			select min(photo_id) from photo where photo_id > #{photo_id}
+		]]>	
+	</select>
+	
 </mapper>
 
 

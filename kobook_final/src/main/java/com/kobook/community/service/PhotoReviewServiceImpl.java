@@ -114,4 +114,14 @@ public class PhotoReviewServiceImpl implements PhotoReviewService {
 	public int getHeartId(int person_id, int photo_id) throws Exception {
 		return dao.getHeartId(person_id, photo_id);
 	}
+
+	@Override
+	public Integer photoPrev(Integer photo_id) throws Exception {
+		return dao.photoPrev(photo_id);
+	}
+
+	@Override
+	public Integer photoNext(Integer photo_id) throws Exception {
+		return dao.photoNext(photo_id);
+	}
 }

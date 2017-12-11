@@ -60,5 +60,9 @@ public interface DonateDAO {
 	public String getDonateTitle(Integer donate_id) throws Exception;
 	//donatePreviewContent
 	public String donatePreviewContent(Integer donate_id) throws Exception;
+	//donatePrev
+	public Integer donatePrev(Integer donate_id) throws Exception;
+	//donateNext
+	public Integer donateNext(Integer donate_id) throws Exception;
 	
 }

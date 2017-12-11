@@ -15,4 +15,6 @@ public interface BlackService {
 	public void blackRemove(Integer black_id) throws Exception;
 	public String blackWriter(Integer black_id) throws Exception;
 	public String blackPreviewContent(Integer black_id) throws Exception;
+	public Integer blackPrev(Integer black_id) throws Exception;
+	public Integer blackNext(Integer black_id) throws Exception;
 }

@@ -172,17 +172,19 @@
 	<select id="getDonateTitle" resultType="string">
 		select donate_title from donate where donate_id = #{donate_id}
 	</select>
-	<!-- 
+	
+	<select id="donatePrev" resultType="Integer">
+		<![CDATA[
+			select max(donate_id) from donate where donate_id < #{donate_id}
+		]]>
+	</select>
 
-	<update id="updateDonate_id" parameterType="int">
-		update donate set donate_id = donate_id-1 where donate_id > #{donate_id}
-	</update>
+	<select id="donateNext" resultType="Integer">
+		<![CDATA[
+			select min(donate_id) from donate where donate_id > #{donate_id}
+		]]>	
+	</select>
 
-	<update id="updateReply_id" parameterType="int">
-		update reply set donate_id = donate_id-1 where donate_id > #{donate_id}
-	</update>
-
-	 -->
 </mapper>
 
 

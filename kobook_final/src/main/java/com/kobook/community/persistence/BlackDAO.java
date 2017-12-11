@@ -33,5 +33,9 @@ public interface BlackDAO {
 	public String blackWriter(Integer black_id) throws Exception;
 	//blackPreviewContent
 	public String blackPreviewContent(Integer black_id) throws Exception;
+	//blackPrev
+	public Integer blackPrev(Integer black_id) throws Exception;
+	//blackNext
+	public Integer blackNext(Integer black_id) throws Exception;
 	
 }

@@ -110,8 +110,8 @@
 			<div class="container">
 				<form role="form" action="photoReviewModify" method="post">
 					<input type='hidden' name='photo_id' value="${photoVO.photo_id}">
-					<input type='hidden' name='page' value="${cri.page}">
-					<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
+					<input type='hidden' name='page' value="${cri.page}"> <input
+						type='hidden' name='perPageNum' value="${cri.perPageNum}">
 					<input type='hidden' name='searchType' value="${cri.searchType}">
 					<input type='hidden' name='keyword' value="${cri.keyword}">
 				</form>
@@ -166,6 +166,10 @@
 							</c:if>
 							<button type="submit" class="btn btn-primary" id="goListBtn">목록으로</button>
 						</div>
+					</div>
+					<a href="javascript:photoPrev();">&lt;&nbsp;&nbsp;이전글</a>
+					<div align="right">
+						<a href="javascript:photoNext();">다음글&nbsp;&nbsp;&gt;</a>
 					</div>
 				</div>
 				<div class='popup back' style="display: none;"></div>
@@ -336,136 +340,182 @@
 </li>
 </script>
 	<script type="text/javascript">
-$(function(){
-	var formObj = $("form[role='form']");
-	 	
-	$("#modifyBtn").on("click", function(){
-		formObj.attr("action", "/community/photoReviewModify");
-		formObj.attr("method", "get");		
-		formObj.submit();
-	});
+		$(function() {
+			var formObj = $("form[role='form']");
 
-	
-	$("#removeBtn").on("click", function(){		
-		var arr = [];
-		$(".uploadedList li").each(function(index){
-			 arr.push($(this).attr("data-src"));
-		});
-		
-		if(arr.length > 0){
-			$.post("/community/deleteAllFiles",{files:arr}, function(){
-				
+			$("#modifyBtn").on("click", function() {
+				formObj.attr("action", "/community/photoReviewModify");
+				formObj.attr("method", "get");
+				formObj.submit();
 			});
-		}
-		
-		formObj.attr("action", "/community/photoReviewRemove");
-		formObj.submit();
-	});	
-	
-	$("#goListBtn").on("click", function(){
-		formObj.attr("method", "get");
-		formObj.attr("action", "/community/photoReviewList");
-		formObj.submit();
-	});
 
-	var photo_id = ${photoVO.photo_id};
-	var template = Handlebars.compile($("#templateAttach").html());
-	
-	$("#heartUp").on("click", function(){
-		event.preventDefault();
-		if(confirm("추천하시겠습니까?")){
+			$("#removeBtn").on("click", function() {
+				var arr = [];
+				$(".uploadedList li").each(function(index) {
+					arr.push($(this).attr("data-src"));
+				});
+
+				if (arr.length > 0) {
+					$.post("/community/deleteAllFiles", {
+						files : arr
+					}, function() {
+
+					});
+				}
+
+				formObj.attr("action", "/community/photoReviewRemove");
+				formObj.submit();
+			});
+
+			$("#goListBtn").on("click", function() {
+				formObj.attr("method", "get");
+				formObj.attr("action", "/community/photoReviewList");
+				formObj.submit();
+			});
+
+			var photo_id = $
+			{
+				photoVO.photo_id
+			}
+			;
+			var template = Handlebars.compile($("#templateAttach").html());
+
+			$("#heartUp").on(
+					"click",
+					function() {
+						event.preventDefault();
+						if (confirm("추천하시겠습니까?")) {
+							$.ajax({
+								url : '/community/photoHeartUp/' + photo_id,
+								type : 'POST',
+								dataType : 'text',
+								success : function(result) {
+									if (result == 'success') {
+										formObj.attr("action",
+												"/community/photoReviewRead?photo_id="
+														+ photo_id);
+										formObj.attr("method", "get");
+										formObj.submit();
+									}
+								}
+							});
+						} else {
+							alert('추천하기 취소하셨습니다');
+						}
+
+					});
+
+			$("#heartDown").on(
+					"click",
+					function() {
+						event.preventDefault();
+						if (confirm("추천 해제하시겠습니까?")) {
+							$.ajax({
+								url : '/community/photoHeartDown/' + photo_id,
+								type : 'POST',
+								dataType : 'text',
+								success : function(result) {
+									if (result == 'success') {
+										alert("추천 해제 성공");
+										formObj.attr("action",
+												"/community/photoReviewRead?photo_id="
+														+ photo_id);
+										formObj.attr("method", "get");
+										formObj.submit();
+									}
+								}
+							});
+						} else {
+							alert('추천상태가 유지됩니다');
+						}
+
+					});
+
+			$.getJSON("/community/photoGetAttach/" + photo_id, function(list) {
+				$(list).each(function() {
+
+					var fileInfo = getFileInfo(this);
+
+					var html = template(fileInfo);
+
+					$(".uploadedList").append(html);
+
+				});
+			});
+
+			$(".uploadedList").on("click", ".mailbox-attachment-info a",
+					function(event) {
+
+						var fileLink = $(this).attr("href");
+
+						if (checkImageType(fileLink)) {
+
+							event.preventDefault();
+
+							var imgTag = $("#popup_img");
+							imgTag.attr("src", fileLink);
+
+							console.log(imgTag.attr("src"));
+
+							$(".popup").show('slow');
+							imgTag.addClass("show");
+						}
+					});
+
+			$(".thumbnail").on("click", function(event) {
+				event.preventDefault();
+				var str = $(this).attr("src");
+				var str2 = str.split("s_");
+				var str3 = str2[0] + str2[1];
+				var imgTag = $("#popup_img");
+				imgTag.attr("src", str3);
+
+				$(".popup").show('slow');
+				imgTag.addClass("show");
+			});
+
+			$("#popup_img").on("click", function() {
+				$(".popup").hide('slow');
+			});
+
+			$(".back").on("click", function() {
+				$(".popup").hide('slow');
+			});
+		});
+
+		var photo_id = ${photoVO.photo_id}
+
+		function photoPrev() {
 			$.ajax({
-				url:'/community/photoHeartUp/'+photo_id,
-				type : 'POST',
-				dataType: 'text',
-				success : function(result) {
-					if(result=='success'){
-						formObj.attr("action", "/community/photoReviewRead?photo_id="+photo_id);
-						formObj.attr("method", "get");		
-						formObj.submit();
+				type : 'GET',
+				url : '/community/photoPrev/' + photo_id,
+				dataType : 'text',
+				success : function(data) {
+					if (data != -1) {
+						self.location = "/community/photoReviewRead?photo_id="
+								+ data;
+					} else {
+						alert("이전 글이 존재하지 않습니다.");
 					}
 				}
 			});
-		}else{
-			alert('추천하기 취소하셨습니다');
 		}
 
-	});
-	
-	$("#heartDown").on("click", function(){
-		event.preventDefault();
-		if(confirm("추천 해제하시겠습니까?")){
+		function photoNext() {
 			$.ajax({
-				url:'/community/photoHeartDown/'+photo_id,
-				type : 'POST',
-				dataType: 'text',
-				success : function(result) {
-					if(result=='success'){
-						alert("추천 해제 성공");
-						formObj.attr("action", "/community/photoReviewRead?photo_id="+photo_id);
-						formObj.attr("method", "get");		
-						formObj.submit();
+				type : 'GET',
+				url : '/community/photoNext/' + photo_id,
+				dataType : 'text',
+				success : function(data) {
+					if (data != -1) {
+						self.location = "/community/photoReviewRead?photo_id=" + data;
+					} else {
+						alert("다음 글이 존재하지 않습니다.");
 					}
 				}
 			});
-		}else{
-			alert('추천상태가 유지됩니다');
 		}
-
-	});
-	
-	$.getJSON("/community/photoGetAttach/"+photo_id,function(list){
-		$(list).each(function(){
-			
-			var fileInfo = getFileInfo(this);
-			
-			var html = template(fileInfo);
-			
-			 $(".uploadedList").append(html);
-			
-		});
-	});
-
-	$(".uploadedList").on("click", ".mailbox-attachment-info a", function(event){
-		
-		var fileLink = $(this).attr("href");
-		
-		if(checkImageType(fileLink)){
-			
-			event.preventDefault();
-					
-			var imgTag = $("#popup_img");
-			imgTag.attr("src", fileLink);
-			
-			console.log(imgTag.attr("src"));
-					
-			$(".popup").show('slow');
-			imgTag.addClass("show");		
-		}	
-	});
-	
-	
-	$(".thumbnail").on("click", function(event){
-			event.preventDefault();
-		var str = $(this).attr("src");
-		var str2 = str.split("s_");
-		var str3 = str2[0]+str2[1];
-  		var imgTag = $("#popup_img");
-		imgTag.attr("src", str3);
-					
-		$(".popup").show('slow');
-		imgTag.addClass("show");
-	}); 
-
-	$("#popup_img").on("click", function(){		
-		$(".popup").hide('slow');		
-	});
-	
-	$(".back").on("click", function(){		
-		$(".popup").hide('slow');		
-	});
-});
-</script>
+	</script>
 	<!-- 	<script type="text/javascript">
 		$(document).ready(function() {
 			$.fn.carousel = function(op) {

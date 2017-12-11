@@ -86,5 +86,15 @@ public class BlackDAOImpl implements BlackDAO {
 	public String blackPreviewContent(Integer black_id) throws Exception {
 		return session.selectOne(namespace+".blackPreviewContent", black_id);
 	}
+
+	@Override
+	public Integer blackPrev(Integer black_id) throws Exception {
+		return session.selectOne(namespace+".blackPrev", black_id);
+	}
+
+	@Override
+	public Integer blackNext(Integer black_id) throws Exception {
+		return session.selectOne(namespace+".blackNext", black_id);
+	}
 	
 }

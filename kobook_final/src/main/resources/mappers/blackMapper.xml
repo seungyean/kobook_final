@@ -110,7 +110,19 @@
 	<select id="blackPreviewContent" resultType="string">
 		select black_content from black where black_id = #{black_id}
 	</select>
+	
+	<select id="blackPrev" resultType="Integer">
+		<![CDATA[
+			select max(black_id) from black where black_id < #{black_id}
+		]]>
+	</select>
 
+	<select id="blackNext" resultType="Integer">
+		<![CDATA[
+			select min(black_id) from black where black_id > #{black_id}
+		]]>	
+	</select>
+	
 </mapper>
 
 

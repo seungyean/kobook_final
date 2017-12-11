@@ -46,5 +46,8 @@ public interface PhotoReviewDAO {
 	public int getPhotoId(Integer heart_id) throws Exception;
 	//getHeartId
 	public int getHeartId(int person_id, int photo_id) throws Exception;
-	
+	//photoPrev
+	public Integer photoPrev(Integer photo_id) throws Exception;
+	//photoNext
+	public Integer photoNext(Integer photo_id) throws Exception;
 }

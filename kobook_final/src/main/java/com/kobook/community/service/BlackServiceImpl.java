@@ -96,6 +96,16 @@ public class BlackServiceImpl implements BlackService {
 	public String blackPreviewContent(Integer black_id) throws Exception {
 		return dao.blackPreviewContent(black_id);
 	}
+
+	@Override
+	public Integer blackPrev(Integer black_id) throws Exception {
+		return dao.blackPrev(black_id);
+	}
+
+	@Override
+	public Integer blackNext(Integer black_id) throws Exception {
+		return dao.blackNext(black_id);
+	}
 	
 	
 

@@ -25,4 +25,6 @@ public interface DonateService {
 	public String getPersonName(Integer person_id) throws Exception;
 	public String getDonateTitle(Integer donate_id) throws Exception;
 	public String donatePreviewContent(Integer donate_id) throws Exception;
+	public Integer donatePrev(Integer donate_id) throws Exception;
+	public Integer donateNext(Integer donate_id) throws Exception;
 }

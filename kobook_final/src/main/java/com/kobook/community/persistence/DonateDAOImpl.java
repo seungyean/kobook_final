@@ -161,4 +161,14 @@ public class DonateDAOImpl implements DonateDAO {
 		return session.selectOne(namespace+".donatePreviewContent", donate_id);
 	}
 
+	@Override
+	public Integer donatePrev(Integer donate_id) throws Exception {
+		return session.selectOne(namespace+".donatePrev", donate_id);
+	}
+
+	@Override
+	public Integer donateNext(Integer donate_id) throws Exception {
+		return session.selectOne(namespace+".donateNext", donate_id);
+	}
+
 }

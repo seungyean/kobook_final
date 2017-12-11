@@ -156,4 +156,14 @@ public class DonateServiceImpl implements DonateService {
 		return dao.donatePreviewContent(donate_id);
 	}
 
+	@Override
+	public Integer donatePrev(Integer donate_id) throws Exception {
+		return dao.donatePrev(donate_id);
+	}
+
+	@Override
+	public Integer donateNext(Integer donate_id) throws Exception {
+		return dao.donateNext(donate_id);
+	}
+
 }

@@ -124,4 +124,14 @@ public class PhotoReviewDAOImpl implements PhotoReviewDAO {
 		
 		return session.selectOne(namespace+".getHeartId", paramMap);
 	}
+
+	@Override
+	public Integer photoPrev(Integer photo_id) throws Exception {
+		return session.selectOne(namespace+".photoPrev", photo_id);
+	}
+
+	@Override
+	public Integer photoNext(Integer photo_id) throws Exception {
+		return session.selectOne(namespace+".photoNext", photo_id);
+	}
 }

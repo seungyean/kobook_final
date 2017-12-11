@@ -123,13 +123,18 @@
 										${blackVO.black_content }</blockquote>
 
 								</div>
+								<a href="javascript:prev();">&lt;&nbsp;&nbsp;이전글</a>
+								<div align="right">
+									<a href="javascript:next();">다음글&nbsp;&nbsp;&gt;</a>
+								</div>
+								<!--/.row-->
 							</article>
 							<ul class="mailbox-attachments clearfix uploadedList">
 							</ul>
 						</div>
 					</div>
 				</div>
-				<!--/.row-->
+
 			</div>
 			<!--/.container-->
 		</section>
@@ -182,81 +187,124 @@
 </script>
 
 	<script>
-$(function(){
-	var formObj = $("form[role='form']");
-	 	
-	$("#modifyBtn").on("click", function(){
-		formObj.attr("action", "/community/blackModify");
-		formObj.attr("method", "get");		
-		formObj.submit();
-	});
+		$(function() {
+			var formObj = $("form[role='form']");
 
-	
-	$("#removeBtn").on("click", function(){		
-		var arr = [];
-		$(".uploadedList li").each(function(index){
-			 arr.push($(this).attr("data-src"));
-		});
-		
-		if(arr.length > 0){
-			$.post("/community/deleteAllFiles",{files:arr}, function(){
-				
+			$("#modifyBtn").on("click", function() {
+				formObj.attr("action", "/community/blackModify");
+				formObj.attr("method", "get");
+				formObj.submit();
 			});
-		}
-		
-		formObj.attr("action", "/community/blackRemove");
-		formObj.submit();
-	});	
-	
-	$("#goListBtn ").on("click", function(){
-		formObj.attr("method", "get");
-		formObj.attr("action", "/community/blackList");
-		formObj.submit();
-	});
 
-	var black_id = ${blackVO.black_id};
-	var template = Handlebars.compile($("#templateAttach").html());
-	
-	$.getJSON("/community/blackGetAttach/"+black_id,function(list){
-		$(list).each(function(){
-			
-			var fileInfo = getFileInfo(this);
-			
-			var html = template(fileInfo);
-			
-			 $(".uploadedList").append(html);
-			
+			$("#removeBtn").on("click", function() {
+				var arr = [];
+				$(".uploadedList li").each(function(index) {
+					arr.push($(this).attr("data-src"));
+				});
+
+				if (arr.length > 0) {
+					$.post("/community/deleteAllFiles", {
+						files : arr
+					}, function() {
+
+					});
+				}
+
+				formObj.attr("action", "/community/blackRemove");
+				formObj.submit();
+			});
+
+			$("#goListBtn ").on("click", function() {
+				formObj.attr("method", "get");
+				formObj.attr("action", "/community/blackList");
+				formObj.submit();
+			});
+
+			var black_id = $
+			{
+				blackVO.black_id
+			}
+			;
+			var template = Handlebars.compile($("#templateAttach").html());
+
+			$.getJSON("/community/blackGetAttach/" + black_id, function(list) {
+				$(list).each(function() {
+
+					var fileInfo = getFileInfo(this);
+
+					var html = template(fileInfo);
+
+					$(".uploadedList").append(html);
+
+				});
+			});
+
+			$(".uploadedList").on("click", ".mailbox-attachment-info a",
+					function(event) {
+
+						var fileLink = $(this).attr("href");
+
+						if (checkImageType(fileLink)) {
+
+							event.preventDefault();
+
+							var imgTag = $("#popup_img");
+							imgTag.attr("src", fileLink);
+
+							console.log(imgTag.attr("src"));
+
+							$(".popup").show('slow');
+							imgTag.addClass("show");
+						}
+					});
+
+			$("#popup_img").on("click", function() {
+
+				$(".popup").hide('slow');
+
+			});
+
 		});
-	});
 
-	$(".uploadedList").on("click", ".mailbox-attachment-info a", function(event){
-		
-		var fileLink = $(this).attr("href");
-		
-		if(checkImageType(fileLink)){
-			
-			event.preventDefault();
-					
-			var imgTag = $("#popup_img");
-			imgTag.attr("src", fileLink);
-			
-			console.log(imgTag.attr("src"));
-					
-			$(".popup").show('slow');
-			imgTag.addClass("show");		
-		}	
-	});
-	
-	$("#popup_img").on("click", function(){
-		
-		$(".popup").hide('slow');
-		
-	});	
+		var black_id = $
+		{
+			blackVO.black_id
+		};
 
+		function prev() {
+			$
+					.ajax({
+						type : 'GET',
+						url : '/community/blackPrev/' + black_id,
+						dataType : 'text',
+						success : function(data) {
+							if (data != -1) {
+								self.location = "/community/blackRead?black_id="
+										+ data;
+							} else {
+								alert("이전 글이 존재하지 않습니다.");
+							}
+						}
+					});
+		}
 
-	
-});
-</script>
+		function next() {
+			$
+					.ajax({
+						type : 'GET',
+						url : '/community/blackNext/' + black_id,
+						dataType : 'text',
+						success : function(data) {
+							if (data != -1) {
+								self.location = "/community/blackRead?black_id="
+										+ data;
+							} else {
+								alert("다음 글이 존재하지 않습니다.");
+							}
+						}
+					});
+		}
+	</script>
 
 	<!-- Start Style Switcher -->
 	<div class="switcher"></div>
