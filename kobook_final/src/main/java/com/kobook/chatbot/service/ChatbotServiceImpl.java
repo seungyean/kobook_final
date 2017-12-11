@@ -111,6 +111,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 		
 			
 		// 게시판 파트
+		// 책검색도 찾아줘,보여줘,알려줘,검색등을 사용하지만 각 게시판에 대한 내용이 들어가있다면 우선순위를 먼저둔다 
 		} else if(text.contains("공지") || text.contains("블랙") || text.contains("포토") || text.contains("무료나눔")){
 			
 			newText = manageBoard(text, person_id);
@@ -138,24 +139,103 @@ public class ChatbotServiceImpl implements ChatbotService {
 	}
 
 	
-	// 책 관련 사항
+	// 책 관련사항  (찾아줘,보여줘,알려줘,검색,책)
 	@Override
 	public String manageBook(String text, int person_id) throws Exception {
 		
 		SearchCriteria cri = new SearchCriteria();
 		List<BookVO> list = null;
+		List<BookVO> sList = null;	//안전거래리스트	
+		List<BookVO> dList = null;	//직거래리스트
 		String newText = "";
-		String keyword = null;
+		String keyword = "";
 		String contentUrl = "";
 		String more = "";
+		String area = "";
 		
+		if(text.contains("근처") || text.contains("주변")){
+			
+			newText = "검색 결과는 제목+내용에서 검색된 결과이며 최대 5개까지 보여드립니다. \n";
+			
+			// 검색,찾아줘,보여줘,알려줘라는 단어와 그 바로앞에 공백이 있다면 cut
+			area = keyWordReplace(text);
+			System.out.println("keywordreplace 직후: "+area);
+			
+			// 주변,근처라는 단어와 그 바로앞에 공백이 있다면 cut
+			area = areaReplace(area);
+			System.out.println("area replace 직후: " + area);
+			cri.setKeyword(area);
+			sList = bookDao.safeListCriteria(cri);
+			dList = bookDao.directListCriteria(cri);
+			System.out.println("area: " + area);
+			
+			newText += "<hr> <안전거래 리스트> \n";
+			if(sList.size() < 1){
+				newText += "해당 키워드에 맞는 책이 없습니다.";
+				
+			} else {
+				newText += "&nbsp; \n <b>"+sList.size() + "</b>" + "개의 결과가 검색되었습니다. \n";
+				
+				if(sList.size() > 5){
+					for(int i=0; i<5; i++){
+						contentUrl = "/book/bookRead?book_id=" + sList.get(i).getBook_id();
+						
+						// 해당 url을 클릭하게 되면 부모창에서 화면 전환이 이루어진다  
+						newText += "\n ■ &nbsp;"
+								+ "<a href=\"javascript:;\" onClick=\"opener.parent.location='"+ contentUrl +"'; return false;\">"
+								+ sList.get(i).getBook_name()+"</a>";
+						
+					}
+				} else {
+					for(int i=0; i<sList.size(); i++){
+						contentUrl = "/book/bookRead?book_id=" + sList.get(i).getBook_id();
+						newText += "\n ■ &nbsp;"
+								+ "<a href=\"javascript:;\" onClick=\"opener.parent.location='"+ contentUrl +"'; return false;\">"
+								+ sList.get(i).getBook_name()+"</a>";
+						 
+					}
+				}
+				
+			}
+			
+			newText += "<hr> <직거래 리스트> \n";
+			
+			if(dList.size() < 1){
+				newText += "해당 키워드에 맞는 책이 없습니다.";
+				
+			} else {
+				newText += "&nbsp; \n <b>"+ dList.size() + "</b>" + "개의 결과가 검색되었습니다. \n";
+				
+				if(dList.size() > 5){
+					for(int i=0; i<5; i++){
+						contentUrl = "/book/bookRead?book_id=" + dList.get(i).getBook_id();
+						newText += "\n ■ &nbsp;"
+								+ "<a href=\"javascript:;\" onClick=\"opener.parent.location='"+ contentUrl +"'; return false;\">"
+								+ dList.get(i).getBook_name()+"</a>";
+					}
+				} else {
+					for(int i=0; i<dList.size(); i++){
+						contentUrl = "/book/bookRead?book_id=" + dList.get(i).getBook_id();
+						newText += "\n ■ &nbsp;"
+								+ "<a href=\"javascript:;\" onClick=\"opener.parent.location='"+ contentUrl +"'; return false;\">"
+								+ dList.get(i).getBook_name()+"</a>";
+					}
+				}
+				
+			}
+			
+		}
 		
 		// 제목 혹은 해시태그로 검색
-		if(text.contains("알려줘") || text.contains("보여줘") || text.contains("찾아줘") || text.contains("검색")){	
-			// xxx 보여줘
+		else if(text.contains("알려줘") || text.contains("보여줘") || text.contains("찾아줘") || text.contains("검색")){	
+			
 			newText = "검색 결과는 제목+내용에서 검색된 결과이며 최대 5개까지 보여드립니다. \n";
+			
+			// 검색,찾아줘,보여줘,알려줘라는 단어와 그 바로앞에 공백이 있다면 cut
 			keyword = keyWordReplace(text);
 			System.out.println("책 키워드 추출: " + keyword);
+			
+			// criteria를 책제목과 해시태그를 검색할 것으로 설정
 			cri.setSearchType("tw");
 			cri.setKeyword(keyword);
 			list = bookDao.listCriteria(cri);
@@ -216,7 +296,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 	}
 
 	
-	// 게시판 관련 사항
+	// 게시판 관련 사항(공지,블랙,무료나눔,포토)
 	@Override
 	public String manageBoard(String text, int person_id) throws Exception {
 		
@@ -224,12 +304,15 @@ public class ChatbotServiceImpl implements ChatbotService {
 		List<?> list = null;
 		String newText = "검색 결과는 제목+내용에서 검색된 결과이며 최대 5개까지 보여드립니다. \n";
 		String boardName = null;
+		
+		// 게시판의 성향을 띈 부분을 제외한 나머지 부분(검색할 내용)을 추리는 과정
 		String rawKeyword = text.substring(text.indexOf(" ")+1);
 		String keyword = null;
 		
 		Pattern bPattern = Pattern.compile("^공지|^포토|^블랙|^무료나눔");
 		Matcher bMatcher = bPattern.matcher(text);
 		
+		// 공지, 포토, 블랙, 무료나눔으로 시작하는 문자열이 있다면 while문에 진입해서 게시판 이름만 가져오기
 		while(bMatcher.find()){
 			boardName = boardNameReplace(bMatcher.group());
 			
@@ -403,7 +486,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 	}
 
 	
-	// 마이페이지 관련 사항
+	// 마이페이지 관련 사항(마일리지,관심분야)
 	@Override
 	public String manageMypage(String text, int person_id) throws Exception {
 		
@@ -430,7 +513,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 	}
 
 	
-	// 메세지 관련 사항
+	// 쪽지 관련 사항(쪽지)
 	@Override
 	public String manageMessage(String text, int person_id) throws Exception {
 		/*SimpleDateFormat dateFormat = new SimpleDateFormat("yy-MM-dd");
@@ -538,6 +621,26 @@ public class ChatbotServiceImpl implements ChatbotService {
 		}
 		
 		return keyword;
+	}
+	
+	public String areaReplace(String text){
+		String area = "";
+		
+		if(text.length() < 1){
+			return "";
+			
+		} else {
+			
+			if(text.contains("주변")){
+				area = StringUtils.replace(text, "주변", "");
+			} else if(text.contains("근처")){
+				area = StringUtils.replace(text, "근처", "");
+			}
+
+			area = area.replaceAll("\\s+$", "");
+		}
+		
+		return area;
 	}
 	
 }
