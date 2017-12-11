@@ -31,6 +31,13 @@
    		order by person_id desc
    	</select>
 	
+	<select id="visitCountView" resultType="map">
+		   <![CDATA[
+		select * from visitCountView where rownum <= 7 order by VISITDATE
+		   ]]>
+	</select>
+
+	
 </mapper>
 
 

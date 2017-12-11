@@ -1,9 +1,11 @@
 package com.kobook.controller;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -204,4 +206,54 @@ public class AdminAjaxController {
 		
 		return entity;
 	}
+	
+	@RequestMapping(value="/personTotal", method=RequestMethod.POST)
+	@ResponseBody	
+	public ResponseEntity<List<HashMap<String, String>>> personTotal() throws Exception  {
+		
+		ResponseEntity<List<HashMap<String, String>>> entity = null;
+		
+		List<Map<String, String>> list = visitservice.visitCountView();
+		List<HashMap<String, String>> replaceList = new ArrayList<HashMap<String,String>>();
+		
+		for(int i = 0; i < list.size(); i++){
+			
+			HashMap<String, String> map = (HashMap<String, String>) list.get(i);
+			String visitDate = "";
+			
+			System.out.println(i+ " in list for : "+map);
+			System.out.println(i+ " in key for : "+map.keySet());
+
+			java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy-MM-dd");
+			
+			String[] key = new String[map.keySet().size()];
+			map.keySet().toArray(key);
+			
+			HashMap<String, String> mapList = new HashMap<String,String>();
+			for (int j = 0; j < key.length; j++) {
+				
+				System.out.println("replaceListMAp key : " + key[j]);
+				
+				if (key[j].equals("VISITDATE")) {
+					visitDate = formatter.format(map.get(key[j]));
+					mapList.put(key[j], visitDate);
+					System.out.println("key : " + key[j] + " value : " + visitDate);
+				}else{
+					System.out.println("key : " + key[j] + " value : " + String.valueOf(map.get(key[j])));
+					mapList.put(key[j], String.valueOf(map.get(key[j])));
+				}		
+								
+			}
+			
+			replaceList.add(mapList);
+		}	
+		try {
+			entity = new ResponseEntity<List<HashMap<String,String>>>(replaceList,HttpStatus.OK);
+		} catch (Exception e) {
+			entity = new ResponseEntity<List<HashMap<String,String>>>(HttpStatus.BAD_REQUEST);
+		}
+		System.out.println(replaceList);
+		return entity;
+	}
+	
 }

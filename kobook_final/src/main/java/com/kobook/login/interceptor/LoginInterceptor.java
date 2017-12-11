@@ -2,6 +2,7 @@ package com.kobook.login.interceptor;
 
 
 
+import java.io.PrintWriter;
 import java.util.Hashtable;
 
 import javax.inject.Inject;
@@ -26,6 +27,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
 	private static Hashtable loginPersons = new Hashtable();
 		
+	/* (non-Javadoc)
+	 * @see org.springframework.web.servlet.handler.HandlerInterceptorAdapter#postHandle(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, java.lang.Object, org.springframework.web.servlet.ModelAndView)
+	 */
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
@@ -40,7 +44,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
 		String person_emailCheck = service.loginCheck(person_email).getPerson_email();
 		String person_pwdCheck = service.loginCheck(person_email).getPerson_pwd();
-		
+		String person_kindCheck = service.loginCheck(person_emailCheck).getPerson_kind();
 		
 		if(service.loginCheck(person_email) != null) {
 			System.out.println("login Check");
@@ -57,7 +61,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 				response.sendRedirect("/admin/adminMain");
 			}
 			
-			else if(person_email.equals(person_emailCheck) && person_pwd.equals(person_pwdCheck)){
+			else if(person_email.equals(person_emailCheck) && person_pwd.equals(person_pwdCheck) && !(person_kindCheck.equals("B"))){
 				session.setAttribute("person_id", person_id);
 				
 				visitservice.visitRegist(Integer.parseInt(person_id));
@@ -68,6 +72,15 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 				}
 
 			}else{
+				if(person_kindCheck.equals("B")){
+					System.out.println("블랙리스트 회원: "+person_id);
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter out = response.getWriter();
+					out.println("<script language='javascript'>");
+					out.println("alert('블랙회원입니다. 이 사이트에 사용이 제한됩니다.');");
+					out.println("history.go(-1);</script>");
+					out.close();
+				}
 				response.sendRedirect("/person/loginFail");
 			}
 		}

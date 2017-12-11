@@ -3,7 +3,9 @@ package com.kobook.controller;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -42,6 +44,8 @@ public class AdminController {
 	@Inject
 	private PayService payservice;
 	
+	
+	
 
 	private static int count;
 	
@@ -53,11 +57,9 @@ public class AdminController {
 	@RequestMapping("/adminMain")
 	public String visitCount(Model model) throws Exception {
 		
-		return "admin/adminMain";
-	}
-	
-	@RequestMapping(value="/adminChart")
-	public String adminChart() {
+		List<Map<String, String>> list = visitservice.visitCountView();
+		System.out.println(list.size());
+		model.addAttribute("list", list);
 		return "admin/adminMain";
 	}
 	

@@ -1,6 +1,7 @@
 package com.kobook.admin.persistence;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -33,4 +34,8 @@ public class VisitDAOImpl implements VisitDAO{
 		return session.selectList(namespace+".blackPersonList");
 	}
 	
+	@Override
+	public List<Map<String, String>> visitCountView() throws Exception {
+		return session.selectList(namespace+".visitCountView");
+	}
 }

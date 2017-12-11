@@ -1,6 +1,7 @@
 package com.kobook.admin.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -35,5 +36,10 @@ public class VisitServiceImpl implements VisitService {
 	@Override
 	public List<PersonVO> blackPersonList () throws Exception {
 		return dao.blackPersonList();
+	}
+	
+	@Override
+	public List<Map<String, String>> visitCountView() throws Exception {
+		return dao.visitCountView();
 	}
 }
