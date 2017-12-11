@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -17,33 +17,36 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1" />
 
- <!-- CSS FILES -->
-    <link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/resources/css/style.css">
-    <link rel="stylesheet" type="text/css" href="/resources/css/style.css" media="screen" data-name="skins">
-    <link rel="stylesheet" href="/resources/css/layout/wide.css" data-name="layout">
+<!-- CSS FILES -->
+<link rel="stylesheet" href="/resources/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/resources/css/style.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/style.css"
+	media="screen" data-name="skins">
+<link rel="stylesheet" href="/resources/css/layout/wide.css"
+	data-name="layout">
 
-    <link rel="stylesheet" type="text/css" href="/resources/css/switcher.css" media="screen" />
+<link rel="stylesheet" type="text/css"
+	href="/resources/css/switcher.css" media="screen" />
 
 <style>
-	.fileDrop {
-	  width: 80%;
-	  height: 100px;
-	  border: 1px dotted gray;
-	  background-color: lightslategrey;
-	  margin: auto;  
-	}
+.fileDrop {
+	width: 80%;
+	height: 100px;
+	border: 1px dotted gray;
+	background-color: lightslategrey;
+	margin: auto;
+}
 
-	.error{
-		color: #ff0000;
-	}
+.error {
+	color: #ff0000;
+}
 </style>
 
 </head>
 <body class="home">
 	<!-- 헤더 -->
- 		 <jsp:include page="/WEB-INF/views/include/header.jsp" />
-  	<!-- /헤더 -->	
+	<jsp:include page="/WEB-INF/views/include/header.jsp" />
+	<!-- /헤더 -->
 
 	<!--start wrapper-->
 	<section class="wrapper">
@@ -65,7 +68,7 @@
 				</div>
 			</div>
 		</section>
-		
+
 		<section class="content typography">
 			<div class="container">
 				<div class="row sub_content">
@@ -75,21 +78,22 @@
 								<span>포토 리뷰 글 작성</span>
 							</h4>
 						</div>
-						<form:form action="photoReviewRegist" id="registerform" commandName="photoCommand"
-							method="post" enctype="multipart/form-data">
+						<form:form action="photoReviewRegist" id="registerform"
+							commandName="photoCommand" method="post"
+							enctype="multipart/form-data">
 							<div class="form-group">
 								<input type="hidden" class="form-control" name="person_id"
 									value="${person_id}">
 							</div>
 							<div class="form-group">
 								<form:input type="text" class="form-control" path="photo_title"
-									placeholder="글 제목"/>
-								<form:errors path="photo_title" cssClass="error"/>
+									placeholder="글 제목" />
+								<form:errors path="photo_title" cssClass="error" />
 							</div>
 							<div class="form-group">
 								<form:textarea rows="10" cols="73" class="form-control"
-									path="photo_content" placeholder="글 내용"/>
-								<form:errors path="photo_content" cssClass="error"/>
+									path="photo_content" placeholder="글 내용" />
+								<form:errors path="photo_content" cssClass="error" />
 							</div>
 							<div class="form-group">
 								<input type="file" name="file">
@@ -99,16 +103,16 @@
 									value="작성 완료">
 							</div>
 						</form:form>
- 						<button class="fileButton">파일 추가</button>
- 						<div class="form-group" id="fileAdd">
- 							<label for="exampleInputEmail1">추가 파일은 아래영역에 드래그하십시오.</label>
- 							<div class="fileDrop"></div>
+						<button class="fileButton">파일 추가</button>
+						<div class="form-group" id="fileAdd">
+							<label for="exampleInputEmail1">추가 파일은 아래영역에 드래그하십시오.</label>
+							<div class="fileDrop"></div>
 							<button class="cancleFile">취소</button>
 						</div>
-						
- 						<div class="box-footer">
- 							<div>
- 								<hr>
+
+						<div class="box-footer">
+							<div>
+								<hr>
 							</div>
 							<ul class="mailbox-attachments clearfix uploadedList">
 							</ul>
@@ -121,10 +125,10 @@
 	<!--end wrapper-->
 
 	<!-- 푸터 -->
- 		 <jsp:include page="/WEB-INF/views/include/footer.jsp" />
-  	<!-- /푸터 -->
+	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+	<!-- /푸터 -->
 
-	
+
 
 	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
@@ -147,8 +151,9 @@
 
 	<script src="../js/main.js"></script>
 	<script type="text/javascript" src="/resources/js/upload.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
-<script id="template" type="text/x-handlebars-template">
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+	<script id="template" type="text/x-handlebars-template">
 <li>
   <div class="mailbox-attachment-info">
 	<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}
@@ -160,7 +165,7 @@
   </div>
 </li>                
 </script>
-<script>
+	<script>
  $("#fileAdd").hide();
 
 $(".fileButton").on("click", function(){

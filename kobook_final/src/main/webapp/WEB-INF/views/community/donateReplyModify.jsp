@@ -16,36 +16,54 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1" />
 
- <!-- CSS FILES -->
-    <link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/resources/css/style.css">
-    <link rel="stylesheet" type="text/css" href="/resources/css/style.css" media="screen" data-name="skins">
-    <link rel="stylesheet" href="/resources/css/layout/wide.css" data-name="layout">
+<!-- CSS FILES -->
+<link rel="stylesheet" href="/resources/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/resources/css/style.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/style.css"
+	media="screen" data-name="skins">
+<link rel="stylesheet" href="/resources/css/layout/wide.css"
+	data-name="layout">
 
-    <link rel="stylesheet" type="text/css" href="/resources/css/switcher.css" media="screen" />
-     <style type="text/css">
-    .popup {position: absolute;}
-    .back { background-color: gray; opacity:0.5; width: 78%; height: 31%; overflow:hidden;  z-index:1101;}
-    .front { 
-       z-index:1110; opacity:1; boarder:1px; margin: auto; 
-      }
-     .show{
-       position:relative;
-       max-width: 900px; 
-       max-height: 500px; 
-       overflow: auto;       
-     }
-     #popup_img{
-     	width: 500%;
-     	height: 500%;
-     }
-  	
-    </style>
+<link rel="stylesheet" type="text/css"
+	href="/resources/css/switcher.css" media="screen" />
+<style type="text/css">
+.popup {
+	position: absolute;
+}
+
+.back {
+	background-color: gray;
+	opacity: 0.5;
+	width: 78%;
+	height: 31%;
+	overflow: hidden;
+	z-index: 1101;
+}
+
+.front {
+	z-index: 1110;
+	opacity: 1;
+	boarder: 1px;
+	margin: auto;
+}
+
+.show {
+	position: relative;
+	max-width: 900px;
+	max-height: 500px;
+	overflow: auto;
+}
+
+#popup_img {
+	width: 500%;
+	height: 500%;
+}
+</style>
 </head>
 <body class="home">
 	<!-- 헤더 -->
- 		 <jsp:include page="/WEB-INF/views/include/header.jsp" />
-  	<!-- /헤더 -->
+	<jsp:include page="/WEB-INF/views/include/header.jsp" />
+	<!-- /헤더 -->
 
 	<!--start wrapper-->
 	<section class="wrapper">
@@ -73,13 +91,14 @@
 				<div class="row">
 					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
 						<div class="blog_single">
-    			<form role="form" action="donateModify" method="post">
-					<input type='hidden' name='donate_id' value="${donateVO.donate_id}">
-					<input type='hidden' name='page' value="${cri.page}">
-					<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
-					<input type='hidden' name='searchType' value="${cri.searchType}">
-					<input type='hidden' name='keyword' value="${cri.keyword}">
-				</form>
+							<form role="form" action="donateModify" method="post">
+								<input type='hidden' name='donate_id'
+									value="${donateVO.donate_id}"> <input type='hidden'
+									name='page' value="${cri.page}"> <input type='hidden'
+									name='perPageNum' value="${cri.perPageNum}"> <input
+									type='hidden' name='searchType' value="${cri.searchType}">
+								<input type='hidden' name='keyword' value="${cri.keyword}">
+							</form>
 							<article class="post">
 								<!-- 글 번호 -->
 								<div class="post_date">
@@ -93,16 +112,16 @@
 
 											<!-- 글 작성일,작성자(person_id),조회수,수정/삭제폼 -->
 											<span><i class="fa fa-calendar"></i> <fmt:formatDate
-													value="${donateVO.donate_date }" pattern="MMM dd, yyyy" /> </span>
-											<span><i class="fa fa-user"></i> By ${writer}
-											</span> <span><i class="fa fa-eye"></i> ${donateVO.donate_hit}
-											</span>
-											<span><i class="fa fa-comments"></i> ${donateVO.reply_count} Comments</span>
-										<c:if test="${donateVO.person_id == person_id || person_id == 1}">
-											<button type="submit" class="btn btn-warning" id="modifyBtn">수정</button>
-											<button type="submit" class="btn btn-danger" id="removeBtn">삭제</button>
-										</c:if>
-										<button type="submit" class="btn btn-primary" id="goListBtn">목록으로</button>
+													value="${donateVO.donate_date }" pattern="MMM dd, yyyy" />
+											</span> <span><i class="fa fa-user"></i> By ${writer} </span> <span><i
+												class="fa fa-eye"></i> ${donateVO.donate_hit} </span> <span><i
+												class="fa fa-comments"></i> ${donateVO.reply_count} Comments</span>
+											<c:if
+												test="${donateVO.person_id == person_id || person_id == 1}">
+												<button type="submit" class="btn btn-warning" id="modifyBtn">수정</button>
+												<button type="submit" class="btn btn-danger" id="removeBtn">삭제</button>
+											</c:if>
+											<button type="submit" class="btn btn-primary" id="goListBtn">목록으로</button>
 										</div>
 									</div>
 									<!-- 글 내용 -->
@@ -110,16 +129,17 @@
 										${donateVO.donate_content }</blockquote>
 								</div>
 							</article>
-					    <div class='popup back' style="display:none;"></div>
-					    <div id="popup_front" class='popup front' style="display:none;">
-					     <img id="popup_img">
-					    </div>
-									<figure class="post_img">
-									<img class="thumbnail" alt="NO Thumbnail"
-												 src="/community/displayFile?fileName=${donateVO.donate_thumbnail }" height="300" width="200">
-									</figure>
-							 <ul class="mailbox-attachments clearfix uploadedList">
-							 </ul>
+							<div class='popup back' style="display: none;"></div>
+							<div id="popup_front" class='popup front' style="display: none;">
+								<img id="popup_img">
+							</div>
+							<figure class="post_img">
+								<img class="thumbnail" alt="NO Thumbnail"
+									src="/community/displayFile?fileName=${donateVO.donate_thumbnail }"
+									height="300" width="200">
+							</figure>
+							<ul class="mailbox-attachments clearfix uploadedList">
+							</ul>
 						</div>
 
 						<!--update Comments-->
@@ -143,10 +163,10 @@
 														<a class="comment-date link-style1"><fmt:formatDate
 																value="${reply.reply_date}" pattern="yy-MM-dd, HH:mm" /></a>
 														<c:if test="${reply.person_id == person_id }">
-														<a href="donateReplyModify?donate_id=${reply.donate_id}&reply_id=${reply.reply_id}">
-															수정
-														</a>
-														<a href="donateReplyRemove?reply_id=${reply.reply_id}">삭제</a>
+															<a
+																href="donateReplyModify?donate_id=${reply.donate_id}&reply_id=${reply.reply_id}">
+																수정 </a>
+															<a href="donateReplyRemove?reply_id=${reply.reply_id}">삭제</a>
 														</c:if>
 													</div>
 													<c:if test="${reply_id != null }">
@@ -184,31 +204,39 @@
 	<!--end wrapper-->
 
 	<!-- 푸터 -->
- 		 <jsp:include page="/WEB-INF/views/include/footer.jsp" />
-  	<!-- /푸터 -->
-	
+	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+	<!-- /푸터 -->
 
-	
 
-	 <script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
-    <script src="/resources/js/bootstrap.min.js"></script>
-    <script src="/resources/js/jquery.easing.1.3.js"></script>
-    <script src="/resources/js/retina-1.1.0.min.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.cookie.js"></script> <!-- jQuery cookie -->
-    <script type="text/javascript" src="/resources/js/styleswitch.js"></script> <!-- Style Colors Switcher -->
-    <script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.smartmenus.bootstrap.min.js"></script>
-        <script type="text/javascript" src="/resources/js/jflickrfeed.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.magnific-popup.min.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.isotope.min.js"></script>
-    <script type="text/javascript" src="/resources/js/swipe.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
 
-    <script src="/resources/js/main.js"></script>
-    
-<script type="text/javascript" src="/resources/js/upload.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
-<script id="templateAttach" type="text/x-handlebars-template">
+
+	<script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
+	<script src="/resources/js/bootstrap.min.js"></script>
+	<script src="/resources/js/jquery.easing.1.3.js"></script>
+	<script src="/resources/js/retina-1.1.0.min.js"></script>
+	<script type="text/javascript" src="/resources/js/jquery.cookie.js"></script>
+	<!-- jQuery cookie -->
+	<script type="text/javascript" src="/resources/js/styleswitch.js"></script>
+	<!-- Style Colors Switcher -->
+	<script type="text/javascript"
+		src="/resources/js/jquery.smartmenus.min.js"></script>
+	<script type="text/javascript"
+		src="/resources/js/jquery.smartmenus.bootstrap.min.js"></script>
+	<script type="text/javascript" src="/resources/js/jflickrfeed.js"></script>
+	<script type="text/javascript"
+		src="/resources/js/jquery.magnific-popup.min.js"></script>
+	<script type="text/javascript"
+		src="/resources/js/jquery.isotope.min.js"></script>
+	<script type="text/javascript" src="/resources/js/swipe.js"></script>
+	<script type="text/javascript"
+		src="/resources/js/jquery-scrolltofixed-min.js"></script>
+
+	<script src="/resources/js/main.js"></script>
+
+	<script type="text/javascript" src="/resources/js/upload.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+	<script id="templateAttach" type="text/x-handlebars-template">
 <li data-src='{{fullName}}'>
 <div class="mailbox-attachment-info">
 <a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}
@@ -216,8 +244,8 @@
 </a>
   </div>
 </li>
-</script> 
-<script>
+</script>
+	<script>
 $(function(){
 	var formObj = $("form[role='form']");
 	 	

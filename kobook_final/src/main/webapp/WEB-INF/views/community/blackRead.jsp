@@ -16,33 +16,50 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1" />
 
- <!-- CSS FILES -->
-    <link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/resources/css/style.css">
-    <link rel="stylesheet" type="text/css" href="/resources/css/style.css" media="screen" data-name="skins">
-    <link rel="stylesheet" href="/resources/css/layout/wide.css" data-name="layout">
+<!-- CSS FILES -->
+<link rel="stylesheet" href="/resources/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/resources/css/style.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/style.css"
+	media="screen" data-name="skins">
+<link rel="stylesheet" href="/resources/css/layout/wide.css"
+	data-name="layout">
 
-    <link rel="stylesheet" type="text/css" href="/resources/css/switcher.css" media="screen" />
-    
-    <style type="text/css">
-    .popup {position: absolute;}
-    .back { background-color: gray; opacity:0.5; width: 100%; height: 300%; overflow:hidden;  z-index:1101;}
-    .front { 
-       z-index:1110; opacity:1; boarder:1px; margin: auto; 
-      }
-     .show{
-       position:relative;
-       max-width: 900px; 
-       max-height: 500px; 
-       overflow: auto;       
-     } 
-  	
-    </style>
+<link rel="stylesheet" type="text/css"
+	href="/resources/css/switcher.css" media="screen" />
+
+<style type="text/css">
+.popup {
+	position: absolute;
+}
+
+.back {
+	background-color: gray;
+	opacity: 0.5;
+	width: 100%;
+	height: 300%;
+	overflow: hidden;
+	z-index: 1101;
+}
+
+.front {
+	z-index: 1110;
+	opacity: 1;
+	boarder: 1px;
+	margin: auto;
+}
+
+.show {
+	position: relative;
+	max-width: 900px;
+	max-height: 500px;
+	overflow: auto;
+}
+</style>
 </head>
 <body class="home">
 	<!-- 헤더 -->
- 		 <jsp:include page="/WEB-INF/views/include/header.jsp" />
-  	<!-- /헤더 -->
+	<jsp:include page="/WEB-INF/views/include/header.jsp" />
+	<!-- /헤더 -->
 
 	<!--start wrapper-->
 	<section class="wrapper">
@@ -69,46 +86,46 @@
 				<div class="row">
 					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
 						<div class="blog_single">
-						
-    <div class='popup back' style="display:none;"></div>
-    <div id="popup_front" class='popup front' style="display:none;">
-     <img id="popup_img">
-    </div>
-    			<form role="form" action="blackModify" method="post">
-					<input type='hidden' name='black_id' value="${blackVO.black_id}">
-					<input type='hidden' name='rn' value="${rn}">
-					<input type='hidden' name='page' value="${cri.page}">
-					<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
-					<input type='hidden' name='searchType' value="${cri.searchType}">
-					<input type='hidden' name='keyword' value="${cri.keyword}">
-				</form>
-   
-							<article class="post">
-									<div class="post_date">
-										<span class="day">${rn}</span>
-									</div>
-									<div class="post_content">
-										<div class="post_meta">
-											<h2>${blackVO.black_title }</h2>
-											<div class="metaInfo">
-												<span><i class="fa fa-calendar"></i> <fmt:formatDate
-														value="${blackVO.black_date }" pattern="MMM dd, yyyy" /> </span> <span><i
-													class="fa fa-user"></i> By ${writer} </span>
-										<c:if test="${blackVO.person_id == person_id || person_id == 1}">
-											<button type="submit" class="btn btn-warning" id="modifyBtn">수정</button>
-											<button type="submit" class="btn btn-danger" id="removeBtn">삭제</button>
-										</c:if>
-										<button type="submit" class="btn btn-primary" id="goListBtn">목록으로</button>
-											</div>
-										</div>
-										<span>신고email : <b>${blackVO.black_email }</b></span>
-										<blockquote class="default">
-											${blackVO.black_content }</blockquote>
 
+							<div class='popup back' style="display: none;"></div>
+							<div id="popup_front" class='popup front' style="display: none;">
+								<img id="popup_img">
+							</div>
+							<form role="form" action="blackModify" method="post">
+								<input type='hidden' name='black_id' value="${blackVO.black_id}">
+								<input type='hidden' name='page' value="${cri.page}"> <input
+									type='hidden' name='perPageNum' value="${cri.perPageNum}">
+								<input type='hidden' name='searchType' value="${cri.searchType}">
+								<input type='hidden' name='keyword' value="${cri.keyword}">
+							</form>
+
+							<article class="post">
+								<div class="post_date">
+									<span class="day"></span>
+								</div>
+								<div class="post_content">
+									<div class="post_meta">
+										<h2>${blackVO.black_title }</h2>
+										<div class="metaInfo">
+											<span><i class="fa fa-calendar"></i> <fmt:formatDate
+													value="${blackVO.black_date }" pattern="MMM dd, yyyy" /> </span>
+											<span><i class="fa fa-user"></i> By ${writer} </span>
+											<c:if
+												test="${blackVO.person_id == person_id || person_id == 1}">
+												<button type="submit" class="btn btn-warning" id="modifyBtn">수정</button>
+												<button type="submit" class="btn btn-danger" id="removeBtn">삭제</button>
+											</c:if>
+											<button type="submit" class="btn btn-primary" id="goListBtn">목록으로</button>
+										</div>
 									</div>
+									<span>신고email : <b>${blackVO.black_email }</b></span>
+									<blockquote class="default">
+										${blackVO.black_content }</blockquote>
+
+								</div>
 							</article>
-							 <ul class="mailbox-attachments clearfix uploadedList">
-							 </ul>
+							<ul class="mailbox-attachments clearfix uploadedList">
+							</ul>
 						</div>
 					</div>
 				</div>
@@ -121,32 +138,40 @@
 	<!--end wrapper-->
 
 	<!-- 푸터 -->
- 		 <jsp:include page="/WEB-INF/views/include/footer.jsp" />
-  	<!-- /푸터 -->
-	
+	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+	<!-- /푸터 -->
 
-	
+
+
 
 	<script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
-    <script src="/resources/js/bootstrap.min.js"></script>
-    <script src="/resources/js/jquery.easing.1.3.js"></script>
-    <script src="/resources/js/retina-1.1.0.min.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.cookie.js"></script> <!-- jQuery cookie -->
-    <script type="text/javascript" src="/resources/js/styleswitch.js"></script> <!-- Style Colors Switcher -->
-    <script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.smartmenus.bootstrap.min.js"></script>
-        <script type="text/javascript" src="/resources/js/jflickrfeed.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.magnific-popup.min.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.isotope.min.js"></script>
-    <script type="text/javascript" src="/resources/js/swipe.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
+	<script src="/resources/js/bootstrap.min.js"></script>
+	<script src="/resources/js/jquery.easing.1.3.js"></script>
+	<script src="/resources/js/retina-1.1.0.min.js"></script>
+	<script type="text/javascript" src="/resources/js/jquery.cookie.js"></script>
+	<!-- jQuery cookie -->
+	<script type="text/javascript" src="/resources/js/styleswitch.js"></script>
+	<!-- Style Colors Switcher -->
+	<script type="text/javascript"
+		src="/resources/js/jquery.smartmenus.min.js"></script>
+	<script type="text/javascript"
+		src="/resources/js/jquery.smartmenus.bootstrap.min.js"></script>
+	<script type="text/javascript" src="/resources/js/jflickrfeed.js"></script>
+	<script type="text/javascript"
+		src="/resources/js/jquery.magnific-popup.min.js"></script>
+	<script type="text/javascript"
+		src="/resources/js/jquery.isotope.min.js"></script>
+	<script type="text/javascript" src="/resources/js/swipe.js"></script>
+	<script type="text/javascript"
+		src="/resources/js/jquery-scrolltofixed-min.js"></script>
 
-<script type="text/javascript" src="/resources/js/upload.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
-    
-    <script src="/resources/js/main.js"></script>
-    
-<script id="templateAttach" type="text/x-handlebars-template">
+	<script type="text/javascript" src="/resources/js/upload.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+
+	<script src="/resources/js/main.js"></script>
+
+	<script id="templateAttach" type="text/x-handlebars-template">
 <li data-src='{{fullName}}'>
 <div class="mailbox-attachment-info">
 <a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}
@@ -154,9 +179,9 @@
 </a>
   </div>
 </li>
-</script>  
+</script>
 
-<script>
+	<script>
 $(function(){
 	var formObj = $("form[role='form']");
 	 	

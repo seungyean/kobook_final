@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -17,33 +17,36 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-  <!-- CSS FILES -->
-    <link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/resources/css/style.css">
-    <link rel="stylesheet" type="text/css" href="/resources/css/style.css" media="screen" data-name="skins">
-    <link rel="stylesheet" href="/resources/css/layout/wide.css" data-name="layout">
+<!-- CSS FILES -->
+<link rel="stylesheet" href="/resources/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/resources/css/style.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/style.css"
+	media="screen" data-name="skins">
+<link rel="stylesheet" href="/resources/css/layout/wide.css"
+	data-name="layout">
 
-    <link rel="stylesheet" type="text/css" href="/resources/css/switcher.css" media="screen" />
+<link rel="stylesheet" type="text/css"
+	href="/resources/css/switcher.css" media="screen" />
 </head>
 
 
 <style>
 .fileDrop {
-  width: 80%;
-  height: 100px;
-  border: 1px dotted gray;
-  background-color: lightslategrey;
-  margin: auto;
-  
+	width: 80%;
+	height: 100px;
+	border: 1px dotted gray;
+	background-color: lightslategrey;
+	margin: auto;
 }
-	.error{
-		color: #ff0000;
-	}
+
+.error {
+	color: #ff0000;
+}
 </style>
 <body class="home">
 	<!-- 헤더 -->
- 		  <jsp:include page="/WEB-INF/views/include/header.jsp" /> 
-  	<!-- /헤더 -->
+	<jsp:include page="/WEB-INF/views/include/header.jsp" />
+	<!-- /헤더 -->
 
 	<!--start wrapper-->
 	<section class="wrapper">
@@ -74,41 +77,41 @@
 								<span>신고합니다 글 작성</span>
 							</h4>
 						</div>
-						<form:form id='registerForm' role="form" 
-							method="post" name="registerform" commandName="blackCommand">
+						<form:form id='registerForm' role="form" method="post"
+							name="registerform" commandName="blackCommand">
 							<div class="form-group">
 								<input type="hidden" class="form-control" name="person_id"
 									value="${person_id}">
 							</div>
 							<div class="form-group">
 								<form:input type="text" class="form-control" path="black_title"
-									placeholder="글 제목"/>
-									<form:errors path="black_title" cssClass="error"/>
+									placeholder="글 제목" />
+								<form:errors path="black_title" cssClass="error" />
 							</div>
 							<div class="form-group">
 								<form:input type="text" class="form-control" path="black_email"
-									placeholder="신고email"/>
-									<form:errors path="black_email" cssClass="error"/>
+									placeholder="신고email" />
+								<form:errors path="black_email" cssClass="error" />
 							</div>
 							<div class="form-group">
 								<form:textarea rows="10" cols="73" class="form-control"
-									path="black_content" placeholder="신고 내용 작성"/>
-									<form:errors path="black_content" cssClass="error"/>
+									path="black_content" placeholder="신고 내용 작성" />
+								<form:errors path="black_content" cssClass="error" />
 							</div>
 							<div class="form-group">
 								<label for="exampleInputEmail1">File DROP Here</label>
-									<div class="fileDrop"></div>
+								<div class="fileDrop"></div>
 							</div>
-							
-	<div class="box-footer">
-		<div>
-			<hr>
-		</div>
 
-		<ul class="mailbox-attachments clearfix uploadedList">
-		</ul>
+							<div class="box-footer">
+								<div>
+									<hr>
+								</div>
 
-	</div>
+								<ul class="mailbox-attachments clearfix uploadedList">
+								</ul>
+
+							</div>
 							<div class="form-group">
 								<input type="submit" class="btn btn-default btn-lg button"
 									value="작성 완료">
@@ -122,31 +125,39 @@
 	<!--end wrapper-->
 
 	<!-- 푸터 -->
- 		  <jsp:include page="/WEB-INF/views/include/footer.jsp" />
-  	<!-- /푸터 -->
+	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+	<!-- /푸터 -->
 
-	
 
-	 <script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
-    <script src="/resources/js/bootstrap.min.js"></script>
-    <script src="/resources/js/jquery.easing.1.3.js"></script>
-    <script src="/resources/js/retina-1.1.0.min.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.cookie.js"></script> <!-- jQuery cookie -->
-    <script type="text/javascript" src="/resources/js/styleswitch.js"></script> <!-- Style Colors Switcher -->
-    <script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.smartmenus.bootstrap.min.js"></script>
-        <script type="text/javascript" src="/resources/js/jflickrfeed.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.magnific-popup.min.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.isotope.min.js"></script>
-    <script type="text/javascript" src="/resources/js/swipe.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
 
-    <script src="/resources/js/main.js"></script>
+	<script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
+	<script src="/resources/js/bootstrap.min.js"></script>
+	<script src="/resources/js/jquery.easing.1.3.js"></script>
+	<script src="/resources/js/retina-1.1.0.min.js"></script>
+	<script type="text/javascript" src="/resources/js/jquery.cookie.js"></script>
+	<!-- jQuery cookie -->
+	<script type="text/javascript" src="/resources/js/styleswitch.js"></script>
+	<!-- Style Colors Switcher -->
+	<script type="text/javascript"
+		src="/resources/js/jquery.smartmenus.min.js"></script>
+	<script type="text/javascript"
+		src="/resources/js/jquery.smartmenus.bootstrap.min.js"></script>
+	<script type="text/javascript" src="/resources/js/jflickrfeed.js"></script>
+	<script type="text/javascript"
+		src="/resources/js/jquery.magnific-popup.min.js"></script>
+	<script type="text/javascript"
+		src="/resources/js/jquery.isotope.min.js"></script>
+	<script type="text/javascript" src="/resources/js/swipe.js"></script>
+	<script type="text/javascript"
+		src="/resources/js/jquery-scrolltofixed-min.js"></script>
 
-<script type="text/javascript" src="/resources/js/upload.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+	<script src="/resources/js/main.js"></script>
 
-<script id="template" type="text/x-handlebars-template">
+	<script type="text/javascript" src="/resources/js/upload.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+
+	<script id="template" type="text/x-handlebars-template">
 <li>
   <div class="mailbox-attachment-info">
 	<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}
@@ -157,9 +168,9 @@
 	</span>
   </div>
 </li>                
-</script>    
+</script>
 
-<script>
+	<script>
 var template = Handlebars.compile($("#template").html());
 
 $(".fileDrop").on("dragenter dragover", function(event){

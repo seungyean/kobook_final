@@ -27,24 +27,24 @@
 <link rel="stylesheet" type="text/css"
 	href="/resources/css/switcher.css" media="screen" />
 <style type="text/css">
-	.layer1 {
-		position: absolute;
-		padding: 5px;
-		filter: alpha(opacity = 50);
-		background-color: white;
-		border: 2px #000000 solid;
-		border-radius: 10px;
-		text-align: center;
-		width: auto;
-		height: auto;
-	}
+.layer1 {
+	position: absolute;
+	padding: 5px;
+	filter: alpha(opacity = 50);
+	background-color: white;
+	border: 2px #000000 solid;
+	border-radius: 10px;
+	text-align: center;
+	width: auto;
+	height: auto;
+}
 </style>
 </head>
 <body class="home">
 	<!-- 헤더 -->
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
 	<!-- /헤더 -->
-	
+
 	<!--start wrapper-->
 	<section class="wrapper">
 		<section class="page_head">
@@ -89,9 +89,8 @@
 										<c:forEach var="black" items="${list}">
 											<tr class="article" id="${black.black_id}">
 												<td align="center">${black.rn}</td>
-												<td><a 
-													href="/community/blackRead${pageMaker.makeSearch(pageMaker.cri.page) }&rn=${black.rn }&black_id=${black.black_id }"
-													>${black.black_title }</a></td>
+												<td><a
+													href="/community/blackRead${pageMaker.makeSearch(pageMaker.cri.page) }&black_id=${black.black_id }">${black.black_title }</a></td>
 												<td align="center">${userMap[black.black_id] }</td>
 												<td align="center"><fmt:formatDate
 														value="${black.black_date }" pattern="yyyy-MM-dd" /></td>
@@ -193,7 +192,7 @@
 		src="/resources/js/jquery-scrolltofixed-min.js"></script>
 
 	<script src="/resources/js/main.js"></script>
-	
+
 	<script>
 		$(function() {
 			$('#searchBtn').on("click", function(event) {

@@ -16,14 +16,17 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1" />
 
- <!-- CSS FILES -->
-    <link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/resources/css/style.css">
-    <link rel="stylesheet" type="text/css" href="/resources/css/style.css" media="screen" data-name="skins">
-    <link rel="stylesheet" href="/resources/css/layout/wide.css" data-name="layout">
+<!-- CSS FILES -->
+<link rel="stylesheet" href="/resources/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/resources/css/style.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/style.css"
+	media="screen" data-name="skins">
+<link rel="stylesheet" href="/resources/css/layout/wide.css"
+	data-name="layout">
 
-    <link rel="stylesheet" type="text/css" href="/resources/css/switcher.css" media="screen" />
-    <style>
+<link rel="stylesheet" type="text/css"
+	href="/resources/css/switcher.css" media="screen" />
+<style>
 .fileDrop {
 	width: 80%;
 	height: 100px;
@@ -36,8 +39,8 @@
 
 <body class="home">
 	<!-- 헤더 -->
- 		 <jsp:include page="/WEB-INF/views/include/header.jsp" />
-  	<!-- /헤더 -->
+	<jsp:include page="/WEB-INF/views/include/header.jsp" />
+	<!-- /헤더 -->
 
 	<!--start wrapper-->
 	<section class="wrapper">
@@ -67,14 +70,16 @@
 						<div class="blog_single">
 							<article class="post">
 								<form role="form" enctype="multipart/form-data" method="post">
-									<input type='hidden' name='page' value="${cri.page}">
-									<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
-									<input type='hidden' name='searchType' value="${cri.searchType}">
-									<input type='hidden' name='keyword' value="${cri.keyword}">
-									<input type="hidden" name="donate_thumbnail" value="${donateVO.donate_thumbnail }">
-									<input type="hidden" name="donate_id" value="${donateVO.donate_id}">
+									<input type='hidden' name='page' value="${cri.page}"> <input
+										type='hidden' name='perPageNum' value="${cri.perPageNum}">
+									<input type='hidden' name='searchType'
+										value="${cri.searchType}"> <input type='hidden'
+										name='keyword' value="${cri.keyword}"> <input
+										type="hidden" name="donate_thumbnail"
+										value="${donateVO.donate_thumbnail }"> <input
+										type="hidden" name="donate_id" value="${donateVO.donate_id}">
 									<div class="post_date">
-										<span class="day">${rn}</span>
+										<span class="day"></span>
 									</div>
 									<div class="post_content">
 										<div class="post_meta">
@@ -83,9 +88,8 @@
 											<div class="metaInfo">
 												<span><i class="fa fa-calendar"></i> <fmt:formatDate
 														value="${donateVO.donate_date }" pattern="MMM dd, yyyy" />
-												</span> <span><i class="fa fa-user"></i> By
-													${writer} </span> <span><i class="fa fa-eye"></i>
-													${donateVO.donate_hit} </span>
+												</span> <span><i class="fa fa-user"></i> By ${writer} </span> <span><i
+													class="fa fa-eye"></i> ${donateVO.donate_hit} </span>
 												<!-- <span><i class="fa fa-comments"></i> <a href="#">12 Comments</a></span> -->
 											</div>
 										</div>
@@ -93,32 +97,33 @@
 											<textarea cols="30" rows="3" name="donate_content"
 												placeholder="${donateVO.donate_content }">${donateVO.donate_content }</textarea>
 										</blockquote>
- 									
+
 									</div>
-									<input type="file" name="file"><br> 
+									<input type="file" name="file"><br>
 									<button type="submit" class="btn btn-primary">SAVE</button>
 									<button type="submit" class="btn btn-warning">CANCEL</button>
-								
+
 								</form>
 							</article>
- 						<button class="fileButton">파일 추가</button>
+							<button class="fileButton">파일 추가</button>
 							<div class="form-group" id="fileAdd">
 								<label for="exampleInputEmail1">추가 파일은 아래영역에 드래그하십시오.</label>
-									<div class="fileDrop"></div>
+								<div class="fileDrop"></div>
 								<button class="cancleFile">취소</button>
 							</div>
- 							<div class="box-footer">
+							<div class="box-footer">
 								<div>
 									<hr>
 								</div>
 
-									<figure class="post_img">
+								<figure class="post_img">
 									<img class="thumbnail" alt="NO Thumbnail"
-												 src="/community/displayFile?fileName=${donateVO.donate_thumbnail }" height="300" width="200">
-									</figure>
+										src="/community/displayFile?fileName=${donateVO.donate_thumbnail }"
+										height="300" width="200">
+								</figure>
 								<ul class="mailbox-attachments clearfix uploadedList">
 								</ul>
-								
+
 							</div>
 						</div>
 					</div>
@@ -132,32 +137,40 @@
 	<!--end wrapper-->
 
 	<!-- 푸터 -->
- 		 <jsp:include page="/WEB-INF/views/include/footer.jsp" />
-  	<!-- /푸터 -->
-	
+	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+	<!-- /푸터 -->
 
-	
+
+
 
 	<script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
-    <script src="/resources/js/bootstrap.min.js"></script>
-    <script src="/resources/js/jquery.easing.1.3.js"></script>
-    <script src="/resources/js/retina-1.1.0.min.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.cookie.js"></script> <!-- jQuery cookie -->
-    <script type="text/javascript" src="/resources/js/styleswitch.js"></script> <!-- Style Colors Switcher -->
-    <script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.smartmenus.bootstrap.min.js"></script>
-        <script type="text/javascript" src="/resources/js/jflickrfeed.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.magnific-popup.min.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.isotope.min.js"></script>
-    <script type="text/javascript" src="/resources/js/swipe.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
+	<script src="/resources/js/bootstrap.min.js"></script>
+	<script src="/resources/js/jquery.easing.1.3.js"></script>
+	<script src="/resources/js/retina-1.1.0.min.js"></script>
+	<script type="text/javascript" src="/resources/js/jquery.cookie.js"></script>
+	<!-- jQuery cookie -->
+	<script type="text/javascript" src="/resources/js/styleswitch.js"></script>
+	<!-- Style Colors Switcher -->
+	<script type="text/javascript"
+		src="/resources/js/jquery.smartmenus.min.js"></script>
+	<script type="text/javascript"
+		src="/resources/js/jquery.smartmenus.bootstrap.min.js"></script>
+	<script type="text/javascript" src="/resources/js/jflickrfeed.js"></script>
+	<script type="text/javascript"
+		src="/resources/js/jquery.magnific-popup.min.js"></script>
+	<script type="text/javascript"
+		src="/resources/js/jquery.isotope.min.js"></script>
+	<script type="text/javascript" src="/resources/js/swipe.js"></script>
+	<script type="text/javascript"
+		src="/resources/js/jquery-scrolltofixed-min.js"></script>
 
-    <script src="/resources/js/main.js"></script>
-	
+	<script src="/resources/js/main.js"></script>
+
 	<script type="text/javascript" src="/resources/js/upload.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
-	
-<script id="template" type="text/x-handlebars-template">
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+
+	<script id="template" type="text/x-handlebars-template">
 <li>
 	<div class="mailbox-attachment-info">
 <a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}
@@ -170,7 +183,7 @@
 </li>
 </script>
 
-<script>
+	<script>
 $(function(){
 	 $("#fileAdd").hide();
 

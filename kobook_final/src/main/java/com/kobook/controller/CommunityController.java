@@ -247,18 +247,16 @@ public class CommunityController {
 
 	//신고게시판 상세보기
 	@RequestMapping("blackRead")
-	public void blackRead(@RequestParam("black_id") int black_id, @RequestParam("rn") int rn
+	public void blackRead(@RequestParam("black_id") int black_id
 			, Model model, @ModelAttribute("cri") SearchCriteria cri) throws Exception{
-		model.addAttribute("rn", rn);
 		model.addAttribute(blackService.blackRead(black_id));
 		model.addAttribute("writer", blackService.blackWriter(black_id));
 	}
 
 	//신고게시판 수정 폼 이동
 	@RequestMapping(value = "blackModify", method = RequestMethod.GET)
-	public void blackModifyGet(@RequestParam("black_id") int black_id, @RequestParam("rn") int rn
+	public void blackModifyGet(@RequestParam("black_id") int black_id
 			, Model model, @ModelAttribute("cri") SearchCriteria cri) throws Exception {
-		model.addAttribute("rn", rn);
 		model.addAttribute(blackService.blackRead(black_id));
 		model.addAttribute("writer", blackService.blackWriter(black_id));
 	}
@@ -363,9 +361,8 @@ public class CommunityController {
 	
 	//무료나눔 게시판 상세보기
 	@RequestMapping("donateRead")
-	public void donateRead(@RequestParam("donate_id") Integer donate_id, @RequestParam("rn") int rn, Model model,
+	public void donateRead(@RequestParam("donate_id") Integer donate_id, Model model,
 			@ModelAttribute("cri") SearchCriteria cri, DonateVO donateVO,ReplyVO vo, HttpServletRequest request)throws Exception{
-		model.addAttribute("rn", rn);
 		//Integer person_id = vo.getPerson_id();
 		//System.out.println("person_id"+person_id);
 		//System.out.println("reply_id : "+vo.getReply_id());
@@ -391,9 +388,8 @@ public class CommunityController {
 	
 	//무료나눔 글 수정 폼 이동
 	@RequestMapping(value = "donateModify", method = RequestMethod.GET)
-	public void donateModifyGet(@RequestParam("donate_id") int donate_id, @RequestParam("rn") int rn, Model model,
+	public void donateModifyGet(@RequestParam("donate_id") int donate_id, Model model,
 			@ModelAttribute("cri") SearchCriteria cri) throws Exception {
-		model.addAttribute("rn", rn);
 		model.addAttribute(donateService.donateRead(donate_id, false));
 		model.addAttribute("writer",donateService.donateWriter(donate_id));
 	}
@@ -556,9 +552,8 @@ public class CommunityController {
 	
 	//포토리뷰 상세보기
 	@RequestMapping("photoReviewRead")
-	public void photoReviewRead(@RequestParam("photo_id") Integer photo_id, @RequestParam("rn") int rn
-			, Model model, @ModelAttribute("cri") SearchCriteria cri) throws Exception{
-		model.addAttribute("rn", rn);
+	public void photoReviewRead(@RequestParam("photo_id") Integer photo_id, Model model
+			, @ModelAttribute("cri") SearchCriteria cri) throws Exception{
 		model.addAttribute(photoService.photoReviewRead(photo_id, true));
 		model.addAttribute("writer", photoService.photoWriter(photo_id));
 	}
@@ -572,9 +567,8 @@ public class CommunityController {
 	
 	//포토리뷰 수정 폼 이동
 	@RequestMapping(value="photoReviewModify", method=RequestMethod.GET)
-	public void photoReviewModifyGet(@RequestParam("photo_id") Integer photo_id, @RequestParam("rn") int rn
+	public void photoReviewModifyGet(@RequestParam("photo_id") Integer photo_id
 			, Model model, @ModelAttribute("cri") SearchCriteria cri) throws Exception {
-		model.addAttribute("rn", rn);
 		model.addAttribute(photoService.photoReviewRead(photo_id, false));
 		model.addAttribute("writer", photoService.photoWriter(photo_id));		
 	}

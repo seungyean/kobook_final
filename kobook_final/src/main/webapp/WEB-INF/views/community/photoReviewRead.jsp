@@ -17,50 +17,73 @@
 	content="width=device-width, initial-scale=1, maximum-scale=1" />
 
 <!-- CSS FILES -->
-    <link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/resources/css/style.css">
-    <link rel="stylesheet" type="text/css" href="/resources/css/style.css" media="screen" data-name="skins">
-    <link rel="stylesheet" href="/resources/css/layout/wide.css" data-name="layout">
+<link rel="stylesheet" href="/resources/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/resources/css/style.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/style.css"
+	media="screen" data-name="skins">
+<link rel="stylesheet" href="/resources/css/layout/wide.css"
+	data-name="layout">
 
-    <link rel="stylesheet" type="text/css" href="/resources/css/switcher.css" media="screen" />
-     <style type="text/css">
-    .popup {position: absolute;}
-    .back { background-color: gray; opacity:0.5; width: 78%; height: 31%; overflow:hidden;  z-index:1101;}
-    .front { 
-       z-index:1110; opacity:1; boarder:1px; margin: auto; 
-      }
-     .show{
-       position:relative;
-       max-width: 900px; 
-       max-height: 500px; 
-       overflow: auto;       
-     }
-     #popup_img{
-     	width: 500%;
-     	height: 500%;
-     }
-     .uploadedList li{
-     	display: inline-block;
-     }
-     .fa-thumbs-o-up {
-     	color: blue;
-     }
-     .fa-thumbs-o-down {
-     	color: red;
-     }
-     
-     .fa-heart{
-     	color: red;
-     }
-     .fa-heart-o{
-     	color: red;
-     }
-    </style>
+<link rel="stylesheet" type="text/css"
+	href="/resources/css/switcher.css" media="screen" />
+<style type="text/css">
+.popup {
+	position: absolute;
+}
+
+.back {
+	background-color: gray;
+	opacity: 0.5;
+	width: 78%;
+	height: 31%;
+	overflow: hidden;
+	z-index: 1101;
+}
+
+.front {
+	z-index: 1110;
+	opacity: 1;
+	boarder: 1px;
+	margin: auto;
+}
+
+.show {
+	position: relative;
+	max-width: 900px;
+	max-height: 500px;
+	overflow: auto;
+}
+
+#popup_img {
+	width: 500%;
+	height: 500%;
+}
+
+.uploadedList li {
+	display: inline-block;
+}
+
+.fa-thumbs-o-up {
+	color: blue;
+}
+
+.fa-thumbs-o-down {
+	color: red;
+}
+
+.fa-heart {
+	color: red;
+}
+
+.fa-heart-o {
+	color: red;
+}
+</style>
 </head>
 <body class="home">
 	<!-- 헤더 -->
- 		 <jsp:include page="/WEB-INF/views/include/header.jsp" />
-  	<!-- /헤더 -->
+	<jsp:include page="/WEB-INF/views/include/header.jsp" />
+	<!-- /헤더 -->
 
 	<!--start wrapper-->
 	<section class="wrapper">
@@ -83,11 +106,10 @@
 			</div>
 		</section>
 		<!-- 여기서부터 -->
-<section class="content portfolio_single">
+		<section class="content portfolio_single">
 			<div class="container">
-    			<form role="form" action="photoReviewModify" method="post">
+				<form role="form" action="photoReviewModify" method="post">
 					<input type='hidden' name='photo_id' value="${photoVO.photo_id}">
-					<input type='hidden' name='rn' value="${rn}">
 					<input type='hidden' name='page' value="${cri.page}">
 					<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
 					<input type='hidden' name='searchType' value="${cri.searchType}">
@@ -100,55 +122,44 @@
 						<div class="porDetCarousel">
 							<div class="carousel-content">
 								<img class="thumbnail" alt="NO Thumbnail"
-												 src="/community/displayFile?fileName=${photoVO.photo_thumbnail }" height="500" width="700">
+									src="/community/displayFile?fileName=${photoVO.photo_thumbnail }"
+									height="500" width="700">
 							</div>
 						</div>
 					</div>
-					
-					<div class="col-lg-4 col-md-4 col-sm-4">
-<!-- 					
- 						<div class="project_description">
-							<div class="widget_title">
-								<h4><span>Project Descriptions</span></h4>
-							</div>
 
-							<p>Lorem ipsum dolor sit amet, consectetur adip, sed do eiusmod tempor incididunt ut aut reiciendise voluptat maiores alias aut et perferendis doloribus asperiores ut labore.</p>
-							<p> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-						</div>
-						  -->
-						
+					<div class="col-lg-4 col-md-4 col-sm-4">
 						<div class="project_details">
 							<div class="widget_title">
-								<h4><span>${photoVO.photo_title }</span></h4>
+								<h4>
+									<span>${photoVO.photo_title }</span>
+								</h4>
 							</div>
 							<ul class="details">
-								<li><span><i class="fa fa-pencil"></i> 글번호 :</span>${rn}</li>
 								<li><span><i class="fa fa-user"></i> 작성자 :</span>${writer}</li>
-								<li><span><i class="fa fa-file-text"></i> 내용 :</span> ${photoVO.photo_content }</li>
-								<li><span><i class="fa fa-calendar"></i> 작성일 :</span>
-								<fmt:formatDate value="${photoVO.photo_date }" pattern="MM月 dd日, yyyy年" /></li>
-								<li><span><i class="fa fa-heart"></i> 좋아요 :</span> ${photoVO.photo_heart }</li>
+								<li><span><i class="fa fa-file-text"></i> 내용 :</span>
+									${photoVO.photo_content }</li>
+								<li><span><i class="fa fa-calendar"></i> 작성일 :</span> <fmt:formatDate
+										value="${photoVO.photo_date }" pattern="MM月 dd日, yyyy年" /></li>
+								<li><span><i class="fa fa-heart"></i> 좋아요 :</span>
+									${photoVO.photo_heart }</li>
 								<li><span><i class="fa fa-eye"></i> 조회수 :</span>${photoVO.photo_hit }</li>
 							</ul>
 							<c:if test="${person_id != -1 }">
 								<c:if test="${photoVO.photo_heart==0 }">
-									<button type="submit" id="heartUp"><i class="fa fa-heart"></i>  <b>  추천</b></button>
+									<button type="submit" id="heartUp">
+										<i class="fa fa-heart"></i> <b> 추천</b>
+									</button>
 								</c:if>
 								<c:if test="${photoVO.photo_heart>0 }">
-									<button type="submit" id="heartUp"><i class="fa fa-heart"></i>  <b>  추천</b></button>
-									<button type="submit" id="heartDown"><i class="fa fa-heart-o"> </i><b>  추천 </b></button>
+									<button type="submit" id="heartUp">
+										<i class="fa fa-heart"></i> <b> 추천</b>
+									</button>
+									<button type="submit" id="heartDown">
+										<i class="fa fa-heart-o"> </i><b> 추천 </b>
+									</button>
 								</c:if>
 							</c:if>
-
-<%-- 							
-							<c:if test="${photoVO.photo_heart==0 }">
-								<a href="photoHeartUp?photo_id=${photoVO.photo_id}"><i class="fa fa-thumbs-o-up">추천하기</i></a>
-							</c:if>
-							<c:if test="${photoVO.photo_heart>0 }">
-								<a href="photoHeartUp?photo_id=${photoVO.photo_id}"><i class="fa fa-thumbs-o-up">추천하기</i></a>
-								<a href="photoHeartDown?photo_id=${photoVO.photo_id}"><i class="fa fa-thumbs-o-down">추천해제</i></a>
-							</c:if><br>
-							 --%>
 							<c:if test="${photoVO.person_id == person_id }">
 								<button type="submit" class="btn btn-warning" id="modifyBtn">수정</button>
 								<button type="submit" class="btn btn-danger" id="removeBtn">삭제</button>
@@ -157,13 +168,13 @@
 						</div>
 					</div>
 				</div>
-							    <div class='popup back' style="display:none;"></div>
-							    <div id="popup_front" class='popup front' style="display:none;">
-							    	<img id="popup_img">
-							    </div>
-								<ul class="mailbox-attachments clearfix uploadedList">
-								</ul>
-<!--                 
+				<div class='popup back' style="display: none;"></div>
+				<div id="popup_front" class='popup front' style="display: none;">
+					<img id="popup_img">
+				</div>
+				<ul class="mailbox-attachments clearfix uploadedList">
+				</ul>
+				<!--                 
 <div class="row sub_content">
                     <div class="col-md-12">
                         <div class="dividerHeading">
@@ -281,14 +292,14 @@
                 </div>
                 -->
 			</div>
-		</section>		
+		</section>
 		<!-- 여기까지 -->
 	</section>
 	<!--end wrapper-->
 
 	<!-- 푸터 -->
- 		 <jsp:include page="/WEB-INF/views/include/footer.jsp" />
-  	<!-- /푸터 -->
+	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+	<!-- /푸터 -->
 
 
 	<script type="text/javascript" src="/resources/js/jquery-1.10.2.min.js"></script>
@@ -297,19 +308,25 @@
 	<script src="/resources/js/retina-1.1.0.min.js"></script>
 	<script type="text/javascript" src="/resources/js/jquery.cookie.js"></script>
 	<script type="text/javascript" src="/resources/js/styleswitch.js"></script>
-	<script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script>
-	<script type="text/javascript" src="/resources/js/jquery.smartmenus.bootstrap.min.js"></script>
+	<script type="text/javascript"
+		src="/resources/js/jquery.smartmenus.min.js"></script>
+	<script type="text/javascript"
+		src="/resources/js/jquery.smartmenus.bootstrap.min.js"></script>
 	<!-- <script type="text/javascript" src="/resources/js/owl.carousel.js"></script> -->
 	<script type="text/javascript" src="/resources/js/jflickrfeed.js"></script>
-	<script type="text/javascript" src="/resources/js/jquery.magnific-popup.min.js"></script>
-	<script type="text/javascript" src="/resources/js/jquery.isotope.min.js"></script>
+	<script type="text/javascript"
+		src="/resources/js/jquery.magnific-popup.min.js"></script>
+	<script type="text/javascript"
+		src="/resources/js/jquery.isotope.min.js"></script>
 	<script type="text/javascript" src="/resources/js/swipe.js"></script>
-	<script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
+	<script type="text/javascript"
+		src="/resources/js/jquery-scrolltofixed-min.js"></script>
 
 	<script src="/resources/js/main.js"></script>
-<script type="text/javascript" src="/resources/js/upload.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
-<script id="templateAttach" type="text/x-handlebars-template">
+	<script type="text/javascript" src="/resources/js/upload.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+	<script id="templateAttach" type="text/x-handlebars-template">
 <li data-src='{{fullName}}'>
 <div class="mailbox-attachment-info">
 <a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}
@@ -317,8 +334,8 @@
 </a>
   </div>
 </li>
-</script> 
-<script type="text/javascript">
+</script>
+	<script type="text/javascript">
 $(function(){
 	var formObj = $("form[role='form']");
 	 	
@@ -449,7 +466,7 @@ $(function(){
 	});
 });
 </script>
-<!-- 	<script type="text/javascript">
+	<!-- 	<script type="text/javascript">
 		$(document).ready(function() {
 			$.fn.carousel = function(op) {
 				var op, ui = {};
