@@ -81,5 +81,10 @@ public class BlackDAOImpl implements BlackDAO {
 	public String blackWriter(Integer black_id) throws Exception {
 		return session.selectOne(namespace+".blackWriter", black_id);
 	}
+
+	@Override
+	public String blackPreviewContent(Integer black_id) throws Exception {
+		return session.selectOne(namespace+".blackPreviewContent", black_id);
+	}
 	
 }

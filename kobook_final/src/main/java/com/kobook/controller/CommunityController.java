@@ -236,6 +236,14 @@ public class CommunityController {
 
 		model.addAttribute("pageMaker", pageMaker);
 	}
+	
+	//신고게시판 미리보기
+	@ResponseBody
+	@RequestMapping(value="blackPreviewContent", method=RequestMethod.GET, produces = "application/text; charset=utf8")
+	public String blackPreviewContent(@RequestParam("black_id")Integer black_id) throws Exception {
+		System.out.println("preview controller......");
+		return blackService.blackPreviewContent(black_id);
+	}
 
 	//신고게시판 상세보기
 	@RequestMapping("blackRead")
@@ -336,6 +344,14 @@ public class CommunityController {
 		pageMaker.setTotalCount(donateService.donateCount(cri));
 		
 		model.addAttribute("pageMaker", pageMaker);
+	}
+	
+	//무료나눔 내용 미리보기
+	@ResponseBody
+	@RequestMapping(value="donatePreviewContent", method=RequestMethod.GET, produces = "application/text; charset=utf8")
+	public String donatePreviewContent(@RequestParam("donate_id")Integer donate_id) throws Exception {
+		System.out.println("preview controller......");
+		return donateService.donatePreviewContent(donate_id);
 	}
 	
 	//무료나눔 첨부파일 추출

@@ -94,7 +94,9 @@
 						
 							</c:forEach>
 						</ul>
+						<c:if test="${person_id != -1 }">
 							<input type="submit" value="글쓰기" class="btn-default">
+						</c:if>
 						<!--end portfolio_masonry -->
 					</div>
 							</form>

@@ -135,8 +135,12 @@
 								<div id="comment">
 									<ul id="comment-list">
 										<c:forEach var="reply" items="${replyList}">
+											<c:if test="${reply.secret_yn!=null }">
+
 											<li class="comment">
 												<div class="comment-container">
+												<c:choose>
+													<c:when test="${reply.secret_yn=='Y' }">
 													<h4 class="comment-author">
 														<span>By, ${reply.person_id}</span>
 													</h4>
@@ -157,8 +161,16 @@
 													<div class="comment-body">
 														<p>${reply.reply_content}</p>
 													</div>
+													</c:when>
+													<c:otherwise>
+														<div class="comment-body">
+															<p><i class="fa fa-lock"> </i> 비밀글 설정된 글입니다.</p>
+														</div>
+													</c:otherwise>
+													</c:choose>
 												</div>
 											</li>
+											</c:if>
 										</c:forEach>
 									</ul>
 								</div>

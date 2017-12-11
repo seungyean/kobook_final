@@ -107,20 +107,10 @@
 		where B.black_id =#{black_id}
 	</select>
 	
-<!--
-
-
-
-	<update id="updateBlack_id" parameterType="int">
-		update black set
-		black_id = black_id-1 where black_id > #{black_id}
-	</update>
-
-		<select id="donateWriter" resultType="string" parameterType="int">
-		select P.PERSON_NAME from donate D join person P on D.person_id = P.person_id
-			where D.donate_id = #{donate_id}
+	<select id="blackPreviewContent" resultType="string">
+		select black_content from black where black_id = #{black_id}
 	</select>
- -->
+
 </mapper>
 
 

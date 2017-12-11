@@ -156,4 +156,9 @@ public class DonateDAOImpl implements DonateDAO {
 		return session.selectOne(namespace+".getDonateTitle", donate_id);
 	}
 
+	@Override
+	public String donatePreviewContent(Integer donate_id) throws Exception {
+		return session.selectOne(namespace+".donatePreviewContent", donate_id);
+	}
+
 }

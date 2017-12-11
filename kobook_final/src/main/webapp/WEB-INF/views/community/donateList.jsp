@@ -43,7 +43,17 @@
      a:HOVER {
 		color: red;
 	}
-  	
+	.layer1 {
+		position: absolute;
+		padding: 5px;
+		filter: alpha(opacity = 50);
+		background-color: white;
+		border: 2px #000000 solid;
+		border-radius: 10px;
+		text-align: center;
+		width: auto;
+		height: auto;
+	}
     </style>
 </head>
 <body class="home">
@@ -102,7 +112,7 @@
 									</thead>									
 									<tbody>									
 										<c:forEach var="donate" items="${list}" varStatus="st">
-											<tr>
+											<tr class="article" id="${donate.donate_id}">
 												<td align="center">${donate.rn}</td>
 												<td align="center" >
 												<img class="thumbnail" alt="NO IMAGE"
@@ -122,7 +132,9 @@
 										</c:forEach>
 									</tbody>
 								</table>
-								<input type="submit" value="글쓰기" class="btn-default">
+								<c:if test="${person_id != -1 }">
+									<input type="submit" value="글쓰기" class="btn-default">
+								</c:if>
 							</form>
 				<!-- Search Form -->
 				<div class='box-body' align="right">
@@ -194,7 +206,7 @@
     <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
 
     <script src="/resources/js/main.js"></script>
-
+	
     <script type="text/javascript">
 	$(function() {
 		$('#searchBtn').on("click", function(event) {
@@ -202,6 +214,46 @@
 							+ "&searchType=" + $("select option:selected").val()
 							+ "&keyword=" + $('#keywordInput').val();
 		});
+		
+		// 모든 글의 a 태그에 마우스 오버 바인딩
+		$('.article').mouseenter(function(event) {
+			contentprev($(this).attr('id'), event);
+		});
+		
+		$('.article').mouseleave(function(event) {
+			event.preventDefault();
+			$('.layer1').remove();
+		})
+		
+		// 마우스 오버시 바인딩 될 function
+		function contentprev(donate_id, event) {
+			
+			$.ajax({
+				type: 'GET',
+				url: '/community/donatePreviewContent?donate_id=' + donate_id,
+				dataType: 'text',
+				success: function(data) {
+					showlayer(data, event);
+				}
+			});
+		}
+		
+		// showlayer 가 호출된 후 전달받은 마우스 이벤트의 좌표로 레이어를 이동
+		function moveTooltip(event) {
+			var posX = event.pageX;
+			var posY = event.pageY + 20;
+			
+			$('.layer1').css({top: posY, left: posX});
+		}
+		
+		// 기존 레이어를 삭제 후 새로 레이어를 생성
+			function showlayer(value, event) {
+			
+			$('.layer1').remove();
+			$('<div class="layer1">  <b> 본문 내용 </b> : ' + value.replace(/\r\n/gi, '<br>') + '</div>').appendTo('body');
+			moveTooltip(event);
+		}
+		
 		
  		$(".thumbnail").on("click", function(event){
  			event.preventDefault();

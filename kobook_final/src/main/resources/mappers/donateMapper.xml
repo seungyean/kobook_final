@@ -37,7 +37,11 @@
 			 order by donate_id DESC, rn DESC
  		]]>
 	</select>
-
+	
+	<select id="donatePreviewContent" resultType="string">
+		select donate_content from donate where donate_id = #{donate_id}
+	</select>
+	
 	<select id="donateCount" resultType="int" parameterType="SearchCriteria">
 		<![CDATA[
 			select count(*) from donate where donate_id > 0

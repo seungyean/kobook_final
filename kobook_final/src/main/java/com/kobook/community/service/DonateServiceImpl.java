@@ -151,4 +151,9 @@ public class DonateServiceImpl implements DonateService {
 		return dao.getDonateTitle(donate_id);
 	}
 
+	@Override
+	public String donatePreviewContent(Integer donate_id) throws Exception {
+		return dao.donatePreviewContent(donate_id);
+	}
+
 }

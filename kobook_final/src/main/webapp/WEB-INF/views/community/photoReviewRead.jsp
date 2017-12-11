@@ -42,6 +42,19 @@
      .uploadedList li{
      	display: inline-block;
      }
+     .fa-thumbs-o-up {
+     	color: blue;
+     }
+     .fa-thumbs-o-down {
+     	color: red;
+     }
+     
+     .fa-heart{
+     	color: red;
+     }
+     .fa-heart-o{
+     	color: red;
+     }
     </style>
 </head>
 <body class="home">
@@ -109,20 +122,23 @@
 								<h4><span>${photoVO.photo_title }</span></h4>
 							</div>
 							<ul class="details">
-								<li><span><i class="fa fa-pencil"></i>글번호 :</span>${rn}</li>
-								<li><span><i class="fa fa-user"></i>작성자 :</span>${writer}</li>
-								<li><span><i class="fa fa-file-text"></i>내용 :</span> ${photoVO.photo_content }</li>
-								<li><span><i class="fa fa-calendar"></i>작성일 :</span>
+								<li><span><i class="fa fa-pencil"></i> 글번호 :</span>${rn}</li>
+								<li><span><i class="fa fa-user"></i> 작성자 :</span>${writer}</li>
+								<li><span><i class="fa fa-file-text"></i> 내용 :</span> ${photoVO.photo_content }</li>
+								<li><span><i class="fa fa-calendar"></i> 작성일 :</span>
 								<fmt:formatDate value="${photoVO.photo_date }" pattern="MM月 dd日, yyyy年" /></li>
-								<li><span><i class="fa fa-heart"></i>좋아요 :</span> ${photoVO.photo_heart }</li>
-								<li><span><i class="fa fa-eye"></i>조회수 :</span>${photoVO.photo_hit }</li>
+								<li><span><i class="fa fa-heart"></i> 좋아요 :</span> ${photoVO.photo_heart }</li>
+								<li><span><i class="fa fa-eye"></i> 조회수 :</span>${photoVO.photo_hit }</li>
 							</ul>
-						
-							<button type="submit" id="heartUp"><i class="fa fa-thumbs-o-up">추천</i></button>
-							
-							
-							<button type="submit" id="heartDown"><i class="fa fa-thumbs-o-down">추천해제</i></button>
-						
+							<c:if test="${person_id != -1 }">
+								<c:if test="${photoVO.photo_heart==0 }">
+									<button type="submit" id="heartUp"><i class="fa fa-heart"></i>  <b>  추천</b></button>
+								</c:if>
+								<c:if test="${photoVO.photo_heart>0 }">
+									<button type="submit" id="heartUp"><i class="fa fa-heart"></i>  <b>  추천</b></button>
+									<button type="submit" id="heartDown"><i class="fa fa-heart-o"> </i><b>  추천 </b></button>
+								</c:if>
+							</c:if>
 
 <%-- 							
 							<c:if test="${photoVO.photo_heart==0 }">

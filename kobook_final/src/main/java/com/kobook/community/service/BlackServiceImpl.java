@@ -91,6 +91,11 @@ public class BlackServiceImpl implements BlackService {
 	public String blackWriter(Integer black_id) throws Exception {
 		return dao.blackWriter(black_id);
 	}
+
+	@Override
+	public String blackPreviewContent(Integer black_id) throws Exception {
+		return dao.blackPreviewContent(black_id);
+	}
 	
 	
 
