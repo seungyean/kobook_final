@@ -139,7 +139,9 @@
 										height="300" width="200">
 									<ul class="mailbox-attachments clearfix uploadedList"></ul>
 								</figure>
+								<div style="float: left;">
 								<a href="javascript:donatePrev();">&lt;&nbsp;&nbsp;이전글</a>
+								</div>
 								<div align="right">
 									<a href="javascript:donateNext();">다음글&nbsp;&nbsp;&gt;</a>
 								</div>
@@ -163,7 +165,7 @@
 												<li class="comment">
 													<div class="comment-container">
 														<c:choose>
-															<c:when test="${reply.secret_yn=='Y' }">
+															<c:when test="${reply.secret_yn=='N' }">
 																<h4 class="comment-author">
 																	<span>By, ${reply.person_id}</span>
 																</h4>
@@ -225,12 +227,13 @@
 									<div class="col-sm-12">
 										<p>
 											<textarea class="form-control" cols="60" rows="6"
-												id="comments" name="reply_content" placeholder="Message"></textarea>
+												id="comments" name="reply_content" placeholder="Message (LogIn 필수!)" onclick="content();"></textarea>
 										</p>
 									</div>
 								</div>
-								<input type="submit" class="btn btn-lg btn-default"
-									value="댓글 작성" />
+								<c:if test="${person_id != -1 }">
+									<input type="submit" class="btn btn-lg btn-default" value="댓글 작성" />
+								</c:if>
 							</form>
 						</div>
 					</div>
@@ -318,11 +321,7 @@
 				formObj.submit();
 			});
 
-			var donate_id = $
-			{
-				donateVO.donate_id
-			}
-			;
+			var donate_id = ${donateVO.donate_id};
 			var template = Handlebars.compile($("#templateAttach").html());
 
 			$.getJSON("/community/donateGetAttach/" + donate_id,
@@ -381,22 +380,19 @@
 			$(".back").on("click", function() {
 				$(".popup").hide('slow');
 			});
+			
 		});
 
-		var donate_id = $
-		{
-			donateVO.donate_id
-		};
+		var donate_id = ${donateVO.donate_id};
 
 		function donatePrev() {
 			$.ajax({
 				type : 'GET',
-				url : '/community/donatePrev/' + donate_id,
+				url : '/community/donatePrev/'+donate_id,
 				dataType : 'text',
 				success : function(data) {
 					if (data != -1) {
-						self.location = "/community/donateRead?donate_id="
-								+ data;
+						self.location = "/community/donateRead?donate_id="+data;
 					} else {
 						alert("이전 글이 존재하지 않습니다.");
 					}
@@ -419,6 +415,7 @@
 				}
 			});
 		}
+		
 	</script>
 	<!-- Start Style Switcher -->
 	<div class="switcher"></div>

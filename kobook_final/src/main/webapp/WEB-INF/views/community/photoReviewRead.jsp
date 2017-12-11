@@ -373,63 +373,51 @@
 				formObj.submit();
 			});
 
-			var photo_id = $
-			{
-				photoVO.photo_id
-			}
-			;
+			var photo_id = ${photoVO.photo_id};
+			
 			var template = Handlebars.compile($("#templateAttach").html());
 
-			$("#heartUp").on(
-					"click",
-					function() {
-						event.preventDefault();
-						if (confirm("추천하시겠습니까?")) {
-							$.ajax({
-								url : '/community/photoHeartUp/' + photo_id,
-								type : 'POST',
-								dataType : 'text',
-								success : function(result) {
-									if (result == 'success') {
-										formObj.attr("action",
-												"/community/photoReviewRead?photo_id="
-														+ photo_id);
-										formObj.attr("method", "get");
-										formObj.submit();
-									}
-								}
-							});
-						} else {
-							alert('추천하기 취소하셨습니다');
+			$("#heartUp").on("click", function() {
+				event.preventDefault();
+				if (confirm("추천하시겠습니까?")) {
+					$.ajax({
+						url : '/community/photoHeartUp/' + photo_id,
+						type : 'POST',
+						dataType : 'text',
+						success : function(result) {
+							if (result == 'success') {
+								formObj.attr("action", "/community/photoReviewRead?photo_id=" + photo_id);
+								formObj.attr("method", "get");
+								formObj.submit();
+							}
 						}
-
 					});
+				} else {
+					alert('추천하기 취소하셨습니다');
+				}
+				
+			});
 
-			$("#heartDown").on(
-					"click",
-					function() {
-						event.preventDefault();
-						if (confirm("추천 해제하시겠습니까?")) {
-							$.ajax({
-								url : '/community/photoHeartDown/' + photo_id,
-								type : 'POST',
-								dataType : 'text',
-								success : function(result) {
-									if (result == 'success') {
-										alert("추천 해제 성공");
-										formObj.attr("action",
-												"/community/photoReviewRead?photo_id="
-														+ photo_id);
-										formObj.attr("method", "get");
-										formObj.submit();
-									}
-								}
-							});
-						} else {
-							alert('추천상태가 유지됩니다');
+			$("#heartDown").on("click", function() {
+				event.preventDefault();
+				if (confirm("추천 해제하시겠습니까?")) {
+					$.ajax({
+						url : '/community/photoHeartDown/' + photo_id,
+						type : 'POST',
+						dataType : 'text',
+						success : function(result) {
+							if (result == 'success') {
+								alert("추천 해제 성공");
+								formObj.attr("action", "/community/photoReviewRead?photo_id=" + photo_id);
+								formObj.attr("method", "get");
+								formObj.submit();
+							}
 						}
-
 					});
+				} else {
+					alert('추천상태가 유지됩니다');
+				}
+			});
 
 			$.getJSON("/community/photoGetAttach/" + photo_id, function(list) {
 				$(list).each(function() {

@@ -257,10 +257,7 @@
 			});
 		});
 
-		var black_id = $
-		{
-			blackVO.black_id
-		};
+		var black_id = ${blackVO.black_id};
 		var template = Handlebars.compile($("#template").html());
 
 		$.getJSON("/community/blackGetAttach/" + black_id, function(list) {

@@ -220,11 +220,8 @@
 				formObj.submit();
 			});
 
-			var black_id = $
-			{
-				blackVO.black_id
-			}
-			;
+			var black_id = ${blackVO.black_id};
+			
 			var template = Handlebars.compile($("#templateAttach").html());
 
 			$.getJSON("/community/blackGetAttach/" + black_id, function(list) {
@@ -266,43 +263,38 @@
 
 		});
 
-		var black_id = $
-		{
-			blackVO.black_id
-		};
+		var black_id = ${blackVO.black_id};
 
 		function prev() {
-			$
-					.ajax({
-						type : 'GET',
-						url : '/community/blackPrev/' + black_id,
-						dataType : 'text',
-						success : function(data) {
-							if (data != -1) {
-								self.location = "/community/blackRead?black_id="
-										+ data;
-							} else {
-								alert("이전 글이 존재하지 않습니다.");
-							}
-						}
-					});
+			$.ajax({
+				type : 'GET',
+				url : '/community/blackPrev/' + black_id,
+				dataType : 'text',
+				success : function(data) {
+					if (data != -1) {
+						self.location = "/community/blackRead?black_id="
+								+ data;
+					} else {
+						alert("이전 글이 존재하지 않습니다.");
+					}
+				}
+			});
 		}
 
 		function next() {
-			$
-					.ajax({
-						type : 'GET',
-						url : '/community/blackNext/' + black_id,
-						dataType : 'text',
-						success : function(data) {
-							if (data != -1) {
-								self.location = "/community/blackRead?black_id="
-										+ data;
-							} else {
-								alert("다음 글이 존재하지 않습니다.");
-							}
-						}
-					});
+			$.ajax({
+				type : 'GET',
+				url : '/community/blackNext/' + black_id,
+				dataType : 'text',
+				success : function(data) {
+					if (data != -1) {
+						self.location = "/community/blackRead?black_id="
+							+ data;
+					} else {
+						alert("다음 글이 존재하지 않습니다.");
+					}
+				}
+			});
 		}
 	</script>
 

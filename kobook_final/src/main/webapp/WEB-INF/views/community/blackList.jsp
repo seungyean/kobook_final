@@ -216,7 +216,6 @@
 			
 			// 마우스 오버시 바인딩 될 function
 			function contentprev(black_id, event) {
-				
 				$.ajax({
 					type: 'GET',
 					url: '/community/blackPreviewContent?black_id=' + black_id,

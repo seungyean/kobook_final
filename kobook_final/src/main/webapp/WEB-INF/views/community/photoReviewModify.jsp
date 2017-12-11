@@ -286,10 +286,8 @@
 			});
 		});
 
-		var photo_id = $
-		{
-			photoVO.photo_id
-		};
+		var photo_id = ${photoVO.photo_id};
+		
 		var template = Handlebars.compile($("#template").html());
 
 		$.getJSON("/community/photoGetAttach/" + photo_id, function(list) {

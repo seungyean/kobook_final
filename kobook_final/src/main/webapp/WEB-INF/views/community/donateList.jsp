@@ -150,6 +150,13 @@ a:HOVER {
 										</c:forEach>
 									</tbody>
 								</table>
+								<select id="donateSelect">
+									<option value="" selected="selected">-----------</option>
+									<option value="5">5개씩보기  </option>
+									<option value="10">10개씩보기</option>
+									<option value="20">20개씩보기</option>
+									<option value="30">30개씩보기</option>
+								</select>
 								<c:if test="${person_id != -1 }">
 									<input type="submit" value="글쓰기" class="btn-default">
 								</c:if>
@@ -256,7 +263,6 @@ a:HOVER {
 		
 		// 마우스 오버시 바인딩 될 function
 		function contentprev(donate_id, event) {
-			
 			$.ajax({
 				type: 'GET',
 				url: '/community/donatePreviewContent?donate_id=' + donate_id,
@@ -276,7 +282,7 @@ a:HOVER {
 		}
 		
 		// 기존 레이어를 삭제 후 새로 레이어를 생성
-			function showlayer(value, event) {
+		function showlayer(value, event) {
 			
 			$('.layer1').remove();
 			$('<div class="layer1">  <b> 본문 내용 </b> : ' + value.replace(/\r\n/gi, '<br>') + '</div>').appendTo('body');
@@ -307,6 +313,10 @@ a:HOVER {
 		
 		$(".back").on("click", function(){		
 			$(".popup").hide('slow');		
+		});
+		
+		$("#donateSelect").on("change", function(){
+			
 		});
 	});
 	</script>
