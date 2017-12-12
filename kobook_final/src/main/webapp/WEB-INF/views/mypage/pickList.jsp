@@ -176,7 +176,16 @@
 													</td>
 													<td>
 													<input type="button" value="삭제" class="btn btn-danger" id="del" style="color: white;" >
-													<input type="button" value="주문" class="btn btn-default" id="order" style="color: white;">
+													<c:set var="name" value="${element.BOOK_SELL_STATE}" />
+													<c:choose>
+   															<c:when test="${element.BOOK_SELL_STATE eq 'I' }">
+      														    <input type="button" value="주문" class="btn btn-default" id="order" style="color: white;">
+   															</c:when>
+   															<c:when test="${element.BOOK_SELL_STATE eq 'C' }">
+  															</c:when>
+  														</c:choose>
+													
+													
 													</td>
 												</tr>
 											</c:forEach>

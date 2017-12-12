@@ -128,6 +128,15 @@
 			   $('#dphone1_3').attr("placeholder", $('#ophone1_3').attr("placeholder"));
 			   
 		   }); 
+		   
+		   $("#test").click(function() {
+			   console.log("눌렀다");
+			   if( $('#dname').attr("placeholder") == ""){
+				   console.log("비었다");
+		  			alert("필수 입력란이 비었습니다. 확인해주세요");
+		  		};
+			});
+		   
 		});
 	 </script>
 </head>
@@ -573,7 +582,8 @@
 								<button class="btn btn-default btn-lg btn-block" type="submit" id="orderSuccess">
 									결제하기
 								</button>
-							</div>
+								<input type="button" value="check" id="test">
+ 							</div>
 						</div>
 					</div>
 				</div>
