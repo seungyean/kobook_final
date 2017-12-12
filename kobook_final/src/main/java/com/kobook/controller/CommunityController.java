@@ -395,14 +395,10 @@ public class CommunityController {
 	public void donateRead(@RequestParam("donate_id") Integer donate_id, Model model,
 			@ModelAttribute("cri") SearchCriteria cri, DonateVO donateVO, ReplyVO vo, HttpServletRequest request)
 			throws Exception {
-		// Integer person_id = vo.getPerson_id();
-		// System.out.println("person_id"+person_id);
-		// System.out.println("reply_id : "+vo.getReply_id());
+
 		model.addAttribute(donateService.donateRead(donate_id, true));
 		model.addAttribute("writer", donateService.donateWriter(donate_id));
 		model.addAttribute("replyList", donateService.donateReplyList(donate_id));
-		// model.addAttribute("reply_person",
-		// donateService.selectPersonName(person_id,donate_id));
 
 		HttpSession session = request.getSession(false);
 		if (session.getAttribute("person_id") != null) {
@@ -510,17 +506,10 @@ public class CommunityController {
 		MessageVO message = new MessageVO();
 
 		message.setPerson_id(vo.getPerson_id()); // 댓글 작성자의 person_id
-		message.setReceiver_id(donateService.getPersonId(donate_id)); // donate
-																		// 원본 글
-																		// 작성자의
-																		// person_id
+		message.setReceiver_id(donateService.getPersonId(donate_id)); // donate원본 글 작성자의 person_id
 		message.setMessage_content(" '" + donateService.getPersonName(vo.getPerson_id()) + "'님께서 회원님의 '"
-				+ donateService.getDonateTitle(donate_id) + "' 글에 댓글을 남겼습니다.");// 댓글
-																				// 작성자의
-																				// person_name,
-																				// 원본
-																				// donate글의
-																				// 제목
+				+ donateService.getDonateTitle(donate_id) + "' 글에 댓글을 남겼습니다.");// 댓글 작성자의 person_name,
+																												//원본 donate글의 제목
 
 		mService.messageSend(message);
 

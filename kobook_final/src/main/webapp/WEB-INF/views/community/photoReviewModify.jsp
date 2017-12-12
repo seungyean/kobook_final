@@ -122,11 +122,6 @@
 					<div>
 						<hr>
 					</div>
-					<%-- 
-					<figure class="post_img">
-						<img class="thumbnail" alt="NO Thumbnail" 
-							src="/community/displayFile?fileName=${photoVO.photo_thumbnail }" height="300" width="200">
-					</figure> --%>
 					<ul class="mailbox-attachments clearfix uploadedList">
 					</ul>
 

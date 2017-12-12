@@ -34,7 +34,7 @@
 		]]>
 		<include refid="search" />
 		<![CDATA[	  
-			 order by donate_id DESC, rn DESC
+			 order by rn DESC
  		]]>
 	</select>
 	
@@ -82,8 +82,7 @@
 	</insert>
 
 	<select id="donateSelect" parameterType="int" resultType="DonateVO">
-		select
-		* from donate where donate_id = #{donate_id}
+		select * from donate where donate_id = #{donate_id}
 	</select>
 
 	<update id="donateUpdate" parameterType="DonateVO">

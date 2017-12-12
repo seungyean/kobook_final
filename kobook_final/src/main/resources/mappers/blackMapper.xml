@@ -31,7 +31,7 @@
 		]]>
 			 <include refid="search"/>
 		<![CDATA[	  
-			 order by black_id DESC, rn DESC
+			 order by rn DESC
  		]]>
 	</select>
 	

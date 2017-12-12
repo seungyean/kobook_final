@@ -90,7 +90,7 @@
 														value="${donateVO.donate_date }" pattern="MMM dd, yyyy" />
 												</span> <span><i class="fa fa-user"></i> By ${writer} </span> <span><i
 													class="fa fa-eye"></i> ${donateVO.donate_hit} </span>
-												<!-- <span><i class="fa fa-comments"></i> <a href="#">12 Comments</a></span> -->
+												<span><i class="fa fa-comments"></i> <a href="#">${donateVO.reply_count} Comments</a></span>
 											</div>
 										</div>
 										<blockquote class="default">
@@ -132,7 +132,6 @@
 			</div>
 			<!--/.container-->
 		</section>
-
 	</section>
 	<!--end wrapper-->
 
