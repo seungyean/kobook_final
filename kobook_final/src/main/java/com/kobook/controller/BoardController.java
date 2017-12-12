@@ -88,6 +88,7 @@ public class BoardController {
 		model.addAttribute(service.boardRead(board_id));
 	}
 	
+	//공지사항 수정
 	@RequestMapping(value = "/boardModify", method = RequestMethod.POST)
 	public String boardModifyPOST(RedirectAttributes rtts, BoardVO vo, SearchCriteria cri) throws Exception {
 		service.boardModify(vo);
@@ -149,8 +150,7 @@ public class BoardController {
 		return "redirect:/board/personList";
 	}
 	
-	//공지사항 입력
-
+	//블랙리스트 List
 	@RequestMapping(value="/blackAdmin", method = RequestMethod.GET)
 	public void blackAdminListGET(@ModelAttribute("cri") SearchCriteria cri, Model model)throws Exception {
 		model.addAttribute("list", visitservice.blackPersonList());

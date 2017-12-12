@@ -399,7 +399,7 @@ function drawChart() {
 	    	
 	          var options = {           
 	        	title : '일별 접속자 수',	  
-	        	width :'600',
+	        	width :'1200',
 	            height : '500'
 	          };
 	          var chart = new google.visualization.LineChart(document.getElementById('chart_a'));
@@ -436,7 +436,6 @@ function drawChart() {
 					$.each(data, function(index, result){
 						console.log(result['VISITDATE'] + " : "+ result['PERSONCOUNT']);
 						contentArray.push([result['VISITDATE'], parseInt(result['PERSONCOUNT'])]);
-							//console.log(result['VISITDATE'] + " : "+result['personcount']);
 								
 						
 						})

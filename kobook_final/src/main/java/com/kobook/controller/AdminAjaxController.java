@@ -75,6 +75,7 @@ public class AdminAjaxController {
 						sum = service.paySum(Integer.parseInt(pay_date.substring(2))-1+"/12");
 						list.add(sum);
 					}
+					//2017년도 
 					sum = service.paySum(pay_date.substring(2)+"/0"+(i+1)+"%"); 
 					list.add(sum);
 				}else {
@@ -148,6 +149,7 @@ public class AdminAjaxController {
 		return entity;
 	}
 	
+	//총 접속자 수
 	@RequestMapping(value="/visitCount", method=RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<Integer> visitCountPOST() throws Exception {
@@ -166,6 +168,7 @@ public class AdminAjaxController {
 		return entity;
 	}
 	
+	//회원등급 수정
 	@RequestMapping(value="/personModi", method=RequestMethod.POST)
 	@ResponseBody	
 	public ResponseEntity<String> personModiPOST(SearchCriteria cri, @RequestParam("person_kind") String person_kind, 
@@ -189,6 +192,7 @@ public class AdminAjaxController {
 		return entity;
 	}
 	
+	//회원삭제
 	@RequestMapping(value="/personRemove", method=RequestMethod.POST)
 	@ResponseBody	
 	public ResponseEntity<String> personRemovePOST(SearchCriteria cri, @RequestParam("person_id") int person_id)throws Exception {
@@ -207,6 +211,7 @@ public class AdminAjaxController {
 		return entity;
 	}
 	
+	//구글Chart를 위한 총 접속자
 	@RequestMapping(value="/personTotal", method=RequestMethod.POST)
 	@ResponseBody	
 	public ResponseEntity<List<HashMap<String, String>>> personTotal() throws Exception  {

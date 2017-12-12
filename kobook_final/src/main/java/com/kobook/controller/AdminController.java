@@ -53,7 +53,7 @@ public class AdminController {
 		return count;
 	}
 
-	 
+	//관리자 메인 List 
 	@RequestMapping("/adminMain")
 	public String visitCount(Model model) throws Exception {
 		

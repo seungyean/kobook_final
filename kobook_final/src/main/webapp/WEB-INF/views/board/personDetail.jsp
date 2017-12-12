@@ -238,11 +238,6 @@ text-align: center;
 			var person_kind = $("#person_kind option:selected").val();
 			var person_id = ${personVO.person_id };
  
-			/* alert("수정된"+person_sell_grade);
-			alert("수정된"+person_kind);
-			alert("수정된 " +person_id); */
-	  /*    var data = {person_sell_grade : person_sell_grade, person_kind : person_kind}  */
-				
 			 $.ajax({
 				type : "POST",
 				url : "/pay/personModi",
