@@ -46,12 +46,13 @@ public class RecomController {
 	@Inject
 	private BookService bookService;
 	
+	
+	//로그인 전에 들르는 메인 컨트롤러
 	@RequestMapping(value="/main", method=RequestMethod.GET)
 	public String goMain(HttpServletRequest request) throws Exception{
 		
 		HttpSession session = request.getSession();
 		String p = (String)session.getAttribute("person_id")+"";
-		System.out.println(p);
 		
 		if(p.equals("null")) {
 			SearchCriteria cri2 = new SearchCriteria();
@@ -71,7 +72,6 @@ public class RecomController {
 	//메인으로 가기 전 로그인한 사용자의 추천도서 목록을 추출하는 메소드. 모든 메인은 이 메소드를 거친다.
 	@RequestMapping(value="/recom", method = RequestMethod.GET)
 	public String recommend(Model model, HttpServletRequest request) throws Exception {
-		System.out.println("controller - recom");
 		request.getAttribute("alarmList");
 		
 		HttpSession session = request.getSession();
@@ -86,36 +86,6 @@ public class RecomController {
 		
 		String person_name = pService.findPersonName(person_id);
 		session.setAttribute("person_name", person_name);
-		
-		//사용자의 추천도서를 우선순위별로 출력하는 반복문.
-		// favorite + rdata 테이블을 사용해서 추천도서의 우선순위(rank)를 매기고, 출력한다.
-/*		for (int i = 0; i < favoriteList.size(); i++) {
-			int temp = 0;
-			
-			if(favoriteList.get(i).getFavorite_rank() == 0){
-				
-				if(favoriteList.get(i).getFavorite_major().equals("M")){
-					favoriteList.get(i).setFavorite_rank(favoriteList.get(i).getFavorite_rank()+10);
-				}
-				
-				while(temp < 20){
-						
-						if(favoriteList.get(i).getFavorite_name().equals(rdataList.get(temp).getRdata_m())){
-							
-							favoriteList.get(i).setFavorite_rank(favoriteList.get(i).getFavorite_rank() + rdataList.get(i).getRdata_support());
-							
-							//update문 매퍼 실행
-							FavoriteVO favorite = new FavoriteVO();
-							favorite.setPerson_id(person_id);
-							favorite.setBook_id(favoriteList.get(i).getBook_id());
-							favorite.setFavorite_rank(favoriteList.get(i).getFavorite_rank());
-							service.updateFavoriteRank(favorite);
-	
-						}
-					temp++;
-				}
-			}
-		}*/
 		
 		cri.setPerPageNum(100);
 		List<BookVO> bookList = bookService.listCriteria(cri);
@@ -172,7 +142,6 @@ public class RecomController {
 	//추천도서 'X'버튼을 누르면 해당 도서가 favorite 테이블에서 삭제된다.
 	@RequestMapping(value="/deleteRecom", method = RequestMethod.GET)
 	public String deleteRecommend(@RequestParam("book_id")int book_id, HttpServletRequest request) throws Exception {
-		System.out.println("controller - deleteRecom");
 		
 		FavoriteVO vo = new FavoriteVO();
 		
