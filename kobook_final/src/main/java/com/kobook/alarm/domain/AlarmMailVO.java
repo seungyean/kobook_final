@@ -54,6 +54,10 @@ public class AlarmMailVO {
 	}
 	
 	
+	
+	//사용자 알림 리스트에 insert 될 때 자동으로 사용자 메일로 같은 알림 발송하는 메소드.
+	//스프링에서 지원하는 JavaMailSender 클래스를 사용하여 메일을 발송한다.
+	//내용에 포함되는 부분은 HTML과 이미지 첨부
 	public void sendMail(AlarmVO alarmVO,JavaMailSender mailSender,PersonService service, HttpServletRequest request) throws Exception {
 		
 		

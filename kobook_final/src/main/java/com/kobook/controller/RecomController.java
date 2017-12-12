@@ -48,6 +48,7 @@ public class RecomController {
 	
 	
 	//로그인 전에 들르는 메인 컨트롤러
+	//신규 등록 도서는 최근에 등록된 순으로 출력된다.
 	@RequestMapping(value="/main", method=RequestMethod.GET)
 	public String goMain(HttpServletRequest request) throws Exception{
 		
@@ -93,6 +94,7 @@ public class RecomController {
 
 		
 		//원래 회원이 추천을 누른 과목의 점수를 더하기.
+		//전공 도서 : +20점, 비 전공 도서 : +10점
 		for (int i = 0; i < favoriteList.size(); i++) {
 			
 			
@@ -107,7 +109,7 @@ public class RecomController {
 			
 		}
 		
-		//데이터 마이닝 결과의 값들에 입력 
+		//데이터 마이닝 결과의 값들에 입력 => 데이터 마이닝한 후 관련있는 계열의 도서를 랜덤으로 가져와 리스트에 추가한다.
 		for (int i = 0; i < rList.size(); i++) {
 			for (int j = 0; j < bookList.size(); j++) {
 				if(rList.get(i).getRdata_o().equals(bookList.get(j).getBook_kind())){

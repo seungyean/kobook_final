@@ -23,7 +23,8 @@ import com.kobook.book.service.BookService;
  * Handles requests for the application home page.
  */
 
-
+//맨 처음 프로그램을 구동했을 때 도착하는 컨트롤러
+//메인 화면을 추출하는 컨트롤러. recomController의 /main과 같은 역할을 한다.
 
 @Controller
 public class HomeController {
