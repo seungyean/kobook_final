@@ -13,4 +13,5 @@ public interface FavoriteDAO {
 	public List<RdataVO> getRdata();
 	public void updateFavoriteRank(FavoriteVO favorite);
 	public List<String> favoriteList(int person_id) throws Exception;
+	public List<RdataVO> getBigdata(int person_id);
 }

@@ -83,25 +83,25 @@ public class RecomController {
 
 		List<FavoriteBookVO> favoriteList = service.getFavorite(person_id);
 		List<BoardVO> boardList = boardService.boardListCri(cri);
-		List<RdataVO> rdataList = service.getRdata();
 		
 		String person_name = pService.findPersonName(person_id);
 		session.setAttribute("person_name", person_name);
 		
 		//사용자의 추천도서를 우선순위별로 출력하는 반복문.
 		// favorite + rdata 테이블을 사용해서 추천도서의 우선순위(rank)를 매기고, 출력한다.
-		for (int i = 0; i < favoriteList.size(); i++) {
+/*		for (int i = 0; i < favoriteList.size(); i++) {
 			int temp = 0;
 			
 			if(favoriteList.get(i).getFavorite_rank() == 0){
 				
 				if(favoriteList.get(i).getFavorite_major().equals("M")){
 					favoriteList.get(i).setFavorite_rank(favoriteList.get(i).getFavorite_rank()+10);
-					
 				}
 				
 				while(temp < 20){
+						
 						if(favoriteList.get(i).getFavorite_name().equals(rdataList.get(temp).getRdata_m())){
+							
 							favoriteList.get(i).setFavorite_rank(favoriteList.get(i).getFavorite_rank() + rdataList.get(i).getRdata_support());
 							
 							//update문 매퍼 실행
@@ -115,12 +115,55 @@ public class RecomController {
 					temp++;
 				}
 			}
+		}*/
+		
+		cri.setPerPageNum(100);
+		List<BookVO> bookList = bookService.listCriteria(cri);
+		List<RdataVO> rList = service.getBigdata(person_id);	// 데이터 마이닝 추천
+
+		
+		//원래 회원이 추천을 누른 과목의 점수를 더하기.
+		for (int i = 0; i < favoriteList.size(); i++) {
+			
+			
+			if(favoriteList.get(i).getFavorite_rank() == 0){
+				if(favoriteList.get(i).getFavorite_major().equals("M")){
+					favoriteList.get(i).setFavorite_rank(favoriteList.get(i).getFavorite_rank()+20);
+				}else {
+					favoriteList.get(i).setFavorite_rank(favoriteList.get(i).getFavorite_rank()+10);
+				}
+			}
+			
+			
 		}
 		
-		favoriteList = service.getFavorite(person_id);
+		//데이터 마이닝 결과의 값들에 입력 
+		for (int i = 0; i < rList.size(); i++) {
+			for (int j = 0; j < bookList.size(); j++) {
+				if(rList.get(i).getRdata_o().equals(bookList.get(j).getBook_kind())){
+					
+					FavoriteBookVO fbvo = new FavoriteBookVO();
+					fbvo.setBook_id(bookList.get(j).getBook_id());
+					fbvo.setBook_name(bookList.get(j).getBook_name());
+					fbvo.setBook_img(bookList.get(j).getBook_img());
+					favoriteList.add(fbvo);
+					
+					FavoriteVO favorite = new FavoriteVO();
+					favorite.setPerson_id(person_id);
+					favorite.setBook_id(favoriteList.get(i).getBook_id());
+					favorite.setFavorite_rank(favoriteList.get(i).getFavorite_rank());
+					service.updateFavoriteRank(favorite);
+					
+					break;
+				}
+			}
+		}
+		
+		
 		request.setAttribute("list", favoriteList);
 		request.setAttribute("boardList", boardList);
-		
+		favoriteList = service.getFavorite(person_id);
+
 		return "/main";
 	}
 	

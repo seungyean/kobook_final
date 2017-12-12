@@ -24,7 +24,6 @@ public class FavoriteDAOImpl implements FavoriteDAO {
 	public List<FavoriteBookVO> getFavorite(int person_id) {
 		return session.selectList(namespace + ".getFavorite", person_id);
 	}
-
 	@Override
 	public void deleteFavorite(FavoriteVO favorite) {
 		session.delete(namespace + ".deleteFavorite", favorite);
@@ -43,6 +42,10 @@ public class FavoriteDAOImpl implements FavoriteDAO {
 	@Override
 	public List<String> favoriteList(int person_id) throws Exception {
 		return session.selectList(namespace + ".favoriteList", person_id);
+	}
+	@Override
+	public List<RdataVO> getBigdata(int person_id) {
+		return session.selectList(namespace + ".getBigdata",person_id);
 	}
 	
 	

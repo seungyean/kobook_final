@@ -5,7 +5,7 @@
 
 <mapper namespace="com.kobook.mappers.recomMapper">
 
-	<select id="getFavorite" resultType="FavoriteBookVO" parameterType="int">
+ 	<select id="getFavorite" resultType="FavoriteBookVO" parameterType="int" >
 		SELECT BOOK.BOOK_NAME,BOOK.BOOK_ID,FAVORITE.FAVORITE_NAME,FAVORITE.PERSON_ID,FAVORITE.FAVORITE_MAJOR,FAVORITE.FAVORITE_RANK,BOOK.BOOK_IMG
 		FROM FAVORITE ,BOOK 
 		WHERE FAVORITE.PERSON_ID = #{person_id}
@@ -32,10 +32,18 @@
 		AND BOOK_ID=#{book_id}
 	</update>
 	
-	<select id="favoriteList" resultType="String" parameterType="Integer">
+ 	<!-- <select id="favoriteList" resultType="String" parameterType="Integer">
 		SELECT favorite_name
 		FROM favorite
 		WHERE person_id = #{person_id}
+	</select>  -->
+	
+	<select id="getBigdata" resultType="RdataVO" parameterType="int">
+		SELECT RDATA.RDATA_O, RDATA.RDATA_SUPPORT
+		FROM FAVORITE, RDATA
+		where FAVORITE.FAVORITE_NAME = RDATA.RDATA_M 
+		and FAVORITE.PERSON_ID= #{person_id}
+		and FAVORITE.FAVORITE_MAJOR='M'
 	</select>
 	
 </mapper>

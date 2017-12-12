@@ -12,4 +12,6 @@ public interface FavoriteService {
 	public void deleteFavorite(FavoriteVO favorite);
 	public List<RdataVO> getRdata();
 	public void updateFavoriteRank(FavoriteVO favorite);
+	public List<RdataVO> getBigdata(int person_id);
+	public List<String> favoriteList(int person_id) throws Exception;
 }
