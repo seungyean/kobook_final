@@ -85,18 +85,10 @@ public class ChatbotServiceImpl implements ChatbotService {
 		String text = vo.getChatlog_content();
 		String newText = "";
 		
-		// user_text 판별
+		// 사용자의 대화 판별
 		if(text.equals("야") || text.contains("도와줘") || text.contains("도움")){
 			
-			newText += personDao.findPersonName(person_id) + "님, 오셨군요!"
-					+ "\n 무엇을 도와드릴까요??"
-					+ "\n 카테고리는 크게"
-					+ "\n &nbsp; 1. 책(도서) "
-					+ "\n &nbsp; 2. 게시판(공지, 포토, 무료나눔, 블랙)"
-					+ "\n &nbsp; 3. 쪽지"
-					+ "\n &nbsp; 4. 마이페이지"
-					+ "\n 로 구성되어있습니다."
-					+ "\n 카테고리명 + 도움말을 입력하시면 가능한 질문들을 보실 수 있습니다.";
+			newText += personDao.findPersonName(person_id) + "님, 오셨군요!";;
 		
 		// 쪽지 파트
 		} else if(text.contains("쪽지")){	
@@ -159,15 +151,12 @@ public class ChatbotServiceImpl implements ChatbotService {
 			
 			// 검색,찾아줘,보여줘,알려줘라는 단어와 그 바로앞에 공백이 있다면 cut
 			area = keyWordReplace(text);
-			System.out.println("keywordreplace 직후: "+area);
 			
 			// 주변,근처라는 단어와 그 바로앞에 공백이 있다면 cut
 			area = areaReplace(area);
-			System.out.println("area replace 직후: " + area);
 			cri.setKeyword(area);
 			sList = bookDao.safeListCriteria(cri);
 			dList = bookDao.directListCriteria(cri);
-			System.out.println("area: " + area);
 			
 			newText += "<hr> <안전거래 리스트> \n";
 			if(sList.size() < 1){
@@ -233,7 +222,6 @@ public class ChatbotServiceImpl implements ChatbotService {
 			
 			// 검색,찾아줘,보여줘,알려줘라는 단어와 그 바로앞에 공백이 있다면 cut
 			keyword = keyWordReplace(text);
-			System.out.println("책 키워드 추출: " + keyword);
 			
 			// criteria를 책제목과 해시태그를 검색할 것으로 설정
 			cri.setSearchType("tw");
@@ -273,7 +261,6 @@ public class ChatbotServiceImpl implements ChatbotService {
 		//내가 등록한 책 보여줘
 		} else if(text.contains("내가") && text.contains("등록")){ 
 			list = bookDao.getMyBookList(person_id);
-			System.out.println("내가 등록한책 리스트 크기: " + list.size());
 			
 			if(list.size() < 1){
 				newText += personDao.findPersonName(person_id) + "님이 등록한 책이 없습니다.";
@@ -315,27 +302,18 @@ public class ChatbotServiceImpl implements ChatbotService {
 		// 공지, 포토, 블랙, 무료나눔으로 시작하는 문자열이 있다면 while문에 진입해서 게시판 이름만 가져오기
 		while(bMatcher.find()){
 			boardName = boardNameReplace(bMatcher.group());
-			
-			if(boardName != null){
-				System.out.println("boardname 추출 ::" + boardName);
-			}
 		}
 		
 		String contentUrl = "";
-		System.out.println("rawkeyword 추출 ::" + rawKeyword);
 		
 		keyword = keyWordReplace(rawKeyword);
 		
-		System.out.println("keyword 추출 ::" + keyword);
-		
 		// 공지사항파트
 		if(boardName.contains("공지")){
-			System.out.println("공지사항 진입");
 	
 			cri.setSearchType("tc");
 			cri.setKeyword(keyword);
 			list = boardDao.boardListCri(cri);
-			System.out.println("photolist 크기: "+list.size());
 			
 			if(list.size() < 1){
 				newText += "찿으시는 결과가 없습니다. 다시 검색해주세요";
@@ -368,12 +346,10 @@ public class ChatbotServiceImpl implements ChatbotService {
 			
 		// 포토리뷰 파트
 		} else if(boardName.contains("포토")){
-			System.out.println("포토리뷰 진입");
 			
 			cri.setSearchType("tc");
 			cri.setKeyword(keyword);
 			list = photoDao.photoList(cri);
-			System.out.println("photolist 크기: "+list.size());
 			
 			if(list.size() < 1){
 				newText += "찿으시는 결과가 없습니다. 다시 검색해주세요";
@@ -405,12 +381,10 @@ public class ChatbotServiceImpl implements ChatbotService {
 				
 		// 블랙리스트 파트
 		} else if(boardName.contains("블랙")){
-			System.out.println("블랙 진입");
 			
 			cri.setSearchType("tcw");
 			cri.setKeyword(keyword);
 			list = blackDao.blackList(cri);
-			System.out.println("blacklist 크기: "+list.size());
 			
 			if(list.size() < 1){
 				newText += "<hr>찿으시는 결과가 없습니다.\n다시 검색해주세요";
@@ -448,7 +422,6 @@ public class ChatbotServiceImpl implements ChatbotService {
 			cri.setSearchType("tc");
 			cri.setKeyword(keyword);
 			list = donateDao.donateList(cri);
-			System.out.println("donatelist 크기: "+list.size());
 			
 			if(list.size() < 1){
 				newText += "찿으시는 결과가 없습니다. 다시 검색해주세요";
@@ -494,8 +467,6 @@ public class ChatbotServiceImpl implements ChatbotService {
 		List<String> list;
 		
 		if(text.contains("마일리지")){	// 내 마일리지 보여줘 
-			System.out.println("토탈마일리지: " + mypageDao.mileageTotal(person_id));
-			System.out.println("사용 마일리지" + mypageDao.mileageUse(person_id));
 			newText += personDao.findPersonName(person_id) + "님의 마일리지는 "
 					+ (mypageDao.mileageTotal(person_id) - mypageDao.mileageUse(person_id)) + "입니다.";
 			
@@ -524,7 +495,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 		List<MessageVO> list = null;
 		
 		if(text.contains("새") || text.contains("새로운") || text.contains("새로온") || text.contains("새로 온")){		// 새 쪽지 보여줘
-			if(messageDao.newMessageList(person_id).size() != 0){	// 리스트의 크기가 0이라는 것은 검색된 메시지가 없다는 뜻
+			if(messageDao.newMessageList(person_id).size() < 1){	// 리스트의 크기가 0이라는 것은 검색된 메시지가 없다는 뜻
 				list = messageDao.newMessageList(person_id);
 				newText += "(최신의 쪽지가 상단에 표시됩니다)<hr>";
 				newText += "<b>&nbsp;보낸 사람 &nbsp;&nbsp;&nbsp; 내용 </b>";
@@ -545,7 +516,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 					+ "<a href=\"javascript:;\" onClick=\"opener.parent.location='"+ contentUrl +"'; return false;\"> 쪽지보관함으로 이동 </a>";
 			
 		} else if(text.contains("보관함") || text.contains("쪽지함")){	// 내 쪽지함 보여줘
-			if(messageDao.messageList(person_id).size() != 0){	// 리스트의 크기가 0이라는 것은 검색된 메시지가 없다는 뜻
+			if(messageDao.messageList(person_id).size() < 1){	// 리스트의 크기가 0이라는 것은 쪽지함에 쪽지가 없다는 뜻
 				list = messageDao.messageList(person_id);
 				newText += "(최신의 쪽지가 상단에 표시됩니다) \n 쪽지는 최대 5개만 보여드립니다.<hr>";
 				newText += "<b>&nbsp;보낸 사람 &nbsp;&nbsp;&nbsp; 내용 </b>";

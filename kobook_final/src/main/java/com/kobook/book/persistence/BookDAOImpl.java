@@ -198,7 +198,7 @@ public class BookDAOImpl implements BookDAO {
 
 
 
-	@Override
+	/*@Override
 	public List<HashMap<String, String>> deliveryList(SearchCriteria cri){
 		return session.selectList(namespace + ".deliveryList",cri,new RowBounds(cri.getPageStart(),cri.getPerPageNum()));
 	}
@@ -234,7 +234,7 @@ public class BookDAOImpl implements BookDAO {
 	public void delstateUpdate(DeliveryDTO dto) throws Exception {
 		session.update(namespace+".delstateUpdate",dto);
 		
-	}
+	}*/
 
 
 
@@ -272,7 +272,7 @@ public class BookDAOImpl implements BookDAO {
 
 
 
-	@Override
+	/*@Override
 	public int wpercent() throws Exception {
 	return session.selectOne(namespace+".wpercent");
 	}
@@ -308,7 +308,7 @@ public class BookDAOImpl implements BookDAO {
 	public int todayMoney() throws Exception {
 		return session.selectOne(namespace+".todayMoney");
 	}
-
+*/
 
 	// 챗봇용
 	@Override

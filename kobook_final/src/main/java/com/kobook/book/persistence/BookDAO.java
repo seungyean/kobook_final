@@ -46,8 +46,6 @@ public interface BookDAO {
 	
 	public int getPersonIdByBookId(int book_id) throws Exception;
 	
-	//由щ럭 ���깆��
-	//public String writeName(int person_id)throws Exception;
 
 	public void reviewCreate(ReviewVO review)throws Exception;
 	
@@ -64,14 +62,14 @@ public interface BookDAO {
 	public int twostar(int person_id)throws Exception;
 	public int onestar(int person_id)throws Exception;
 	
-	//���ш굅�� 諛곗�〓━�ㅽ��
-	public List<HashMap<String, String>> deliveryList(SearchCriteria cri);
+	/*//���ш굅�� 諛곗�〓━�ㅽ��
+	public List<HashMap<String, String>> deliveryList(SearchCriteria cri);*/
 	
 	//諛곗�〓━�ㅽ�� 移댁�댄��
-	public int countdelList()throws Exception;
+	/*public int countdelList()throws Exception;*/
 	
 	//諛곗�≪���� ���곗�댄��
-	public void delstateUpdate(DeliveryDTO dto)throws Exception;
+	/*public void delstateUpdate(DeliveryDTO dto)throws Exception;*/
 	
 	public void registerkeyword(SearchCriteria cri)throws Exception;
 	
@@ -81,16 +79,16 @@ public interface BookDAO {
 	
 	public int safeListCount() throws Exception;
 	
-	public List<DeliveryDTO> selectDateList(DateDTO dto) throws Exception;
+	/*public List<DeliveryDTO> selectDateList(DateDTO dto) throws Exception;*/
 	
-	public int wpercent() throws Exception;
+	/*public int wpercent() throws Exception;
 	public int ipercent() throws Exception;
 	public int cpercent() throws Exception;
 	
 	public int month(int m) throws Exception;
 	
 	public int todayMoney()throws Exception;
-	
+	*/
 	
 	//챗봇용
 	public String getNameById(int book_id) throws Exception;

@@ -44,7 +44,6 @@ public interface BookService {
 	
 	public int getPersonIdByBookId(int book_id) throws Exception;
 	
-	//public String writeName(int person_id) throws Exception;
 	
 	public void reviewregist(ReviewVO review)throws Exception;
 	
@@ -61,14 +60,14 @@ public interface BookService {
 	public int twostar(int person_id)throws Exception;
 	public int onestar(int person_id)throws Exception;
 	
-	
+	/*
 	public List<HashMap<String, String>> deliveryList(SearchCriteria cri)throws Exception;
 	
 	public List<DeliveryDTO>selectDateList(DateDTO dto)throws Exception;
 	
 	public int countdelList() throws Exception;
 	
-		public void delstateUpdate(DeliveryDTO dto)throws Exception;
+		public void delstateUpdate(DeliveryDTO dto)throws Exception;*/
 		
 		public void registerkeyword(SearchCriteria cri)throws Exception;
 		
@@ -78,13 +77,13 @@ public interface BookService {
 		
 		public int safeListCount() throws Exception;
 		
-		public int wpercent() throws Exception;
+		/*public int wpercent() throws Exception;
 		public int ipercent() throws Exception;
 		public int cpercent() throws Exception;
 		
 		public int month(int m) throws Exception;
 		
-		public int todayMoney() throws Exception;
+		public int todayMoney() throws Exception;*/
 
 	
 }

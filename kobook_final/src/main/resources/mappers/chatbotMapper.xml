@@ -18,7 +18,7 @@
 		select chatlog_id, person_id, chatlog_content, chatlog_speaker, to_char(chatlog_date, 'hh24:mi')
 		from chatlog
 		where person_id = #{person_id}
-		order by chatlog_date
+		order by chatlog_id
 	</select>
 	
 </mapper>

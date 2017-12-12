@@ -18,9 +18,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.kobook.book.domain.BookVO;
 import com.kobook.book.domain.Criteria;
 import com.kobook.book.domain.DateDTO;
+import com.kobook.book.domain.DeliveryDTO;
 import com.kobook.book.domain.PersonDTO;
 import com.kobook.book.domain.SearchCriteria;
 import com.kobook.book.persistence.BookDAO;
+import com.kobook.book.persistence.DeliveryDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/spring/**/root-context.xml"})
@@ -28,6 +30,9 @@ public class BookDAOTest {
 
 	@Inject
 	private BookDAO dao;
+	
+	@Inject
+	private DeliveryDAO ddao;
 	
 	@Test
 	public void test() throws Exception {
@@ -62,11 +67,20 @@ public class BookDAOTest {
 		dao.selectDateList(dto);
 		System.out.println(dao.selectDateList(dto));*/
 		
-		SearchCriteria cri=new SearchCriteria();
+	/*	SearchCriteria cri=new SearchCriteria();
 		cri.setPage(2);
 		cri.setPerPageNum(5);
 		System.out.println(dao.reviewList(6, cri));
-
+		
+*/
+		//날짜별 조회 리스트 출력
+		List<DeliveryDTO>list=new ArrayList<>();
+		DateDTO dto=new DateDTO();
+		dto.setStartday("20170101");
+		dto.setEndday("20171212");
+		System.out.println(ddao.selectDateList(dto));
+		
+		
 	}
 	
 	
