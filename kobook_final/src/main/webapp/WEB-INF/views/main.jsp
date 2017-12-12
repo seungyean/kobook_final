@@ -167,7 +167,7 @@
 			                <div class="recentitems portfolio">
 				                <c:forEach var="f" items="${list }">
 				
-					                <c:if test="${f.favorite_major == 'M' }">
+			<%-- 		                <c:if test="${f.favorite_major == 'M' }">
 						                	<div class="portfolio-item mockups">
 						                        <div class="box">
 						                            <img src="/book/displayFile?fileName=${f.book_img }" alt="" style="width: 300px; height: 300px;">
@@ -182,10 +182,58 @@
 						                        </div>
 						                    </div>
 			
-					                </c:if>
+					                </c:if> --%>
+					              <c:choose>  
+					                <c:when test="${f.favorite_major == 'M' }">
+					                		<div class="portfolio-item mockups">
+						                        <div class="box">
+						                            <img src="/book/displayFile?fileName=${f.book_img }" alt="" style="width: 300px; height: 300px;">
+						                            <div class="option inner">
+						                                <div>
+						                                    <h5>전공 상세보기</h5>
+						                                    <a href="/book/displayFile?fileName=${f.book_img }" class="fa fa-search mfp-image"></a>
+						                                    <a href="/book/bookRead?book_id=${f.book_id}" class="fa fa-link"></a>
+						                                    <a href="/deleteRecom?book_id=${f.book_id }&favorite_major=${f.favorite_major}&favorite_name=${f.favorite_name}" class="fa fa-times"></a>
+						                                </div>
+						                            </div>
+						                        </div>
+						                    </div>
+					                </c:when>
+					                <c:when test="${f.favorite_major == 'O' }">
+					                	
+					                	<input type="hidden" id="book_id" value="${f.book_id }">
+					                	
+					                	<div class="portfolio-item graphic-design">
+					                        <div class="box">
+					                            <img src="/book/displayFile?fileName=${f.book_img }" alt="" style="width: 300px; height: 300px;">
+					                            <div class="option inner">
+					                                <div>
+					                                    <h5>기타 상세보기</h5>
+					                                    <a href="/book/displayFile?fileName=${f.book_img }" class="fa fa-search mfp-image"></a>
+					                                    <a href="/book/bookRead?book_id=${f.book_id}" class="fa fa-link"></a>
+					                                    <a href="/deleteRecom?book_id=${f.book_id }&favorite_major=${f.favorite_major}&favorite_name=${f.favorite_name}" class="fa fa-times"></a>
+					                                </div>
+					                            </div>
+					                        </div>
+					                    </div>
+					                </c:when>
+					                <c:otherwise>
+					                	<div class="portfolio-item flayers">
+						                        <div class="box">
+						                            <img src="/book/displayFile?fileName=${f.book_img }" alt="" style="width: 300px; height: 300px;">
+						                            <div class="option inner">
+						                                <div>
+						                                    <h5>추천도서 상세보기</h5>
+						                                    <a href="/book/displayFile?fileName=${f.book_img }" class="fa fa-search mfp-image"></a>
+						                                    <a href="/book/bookRead?book_id=${f.book_id}" class="fa fa-link"></a>
+						                                </div>
+						                            </div>
+						                        </div>
+						                </div>
+					                </c:otherwise>
+					             </c:choose>
 					                
-					                
-					                <c:if test="${f.favorite_major == 'O' }">
+					               <%--  <c:if test="${f.favorite_major == 'O' }">
 									
 									<input type="hidden" id="book_id" value="${f.book_id }">
 									
@@ -202,7 +250,7 @@
 					                            </div>
 					                        </div>
 					                    </div>
-					                </c:if>
+					                </c:if> --%>
 				                	
 				                </c:forEach>  
 			               </div>

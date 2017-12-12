@@ -22,7 +22,7 @@ public class FavoriteServiceImpl implements FavoriteService {
 	public List<FavoriteBookVO> getFavorite(int person_id) {
 		return dao.getFavorite(person_id);
 	}
-
+	
 	@Override
 	public void deleteFavorite(FavoriteVO favorite) {
 		dao.deleteFavorite(favorite);
@@ -48,4 +48,16 @@ public class FavoriteServiceImpl implements FavoriteService {
 	public void updateFavoriteRank(FavoriteVO favorite) {
 		dao.updateFavoriteRank(favorite);
 	}
+
+	@Override
+	public List<RdataVO> getBigdata(int person_id) {
+		return dao.getBigdata(person_id);
+	}
+
+	@Override
+	public List<String> favoriteList(int person_id) throws Exception {
+		return dao.favoriteList(person_id);
+	}
+	
+	
 }
