@@ -209,7 +209,7 @@ public class BookServiceImpl implements BookService {
 
 
 
-	@Override
+	/*@Override
 	public List<HashMap<String, String>> deliveryList(SearchCriteria cri) throws Exception {
 		return dao.deliveryList(cri);
 	}
@@ -237,7 +237,7 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public void delstateUpdate(DeliveryDTO dto)throws Exception {
 		dao.delstateUpdate(dto);
-	}
+	}*/
 
 
 
@@ -273,7 +273,7 @@ public class BookServiceImpl implements BookService {
 
 
 
-	@Override
+	/*@Override
 	public int wpercent() throws Exception {
 		return dao.wpercent();
 	}
@@ -308,7 +308,7 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public int todayMoney() throws Exception {
 		return dao.todayMoney();
-	}
+	}*/
 	
 	
 	

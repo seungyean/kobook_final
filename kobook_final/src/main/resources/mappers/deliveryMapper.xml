@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kobook.mappers.deliveryMapper">
+
+
+	<!--관리자 안심거래배송리스트  -->
+	 <select id="deliveryList" resultType="HashMap" parameterType="SearchCriteria">
+	<![CDATA[
+ 	 select d.delivery_id, b.book_name, per.person_name, p.pay_amount, p.pay_date ,d.delivery_state,d.delivery_msg,d.delivery_address
+	from pay p, book b, book_order o, delivery d, person per
+	where 
+	p.order_id=o.order_id
+  	and o.ORDER_ID=d.ORDER_ID
+	and o.book_id=b.book_id
+ 	 and o.PERSON_ID=per.PERSON_ID
+	and b.book_safe_yn='Y'
+	and o.person_id=per.person_id
+	]]>
+    <include refid="delsearch"></include>
+    <![CDATA[  
+       order by p.pay_date
+     ]]> 
+	</select>
+	
+		<!--배송리스트에서 검색  -->
+		 <sql id="delsearch">
+			<if test="searchType != null">
+				<if test="searchType == 'p'.toString()">
+					and per.person_name like '%'|| #{keyword}||'%'
+				</if>
+				<if test="searchType == 'c'.toString()">
+					and b.book_name like '%'|| #{keyword}||'%'
+				</if>
+			</if>
+		</sql>
+	
+	<!--페이징처리-배송리스트  -->
+	<select id="countdelList" resultType="Integer" >
+	  select count(d.delivery_id)
+	from pay p, book b, book_order o, delivery d,person per
+	where 
+	p.order_id=o.order_id
+  	and o.ORDER_ID=d.ORDER_ID
+	and o.book_id=b.book_id
+  	and o.PERSON_ID=per.PERSON_ID
+	and b.book_safe_yn='Y'
+	and o.person_id=per.person_id
+	</select>
+	
+	<!--배송상태변경  -->
+ 	<update id="delstateUpdate" parameterType="DeliveryDTO">
+	  UPDATE delivery
+      SET delivery_state = #{delivery_state}
+      WHERE delivery_id = #{delivery_id}
+	</update>
+	
+
+	<!--기간별 날짜 조회  -->
+	<select id="selectDateList" resultType="DeliveryDTO" parameterType="DateDTO">
+	<![CDATA[     
+ 	select d.delivery_id, b.book_name, per.person_name, p.pay_amount, p.pay_date ,d.delivery_state,d.delivery_msg,d.delivery_address
+	from pay p, book b, book_order o, delivery d,person per
+	where 
+	p.order_id=o.order_id
+  	and o.ORDER_ID=d.ORDER_ID
+	and o.book_id=b.book_id
+ 	 and o.PERSON_ID=per.PERSON_ID
+	and b.book_safe_yn='Y'
+	and o.person_id=per.person_id
+ 	and p.pay_date between to_date(#{startday},'YYYYMMDD') and to_date (#{endday},'YYYYMMDD')+0.99999
+	 ]]>
+	 order by d.delivery_id desc
+	</select>
+	
+
+	<!-- 'W'비중 -->
+	<select id="wpercent" resultType="Integer" >
+	<![CDATA[ 
+	select round(((select count(delivery_state)
+	from delivery
+	where delivery_state='W')/(select count(delivery_id)
+	from delivery)*100),0) from dual
+	 ]]>
+	</select>
+	
+	<!-- 'I'비중 -->
+	<select id="ipercent" resultType="Integer" >
+	<![CDATA[ 
+	select round(((select count(delivery_state)
+	from delivery
+	where delivery_state='I')/(select count(delivery_id)
+	from delivery)*100),0) from dual
+	 ]]>
+	</select>
+	
+	<!-- 'C'비중 -->
+	<select id="cpercent" resultType="Integer" >
+	<![CDATA[ 
+	select round(((select count(delivery_state)
+	from delivery
+	where delivery_state='C')/(select count(delivery_id)
+	from delivery)*100),0) from dual
+	 ]]>
+	</select>
+	
+	<!--달별 -->
+	<select id="month" resultType="Integer" parameterType="Integer">
+	select  sum(nvl(pay_amount,0))
+	from pay
+  	right outer join dual
+  	on to_char(pay_date, 'MM') = to_char(add_months(sysdate,#{value}),'MM')
+	group by to_char(pay_date,'MM')
+	</select>
+	
+	
+	<!--오늘 총 금액  -->
+	<select id="todayMoney" resultType="Integer">
+	select nvl(sum(pay_amount)*0.5,0)
+	from pay
+	where to_char(pay_date,'YY/MM/DD')=(select TO_CHAR(SYSDATE,'YY/MM/DD')from dual)
+	</select>
+
+</mapper>

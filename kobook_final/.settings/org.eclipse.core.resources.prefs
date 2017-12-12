@@ -2,5 +2,6 @@ eclipse.preferences.version=1
 encoding//src/main/java/com/kobook/book/persistence/BookDAO.java=UTF-8
 encoding//src/main/java/com/kobook/book/service/BookService.java=UTF-8
 encoding//src/main/java/com/kobook/controller/BookController.java=UTF-8
+encoding//src/main/java/com/kobook/controller/DeliveryController.java=UTF-8
 encoding//src/main/java/com/kobook/controller/MyPageController.java=UTF-8
 encoding//src/main/webapp/WEB-INF/views/chatbot/chatbot.jsp=UTF-8
