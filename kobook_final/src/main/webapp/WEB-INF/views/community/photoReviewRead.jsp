@@ -178,123 +178,6 @@
 				</div>
 				<ul class="mailbox-attachments clearfix uploadedList">
 				</ul>
-				<!--                 
-<div class="row sub_content">
-                    <div class="col-md-12">
-                        <div class="dividerHeading">
-                            <h4><span>Recent Work</span></h4>
-                        </div>
-                        <div id="recent-work-slider" class="owl-carousel">
-                            <div class="recent-item box">
-                                <figure class="touching ">
-                                    <img src="../images/portfolio/portfolio_1.png" alt=""/>
-                                    <div class="option inner">
-                                        <div>
-                                            <h5>Touch and Swipe</h5>
-                                            <a href="../images/portfolio/full/portfolio_1.png" class="fa fa-search mfp-image"></a>
-                                            <a href="portfolio_single.html" class="fa fa-link"></a>
-                                            <span>Mobile</span>
-                                        </div>
-                                    </div>
-                                </figure>
-                            </div>
-                            <div class="recent-item box">
-                                <figure class="touching ">
-                                    <img src="../images/portfolio/portfolio_2.png" alt=""/>
-                                    <div class="option inner">
-                                        <div>
-                                            <h5>Touch and Swipe</h5>
-                                            <a href="../images/portfolio/full/portfolio_2.png" class="fa fa-search mfp-image"></a>
-                                            <a href="portfolio_single.html" class="fa fa-link"></a>
-                                            <span>Mobile</span>
-                                        </div>
-                                    </div>
-                                </figure>
-                            </div>
-                            <div class="recent-item box">
-                                <figure class="touching ">
-                                    <img src="../images/portfolio/portfolio_3.png" alt=""/>
-                                    <div class="option inner">
-                                        <div>
-                                            <h5>Touch and Swipe</h5>
-                                            <a href="../images/portfolio/full/portfolio_3.png" class="fa fa-search mfp-image"></a>
-                                            <a href="portfolio_single.html" class="fa fa-link"></a>
-                                            <span>Mobile</span>
-                                        </div>
-                                    </div>
-                                </figure>
-                            </div>
-                            <div class="recent-item box">
-                                <figure class="touching ">
-                                    <img src="../images/portfolio/portfolio_4.png" alt=""/>
-                                    <div class="option inner">
-                                        <div>
-                                            <h5>Touch and Swipe</h5>
-                                            <a href="../images/portfolio/full/portfolio_4.png" class="fa fa-search mfp-image"></a>
-                                            <a href="portfolio_single.html" class="fa fa-link"></a>
-                                            <span>Mobile</span>
-                                        </div>
-                                    </div>
-                                </figure>
-                            </div>
-                            <div class="recent-item box">
-                                <figure class="touching ">
-                                    <img src="../images/portfolio/portfolio_5.png" alt=""/>
-                                    <div class="option inner">
-                                        <div>
-                                            <h5>Touch and Swipe</h5>
-                                            <a href="../images/portfolio/full/portfolio_5.png" class="fa fa-search mfp-image"></a>
-                                            <a href="portfolio_single.html" class="fa fa-link"></a>
-                                            <span>Mobile</span>
-                                        </div>
-                                    </div>
-                                </figure>
-                            </div>
-                            <div class="recent-item box">
-                                <figure class="touching ">
-                                    <img src="../images/portfolio/portfolio_6.png" alt=""/>
-                                    <div class="option inner">
-                                        <div>
-                                            <h5>Touch and Swipe</h5>
-                                            <a href="../images/portfolio/full/portfolio_6.png" class="fa fa-search mfp-image"></a>
-                                            <a href="portfolio_single.html" class="fa fa-link"></a>
-                                            <span>Mobile</span>
-                                        </div>
-                                    </div>
-                                </figure>
-                            </div>
-
-                            <div class="recent-item box">
-                                <figure class="touching ">
-                                    <img src="../images/portfolio/portfolio_7.png" alt=""/>
-                                    <div class="option inner">
-                                        <div>
-                                            <h5>Touch and Swipe</h5>
-                                            <a href="../images/portfolio/full/portfolio_7.png" class="fa fa-search mfp-image"></a>
-                                            <a href="portfolio_single.html" class="fa fa-link"></a>
-                                            <span>Mobile</span>
-                                        </div>
-                                    </div>
-                                </figure>
-                            </div>
-
-                            <div class="recent-item box">
-                                <figure class="touching ">
-                                    <img src="../images/portfolio/portfolio_8.png" alt=""/>
-                                    <div class="option inner">
-                                        <div>
-                                            <h5>Touch and Swipe</h5>
-                                            <a href="../images/portfolio/full/portfolio_8.png" class="fa fa-search mfp-image"></a>
-                                            <a href="portfolio_single.html" class="fa fa-link"></a>
-                                            <span>Mobile</span>
-                                        </div>
-                                    </div>
-                                </figure>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                -->
 			</div>
 		</section>
 		<!-- 여기까지 -->
@@ -373,63 +256,51 @@
 				formObj.submit();
 			});
 
-			var photo_id = $
-			{
-				photoVO.photo_id
-			}
-			;
+			var photo_id = ${photoVO.photo_id};
+			
 			var template = Handlebars.compile($("#templateAttach").html());
 
-			$("#heartUp").on(
-					"click",
-					function() {
-						event.preventDefault();
-						if (confirm("추천하시겠습니까?")) {
-							$.ajax({
-								url : '/community/photoHeartUp/' + photo_id,
-								type : 'POST',
-								dataType : 'text',
-								success : function(result) {
-									if (result == 'success') {
-										formObj.attr("action",
-												"/community/photoReviewRead?photo_id="
-														+ photo_id);
-										formObj.attr("method", "get");
-										formObj.submit();
-									}
-								}
-							});
-						} else {
-							alert('추천하기 취소하셨습니다');
+			$("#heartUp").on("click", function() {
+				event.preventDefault();
+				if (confirm("추천하시겠습니까?")) {
+					$.ajax({
+						url : '/community/photoHeartUp/' + photo_id,
+						type : 'POST',
+						dataType : 'text',
+						success : function(result) {
+							if (result == 'success') {
+								formObj.attr("action", "/community/photoReviewRead?photo_id=" + photo_id);
+								formObj.attr("method", "get");
+								formObj.submit();
+							}
 						}
-
 					});
+				} else {
+					alert('추천하기 취소하셨습니다');
+				}
+				
+			});
 
-			$("#heartDown").on(
-					"click",
-					function() {
-						event.preventDefault();
-						if (confirm("추천 해제하시겠습니까?")) {
-							$.ajax({
-								url : '/community/photoHeartDown/' + photo_id,
-								type : 'POST',
-								dataType : 'text',
-								success : function(result) {
-									if (result == 'success') {
-										alert("추천 해제 성공");
-										formObj.attr("action",
-												"/community/photoReviewRead?photo_id="
-														+ photo_id);
-										formObj.attr("method", "get");
-										formObj.submit();
-									}
-								}
-							});
-						} else {
-							alert('추천상태가 유지됩니다');
+			$("#heartDown").on("click", function() {
+				event.preventDefault();
+				if (confirm("추천 해제하시겠습니까?")) {
+					$.ajax({
+						url : '/community/photoHeartDown/' + photo_id,
+						type : 'POST',
+						dataType : 'text',
+						success : function(result) {
+							if (result == 'success') {
+								alert("추천 해제 성공");
+								formObj.attr("action", "/community/photoReviewRead?photo_id=" + photo_id);
+								formObj.attr("method", "get");
+								formObj.submit();
+							}
 						}
-
 					});
+				} else {
+					alert('추천상태가 유지됩니다');
+				}
+			});
 
 			$.getJSON("/community/photoGetAttach/" + photo_id, function(list) {
 				$(list).each(function() {
@@ -516,119 +387,7 @@
 			});
 		}
 	</script>
-	<!-- 	<script type="text/javascript">
-		$(document).ready(function() {
-			$.fn.carousel = function(op) {
-				var op, ui = {};
-				op = $.extend({
-					speed: 500,
-					autoChange: false,
-					interval: 5000
-				}, op);
-				ui.carousel = this;
-				ui.items    = ui.carousel.find('.carousel-item');
-				ui.itemsLen = ui.items.length;
 
-				// CREATE CONTROLS
-				ui.ctrl 	= $('<div />', {'class': 'carousel-control'});
-				ui.prev 	= $('<div />', {'class': 'carousel-prev'});
-				ui.next 	= $('<div />', {'class': 'carousel-next'});
-				ui.pagList  = $('<ul />', {'class': 'carousel-pagination'});
-				ui.pagItem  = $('<li></li>');
-				for (var i = 0; i < ui.itemsLen; i++) {
-					ui.pagItem.clone().appendTo(ui.pagList);
-				}
-				ui.prev.appendTo(ui.ctrl);
-				ui.next.appendTo(ui.ctrl);
-				ui.pagList.appendTo(ui.ctrl);
-				ui.ctrl.appendTo(ui.carousel);
-				ui.carousel.find('.carousel-pagination li').eq(0).addClass('active');
-				ui.carousel.find('.carousel-item').each(function() {
-					$(this).hide();
-				});
-				ui.carousel.find('.carousel-item').eq(0).show().addClass('active');
-				
-				
-				// CHANGE ITEM
-				var changeImage = function(direction, context) {
-					var current = ui.carousel.find('.carousel-item.active');
-
-					if (direction == 'index') {
-						if(current.index() === context.index())
-							return false;
-
-						context.addClass('active').siblings().removeClass('active');
-
-						ui.items.eq(context.index()).addClass('current').fadeIn(op.speed, function() {
-							current.removeClass('active').hide();
-							$(this).addClass('active').removeClass('current');
-						});
-					} 
-
-					if (direction == 'prev') {
-						if (current.index() == 0) {
-							ui.carousel.find('.carousel-item:last').addClass('current').fadeIn(op.speed, function() {
-								current.removeClass('active').hide();
-								$(this).addClass('active').removeClass('current');
-							});
-						}
-						else {
-							current.prev().addClass('current').fadeIn(op.speed, function() {
-								current.removeClass('active').hide();
-								$(this).addClass('active').removeClass('current');
-							});
-						}
-					}
-
-					if (direction == undefined) {
-						if (current.index() == ui.itemsLen - 1) {
-							ui.carousel.find('.carousel-item:first').addClass('current').fadeIn(300, function() {
-								current.removeClass('active').hide();
-								$(this).addClass('active').removeClass('current');
-							});
-						}
-						else {
-							current.next().addClass('current').fadeIn(300, function() {
-								current.removeClass('active').hide();
-								$(this).addClass('active').removeClass('current');
-							});
-						}
-					}
-					ui.carousel.find('.carousel-pagination li').eq( ui.carousel.find('.carousel-item.current').index() ).addClass('active').siblings().removeClass('active');
-				};
-
-				ui.carousel
-					.on('click', 'li', function() {
-						changeImage('index', $(this));
-					})
-					.on('click', '.carousel-prev', function() {
-						changeImage('prev');
-					})
-					.on('click', '.carousel-next', function() {
-						changeImage();
-					});
-				
-				// AUTO CHANGE
-				if (op.autoChange) {
-					var changeInterval = setInterval(changeImage, op.interval);
-					ui.carousel
-						.on('mouseenter', function() {
-							clearInterval(changeInterval);
-						})
-						.on('mouseleave', function() {
-							changeInterval = setInterval(changeImage, op.interval);
-						});
-				}
-				return this;
-			};
-			
-			$('.porDetCarousel').each(function() {
-				$(this).carousel({
-					autoChange: true
-				});
-			});
-		});
-	</script> -->
 	<!-- Start Style Switcher -->
 	<div class="switcher"></div>
 	<!-- End Style Switcher -->

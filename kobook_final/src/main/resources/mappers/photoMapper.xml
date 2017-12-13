@@ -27,11 +27,11 @@
 
 	<select id="photoList" resultType="PhotoVO" parameterType="SearchCriteria">
 		<![CDATA[
-			 select rownum as rn, photo.* from photo where photo_id > 0
+			 select * from photo where photo_id > 0
 		]]>
 		<include refid="search" />
 		<![CDATA[	  
-			 order by photo_id DESC, rn DESC
+			 order by photo_id DESC
  		]]>
 	</select>
 

@@ -122,11 +122,6 @@
 					<div>
 						<hr>
 					</div>
-					<%-- 
-					<figure class="post_img">
-						<img class="thumbnail" alt="NO Thumbnail" 
-							src="/community/displayFile?fileName=${photoVO.photo_thumbnail }" height="300" width="200">
-					</figure> --%>
 					<ul class="mailbox-attachments clearfix uploadedList">
 					</ul>
 
@@ -286,10 +281,8 @@
 			});
 		});
 
-		var photo_id = $
-		{
-			photoVO.photo_id
-		};
+		var photo_id = ${photoVO.photo_id};
+		
 		var template = Handlebars.compile($("#template").html());
 
 		$.getJSON("/community/photoGetAttach/" + photo_id, function(list) {
