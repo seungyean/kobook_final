@@ -25,6 +25,7 @@
 		select MAX(black_id) from black
 	</select>
  
+ 	<!-- 신고합니다 글 정보 출력 -->
 	<select id="blackList" resultType="BlackVO" parameterType="SearchCriteria">
 		<![CDATA[
 			 select rownum as rn, black.* from black where black_id > 0

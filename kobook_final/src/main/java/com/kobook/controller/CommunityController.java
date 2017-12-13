@@ -78,7 +78,6 @@ public class CommunityController {
 	@RequestMapping(value = "/uploadAjax", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
 	public ResponseEntity<String> uploadAjax(MultipartFile file) throws Exception {
 
-		System.out.println("originalName: " + file.getOriginalFilename());
 
 		return new ResponseEntity<>(UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes()),
 				HttpStatus.CREATED);
@@ -87,49 +86,43 @@ public class CommunityController {
 	// 파일(이미지) 출력
 	@ResponseBody
 	@RequestMapping("/displayFile")
-	public ResponseEntity<byte[]> displayFile(String fileName) throws Exception {
+    public ResponseEntity<byte[]> displayFile(String fileName) throws Exception {
+        InputStream in = null;
+        ResponseEntity<byte[]> entity = null;
+        try {
 
-		InputStream in = null;
-		ResponseEntity<byte[]> entity = null;
+           String formatName = fileName.substring(fileName.lastIndexOf(".") + 1);
 
-		System.out.println("FILE NAME: " + fileName);
+           MediaType mType = MediaUtils.getMediaType(formatName);
 
-		try {
+           HttpHeaders headers = new HttpHeaders();
 
-			String formatName = fileName.substring(fileName.lastIndexOf(".") + 1);
+           in = new FileInputStream(uploadPath + fileName);
 
-			MediaType mType = MediaUtils.getMediaType(formatName);
+           if (mType != null) {
+              headers.setContentType(mType);
+           } else {
+         	  
+              fileName = fileName.substring(fileName.indexOf("_") + 1);
+              headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+              headers.add("Content-Disposition",
+                    "attachment; filename=\"" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1") + "\"");
+           }
 
-			HttpHeaders headers = new HttpHeaders();
-
-			in = new FileInputStream(uploadPath + fileName);
-
-			if (mType != null) {
-				headers.setContentType(mType);
-			} else {
-
-				fileName = fileName.substring(fileName.indexOf("_") + 1);
-				headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-				headers.add("Content-Disposition",
-						"attachment; filename=\"" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1") + "\"");
-			}
-
-			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
-		} catch (Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
-		} finally {
-			in.close();
-		}
-		return entity;
-	}
+           entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
+        } catch (Exception e) {
+           e.printStackTrace();
+           entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
+        } finally {
+           in.close();
+        }
+        return entity;
+     }
 
 	// attach 테이블에서 업로드된 파일 삭제
 	@ResponseBody
 	@RequestMapping(value = "/deleteFile", method = RequestMethod.POST)
 	public ResponseEntity<String> deleteFile(String fileName) {
-
-		System.out.println("delete file: " + fileName);
 
 		String formatName = fileName.substring(fileName.lastIndexOf(".") + 1);
 
@@ -150,8 +143,6 @@ public class CommunityController {
 	@ResponseBody
 	@RequestMapping(value = "/deleteAllFiles", method = RequestMethod.POST)
 	public ResponseEntity<String> deleteFile(@RequestParam("files[]") String[] files) {
-
-		System.out.println("delete all files: " + files);
 
 		if (files == null || files.length == 0) {
 			return new ResponseEntity<String>("deleted", HttpStatus.OK);
@@ -216,7 +207,7 @@ public class CommunityController {
 		return "redirect:/community/blackList";
 	}
 
-	// 신고 게시판 List출력
+	// 신고합니다 List출력
 	@RequestMapping(value = "blackList", method = RequestMethod.GET)
 	public void blackList(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
 		List<BlackVO> list = blackService.blackList(cri);
@@ -242,7 +233,7 @@ public class CommunityController {
 	@ResponseBody
 	@RequestMapping(value = "blackPreviewContent", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 	public String blackPreviewContent(@RequestParam("black_id") Integer black_id) throws Exception {
-		System.out.println("preview controller......");
+		
 		return blackService.blackPreviewContent(black_id);
 	}
 
@@ -379,7 +370,6 @@ public class CommunityController {
 	@ResponseBody
 	@RequestMapping(value = "donatePreviewContent", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 	public String donatePreviewContent(@RequestParam("donate_id") Integer donate_id) throws Exception {
-		System.out.println("preview controller......");
 		return donateService.donatePreviewContent(donate_id);
 	}
 
@@ -456,7 +446,6 @@ public class CommunityController {
 	@RequestMapping(value = "donateModify", method = RequestMethod.POST)
 	public String donateModifyPost(RedirectAttributes rtts, DonateVO vo, SearchCriteria cri,
 			@RequestParam("file") MultipartFile file) throws Exception {
-		System.out.println("Modify Post 컨트롤러 진입");
 		String donate_thumbnail = UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes());
 		String[] donate_thumbnail1 = donate_thumbnail.split("_");
 
@@ -540,7 +529,6 @@ public class CommunityController {
 	public String donateReplyModifyPOST(Model model, ReplyVO vo, @ModelAttribute("cri") SearchCriteria cri)
 			throws Exception {
 		donateService.replyModify(vo);
-		System.out.println(vo.toString());
 
 		model.addAttribute(donateService.donateRead(vo.getDonate_id(), false));
 		model.addAttribute("writer", donateService.donateWriter(vo.getDonate_id()));
