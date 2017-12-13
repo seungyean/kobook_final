@@ -117,7 +117,7 @@
 						</div>
 						<nav id="breadcrumbs">
 							<ul>
-								<li><a href="index.html">Home </a>/</li>
+								<li><a href="/">Home </a>/</li>
 								<li>Pages</li>
 							</ul>
 						</nav>

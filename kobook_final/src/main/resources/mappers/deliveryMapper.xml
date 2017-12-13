@@ -20,7 +20,7 @@
 	]]>
     <include refid="delsearch"></include>
     <![CDATA[  
-       order by p.pay_date
+       order by p.pay_date desc
      ]]> 
 	</select>
 	
