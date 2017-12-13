@@ -100,9 +100,8 @@
 			</tr>
 			</c:forEach>
 		</table>
-		 --%>
-		 
-		 <h2>추천도서</h2>
+		
+				 <h2>추천도서</h2>
 		<table border="1">
 			<tr>
 				<td>책이름</td>
@@ -126,6 +125,9 @@
 			</tr>
 			</c:forEach>
 		</table>
+		 --%>
+		 
+
 		
 		<section class="super_sub_content">
             <div class="dividerHeading text-center">
