@@ -361,34 +361,6 @@
 		src="https://www.gstatic.com/charts/loader.js"></script>
 
 
-	<script type="text/javascript">
-
-google.charts.load('current', {'packages':['corechart']});
-google.charts.setOnLoadCallback(drawChart);
-
-function drawChart() {
-  var data = new google.visualization.DataTable();
-  data.addColumn('string', 'Pizza');
-  data.addColumn('number', 'Populartiy');
-  data.addRows([
-    ['Pepperoni', 33],
-    ['Hawaiian', 26],
-    ['Mushroom', 22],
-    ['Sausage', 10], // Below limit.
-    ['Anchovies', 9] // Below limit.
-  ]);
-
-  var options = {
-    title: '주문배송 접수 / 처리',
-    sliceVisibilityThreshold: .2,
-    width :'500',
-    height : '500'
-  };
-
-  var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-  chart.draw(data, options);
-}
-</script>
 
 	<script type="text/javascript">
 
