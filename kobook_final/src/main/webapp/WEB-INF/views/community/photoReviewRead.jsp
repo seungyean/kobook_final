@@ -152,9 +152,6 @@
 									</button>
 								</c:if>
 								<c:if test="${photoVO.photo_heart>0 }">
-									<button type="submit" id="heartUp">
-										<i class="fa fa-heart"></i> <b> 추천</b>
-									</button>
 									<button type="submit" id="heartDown">
 										<i class="fa fa-heart-o"> </i><b> 추천 </b>
 									</button>
