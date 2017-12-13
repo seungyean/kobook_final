@@ -7,9 +7,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<%
-	//session.setAttribute("person_id", 5);
-%>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -117,23 +114,6 @@ $(function()
 				<i class="fa fa-search"></i>
 			</button>
 
-	<%-- 		<select id="sortType">
-				<option value="n"
-					<c:out value="${cri.searchType == null?'selected':''}"/>>
-					정렬방법</option>
-				<option value="d"
-					<c:out value="${cri.sortType eq 'd'?'selected':''}"/>>
-					날짜순</option>
-				<option value="s"
-					<c:out value="${cri.sortType eq 's'?'selected':''}"/>>
-					안심거래순</option>
-				<option value="p"
-					<c:out value="${cri.sortType eq 'p'?'selected':''}"/>>가격순</option>
-				<option value="b"
-					<c:out value="${cri.sortType eq 'b'?'selected':''}"/>>
-					책상태순</option>
-			</select> --%>
-			</form> 
 		</div>
 
 
@@ -146,6 +126,7 @@ $(function()
 			</div>
 
 		<section class="content portfolio small-images">
+		<div class="container">
 			<form action="/book/bookRegist" method="get">
 				<!--begin isotope -->
 				<div class="isotope col-lg-12">
@@ -197,8 +178,6 @@ $(function()
 														</c:when>
 
 													</c:choose>
-
-
 													<!--     <span>Business</span> -->
 												</div>
 											</div>
@@ -229,13 +208,10 @@ $(function()
 														class="fa fa-search mfp-image"></a> <a
 														href="/book/bookRead?book_id=${b.book_id}"
 														class="fa fa-link"></a> <span>${b.book_m_price}원</span>
-
 													<c:choose>
-
 														<c:when test="${b.book_sell_state=='I'}">
 															<span>판매중</span>
 														</c:when>
-
 														<c:when test="${b.book_sell_state=='C'}">
 															<span>판매완료</span>
 														</c:when>
@@ -273,11 +249,9 @@ $(function()
 														<c:when test="${b.book_sell_state=='I'}">
 															<span>판매중</span>
 														</c:when>
-
 														<c:when test="${b.book_sell_state=='C'}">
 															<span>판매완료</span>
 														</c:when>
-
 													</c:choose>
 													<!-- <span>Computer</span> -->
 												</div>
@@ -296,7 +270,6 @@ $(function()
 								<li class="list_item col-lg-3 col-md-4 col-sm-6 Engineering">
 									<div class="recent-item box">
 										<figure class="touching ">
-
 											<img src="displayFile?fileName=${b.book_img}" alt="aa"
 												height="280"></img>
 											<a href="/book/bookRead?book_id=${b.book_id}"></a>
@@ -311,11 +284,9 @@ $(function()
 														<c:when test="${b.book_sell_state=='I'}">
 															<span>판매중</span>
 														</c:when>
-
 														<c:when test="${b.book_sell_state=='C'}">
 															<span>판매완료</span>
 														</c:when>
-
 													</c:choose>
 													<!-- <span>Deutsch</span> -->
 												</div>
@@ -349,11 +320,9 @@ $(function()
 														<c:when test="${b.book_sell_state=='I'}">
 															<span>판매중</span>
 														</c:when>
-
 														<c:when test="${b.book_sell_state=='C'}">
 															<span>판매완료</span>
 														</c:when>
-
 													</c:choose>
 													<!-- <span>Law</span> -->
 												</div>
@@ -387,11 +356,9 @@ $(function()
 														<c:when test="${b.book_sell_state=='I'}">
 															<span>판매중</span>
 														</c:when>
-
 														<c:when test="${b.book_sell_state=='C'}">
 															<span>판매완료</span>
 														</c:when>
-
 													</c:choose>
 													<!-- <span>History</span> -->
 												</div>
@@ -425,11 +392,9 @@ $(function()
 														<c:when test="${b.book_sell_state=='I'}">
 															<span>판매중</span>
 														</c:when>
-
 														<c:when test="${b.book_sell_state=='C'}">
 															<span>판매완료</span>
 														</c:when>
-
 													</c:choose>
 													<!-- <span>Physics</span> -->
 												</div>
@@ -447,7 +412,7 @@ $(function()
 
 				<input type="submit" value="글쓰기" class="btn-default" />
 			</form>
-
+			</div>
 		</section>
 		<!--end small images  -->
 
@@ -455,7 +420,6 @@ $(function()
 
 		<div class="text-center">
 			<ul class="pagination">
-
 				<c:if test="${pageMaker.prev}">
 					<li><a
 						href="bookList${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
@@ -476,13 +440,6 @@ $(function()
 
 			</ul>
 		</div>
-
-
-	
-	
-	
-
-
 		<!-- /.box-footer-->
 
 
@@ -523,11 +480,7 @@ $(function()
 		src="/resources/js/jquery.matchHeight-min.js"></script>
 	<script type="text/javascript"
 		src="/resources/js/jquery-scrolltofixed-min.js"></script>
-
 	<script src="/resources/js/main.js"></script>
-
-
-
 	<script type="text/javascript">
 		$(document).ready(
 				function() {
@@ -546,19 +499,7 @@ $(function()
 								console.log("키워드: "+key_word);
 							});
 
-						       // $('#reviewForm').append('<input type="hidden" name="review_star" value="'+review_star +'">');
 				});
-
-		/*$('#sortType').change(
-		function(event) {
-
-			self.location = "bookList"
-					+ '${pageMaker.makeQuery(1)}'
-					+ "&sortType="
-					+ $("select option:selected").val();
-
-		}); */
-		
 	</script>
 	<!-- Start Style Switcher -->
 	<div class="switcher"></div>

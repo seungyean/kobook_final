@@ -1,17 +1,6 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-	/* if(session.getAttribute("person_id")!=null){
-		int person_id=Integer.parseInt((String)(session.getAttribute("person_id")));
-	} */
-%>
-<%-- <%
 
-	int pay_id=Integer.parseInt((String)(session.getAttribute("pay_id")));
-	System.out.print(pay_id);
-
-%> --%>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -150,19 +139,9 @@ pre {
 	data-name="layout">
 <link rel="stylesheet" type="text/css"
 	href="/resources/css/switcher.css" media="screen" />
-
-
 </head>
-
-
-
 <body>
-
-
 	<!--start wrapper-->
-
-
-
 	<br>
 
 	<form action="/book/bookreviewRegist" method="post" id="reviewForm">
@@ -204,15 +183,6 @@ pre {
 		<input type="submit" value="글쓰기" id="submit"
 			class="btn btn-default btn-lg button">
 	</form>
-
-
-
-
-
-
-
-
-
 	<!--end wrapper-->
 
 

@@ -79,7 +79,7 @@
 	<select id="sellPersonList" resultType="BookVO">
 		select * 
 		from book
-		where person_id=6
+		where person_id=#{person_id}
     	and book_id not in(#{book_id})
 	</select>
 

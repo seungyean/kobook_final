@@ -196,70 +196,6 @@ vertical-align:middle;
 
 		<section class="content typography">
 			<div class="container">
-			
-	<%-- 	 	 <div class="row sub_content">
-                    <div class="col-md-12">
-                        <div class="dividerHeading">
-                            <h4><span>검색</span></h4>
-                        </div>
-                        
-                        <!-- <form> -->
-						<div class='box-body' align="center" >
-									<select name="searchType">
-										<option value="n"
-											<c:out value="${cri.searchType == null?'selected':''}"/>>
-											검색방법</option>
-										<option value="t"
-											<c:out value="${cri.searchType eq 't'?'selected':''}"/>>
-											주문자이름</option>
-										<option value="c"
-											<c:out value="${cri.searchType eq 'c'?'selected':''}"/>>
-											책제목</option>
-										
-									</select> 
-									<input type="text" name="keyword" id="keywordInput"
-										value='${cri.keyword }' placeholder="Enter Search keywords..."
-										size="25">
-									<button id='searchBtn' class="btn-default">
-										<i class="fa fa-search"></i>
-									</button>
-						
-						
-						
-									<select id="sortType">
-						
-										<option value="n"
-											<c:out value="${cri.searchType == null?'selected':''}"/>>
-											정렬방법</option>
-						
-						
-										<option value="d"
-											<c:out value="${cri.sortType eq 'd'?'selected':''}"/>>
-											날짜순</option>
-										<option value="s"
-											<c:out value="${cri.sortType eq 's'?'selected':''}"/>>
-											안심거래순</option>
-										<option value="p"
-											<c:out value="${cri.sortType eq 'p'?'selected':''}"/>>가격순</option>
-										<option value="b"
-											<c:out value="${cri.sortType eq 'b'?'selected':''}"/>>
-											책상태순</option>
-									</select>
-						
-								</div>
-						<!-- </form> --> 
-                    </div>
-                    </div> --%>
-                    <!--검색 row-sub-content  -->
-                    
-                    
-                    
-          <!-- // 1. Datepicker(데이트피커) 사용하기 -->
-        
-	<!-- 	<input type="text" id="startday" placeholder="시작 날짜를 선택하세요">
-		<input type="text" id="endday" placeholder="끝 날짜를 선택하세요">
-		<input name="submit" type="submit" value="확인" id="datePick" /> -->
-		
 				<div class="media-body">
 							<form method="GET" id="OrderHistoryForm" name="OrderHistoryForm">
 								<div class="xans-element- xans-myshop xans-myshop-orderhistoryhead ">
@@ -274,69 +210,9 @@ vertical-align:middle;
 										<li>&nbsp;&nbsp;- 기간 검색시 지난 판매내역을 조회하실 수 있습니다.</li>
 									</ul>
 								</div>
-<!-- 								<input id="mode" name="mode" value="" type="hidden" />  -->
-<!-- 								<input id="term" name="term" value="" type="hidden" /> -->
 							</form>
 							</div>
-		 
-		 
-		
-			
-		
-		<!-- 날짜조회 -->
-	<%-- 	<div class="row sub_content">
-					<div class="col-lg-12 col-md-12 col-sm-12">
-						<div class="dividerHeading">
-							<h4><span>날짜조회 리스트</span></h4>
-							<br>
-							<br>
-										<!-- <form> -->
-									<table class="table table-hover">
-										<thead>
-											<tr>
-												<td align="center">번호</td>
-												<td align="center">책이름</td>
-												<td align="center">주문자</td>
-												<td align="center">총 주문액</td>
-												<td align="center">배송 주소</td>
-												<td align="center">결제 날짜</td>
-												<td align="center">배송 상태</td>
-												<td align="center">배송 메세지</td>
-												<td></td>
-											</tr>
-										</thead>
-										<tbody id="dtable">
-											<c:forEach var="sl" items="${selectDateList}">
-												<tr>
-													<td align="center" data-rno="${sl.DELIVERY_ID}" >${sl.DELIVERY_ID}</td>
-													<td align="center">${sl.BOOK_NAME}</td>
-													<td align="center">${sl.PERSON_NAME}</td>
-													<td align="center">${sl.PAY_AMOUNT}</td>
-													<td align="center">${sl.DELIVERY_ADDRESS}</td>
-													<td align="center"><fmt:formatDate value="${sl.PAY_DATE}" pattern='yyyy-MM-dd' /></td>
-													<td align="center" >
-												 	<c:if test="${sl.DELIVERY_STATE eq 'W'}"></c:if>>배송준비중 &nbsp;&nbsp;
-													<c:if test="${sl.DELIVERY_STATE eq 'I'}"></c:if>>배송중 &nbsp;&nbsp;
-													<c:if test="${sl.DELIVERY_STATE eq 'C'}"></c:if>>배송완료 &nbsp;&nbsp;
-													</td>
-													<td align="center">
-													<c:choose>
-													<c:when test="${empty sl.DELIVERY_MSG}">
-													</c:when>
-													<c:otherwise>
-													<img alt="" src="/resources/img/msg.png" data-rno="${sl.DELIVERY_MSG}" class="msgimg" width="22px" height="15px">
-													</c:otherwise>
-													</c:choose>
-													</td>
-												</tr>
-											</c:forEach>
-										</tbody>
-									</table>
-									<!-- </form> -->
-						</div>
-					</div>
-				</div>  --%>
-		<!--/날짜조회  -->
+
 			
 
 
@@ -348,17 +224,6 @@ vertical-align:middle;
 							<h4><span>안심거래 배송 리스트</span></h4>
 							<br>
 							<br>
-							
-							<%-- <c:choose>
-								<c:when test="${empty dlist }">
-									<div class="media-body">
-										<div class="well" style="margin-left: 50px;">
-											<h2 align="center">안심거래 배송 리스트가 존재하지 않습니다.</h2>
-										</div>
-									</div>
-								</c:when>
-								<c:otherwise>
-								 --%>
 									<input type="button" value="변경" class="btn-default" id="update" >
 									
 										<!-- <form> -->
@@ -505,10 +370,7 @@ vertical-align:middle;
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <!-- <script src="//code.jquery.com/jquery-1.10.2.js"></script> -->
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-
 <script src="/resources/js/main.js"></script>
-
-
 <script type="text/javascript">
 	$(function(){	
 		
@@ -520,24 +382,12 @@ vertical-align:middle;
 	
 	     }));
 		
-		
-/* 		$('#searchBtn').on("click", function(event) {
-
-					self.location = "delivery"
-							+ '${pageMaker.makeQuery(1)}'
-							+ "&searchType="
-							+ $("select option:selected").val()
-							+ "&keyword="
-							+ $('#keywordInput').val();
-		}); */
-		
 	});
 
 	var updateObject= new Object();
 	
 	$('#update').on("click",function(event){
 		event.preventDefault();
-		//var statusObject = new Object();
 		
 		
 		
@@ -558,18 +408,12 @@ vertical-align:middle;
 	 			success: function(data){	 		
 	 				
 	 				var list = [w,i,c];	
-	 				
-	 				
+
 	 				$.each(data,function(index,result){
 						list[index] = result;	 
 						console.log(index);
 	 				});
 	 				console.log("list[0] : " + list[0] + " list[1] : " +list[1]+ " list[2] : " + list[2]);
-	 				/* console.log("data:"+data);
-	 				if(data == 'SUCCESS'){
-	 				drawChart();
-	 				alert('gggg');
-		 			} */
 		 			w = list[0];
 		 			i = list[1];
 		 			c = list[2];
@@ -589,41 +433,13 @@ vertical-align:middle;
 		var startday = $('#startday').val();
 		var endday = $('#endday').val(); 
 		
-	    console.log($('#startday').val());
-	    console.log($('#endday').val());
-	       
-	    
-/* 		$.ajax({
-			type:'post',
-			url:'/book/deliverydateAjax',
-			headers: { 
-			      "Content-Type": "application/json",
-			      "X-HTTP-Method-Override": "POST" },
-			dataType:'text',
-			//data : JSON.stringify(jsonData), 
-			data: JSON.stringify({startday:startday, endday:endday}),
-			success:function(data){
-				console.log("data : " + data);
-				console.log("data길이"+data.length);
-				 getList("/book/deliverydate/"+startday+"/"+endday);
-			},
-			error:function(e){  
-	            alert("에러"+e.responseText);  
-	        }  
-		}); */
-		
     getList("/book/deliverydate/"+startday+"/"+endday);
-	//    getList("???");
 
 	});
 
 	 function getList(deliveryInfo){
 		$.getJSON(deliveryInfo, function(data){		// "/chat/{person_id}" 로부터 나오는 전체 데이터 (array)
-			
-			//alert(data);
-			console.log("넘어온 데이터: "+data);
-			console.log("dataArray: " + data.length);
-			
+
 			$('.trow').remove();
 			$.each(data,function(index,result){
 
@@ -661,13 +477,7 @@ vertical-align:middle;
 						+'<td align="center">'+result.pay_date+'</td>'
 						+'<td align="center" class="state">'+state+'</td>'
 						+'<td align="center" class="msg">'+img+'</td>'
-						);
-						
-					
-						
-
-						
-						
+						);	
 						
 			});
 		});
@@ -694,30 +504,6 @@ vertical-align:middle;
 
     var date = new Date();
     var year  = date.getFullYear();
-  //  var month = date.getMonth()-10;
-
-/*  //이번달
-  var month=date.getMonth()+1;
-  if(month==12){
-		 var next_month=1;
-	 }
- //다음달
- var next_month=((date.getMonth()+1)%12)+1;
-
- //저번달
- var prev_month=date.getMonth();
- 
- //12월이면 다음달 1월
- //12월이면 내년 1월
- if(year==12){
-  var year=date.getFullYear()+1;
- } */
-    
-/* 	console.log("저번달"+prev_month);
-	console.log("이번달"+month);
-	console.log("다음달"+next_month);
-    console.log("년"+year);
-    console.log("월"+month); */
     
     
     function drawBasic() {
@@ -769,8 +555,6 @@ vertical-align:middle;
 	    ['배송준비중',  eval(w)],
 	    ['배송완료', eval(c)],
 	    ['배송중', eval(i)],
-	  //  ['Sausage', 10], // Below limit.
-	  //  ['Anchovies', 9] // Below limit.
 	  ]);
 	
 	  var options = {
@@ -798,13 +582,11 @@ vertical-align:middle;
 	 $("#endday").datepicker({
 	    dateFormat : "yymmdd",
 	   altField : '#endday'
-	   // altField: ".selecter"
+
 	 });
                
 </script>
 
-         
-<!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
 		
     <!-- Start Style Switcher -->
     <div class="switcher"></div>

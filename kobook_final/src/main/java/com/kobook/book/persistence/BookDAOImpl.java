@@ -36,37 +36,25 @@ public class BookDAOImpl implements BookDAO {
 		session.insert(namespace+".create",vo);
 	}
 	
-
-	
-	
 	@Override
 	public List<BookVO> listCriteria(SearchCriteria cri) throws Exception {
 		return session.selectList(namespace+".listCriteria",cri,new RowBounds(cri.getPageStart(),cri.getPerPageNum()));
 	}
-
-	
 	
 	@Override
 	public List<BookVO> directListCriteria(SearchCriteria cri) throws Exception {
 		return session.selectList(namespace+".directListCriteria",cri,new RowBounds(cri.getPageStart(),cri.getPerPageNum()));
 	}
-
-
-
-
+	
 	@Override
 	public List<BookVO> safeListCriteria(SearchCriteria cri) throws Exception {
 		return session.selectList(namespace+".safeListCriteria",cri,new RowBounds(cri.getPageStart(),cri.getPerPageNum()));
 	}
 
-	
-
 	@Override
 	public PersonDTO readSellPerson(int person_id) throws Exception {
 		return session.selectOne(namespace+".readSellPerson",person_id);
 	}
-
-
 
 
 	@Override
@@ -77,9 +65,6 @@ public class BookDAOImpl implements BookDAO {
 		return session.selectList(namespace+".sellPersonList", hmap);
 	}
 
-	
-	
-	
 	@Override
 	public List<ReviewVO> reviewList(int person_id,SearchCriteria cri) throws Exception {
 		Map<String, Object>hmap=new HashMap<String,Object>();
@@ -87,8 +72,6 @@ public class BookDAOImpl implements BookDAO {
 		hmap.put("cri", cri);
 		return session.selectList(namespace+".reviewList",hmap,new RowBounds(cri.getPageStart(),5));
 	}
-
-
 
 
 	@Override
@@ -113,37 +96,20 @@ public class BookDAOImpl implements BookDAO {
 	}
 
 
-
-
 	@Override
 	public int getPersonIdByBookId(int book_id) throws Exception {
 		return session.selectOne(namespace +".getPersonIdByBookId", book_id);
 	}
-
-
-
-/*	@Override
-	public String writeName(int person_id) throws Exception {
-		return session.selectOne(namespace+".writeName",person_id);
-	}*/
-
-
-
 
 	@Override
 	public void reviewCreate(ReviewVO review) throws Exception {
 		session.insert(namespace+".reviewCreate",review);
 	}
 
-
-
-
 	@Override
 	public int countReview(int person_id) throws Exception {
 		return session.selectOne(namespace+".countReview",person_id);
 	}
-
-
 
 
 	@Override
@@ -155,23 +121,15 @@ public class BookDAOImpl implements BookDAO {
 		return a;
 	}
 
-
-
-
 	@Override
 	public int fivestar(int person_id) throws Exception {
 		return session.selectOne(namespace+".fivestar",person_id);
 	}
 
-
-
-
 	@Override
 	public int fourstar(int person_id) throws Exception {
 		return session.selectOne(namespace+".fourstar",person_id);
 	}
-
-
 
 
 	@Override
@@ -180,15 +138,10 @@ public class BookDAOImpl implements BookDAO {
 	}
 
 
-
-
 	@Override
 	public int twostar(int person_id) throws Exception {
 		return session.selectOne(namespace+".twostar",person_id);
 	}
-
-
-
 
 	@Override
 	public int onestar(int person_id) throws Exception {
@@ -196,57 +149,11 @@ public class BookDAOImpl implements BookDAO {
 	}
 
 
-
-
-	/*@Override
-	public List<HashMap<String, String>> deliveryList(SearchCriteria cri){
-		return session.selectList(namespace + ".deliveryList",cri,new RowBounds(cri.getPageStart(),cri.getPerPageNum()));
-	}
-
-
-
-
-
-
-
-	@Override
-	public int countdelList() throws Exception {
-		return session.selectOne(namespace+".countdelList");
-	}
-
-
-
-
-	@Override
-	public List<DeliveryDTO> selectDateList(DateDTO dto) throws Exception {
-		return session.selectList(namespace+".selectDateList",dto);
-	}
-
-
-
-
-
-
-
-
-
-	@Override
-	public void delstateUpdate(DeliveryDTO dto) throws Exception {
-		session.update(namespace+".delstateUpdate",dto);
-		
-	}*/
-
-
-
-
 	@Override
 	public void registerkeyword(SearchCriteria cri) throws Exception {
 	session.insert(namespace+".registerkeyword",cri);
 		
 	}
-
-
-
 
 	@Override
 	public List<RankingVO> rankingList() throws Exception {
@@ -262,53 +169,10 @@ public class BookDAOImpl implements BookDAO {
 	}
 
 
-
-
 	@Override
 	public int safeListCount() throws Exception {
 		return session.selectOne(namespace+".safeListCount");
 	}
-
-
-
-
-	/*@Override
-	public int wpercent() throws Exception {
-	return session.selectOne(namespace+".wpercent");
-	}
-
-
-
-
-	@Override
-	public int ipercent() throws Exception {
-		return session.selectOne(namespace+".ipercent");
-	}
-
-
-
-
-	@Override
-	public int cpercent() throws Exception {
-		return session.selectOne(namespace+".cpercent");
-	}
-
-
-
-
-	@Override
-	public int month(int m) throws Exception {
-		return session.selectOne(namespace+".month",m);
-	}
-
-
-
-
-	@Override
-	public int todayMoney() throws Exception {
-		return session.selectOne(namespace+".todayMoney");
-	}
-*/
 
 	// 챗봇용
 	@Override

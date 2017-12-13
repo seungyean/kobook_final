@@ -73,8 +73,6 @@ public class PageMaker {
   }
 
   public String makeQuery(int page) {
-     //page�� �־����� ���ڿ������� ������ִ� api
-     //board/read?bno=12&perPageNum=20
     UriComponents uriComponents = UriComponentsBuilder.newInstance().queryParam("page", page)
         .queryParam("perPageNum", cri.getPerPageNum()).build();
 
@@ -94,18 +92,4 @@ public class PageMaker {
        
        return uriComponents.toUriString();
      }
-  
- /* 
-  public String makeSearch(int page){
-    
-    UriComponents uriComponents =
-              UriComponentsBuilder.newInstance()
-              .queryParam("page", page)
-              .queryParam("perPageNum", cri.getPerPageNum())
-              .queryParam("searchType", ((Criteria)cri).getSearchType())
-              .queryParam("keyword", ((Criteria)cri).getKeyword())
-              .build();             
-    
-    return uriComponents.toUriString();
-  } */
 }

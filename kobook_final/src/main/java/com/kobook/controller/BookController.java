@@ -77,14 +77,8 @@ public class BookController {
 	//책등록(이미지등록포함)
 	@RequestMapping(value="/bookRegist",method=RequestMethod.POST)
 	public String bookRegistPOST( BookVO book,Model model,@RequestParam("file")MultipartFile file) throws Exception{
-		
-		System.out.println(file.getOriginalFilename());
-        System.out.println(file.getSize());
-        System.out.println(file.getContentType());
-        
         String savedName=uploadFile(file.getOriginalFilename(), file.getBytes());
-       
-        System.out.println(book.toString()); 
+
         book.setBook_img(savedName);
 		service.regist(book);
 		return "redirect:/book/bookList";
@@ -104,12 +98,10 @@ public class BookController {
 	public String modifyPOST(@RequestParam("book_id")int book_id,RedirectAttributes rttr, BookVO book, @ModelAttribute("cri") SearchCriteria cri, Model model,@RequestParam("file")MultipartFile file)throws Exception{
 		
 		 String savedName=uploadFile(file.getOriginalFilename(), file.getBytes());
-		 System.out.println("book정보:"+book.toString());
 	       book.setBook_img(savedName);
 		
 		 
 		service.modify(book);
-		 System.out.println("책정보:"+book.toString()); 
 		rttr.addAttribute("page",cri.getPage());
 		rttr.addAttribute("perPageNum",cri.getPerPageNum());
 		return "redirect:/book/bookList";
@@ -122,8 +114,6 @@ public class BookController {
     public ResponseEntity<byte[]> displayFile(String fileName) throws Exception {
        InputStream in = null;
        ResponseEntity<byte[]> entity = null;
-
-       System.out.println("FILE NAME: " + fileName);
 
        try {
 
@@ -159,7 +149,6 @@ public class BookController {
     //책 리스트 보여주기
     @RequestMapping("/bookList")
 	public void list(@ModelAttribute("cri") SearchCriteria cri, Model model)throws Exception{
-    		System.out.println("검색내용 없을 때 null이어야함:"+cri.getKeyword());
     		service.listCriteria(cri);
     		
     		PageMaker pageMaker=new PageMaker();
@@ -176,11 +165,9 @@ public class BookController {
     //인기검색어
     @RequestMapping(value="/rankingRegist",method=RequestMethod.POST)
 	public String rankingRegistPOST(@ModelAttribute("cri") SearchCriteria cri,Model model,RedirectAttributes rttr)throws Exception{
-    	System.out.println(cri.getKeyword());
     	RankingVO ranking=new RankingVO();
     	ranking.setRanking_keyword(cri.getKeyword());
     	service.registerkeyword(cri);
-    	System.out.println("등록된값: "+ranking.getRanking_keyword());
     	
     	rttr.addAttribute("page", cri.getPage());
         rttr.addAttribute("perPageNum", cri.getPerPageNum());
@@ -213,7 +200,6 @@ public class BookController {
 	@RequestMapping(value="/bookRead",method=RequestMethod.GET)
 	public void read(@RequestParam("book_id")int book_id, PersonDTO person, Model model,
 			@ModelAttribute("cri") SearchCriteria cri, HttpServletRequest request)throws Exception{
-		System.out.println("readCon: book_id: " + book_id);
 		model.addAttribute(service.read(book_id));
 		
 		model.addAttribute("s",service.readSellPerson(service.getPersonIdByBookId(book_id)));
@@ -262,22 +248,17 @@ public class BookController {
 	//후기등록(pay_id 가져오는 부분)
 	@RequestMapping(value="/bookreviewRegist",method=RequestMethod.GET)
 	public void reviewRegist(Model model,@RequestParam("pay_id")int pay_id)throws Exception{
-		System.out.println("후기등록 form");
 		
 		ReviewVO reviewVO = new ReviewVO();
 		reviewVO.setPay_id(pay_id);
 		model.addAttribute("pay_id", reviewVO.getPay_id());
-		System.out.println("pay_id값: "+reviewVO.getPay_id());
 	}
 	
 	
 	//후기등록(후기 내용전체등록)
 	@RequestMapping(value="/bookreviewRegist",method=RequestMethod.POST)
 	public void reviewRegistPOST(@RequestParam("pay_id") int pay_id,  ReviewVO review, Model model)throws Exception{
-		 System.out.println("후기 값 넘어가ㄴ기전");
-		 System.out.println("등록전: "+review.toString());
 	     service.reviewregist(review);
-	     System.out.println("등록후: "+review.toString());
 	}
 	
 	
@@ -294,9 +275,7 @@ public class BookController {
 	//찜하기
 	@RequestMapping(value="/pick")
 	public String pick(PickVO pick, Model model)throws Exception{
-		System.out.println("PICK컨트롤러 진입");
 		service.pick(pick);
-		System.out.println("pick 상태");
 		return "redirect:/mypage/pickList";
 	}
 	

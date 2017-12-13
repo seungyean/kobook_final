@@ -18,8 +18,7 @@ public class DeliveryDAOImpl implements DeliveryDAO {
 	@Inject
 	private SqlSession session;
 	
-	private static String namespace
-	="com.kobook.mappers.deliveryMapper";
+	private static String namespace ="com.kobook.mappers.deliveryMapper";
 	
 	@Override
 	public List<HashMap<String, String>> deliveryList(SearchCriteria cri){
@@ -56,8 +55,6 @@ public class DeliveryDAOImpl implements DeliveryDAO {
 	public int month(int m) throws Exception {
 		return session.selectOne(namespace+".month",m);
 	}
-
-
 
 
 	@Override

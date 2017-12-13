@@ -1,14 +1,10 @@
-
- <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
-
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
 <!DOCTYPE html>
-<!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!-->
 <html class="no-js" lang="en">
 <!--<![endif]-->
 <head>
@@ -28,8 +24,6 @@ body{
          width: 1100px;
          margin: 0 auto;
       }
-
-
 
       ul.tabs{
          margin: 0px;
@@ -177,17 +171,12 @@ body{
                <li><a
                   href="booklocationList${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
             </c:if>
-
          </ul>
       </div><!--/col-sm-12 text-center  -->
-            
-    
-                      
+ 
                   </div> <!--/tab-1  -->
                
-                        
-               
-               
+
                <div id="tab-2" class="tab-content">
                 <table class="table table-striped table-hover">
                     <thead>
@@ -250,10 +239,7 @@ body{
 
          </ul>
       </div><!--/col-sm-12 text-center  -->
-            
-                          
                       </div> <!--/tab-2  -->
-               
                 </div><!--/container1  -->   
                 
       <form action="/book/booklocationList" method="post">
@@ -263,13 +249,7 @@ body{
         </form>
       
                         
-               
-      
-            
-            
-            
-            
-            
+
                   </div> <!--/col-lg-12 col-md-12 col-sm-12  -->      
                </div><!--/row sub_content  -->
              </div>
@@ -301,11 +281,8 @@ body{
     <script type="text/javascript" src="/resources/js/jquery-hoverdirection.min.js"></script>
     <script type="text/javascript" src="/resources/js/jquery.matchHeight-min.js"></script>
     <script type="text/javascript" src="/resources/js/jquery-scrolltofixed-min.js"></script>
-
   <script src="/resources/js/main.js"></script>
-   
-   
-   
+
       <script>
       $(document).ready(
             function() {
@@ -334,10 +311,6 @@ body{
             });
 
       </script>
-      
-      
-      
-   
    <!-- Start Style Switcher -->
    <div class="switcher"></div>
    <!-- End Style Switcher -->

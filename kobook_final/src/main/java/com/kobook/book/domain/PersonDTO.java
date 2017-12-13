@@ -19,9 +19,6 @@ public class PersonDTO {
 		this.person_avg = person_avg;
 	}
 
-
-	
-
 	public int getPerson_id() {
 		return person_id;
 	}

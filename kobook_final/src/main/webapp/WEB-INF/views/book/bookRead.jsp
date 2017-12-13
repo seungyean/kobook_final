@@ -1,14 +1,9 @@
-<%-- <%@page import="kobook.book.domain.BookSearch"%>
-<%@page import="kobook.book.domain.Book"%> --%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%-- <% 
-	int person_id = Integer.parseInt((String)(session.getAttribute("person_id")));
 
-%> --%>
 <%
 	int countstar = (int)request.getAttribute("countstar");
 	int reviewcount = (int)request.getAttribute("reviewcount");
@@ -20,8 +15,6 @@
 	
 %>
 <!DOCTYPE html>
-<!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!-->
 <html class="no-js" lang="en">
 <!--<![endif]-->
 <head>
@@ -34,9 +27,6 @@
 	content="width=device-width, initial-scale=1, maximum-scale=1" />
 
 <style type="text/css">
-/* body {
-  padding-top: 70px;
-} */
 .btn-grey{
     background-color:#D8D8D8;
 	color:#FFF;
@@ -116,15 +106,9 @@
 			</div>
 		</section>
 
-
-
-
-
-
 		<section class="content portfolio_single">
 			<div class="container">
 				<div class="row sub_content">
-			
 			
 				<form role="form" action="/book/bookModify"  name="modifyForm" method="get">
 					<input type="hidden" name="book_id" value="${bookVO.book_id}"> 
@@ -194,11 +178,7 @@
 					 	</c:if>
 					 	
 					 	</form>
-                 	<%--<input type="hidden" name="page" value="${cri.page}">
-                		<input type="hidden" name="perPageNum" value="${cri.perPageNum}"> --%>
-                
-                	
-							
+              
 				<c:if test="${bookVO.person_id!=person_id && bookVO.book_sell_state=='I'}">
 				<form action="/book/pick" method="post" name="pick">	
                      <input type="hidden" name="book_id" value="${bookVO.book_id}">
@@ -232,8 +212,6 @@
                        		</h2>
                     </div>
                </div>
-		
-		     
 		<div class="container">
             
       <div class="row">
@@ -430,120 +408,12 @@
 			</ul>
 		</div>
                </div>
-
-
                     </div>
 
-           
-               
-         
-               
-      <%-- <div class="row">
-         <div class="col-sm-7">
-            <hr/>
-            <div class="review-block">
-             <c:forEach var="rlist" items="${reviewList}">
-               <div class="row">
-                  <div class="col-sm-3">
-                 
-                  
-                    
-                     <div class="review-block-name"><a href="#">작성자: ${reviewer}</a></div>
-                     <div class="review-block-date"><fmt:formatDate value="${rlist.review_date}" pattern='yyyy-MM-dd' /><br/></div>
-                  </div>
-                  <div class="col-sm-9">
-                     <div class="review-block-rate">
-                        <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
-                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                        </button>
-                        <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
-                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                        </button>
-                        <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
-                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                        </button>
-                        <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
-                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                        </button>
-                        <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
-                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                        </button>
-                     </div>
-                     <div class="review-block-title">${rlist.review_title}</div>
-                     <div class="review-block-description">${rlist.review_content }</div>
-                  </div>
-               </div>
-               <hr/>
-               </c:forEach>
-            </div>
-         </div>
-      </div> --%>
-      
     </div> <!-- /container -->
 						
 						<!--/여기까지  -->	
 		
-		
-		        <%-- <div class="row sub_content">
-                    <div class="col-md-12">
-                        <div class="dividerHeading">
-                            <h4><span>판매자정보</span></h4>
-                        </div>
-  
-                      		 <h2> 이메일 : ${s.person_email} &nbsp;&nbsp;
-                       		 등급 :
-                       		 	<c:choose>
-								<c:when test="${s.person_sell_grade=='U'}">
-								<img alt="" src="/resources/img/vip.jpg">
-								</c:when>
-								<c:when test="${s.person_sell_grade=='M'}">
-								<img alt="" src="/resources/img/gold.jpg">
-								</c:when>
-								<c:when test="${s.person_sell_grade=='D'}">
-								<img alt="" src="/resources/img/green.jpg">
-								</c:when>
-								</c:choose> &nbsp;&nbsp;
-                       		</h2>
-                    </div>
-               </div> --%>
-                       		 
-                       		 
-                       		 
-                  <%--      		 평점 :
-                       		 <c:choose>
-                       		 <fmt:formatNumber value="${countstar/reviewcount}" pattern="#.#"/><br>
-                       		<c:when test="${reviewcount}<=0">
-                       		등록된 후기 글이 없습니다.
-                       		</c:when>
-
-								<c:when test="${countstar/reviewcount=='5'}">
-								<img alt="" src="/resources/img/5.PNG">
-								</c:when>
-								<c:when test="${countstar/reviewcount=='4'}">
-								<img alt="" src="/resources/img/4.PNG">
-								</c:when>
-								<c:when test="${countstar/reviewcount=='3'}">
-								<img alt="" src="/resources/img/3.PNG">
-								</c:when>
-								<c:when test="${countstar/reviewcount=='2'}">
-								<img alt="" src="/resources/img/2.PNG">
-								</c:when>
-								<c:when test="${countstar/reviewcount=='1'}">
-								<img alt="" src="/resources/img/1.png">
-								</c:when>
-								<c:otherwise>
-								test
-								</c:otherwise>
-								
-								</c:choose> --%>
-								
-                       		 
-		
-               
-		     
-		     
-		     
-		     
 		     <div class="row sub_content">
                     <div class="col-md-12">
                         <div class="dividerHeading">
@@ -608,15 +478,13 @@ $(function(){
 })
 
 $('.flip').click(function() {
-   /*  $(this).closest('tbody').next('.section').show('fast'); */
     $(this).closest('tbody').next('.section').slideToggle();
-   /*  $(this).addClass('opened'); */
+  
    
 });
 
 </script>
 
-	
 	 <script src="/resources/js/main.js"></script>
 	<!-- Start Style Switcher -->
 	<div class="switcher"></div>
