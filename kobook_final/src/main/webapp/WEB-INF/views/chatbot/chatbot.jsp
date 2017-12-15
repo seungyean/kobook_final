@@ -264,7 +264,7 @@ textarea {
 					for(j=0; j<dataArr.length; j++){
 						html += '<p class="uk-margin-remove chat-paragraph">'+ dataArr[j] + '</p>';
 					}
-					//html += '<p class="uk-margin-remove chat-paragraph">' + data[i].chatlog_content + '</p>';
+					
 					html += printData(data[i], $('#com-template2'));
 				} else {
 					html += printData(data[i], $('#user-template'));

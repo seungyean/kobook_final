@@ -495,7 +495,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 		List<MessageVO> list = null;
 		
 		if(text.contains("새") || text.contains("새로운") || text.contains("새로온") || text.contains("새로 온")){		// 새 쪽지 보여줘
-			if(messageDao.newMessageList(person_id).size() < 1){	// 리스트의 크기가 0이라는 것은 검색된 메시지가 없다는 뜻
+			if(messageDao.newMessageList(person_id).size() > 0){	// 리스트의 크기가 0이라는 것은 검색된 메시지가 없다는 뜻
 				list = messageDao.newMessageList(person_id);
 				newText += "(최신의 쪽지가 상단에 표시됩니다)<hr>";
 				newText += "<b>&nbsp;보낸 사람 &nbsp;&nbsp;&nbsp; 내용 </b>";
@@ -516,7 +516,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 					+ "<a href=\"javascript:;\" onClick=\"opener.parent.location='"+ contentUrl +"'; return false;\"> 쪽지보관함으로 이동 </a>";
 			
 		} else if(text.contains("보관함") || text.contains("쪽지함")){	// 내 쪽지함 보여줘
-			if(messageDao.messageList(person_id).size() < 1){	// 리스트의 크기가 0이라는 것은 쪽지함에 쪽지가 없다는 뜻
+			if(messageDao.messageList(person_id).size() > 0){	// 리스트의 크기가 0이라는 것은 쪽지함에 쪽지가 없다는 뜻
 				list = messageDao.messageList(person_id);
 				newText += "(최신의 쪽지가 상단에 표시됩니다) \n 쪽지는 최대 5개만 보여드립니다.<hr>";
 				newText += "<b>&nbsp;보낸 사람 &nbsp;&nbsp;&nbsp; 내용 </b>";
